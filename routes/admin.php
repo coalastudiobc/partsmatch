@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['auth','verified','admin'])->namespace('App\Http\Controllers\Admin')->name('admin.')->group(function () {
+Route::middleware(['auth', 'verified', 'admin'])->namespace('App\Http\Controllers\Admin')->name('admin.')->group(function () {
    Route::match('get', 'dashboard', 'AdminController@dashboard')->name('dashboard');
    Route::get('show', 'AdminController@show')->name('show');
    Route::get('edit', 'AdminController@edit')->name('edit');
@@ -35,10 +35,11 @@ Route::middleware(['auth','verified','admin'])->namespace('App\Http\Controllers\
       Route::get('cms/list', 'CmsManagementController@index')->name('index');
       Route::get('cms/deleted/pages', 'CmsManagementController@deleted_pages')->name('deleted');
       Route::get('cms/delete/{id}', 'CmsManagementController@destroy')->name('delete');
-      Route::get('cms/edit/{id}', 'CmsManagementController@edit')->name('edit');
+      Route::get('cms/edit/{page}', 'CmsManagementController@edit')->name('edit');
       Route::get('cms/restore/{id}', 'CmsManagementController@restore')->name('restore');
-      Route::post('cms/update/{id}', 'CmsManagementController@update')->name('update');
+      Route::post('cms/update/{page}', 'CmsManagementController@update')->name('update');
    });
+   Route::match(['GET', "POST"], 'status',  'CmsManagementController@toggleStatus')->name('status');
 
    //package 
    Route::name('packages.')->group(function () {
@@ -63,5 +64,4 @@ Route::middleware(['auth','verified','admin'])->namespace('App\Http\Controllers\
       Route::get('user/restore/{id}', 'UserController@restore')->name('restore');
       Route::post('update/{id}', 'UserController@store')->name('update');
    });
-
 });

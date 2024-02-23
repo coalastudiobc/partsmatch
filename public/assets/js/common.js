@@ -1,19 +1,19 @@
 jQuery(window).on("load", function () {
     jQuery(".loader").fadeOut("slow");
 });
-jQuery(document).ready(function() {
-    jQuery(".delete").click(function(e) {
+jQuery(document).ready(function () {
+    jQuery(".delete").click(function (e) {
         e.preventDefault();
         jQuery('body').addClass('modal-open');
         let url = jQuery(this).attr('href');
         swal({
-                title: 'Are You Sure?',
-                text: 'You want to delete',
-                icon: 'warning',
-                buttons: true,
-                dangerMode: true,
-                buttons: ["No", "Yes"],
-            })
+            title: 'Are You Sure?',
+            text: 'You want to delete',
+            icon: 'warning',
+            buttons: true,
+            dangerMode: true,
+            buttons: ["No", "Yes"],
+        })
             .then((willDelete) => {
                 if (willDelete) {
                     window.location.replace(url)
@@ -23,18 +23,18 @@ jQuery(document).ready(function() {
             });
     });
     // restore
-    jQuery(".restore").click(function(e) {
+    jQuery(".restore").click(function (e) {
         e.preventDefault();
         jQuery('body').addClass('modal-open');
         let url = jQuery(this).attr('href');
         swal({
-                title: 'Are You Sure?',
-                text: 'You want to restore',
-                icon: 'warning',
-                buttons: true,
-                dangerMode: true,
-                buttons: ["No", "Yes"],
-            })
+            title: 'Are You Sure?',
+            text: 'You want to restore',
+            icon: 'warning',
+            buttons: true,
+            dangerMode: true,
+            buttons: ["No", "Yes"],
+        })
             .then((willRestore) => {
                 if (willRestore) {
                     window.location.replace(url)
@@ -45,8 +45,8 @@ jQuery(document).ready(function() {
     });
 
     /* Center no record message */
-    if( $("td.no-record-found").length )
-        $("td.no-record-found").attr("colspan" , $("td.no-record-found").closest("table").find("tr:first-child th").length )
+    if ($("td.no-record-found").length)
+        $("td.no-record-found").attr("colspan", $("td.no-record-found").closest("table").find("tr:first-child th").length)
 });
 
 
@@ -55,8 +55,8 @@ jQuery.validator.addMethod('filesize', function (value, element, param) {
     return this.optional(element) || (element.files[0].size <= param)
 }, 'File size must be less than {0}');
 
-jQuery.validator.addMethod("validDate", function(value, element) {
-    return this.optional(element) || moment(value,"YYYY/MM/DD").isValid();
+jQuery.validator.addMethod("validDate", function (value, element) {
+    return this.optional(element) || moment(value, "YYYY/MM/DD").isValid();
 }, "Please enter a valid date in the format YYYY/MM/DD");
 
 jQuery.validator.addMethod('doclength', function (value, element, param) {
@@ -76,7 +76,7 @@ jQuery.validator.addMethod("regex", function (value, element, regexp) {
 
 
 function handleValidation(form, rules, messages = {}, submitHandler = false) {
-    if( typeof form == "string" )
+    if (typeof form == "string")
         form = jQuery('form#' + form);
     let valdiationConfiguration = {
         errorClass: "invalid-feedback",
@@ -103,16 +103,16 @@ function handleValidation(form, rules, messages = {}, submitHandler = false) {
         errorPlacement: function (label, element) {
             if (jQuery(element).hasClass('selectric')) {
                 label.removeClass('invalid-feedback').addClass('cstm-selectric-invalid').insertAfter(jQuery(element).parent().siblings('.selectric'))
-            }else if( jQuery(element).hasClass('select2-error') ){
-                label.insertAfter( $(element).parent() )
+            } else if (jQuery(element).hasClass('select2-error')) {
+                label.insertAfter($(element).parent())
             } else {
                 label.insertAfter(element)
             }
         }
     };
-    if( submitHandler )
+    if (submitHandler)
         valdiationConfiguration.submitHandler = submitHandler;
-    form.validate( valdiationConfiguration );
+    form.validate(valdiationConfiguration);
 }
 jQuery(document).ajaxStart(function (event, request, settings) {
     jQuery("body").addClass("loading");
@@ -152,12 +152,12 @@ function ajaxCall(url, method, params, loader = true) {
                     reject(error)
                 }
             };
-            if( params instanceof FormData ){
+            if (params instanceof FormData) {
                 requestObject.processData = requestObject.contentType = false;
                 delete requestObject.dataType;
             }
             // console.log( requestObject );
-            jQuery.ajax( requestObject );
+            jQuery.ajax(requestObject);
         });
     } else {
         return new Promise((resolve, reject) => {
@@ -202,19 +202,19 @@ function addUserAjaxCall(url, method, params, loader = true) {
                     jQuery(".submit").attr("disabled", false);
                 },
                 success: function (data) {
-                        if (data.success == true) {
-                            if(data.url) {
-                                window.location.replace(data.url);
-                            }    
-                        } else if(data.success == false){
-                            if('errortype' in data && data.errortype ){ 
-                                var response_ajax = jQuery(document).find(".ajax-response-"+data.errortype); 
-                            }else{ 
-                                var response_ajax = jQuery(document).find(".ajax-response"); 
-                                $("html, body").animate({ scrollTop: 0 }, "fast"); 
-                            } 
-                            response_ajax.html('<div class="alert alert-danger alert-dismissible fade show k" role="alert">'+ data.msg +'<button type="button" class="btn-close close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
+                    if (data.success == true) {
+                        if (data.url) {
+                            window.location.replace(data.url);
                         }
+                    } else if (data.success == false) {
+                        if ('errortype' in data && data.errortype) {
+                            var response_ajax = jQuery(document).find(".ajax-response-" + data.errortype);
+                        } else {
+                            var response_ajax = jQuery(document).find(".ajax-response");
+                            $("html, body").animate({ scrollTop: 0 }, "fast");
+                        }
+                        response_ajax.html('<div class="alert alert-danger alert-dismissible fade show k" role="alert">' + data.msg + '<button type="button" class="btn-close close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
+                    }
                 },
                 error: function (error) {
                     console.log(error);
@@ -242,10 +242,11 @@ function addUserAjaxCall(url, method, params, loader = true) {
     }
 }
 
-function toggleStatus(element, model, id, field=null, message=null) {
+function toggleStatus(element, model, id, field = null, message = null) {
     jQuery(element).attr('disabled', true)
-    let params = { 'id': id, 'model': model, 'field':field, 'message':message };
-    let url = APP_URL + "/status";
+    let params = { 'id': id, 'model': model, 'field': field, 'message': message };
+    let url = APP_URL + "/admin/status";
+    console.log(url, "status");
     let response = ajaxCall(url, 'get', params);
     response.then(function (result) {
         toastr.options.closeButton = true;
@@ -266,11 +267,11 @@ function toggleStatus(element, model, id, field=null, message=null) {
     })
 }
 
-function showMessage(message=null){
-        toastr.options.closeButton = true;
-        toastr.options.closeMethod = 'fadeOut';
-        toastr.options.closeDuration = 10;
-        return toastr.success(message);
+function showMessage(message = null) {
+    toastr.options.closeButton = true;
+    toastr.options.closeMethod = 'fadeOut';
+    toastr.options.closeDuration = 10;
+    return toastr.success(message);
 }
 
 /* 
@@ -278,25 +279,25 @@ function showMessage(message=null){
     Close current modal
     Open Modal
 */
-function showOtherModal( otherModal = null ){
+function showOtherModal(otherModal = null) {
     let currentOpenModal = $(".modal.show"),
-    myModalEl = $( "#"+currentOpenModal.attr("id") ).get(0),
-    currentOpenModalInstance = bootstrap.Modal.getInstance(myModalEl);
-    if( otherModal && currentOpenModalInstance ){
+        myModalEl = $("#" + currentOpenModal.attr("id")).get(0),
+        currentOpenModalInstance = bootstrap.Modal.getInstance(myModalEl);
+    if (otherModal && currentOpenModalInstance) {
         currentOpenModal.on('hidden.bs.modal', function () {
-            let myModalEl = $("#"+otherModal).get(0),
-            modal = bootstrap.Modal.getOrCreateInstance(myModalEl);
+            let myModalEl = $("#" + otherModal).get(0),
+                modal = bootstrap.Modal.getOrCreateInstance(myModalEl);
             modal.show();
             $(currentOpenModal).off('hidden.bs.modal');
         });
         currentOpenModalInstance.hide();
     }
-    else if( currentOpenModalInstance ){
+    else if (currentOpenModalInstance) {
         currentOpenModalInstance.hide();
     }
-    else if( otherModal ){
-        let myModalEl = $("#"+otherModal).get(0),
-        modal = bootstrap.Modal.getOrCreateInstance(myModalEl);
+    else if (otherModal) {
+        let myModalEl = $("#" + otherModal).get(0),
+            modal = bootstrap.Modal.getOrCreateInstance(myModalEl);
         modal.show();
     }
 }

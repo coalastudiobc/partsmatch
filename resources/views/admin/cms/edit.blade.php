@@ -25,7 +25,7 @@
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label>Slug<span class="required-field">*</span></label>
-                                            <input type="text" readonly name="slug"
+                                            <input type="text" name="slug"
                                                 class="form-control @error('slug') is-invalid @enderror"
                                                 value="{{ old('slug', $page->slug ?? $page->slug) }}">
                                         </div>
@@ -43,10 +43,10 @@
 
                                         <div class="form-group form-group col-md-12">
                                             <label>Content<span class="required-field">*</span></label>
-                                            <textarea name="content" class="form-control summernote @error('content') is-invalid @enderror">{{ $page->content ?? $page->content }}</textarea>
+                                            <textarea name="content" class="form-control summernote @error('content') is-invalid @enderror">{{ $page->page_content ?? $page->page_content }}</textarea>
                                         </div>
                                     </div>
-                                    {{-- <div class="row">
+                                    <div class="row">
 
                                         <div class="form-group form-group col-md-12">
                                             <label>Page Title</label>
@@ -55,7 +55,7 @@
                                                 value="{{ old('page_title', $page->page_title ?? $page->page_title) }}">
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    {{-- <div class="row">
 
                                         <div class="form-group form-group col-md-6">
                                             <label>Meta Title</label>
@@ -110,7 +110,7 @@
                 e.preventDefault();
                 if (jQuery('#cms').valid()) {
                     var formData = new FormData($('form#cms').get(0));
-                    url = "{{ route('admin.cms.update', [jsencode_userdata($page->id)]) }}";
+                    url = "{{ route('admin.cms.update', [$page->id]) }}";
                     var response = ajaxCall(url, 'post', formData);
                     response.then(editCmsPage).catch(editCmsPageError)
 
