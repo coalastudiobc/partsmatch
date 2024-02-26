@@ -63,5 +63,12 @@ Route::middleware(['auth','verified','admin'])->namespace('App\Http\Controllers\
       Route::get('user/restore/{id}', 'UserController@restore')->name('restore');
       Route::post('update/{id}', 'UserController@store')->name('update');
    });
-
+   //category
+   Route::name('category.')->group(function () {
+      Route::get('categories', 'CategoryController@index')->name('index');
+      Route::get('category/add', 'CategoryController@create')->name('add');
+      Route::post('categories/store/{id?}', 'CategoryController@store')->name('store');
+      Route::get('categories/{id}/edit', 'CategoryController@edit')->name('edit');
+      Route::get('categories/{id}/delete', 'CategoryController@destroy')->name('delete');
+   });
 });

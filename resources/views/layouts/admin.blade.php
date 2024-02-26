@@ -94,6 +94,15 @@
                             <a href="{{ route('admin.dashboard') }}" class="nav-link"><i
                                     data-feather="monitor"></i><span>Dashboard</span></a>
                         </li>
+                        <li class="dropdown {{ Route::is('admin.category*') ? 'active' : '' }} ">
+                            <a href="#" class="menu-toggle nav-link has-dropdown"><i
+                                data-feather="grid"></i><span>Category</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="nav-link " href="{{ route('admin.category.index') }}">Categories</a></li>
+                                <li><a class="nav-link " href="{{ route('admin.category.add') }}">Add Category</a></li>
+                            </ul>
+                       </li>
                         {{-- <li class="dropdown {{ Route::is('admin.users.*') ? 'active' : '' }}">
                             <a href="#" class="menu-toggle nav-link has-dropdown"><i
                                     data-feather="user"></i><span>Dealers</span></a>
