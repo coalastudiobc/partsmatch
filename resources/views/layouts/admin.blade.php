@@ -94,6 +94,11 @@
                             <a href="{{ route('admin.dashboard') }}" class="nav-link"><i
                                     data-feather="monitor"></i><span>Dashboard</span></a>
                         </li>
+                        
+                        <li class="dropdown {{ Route::is('admin.cms.*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.cms.index') }}" class="nav-link"><i
+                                    data-feather="maximize"></i><span>Cms Management</span></a>
+                        </li>
                         <li class="dropdown {{ Route::is('admin.category*') ? 'active' : '' }} ">
                             <a href="#" class="menu-toggle nav-link has-dropdown"><i
                                 data-feather="grid"></i><span>Category</span>
@@ -121,8 +126,9 @@
                                 <li><a class="nav-link " href="{{ route('admin.packages.add') }}">Add Subscription
                                         Plan</a></li>
                             </ul>
-                        </li>
-                        <li class="dropdown {{ Route::is('admin.cms.*') ? 'active' : '' }}">
+                        </li>--}}
+                       
+                        {{-- <li class="dropdown {{ Route::is('admin.cms.*') ? 'active' : '' }}">
                             <a href="#" class="menu-toggle nav-link has-dropdown"><i
                                     data-feather="maximize"></i><span>Cms Management</span></a>
                             <ul class="dropdown-menu">
@@ -130,7 +136,8 @@
                                 <li><a class="nav-link " href="{{ route('admin.cms.deleted') }}">Deleted Cms
                                         Pages</a></li>
                             </ul>
-                        </li>
+                        </li> --}}
+                        {{--
                         <li class="dropdown {{ Route::is('admin.payments.*') ? 'active' : '' }}">
                             <a href="{{ route('admin.payments.all') }}" class="nav-link">
                                 <i class="fas fa-money-bill ml-0"></i>

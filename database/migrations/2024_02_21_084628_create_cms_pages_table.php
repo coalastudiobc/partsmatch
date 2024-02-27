@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('page_title')->nullable();
             $table->string('media_name')->nullable();
             $table->string('media_url')->nullable();
-            $table->enum('status', ['1', '0'])->default('1');
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }

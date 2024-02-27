@@ -64,7 +64,7 @@
 
                                             </tr>
                                         @empty
-                                            <tr>
+                                            {{-- <tr>
                                                 <td class="empty_records" colspan="5">
                                                     @if ($delete)
                                                         No Cms page deleted yet!
@@ -72,7 +72,7 @@
                                                         No Cms page yet!
                                                     @endif
                                                 </td>
-                                            </tr>
+                                            </tr> --}}
                                         @endforelse
                                     </table>
                                     <div class="card-footer text-right">
