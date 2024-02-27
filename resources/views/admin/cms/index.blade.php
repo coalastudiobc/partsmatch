@@ -9,9 +9,9 @@
                 <div class="row">
                     <div class="col-12 col-md-6 col-lg-12">
                         <div class="card">
-                            <x-alert-component />
+                            {{-- <x-alert-component /> --}}
                             <div class="card-header">
-                                <h4>{{ $delete ? 'Deleted Pages' : 'All Pages' }}</h4>
+                                {{-- <h4>{{ $delete ? 'Deleted Pages' : 'All Pages' }}</h4> --}}
                                 {{-- <x-search-form :dateField="false"/>     --}}
                             </div>
                             <div class="card-body p-0">
@@ -19,41 +19,47 @@
                                     <table class="table table-striped table-md">
                                         <tr>
                                             <th>Name</th>
-                                            <th>Short content</th>
+                                            <th>Title</th>
                                             <th>Content</th>
                                             <th>Image</th>
-                                            @if(!$delete)
+                                            {{-- @if (!$delete) --}}
                                             <th>Status</th>
-                                            @endif
+                                            {{-- @endif --}}
                                             <th>Action</th>
                                         </tr>
                                         @forelse($cms_pages as $page)
                                             <tr>
                                                 <td>{{ $page->name ? $page->name : '' }}</td>
-                                                <td>{{ $page->short_content ? Str::limit($page->short_content, 50, '....') : '' }}
+                                                <td>{{ $page->page_title ? Str::limit($page->page_title, 50, '....') : '' }}
                                                 </td>
-                                                <td>{{ $page->content ? Str::limit($page->content, 50, '....') : '' }}</td>
-                                                <td>@if($page->media_url)<img alt="image" src="{{Storage::url($page->media_url)}}"  width="100" height="100">@endif</td>
-                                                @if(!$delete)
+                                                <td>{{ $page->page_content ? Str::limit($page->page_content, 50, '....') : '' }}
+                                                </td>
+                                                <td>
+                                                    @if ($page->media_url)
+                                                        <img alt="image" src="{{ Storage::url($page->media_url) }}"
+                                                            width="100" height="100">
+                                                    @endif
+                                                </td>
+                                                {{-- @if (!$delete) --}}
                                                 <td>
                                                     <label>
                                                         <input type="checkbox" class="custom-switch-input"
                                                             @if ($page->status == '1') checked="checked" @endif
-                                                            onchange="toggleStatus(this, 'CmsPage', '{{ jsencode_userdata($page->id) }}');">
+                                                            onchange="toggleStatus(this, 'CmsPage', '{{ $page->id }}');">
                                                         <span class="custom-switch-indicator"></span>
                                                     </label>
                                                 </td>
-                                                @endif
+                                                {{-- @endif --}}
                                                 <td>
-                                                    @if ($delete)
-                                                        <a href="{{ route('admin.cms.restore', [jsencode_userdata($page->id)]) }}"
-                                                            class="btn btn-primary restore">Restore</a>
-                                                    @else
-                                                        <a href="{{ route('admin.cms.edit', [jsencode_userdata($page->id)]) }}"
-                                                            class="btn btn-primary edit">Edit</a>
-                                                        <a href="{{ route('admin.cms.delete', [jsencode_userdata($page->id)]) }}"
-                                                            class="btn btn-danger delete">Delete</a>
-                                                    @endif
+                                                    {{-- @if ($delete) --}}
+                                                    {{-- <a href="{{ route('admin.cms.restore', [jsencode_userdata($page->id)]) }}"
+                                                        class="btn btn-primary restore">Restore</a> --}}
+                                                    {{-- @else --}}
+                                                    <a href="{{ route('admin.cms.edit', [$page->id]) }}"
+                                                        class="btn btn-primary edit">Edit</a>
+                                                    {{-- <a href="{{ route('admin.cms.delete', [($page->id)]) }}"
+                                                        class="btn btn-danger delete">Delete</a> --}}
+                                                    {{-- @endif --}}
                                                 </td>
 
                                             </tr>
@@ -71,7 +77,7 @@
                                     </table>
                                     <div class="card-footer text-right">
                                         <nav class="d-inline-block">
-                                            {!! $cms_pages->links('admin.pagination') !!}
+                                            {{-- {!! $cms_pages->links('admin.pagination') !!} --}}
                                         </nav>
                                     </div>
                                 </div>
