@@ -39,10 +39,10 @@ return [
         ],
     ],
     'stripe_settings' => [
-        'stripe_id' => [
+        'stripe_key' => [
             'required' => 'Please enter the stripe id',
         ],
-        'stripe_key' => [
+        'secret_key' => [
             'required' => 'Please enter the secret key',
         ],
         'webhook_secret' => [
@@ -131,6 +131,14 @@ return [
             'string' => 'Only alphabets, numbers and in between space are allowed',
         ],
     ],
+    'commission' => [
+        'ordercommission_type' => [
+            'required' => 'Please select the order commission type',
+        ],
+        'ordercommission' => [
+            'required' => 'Please enter the oder commission',
+        ],
+    ],
     'hashtags' => [
         'title' => [
             'required' => 'Please enter the hashtag Title',
@@ -183,7 +191,7 @@ return [
             'mimes' => 'Supported only JPEG, JPG, PNG image type'
         ],
     ],
-    
+
     'user' => [
         'name' => [
             'required' => 'Please enter the name',
@@ -241,13 +249,13 @@ return [
         'terms' => [
             'required' => 'Please check terms & condition',
         ],
-        
+
     ],
 
     'media' => [
         'name' => [
             'required' => 'Please enter the name',
-            'string' => 'name must be a valid string',  
+            'string' => 'name must be a valid string',
             'min' => 'Name can be :min - :max characters',
             'max' => 'Name can be :min - :max characters',
         ],

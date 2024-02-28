@@ -105,17 +105,19 @@ if (!function_exists('store_image')) {
 //         return false;
 //     }
 // }
-// if (!function_exists('get_admin_setting')) {
-//     function get_admin_setting($name)
-//     {
-//         $record = AdminSetting::where('name', $name)->first();
-//         if ($record) {
+if (!function_exists('get_admin_setting')) {
+    function get_admin_setting($name, $value = null)
+    {
+        $record = AdminSetting::where('name', $name)->first();
+        if ($record && $value) {
 
-//             return $record->value;
-//         }
-//         return null;
-//     }
-// }
+            return $record->value;
+        } else {
+            return $record;
+        }
+        return null;
+    }
+}
 // if (!function_exists('stripe_details_validate')) {
 //     function stripe_details_validate($key, $secret)
 //     {
@@ -130,6 +132,3 @@ if (!function_exists('store_image')) {
 //         }
 //     }
 // }
-
-
-

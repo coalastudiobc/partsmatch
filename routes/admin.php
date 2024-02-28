@@ -18,11 +18,13 @@ Route::middleware(['auth', 'verified', 'admin'])->namespace('App\Http\Controller
    Route::match('get', 'dashboard', 'AdminController@dashboard')->name('dashboard');
    Route::get('show', 'AdminController@show')->name('show');
    Route::get('edit', 'AdminController@edit')->name('edit');
+   Route::match(["GET", "POST"], "commission/{commissionid?}", 'AdminController@commission')->name('commission');
+
 
    // Stripe settings
    Route::name('settings.')->group(function () {
       Route::get('settings', 'AdminController@settings')->name('view');
-      Route::post('settings/update', 'AdminController@settingsUpdate')->name('update');
+      Route::post('settings/update', 'AdminController@stripeSettings')->name('update');
    });
 
    //payments history

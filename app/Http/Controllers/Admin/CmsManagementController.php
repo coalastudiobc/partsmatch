@@ -41,7 +41,7 @@ class CmsManagementController extends Controller
 
         $page->update([
             'name' => $request->name,
-            'slug' => $request->slug,
+            'slug' => $page->slug,
             'page_content' => $request->content,
             'page_title' => $request->page_title,
             'media_name' => $media_name,
