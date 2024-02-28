@@ -12,8 +12,9 @@
                                 <h4>Update Profile</h4>
                             </div>
                             <div class="card-body">
-                                <form method="POST" action="{{ route('admin.users.update', [jsencode_userdata($user->id)]) }}"
-                                    id="profile" enctype="multipart/form-data">
+                                <form method="POST"
+                                    action="{{ route('admin.users.update', [jsencode_userdata($user->id)]) }}" id="profile"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
                                         <div class="form-group col-6">
@@ -68,31 +69,34 @@
                                             @enderror
                                         </div> --}}
                                     </div>
-                                    <div class="row">
-                                        <div class="form-group col-6">
-                                            <label for="password" class="d-block">{{ __('Password') }}</label>
-                                            <input id="password_confirmation" type="password"
-                                                class="form-control pwstrength @error('password') is-invalid @enderror"
-                                                data-indicator="pwindicator" name="password" autocomplete="new-password">
+                                    @if (!auth()->user()->role == 'Administrator')
+                                        <div class="row">
+                                            <div class="form-group col-6">
+                                                <label for="password" class="d-block">{{ __('Password') }}</label>
+                                                <input id="password_confirmation" type="password"
+                                                    class="form-control pwstrength @error('password') is-invalid @enderror"
+                                                    data-indicator="pwindicator" name="password"
+                                                    autocomplete="new-password">
 
-                                            @error('password')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                            <div id="pwindicator" class="pwindicator">
-                                                <div class="bar"></div>
-                                                <div class="label"></div>
+                                                @error('password')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                                <div id="pwindicator" class="pwindicator">
+                                                    <div class="bar"></div>
+                                                    <div class="label"></div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-6">
+                                                <label for="password-confirm"
+                                                    class="d-block">{{ __('Confirm Password') }}</label>
+                                                <input type="password" class="form-control" name="password_confirmation"
+                                                    autocomplete="new-password">
+
                                             </div>
                                         </div>
-                                        <div class="form-group col-6">
-                                            <label for="password-confirm"
-                                                class="d-block">{{ __('Confirm Password') }}</label>
-                                            <input type="password" class="form-control" name="password_confirmation"
-                                                autocomplete="new-password">
-
-                                        </div>
-                                    </div>
+                                    @endif
                                     <div class="card-footer text-right">
                                         <a class="btn btn-success" href="{{ url()->previous() }}"> Back</a>
                                         <button class="btn btn-primary mr-1" id="submit">Update</button>
@@ -134,7 +138,7 @@
                             '<div class="alert alert-danger alert-dismissible fade show k" role="alert">' +
                             response.msg +
                             '<button type="button" class="btn-close close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
-                            );
+                        );
                     }
                 }
 

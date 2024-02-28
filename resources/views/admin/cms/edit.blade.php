@@ -27,7 +27,7 @@
                                             <label>Slug<span class="required-field">*</span></label>
                                             <input type="text" name="slug"
                                                 class="form-control @error('slug') is-invalid @enderror"
-                                                value="{{ old('slug', $page->slug ?? $page->slug) }}">
+                                                value="{{ old('slug', $page->slug ?? $page->slug) }}" disabled>
                                         </div>
                                     </div>
                                     {{-- <div class="row">

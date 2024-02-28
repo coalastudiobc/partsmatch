@@ -4,11 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 
+use App\Models\AdminSetting;
+use App\Models\Commission;
 use App\Models\User;
+use Illuminate\Contracts\Validation\Validator as ValidationValidator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
@@ -17,7 +21,7 @@ class AdminController extends Controller
         $dealers = User::role('Dealer')->search()->count();
         return view('admin.dashboard', compact('dealers'));
     }
-    
+
     public function show()
     {
         $user = auth()->user();
@@ -30,13 +34,14 @@ class AdminController extends Controller
 
         return view('admin.update', compact('user'));
     }
-    
-    public function store( Request $request, $id = null) {
-           
+
+    public function store(Request $request, $id = null)
+    {
+
         DB::beginTransaction();
         try {
             $id = jsdecode_userdata($id);
-            $user = User::where('id',$id)->first();
+            $user = User::where('id', $id)->first();
 
             $data = [
                 'name' => $request->name,
@@ -49,29 +54,29 @@ class AdminController extends Controller
             }
             if ($request->has('profile_pic')) {
                 $profile = store_image($request->file('profile_pic'), 'user/profilePicture');
-                
+
                 if ($profile != null) {
                     $data['profile_file'] = $profile['name'];
                     $data['profile_url'] = $profile['url'];
                 }
             }
-                if (!empty($user)) {
-                    if (!is_null($user->profile_url) && Storage::exists($user->profile_url) && $request->has('profile_pic')) {
-                        Storage::delete($user->profile_url);
-                    }
-                    $user->update($data);
-                } else {
-                    return response()->json([
-                        'success'    =>  false,
-                        'msg'       =>   "User not found"
-                    ], 200);
+            if (!empty($user)) {
+                if (!is_null($user->profile_url) && Storage::exists($user->profile_url) && $request->has('profile_pic')) {
+                    Storage::delete($user->profile_url);
                 }
+                $user->update($data);
+            } else {
+                return response()->json([
+                    'success'    =>  false,
+                    'msg'       =>   "User not found"
+                ], 200);
+            }
 
             DB::commit();
 
             session()->flash('status', 'success');
             session()->flash('message', 'Data updated successfully');
-            $url = route('admin.users.show',[jsencode_userdata($user->id)]);
+            $url = route('admin.users.show', [jsencode_userdata($user->id)]);
             return response()->json([
                 'success'    =>  true,
                 'url'       =>   $url
@@ -84,5 +89,57 @@ class AdminController extends Controller
                 'msg'      =>  $e->getMessage()
             ]);
         }
+    }
+
+    public function settings()
+    {
+        return view('admin.settings');
+    }
+    public function stripeSettings(Request $request)
+    {
+        $request->validate([
+            'stripe_key' => 'required',
+            'secret_key' => 'required',
+        ], [
+            'stripe_key.required' => "stripe key is required",
+            'secret_key.required' => "secret key is required",
+        ]);
+
+        $adminSetting = get_admin_setting('stripe_key');
+        $adminSetting2 =  get_admin_setting('secret_key');
+
+        $adminSetting->update([
+            'value' => $request->stripe_key
+        ]);
+        $adminSetting2->update([
+            'value' => $request->secret_key
+        ]);
+
+        session()->flash('status', 'success');
+        session()->flash('message', 'Data updated successfully');
+        return redirect()->route('admin.settings.view');
+    }
+
+    public function commission(Request $request, Commission $commissionid)
+    {
+
+        if ($request->method() == "POST") {
+            $request->validate([
+                'ordercommission_type' => 'required',
+                'ordercommission' => 'required',
+            ], [
+                'ordercommission_type.required' => "order commission type is required",
+                'ordercommission.required' => "order commission is required",
+            ]);
+            $commissionid->update([
+                'type' => $request->ordercommission_type,
+                'value' => $request->ordercommission
+            ]);
+            return redirect()->route('admin.commission')->with('success', 'Data updated successfully');
+        }
+
+        $commission = Commission::first();
+
+        return view('admin.commission', compact('commission'));
     }
 }
