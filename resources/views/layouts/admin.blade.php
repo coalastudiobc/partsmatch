@@ -137,16 +137,15 @@
                                         Pages</a></li>
                             </ul>
                         </li> --}}
-                        {{--
-                        <li class="dropdown {{ Route::is('admin.payments.*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.payments.all') }}" class="nav-link">
+                        <li class="dropdown {{ Route::is('admin.commission.*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.commission') }}" class="nav-link">
                                 <i class="fas fa-money-bill ml-0"></i>
-                                <span>Payments History</span></a>
+                                <span>Commission</span></a>
                         </li>
                         <li class="dropdown {{ Route::is('admin.settings.*') ? 'active' : '' }}">
                             <a href="{{ route('admin.settings.view') }}" class="nav-link"><i
                                     data-feather="settings"></i><span>Stripe Setting</span></a>
-                        </li> --}}
+                        </li> 
                     </ul>
                 </aside>
             </div>
