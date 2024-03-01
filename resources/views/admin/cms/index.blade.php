@@ -45,7 +45,8 @@
                                                     <label>
                                                         <input type="checkbox" class="custom-switch-input"
                                                             @if ($page->status == '1') checked="checked" @endif
-                                                            onchange="toggleStatus(this, 'CmsPage', '{{ $page->id }}');">
+                                                            onchange="toggleStatus(this, 'CmsPage', '{{ $page->id }}');"
+                                                            url="{{ route('admin.cms.status') }}">
                                                         <span class="custom-switch-indicator"></span>
                                                     </label>
                                                 </td>

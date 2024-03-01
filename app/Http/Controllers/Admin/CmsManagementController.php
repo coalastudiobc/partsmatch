@@ -50,7 +50,6 @@ class CmsManagementController extends Controller
         ]);
 
         $url = route('admin.cms.index');
-        // dd($url);
         session()->flash('status', 'Page updated successfully');
 
         return response()->json(['success' => true, 'status' => 'success', 'message' => 'Page updated successfully', 'url' => $url]);
@@ -66,11 +65,12 @@ class CmsManagementController extends Controller
             }
             $result = $class::where('id', $id)->firstOrFail();
             $status = ($result->status == 1) ? '0' : '1';
+
             if ($result->update(['status' => $status])) {
                 if ($status == '1') {
-                    return response()->json(['status' => 'success', 'message' => "CmsPage has been activated"], 200);
+                    return response()->json(['status' => 'success', 'message' => $request->model . " has been activated"], 200);
                 } else {
-                    return response()->json(['status' => 'danger', 'message' => "CmsPage has been deactivated"], 200);
+                    return response()->json(['status' => 'danger', 'message' => $request->model . " has been deactivated"], 200);
                 }
             } else {
                 return response()->json(['status' => 'error', 'message' => 'status' . ' has not been updated.'], 400);

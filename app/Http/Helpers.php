@@ -106,14 +106,11 @@ if (!function_exists('store_image')) {
 //     }
 // }
 if (!function_exists('get_admin_setting')) {
-    function get_admin_setting($name, $value = null)
+    function get_admin_setting($name)
     {
         $record = AdminSetting::where('name', $name)->first();
-        if ($record && $value) {
-
+        if ($record) {
             return $record->value;
-        } else {
-            return $record;
         }
         return null;
     }

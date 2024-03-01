@@ -11,7 +11,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable , HasRoles;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -22,7 +22,14 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'status'
+        'status',
+        'user_details_id',
+        'working_for',
+        'profile_picture_file',
+        'profile_picture_url',
+        'phone_number',
+        'industry_type',
+        'address',
     ];
 
     /**
@@ -51,7 +58,7 @@ class User extends Authenticatable
         $query->when(!empty($request->filter_by_name), function ($q) use ($request) {
             $q->Where('email', 'like', '%' . $request->filter_by_name . '%');
             $q->orWhere('name', 'like', '%' . $request->filter_by_name . '%');
-        })->when(!empty($request->filter_by_name) && $request->filter_by_name == 'active' , function ($q) use ($request) {
+        })->when(!empty($request->filter_by_name) && $request->filter_by_name == 'active', function ($q) use ($request) {
             $q->where('status', '1');
         })->when(!is_null($request->dates), function ($q) use ($request) {
             $dates = explode(' - ', $request->dates);

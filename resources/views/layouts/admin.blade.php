@@ -94,20 +94,26 @@
                             <a href="{{ route('admin.dashboard') }}" class="nav-link"><i
                                     data-feather="monitor"></i><span>Dashboard</span></a>
                         </li>
-                        
+
                         <li class="dropdown {{ Route::is('admin.cms.*') ? 'active' : '' }}">
                             <a href="{{ route('admin.cms.index') }}" class="nav-link"><i
                                     data-feather="maximize"></i><span>Cms Management</span></a>
                         </li>
                         <li class="dropdown {{ Route::is('admin.category*') ? 'active' : '' }} ">
                             <a href="#" class="menu-toggle nav-link has-dropdown"><i
-                                data-feather="grid"></i><span>Category</span>
+                                    data-feather="grid"></i><span>Category</span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="nav-link " href="{{ route('admin.category.index') }}">Categories</a></li>
-                                <li><a class="nav-link " href="{{ route('admin.category.add') }}">Add Category</a></li>
+                                <li><a class="nav-link " href="{{ route('admin.category.index') }}">Categories</a>
+                                </li>
+                                <li><a class="nav-link " href="{{ route('admin.category.add') }}">Add Category</a>
+                                </li>
                             </ul>
-                       </li>
+                        </li>
+                        <li class="dropdown {{ Route::is('admin.users.*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.dealers.all') }}" class="nav-link"><i
+                                    data-feather="user"></i><span>User</span></a>
+                        </li>
                         {{-- <li class="dropdown {{ Route::is('admin.users.*') ? 'active' : '' }}">
                             <a href="#" class="menu-toggle nav-link has-dropdown"><i
                                     data-feather="user"></i><span>Dealers</span></a>
@@ -126,8 +132,8 @@
                                 <li><a class="nav-link " href="{{ route('admin.packages.add') }}">Add Subscription
                                         Plan</a></li>
                             </ul>
-                        </li>--}}
-                       
+                        </li> --}}
+
                         {{-- <li class="dropdown {{ Route::is('admin.cms.*') ? 'active' : '' }}">
                             <a href="#" class="menu-toggle nav-link has-dropdown"><i
                                     data-feather="maximize"></i><span>Cms Management</span></a>
@@ -145,7 +151,7 @@
                         <li class="dropdown {{ Route::is('admin.settings.*') ? 'active' : '' }}">
                             <a href="{{ route('admin.settings.view') }}" class="nav-link"><i
                                     data-feather="settings"></i><span>Stripe Setting</span></a>
-                        </li> 
+                        </li>
                     </ul>
                 </aside>
             </div>
@@ -153,7 +159,8 @@
             @yield('content')
             <footer class="main-footer">
                 <div class="footer-left">
-                    <a style="text-decoration:none" href="{{ route('admin.dashboard') }}">{{ config('app.name') }}</a>
+                    <a style="text-decoration:none"
+                        href="{{ route('admin.dashboard') }}">{{ config('app.name') }}</a>
                 </div>
                 <div class="footer-right"></div>
             </footer>

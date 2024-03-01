@@ -40,32 +40,34 @@ Route::middleware(['auth', 'verified', 'admin'])->namespace('App\Http\Controller
       Route::get('cms/edit/{page}', 'CmsManagementController@edit')->name('edit');
       Route::get('cms/restore/{id}', 'CmsManagementController@restore')->name('restore');
       Route::post('cms/update/{page}', 'CmsManagementController@update')->name('update');
+      Route::match(['GET', "POST"], 'cms/status', 'CmsManagementController@toggleStatus')->name('status');
    });
-   Route::match(['GET', "POST"], 'status',  'CmsManagementController@toggleStatus')->name('status');
 
    //package 
-   Route::name('packages.')->group(function () {
-      Route::get('packages', 'PackageController@index')->name('all');
-      Route::get('add/packages', 'PackageController@create')->name('add');
-      Route::post('packages/store/{id?}', 'PackageController@store')->name('store');
-      Route::get('packages/edit/{id}', 'PackageController@edit')->name('edit');
-      Route::get('packages/delete/{id}', 'PackageController@destroy')->name('delete');
-   });
+   // Route::name('packages.')->group(function () {
+   //    Route::get('packages', 'PackageController@index')->name('all');
+   //    Route::get('add/packages', 'PackageController@create')->name('add');
+   //    Route::post('packages/store/{id?}', 'PackageController@store')->name('store');
+   //    Route::get('packages/edit/{id}', 'PackageController@edit')->name('edit');
+   //    Route::get('packages/delete/{id}', 'PackageController@destroy')->name('delete');
+   // });
 
    //users 
-   Route::name('users.')->group(function () {
-      Route::get('users', 'UserController@index')->name('all');
-      Route::get('pre/users', 'UserController@preLaunchIndex')->name('pre.launch.all');
-      Route::get('pre/users/export', 'UserController@preUserExport')->name('pre.export');
-      Route::get('add/user', 'UserController@create')->name('add');
-      Route::get('user/profile/{id}', 'UserController@userProfile')->name('show');
-      // Route::post('user/store/{id?}', 'UserController@store')->name('store');
-      Route::get('user/edit/{id}', 'UserController@edit')->name('edit');
-      Route::get('user/delete/{id}', 'UserController@destroy')->name('delete');
-      Route::get('users/deleted', 'UserController@deletedUsers')->name('deleted');
-      Route::get('user/restore/{id}', 'UserController@restore')->name('restore');
-      Route::post('update/{id}', 'UserController@store')->name('update');
+   Route::name('dealers.')->group(function () {
+      Route::get('dealers', 'DealerController@index')->name('all');
+      Route::match(['GET', "POST"], 'dealers/status', 'DealerController@toggleStatus')->name('status');
+
+      // Route::get('pre/users', 'UserController@preLaunchIndex')->name('pre.launch.all');
+
+      // Route::get('add/user', 'UserController@create')->name('add');
+      // Route::get('user/profile/{id}', 'UserController@userProfile')->name('show');
+      // // Route::post('user/store/{id?}', 'UserController@store')->name('store');
+      // Route::get('user/edit/{id}', 'UserController@edit')->name('edit');
+      // Route::get('user/delete/{id}', 'UserController@destroy')->name('delete');
+      // Route::get('users/deleted', 'UserController@deletedUsers')->name('deleted');
+      // Route::get('user/restore/{id}', 'UserController@restore')->name('restore');
    });
+   // Route::post('update/{id}', 'UserController@store')->name('users.update');
    //category
    Route::name('category.')->group(function () {
       Route::get('categories', 'CategoryController@index')->name('index');

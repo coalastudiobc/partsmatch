@@ -23,7 +23,7 @@
                                                 <label>Stripe id<span class="required-field">*</span></label>
                                                 <input type="text" name="stripe_key"
                                                     class="form-control @error('stripe_key') is-invalid @enderror"
-                                                    value="{{ old('stripe_key', get_admin_setting('stripe_key', 1)) }}">
+                                                    value="{{ old('stripe_key', get_admin_setting('stripe_key')) }}">
                                                 @error('stripe_key')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -36,7 +36,7 @@
                                                 <label>Secret key <span class="required-field">*</span></label>
                                                 <input type="text" name="secret_key"
                                                     class="form-control @error('secret_key') is-invalid @enderror"
-                                                    value="{{ old('secret_key', get_admin_setting('secret_key', 1)) }}">
+                                                    value="{{ old('secret_key', get_admin_setting('secret_key')) }}">
                                                 @error('secret_key')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>

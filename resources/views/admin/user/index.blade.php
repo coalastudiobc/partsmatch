@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', $deleted ?  'Deleted Users' : 'Users')
+@section('title', 'Users')
 
 @section('content')
     <div class="main-content">
@@ -10,8 +10,8 @@
                         <div class="card">
                             <x-alert-component />
                             <div class="card-header">
-                                <h4> {{$deleted ?  'Deleted Users' : 'Users'}}</h4>
-                                <x-search-form :dateField="false"/>
+                                <h4> {{ 'Users' }}</h4>
+                                <x-search-form :dateField="false" />
                             </div>
                             <div class="card-body p-0">
                                 <div class="table-responsive">
@@ -19,48 +19,40 @@
                                         <tr>
                                             <th>Name</th>
                                             <th>Email</th>
-                                            @if(!$deleted)
-                                                <th>Status</th>
-                                            @endif
-                                            <th>Purchased Plan</th>
-                                            <th>Files Archived</th>
-                                            <th>Action</th>
+                                            <th>Industry</th>
+                                            <th>Address</th>
+                                            <th>Product</th>
+                                            <th>Status</th>
+                                            {{-- <th>Action</th> --}}
                                         </tr>
                                         @forelse ($users as $user)
-                                        {{-- @dd($user->filesArchived()->count()) --}}
                                             <tr>
-                                                <td>{{ $user->name ? Str::limit($user->name ,15,'...') : '' }}</td>
+                                                <td>{{ $user->name ? Str::limit($user->name, 15, '...') : '' }}</td>
                                                 <td>{{ $user->email ? $user->email : 'N/A' }}</td>
-                                                @if(!$deleted)
-                                                    <td>
-                                                        <label>
-                                                            <input type="checkbox" class="custom-switch-input"
-                                                                @if ($user->status == '1') checked="checked" @endif
-                                                                onchange="toggleStatus(this, 'User', '{{ jsencode_userdata($user->id) }}');">
-                                                            <span class="custom-switch-indicator"></span>
-                                                        </label>
-                                                    </td>
-                                                @endif
+                                                <td>{{ $user->industry_type ? $user->industry_type : 'N/A' }}</td>
+                                                <td>{{ $user->address ? $user->address : 'N/A' }}</td>
+                                                <td>{{ $user->product ? $user->product : 'N/A' }}</td>
+
                                                 <td>
-                                                    @forelse($user->subscriptions as $subscription)
-                                                    <a href="#" >{{$subscription->name}}</a>
-                                                    {{!$loop->first && !$loop->last? "," : ""}}
-                                                    @empty
-                                                    Ø
-                                                    @endforelse
+                                                    <label>
+                                                        <input type="checkbox" class="custom-switch-input"
+                                                            @if ($user->status == 'ACTIVE') checked="checked" @endif
+                                                            onchange="toggleStatus(this, 'User', '{{ $user->id }}');"
+                                                            url="{{ route('admin.dealers.status') }}">
+                                                        <span class="custom-switch-indicator"></span>
+                                                    </label>
                                                 </td>
-                                                <td>{{ $user ? $user->filesArchived()->count() : 'N/A' }}</td>
+
                                                 <td>
-                                                    @if($deleted)
-                                                        <a href="{{ route('admin.users.restore', [jsencode_userdata($user->id)]) }}" class="btn btn-primary restore">Restore</a>
-                                                    @else
-                                                        <a href="{{ route('admin.users.show', [jsencode_userdata($user->id)]) }}"class="btn btn-secondary">View</a>
-                                                        <a href="{{ route('admin.users.edit', [jsencode_userdata($user->id)]) }}"class="btn btn-primary">Edit</a>
-                                                        <a href="{{ route('admin.users.delete', [jsencode_userdata($user->id)]) }}"class="btn btn-danger delete">Delete</a>
-                                                    @endif                                                        
+                                                    {{-- <a
+                                                        href="{{ route('admin.users.show', [jsencode_userdata($user->id)]) }}"class="btn btn-secondary">View</a>
+                                                    <a
+                                                        href="{{ route('admin.users.edit', [jsencode_userdata($user->id)]) }}"class="btn btn-primary">Edit</a>
+                                                    <a
+                                                        href="{{ route('admin.users.delete', [jsencode_userdata($user->id)]) }}"class="btn btn-danger delete">Delete</a> --}}
                                                 </td>
                                             </tr>
-                                            @empty
+                                        @empty
                                             <tr>
                                                 <td class="no-record-found">
                                                     <center>Did not found any User </center>
@@ -69,12 +61,12 @@
                                         @endforelse
 
                                     </table>
-                                    <div class="card-footer"> 
+                                    <div class="card-footer">
                                         <div class="text-right">
-                                            <nav class="d-inline-block">           
-                                                {!! $users->links('admin.pagination') !!}
-                                            </nav> 
-                                       </div>
+                                            <nav class="d-inline-block">
+                                                {{-- {!! $users->links('admin.pagination') !!} --}}
+                                            </nav>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -86,5 +78,4 @@
     </div>
 @endsection
 @push('scripts')
-
 @endpush

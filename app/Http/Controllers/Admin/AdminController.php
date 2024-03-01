@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 
+use App\Http\Requests\CommissionRequest;
 use App\Models\AdminSetting;
 use App\Models\Commission;
 use App\Models\User;
@@ -105,32 +106,18 @@ class AdminController extends Controller
             'secret_key.required' => "secret key is required",
         ]);
 
-        $adminSetting = get_admin_setting('stripe_key');
-        $adminSetting2 =  get_admin_setting('secret_key');
-
-        $adminSetting->update([
-            'value' => $request->stripe_key
-        ]);
-        $adminSetting2->update([
-            'value' => $request->secret_key
-        ]);
+        AdminSetting::where('name', 'stripe_key')->update(['value' => $request->stripe_key]);
+        AdminSetting::where('name', 'secret_key')->update(['value' => $request->secret_key]);
+        AdminSetting::where('name', 'webhook_secret')->update(['value' => $request->webhook_secret]);
 
         session()->flash('status', 'success');
         session()->flash('message', 'Data updated successfully');
         return redirect()->route('admin.settings.view');
     }
 
-    public function commission(Request $request, Commission $commissionid)
+    public function commission(CommissionRequest $request, Commission $commissionid)
     {
-
         if ($request->method() == "POST") {
-            $request->validate([
-                'ordercommission_type' => 'required',
-                'ordercommission' => 'required',
-            ], [
-                'ordercommission_type.required' => "order commission type is required",
-                'ordercommission.required' => "order commission is required",
-            ]);
             $commissionid->update([
                 'type' => $request->ordercommission_type,
                 'value' => $request->ordercommission

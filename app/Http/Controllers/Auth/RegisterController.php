@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\PaymentDetail;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -63,10 +66,35 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        try {
+            DB::beginTransaction();
+            if ($data['image']) {
+                $file = request()->image;
+                $media_name = $file->getClientOriginalName();
+                $path = Storage::disk('public')->put('registration_pics', $file);
+            }
+            $userdetails = User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+                'phone_number' => $data['phone'],
+                'address' => $data['address'],
+                'zipcode' => $data['zipcode'],
+                'industry_type' => $data['industry'],
+                'profile_picture_file' => $media_name,
+                'profile_picture_url' => $path,
+            ]);
+            PaymentDetail::create([
+                'user_id' => $userdetails->id,
+                'stripe_token' => $data['public_key'],
+                'stripe_secret' => $data['secret_key'],
+            ]);
+
+            DB::commit();
+            return $userdetails;
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->back()->with('message', $e->getMessage());
+        }
     }
 }

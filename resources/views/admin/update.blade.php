@@ -12,9 +12,7 @@
                                 <h4>Update Profile</h4>
                             </div>
                             <div class="card-body">
-                                <form method="POST"
-                                    action="{{ route('admin.users.update', [jsencode_userdata($user->id)]) }}" id="profile"
-                                    enctype="multipart/form-data">
+                                <form method="POST" {{-- action="{{ route('admin.users.update', [jsencode_userdata($user->id)]) }}" id="profile" --}} enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
                                         <div class="form-group col-6">
@@ -69,7 +67,7 @@
                                             @enderror
                                         </div> --}}
                                     </div>
-                                    @if (!auth()->user()->role == 'Administrator')
+                                    @if (auth()->user()->role != 'Administrator')
                                         <div class="row">
                                             <div class="form-group col-6">
                                                 <label for="password" class="d-block">{{ __('Password') }}</label>

@@ -244,8 +244,8 @@ function addUserAjaxCall(url, method, params, loader = true) {
 
 function toggleStatus(element, model, id, field = null, message = null) {
     jQuery(element).attr('disabled', true)
+    var url = jQuery(element).attr("url");
     let params = { 'id': id, 'model': model, 'field': field, 'message': message };
-    let url = APP_URL + "/admin/status";
     console.log(url, "status");
     let response = ajaxCall(url, 'get', params);
     response.then(function (result) {
