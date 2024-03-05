@@ -1,46 +1,77 @@
-.selectric-is-invalid ~ .invalid-feedback {
-    display: block;
+/* webfonts */
+
+@font-face {
+    font-family: "DM-Sans";
+    src: url('../fonts/DMSans-ExtraLight.ttf');
+    font-weight:100;
 }
-.selectric-is-invalid .selectric {
-    border-color: red;
+@font-face {
+    font-family: "DM-Sans";
+    src: url('../fonts/DMSans-Light.ttf');
+    font-weight:300;
 }
-.certificate-outer {
-    display: flex;
-    gap: 10px;
-    margin: 0 0 10px;
+@font-face {
+    font-family: "DM-Sans";
+    src: url('../fonts/DMSans-Regular.ttf');
+    font-weight:500;
 }
-.certificate-input {
-    width: 33.333%;
+@font-face {
+    font-family: "DM-Sans"; 
+    src: url('../fonts/DMSans-Medium.ttf');
+    font-weight:400;
 }
-.certificate-choose-file {
-    width: 33.333%;
+@font-face {
+    font-family: "DM-Sans";
+    src: url('../fonts/DMSans-SemiBold.ttf');
+    font-weight:600;
 }
-.certificate-outer .input-group {
-    width: 33.333%;
+
+@font-face {
+    font-family: "DM-Sans";
+    src: url('../fonts/DMSans-Bold.ttf');
+    font-weight:700;
 }
-.certificate-outer button.btn.btn-danger.remove {
-    height: 100%;
-    min-width: 85px;
+@font-face {
+    font-family: "DM-Sans";
+    src: url('../fonts/DMSans-ExtraBold.ttf');
+    font-weight:800;
 }
-.certificate-outer button.btn.btn-danger.admin_doc_remove {
-    height: 100%;
-    min-width: 85px;
+
+@font-face {
+    font-family: "DM-Sans";
+    src: url('../fonts/DMSans-Black.ttf');
+    font-weight:900;
 }
-.certificate-outer button#addMore {
-    height: 100%;
-    min-width: 85px;
+@font-face {
+    font-family: 'Aeonik';
+    src: url('../fonts/AeonikTRIAL-Regular.otf');
+    font-weight:400;
 }
-.certificate-outer button#addMoreAdmin {
-    height: 100%;
-    min-width: 85px;
+@font-face {
+    font-family: 'Aeonik';
+    src: url('../fonts/AeonikTRIAL-Light.otf');
+    font-weight:300;
 }
-span#construction_site\[\]-error {
-    margin-top: 0.25rem;
-    font-size: 80%;
-    color: #dc3545;
+@font-face {
+    font-family: 'Aeonik';
+    src: url('../fonts/AeonikTRIAL-Bold.otf');
+    font-weight:700;
 }
-.sidebar-mini .main-sidebar .sidebar-brand a {
-    display: inline-block;
-    width: 22px;
-    overflow: hidden;
+
+
+/* webfonts end */
+
+:root {
+    --primary-color: #BAE8E8;
+    --secondary-color: #272643;
+    --white:#fff;
+    --black: #000;
+    --border-color:#E8E8E8;
+    --text-color: #5C5C5C;
+    --heading-color: #272643;
+    
 }
+
+
+
+
