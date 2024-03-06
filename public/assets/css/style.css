@@ -110,7 +110,9 @@ body {
     font-family:  'Aeonik';
     overflow-x: hidden;
 }
-
+main{
+    position: relative;
+}
 h1,
 h2,
 h3,
@@ -122,7 +124,7 @@ h6 {
     word-break: break-word;
     font-family: 'Aeonik';
     font-weight: 700;
-    line-height: 1;
+    line-height: 1.1;
     color: var(--heading-color);
 }
 
@@ -158,7 +160,10 @@ a, p, button, span {
 a {
     text-decoration: none !important;
     display: inline-block;
-    color: var(--secondary-color) !important;
+    color: var(--secondary-color);
+}
+a:hover {
+    color: unset;
 }
 a:focus-visible {
     outline: transparent;
@@ -249,6 +254,10 @@ header {
     transform: none;
     opacity: 1;
 }
+.nav-menu-cstm li a{
+    color: var(--secondary-color);
+}
+
 /* ======== nav-bar toggle animation =========== */
 
 .container{
@@ -373,7 +382,7 @@ header {
 }
 .secondary-btn{
     background-color: var(--secondary-color);
-    color: var(--white) !important;
+    color: var(--white);
     padding: 12px 18px;
     display: inline-flex;
     align-items: center;
@@ -660,6 +669,7 @@ header {
 
 .form-group label {
     margin-bottom: 15px;
+    font-weight: 500;
 }
 .form-control {
     border-radius: 5px;
@@ -696,7 +706,149 @@ header {
 
 
 
+
+/* ----------------------------------------------------------------Shop By Brands Sec ----------------------------------------- */
+.shop-by-brands-sec{
+    padding: 50px 0px;
+}
+.brands-header h3{
+    text-align: center;
+    font-size: 35px;
+    font-weight: 700;
+    text-transform: capitalize;
+}
+.brands-image {
+    background: #f6f6f6;
+    border-radius: 5px;
+    width: 100%;
+    display: grid;
+    place-content: center;
+    padding: 45px 15px;
+}
+.sp-brands {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+    gap: 20px;
+    justify-items: center;
+    justify-content: space-between;
+}
+.brands-image img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    margin: 0 auto;
+}
+.brands-image-content h6{
+    color: #272643;
+    font-family: "DM-Sans";
+    font-size: 16px;
+    letter-spacing: -0.16px;
+    text-transform: capitalize;
+    text-align: center;
+    padding-top: 10px;
+}
+
+.brands-btn {
+    display: flex;
+    justify-content: end;
+    padding-bottom: 20px;
+}
+
+
 /* -------------------------Footer-sec -------------------- */
-.footer-sec{
+.footer-sec {
     background-color: var(--secondary-color);
+    color: #fff;
+    --heading-color: #fff;
+}
+.footer-main{
+    padding: 50px 0px;
+    padding-bottom: 0px;
+}
+.footer-logo-box h6 a{
+    color: var(--primary-color);
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.ls-footer-title {
+    color: #FFF;
+    font-size: 18px;
+    font-weight: 500;
+    text-transform: capitalize;
+    opacity: 0.8;
+}
+
+.footer-social-list h4 {
+    font-size: 28px;
+    font-weight: 500;
+
+}
+
+.footer-link-list h4 {
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--white);
+}
+
+
+.footer-logo-box h2 {
+    font-size: 40px;
+    font-weight: 700;
+    margin-top: 8px;
+    margin-bottom: 18px;
+}
+
+.footer-link-list ul>li+li,
+.footer-social-list ul>li+li {
+    margin-top: 20px;
+}
+.footer-link-list ul, .footer-social-list ul {
+    margin-top: 15px;
+}
+
+.footer-link-list ul li a {
+    font-size: 16px;
+    font-weight: 500;
+    opacity: 0.5;
+    margin-top: 9px;
+    color: var(--white);
+
+}
+
+.footer-social-list ul li a {
+    font-size: 16px;
+    font-weight: 500;
+    opacity: 0.5;
+    color: var(--white);
+}
+
+.footer-logo-box {
+    max-width: 610px;
+    width: 100%;
+}
+.footer-wrapper {
+    padding-bottom: 50px;
+}
+
+.footer-btn {
+    padding-top: 40px;
+}
+
+.right-reserve {
+    text-align: center;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 5px;
+    padding: 30px 0px;
+    color: rgb(255 255 255 / 30%);
+}
+.footer-small{
+    border-top: 1px solid rgb(104 104 122 / 59%);
+}
+.footer-social-list ul li a:hover ,.footer-link-list ul li a:hover {
+    opacity: 1;
+}
+.footer-btn a {
+    font-weight: 600;
 }

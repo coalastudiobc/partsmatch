@@ -75,17 +75,10 @@
     <main>
         @yield('content')
     </main>
-
-
-
-
-    <!-- -------- JS Links ----------- -->
+    @yield('footer')
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/js/slick.js') }}"></script>
-    {{-- <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/slick.js"></script>
-    <script src="js/slick.min.js"></script> --}}
+    @stack('scripts')
 </body>
 </html>

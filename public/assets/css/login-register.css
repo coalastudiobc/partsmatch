@@ -116,18 +116,19 @@
 .login-nav.custm-nav-menu .navbar-nav:first-child {
     margin-right: 20px;
 }
-.login-sec {
-    height: calc(100vh - 90px);
-}
+
 .login-sec {
     position: relative;
     padding: 100px 0px 40px;
+    height: calc(100vh - 90px);
+    overflow-y: auto;
 }
 .login-bg-img {
     position: absolute;
     left: 0;
     bottom: 0;
     height: 100%;
+    z-index: -1;
 }
 
 .login-bg-img.right {
@@ -177,20 +178,24 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 2px;
 }
-.sign-up-link-box p{
+.sign-up-link-box p {
     font-weight: 500;
+    color: #727272;
 }
 .sign-up-link-box a {
     text-decoration: underline !important;
     font-weight: 700;
 }
-.sign-up-card{
+.sign-up-card {
     border-radius: 5px;
     box-shadow: 0px 12px 34px 0px rgba(39, 38, 67, 0.11);
     background-color: var(--white);
     max-width: 580px;
     padding: 30px 40px 20px;
+    display: block;
+    margin-left: auto;
 }
 .sign-up-process {
     max-width: 160px;
@@ -217,6 +222,8 @@
 }
 .sign-up-process-box p {
     font-size: 14px;
+    font-weight: 500;
+    line-height: 1;
 }
 .sign-up-process::before {
     content: "";
@@ -241,3 +248,89 @@
     color: var(--text-color);
     opacity: 0.9;
 }
+.profile-without-img {
+    width: 70px;
+    height: 70px;
+    background-color: #e8e8e8;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.upload-icon {
+    position: absolute;
+    background-color: var(--heading-color);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 3px;
+    right: 2px;
+    border: 2px solid #fff;
+}
+.file-upload-box input#file-upload {
+    display: none;
+}
+.file-upload-box label{
+    cursor: pointer;
+}
+.upload-img {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 40px 0px 30px;
+    gap: 10px;
+}
+.upload-img h3 {
+    font-weight: 500;
+    font-size: 16px;
+}
+.signup-sec {
+    padding: 70px 0px;
+}
+.signup-img-txt h2 {
+    text-align: center;
+    font-size: 35px;
+}
+.signup-img-txt p {
+    font-size: 14px;
+    font-weight: 400;
+    max-width: 500px;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 5px;
+    color: #5C5C5C;
+    opacity: 0.9;
+}
+
+.login-nav .navbar-nav:first-child {
+    gap: 30px;
+}
+
+.form-field:has(.input-icon) input{
+    padding-right: 50px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
