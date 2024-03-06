@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('phone_number')->nullable();
             $table->string('industry_type')->nullable();
             $table->string('address')->nullable();
+            $table->string('zipcode')->nullable();
             $table->enum('status', ['ACTIVE', 'INACTIVE', 'APPROVED', 'REJECTED'])->default('ACTIVE');
             $table->rememberToken();
             $table->timestamps();

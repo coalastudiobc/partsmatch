@@ -40,4 +40,11 @@ class DealerController extends Controller
             return response()->json(['status' => 'error', 'message' => $e->getMessage()], 400);
         }
     }
+
+    public function dealerProfile(Request $request, User $user)
+    {
+        $paymentdetail = $user->paymentDetail;
+
+        return view('admin.user.view', compact('user', 'paymentdetail'));
+    }
 }

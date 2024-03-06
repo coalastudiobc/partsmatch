@@ -30,6 +30,7 @@ class User extends Authenticatable
         'phone_number',
         'industry_type',
         'address',
+        'zipcode',
     ];
 
     /**
@@ -52,6 +53,10 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public function paymentDetail()
+    {
+        return $this->hasOne(PaymentDetail::class, 'user_id', 'id');
+    }
     public function scopeSearch($query)
     {
         $request = request();
