@@ -23,7 +23,7 @@
                                             <th>Address</th>
                                             <th>Product</th>
                                             <th>Status</th>
-                                            {{-- <th>Action</th> --}}
+                                            <th>Action</th>
                                         </tr>
                                         @forelse ($users as $user)
                                             <tr>
@@ -44,9 +44,9 @@
                                                 </td>
 
                                                 <td>
-                                                    {{-- <a
-                                                        href="{{ route('admin.users.show', [jsencode_userdata($user->id)]) }}"class="btn btn-secondary">View</a>
                                                     <a
+                                                        href="{{ route('admin.dealers.show', [$user->id]) }}"class="btn btn-primary">View</a>
+                                                    {{-- <a
                                                         href="{{ route('admin.users.edit', [jsencode_userdata($user->id)]) }}"class="btn btn-primary">Edit</a>
                                                     <a
                                                         href="{{ route('admin.users.delete', [jsencode_userdata($user->id)]) }}"class="btn btn-danger delete">Delete</a> --}}
