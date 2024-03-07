@@ -28,7 +28,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        return view('home');
+        return view('welcome');
     }
 
     public function changePassword(ChangePasswordRequest $request)
@@ -56,15 +56,8 @@ class HomeController extends Controller
         if (Auth::user()->hasRole("Administrator")) {
 
             return redirect()->route('admin.dashboard');
-        } else if (Auth::user()->hasRole("User")) {
-            $subscriptions = Auth::user()->subscriptions;
-            if (count($subscriptions)) {
-
-                return redirect()->route('user.documents.all');
-            } else {
-
-                return redirect()->route('user.subscription.plans');
-            }
+        } else if (Auth::user()->hasRole("Dealer")) {
+            return redirect()->route('dealer.dashboard');
         } else {
             return "ROLE NOT ASSIGNED";
         }

@@ -100,6 +100,7 @@
     --text-color: #5C5C5C;
     --heading-color: #272643;
     --border-color:#ebebed;
+    --gray-color: #727272;
 }
 
 html {
@@ -109,6 +110,7 @@ html {
 body {   
     font-family:  'Aeonik';
     overflow-x: hidden;
+    color: var(--secondary-color);
 }
 main{
     position: relative;
@@ -755,6 +757,8 @@ header {
 }
 
 
+
+
 /* -------------------------Footer-sec -------------------- */
 .footer-sec {
     background-color: var(--secondary-color);
@@ -851,4 +855,8 @@ header {
 }
 .footer-btn a {
     font-weight: 600;
+}
+.multi-img-box{
+    border-radius: 5px;
+    background: var(--white);
 }

@@ -1,5 +1,5 @@
 @extends('layouts.front')
-
+@section('title',"login")
 @section('content')
     <div class="login-sec">
         <div class="container">
