@@ -55,6 +55,11 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'phone_number' => ['required'],
+            'address' => ['required'],
+            'zipcode' => ['required'],
+            'industry_type' => ['required'],
+            'image' => ['required'],
         ]);
     }
 
@@ -67,30 +72,31 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         try {
-            DB::beginTransaction();
-            if ($data['image']) {
-                $file = request()->image;
-                $media_name = $file->getClientOriginalName();
-                $path = Storage::disk('public')->put('registration_pics', $file);
-            }
-            $userdetails = User::create([
+            $user = [
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
-                'phone_number' => $data['phone'],
+                'phone_number' => $data['phone_number'],
                 'address' => $data['address'],
                 'zipcode' => $data['zipcode'],
-                'industry_type' => $data['industry'],
-                'profile_picture_file' => $media_name,
-                'profile_picture_url' => $path,
-            ]);
-            PaymentDetail::create([
-                'user_id' => $userdetails->id,
-                'stripe_token' => $data['public_key'],
-                'stripe_secret' => $data['secret_key'],
-            ]);
-
+                'industry_type' => $data['industry_type'],
+            ];
+            if ($data['image']) {
+                $file = request()->image;
+                $media_name = $file->getClientOriginalName();
+                $path = Storage::put('registration_pics', $file);
+                $user['profile_picture_file'] = $media_name;
+                $user['profile_picture_url'] = $path;
+            }
+            DB::beginTransaction();
+            $userdetails = User::create($user);
             DB::commit();
+            // PaymentDetail::create([
+            //     'user_id' => $userdetails->id,
+            //     'stripe_token' => $data['public_key'],
+            //     'stripe_secret' => $data['secret_key'],
+            // ]);
+
             return $userdetails;
         } catch (\Exception $e) {
             DB::rollback();

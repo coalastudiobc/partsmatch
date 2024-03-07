@@ -202,6 +202,9 @@
             </div>
         </div>
     </div> --}}
+    @if($errors->any())
+    {{ implode('', $errors->all('<div>:message</div>')) }}
+@endif
     <div class="signup-sec">
         <div class="container">
             <div class="signup-wrapper">
@@ -229,7 +232,8 @@
                                 <p>It is a long established fact that a reader will be distracted by</p>
                             </div>
                             <div class="sign-up-form">
-                                <form action="">
+                                <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
+                                    @csrf
                                     <div class="upload-img">
                                         <div class="file-upload-box">
                                             <label for="file-upload">
@@ -256,7 +260,7 @@
                                             <div class="form-group">
                                                 <label for="">Name</label>
                                                 <div class="form-field">
-                                                    <input type="text" name="name"
+                                                    <input type="text" name="name" value="{{ old('name') }}"
                                                         class="form-control @error('name') is-invalid @enderror"
                                                         placeholder="Name">
 
@@ -272,7 +276,7 @@
                                             <div class="form-group">
                                                 <label for="">Email</label>
                                                 <div class="form-field">
-                                                    <input type="email" name="email"
+                                                    <input type="email" name="email" value="{{ old('email') }}"
                                                         class="form-control @error('email') is-invalid @enderror"
                                                         placeholder="Email ID">
 
@@ -288,11 +292,11 @@
                                             <div class="form-group">
                                                 <label for="">Phone</label>
                                                 <div class="form-field">
-                                                    <input type="text" name="phone"
-                                                        class="form-control @error('phone') is-invalid @enderror"
-                                                        placeholder="Phone">
+                                                    <input type="text" name="phone_number" value="{{ old('phone_number') }}"
+                                                        class="form-control @error('phone_number') is-invalid @enderror"
+                                                        placeholder="phone_number">
 
-                                                    @error('phone')
+                                                    @error('phone_number')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
@@ -304,7 +308,7 @@
                                             <div class="form-group">
                                                 <label for="">Complete Address</label>
                                                 <div class="form-field">
-                                                    <input type="text" name="address"
+                                                    <input type="text" name="address" value="{{ old('address') }}"
                                                         class="form-control @error('address') is-invalid @enderror"
                                                         placeholder="Address">
 
@@ -320,7 +324,7 @@
                                             <div class="form-group">
                                                 <label for="">Zip Code</label>
                                                 <div class="form-field">
-                                                    <input type="text" name="zipcode"
+                                                    <input type="text" name="zipcode" value="{{ old('zipcode') }}"
                                                         class="form-control @error('zipcode') is-invalid @enderror"
                                                         placeholder="Zip code">
 
@@ -336,11 +340,11 @@
                                             <div class="form-group">
                                                 <label for="">Select industry</label>
                                                 <div class="form-field">
-                                                    <input type="text" name="industry"
-                                                        class="form-control @error('industry') is-invalid @enderror"
+                                                    <input type="text" name="industry_type" value="{{ old('industry_type') }}"
+                                                        class="form-control @error('industry_type') is-invalid @enderror"
                                                         placeholder="Select industry">
 
-                                                    @error('industry')
+                                                    @error('industry_type')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
@@ -352,7 +356,7 @@
                                             <div class="form-group">
                                                 <label for="">Password</label>
                                                 <div class="form-field">
-                                                    <input type="password" name="password"
+                                                    <input type="password" name="password" value="{{ old('password') }}"
                                                         class="form-control @error('password') is-invalid @enderror"
                                                         placeholder="**********">
 
@@ -368,7 +372,7 @@
                                             <div class="form-group">
                                                 <label for="">Confirm Password</label>
                                                 <div class="form-field">
-                                                    <input type="password" name="password_confirmation"
+                                                    <input type="password" name="password_confirmation" value="{{ old('password_confirmation') }}"
                                                         class="form-control @error('password_confirmation') is-invalid @enderror"
                                                         placeholder="**********">
 
@@ -381,10 +385,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <a href="#" class="btn secondary-btn full-btn">Next</a>
+                                    <button  class="btn secondary-btn full-btn">Submit</button>
                                     <div class="sign-up-link-box">
-                                        <p>Don’t have an account?</p>
-                                        <a href="{{ route('login') }}">Sign In</a>
+                                        <p>Already have an account?</p>
+                                        <a href="{{ route('login') }}">Log In</a>
                                     </div>
                                 </form>
                             </div>
