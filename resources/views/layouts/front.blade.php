@@ -26,7 +26,7 @@
         <div class="custm-nav">
             <div class="container">
                 <nav class="navbar navbar-expand-lg bg-body-tertiary">
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="{{ route('welcome') }}">
                         <div class="header-logo">
                             <img src="{{ asset('assets/images/header-logo.png') }}  " alt="">
                         </div>
@@ -53,25 +53,28 @@
                             @guest
                                 <ul class="navbar-nav">
                                     <li class="nav-item">
-                                        <a class="nav-link btn secondary-btn login-btn" aria-current="page" href="{{ route('login') }}">
+                                        <a class="nav-link btn secondary-btn login-btn" aria-current="page"
+                                            href="{{ route('login') }}">
                                             Login
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link primary-btn signup-btn" aria-current="page" href="#">
+                                        <a class="nav-link primary-btn signup-btn" aria-current="page"
+                                            href="{{ route('register') }}">
                                             Sign Up
                                         </a>
                                     </li>
                                 </ul>
                             @endguest
                             @auth
-                            <ul class="navbar-nav">
-                                <li class="nav-item">
-                                    <a class="nav-link btn secondary-btn login-btn" aria-current="page" href="{{ route('logout') }}">
-                                        Logout
-                                    </a>
-                                </li>
-                            </ul>
+                                <ul class="navbar-nav">
+                                    <li class="nav-item">
+                                        <a class="nav-link btn secondary-btn login-btn" aria-current="page"
+                                            href="{{ route('logout') }}">
+                                            Logout
+                                        </a>
+                                    </li>
+                                </ul>
                             @endauth
                         </div>
 
@@ -90,4 +93,5 @@
     <script src="{{ asset('assets/js/slick.js') }}"></script>
     @stack('scripts')
 </body>
+
 </html>
