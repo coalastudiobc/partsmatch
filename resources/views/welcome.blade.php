@@ -1,5 +1,5 @@
 @extends('layouts.front')
-@section('title',"welcome")
+@section('title', 'welcome')
 @section('content')
     <section class="hero-section">
         <div class="container">
@@ -1481,18 +1481,16 @@
 @endsection
 @include('layouts.include.footer')
 @push('scripts')
-<script>
-    $('.slick-carousel').slick({
-        infinite: true,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: true,
+    <script>
+        $('.slick-carousel').slick({
+            infinite: true,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: true,
 
-        dots: false,
-        prevArrow: $('.prev-btn'),
-        nextArrow: $('.next-btn'),
-    });
-
-   
-</script>
+            dots: false,
+            prevArrow: $('.prev-btn'),
+            nextArrow: $('.next-btn'),
+        });
+    </script>
 @endpush
