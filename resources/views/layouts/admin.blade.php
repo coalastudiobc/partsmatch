@@ -40,31 +40,31 @@
                     <div class="collapse navbar-collapse ms-auto" id="navbarNav">
                         <div class="custm-nav-menu login-nav">
                             @auth
-                                <ul class="navbar-nav">
-                                    <li>
-                                        <div class="nav-profile">
-                                            <div class="nav-profile-img">
+                            <ul class="navbar-nav">
+                                <li>
+                                    <div class="nav-profile">
+                                        <div class="nav-profile-img">
 
-                                                <div class="dropdown">
-                                                    <button class="btn btn-secondary dropdown-toggle" type="button"
-                                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                                        <img src="{{ asset('assets/images/profile-img.png') }}"
-                                                            alt="">
-                                                        Alfonso
-                                                    </button>
-                                                    <ul class="dropdown-menu">
-                                                        <li><a class="dropdown-item" href="#">Profile</a></li>
-                                                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                                                        <li><a class="dropdown-item" href="{{ route('logout') }}">
-                                                                Logout
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
+                                            <div class="dropdown">
+                                                <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <img src="{{ Storage::url($authUser->profile_picture_url)  }}"
+                                                        alt="">
+                                                    {{ $authUser->name }}
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                                                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                                                    <li><a class="dropdown-item" href="{{ route('logout') }}">
+                                                            Logout
+                                                        </a>
+                                                    </li>
+                                                </ul>
                                             </div>
                                         </div>
-                                    </li>
-                                </ul>
+                                    </div>
+                                </li>
+                            </ul>
                             @endauth
                         </div>
 
