@@ -1,46 +1,168 @@
-@extends('layouts.admin')
+ @extends('layouts.admin')
 
-@section('title', 'Dashboard')
+ @section('title', 'Dashboard')
+ @section('heading', 'Dashboard')
+ @section('content')
 
-@section('content')
-<div class="main-content">
-		<div class="card">
-			<x-alert-component />
+     <div class="dashboard-right-box">
+         <h2>All Products</h2>
+         <div class="product-detail-table">
+             <div class="table-responsive">
+                 <table class="table">
+                     <tr>
+                         <th>
+                             <p>Image</p>
+                         </th>
+                         <th>
+                             <p>Product</p>
+                         </th>
+                         <th>
+                             <p>Price</p>
+                         </th>
+                         <th>
+                             <p>Quantity</p>
+                         </th>
+                     </tr>
+                     <tr>
+                         <td>
+                             <img src="images/table-img.png" alt="">
+                         </td>
+                         <td>
+                             <p>Car Engine</p>
+                         </td>
+                         <td>
+                             <p>$700</p>
+                         </td>
+                         <td>
+                             <div class="table-pro-quantity">
+                                 1
+                             </div>
+                         </td>
+                     </tr>
+                     <tr>
+                         <td>
+                             <img src="images/table-img.png" alt="">
+                         </td>
+                         <td>
+                             <p>Car Engine</p>
+                         </td>
+                         <td>
+                             <p>$700</p>
+                         </td>
+                         <td>
+                             <div class="table-pro-quantity">
+                                 1
+                             </div>
+                         </td>
+                     </tr>
+                     <tr>
+                         <td>
+                             <img src="images/table-img.png" alt="">
+                         </td>
+                         <td>
+                             <p>Car Engine</p>
+                         </td>
+                         <td>
+                             <p>$700</p>
+                         </td>
+                         <td>
+                             <div class="table-pro-quantity">
+                                 1
+                             </div>
+                         </td>
+                     </tr>
+                     <tr>
+                         <td>
+                             <img src="images/table-img.png" alt="">
+                         </td>
+                         <td>
+                             <p>Car Engine</p>
+                         </td>
+                         <td>
+                             <p>$700</p>
+                         </td>
+                         <td>
+                             <div class="table-pro-quantity">
+                                 1
+                             </div>
+                         </td>
+                     </tr>
+                     <tr>
+                         <td>
+                             <img src="images/table-img.png" alt="">
+                         </td>
+                         <td>
+                             <p>Car Engine</p>
+                         </td>
+                         <td>
+                             <p>$700</p>
+                         </td>
+                         <td>
+                             <div class="table-pro-quantity">
+                                 1
+                             </div>
+                         </td>
+                     </tr>
+                     <tr>
+                         <td>
+                             <img src="images/table-img.png" alt="">
+                         </td>
+                         <td>
+                             <p>Car Engine</p>
+                         </td>
+                         <td>
+                             <p>$700</p>
+                         </td>
+                         <td>
+                             <div class="table-pro-quantity">
+                                 1
+                             </div>
+                         </td>
+                     </tr>
+                     <tr>
+                         <td>
+                             <img src="images/table-img.png" alt="">
+                         </td>
+                         <td>
+                             <p>Car Engine</p>
+                         </td>
+                         <td>
+                             <p>$700</p>
+                         </td>
+                         <td>
+                             <div class="table-pro-quantity">
+                                 1
+                             </div>
+                         </td>
+                     </tr>
+                 </table>
+             </div>
+         </div>
+         <div class="pagination-wrapper">
+             <div class="pagination-boxes">
+                 <div class="pagination-box">
+                     <i class="fa-solid fa-angle-left"></i>
+                 </div>
+                 <div class="pagination-box active">
+                     <p>1</p>
+                 </div>
+                 <div class="pagination-box">
+                     <p>2</p>
+                 </div>
+                 <div class="pagination-box">
+                     <p>3</p>
+                 </div>
+                 <div class="pagination-box">
+                     <p>4</p>
+                 </div>
+                 <div class="pagination-box">
+                     <p>5</p>
+                 </div>
+                 <div class="pagination-box">
+                     <i class="fa-solid fa-angle-right"></i>
+                 </div>
+             </div>
+         </div>
+     </div>
 
-			<div class="card-header">
-				<x-search-form :nameField="false" />
-			</div>
-		</div>
-		<section class="section">
-		<div class="row ">
-			<div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
-				<div class="card">
-					<div class="card-statistic-4">
-						<div class="align-items-center justify-content-between">
-							<div class="row ">
-								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
-									<div class="card-content">
-										<h5 class="font-15"> Total Dealers</h5>
-										<h2 class="mb-3 font-18"> {{$dealers ?? 0}} </h2>
-									</div>
-								</div>
-								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
-									<div class="banner-img">
-										<img src="{{ asset('assets/img/banner/1.png') }}" alt="">
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-</div>
-
-@endsection
-@push('scripts')
-<script src="{{ asset('assets/js/sweetalert.min.js') }}"></script>
-<script src="{{ asset('assets/js/apexcharts.min.js') }}"></script>
-<script src="{{ asset('assets/js/index.js') }}"></script>
-@endpush
+ @endsection

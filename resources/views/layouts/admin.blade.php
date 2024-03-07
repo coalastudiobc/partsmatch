@@ -3,182 +3,115 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title> @yield('title') | {{ config('app.name') }}</title>
-
-    <!-- Favicon -->
-    @include('layouts.include.favicon')
-    <link rel="stylesheet" href="{{ asset('assets/css/app.min.css') }}">
-    <link rel="stylesheet" href=" {{ asset('assets/css/style.css') }}">
-    <link rel="stylesheet" href=" {{ asset('assets/css/selectric.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/components.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/iziToast.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/toaster.min.css') }}">
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('assets/css/admin-over-ride.css') }}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/img/favicon/apple-touch-icon.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/img/favicon/favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/img/favicon/favicon-16x16.png') }}">
-    <link rel="manifest" href="{{ asset('assets/img/favicon/site.webmanifest') }}">
-
-    @stack('styles')
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@yield('title')</title>
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
-    <script>
-        const APP_URL = '{{ url('') }}';
-    </script>
-    @includeFirst(['validation'])
+    <link rel="stylesheet" href="{{ asset('assets/css/login-register.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/slick.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/slick-theme.css') }}">
+
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.8/slick-theme.min.css"> -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.8/slick.css  "> -->
 
 </head>
 
 <body>
-
-    <div class="loader"></div>
-    <div id="app">
-        <div class="main-wrapper main-wrapper-1">
-            <div class="navbar-bg"></div>
-            <nav class="navbar navbar-expand-lg main-navbar sticky">
-                <div class="form-inline mr-auto">
-                    <ul class="navbar-nav mr-3">
-                        <li>
-                            <a href="javascript:void(0);" data-toggle="sidebar"
-                                class="nav-link nav-link-lg collapse-btn">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round"
-                                    class="feather feather-align-justify">
-                                    <line x1="21" y1="10" x2="3" y2="10"></line>
-                                    <line x1="21" y1="6" x2="3" y2="6"></line>
-                                    <line x1="21" y1="14" x2="3" y2="14"></line>
-                                    <line x1="21" y1="18" x2="3" y2="18"></line>
-                                </svg>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <ul class="navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a href="#" data-toggle="dropdown"
-                            class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                            <img alt="image"
-                                src="{{ !is_null($authUser->profile_url) ? Storage::url($authUser->profile_url) : asset('assets/img/user.png') }}"
-                                class="user-img-radious-style">
-                            <span class="d-sm-none d-lg-inline-block"></span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right pullDown">
-                            <div class="dropdown-title">{{ $authUser->name }}</div>
-                            <a href="{{ route('admin.show') }}" class="dropdown-item has-icon">
-                                <i class="far fa-user"></i> Profile
-                            </a>
-                            <a href=" {{ route('change.password') }} " class="dropdown-item has-icon">
-                                <i class="fas fa-cog"></i> Change Password
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a href=" {{ route('custom.logout') }} " class="dropdown-item has-icon text-danger">
-                                <i class="fas fa-sign-out-alt"></i>Logout
-                            </a>
+    <header>
+        <div class="custm-nav">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                    <a class="navbar-brand" href="{{ route('welcome') }}">
+                        <div class="header-logo">
+                            <img src="{{ asset('assets/images/header-logo.png') }}  " alt="">
                         </div>
-                    </li>
-                </ul>
-            </nav>
-            <div class="main-sidebar sidebar-style-2">
-                <aside id="sidebar-wrapper">
-                    <div class="sidebar-brand">
-                        <a href="{{ route('admin.dashboard') }}" class="d-inline-block">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                        <span class="navbar-toggler-icon"></span>
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse ms-auto" id="navbarNav">
+                        <div class="custm-nav-menu login-nav">
+                            @auth
+                                <ul class="navbar-nav">
+                                    <li>
+                                        <div class="nav-profile">
+                                            <div class="nav-profile-img">
 
-                            <h1 style="line-height: 70px;text-transform: none;">{{ config('app.name') }}</h1>
-                        </a>
+                                                <div class="dropdown">
+                                                    <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <img src="{{ asset('assets/images/profile-img.png') }}"
+                                                            alt="">
+                                                        Alfonso
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                                                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                                                        <li><a class="dropdown-item" href="{{ route('logout') }}">
+                                                                Logout
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            @endauth
+                        </div>
+
                     </div>
-                    <ul class="sidebar-menu">
-                        <li class="dropdown {{ 'admin.dashboard' == Request::route()->getName() ? 'active' : '' }}">
-                            <a href="{{ route('admin.dashboard') }}" class="nav-link"><i
-                                    data-feather="monitor"></i><span>Dashboard</span></a>
-                        </li>
-
-                        <li class="dropdown {{ Route::is('admin.cms.*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.cms.index') }}" class="nav-link"><i
-                                    data-feather="maximize"></i><span>Cms Management</span></a>
-                        </li>
-                        <li class="dropdown {{ Route::is('admin.category*') ? 'active' : '' }} ">
-                            <a href="#" class="menu-toggle nav-link has-dropdown"><i
-                                    data-feather="grid"></i><span>Category</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="nav-link " href="{{ route('admin.category.index') }}">Categories</a>
-                                </li>
-                                <li><a class="nav-link " href="{{ route('admin.category.add') }}">Add Category</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="dropdown {{ Route::is('admin.users.*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.dealers.all') }}" class="nav-link"><i
-                                    data-feather="user"></i><span>User</span></a>
-                        </li>
-                        {{-- <li class="dropdown {{ Route::is('admin.users.*') ? 'active' : '' }}">
-                            <a href="#" class="menu-toggle nav-link has-dropdown"><i
-                                    data-feather="user"></i><span>Dealers</span></a>
-                            <ul class="dropdown-menu">
-                                <li><a class="nav-link " href="{{ route('admin.users.all') }}">Dealers</a></li>
-                                <li><a class="nav-link " href="{{ route('admin.users.deleted') }}">Deleted Users</a>
-                                </li>
-                            </ul>
-                        </li> --}}
-                        {{-- <li class="dropdown {{ Route::is('admin.packages.*') ? 'active' : '' }} ">
-                            <a href="#" class="menu-toggle nav-link has-dropdown"><i
-                                    data-feather="briefcase"></i><span>Subscription Plans</span></a>
-                            <ul class="dropdown-menu">
-                                <li><a class="nav-link " href="{{ route('admin.packages.all') }}">Subscription
-                                        Plans</a></li>
-                                <li><a class="nav-link " href="{{ route('admin.packages.add') }}">Add Subscription
-                                        Plan</a></li>
-                            </ul>
-                        </li> --}}
-
-                        {{-- <li class="dropdown {{ Route::is('admin.cms.*') ? 'active' : '' }}">
-                            <a href="#" class="menu-toggle nav-link has-dropdown"><i
-                                    data-feather="maximize"></i><span>Cms Management</span></a>
-                            <ul class="dropdown-menu">
-                                <li><a class="nav-link " href="{{ route('admin.cms.index') }}">All Cms Pages</a></li>
-                                <li><a class="nav-link " href="{{ route('admin.cms.deleted') }}">Deleted Cms
-                                        Pages</a></li>
-                            </ul>
-                        </li> --}}
-                        <li class="dropdown {{ Route::is('admin.commission.*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.commission') }}" class="nav-link">
-                                <i class="fas fa-money-bill ml-0"></i>
-                                <span>Commission</span></a>
-                        </li>
-                        <li class="dropdown {{ Route::is('admin.settings.*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.settings.view') }}" class="nav-link"><i
-                                    data-feather="settings"></i><span>Stripe Setting</span></a>
-                        </li>
-                    </ul>
-                </aside>
+                </nav>
             </div>
-
-            @yield('content')
-            <footer class="main-footer">
-                <div class="footer-left">
-                    <a style="text-decoration:none"
-                        href="{{ route('admin.dashboard') }}">{{ config('app.name') }}</a>
-                </div>
-                <div class="footer-right"></div>
-            </footer>
         </div>
-    </div>
-    <script src="{{ asset('assets/js/app.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.selectric.min.js') }}"></script>
-    <script src="{{ asset('assets/js/toaster.min.js') }}"></script>
-    <script src="{{ asset('assets/js/validate.min.js') }}"></script>
-    <script src="{{ asset('assets/js/additional_method.min.js') }}"></script>
-    <script src="{{ asset('assets/js/daterangepicker.js') }}"></script>
-    <script src="{{ asset('assets/js/sweetalert.min.js') }}"></script>
-    <script src="{{ asset('assets/js/iziToast.min.js') }}"></script>
-    <script src="{{ asset('assets/js/scripts.js') }}"></script>
-    <script src="{{ asset('assets/js/common.js') }}?ver={{ now() }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    </header>
+    <section class="banner-content-sec">
+        <div class="container">
+            <div class="banner-content-wrapper">
+                <div class="banner-content-heading">
+                    <h2>
+                        @yield('heading')
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </section>
+    <main>
+        <section class="page-content-sec">
+            <div class="container">
+                <div class="page-content-wrapper">
+                    <div class="dc-content-wrapper">
+                        @include('admin.sidebar')
+                        @yield('content')
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer-sec">
+        <div class="footer-main">
+            <div class="container">
+                <div class="footer-small">
+                    <p class="right-reserve">@2024 partsmatch.com All Right Reserved</p>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+    <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/js/slick.js') }}"></script>
     @stack('scripts')
-    @yield('modal')
 </body>
 
 </html>
