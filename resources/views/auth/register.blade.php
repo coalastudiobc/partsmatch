@@ -340,9 +340,16 @@
                                             <div class="form-group">
                                                 <label for="">Select industry</label>
                                                 <div class="form-field">
-                                                    <input type="text" name="industry_type" value="{{ old('industry_type') }}"
+                                                    <select name="cars" id="industury" class="form-control" >
+                                                        <option value="volvo">Select industry</option>
+                                                        <option value="">Volvo</option>
+                                                        <option value="saab">Saab</option>
+                                                        <option value="opel">Opel</option>
+                                                        <option value="audi">Audi</option>
+                                                      </select>
+                                                    {{-- <input type="text" name="industry_type" value="{{ old('industry_type') }}"
                                                         class="form-control @error('industry_type') is-invalid @enderror"
-                                                        placeholder="Select industry">
+                                                        placeholder="Select industry"> --}}
 
                                                     @error('industry_type')
                                                         <span class="invalid-feedback" role="alert">

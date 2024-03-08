@@ -29,6 +29,8 @@ Auth::routes(['verify' => true]);
 Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers')->group(function () {
     Route::get('redirect-to-dashboard', [HomeController::class, 'redirectToDashboard'])->name('redirect-to-dashboard');
     Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/profile', [ProfileController::class, 'profile'])->name('profile');
+    Route::get('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
     Route::get('/logout', [HomeController::class, 'logout'])->name('custom.logout');
     Route::match(['GET', 'POST'], '/change/password', [HomeController::class, 'changePassword'])->name('change.password');
 });

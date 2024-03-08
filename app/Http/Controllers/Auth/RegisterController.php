@@ -90,6 +90,8 @@ class RegisterController extends Controller
             }
             DB::beginTransaction();
             $userdetails = User::create($user);
+            $userdetails->syncRole('Dealer');
+
             DB::commit();
             // PaymentDetail::create([
             //     'user_id' => $userdetails->id,

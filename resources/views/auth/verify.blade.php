@@ -1,28 +1,35 @@
-@extends('layouts.app')
-
+@extends('layouts.front')
+@section('title', 'login')
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Verify Your Email Address') }}</div>
-
-                <div class="card-body">
+    <div class="login-sec">
+        <div class="container">
+            <div class="login-wrapper">
+                <div class="login-box">
+                    <div class="logo-box">
+                        <img src="{{ asset('assets/images/header-logo.png') }}" alt="">
+                    </div>
                     @if (session('resent'))
                         <div class="alert alert-success" role="alert">
                             {{ __('A fresh verification link has been sent to your email address.') }}
                         </div>
                     @endif
-
-                    {{ __('Before proceeding, please check your email for a verification link.') }}
-                    {{ __('If you did not receive the email') }},
-                    <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
-                        @csrf
-                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ __('click here to request another') }}</button>.
-                    </form>
+                    <div class="login-txt">
+                        <h2>verification</h2>
+                        <p>please verify your email</p>
+                    </div>
+                    <div class="login-form">
+                        {{ __('Before proceeding, please check your email for a verification link.') }}
+                        {{ __('If you did not receive the email') }},
+                        <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
+                            @csrf
+                            <button type="submit" class="btn secondary-btn full-btn">{{ __('click here to request another') }}</button>.
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
+        <img class="login-bg-img" src="{{ asset('assets/images/login-img1.png') }}" alt="">
+        <img class="login-bg-img right" src="{{ asset('assets/images/login-img2.png') }}" alt="">
     </div>
-</div>
 @endsection
+
