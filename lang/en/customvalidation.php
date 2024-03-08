@@ -1,10 +1,11 @@
 <?php
 
+use Symfony\Contracts\Service\Attribute\Required;
 
 return [
     'login' => [
         'email' => [
-            'required' => 'Please enter email or username',
+            'required' => 'Please enter email',
             'email' => 'This is not a valid email address',
             'regex' => 'Please enter the valid email address',
         ],
@@ -15,6 +16,10 @@ return [
             'regex' => 'Password can be alphanumeric and (@#$%^&*) these special characters *At least one uppercase *One lowercase *One numeric',
 
         ],
+        'password_confirmation' => [
+            'required' => 'Please enter the confirmation password',
+            'equalTo' => 'confoirm password does not match'
+        ]
     ],
 
     'change_password' => [

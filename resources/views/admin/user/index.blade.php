@@ -2,6 +2,113 @@
 @section('title', 'Users')
 
 @section('content')
+
+    <div class="dashboard-right-box">
+        <h2>User</h2>
+        <div class="product-detail-table">
+            <div class="table-responsive">
+                <table class="table">
+                    <tr>
+                        <th>
+                            <p>Name</p>
+                        </th>
+                        <th>
+                            <p>Email</p>
+                        </th>
+                        <th>
+                            <p>Industry</p>
+                        </th>
+                        <th>
+                            <p>Address</p>
+                        </th>
+                        <th>
+                            <p>Product</p>
+                        </th>
+                        <th>
+                            <p>Status</p>
+                        </th>
+                        <th>
+                            <p>Action</p>
+                        </th>
+                    </tr>
+                    @forelse ($users as $user)
+                        <tr>
+                            <td>
+                                <p>{{ $user->name ? Str::limit($user->name, 15, '...') : '' }}</p>
+                            </td>
+                            <td>
+                                <p>{{ $user->email ? $user->email : 'N/A' }}</p>
+                            </td>
+                            <td>
+                                <p>{{ $user->industry_type ? $user->industry_type : 'N/A' }}</p>
+                            </td>
+                            <td>
+                                <p>{{ $user->address ? $user->address : 'N/A' }}</p>
+                            </td>
+                            <td>
+                                <p>{{ $user->product ? $user->product : 'N/A' }}</p>
+                            </td>
+                            {{-- <td>
+                                <p>{{ $user->industry_type ? $user->industry_type : 'N/A' }}</p>
+                            </td> --}}
+                            <td>
+                                <input type="checkbox" class="custom-switch-input"
+                                    @if ($user->status == 'ACTIVE') checked="checked" @endif
+                                    onchange="toggleStatus(this, 'User', '{{ $user->id }}');"
+                                    url="{{ route('admin.dealers.status') }}">
+                                <span class="custom-switch-indicator"></span>
+
+                            </td>
+                            <td>
+                                <p><a href="{{ route('admin.dealers.show', [$user->id]) }}"class="btn btn-primary">View</a>
+                                </p>
+                            </td>
+                            {{-- <td>
+                                <div class="table-pro-quantity">
+                                    1
+                                </div>
+                            </td> --}}
+                        </tr>
+                    @empty
+                        <tr>
+                            <td class="no-record-found">
+                                <center>Did not found any User </center>
+                            </td>
+                        </tr>
+                    @endforelse
+                </table>
+            </div>
+        </div>
+        <div class="pagination-wrapper">
+            <div class="pagination-boxes">
+                <div class="pagination-box">
+                    <i class="fa-solid fa-angle-left"></i>
+                </div>
+                <div class="pagination-box active">
+                    <p>1</p>
+                </div>
+                <div class="pagination-box">
+                    <p>2</p>
+                </div>
+                <div class="pagination-box">
+                    <p>3</p>
+                </div>
+                <div class="pagination-box">
+                    <p>4</p>
+                </div>
+                <div class="pagination-box">
+                    <p>5</p>
+                </div>
+                <div class="pagination-box">
+                    <i class="fa-solid fa-angle-right"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@endsection
+
+{{-- @section('content')
     <div class="main-content">
         <section class="section">
             <div class="section-body">
@@ -46,10 +153,6 @@
                                                 <td>
                                                     <a
                                                         href="{{ route('admin.dealers.show', [$user->id]) }}"class="btn btn-primary">View</a>
-                                                    {{-- <a
-                                                        href="{{ route('admin.users.edit', [jsencode_userdata($user->id)]) }}"class="btn btn-primary">Edit</a>
-                                                    <a
-                                                        href="{{ route('admin.users.delete', [jsencode_userdata($user->id)]) }}"class="btn btn-danger delete">Delete</a> --}}
                                                 </td>
                                             </tr>
                                         @empty
@@ -64,7 +167,7 @@
                                     <div class="card-footer">
                                         <div class="text-right">
                                             <nav class="d-inline-block">
-                                                {{-- {!! $users->links('admin.pagination') !!} --}}
+                                                {!! $users->links('admin.pagination') !!}
                                             </nav>
                                         </div>
                                     </div>
@@ -76,6 +179,6 @@
             </div>
         </section>
     </div>
-@endsection
+@endsection --}}
 @push('scripts')
 @endpush

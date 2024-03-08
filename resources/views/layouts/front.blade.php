@@ -108,6 +108,9 @@
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/js/slick.js') }}"></script>
+    <script src="{{ asset('assets/js/validate.min.js') }}"></script>
+    <script src="{{ asset('assets/js/common.js') }}?ver={{ now() }}"></script>
+
     @stack('scripts')
 </body>
 

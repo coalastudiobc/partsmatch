@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 Route::get('/', function () {
     if (Auth::check())
         return redirect()->route('redirect-to-dashboard');
@@ -22,10 +23,10 @@ Route::get('/', function () {
         return view('welcome');
 })->name('welcome');
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 
-Route::middleware(['auth','verified'])->namespace('App\Http\Controllers')->group(function () {
+Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers')->group(function () {
     Route::get('redirect-to-dashboard', [HomeController::class, 'redirectToDashboard'])->name('redirect-to-dashboard');
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/logout', [HomeController::class, 'logout'])->name('custom.logout');
