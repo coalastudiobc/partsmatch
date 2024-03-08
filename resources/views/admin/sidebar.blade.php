@@ -27,7 +27,9 @@
                             <path d="M12.7413 7.78811V2.41351L9.17383 3.6027V8.97726L12.7413 7.78811Z" fill="white" />
                         </svg>
                     </span>
-                    <h4>Total Products</h4>
+                    <a href="{{ route('admin.dealers.all') }}">
+                        <h4>User</h4>
+                    </a>
                 </div>
                 <p class="analyics-tabs-num">100</p>
             </div>

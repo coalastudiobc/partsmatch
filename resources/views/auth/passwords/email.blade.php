@@ -18,14 +18,14 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        <form method="POST" action="{{ route('password.email') }}">
+                        <form id="send_email" method="POST" action="{{ route('password.email') }}">
                             @csrf
                             <div class="form-group">
                                 <label for="email">Email or Phone Number</label>
                                 <div class="form-field">
                                     <input id="email" type="email"
                                         class="form-control @error('email') is-invalid @enderror" name="email"
-                                        value="{{ old('email') }}"  autocomplete="email" autofocus
+                                        value="{{ old('email') }}" autocomplete="email" autofocus
                                         placeholder="Enter Email">
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
@@ -55,3 +55,8 @@
         <img class="login-bg-img right" src="{{ asset('assets/images/login-img2.png') }}" alt="">
     </div>
 @endsection
+
+@push('scripts')
+    @includeFirst(['validation'])
+    @includeFirst(['validation.js_email'])
+@endpush
