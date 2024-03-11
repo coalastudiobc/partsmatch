@@ -114,7 +114,7 @@ class CategoryController extends Controller
             $message = "Category deletion failed";
         }
 
-        return redirect()->route('admin.categories')->with(['status' => $status , 'message' => $message] );
+        return redirect()->route('admin.category.index')->with(['status' => $status , 'message' => $message] );
 
     }
 }

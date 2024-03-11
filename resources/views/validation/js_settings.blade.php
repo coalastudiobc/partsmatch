@@ -27,7 +27,6 @@
         handleValidation('settings', rules, messages);
         if (jQuery('#settings').valid()) {
             jQuery('#settings').find('button').attr('disabled', false);
-
         }
     });
 </script>

@@ -35,7 +35,7 @@
               },
               image: {
                 filesize: profilePicSize,
-                extension: profilePicMimes,
+                extension: profilePicMimes
               }
 
           }
@@ -74,11 +74,11 @@
               },
               image: { 
                 filesize: `{{ __('customvalidation.cms.image.size', ['min' =>'${profilePicSize}'])}}`,
-                extension: `{{ __('customvalidation.cms.image.mimes', ['mime' => '${profilePicMimes}']) }}`,
+                extension: `{{ __('customvalidation.cms.image.mimes', ['mime' => '${profilePicMimes}']) }}`
               },
           };
 
-          handleValidation('cms', rules, messages);
+        //   handleValidation('cms', rules, messages);
 
           
       });
