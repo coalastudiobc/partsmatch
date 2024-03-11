@@ -401,11 +401,11 @@
 }
 
 .analyics-tabs-btns {
-    display: flex;
+    /* display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-between; */
     background-color: #F5F5F5;
-    padding: 15px 20px;
+
     border-radius: 5px;
     margin-bottom: 16px;
     cursor: pointer;
@@ -420,6 +420,7 @@
     display: flex;
     align-items: center;
     gap: 15px;
+    padding: 15px 20px;
 }
 
 .analyics-tabs-btns p {
@@ -606,4 +607,24 @@
 .user-list-table table tr th:last-child,
 .cms-list-table table tr th:last-child {
     width: unset;
+}
+
+.card-header-form.padding {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.card-header-form.padding h2 {
+    padding: 0;
+    margin: 0;
+    border-bottom: 0;
+}
+
+.dashboard-left-box {
+    position: sticky;
+    top: 100px;
 }

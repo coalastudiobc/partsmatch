@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('title', 'Users')
+@section('heading', 'User')
 
 @section('content')
 
@@ -52,15 +53,21 @@
                                 <p>{{ $user->industry_type ? $user->industry_type : 'N/A' }}</p>
                             </td> --}}
                             <td>
-                                <input type="checkbox" class="custom-switch-input"
-                                    @if ($user->status == 'ACTIVE') checked="checked" @endif
-                                    onchange="toggleStatus(this, 'User', '{{ $user->id }}');"
-                                    url="{{ route('admin.dealers.status') }}">
-                                <span class="custom-switch-indicator"></span>
+                                <div class="toggle-btn">
+                                    <input type="checkbox" id="switch1" class=""
+                                        @if ($user->status == 'ACTIVE') checked="checked" @endif
+                                        onchange="toggleStatus(this, 'User', '{{ $user->id }}');"
+                                        url="{{ route('admin.dealers.status') }}"><label for="switch1">Toggle</label>
+                                </div>
+                                {{-- <span class="custom-switch-indicator"></span> --}}
+                                {{-- <div >
+                                    <input type="checkbox" id="switch1"><label for="switch1">Toggle</label>
+                                </div> --}}
 
                             </td>
                             <td>
-                                <p><a href="{{ route('admin.dealers.show', [$user->id]) }}"class="btn btn-primary">View</a>
+                                <p><a href="{{ route('admin.dealers.show', [$user->id]) }}"class=""><i
+                                            class="fa-solid fa-eye"></i></a>
                                 </p>
                             </td>
                             {{-- <td>

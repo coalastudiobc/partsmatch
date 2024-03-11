@@ -236,7 +236,8 @@
                                     </div>
                                 </button>
                             </h2>
-                            <div id="flush-collapseOne" class="accordion-collapse collapse"
+                            <div id="flush-collapseOne"
+                                class="accordion-collapse collapse  @if (Route::is('admin.category.*')) show @endif"
                                 aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body">
                                     <ul class="sub-menu">
@@ -260,7 +261,8 @@
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#flush-collapseOne1" aria-expanded="false"
                                     aria-controls="flush-collapseOne">
-                                    <div class="analyics-tabs-btns @if (Route::is('admin.dealers.*')) active @endif ">
+                                    <a href="{{ route('admin.dealers.all') }}"
+                                        class="analyics-tabs-btns @if (Route::is('admin.dealers.*')) active @endif ">
                                         <div class="analyics-tabs-name">
                                             <span>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17"
@@ -272,12 +274,12 @@
                                                     </g>
                                                 </svg>
                                             </span>
-                                            <a href="{{ route('admin.dealers.all') }}">
-                                                <h4>Users</h4>
-                                            </a>
+
+                                            <h4>Users</h4>
+
                                         </div>
                                         {{-- <p class="analyics-tabs-num">200</p> --}}
-                                    </div>
+                                    </a>
                                 </button>
                             </h2>
                             {{-- <div id="flush-collapseOne1" class="accordion-collapse collapse"
@@ -304,7 +306,8 @@
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#flush-collapseOne2" aria-expanded="false"
                                     aria-controls="flush-collapseOne">
-                                    <div class="analyics-tabs-btns @if (Route::is('admin.cms.*')) active @endif ">
+                                    <a href="{{ route('admin.cms.index') }}"
+                                        class="analyics-tabs-btns @if (Route::is('admin.cms.*')) active @endif ">
                                         <div class="analyics-tabs-name">
                                             <span>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17"
@@ -330,12 +333,10 @@
                                                     </defs>
                                                 </svg>
                                             </span>
-                                            <a href="{{ route('admin.cms.index') }}">
-                                                <h4>Cms</h4>
-                                            </a>
+                                            <h4>Cms</h4>
                                         </div>
                                         {{-- <p class="analyics-tabs-num">60</p> --}}
-                                    </div>
+                                    </a>
                                 </button>
                             </h2>
                             {{-- <div id="flush-collapseOne2" class="accordion-collapse collapse"
@@ -362,7 +363,8 @@
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#flush-collapseOne3" aria-expanded="false"
                                     aria-controls="flush-collapseOne">
-                                    <div class="analyics-tabs-btns @if (Route::is('admin.settings.*')) active @endif ">
+                                    <a href="{{ route('admin.settings.view') }}"
+                                        class="analyics-tabs-btns @if (Route::is('admin.settings.*')) active @endif ">
                                         <div class="analyics-tabs-name">
                                             <span>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17"
@@ -384,12 +386,10 @@
                                                     </defs>
                                                 </svg>
                                             </span>
-                                            <a href="{{ route('admin.settings.view') }}">
-                                                <h4>stripe setting</h4>
-                                            </a>
+                                            <h4>stripe setting</h4>
                                         </div>
-                                        <p class="analyics-tabs-num">20</p>
-                                    </div>
+                                        <p class="analyics-tabs-num"></p>
+                                    </a>
                                 </button>
                             </h2>
                             {{-- <div id="flush-collapseOne3" class="accordion-collapse collapse"
@@ -416,7 +416,8 @@
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#flush-collapseOne4" aria-expanded="false"
                                     aria-controls="flush-collapseOne">
-                                    <div class="analyics-tabs-btns ">
+                                    <a href="{{ route('admin.commission') }}"
+                                        class="analyics-tabs-btns @if (Route::is('admin.commission')) active @endif ">
                                         <div class="analyics-tabs-name">
                                             <span>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17"
@@ -436,13 +437,13 @@
                                                     </defs>
                                                 </svg>
                                             </span>
-                                            <h4>cancelled orders</h4>
+                                            <h4>Commission</h4>
                                         </div>
-                                        <p class="analyics-tabs-num">20</p>
-                                    </div>
+                                        <p class="analyics-tabs-num"></p>
+                                    </a>
                                 </button>
                             </h2>
-                            <div id="flush-collapseOne4" class="accordion-collapse collapse"
+                            {{-- <div id="flush-collapseOne4" class="accordion-collapse collapse"
                                 aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body">
                                     <ul class="sub-menu">
@@ -454,7 +455,7 @@
                                             </a></li>
                                     </ul>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </li>
@@ -485,7 +486,7 @@
                                             </span>
                                             <h4>parts manager</h4>
                                         </div>
-                                        <p class="analyics-tabs-num">parts manager</p>
+                                        <p class="analyics-tabs-num"></p>
                                     </div>
                                 </button>
                             </h2>
@@ -538,7 +539,7 @@
                                             </span>
                                             <h4>money earned</h4>
                                         </div>
-                                        <p class="analyics-tabs-num">$6000</p>
+                                        <p class="analyics-tabs-num"></p>
                                     </div>
                                 </button>
                             </h2>

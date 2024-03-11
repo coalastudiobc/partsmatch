@@ -1,81 +1,7 @@
 @extends('layouts.admin')
 
 @section('title', 'Cms Management')
-
-{{-- @section('content')
-    <div class="main-content">
-        <section class="section">
-            <div class="section-body">
-                <div class="row">
-                    <div class="col-12 col-md-6 col-lg-12">
-                        <div class="card">
-                            <x-alert-component />
-                            <div class="card-header">
-
-                            </div>
-                            <div class="card-body p-0">
-                                <div class="table-responsive">
-                                    <table class="table table-striped table-md">
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Title</th>
-                                            <th>Content</th>
-                                            <th>Image</th>
-
-                                            <th>Status</th>
-
-                                            <th>Action</th>
-                                        </tr>
-                                        @forelse($cms_pages as $page)
-                                            <tr>
-                                                <td>{{ $page->name ? $page->name : '' }}</td>
-                                                <td>{{ $page->page_title ? Str::limit($page->page_title, 50, '....') : '' }}
-                                                </td>
-                                                <td>{{ $page->page_content ? Str::limit($page->page_content, 50, '....') : '' }}
-                                                </td>
-                                                <td>
-                                                    @if ($page->media_url)
-                                                        <img alt="image" src="{{ Storage::url($page->media_url) }}"
-                                                            width="100" height="100">
-                                                    @endif
-                                                </td>
-
-                                                <td>
-                                                    <label>
-                                                        <input type="checkbox" class="custom-switch-input"
-                                                            @if ($page->status == '1') checked="checked" @endif
-                                                            onchange="toggleStatus(this, 'CmsPage', '{{ $page->id }}');"
-                                                            url="{{ route('cms.status') }}">
-                                                        <span class="custom-switch-indicator"></span>
-                                                    </label>
-                                                </td>
-
-                                                <td>
-
-                                                    <a href="{{ route('admin.cms.edit', [$page->id]) }}"
-                                                        class="btn btn-primary edit">Edit</a>
-
-                                                </td>
-
-                                            </tr>
-                                        @empty
-                                           
-                                        @endforelse
-                                    </table>
-                                    <div class="card-footer text-right">
-                                        <nav class="d-inline-block">
-                                        </nav>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-@endsection --}}
-
+@section('heading', 'Cms')
 
 @section('content')
 
@@ -125,18 +51,23 @@
                                 </p>
                             </td>
                             <td>
-                                <p><input type="checkbox" class="custom-switch-input"
+                                <p>
+                                    {{-- <span class="custom-switch-indicator"></span> --}}
+                                </p>
+                                <div class="toggle-btn">
+                                    <input type="checkbox" id="switch10" class="custom-switch-input"
                                         @if ($page->status == '1') checked="checked" @endif
                                         onchange="toggleStatus(this, 'CmsPage', '{{ $page->id }}');"
-                                        url="{{ route('cms.status') }}">
-                                    <span class="custom-switch-indicator"></span>
-                                </p>
+                                        url="{{ route('cms.status') }}"><label for="switch10">Toggle</label>
+                                </div>
+
                             </td>
                             {{-- <td>
                                 <p>{{ $user->industry_type ? $user->industry_type : 'N/A' }}</p>
                             </td> --}}
                             <td>
-                                <a href="{{ route('admin.cms.edit', [$page->id]) }}" class="btn btn-primary edit">Edit</a>
+                                <a href="{{ route('admin.cms.edit', [$page->id]) }}" class="edit"><i style="color: green"
+                                        class="fa-solid fa-pen-to-square"></i></a>
 
                             </td>
 
