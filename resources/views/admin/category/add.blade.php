@@ -67,7 +67,8 @@
                                             <button class="btn btn-primary mr-1" id="submit">Submit</button>
                                         </div>
                                 </form> --}}
-                                <form form id="category" enctype="multipart/form-data" method="post">
+                                <form  id="category" enctype="multipart/form-data" method="post">
+                                    @csrf
                                     <div class="row">
                                         <div class="col-md-12">
                                             {{-- <div class="upload-img">
