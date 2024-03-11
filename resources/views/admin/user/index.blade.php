@@ -5,7 +5,7 @@
 
     <div class="dashboard-right-box">
         <h2>User</h2>
-        <div class="product-detail-table">
+        <div class="product-detail-table user-list-table">
             <div class="table-responsive">
                 <table class="table">
                     <tr>
