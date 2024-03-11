@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('title', 'Update ' . $page->name)
+@section('heading', 'Cms')
 
 @section('content')
     <div class="main-content">
@@ -14,63 +15,6 @@
                                 <h4>{{ 'Update ' . $page->name }}</h4>
                             </div>
                             <div class="card-body">
-                                {{-- <form id="cms" enctype="multipart/form-data" method="post">
-                                    @csrf
-                                    <div class="row">
-                                        <div class="form-group col-md-6">
-                                            <label>Name<span class="required-field">*</span></label>
-                                            <input type="text" name="name"
-                                                class="form-control @error('name') is-invalid @enderror"
-                                                value="{{ old('name', $page->name ? $page->name : '') }}">
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label>Slug<span class="required-field">*</span></label>
-                                            <input type="text" name="slug"
-                                                class="form-control @error('slug') is-invalid @enderror"
-                                                value="{{ old('slug', $page->slug ?? $page->slug) }}" disabled>
-                                        </div>
-                                    </div>
-                                
-                                    <div class="row">
-
-                                        <div class="form-group form-group col-md-12">
-                                            <label>Content<span class="required-field">*</span></label>
-                                            <textarea name="content" class="form-control summernote @error('content') is-invalid @enderror">{{ $page->page_content ?? $page->page_content }}</textarea>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-
-                                        <div class="form-group form-group col-md-12">
-                                            <label>Page Title</label>
-                                            <input type="text" name="page_title"
-                                                class="form-control @error('page_title') is-invalid @enderror"
-                                                value="{{ old('page_title', $page->page_title ?? $page->page_title) }}">
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="row">
-
-                                        <div class="form-group form-group col-md-6">
-                                            <label>Status<span class="required-field">*</span></label>
-                                            <select name="status"
-                                                class="form-control @error('status') is-invalid @enderror">
-                                                <option value="0"@if ($page->status == 0) selected @endif>
-                                                    Inactive</option>
-                                                <option value="1" @if ($page->status == 1) selected @endif>
-                                                    Active</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group form-group col-md-6">
-                                            <label>Image</label>
-                                            <input type="file" name="image"
-                                                class="form-control @error('image') is-invalid @enderror">
-                                        </div>
-                                    </div>
-                                    <div class="card-footer text-right">
-                                        <a class="btn btn-primary mr-1" href="{{ route('admin.cms.index') }}">Back</a>
-                                        <button class="btn btn-primary mr-1" id="submit" type="submit">Submit</button>
-                                    </div>
-                                </form> --}}
                                 <form id="cms" enctype="multipart/form-data" method="post">
                                     <div class="row">
                                         <div class="col-md-6">
@@ -143,12 +87,15 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
-                                            <a class="btn btn-primary mr-1" href="{{ route('admin.cms.index') }}">Back</a>
-                                            <button class="btn btn-primary mr-1" id="submit"
+
+                                        <div class="col-md-6">
+                                            <a class="btn secondary-btn full-btn mr-1"
+                                                href="{{ route('admin.cms.index') }}">Back</a>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <button class="btn primary-btn full-btn mr-1" id="submit"
                                                 type="submit">Submit</button>
                                         </div>
-
                                     </div>
                                 </form>
 

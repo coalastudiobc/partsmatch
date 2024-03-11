@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 @section('title', 'commision')
+@section('heading', 'Commision')
+
 @section('content')
     <div class="main-content">
         <section class="section">
@@ -13,42 +15,50 @@
                                 <h4>Commision</h4>
                             </div>
                             <div class="card-body">
+
                                 <form id="commission" action="{{ route('admin.commission', [$commission->id]) }}"
                                     enctype="multipart/form-data" method="post">
                                     @csrf
-                                    <div class="form-group">
-                                        <label>Order Commission Type</label>
-                                        <select id="checktype" name="ordercommission_type"
-                                            class="form-control @error('ordercommission_type') is-invalid @enderror">
-                                            <option value="Percentage" @if ($commission->type == 'Percentage') selected @endif>
-                                                Percentage
-                                            </option>
-                                            <option value="Fixed" @if ($commission->type == 'Fixed') selected @endif>Fixed
-                                            </option>
-                                        </select>
-                                        @error('ordercommission_type')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <label>Order Commission Type</label>
+                                            <select id="checktype" name="ordercommission_type"
+                                                class="form-control @error('ordercommission_type') is-invalid @enderror">
+                                                <option value="Percentage"
+                                                    @if ($commission->type == 'Percentage') selected @endif>
+                                                    Percentage
+                                                </option>
+                                                <option value="Fixed" @if ($commission->type == 'Fixed') selected @endif>
+                                                    Fixed
+                                                </option>
+                                            </select>
+                                            @error('ordercommission_type')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Order Commission<span class="required-field">*</span></label>
+                                            <input type="text" id="checkcommission" name="ordercommission"
+                                                class="form-control @error('ordercommission') is-invalid @enderror"
+                                                value="{{ old('name', $commission->value) }}">
 
-                                    <div class="form-group">
-                                        <label>Order Commission<span class="required-field">*</span></label>
-                                        <input type="text" id="checkcommission" name="ordercommission"
-                                            class="form-control @error('ordercommission') is-invalid @enderror"
-                                            value="{{ old('name', $commission->value) }}">
+                                            @error('ordercommission')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
 
-                                        @error('ordercommission')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-
-                                    <div class="card-footer text-right">
-                                        <a class="btn btn-danger mr-1" href="{{ route('admin.commission') }}">Back</a>
-                                        <button class="btn btn-primary mr-1" id="submit">Submit</button>
+                                        <div class="col-md-6">
+                                            <a class="btn secondary-btn full-btn mr-1"
+                                                href="{{ route('admin.commission') }}">Back</a>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <button class="btn primary-btn full-btn mr-1" id="submit"
+                                                type="submit">Submit</button>
+                                        </div>
                                     </div>
                                 </form>
                             </div>

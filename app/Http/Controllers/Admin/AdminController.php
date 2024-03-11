@@ -122,7 +122,9 @@ class AdminController extends Controller
                 'type' => $request->ordercommission_type,
                 'value' => $request->ordercommission
             ]);
-            return redirect()->route('admin.commission')->with('success', 'Data updated successfully');
+            session()->flash('status', 'success');
+            session()->flash('message', 'Data updated successfully');
+            return redirect()->route('admin.commission');
         }
 
         $commission = Commission::first();

@@ -1013,3 +1013,57 @@ header {
     border-radius: 5px;
     overflow: hidden;
 }
+
+
+
+/* ================================== toggle switch css ======================================  */
+
+
+.toggle-btn input[type=checkbox] {
+    height: 0;
+    width: 0;
+    visibility: hidden;
+    display: none;
+}
+
+.toggle-btn label {
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 50px;
+    height: 24px;
+    background: #fff;
+    display: block;
+    border-radius: 100px;
+    position: relative;
+    border: 1px solid #5C5C5C;
+}
+
+.toggle-btn label:after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 5px;
+    width: 16px;
+    height: 16px;
+    background: var(--heading-color);
+    border-radius: 90px;
+    transition: 0.3s;
+}
+
+.toggle-btn input:checked+label {
+    background: #fff;
+    border: 1px solid var(--heading-color);
+}
+
+.toggle-btn input:checked+label:after {
+    left: calc(100% - 5px);
+    transform: translateX(-100%);
+}
+
+.toggle-btn label:active:after {
+    width: 50px;
+}
+
+
+
+/* ================= toggle switch css ===================  */
