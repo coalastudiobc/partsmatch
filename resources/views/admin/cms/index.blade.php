@@ -2,17 +2,16 @@
 
 @section('title', 'Cms Management')
 
-@section('content')
+{{-- @section('content')
     <div class="main-content">
         <section class="section">
             <div class="section-body">
                 <div class="row">
                     <div class="col-12 col-md-6 col-lg-12">
                         <div class="card">
-                            {{-- <x-alert-component /> --}}
+                            <x-alert-component />
                             <div class="card-header">
-                                {{-- <h4>{{ $delete ? 'Deleted Pages' : 'All Pages' }}</h4> --}}
-                                {{-- <x-search-form :dateField="false"/>     --}}
+
                             </div>
                             <div class="card-body p-0">
                                 <div class="table-responsive">
@@ -22,9 +21,9 @@
                                             <th>Title</th>
                                             <th>Content</th>
                                             <th>Image</th>
-                                            {{-- @if (!$delete) --}}
+
                                             <th>Status</th>
-                                            {{-- @endif --}}
+
                                             <th>Action</th>
                                         </tr>
                                         @forelse($cms_pages as $page)
@@ -40,7 +39,7 @@
                                                             width="100" height="100">
                                                     @endif
                                                 </td>
-                                                {{-- @if (!$delete) --}}
+
                                                 <td>
                                                     <label>
                                                         <input type="checkbox" class="custom-switch-input"
@@ -50,35 +49,21 @@
                                                         <span class="custom-switch-indicator"></span>
                                                     </label>
                                                 </td>
-                                                {{-- @endif --}}
+
                                                 <td>
-                                                    {{-- @if ($delete) --}}
-                                                    {{-- <a href="{{ route('admin.cms.restore', [jsencode_userdata($page->id)]) }}"
-                                                        class="btn btn-primary restore">Restore</a> --}}
-                                                    {{-- @else --}}
+
                                                     <a href="{{ route('admin.cms.edit', [$page->id]) }}"
                                                         class="btn btn-primary edit">Edit</a>
-                                                    {{-- <a href="{{ route('admin.cms.delete', [($page->id)]) }}"
-                                                        class="btn btn-danger delete">Delete</a> --}}
-                                                    {{-- @endif --}}
+
                                                 </td>
 
                                             </tr>
                                         @empty
-                                            {{-- <tr>
-                                                <td class="empty_records" colspan="5">
-                                                    @if ($delete)
-                                                        No Cms page deleted yet!
-                                                    @else
-                                                        No Cms page yet!
-                                                    @endif
-                                                </td>
-                                            </tr> --}}
+                                           
                                         @endforelse
                                     </table>
                                     <div class="card-footer text-right">
                                         <nav class="d-inline-block">
-                                            {{-- {!! $cms_pages->links('admin.pagination') !!} --}}
                                         </nav>
                                     </div>
                                 </div>
@@ -89,4 +74,116 @@
             </div>
         </section>
     </div>
+@endsection --}}
+
+
+@section('content')
+
+    <div class="dashboard-right-box">
+        <h2>User</h2>
+        <div class="product-detail-table cms-list-table">
+            <div class="table-responsive">
+                <table class="table">
+                    <tr>
+                        <th>
+                            <p>Name</p>
+                        </th>
+                        <th>
+                            <p>Title</p>
+                        </th>
+                        <th>
+                            <p>Content</p>
+                        </th>
+                        <th>
+                            <p>Image</p>
+                        </th>
+                        <th>
+                            <p>Status</p>
+                        </th>
+                        <th>
+                            <p>Action</p>
+                        </th>
+
+                    </tr>
+                    @forelse($cms_pages as $page)
+                        <tr>
+                            <td>
+                                <p>{{ $page->name ? $page->name : '' }}</p>
+                            </td>
+                            <td>
+                                <p>{{ $page->page_title ? Str::limit($page->page_title, 50, '....') : '' }}</p>
+                            </td>
+                            <td>
+                                <p>{{ $page->page_content ? Str::limit($page->page_content, 50, '....') : '' }}</p>
+                            </td>
+                            <td>
+                                <p>
+                                    @if ($page->media_url)
+                                        <img alt="image" src="{{ Storage::url($page->media_url) }}" width="100"
+                                            height="100">
+                                    @endif
+                                </p>
+                            </td>
+                            <td>
+                                <p><input type="checkbox" class="custom-switch-input"
+                                        @if ($page->status == '1') checked="checked" @endif
+                                        onchange="toggleStatus(this, 'CmsPage', '{{ $page->id }}');"
+                                        url="{{ route('cms.status') }}">
+                                    <span class="custom-switch-indicator"></span>
+                                </p>
+                            </td>
+                            {{-- <td>
+                                <p>{{ $user->industry_type ? $user->industry_type : 'N/A' }}</p>
+                            </td> --}}
+                            <td>
+                                <a href="{{ route('admin.cms.edit', [$page->id]) }}" class="btn btn-primary edit">Edit</a>
+
+                            </td>
+
+                            {{-- <td>
+                                <div class="table-pro-quantity">
+                                    1
+                                </div>
+                            </td> --}}
+                        </tr>
+                    @empty
+                        <tr>
+                            <td class="no-record-found">
+                                <center>Did not found any User </center>
+                            </td>
+                        </tr>
+                    @endforelse
+                </table>
+            </div>
+        </div>
+        <div class="pagination-wrapper">
+            <div class="pagination-boxes">
+                <div class="pagination-box">
+                    <i class="fa-solid fa-angle-left"></i>
+                </div>
+                <div class="pagination-box active">
+                    <p>1</p>
+                </div>
+                <div class="pagination-box">
+                    <p>2</p>
+                </div>
+                <div class="pagination-box">
+                    <p>3</p>
+                </div>
+                <div class="pagination-box">
+                    <p>4</p>
+                </div>
+                <div class="pagination-box">
+                    <p>5</p>
+                </div>
+                <div class="pagination-box">
+                    <i class="fa-solid fa-angle-right"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
+
+@push('scripts')
+@endpush

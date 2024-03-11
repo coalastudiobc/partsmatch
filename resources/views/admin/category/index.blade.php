@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title', 'Category')
-
+{{-- 
 @section('content')
     <div class="main-content">
         <section class="section">
@@ -70,7 +70,103 @@
             </div>
         </section>
     </div>
+@endsection --}}
+
+@section('content')
+
+    <div class="dashboard-right-box">
+        <h2>Categories</h2>
+        <div class="card-header-form padding">
+            <a class="btn btn-primary btn-lg float-end" href="{{ route('admin.category.add') }}">Add
+                Category</a>
+        </div>
+        <div class="product-detail-table">
+            <div class="table-responsive">
+                <table class="table">
+                    <tr>
+                        <th>
+                            <p>Name</p>
+                        </th>
+                        <th>
+                            <p>icon</p>
+                        </th>
+                        <th>
+                            <p>Parent Category</p>
+                        </th>
+                        <th>
+                            <p>Status</p>
+                        </th>
+                        <th>
+                            <p>Action</p>
+                        </th>
+
+                    </tr>
+                    @forelse($categories as $category)
+                        <tr>
+                            <td>
+                                <p>{{ $category->name ? $category->name : '' }}</p>
+                            </td>
+                            <td>
+                                <p>{!! $category->icon ?? $category->icon !!}</p>
+                            </td>
+                            <td>
+                                <p>{{ $category->parent ? $category->parent->name : '' }}</p>
+                            </td>
+                            <td>
+                                <p>
+                                    <input type="checkbox" class="custom-switch-input"
+                                        @if ($category->status == '1') checked="checked" @endif
+                                        onchange="toggleStatus(this, 'Category', '{{ jsencode_userdata($category->id) }}');">
+                                    <span class="custom-switch-indicator"></span>
+                                </p>
+                            </td>
+                            <td>
+                                <p><a href="{{ route('admin.category.edit', [jsencode_userdata($category->id)]) }}"
+                                        class="btn btn-primary">Edit</a>
+                                    <a href="{{ route('admin.category.delete', [jsencode_userdata($category->id)]) }}"
+                                        class="btn btn-danger delete">Delete</a>
+                                </p>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td class="no-record-found">
+                                <center>Did not found any Category </center>
+                            </td>
+                        </tr>
+                    @endforelse
+                </table>
+            </div>
+        </div>
+        <div class="pagination-wrapper">
+            <div class="pagination-boxes">
+                <div class="pagination-box">
+                    <i class="fa-solid fa-angle-left"></i>
+                </div>
+                <div class="pagination-box active">
+                    <p>1</p>
+                </div>
+                <div class="pagination-box">
+                    <p>2</p>
+                </div>
+                <div class="pagination-box">
+                    <p>3</p>
+                </div>
+                <div class="pagination-box">
+                    <p>4</p>
+                </div>
+                <div class="pagination-box">
+                    <p>5</p>
+                </div>
+                <div class="pagination-box">
+                    <i class="fa-solid fa-angle-right"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
+
 @push('scripts')
     <script>
         jQuery(document).ready(function() {

@@ -14,7 +14,7 @@
                                 <h4>{{ 'Update ' . $page->name }}</h4>
                             </div>
                             <div class="card-body">
-                                <form id="cms" enctype="multipart/form-data" method="post">
+                                {{-- <form id="cms" enctype="multipart/form-data" method="post">
                                     @csrf
                                     <div class="row">
                                         <div class="form-group col-md-6">
@@ -30,15 +30,7 @@
                                                 value="{{ old('slug', $page->slug ?? $page->slug) }}" disabled>
                                         </div>
                                     </div>
-                                    {{-- <div class="row">
-
-                                        <div class="form-group form-group col-md-12">
-                                            <label>Short Content</label>
-                                            <input type="text" name="short_content"
-                                                class="form-control @error('short_content') is-invalid @enderror"
-                                                value="{{ old('short_content', $page->short_content ?? $page->short_content) }}">
-                                        </div>
-                                    </div> --}}
+                                
                                     <div class="row">
 
                                         <div class="form-group form-group col-md-12">
@@ -55,21 +47,7 @@
                                                 value="{{ old('page_title', $page->page_title ?? $page->page_title) }}">
                                         </div>
                                     </div>
-                                    {{-- <div class="row">
-
-                                        <div class="form-group form-group col-md-6">
-                                            <label>Meta Title</label>
-                                            <input type="text" name="meta_title"
-                                                class="form-control @error('meta_title') is-invalid @enderror"
-                                                value="{{ old('meta_title', $page->meta_title ?? $page->meta_title) }}">
-                                        </div>
-                                        <div class="form-group form-group col-md-6">
-                                            <label>Meta Description</label>
-                                            <input type="text" name="meta_description"
-                                                class="form-control @error('meta_description') is-invalid @enderror"
-                                                value="{{ old('meta_description', $page->meta_description ?? $page->meta_description) }}">
-                                        </div>
-                                    </div> --}}
+                                    
                                     <div class="row">
 
                                         <div class="form-group form-group col-md-6">
@@ -92,7 +70,88 @@
                                         <a class="btn btn-primary mr-1" href="{{ route('admin.cms.index') }}">Back</a>
                                         <button class="btn btn-primary mr-1" id="submit" type="submit">Submit</button>
                                     </div>
+                                </form> --}}
+                                <form id="cms" enctype="multipart/form-data" method="post">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="">Name</label>
+                                                <div class="form-field">
+                                                    <input type="text" name="name"
+                                                        class="form-control @error('name') is-invalid @enderror"
+                                                        value="{{ old('name', $page->name ? $page->name : '') }}">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="">Slug</label>
+                                                <div class="form-field">
+                                                    <input type="text" name="slug"
+                                                        class="form-control @error('slug') is-invalid @enderror"
+                                                        value="{{ old('slug', $page->slug ?? $page->slug) }}" disabled>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="">Content</label>
+                                                <div class="form-field">
+                                                    <textarea name="content" class="form-control summernote @error('content') is-invalid @enderror">{{ $page->page_content ?? $page->page_content }}</textarea>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="">Page Title</label>
+                                                <div class="form-field">
+                                                    <input type="text" name="page_title"
+                                                        class="form-control @error('page_title') is-invalid @enderror"
+                                                        value="{{ old('page_title', $page->page_title ?? $page->page_title) }}">
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="">Status</label>
+                                                <div class="form-field">
+                                                    <select name="status"
+                                                        class="form-control @error('status') is-invalid @enderror">
+                                                        <option
+                                                            value="0"@if ($page->status == 0) selected @endif>
+                                                            Inactive</option>
+                                                        <option value="1"
+                                                            @if ($page->status == 1) selected @endif>
+                                                            Active</option>
+                                                    </select>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="">Image</label>
+                                                <div class="form-field">
+                                                    <input type="file" name="image"
+                                                        class="form-control @error('image') is-invalid @enderror">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <a class="btn btn-primary mr-1" href="{{ route('admin.cms.index') }}">Back</a>
+                                            <button class="btn btn-primary mr-1" id="submit"
+                                                type="submit">Submit</button>
+                                        </div>
+
+                                    </div>
                                 </form>
+
                             </div>
                         </div>
                     </div>
