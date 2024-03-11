@@ -77,4 +77,10 @@ Route::middleware(['auth', 'verified', 'admin'])->namespace('App\Http\Controller
       Route::get('categories/{id}/edit', 'CategoryController@edit')->name('edit');
       Route::get('categories/{id}/delete', 'CategoryController@destroy')->name('delete');
    });
+
+   Route::name('profile.')->group(function () {
+      Route::get('/profile', 'ProfileController@profile')->name('view');
+      Route::post('/profile/update', 'ProfileController@update')->name('update');
+   });
+
 });

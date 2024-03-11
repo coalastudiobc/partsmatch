@@ -55,7 +55,7 @@
                                                     {{ $authUser->name }}
                                                 </button>
                                                 <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item" href="{{ route('profile') }}">Profile</a></li>
+                                                    <li><a class="dropdown-item" href="{{ route('admin.profile.view') }}">Profile</a></li>
                                                     <li><a class="dropdown-item" href="#">Another action</a></li>
                                                     <li><a class="dropdown-item" href="{{ route('logout') }}">
                                                             Logout
