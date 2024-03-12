@@ -1147,10 +1147,14 @@ header {
 
 .dashboard-left-box {
     position: sticky;
-    top: 250px;
+    top: 250px !important;
 }
 
 .analyics-tabs ul {
     max-height: 510px;
     overflow: auto;
+}
+
+.analyics-tabs ul::-webkit-scrollbar {
+    width: 5px;
 }

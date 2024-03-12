@@ -54,7 +54,7 @@
                                             </div>
                                         </div>
                                         <div class="text-right">
-                                            <button class="btn btn-primary mr-1" id="submit">Submit</button>
+                                            <button class="btn primary-btn mr-1" id="submit">Submit</button>
                                         </div>
                                     </div>
                                 </form>

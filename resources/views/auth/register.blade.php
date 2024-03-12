@@ -40,11 +40,12 @@
                                                 <div class="profile-without-img">
                                                     <img src="{{ asset('assets/images/user.png') }}" id="Userimage"
                                                         alt="">
-                                                    <div class="upload-icon">
-                                                        <img src="{{ asset('assets/images/upload.png') }}" alt="">
-                                                    </div>
+
                                                 </div>
                                                 <input type="file" id="file-upload" value="" name="image">
+                                                <div class="upload-icon">
+                                                    <img src="{{ asset('assets/images/upload.png') }}" alt="">
+                                                </div>
                                                 @error('image')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>

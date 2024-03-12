@@ -241,7 +241,6 @@
     justify-content: center;
     align-items: center;
     z-index: 1;
-
 }
 
 .sign-up-process-box.active {
@@ -291,15 +290,17 @@
     align-items: center;
     position: relative;
     overflow: hidden;
-
 }
 
 .file-upload-box {
     position: relative;
 }
 
-.profile-without-img img {
-    object-fit: cover;
+span#closeEditProfile {
+    position: absolute;
+    right: 25px;
+    top: 25px;
+    cursor: pointer;
 }
 
 .upload-icon {
