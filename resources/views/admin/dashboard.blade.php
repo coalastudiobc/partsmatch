@@ -6,16 +6,22 @@
      <div class="main-content">
          <section class="section">
              <div class="section-body">
-                 <div class="row">
-                     <div class="col-6 col-md-6 col-lg-12">
-                         <div class="card">
-                             <div class='ajax-response'></div>
-                             {{-- <x-alert-component /> --}}
-                             <div class="card-header">
-                                 <h4>Dashboad</h4>
-                             </div>
-                             <div class="fillter-mainbox">
-                                 <div class="date-range p-relative dash-date position-relative">
+                 <div class="card">
+                     <div class='ajax-response'></div>
+                     {{-- <x-alert-component /> --}}
+                     <div class="card-header">
+                         <h4>Dashboad</h4>
+                     </div>
+
+                     <div class="card-body">
+                         <div class="fillter-mainbox">
+                             <div class="form-group date-picker-group">
+                                 <div class="formfield">
+                                     <input type="text" id="email" class="form-control " name="email"
+                                         placeholder="03/12/2024 - 03/12/2024" value="">
+                                     <span class="form-icon ">
+                                         <i class="fa fa-caret-down"></i>
+                                     </span>
                                      <span class="icon_box">
                                          <svg width="16" height="19" viewBox="0 0 16 19" fill="none"
                                              xmlns="http://www.w3.org/2000/svg">
@@ -24,126 +30,72 @@
                                                  fill="#1372E6"></path>
                                          </svg>
                                      </span>
-                                     <div class="date-range-input">
-                                         <input type="text" id="daterange" class="report-range w-100">
-                                         <i class="fa fa-caret-down"></i>
-                                     </div>
                                  </div>
-                                 <button type="button" class="btn btn-primary filter">
-                                     <svg class="mr-2" width="19" height="15" viewBox="0 0 19 15" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                         <path
-                                             d="M19 1.34603C19 2.09183 18.3817 2.69429 17.6163 2.69429H1.38374C0.618316 2.69429 0 2.09183 0 1.34603C0 0.602468 0.618316 6.20119e-06 1.38374 6.20119e-06H17.6163C18.3817 -0.00223343 19 0.602468 19 1.34603Z"
-                                             fill="white"></path>
-                                         <path
-                                             d="M16.7017 7.01428C16.7017 7.75783 16.0834 8.36254 15.3179 8.36254H3.68257C2.91714 8.36254 2.29883 7.75783 2.29883 7.01428C2.29883 6.27072 2.91714 5.66602 3.68257 5.66602H15.3179C16.0834 5.66602 16.7017 6.26848 16.7017 7.01428Z"
-                                             fill="white"></path>
-                                         <path
-                                             d="M13.2552 12.6808C13.2552 13.4266 12.6369 14.029 11.8714 14.029H7.13179C6.36636 14.029 5.74805 13.4266 5.74805 12.6808C5.74805 11.9372 6.36636 11.3325 7.13179 11.3325H11.8714C12.6369 11.3325 13.2552 11.935 13.2552 12.6808Z"
-                                             fill="white"></path>
-                                     </svg>Apply
-                                 </button>
-                                 <button type="button" class="btn btn-dark clear">Clear Filter</button>
+
                              </div>
-                             <div class="card-body">
 
-                                 <div class="">
-
-                                     <div class="card-statistic-4">
-                                         <div class="align-items-center justify-content-between">
-                                             <div class="row">
-                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
-                                                     <div class="card-content">
-                                                         <h5 class="font-15"> Total Customers</h5>
-                                                         <h2 class="mb-3 font-18">14</h2>
-                                                     </div>
-                                                 </div>
-                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
-                                                     <div class="banner-img">
-                                                         <img src="http://parts_match.in/assets/banner/2.png"
-                                                             alt="">
-                                                     </div>
-                                                 </div>
-                                             </div>
+                             <button type="button" class="btn primary-btn filter">
+                                 <svg class="mr-2" width="19" height="15" viewBox="0 0 19 15" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                     <path
+                                         d="M19 1.34603C19 2.09183 18.3817 2.69429 17.6163 2.69429H1.38374C0.618316 2.69429 0 2.09183 0 1.34603C0 0.602468 0.618316 6.20119e-06 1.38374 6.20119e-06H17.6163C18.3817 -0.00223343 19 0.602468 19 1.34603Z"
+                                         fill="white"></path>
+                                     <path
+                                         d="M16.7017 7.01428C16.7017 7.75783 16.0834 8.36254 15.3179 8.36254H3.68257C2.91714 8.36254 2.29883 7.75783 2.29883 7.01428C2.29883 6.27072 2.91714 5.66602 3.68257 5.66602H15.3179C16.0834 5.66602 16.7017 6.26848 16.7017 7.01428Z"
+                                         fill="white"></path>
+                                     <path
+                                         d="M13.2552 12.6808C13.2552 13.4266 12.6369 14.029 11.8714 14.029H7.13179C6.36636 14.029 5.74805 13.4266 5.74805 12.6808C5.74805 11.9372 6.36636 11.3325 7.13179 11.3325H11.8714C12.6369 11.3325 13.2552 11.935 13.2552 12.6808Z"
+                                         fill="white"></path>
+                                 </svg>Apply
+                             </button>
+                             <button type="button" class="btn secondary-btn clear">Clear Filter</button>
+                         </div>
+                         <div class="card-box">
+                             <div class="row g-5">
+                                 <div class="col-md-4">
+                                     <div class="dashboard-card">
+                                         <div class="dashboard-card-stats">
+                                             <h4>total customer</h4>
+                                             <p>14</p>
                                          </div>
-                                     </div>
-                                     <div class="card-statistic-4">
-                                         <div class="align-items-center justify-content-between">
-                                             <div class="row ">
-                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
-                                                     <div class="card-content">
-                                                         <h5 class="font-15"> Total Customers</h5>
-                                                         <h2 class="mb-3 font-18">14</h2>
-                                                     </div>
-                                                 </div>
-                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
-                                                     <div class="banner-img">
-                                                         <img src="http://parts_match.in/assets/banner/1.png"
-                                                             alt="">
-                                                     </div>
-                                                 </div>
-                                             </div>
-                                         </div>
-                                     </div>
-
-
-
-                                     <div class="card-statistic-4">
-                                         <div class="align-items-center justify-content-between">
-                                             <div class="row ">
-                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
-                                                     <div class="card-content">
-                                                         <h5 class="font-15"> Total Customers</h5>
-                                                         <h2 class="mb-3 font-18">14</h2>
-                                                     </div>
-                                                 </div>
-                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
-                                                     <div class="banner-img">
-                                                         <img src="http://parts_match.in/assets/banner/3.png"
-                                                             alt="">
-                                                     </div>
-                                                 </div>
-                                             </div>
-                                         </div>
-                                     </div>
-                                     <div class="card-statistic-4">
-                                         <div class="align-items-center justify-content-between">
-                                             <div class="row ">
-                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
-                                                     <div class="card-content">
-                                                         <h5 class="font-15"> Total Customers</h5>
-                                                         <h2 class="mb-3 font-18">14</h2>
-                                                     </div>
-                                                 </div>
-                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
-                                                     <div class="banner-img">
-                                                         <img src="http://parts_match.in/assets/banner/4.png"
-                                                             alt="">
-                                                     </div>
-                                                 </div>
-                                             </div>
-                                         </div>
-                                     </div>
-                                     <div class="card-statistic-4">
-                                         <div class="align-items-center justify-content-between">
-                                             <div class="row ">
-                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
-                                                     <div class="card-content">
-                                                         <h5 class="font-15"> Total Customers</h5>
-                                                         <h2 class="mb-3 font-18">14</h2>
-                                                     </div>
-                                                 </div>
-                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
-                                                     <div class="banner-img">
-                                                         <img src="http://parts_match.in/assets/banner/2.png"
-                                                             alt="">
-                                                     </div>
-                                                 </div>
-                                             </div>
+                                         <div class="dashboard-card-img">
+                                             <img src="http://parts_match.in/assets/banner/2.png" alt="">
                                          </div>
                                      </div>
                                  </div>
-
+                                 <div class="col-md-4">
+                                     <div class="dashboard-card">
+                                         <div class="dashboard-card-stats">
+                                             <h4>total customer</h4>
+                                             <p>14</p>
+                                         </div>
+                                         <div class="dashboard-card-img">
+                                             <img src="http://parts_match.in/assets/banner/2.png" alt="">
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="col-md-4">
+                                     <div class="dashboard-card">
+                                         <div class="dashboard-card-stats">
+                                             <h4>total customer</h4>
+                                             <p>14</p>
+                                         </div>
+                                         <div class="dashboard-card-img">
+                                             <img src="http://parts_match.in/assets/banner/2.png" alt="">
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="col-md-4">
+                                     <div class="dashboard-card">
+                                         <div class="dashboard-card-stats">
+                                             <h4>total customer</h4>
+                                             <p>14</p>
+                                         </div>
+                                         <div class="dashboard-card-img">
+                                             <img src="http://parts_match.in/assets/banner/2.png" alt="">
+                                         </div>
+                                     </div>
+                                 </div>
                              </div>
                          </div>
                      </div>
