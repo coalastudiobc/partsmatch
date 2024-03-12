@@ -82,14 +82,9 @@ class RegisterController extends Controller
                 'industry_type' => $data['industry_type'],
             ];
             if ($data['image']) {
-                $file = request()->image;
-                $media_name = $file->getClientOriginalName();
-                $path = Storage::put('profile_pictures', $file);
-                $user['profile_picture_file'] = $media_name;
-                $user['profile_picture_url'] = $path;
-                // $image = store_image(request()->image, 'profile_pictures');
-                // $user['profile_picture_url'] = $image['url'];
-                // $user['profile_picture_file'] = $image['name'];
+                $image = store_image(request()->image, 'profile_pictures');
+                $user['profile_picture_url'] = $image['url'];
+                $user['profile_picture_file'] = $image['name'];
             }
 
             $userdetails = User::create($user);
