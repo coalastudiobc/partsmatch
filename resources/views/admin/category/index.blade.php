@@ -38,8 +38,8 @@
                             <td>
                                 <p>{{ $category->name ? $category->name : '' }}</p>
                             </td>
-                            <td>
-                                <p>{!! $category->icon ?? $category->icon !!}</p>
+                            <td style="max-height: 100px;max-width: 100px">
+                                <p style="max-height: 100px;max-width: 100px">{!! $category->icon ?? $category->icon !!}</p>
                             </td>
                             <td>
                                 <p>{{ $category->parent ? $category->parent->name : '' }}</p>

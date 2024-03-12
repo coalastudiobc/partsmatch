@@ -3,65 +3,15 @@
         <div class="analyics-tabs">
             <ul>
                 <li class="analyics-tabs-list">
-                    <div class="accordion accordion-flush" id="accordionFlushExample">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="flush-headingOne">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#flush-collapseOne" aria-expanded="false"
-                                    aria-controls="flush-collapseOne">
-                                    <a href="{{ route('admin.category.index') }}"
-                                        class="analyics-tabs-btns @if (Route::is('admin.category.*')) active @endif">
-                                        <div class="analyics-tabs-name">
-                                            <span>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                                                    viewBox="0 0 18 18" fill="none">
-                                                    <path
-                                                        d="M13.2509 8.50165L9.17383 9.86068L13.2509 11.2197L17.328 9.86068L13.2509 8.50165Z"
-                                                        fill="white" />
-                                                    <path
-                                                        d="M0 9.86068L4.07709 11.2197L8.15419 9.86068L4.07709 8.50165L0 9.86068Z"
-                                                        fill="white" />
-                                                    <path
-                                                        d="M8.82418 0.0338348C8.71957 -0.00102436 8.60646 -0.00102436 8.50185 0.0338348L4.58594 1.33915L8.66303 2.69818L12.7401 1.33915L8.82418 0.0338348Z"
-                                                        fill="white" />
-                                                    <path
-                                                        d="M4.58594 17.4033L8.15339 16.2141V10.9351L4.58594 12.1242V17.4033Z"
-                                                        fill="white" />
-                                                    <path
-                                                        d="M0 15.8468C0 16.0662 0.140354 16.2609 0.34849 16.3303L3.56746 17.4033V12.1242L0 10.9351V15.8468Z"
-                                                        fill="white" />
-                                                    <path
-                                                        d="M9.17383 16.2141L12.7413 17.4033V12.1242L9.17383 10.9351V16.2141Z"
-                                                        fill="white" />
-                                                    <path
-                                                        d="M13.7617 17.4033L16.9807 16.3303C17.1888 16.2609 17.3292 16.0661 17.3292 15.8468V10.9351L13.7617 12.1242V17.4033Z"
-                                                        fill="white" />
-                                                    <path
-                                                        d="M4.58594 7.78811L8.15339 8.97726V3.6027L4.58594 2.41351V7.78811Z"
-                                                        fill="white" />
-                                                    <path
-                                                        d="M12.7413 7.78811V2.41351L9.17383 3.6027V8.97726L12.7413 7.78811Z"
-                                                        fill="white" />
-                                                </svg>
-                                            </span>
-                                            <h4>Category</h4>
-                                        </div>
-                                    </a>
-                                </button>
-                            </h2>
-                        </div>
-                    </div>
-                </li>
-                <li class="analyics-tabs-list">
 
                     <div class="accordion accordion-flush" id="accordionFlushExample">
                         <div class="accordion-item">
+                            {{-- <a href="{{ route('admin.dashboard') }}" > --}}
                             <h2 class="accordion-header" id="flush-headingOne">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#flush-collapseOne1" aria-expanded="false"
                                     aria-controls="flush-collapseOne">
-                                    <a href="{{ route('admin.dashboard') }}"
-                                        class="analyics-tabs-btns @if (Route::is('admin.dashboard.*')) active @endif ">
+                                    <div class="analyics-tabs-btns @if (Route::is('admin.dashboard')) active @endif ">
                                         <div class="analyics-tabs-name">
                                             <span>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17"
@@ -77,9 +27,10 @@
                                             <h4>dashboard</h4>
 
                                         </div>
-                                    </a>
+                                    </div>
                                 </button>
                             </h2>
+                        {{-- </a> --}}
                         </div>
                     </div>
                 </li>

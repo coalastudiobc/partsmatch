@@ -41,6 +41,10 @@ class CategoryController extends Controller
             if($request->has('icon')) {
                 $data['icon'] = $request->icon;
             }
+            if($request->has('main_category')) {
+                
+                $data['parent_id'] = $request->main_category;
+            }
 
             if ($id == null) {
                 Category::create($data);
