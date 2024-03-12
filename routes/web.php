@@ -23,11 +23,11 @@ Route::get('/', function () {
         return view('welcome');
 })->name('welcome');
 
-Auth::routes(['verify' => true]);
+Route::get('redirect-to-dashboard', [HomeController::class, 'redirectToDashboard'])->name('redirect-to-dashboard');
+Auth::routes();
 
 
 Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers')->group(function () {
-    Route::get('redirect-to-dashboard', [HomeController::class, 'redirectToDashboard'])->name('redirect-to-dashboard');
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/logout', [HomeController::class, 'logout'])->name('custom.logout');
     Route::match(['GET', 'POST'], '/change/password', [HomeController::class, 'changePassword'])->name('change.password');

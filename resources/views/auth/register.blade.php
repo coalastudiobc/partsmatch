@@ -142,13 +142,13 @@
                                             <div class="form-group">
                                                 <label for="">Select industry</label>
                                                 <div class="form-field">
-                                                    <select name="industry_type" id="industury" class="form-control" >
+                                                    <select name="industry_type" id="industury" class="form-control">
                                                         <option value="volvo">Select industry</option>
                                                         <option value="saab">Volvo</option>
                                                         <option value="saab">Saab</option>
                                                         <option value="opel">Opel</option>
                                                         <option value="audi">Audi</option>
-                                                      </select>
+                                                    </select>
                                                     {{-- <input type="text" name="industry_type" value="{{ old('industry_type') }}"
                                                         class="form-control @error('industry_type') is-invalid @enderror"
                                                         placeholder="Select industry"> --}}
@@ -212,7 +212,6 @@
 @push('scripts')
     <script>
         $("#file-upload").change(function() {
-            console.log(this.files);
             if (this.files && this.files[0]) {
 
                 var reader = new FileReader();
