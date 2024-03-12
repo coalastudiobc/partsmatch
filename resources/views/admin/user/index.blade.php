@@ -32,7 +32,7 @@
                             <p>Action</p>
                         </th>
                     </tr>
-                    @forelse ($users as $user)
+                    @forelse ($users as $key => $user)
                         <tr>
                             <td>
                                 <p>{{ $user->name ? Str::limit($user->name, 15, '...') : '' }}</p>
@@ -54,10 +54,10 @@
                             </td> --}}
                             <td>
                                 <div class="toggle-btn">
-                                    <input type="checkbox" id="switch1" class=""
+                                    <input type="checkbox" id="switch{{ $key }}" class=""
                                         @if ($user->status == 'ACTIVE') checked="checked" @endif
                                         onchange="toggleStatus(this, 'User', '{{ $user->id }}');"
-                                        url="{{ route('admin.dealers.status') }}"><label for="switch1">Toggle</label>
+                                        url="{{ route('admin.dealers.status') }}"><label for="switch{{ $key }}">Toggle</label>
                                 </div>
                                 {{-- <span class="custom-switch-indicator"></span> --}}
                                 {{-- <div >
