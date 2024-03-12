@@ -67,31 +67,31 @@
                                 </ul>
                             @endguest
                             @auth
-                            <ul class="navbar-nav">
-                                <li>
-                                    <div class="nav-profile">
-                                        <div class="nav-profile-img">
+                                <ul class="navbar-nav">
+                                    <li>
+                                        <div class="nav-profile">
+                                            <div class="nav-profile-img">
 
-                                            <div class="dropdown">
-                                                <button class="btn btn-secondary dropdown-toggle" type="button"
-                                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <img src="{{ Storage::url($authUser->profile_picture_url) }}"
-                                                        alt="">
-                                                    {{ $authUser->name }}
-                                                </button>
-                                                <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item" href="{{ route('profile') }}">Profile</a></li>
-                                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                                    <li><a class="dropdown-item" href="{{ route('logout') }}">
-                                                            Logout
-                                                        </a>
-                                                    </li>
-                                                </ul>
+                                                <div class="dropdown">
+                                                    <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <img src="{{ Storage::url($authUser->profile_picture_url) }}"
+                                                            alt="">
+                                                        {{ $authUser->name }}
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a class="dropdown-item" href="">Profile</a></li>
+                                                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                                                        <li><a class="dropdown-item" href="{{ route('logout') }}">
+                                                                Logout
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </li>
-                            </ul>
+                                    </li>
+                                </ul>
                             @endauth
                         </div>
 

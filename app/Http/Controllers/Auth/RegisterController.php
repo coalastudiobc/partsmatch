@@ -84,25 +84,21 @@ class RegisterController extends Controller
             if ($data['image']) {
                 $file = request()->image;
                 $media_name = $file->getClientOriginalName();
-                $path = Storage::put('registration_pics', $file);
+                $path = Storage::put('profile_pictures', $file);
                 $user['profile_picture_file'] = $media_name;
                 $user['profile_picture_url'] = $path;
+                // $image = store_image(request()->image, 'profile_pictures');
+                // $user['profile_picture_url'] = $image['url'];
+                // $user['profile_picture_file'] = $image['name'];
             }
-            DB::beginTransaction();
-            $userdetails = User::create($user);
-            $userdetails->syncRole('Dealer');
 
-            DB::commit();
-            // PaymentDetail::create([
-            //     'user_id' => $userdetails->id,
-            //     'stripe_token' => $data['public_key'],
-            //     'stripe_secret' => $data['secret_key'],
-            // ]);
+            $userdetails = User::create($user);
+            $userdetails->assignRole('Dealer');
 
             return $userdetails;
         } catch (\Exception $e) {
-            DB::rollback();
-            return redirect()->back()->with('message', $e->getMessage());
+
+            return redirect()->back()->with(['status' => 'success', 'message' => $e->getMessage()]);
         }
     }
 }

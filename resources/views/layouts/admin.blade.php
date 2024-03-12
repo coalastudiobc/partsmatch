@@ -42,10 +42,10 @@
                     <div class="collapse navbar-collapse ms-auto" id="navbarNav">
                         <div class="custm-nav-menu login-nav">
                             @auth
-                            <ul class="navbar-nav">
-                                <li>
-                                    <div class="nav-profile">
-                                        <div class="nav-profile-img">
+                                <ul class="navbar-nav">
+                                    <li>
+                                        <div class="nav-profile">
+                                            <div class="nav-profile-img">
 
                                             <div class="dropdown">
                                                 <button class="btn btn-secondary dropdown-toggle" type="button"
@@ -64,9 +64,8 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                    </div>
-                                </li>
-                            </ul>
+                                    </li>
+                                </ul>
                             @endauth
                         </div>
 
@@ -112,6 +111,7 @@
     </footer>
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/js/daterangepicker.js') }}"></script>
     <script src="{{ asset('assets/js/slick.js') }}"></script>
     <script src="{{ asset('assets/js/validate.min.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
