@@ -18,7 +18,7 @@
                             <div class="form-group">
                                 <label for="">Email or Phone Number</label>
                                 <div class="form-field">
-                                    <input id="email" type="email"
+                                    <input id="email" 
                                         class="form-control @error('email') is-invalid @enderror" name="email"
                                         value="{{ old('email') }}" autocomplete="email" autofocus
                                         placeholder="Enter email or phone number">

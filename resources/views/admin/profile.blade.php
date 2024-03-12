@@ -36,7 +36,7 @@
                                         <div class="form-group">
                                             <label for="">Name</label>
                                             <div class="form-field">
-                                                <input type="text" class="form-control disabled-inputs" placeholder="John Doe" disabled  value="{{old('name',$authUser->name)}}">
+                                                <input type="text" name="name" class="form-control disabled-inputs" placeholder="John Doe" disabled  value="{{old('name',$authUser->name)}}">
 
                                             </div>
                                         </div>
@@ -45,7 +45,7 @@
                                         <div class="form-group">
                                             <label for="">Email</label>
                                             <div class="form-field">
-                                                <input type="email" class="form-control disabled-inputs" placeholder="johndoe@gmail.com" disabled value="{{old('name',$authUser->email)}}">
+                                                <input type="email" name="email" class="form-control disabled-inputs" placeholder="johndoe@gmail.com" disabled value="{{old('email',$authUser->email)}}">
 
                                             </div>
                                         </div>
@@ -54,7 +54,7 @@
                                         <div class="form-group">
                                             <label for="">Phone Number</label>
                                             <div class="form-field">
-                                                <input type="tel" class="form-control disabled-inputs" placeholder="Enter phone number" name="phone_number" disabled value="{{old('name',$authUser->phonr_number)}}">
+                                                <input type="tel" name="phone_number" class="form-control disabled-inputs" placeholder="Enter phone number" name="phone_number" disabled value="{{old('phone_number',$authUser->phonr_number)}}">
 
                                             </div>
                                         </div>
@@ -64,7 +64,7 @@
                                         <div class="form-group">
                                             <label for="">Password</label>
                                             <div class="form-field">
-                                                <input type="tel" class="form-control disabled-inputs" placeholder="*********" disabled value="{{old('name',$authUser->phonr_number)}}">
+                                                <input type="tel" name="password" class="form-control disabled-inputs" placeholder="*********" disabled value="{{old('password')}}">
 
                                             </div>
                                         </div>
@@ -73,7 +73,7 @@
                                         <div class="form-group">
                                             <label for="">Confirm password</label>
                                             <div class="form-field">
-                                                <input type="tel" class="form-control disabled-inputs" placeholder="*********" disabled value="{{old('name',$authUser->phonr_number)}}">
+                                                <input type="tel" name="confirm_password" class="form-control disabled-inputs" placeholder="*********" disabled value="{{old('confirm_password')}}">
 
                                             </div>
                                         </div>

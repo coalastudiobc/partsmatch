@@ -142,9 +142,9 @@
                                             <div class="form-group">
                                                 <label for="">Select industry</label>
                                                 <div class="form-field">
-                                                    <select name="cars" id="industury" class="form-control" >
+                                                    <select name="industry_type" id="industury" class="form-control" >
                                                         <option value="volvo">Select industry</option>
-                                                        <option value="">Volvo</option>
+                                                        <option value="saab">Volvo</option>
                                                         <option value="saab">Saab</option>
                                                         <option value="opel">Opel</option>
                                                         <option value="audi">Audi</option>

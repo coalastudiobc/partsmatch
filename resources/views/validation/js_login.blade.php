@@ -26,7 +26,7 @@
             }
         };
 
-        handleValidation('login', rules, messages);
+        // handleValidation('login', rules, messages);
 
         $("#login").on("submit", function() {
             if ($('#login').valid()) {
