@@ -9,9 +9,6 @@
                  <div class="card">
                      <div class='ajax-response'></div>
                      {{-- <x-alert-component /> --}}
-                     <div class="card-header">
-                         <h4>Dashboad</h4>
-                     </div>
 
                      <div class="card-body">
                          <div class="fillter-mainbox">
@@ -39,13 +36,13 @@
                                      xmlns="http://www.w3.org/2000/svg">
                                      <path
                                          d="M19 1.34603C19 2.09183 18.3817 2.69429 17.6163 2.69429H1.38374C0.618316 2.69429 0 2.09183 0 1.34603C0 0.602468 0.618316 6.20119e-06 1.38374 6.20119e-06H17.6163C18.3817 -0.00223343 19 0.602468 19 1.34603Z"
-                                         fill="white"></path>
+                                         fill="CurrentColor"></path>
                                      <path
                                          d="M16.7017 7.01428C16.7017 7.75783 16.0834 8.36254 15.3179 8.36254H3.68257C2.91714 8.36254 2.29883 7.75783 2.29883 7.01428C2.29883 6.27072 2.91714 5.66602 3.68257 5.66602H15.3179C16.0834 5.66602 16.7017 6.26848 16.7017 7.01428Z"
-                                         fill="white"></path>
+                                         fill="CurrentColor"></path>
                                      <path
                                          d="M13.2552 12.6808C13.2552 13.4266 12.6369 14.029 11.8714 14.029H7.13179C6.36636 14.029 5.74805 13.4266 5.74805 12.6808C5.74805 11.9372 6.36636 11.3325 7.13179 11.3325H11.8714C12.6369 11.3325 13.2552 11.935 13.2552 12.6808Z"
-                                         fill="white"></path>
+                                         fill="CurrentColor"></path>
                                  </svg>Apply
                              </button>
                              <button type="button" class="btn secondary-btn clear">Clear Filter</button>

@@ -123,8 +123,8 @@ return [
     ],
 
     'category' => [
-        'title' => [
-            'required' => 'Please enter the category Title',
+        'name' => [
+            'required' => 'Please enter the category name',
             'unique' => 'Title is already taken',
             'min' => 'Title can be :min - :max characters',
             'max' => 'Title can be :min - :max characters',
@@ -192,6 +192,7 @@ return [
             'required' => 'Status field is required',
         ],
         'image' => [
+            'required' => 'Image is required',
             'size' => 'Image size should not be greater than :min MB',
             'mimes' => 'Supported only JPEG, JPG, PNG image type'
         ],

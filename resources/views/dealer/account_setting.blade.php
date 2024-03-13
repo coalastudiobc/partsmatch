@@ -36,12 +36,13 @@
                                                     <label for="file-upload">
                                                         <div class="profile-without-img">
                                                             <img src="{{ $user->profile_picture_url ? Storage::url($user->profile_picture_url) : asset('assets/images/user.png') }}"
-                                                                alt="">
-                                                            <div class="upload-icon">
+                                                                alt="" id="Userimage">
+                                                            <div class="upload-icon d-none editable">
                                                                 <i class="fa-sharp fa-solid fa-pen"></i>
                                                             </div>
                                                         </div>
-                                                        <input type="file" name="image" id="file-upload">
+                                                        <input type="file" name="image" disabled
+                                                            class="disabled-inputs" id="file-upload">
                                                     </label>
                                                 </div>
                                             </div>
@@ -51,9 +52,10 @@
                                                 <label for="">Full name</label>
                                                 <div class="form-field">
                                                     <input type="text"
-                                                        class="form-control @error('name') is-invalid @enderror"
-                                                        name="name" value="{{ old('name', $user->name ?? $user->name) }}"
-                                                        placeholder="John Doe">
+                                                        class="form-control @error('name') is-invalid @enderror disabled-inputs"
+                                                        disabled name="name"
+                                                        value="{{ old('name', $user->name ?? $user->name) }}"
+                                                        placeholder="Full name">
                                                     @error('name')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
@@ -76,8 +78,8 @@
                                                 <div class="form-field">
                                                     <input type="email" name="email"
                                                         value="{{ old('name', $user->email ?? $user->email) }}"
-                                                        class="form-control @error('email') is-invalid @enderror"
-                                                        placeholder="Name">
+                                                        class="form-control @error('email') is-invalid @enderror disabled-inputs"
+                                                        disabled placeholder="Email">
                                                     @error('email')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
@@ -104,7 +106,8 @@
                                                     <!-- <input type="text" class="form-control" placeholder="Select industry"> -->
                                                     <select name="industry_type" id="industury"
                                                         value="{{ old('name', $user->industry_type ?? $user->industry_type) }}"
-                                                        class="form-control @error('industry_type') is-invalid @enderror">
+                                                        disabled
+                                                        class="form-control @error('industry_type') is-invalid @enderror disabled-inputs">
                                                         <option value="volvo">Automobile</option>
                                                         <option value="saab">Automobile</option>
                                                         <option value="opel">Automobile</option>
@@ -122,8 +125,8 @@
                                             <div class="form-group">
                                                 <label for="">Complete address</label>
                                                 <div class="form-field">
-                                                    <input type="text" name="address"
-                                                        class="form-control @error('address') is-invalid @enderror"
+                                                    <input type="text" name="address" disabled
+                                                        class="form-control @error('address') is-invalid @enderror disabled-inputs"
                                                         value="{{ old('name', $user->address ?? $user->address) }}"
                                                         placeholder="Complete address">
                                                     @error('address')
@@ -147,21 +150,27 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="accounts-btns">
-                                                <button type="submit" class="btn secondary-btn">Save Changes</button>
-                                                <a href="#" class="btn primary-btn">Cancel</a>
+                                                <button type="submit" disabled
+                                                    class="btn secondary-btn disabled-inputs">Save Changes</button>
+                                                <a href="#" disabled
+                                                    class="btn primary-btn disabled-inputs">Cancel</a>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="change-pass-box">
                                                 <a href="#" class="btn primary-btn" data-bs-toggle="modal"
-                                                    data-bs-target="#change-pass-model">Change Password</a>
+                                                    data-bs-target="#change-pass-model">Change
+                                                    Password</a>
                                             </div>
                                         </div>
                                     </div>
                                 </form>
                             </div>
                             <div class="edit-icon">
-                                <a href="#"><i class="fa-solid fa-pen-to-square" style="color: #3EBE62;"></i></a>
+                                <a href="#"><i id="editProfile" class="fa-solid fa-pen-to-square"
+                                        style="color: #3EBE62;"></i></a>
+                                <span id="closeEditProfile" class='d-none'><i
+                                        class="fa-sharp fa-solid fa-close"></i></span>
                             </div>
                         </div>
                     </div>
@@ -268,17 +277,17 @@
 @endsection
 
 <div class="modal fade" id="change-pass-model" tabindex="-1" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+    aria-hidden="true" data-bs-backdrop="static">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <!-- <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div> -->
             <div class="modal-body">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div class="add-pro-form">
                     <h2>Change Password</h2>
-                    <form action="{{ route('dealer.changepassword') }}" method='post'>
+                    <form id="changePassword" action="{{ route('dealer.changepassword') }}" method='post'>
                         @csrf
                         <div class="row">
                             <div class="col-md-12">
@@ -399,5 +408,39 @@
             nextArrow: $('.next-btn'),
         });
     </script>
+    <script>
+        $(document).ready(function() {
+            $('#editProfile').click(function(e) {
+                e.preventDefault();
+                $(this).addClass('d-none')
+                $('#closeEditProfile').removeClass('d-none')
+                $('.disabled-inputs').removeAttr('disabled');
+                $('.editable').removeClass('d-none');
+            });
+            $('#closeEditProfile').click(function(e) {
+                e.preventDefault();
+                $(this).addClass('d-none')
+                $('#editProfile').removeClass('d-none')
+                $('.disabled-inputs').attr('disabled', 'disabled');
+                $('.editable').addClass('d-none');
+            });
+        });
+    </script>
+    <script>
+        $("#file-upload").change(function() {
+            if (this.files && this.files[0]) {
+
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('#Userimage').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+    </script>
+    @includeFirst(['validation'])
     @includeFirst(['validation.dealer.js_profile'])
+    @includeFirst(['validation.js_change_password'])
 @endpush

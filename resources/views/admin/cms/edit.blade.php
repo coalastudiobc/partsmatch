@@ -11,9 +11,7 @@
                         <div class="card">
                             <div class='ajax-response'></div>
                             <x-alert-component />
-                            <div class="card-header">
-                                <h4>{{ 'Update ' . $page->name }}</h4>
-                            </div>
+
                             <div class="card-body">
                                 <form id="cms" enctype="multipart/form-data" method="post">
                                     @csrf
@@ -25,7 +23,11 @@
                                                     <input type="text" name="name"
                                                         class="form-control @error('name') is-invalid @enderror"
                                                         value="{{ old('name', $page->name ? $page->name : '') }}">
-
+                                                    @error('name')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                 </div>
                                             </div>
                                         </div>
@@ -45,7 +47,11 @@
                                                 <label for="">Content</label>
                                                 <div class="form-field">
                                                     <textarea name="content" class="form-control summernote @error('content') is-invalid @enderror">{{ $page->page_content ?? $page->page_content }}</textarea>
-
+                                                    @error('content')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                 </div>
                                             </div>
                                         </div>
@@ -56,7 +62,11 @@
                                                     <input type="text" name="page_title"
                                                         class="form-control @error('page_title') is-invalid @enderror"
                                                         value="{{ old('page_title', $page->page_title ?? $page->page_title) }}">
-
+                                                    @error('page_title')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                 </div>
                                             </div>
                                         </div>
@@ -74,7 +84,11 @@
                                                             @if ($page->status == 1) selected @endif>
                                                             Active</option>
                                                     </select>
-
+                                                    @error('status')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                 </div>
                                             </div>
                                         </div>
@@ -84,7 +98,11 @@
                                                 <div class="form-field">
                                                     <input type="file" name="image"
                                                         class="form-control @error('image') is-invalid @enderror">
-
+                                                    @error('image')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                 </div>
                                             </div>
                                         </div>

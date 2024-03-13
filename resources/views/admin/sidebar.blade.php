@@ -11,7 +11,8 @@
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#flush-collapseOne1" aria-expanded="false"
                                     aria-controls="flush-collapseOne">
-                                    <div class="analyics-tabs-btns @if (Route::is('admin.dashboard')) active @endif ">
+                                    <a href="{{ route('admin.dashboard') }}"
+                                        class="analyics-tabs-btns @if (Route::is('admin.dashboard')) active @endif ">
                                         <div class="analyics-tabs-name">
                                             <span>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17"
@@ -27,10 +28,10 @@
                                             <h4>dashboard</h4>
 
                                         </div>
-                                    </div>
+                                    </a>
                                 </button>
                             </h2>
-                        {{-- </a> --}}
+                            {{-- </a> --}}
                         </div>
                     </div>
                 </li>
@@ -411,7 +412,8 @@
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#flush-collapseOne3" aria-expanded="false"
                                     aria-controls="flush-collapseOne">
-                                    <div class="analyics-tabs-btns @if (Route::is('admin.profile.*')) active @endif ">
+                                    <a href="{{ route('admin.profile.view') }}"
+                                        class="analyics-tabs-btns @if (Route::is('admin.profile.*')) active @endif ">
                                         <div class="analyics-tabs-name">
                                             <span>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17"
@@ -433,11 +435,11 @@
                                                     </defs>
                                                 </svg>
                                             </span>
-                                            <a href="{{ route('admin.profile.view') }}">
-                                                <h4>Profile setting</h4>
-                                            </a>
+
+                                            <h4>Profile setting</h4>
+
                                         </div>
-                                    </div>
+                                    </a>
                                 </button>
                             </h2>
                         </div>
