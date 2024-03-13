@@ -95,6 +95,51 @@
     display: inline-flex;
     gap: 7px;
     align-items: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+
+}
+
+.multi-img-slick-wrapper {
+    position: relative;
+}
+
+.multi-img-slick-wrapper .slick-list.draggable {
+    margin: 0 -9px;
+}
+
+.multi-img-box {
+    border-radius: 5px;
+    background: var(--white);
+    margin: 0px 9px;
+    max-width: 232px;
+    cursor: pointer;
+    border: 2px solid transparent;
+
+}
+
+.multi-img-box:hover {
+    border: 2px solid var(--border-color);
+}
+
+.multi-img-slick {
+    padding: 0;
+}
+
+.next-btn-multi.slick-arrow {
+    right: -10px;
+    width: 30px;
+    height: 30px;
+    box-shadow: 0px 12px 34px 0px rgba(39, 38, 67, 0.11);
+    border: 0;
+}
+
+.prev-btn-multi.slick-arrow {
+    width: 30px;
+    height: 30px;
+    left: -11px;
+    box-shadow: 0px 12px 34px 0px rgba(39, 38, 67, 0.11);
+    border: 0;
 }
 
 .back-round-icon {
@@ -105,6 +150,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #fff;
 }
 
 .slick-product {
@@ -313,6 +359,59 @@
     color: var(--heading-color);
 }
 
+.pro-dealer-box {
+    margin-top: 20px;
+    background-color: #fff;
+    padding: 30px 20px 40px;
+    border-radius: 5px;
+}
+
+.pro-dealer-box h4 {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--gray-color);
+    margin-bottom: 10px;
+}
+
+.pro-dealer-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.pro-dealer-img-box {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.dealer-img-txt h5 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #000;
+}
+
+.dealer-img-txt p {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--gray-color);
+}
+
+.dealer-img-box {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.dealer-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.related-pro-sec {
+    padding: 60px 0px 50px;
+}
 
 
 
@@ -323,7 +422,7 @@
 
 
 
-/* dealer-profile-page */
+/* -------------------------------------  dealer-profile-page ---------------------------------------------------------*/
 .dealer-profile-content {
     background-color: #fff;
     padding: 35px 33px;
@@ -383,6 +482,7 @@
 
 
 
+
 /* -----------------------------Dashboard Page---------------------------------- */
 .dc-content-wrapper {
     display: flex;
@@ -401,11 +501,11 @@
 }
 
 .analyics-tabs-btns {
-    /* display: flex;
+    display: flex;
     align-items: center;
-    justify-content: space-between; */
+    justify-content: space-between;
     background-color: #F5F5F5;
-
+    padding: 15px 20px;
     border-radius: 5px;
     margin-bottom: 16px;
     cursor: pointer;
@@ -420,7 +520,6 @@
     display: flex;
     align-items: center;
     gap: 15px;
-    padding: 15px 20px;
 }
 
 .analyics-tabs-btns p {
@@ -505,6 +604,7 @@
 
 .product-detail-table table tr th {
     border-bottom: 0;
+    padding: 12px 40px 12px 22px;
 }
 
 .product-detail-table table tr th p {
@@ -515,7 +615,7 @@
 
 .product-detail-table table tr th:last-child {
     text-align: right;
-    padding-right: 40px;
+    padding-right: 28px;
     width: 100px;
 }
 
@@ -577,7 +677,7 @@
     border-color: #BDBDBD;
 }
 
-/* Cart Page */
+/* ------------------------------------- Cart Page ----------------------- */
 .banner-content-sec {
     background-color: var(--secondary-color);
 }
@@ -587,9 +687,14 @@
 }
 
 .banner-content-heading {
-    display: flex;
-    justify-content: center;
     align-items: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.banner-content-last {
+    display: flex;
+    justify-content: flex-end;
 }
 
 .banner-content-heading h2 {
@@ -597,34 +702,308 @@
     font-size: 40px;
     font-weight: 500;
     text-transform: capitalize;
+    text-align: center;
 }
+
+
+
+
+
+
+
 
 .page-content-sec {
     padding: 50px 0px;
     background: #F6F6F6;
 }
 
-.user-list-table table tr th:last-child,
-.cms-list-table table tr th:last-child {
+
+.serach-and-filter-sec {
+    padding: 26px 0px;
+}
+
+.serach-and-filter-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.pro-search-box input {
+    min-width: 384px;
+    width: 100%;
+    background-color: #Fff;
+    border: 0;
+}
+
+.pro-search-box {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+}
+
+.pro-search-box .primary-btn {
+    width: 100%;
+}
+
+.pro-filter {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.pro-filter p {
+    font-size: 16px;
+    color: var(--gray-color);
+}
+
+.pro-filter .outline-btn {
+    padding: 8px 16px;
+}
+
+.dashboard-right-box {
+    padding: 0;
+    background-color: transparent;
+    box-shadow: unset;
+}
+
+.dashboard-right-box table tr td {
+    background-color: var(--white);
+    color: #5C5C5C;
+    font-size: 16px;
+}
+
+.dashboard-right-box table tr td p {
+    font-size: 16px;
+}
+
+.product-list-table table tr th:last-child {
+    text-align: right;
+    padding-right: 40px;
     width: unset;
 }
 
-.card-header-form.padding {
+.pro-list-name {
     display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.product-list-table table tr td .cancel-btn {
+    padding: 5px 15px;
+}
+
+.invoice-download {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pro-list-name h4 {
+    color: #5c5c5c;
+    font-weight: 500;
+}
+
+.banner-content-heading.flex-heading {
     justify-content: space-between;
     align-items: center;
-    padding-bottom: 15px;
-    margin-bottom: 15px;
-    border-bottom: 1px solid var(--border-color);
 }
 
-.card-header-form.padding h2 {
-    padding: 0;
+.banner-content-heading .back-page-btn {
     margin: 0;
-    border-bottom: 0;
 }
 
-.dashboard-left-box {
-    position: sticky;
-    top: 100px;
+.banner-content-heading .back-page-btn p {
+    color: var(--white);
+}
+
+.pro-manage-table .pro-img-box {
+    width: 50px;
+    height: 50px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.pro-manage-table .pro-img-box img {
+    width: 100%;
+    object-fit: cover;
+}
+
+.action-btns {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.img-upload-box {
+    padding: 35px 0px;
+    border: 2px dashed #E8E8E8;
+    border-radius: 5px;
+
+}
+
+.img-upload-box img {
+    margin: 0 auto;
+    display: block;
+}
+
+.img-upload-box p {
+    font-size: 14px;
+    color: #5c5c5c;
+    text-align: center;
+}
+
+.img-upload-box {
+    margin: 0;
+    width: 100%;
+    cursor: pointer;
+}
+
+.img-upload-box input {
+    display: none;
+}
+
+.model-pro-img {
+    width: 135px;
+    height: 135px;
+    margin-bottom: 30px;
+}
+
+.left-input input {
+    padding: 9px 13px;
+    border: 1px solid red;
+    border-radius: 5px;
+    width: fit-content;
+    max-width: 45px;
+    color: red;
+}
+
+.left-input input::placeholder {
+    color: red;
+}
+
+.singlr-pro-detail {
+    background-color: #F6F6F6;
+}
+
+.singlr-pro-detail .accordion-button {
+    background-color: #F6F6F6;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.singlr-pro-detail .accordion-item {
+    background-color: #F6F6F6;
+}
+
+.quantity-btn input {
+    max-width: 50px;
+}
+
+.quantity-btn input {
+    max-width: 20px;
+    border: 0;
+    font-size: 12px;
+}
+
+.dropdown-item:focus,
+.dropdown-item:hover {
+    color: #fff;
+    background-color: #272643;
+}
+
+.dropdown-item:focus svg path,
+.dropdown-item:hover svg path {
+    fill: #fff;
+}
+
+.serach-and-filter-box h3 {
+    font-size: 25px;
+}
+
+.parts-mang-img-box {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: #ffff;
+}
+
+.account-detail-card,
+.cstm-card.banking-detail-card {
+    padding: 30px 40px;
+    position: relative;
+}
+
+.cstm-card.account-detail-card .upload-img {
+    align-items: flex-start;
+}
+
+.cstm-card.account-detail-card .profile-without-img {
+    width: 95px;
+    height: 95px;
+}
+
+.cstm-card.account-detail-card .upload-icon {
+    background-color: var(--primary-color) !important;
+    width: 35px;
+    height: 35px;
+    bottom: 0px;
+    right: -8px;
+    border: 2px solid #fff;
+}
+
+.accounts-btns {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+.accounts-btns .btn {
+    min-width: 147px;
+}
+
+.change-pass-box {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+}
+
+.bank-img-txt img {
+    margin-bottom: 20px;
+}
+
+.bank-img-txt p {
+    font-size: 14px;
+    color: var(--gray-color);
+    margin-top: 5px;
+}
+
+.type-accounts-box {
+    display: inline-flex;
+    padding: 15px;
+    justify-content: space-between;
+    max-width: 230px;
+    width: 100%;
+    background-color: var(--primary-color);
+    border-radius: 5px;
+}
+
+.type-of-accounts {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-checkbox label {
+    cursor: pointer;
+}
+
+.form-checkbox {
+    margin: 17px 0px 30px;
+}
+
+.edit-icon {
+    position: absolute;
+    top: 8px;
+    right: 10px;
 }
