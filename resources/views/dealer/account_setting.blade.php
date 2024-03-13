@@ -50,9 +50,15 @@
                                             <div class="form-group">
                                                 <label for="">Full name</label>
                                                 <div class="form-field">
-                                                    <input type="text" class="form-control" name="name"
-                                                        value="{{ old('name', $user->name ?? $user->name) }}"
+                                                    <input type="text"
+                                                        class="form-control @error('name') is-invalid @enderror"
+                                                        name="name" value="{{ old('name', $user->name ?? $user->name) }}"
                                                         placeholder="John Doe">
+                                                    @error('name')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                     <div class="input-icon">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="14"
                                                             height="16" viewBox="0 0 14 16" fill="none">
@@ -70,7 +76,13 @@
                                                 <div class="form-field">
                                                     <input type="email" name="email"
                                                         value="{{ old('name', $user->email ?? $user->email) }}"
-                                                        class="form-control" placeholder="Name">
+                                                        class="form-control @error('email') is-invalid @enderror"
+                                                        placeholder="Name">
+                                                    @error('email')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                     <div class="input-icon">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18"
                                                             height="14" viewBox="0 0 18 14" fill="none">
@@ -92,12 +104,17 @@
                                                     <!-- <input type="text" class="form-control" placeholder="Select industry"> -->
                                                     <select name="industry_type" id="industury"
                                                         value="{{ old('name', $user->industry_type ?? $user->industry_type) }}"
-                                                        class="form-control">
+                                                        class="form-control @error('industry_type') is-invalid @enderror">
                                                         <option value="volvo">Automobile</option>
                                                         <option value="saab">Automobile</option>
                                                         <option value="opel">Automobile</option>
                                                         <option value="audi">Automobile</option>
                                                     </select>
+                                                    @error('industry_type')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                 </div>
                                             </div>
                                         </div>
@@ -105,9 +122,15 @@
                                             <div class="form-group">
                                                 <label for="">Complete address</label>
                                                 <div class="form-field">
-                                                    <input type="text" name="address" class="form-control"
+                                                    <input type="text" name="address"
+                                                        class="form-control @error('address') is-invalid @enderror"
                                                         value="{{ old('name', $user->address ?? $user->address) }}"
                                                         placeholder="Complete address">
+                                                    @error('address')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                     <div class="input-icon">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="12"
                                                             height="15" viewBox="0 0 12 15" fill="none">
@@ -262,8 +285,14 @@
                                 <div class="form-group">
                                     <label for="">Old Password</label>
                                     <div class="form-field">
-                                        <input type="password" name="current_password" class="form-control"
+                                        <input type="password" name="old_password"
+                                            class="form-control @error('old_password') is-invalid @enderror"
                                             placeholder="**************************">
+                                        @error('old_password')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                         <div class="input-icon">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="17" height="13"
                                                 viewBox="0 0 17 13" fill="none">
@@ -284,8 +313,14 @@
                                 <div class="form-group">
                                     <label for="">New Password</label>
                                     <div class="form-field">
-                                        <input type="password" name="new_password" class="form-control"
+                                        <input type="password" name="password"
+                                            class="form-control @error('password') is-invalid @enderror"
                                             placeholder="**************************">
+                                        @error('password')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                         <div class="input-icon">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="17" height="13"
                                                 viewBox="0 0 17 13" fill="none">
@@ -306,8 +341,14 @@
                                 <div class="form-group">
                                     <label for="">Confirm New Password</label>
                                     <div class="form-field">
-                                        <input type="password" name="new_password" class="form-control"
+                                        <input type="password" name="confirm_password"
+                                            class="form-control @error('confirm_password') is-invalid @enderror"
                                             placeholder="**************************">
+                                        @error('confirm_password')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                         <div class="input-icon">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="17" height="13"
                                                 viewBox="0 0 17 13" fill="none">
@@ -358,4 +399,5 @@
             nextArrow: $('.next-btn'),
         });
     </script>
+    @includeFirst(['validation.dealer.js_profile'])
 @endpush

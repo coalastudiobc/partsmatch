@@ -874,7 +874,7 @@ header {
 }
 
 .footer-main {
-    padding: 50px 0px;
+    padding: 0px;
     padding-bottom: 0px;
 }
 
@@ -978,7 +978,8 @@ header {
     background: var(--white);
 }
 
-.form-field.is-invalid .input-icon {
+/* .form-field input.is-invalid  */
+.form-field:has(.is-invalid) .input-icon {
     display: none;
 }
 
@@ -1136,6 +1137,7 @@ header {
     align-items: center;
     gap: 10px;
     margin-bottom: 50px;
+    justify-content: flex-end;
 }
 
 .banner-content-sec {
@@ -1156,5 +1158,5 @@ header {
 }
 
 .analyics-tabs ul::-webkit-scrollbar {
-    width: 5px;
+    width: 0px;
 }

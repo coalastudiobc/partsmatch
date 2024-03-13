@@ -131,7 +131,7 @@
 }
 
 .login-sec {
-    position: relative;
+    /* position: relative; */
     padding: 100px 0px 40px;
     height: calc(100vh - 90px);
     overflow-y: auto;
