@@ -212,6 +212,17 @@ return [
             'regex' => 'Please enter the valid email address',
             'unique' => 'Please enter the unique email',
         ],
+        'address' => [
+            'required' => 'Please enter your address',
+        ],
+        'phone_number' => [
+            'required' => 'Please enter the phone number',
+            'digits' => 'Phone number must be of :digits',
+            'phoneUS' => 'Phone number must be of :digits digits',
+        ],
+        'industry_type' => [
+            'required' => 'Please enter the industry type',
+        ],
         'bio' => [
             'min' => 'Bio can be :min - :max characters',
             'max' => 'Bio can be :min - :max characters',

@@ -1273,3 +1273,7 @@ button.btn-close {
     border-radius: 5px;
     overflow: hidden;
 }
+
+.form-field:has(.is-invalid) .input-icon {
+    display: none;
+}

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Dealer;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ChangePasswordRequest;
+use App\Http\Requests\ProfileRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -14,7 +16,7 @@ class AccountSettingController extends Controller
         $user = User::where('id', auth()->user()->id)->first();
         return view('dealer.account_setting', compact('user'));
     }
-    public function update(Request $request)
+    public function update(ProfileRequest $request)
     {
         $data = [
             'name' => $request->name,
@@ -23,9 +25,6 @@ class AccountSettingController extends Controller
             'industry_type' => $request->industry_type,
             'address' => $request->address,
         ];
-        if ($request->has('password')) {
-            $data['password'] = Hash::make($request->password);
-        }
         if ($request->has('image')) {
             $image = store_image($request->image, 'profile_pictures');
 
@@ -39,17 +38,16 @@ class AccountSettingController extends Controller
         return redirect()->back()->with(['status' => "success", "message" => 'Updated successfully']);
     }
 
-    public function updatePassword(Request $request)
+    public function updatePassword(ChangePasswordRequest $request)
     {
-        // dd($request->toArray());
-        $currentPassword = $request->current_password;
+        $old_password = $request->old_password;
         $user = auth()->user();
 
-        if (!Hash::check($currentPassword, $user->password)) {
+        if (!Hash::check($old_password, $user->password)) {
             return back()->with('error', __('password is incorrect'));
         }
 
-        $newPassword = Hash::make($request->new_password);
+        $newPassword = Hash::make($request->password);
         User::where('id', $user->id)->update(['password' => $newPassword]);
         return redirect()->back()->with(['status' => "success", "message" => 'Updated successfully']);
     }
