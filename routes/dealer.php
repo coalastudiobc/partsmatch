@@ -9,4 +9,10 @@ Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer'
     Route::get('/profile', [AccountSettingController::class, 'profile'])->name('profile');
     Route::post('profile/update', [AccountSettingController::class, 'update'])->name('profile.update');
     Route::post('change-password', [AccountSettingController::class, 'updatePassword'])->name('changepassword');
+    // products
+    Route::name('products')->group(function(){
+        
+        Route::get('/products', [ProductController::class, 'index'])->name('profile');
+    });
+
 });
