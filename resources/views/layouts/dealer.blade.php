@@ -99,8 +99,9 @@
             </div>
         </section>
     </main>
-
-    <footer class="footer-sec">
+    @include('layouts.include.footer')
+    @yield('footer')
+    {{-- <footer class="footer-sec">
         <div class="footer-main">
             <div class="container">
                 <div class="footer-small">
@@ -109,7 +110,7 @@
             </div>
         </div>
 
-    </footer>
+    </footer> --}}
     @yield('modals')
 
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
