@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Dealer\AccountSettingController;
 use App\Http\Controllers\Dealer\DealerController;
+use App\Http\Controllers\Dealer\ProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer')->name('dealer.')->group(function () {
@@ -10,9 +11,9 @@ Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer'
     Route::post('profile/update', [AccountSettingController::class, 'update'])->name('profile.update');
     Route::post('change-password', [AccountSettingController::class, 'updatePassword'])->name('changepassword');
     // products
-    Route::name('products')->group(function(){
+    Route::name('products.')->group(function(){
         
-        Route::get('/products', [ProductController::class, 'index'])->name('profile');
+        Route::get('/products', [ProductController::class, 'index'])->name('index');
     });
 
 });

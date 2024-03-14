@@ -2,6 +2,7 @@
     <h2>Analytics</h2>
     <div class="analyics-tabs">
         <ul>
+            <a href="{{ route('dealer.products.index') }}">
             <li class="analyics-tabs-list">
                 <div class="accordion accordion-flush" id="accordionFlushExample">
                     <div class="accordion-item">
@@ -29,6 +30,7 @@
                     </div>
                 </div>
             </li>
+            </a>
         </ul>
     </div>
 </div>
