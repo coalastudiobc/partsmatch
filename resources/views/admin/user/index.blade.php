@@ -57,7 +57,8 @@
                                     <input type="checkbox" id="switch{{ $key }}" class=""
                                         @if ($user->status == 'ACTIVE') checked="checked" @endif
                                         onchange="toggleStatus(this, 'User', '{{ $user->id }}');"
-                                        url="{{ route('admin.dealers.status') }}"><label for="switch{{ $key }}">Toggle</label>
+                                        url="{{ route('admin.dealers.status') }}"><label
+                                        for="switch{{ $key }}">Toggle</label>
                                 </div>
                                 {{-- <span class="custom-switch-indicator"></span> --}}
                                 {{-- <div >
