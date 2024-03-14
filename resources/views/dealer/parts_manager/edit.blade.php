@@ -117,7 +117,8 @@
                                         </div>
 
                                         <div class="col-md-6">
-                                            <a class="btn secondary-btn full-btn mr-1">Back</a>
+                                            <a href="{{ route('dealer.partsmanager.index') }}"
+                                                class="btn secondary-btn full-btn mr-1">Back</a>
                                         </div>
                                         <div class="col-md-6">
                                             <button class="btn primary-btn full-btn mr-1" id="submit"
