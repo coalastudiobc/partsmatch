@@ -1277,3 +1277,17 @@ button.btn-close {
 .form-field:has(.is-invalid) .input-icon {
     display: none;
 }
+
+
+
+/* anmol */
+
+.form-icon {
+    position: absolute;
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    color: #C8C9D8;
+}

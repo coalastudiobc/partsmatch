@@ -268,10 +268,180 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <!-- <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div> -->
-                <div class="modal-body">
+                      <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div> -->
+                    <div class="modal-body">
+                        <div class="add-pro-form">
+                            <h2>Add New Products</h2>
+                            <form action="">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Product Name</label>
+                                            <div class="form-field">
+                                                <input type="text" class="form-control" placeholder="Product Name">
+    
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Product Category</label>
+                                            <div class="form-field">
+                                                <input type="text" class="form-control" placeholder="Product Category">
+    
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="">Product Description</label>
+                                            <div class="form-field">
+                                                <textarea name="" class="form-control" id="" cols="30" rows="2"></textarea>
+    
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="">Additional details</label>
+                                            <div class="form-field">
+                                                <textarea name="" class="form-control" id="" cols="30" rows="2"></textarea>
+    
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="">Add Product Images (Up to 5)</label>
+                                            <label class="img-upload-box">
+                                                <img src="images/upload-img.png" alt="">
+                                                <p>Upload Images</p>
+                                                <input type="file">
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Product Quantity</label>
+                                            <div class="form-field">
+                                                <input type="text" class="form-control" placeholder="Product Quantity">
+    
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Product Price</label>
+                                            <div class="form-field">
+                                                <input type="text" class="form-control" placeholder="$000">
+    
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Other specifications</label>
+                                            <div class="form-field">
+                                                <input type="text" class="form-control"
+                                                    placeholder="Other specifications">
+    
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Shipping Price</label>
+                                            <div class="form-field">
+                                                <input type="text" class="form-control" placeholder="$000">
+    
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Model</label>
+                                            <div class="form-field">
+                                                <select class="form-control" name="car-years" id="car-years"></select>
+                                                {{-- <select class="form-control" name="Select your country"
+                                                    id="Select your country">
+                                                    <option>Select your model</option>
+                                                    <option value="model1">Model1</option>
+                                                    <option value="model2">Model2</option>
+                                                    <option value="model3">Model3</option>
+                                                </select> --}}
+                                                <span class="form-icon">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8"
+                                                        viewBox="0 0 14 8" fill="none">
+                                                        <path d="M13 1L7 7L1 1" stroke="#272643" stroke-width="2"
+                                                            stroke-miterlimit="10" stroke-linecap="round"
+                                                            stroke-linejoin="round"></path>
+                                                    </svg>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Brand</label>
+                                            <div class="form-field">
+                                                <select class="form-control" name="car-makes" id="car-makes"></select>
+                                                {{-- <select class="form-control" name="Select your country"
+                                                    id="Select your country">
+                                                    <option>Select your country</option>
+                                                    <option value="brand1">Brand1</option>
+                                                    <option value="brand2">Brand2</option>
+                                                    <option value="brand3">brand3</option>
+                                                </select> --}}
+                                                <span class="form-icon">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8"
+                                                        viewBox="0 0 14 8" fill="none">
+                                                        <path d="M13 1L7 7L1 1" stroke="#272643" stroke-width="2"
+                                                            stroke-miterlimit="10" stroke-linecap="round"
+                                                            stroke-linejoin="round"></path>
+                                                    </svg>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Make</label>
+                                            <div class="form-field">
+                                                <select class="form-control" name="car-models" id="car-models"></select>
+                                                {{-- <select class="form-control" name="Select your country"
+                                                    id="Select your country">
+                                                    <option>Select your make</option>
+                                                    <option value="make1">Make1</option>
+                                                    <option value="make2">Make2</option>
+                                                    <option value="make3">make3</option>
+                                                </select> --}}
+                                                <span class="form-icon">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8"
+                                                        viewBox="0 0 14 8" fill="none">
+                                                        <path d="M13 1L7 7L1 1" stroke="#272643" stroke-width="2"
+                                                            stroke-miterlimit="10" stroke-linecap="round"
+                                                            stroke-linejoin="round"></path>
+                                                    </svg>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <a href="#" class="btn secondary-btn full-btn" data-bs-toggle="modal"
+                                                data-bs-target="#bulk-upload">Bulk Upload</a>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <a href="#" class="btn primary-btn full-btn">submit</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                {{-- <div class="modal-body">
                     <div class="add-pro-form">
                         <h2>Add New Products</h2>
                         <form action="">
@@ -387,8 +557,8 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <select name="car-years" id="car-years"></select>  
-                                    <select name="car-makes" id="car-makes"></select> 
+                                    <select name="car-years" id="car-years"></select>
+                                    <select name="car-makes" id="car-makes"></select>
                                     <select name="car-models" id="car-models"></select>
                                     <select name="car-model-trims" id="car-model-trims"></select>
                                     <div class="col-md-6">
@@ -402,11 +572,8 @@
                             </div>
                         </form>
                     </div>
-                </div>
-                <!-- <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-            </div> -->
+                </div> --}}
+               
             </div>
         </div>
     </div>
@@ -416,10 +583,6 @@
     <div class="modal fade" id="bulk-upload" tabindex="-1" aria-labelledby="bulk-upload" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <!-- <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div> -->
                 <div class="modal-body">
                     <div class="add-pro-form">
                         <h2>Bulk Upload</h2>
@@ -439,7 +602,6 @@
                                 <div class="col-md-12">
                                     <a href="#" class="btn secondary-btn full-btn">submit</a>
                                 </div>
-
                             </div>
                         </form>
                     </div>
@@ -452,9 +614,9 @@
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <!-- <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div> -->
+                              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div> -->
                             <div class="modal-body">
                                 <div class="pro-detail-body">
                                     <img class="model-pro-img" src="images/collect1.png" alt="">
@@ -507,34 +669,23 @@
                                     aria-label="Close"></button>
                             </div>
                             <!-- <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Save changes</button>
-                    </div> -->
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-primary">Save changes</button>
+                            </div> -->
                         </div>
                     </div>
                 </div>
 
             @endsection
-@push('scripts')
-<script type="text/javascript">
-    $(document).ready(
-    function()
-    {
-         //Create a variable for the CarQuery object.  You can call it whatever you like.
-         var carquery = new CarQuery();
-    
-         //Run the carquery init function to get things started:
-         carquery.init();
-         
-         //Optionally, you can pre-select a vehicle by passing year / make / model / trim to the init function:
-         //carquery.init('2000', 'dodge', 'Viper', 11636);
-    
-         //Optional: Pass sold_in_us:true to the setFilters method to show only US models. 
-         carquery.setFilters( {sold_in_us:true} );
-    
-         //Optional: initialize the year, make, model, and trim drop downs by providing their element IDs
-         carquery.initYearMakeModelTrim('car-years', 'car-makes', 'car-models', 'car-model-trims');
-    
-    });
-    </script>
-    @endpush
+            @push('scripts')
+                <script type="text/javascript">
+                    $(document).ready(
+                        function() {
+                            var carquery = new CarQuery();
+                            carquery.init();
+                            carquery.initYearMakeModelTrim('car-years', 'car-makes', 'car-models', 'car-model-trims');
+                            console.log('test');
+
+                        });
+                </script>
+            @endpush

@@ -14,9 +14,9 @@ Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer'
     Route::match(['GET', "POST"], 'dealers/status', [DealerController::class, 'toggleStatus'])->name('status');
 
     // products
-    Route::name('products')->group(function(){
+    Route::name('products.')->group(function(){
         
-        Route::get('/products', [ProductController::class, 'index'])->name('profile');
+        Route::get('/products', [ProductController::class, 'index'])->name('index');
     });
 
     Route::name('partsmanager.')->group(function () {
