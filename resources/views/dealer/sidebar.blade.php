@@ -10,7 +10,7 @@
                                 data-bs-target="#flush-collapseOne1" aria-expanded="false"
                                 aria-controls="flush-collapseOne">
                                 <a href="{{ route('dealer.dashboard') }}"
-                                    class="analyics-tabs-btns @if (Route::is('dealer.products.*')) active @endif ">
+                                    class="analyics-tabs-btns @if (Route::is('dealer.dashboard')) active @endif ">
                                     <div class="analyics-tabs-name">
                                         <span>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17"
@@ -37,7 +37,9 @@
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#flush-collapseOne1" aria-expanded="false"
                                 aria-controls="flush-collapseOne">
-                                <div class="analyics-tabs-btns @if (Route::is('dealer.products.*')) active @endif ">
+
+                                <a href="{{ route('dealer.products.index') }}"
+                                    class="analyics-tabs-btns @if (Route::is('dealer.products.*')) active @endif ">
                                     <div class="analyics-tabs-name">
                                         <span>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17"
@@ -51,7 +53,7 @@
                                         </span>
                                         <h4>products</h4>
                                     </div>
-                                </div>
+                                </a>
                             </button>
                         </h2>
                     </div>
