@@ -121,18 +121,19 @@
                                                                 <img src="{{ Storage::url($image->file_url) }}"
                                                                     alt="img" img-id="{{ $image->id }}"
                                                                     height="100px" width="75px">
-<<<<<<< HEAD
-                                                                <img src="{{ Storage::url($image->file_url) }}"
+                                                                <<<<<<< HEAD <img
+                                                                    src="{{ Storage::url($image->file_url) }}"
                                                                     class="uploadedimage" alt="img"
                                                                     img-id="{{ $image->id }}" height="100px"
                                                                     width="75px">
-=======
-                                                                img-id="{{ $image->id }}" height="100px" width="75px">
->>>>>>> 29452a88d09b112fef4493834e065711e217f768
-                                                                <div class="upload-img-cross">
-                                                                    <i
-                                                                        class="fa-regular fa-circle-xmark remove_uploaded"></i>
-                                                                </div>
+                                                                    =======
+                                                                    img-id="{{ $image->id }}" height="100px"
+                                                                    width="75px">
+                                                                    >>>>>>> 29452a88d09b112fef4493834e065711e217f768
+                                                                    <div class="upload-img-cross">
+                                                                        <i
+                                                                            class="fa-regular fa-circle-xmark remove_uploaded"></i>
+                                                                    </div>
                                                             </div>
                                                         @endforeach
 

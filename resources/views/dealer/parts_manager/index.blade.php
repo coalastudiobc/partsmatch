@@ -120,138 +120,163 @@
                                                     <img src="images/user.png" id="Userimage" alt="">
                                                 </div>
                                                 <input type="file" name="image" id="file-upload">
-                                                <div class="upload-icon">
-                                                    <img src="images/upload.png" alt="">
+                                            @section('modals')
+                                                <div class="modal fade" id="add-manager-model" tabindex="-1"
+                                                    aria-labelledby="exampleModalLabel" aria-hidden="true"
+                                                    data-bs-backdrop="static">
+                                                    <div class="modal-dialog modal-dialog-centered">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                {{-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> --}}
+                                                                <button type="button" class="btn-close"
+                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="add-pro-form">
+                                                                    <h2>Add New Manager</h2>
+                                                                    <form id="parts_manager"
+                                                                        action="{{ route('dealer.partsmanager.store') }}"
+                                                                        method="post" enctype="multipart/form-data">
+                                                                        @csrf
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <div class="upload-img">
+                                                                                    <div class="file-upload-box">
+                                                                                        <label for="file-upload">
+                                                                                            <div
+                                                                                                class="profile-without-img">
+                                                                                                <img src="images/user.png"
+                                                                                                    id="Userimage"
+                                                                                                    alt="">
+                                                                                            </div>
+                                                                                            <input type="file"
+                                                                                                name="image"
+                                                                                                id="file-upload">
+                                                                                            <div class="upload-icon">
+                                                                                                <img src="images/upload.png"
+                                                                                                    alt="">
+                                                                                                <img src="images/upload.png"
+                                                                                                    alt="">
+                                                                                            </div>
+                                                                                        </label>
+                                                                                    </div>
+                                                                                    <h3>Upload profile picture</h3>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <div class="form-group">
+                                                                                    <label for="">Full Name</label>
+                                                                                    <div class="form-field">
+                                                                                        <input type="text"
+                                                                                            name="name"
+                                                                                            class="form-control"
+                                                                                            placeholder="Full Name">
+
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <div class="form-group">
+                                                                                    <label for="">Email</label>
+                                                                                    <div class="form-field">
+                                                                                        <input type="email"
+                                                                                            name="email"
+                                                                                            class="form-control"
+                                                                                            placeholder="Email">
+
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <div class="form-group">
+                                                                                    <label for="">Phone
+                                                                                        Number</label>
+                                                                                    <div class="form-field">
+                                                                                        <input type="text"
+                                                                                            name="phone_number"
+                                                                                            class="form-control"
+                                                                                            placeholder="Phone Number">
+
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <div class="form-group">
+                                                                                    <label for="">Assign
+                                                                                        Role</label>
+                                                                                    <div class="form-field">
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            placeholder="Assign Role">
+
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="col-md-6">
+                                                                                <div class="form-group">
+                                                                                    <label for="">Password</label>
+                                                                                    <div class="form-field">
+                                                                                        <input type="password"
+                                                                                            name="password"
+                                                                                            class="form-control"
+                                                                                            placeholder="Password">
+
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <div class="form-group">
+                                                                                    <label for="">Confirm
+                                                                                        Password</label>
+                                                                                    <div class="form-field">
+                                                                                        <input type="password"
+                                                                                            name="confirm_password"
+                                                                                            class="form-control"
+                                                                                            placeholder="Confirm Password">
+
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-12">
+                                                                                <button type="submit"
+                                                                                    class="btn secondary-btn full-btn">Submit
+                                                                                    Details</button>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                            <!-- <div class="modal-footer">
+                                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                  <button type="button" class="btn btn-primary">Save changes</button>
+                                                </div> -->
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </label>
-                                        </div>
-                                        <h3>Upload profile picture</h3>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Full Name</label>
-                                        <div class="form-field">
-                                            <input type="text" name="name"
-                                                class="form-control @error('name') is-invalid @enderror"
-                                                placeholder="Full Name">
-                                            @error('status')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Email</label>
-                                        <div class="form-field">
-                                            <input type="email" name="email"
-                                                class="form-control @error('email') is-invalid @enderror"
-                                                placeholder="Email">
-                                            @error('email')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Phone Number</label>
-                                        <div class="form-field">
-                                            <input type="text" name="phone_number"
-                                                class="form-control @error('phone_number') is-invalid @enderror"
-                                                placeholder="Phone Number">
-                                            @error('phone_number')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Assign Role</label>
-                                        <div class="form-field">
-                                            <input type="text"
-                                                class="form-control @error('phone_number') is-invalid @enderror"
-                                                placeholder="Assign Role">
-                                            @error('phone_number')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                </div>
+                                            @endsection
+                                            @push('scripts')
+                                                @includeFirst(['validation.dealer.js_parts_manager'])
+                                                <script>
+                                                    $(document).ready(function() {
+                                                        $("#file-upload").change(function() {
+                                                            if (this.files && this.files[0]) {
 
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Password</label>
-                                        <div class="form-field">
-                                            <input type="password" id="manager_confirm_password" name="password"
-                                                class="form-control @error('password') is-invalid @enderror"
-                                                placeholder="Password">
-                                            @error('password')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Confirm Password</label>
-                                        <div class="form-field">
-                                            <input type="password" name="confirm_password"
-                                                class="form-control @error('confirm_password') is-invalid @enderror"
-                                                placeholder="Confirm Password">
-                                            @error('confirm_password')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <button type="submit" class="btn secondary-btn full-btn">Submit Details</button>
-                                </div>
+                                                                var reader = new FileReader();
 
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-@endsection
-@push('scripts')
-    @includeFirst(['validation.dealer.js_parts_manager'])
-    <script>
-        $(document).ready(function() {
-            $("#file-upload").change(function() {
-                if (this.files && this.files[0]) {
+                                                                reader.onload = function(e) {
+                                                                    $('#Userimage').attr('src', e.target.result);
+                                                                }
 
-                    var reader = new FileReader();
-
-                    reader.onload = function(e) {
-                        $('#Userimage').attr('src', e.target.result);
-                    }
-
-                    reader.readAsDataURL(this.files[0]);
-                }
-            });
-            @if (count($errors))
-                {
-                    $('#add-manager-model').modal('show');
-                }
-            @endif
-        });
-    </script>
-@endpush
+                                                                reader.readAsDataURL(this.files[0]);
+                                                            }
+                                                        });
+                                                        @if (count($errors))
+                                                            {
+                                                                $('#add-manager-model').modal('show');
+                                                            }
+                                                        @endif
+                                                    });
+                                                </script>
+                                            @endpush

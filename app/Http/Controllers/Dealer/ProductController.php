@@ -90,7 +90,12 @@ class ProductController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(Product $product)
+    public function edit(Product $product)
     {
+        $category = Category::where('id', $product->subcategory_id)->first();
+        $images = ProductImage::where('product_id', $product->id)->get();
+
+        return view('dealer.products.edit', compact('product', 'category', 'images'));
         $category = Category::where('id', $product->subcategory_id)->first();
         $images = ProductImage::where('product_id', $product->id)->get();
 
