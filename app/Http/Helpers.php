@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\AdminSetting;
+use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
@@ -82,6 +83,14 @@ if (!function_exists('store_image')) {
         } catch (\Exception $e) {
             return null;
         }
+    }
+}
+if (!function_exists('get_category')) {
+    function get_category()
+    {
+        $record = Category::where('parent_id',   null)->get();
+
+        return $record;
     }
 }
 // if (!function_exists('get_country')) {

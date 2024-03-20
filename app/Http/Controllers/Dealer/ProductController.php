@@ -3,7 +3,12 @@
 namespace App\Http\Controllers\Dealer;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\Product;
+use App\Models\ProductImage;
+use GrahamCampbell\ResultType\Success;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -12,7 +17,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('dealer.products.index');
+        $products = Product::with('productImage')->get();
+        return view('dealer.products.index', compact('products'));
     }
 
     /**
@@ -28,7 +34,47 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+        try {
+            $product = [
+                'name' => $request->name,
+                'user_id' => auth()->user()->id,
+                'subcategory_id' => $request->subcategory,
+                'description' => $request->description,
+                'additional_details' => $request->additional_details,
+                'stocks_avaliable' => $request->stocks_avaliable,
+                'price' => $request->price,
+                'shipping_price' => $request->shipping_price,
+                'other_specification' => $request->other_specification,
+                'year' => $request->year,
+                'brand' => $request->brand,
+                'model' => $request->model,
+                'status' => '1',
+            ];
+
+            DB::beginTransaction();
+            $product = Product::create($product);
+
+            if (count($request->file('images')) > 0) {
+                foreach ($request->file('images') as $file) {
+                    $image = store_image($file, 'products/images');
+                    if ($image != null) {
+                        $productimage[] = [
+                            'product_id' => $product->id,
+                            'file_name' => $image['name'],
+                            'file_url' => $image['url'],
+                        ];
+                    }
+                }
+            }
+            ProductImage::insert($productimage);
+
+            DB::commit();
+            return redirect()->back();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     /**
@@ -42,24 +88,86 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Product $product)
     {
-        //
+        $category = Category::where('id', $product->subcategory_id)->first();
+        $images = ProductImage::where('product_id', $product->id)->get();
+
+        return view('dealer.products.edit', compact('product', 'category', 'images'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Product $product)
     {
-        //
+        dd($request);
+
+        try {
+
+            $products = [
+                'name' => $request->name,
+                'user_id' => auth()->user()->id,
+                'subcategory_id' => $request->subcategory,
+                'description' => $request->description,
+                'additional_details' => $request->additional_details,
+                'stocks_avaliable' => $request->stocks_avaliable,
+                'price' => $request->price,
+                'shipping_price' => $request->shipping_price,
+                'other_specification' => $request->other_specification,
+                'year' => $request->year,
+                'brand' => $request->brand,
+                'model' => $request->model,
+                'status' => '1',
+            ];
+
+            DB::beginTransaction();
+            $product->update($products);
+
+            $images = ProductImage::where('product_id', $product->id)->get();
+            // dd($images, $request->file('images'));
+            if (count($request->file('images')) > 0) {
+                foreach ($request->file('images') as $key => $file) {
+                    $image = store_image($file, 'products/images');
+                    if ($image != null) {
+                        $productimage[] = [
+                            // $images['product_id'] => $product->id,
+                            $images['file_name'] => $image['name'],
+                            $images['file_url'] => $image['url'],
+                        ];
+                    }
+                    $images->update($productimage);
+                }
+            }
+
+
+            DB::commit();
+            return redirect()->back();
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+            DB::rollBack();
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return redirect()->back()->with(['success' => true, 'message' => "successfully deleted"]);
+    }
+
+    public function togglestatus()
+    {
+    }
+    public function subcategory($id)
+    {
+        $subcategories = Category::where('parent_id', $id)->get();
+        return response()->json([
+            'status' => true,
+            'subcategory' => view('dealer.include.subcategory', compact('subcategories'))->render(),
+        ], 200);
     }
 }
