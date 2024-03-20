@@ -1291,3 +1291,27 @@ button.btn-close {
     align-items: center;
     color: #C8C9D8;
 }
+
+.upload-img-preview {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.upload-img-preview img {
+    width: 80px;
+    height: 100px;
+    object-fit: cover;
+
+}
+
+.upload-img-box {
+    position: relative;
+}
+
+.upload-img-cross {
+    position: absolute;
+    right: 0;
+    top: 0;
+}

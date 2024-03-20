@@ -37,12 +37,12 @@
                                                         <div class="profile-without-img">
                                                             <img src="{{ $user->profile_picture_url ? Storage::url($user->profile_picture_url) : asset('assets/images/user.png') }}"
                                                                 alt="" id="Userimage">
-                                                            <div class="upload-icon d-none editable">
-                                                                <i class="fa-sharp fa-solid fa-pen"></i>
-                                                            </div>
                                                         </div>
                                                         <input type="file" name="image" disabled
                                                             class="disabled-inputs" id="file-upload">
+                                                        <div class="upload-icon d-none editable">
+                                                            <i class="fa-sharp fa-solid fa-pen"></i>
+                                                        </div>
                                                     </label>
                                                 </div>
                                             </div>

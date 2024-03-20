@@ -20,7 +20,9 @@
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.8/slick.css  "> -->
 
     @includeFirst(['validation'])
-
+    <script>
+        const APP_URL = "{{ url('') }}";
+    </script>
 </head>
 
 <body>
@@ -78,7 +80,7 @@
     <section class="banner-content-sec">
         <div class="container">
             <div class="banner-content-wrapper">
-                <div class="banner-content-heading">
+                <div class="banner-content-heading single-heading">
                     <h2>
                         @yield('heading')
                     </h2>
@@ -120,7 +122,7 @@
     <script src="{{ asset('assets/js/validate.min.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
     <script src="{{ asset('assets/js/common.js') }}?ver={{ now() }}"></script>
-    <script type="text/javascript" src="http://www.carqueryapi.com/js/jquery.min.js"></script>
+    {{-- <script type="text/javascript" src="http://www.carqueryapi.com/js/jquery.min.js"></script> --}}
     <script type="text/javascript" src="http://www.carqueryapi.com/js/carquery.0.3.4.js"></script>
     @stack('scripts')
 </body>

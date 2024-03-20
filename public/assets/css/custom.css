@@ -821,6 +821,12 @@
     height: 50px;
     background-color: #fff;
     cursor: pointer;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    object-fit: cover;
+    border-radius: 100px;
 }
 
 .pro-manage-table .pro-img-box img {
@@ -925,6 +931,11 @@
     height: 44px;
     border-radius: 50%;
     background-color: #ffff;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    object-fit: cover;
 }
 
 .account-detail-card,
@@ -1006,4 +1017,8 @@
     position: absolute;
     top: 8px;
     right: 10px;
+}
+
+.single-heading {
+    grid-template-columns: auto;
 }
