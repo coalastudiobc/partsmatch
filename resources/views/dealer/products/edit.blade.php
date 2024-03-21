@@ -112,11 +112,11 @@
                                                         value={{ count($product->productImage) }}>
 
                                                 </label>
-                                                <div class="upload-img-preview">
+                                                <div class="pre-upload-img-preview">
                                                     @foreach ($product->productImage as $image)
                                                         <div class="upload-img-box">
                                                             <img src="{{ Storage::url($image->file_url) }}" alt="img"
-                                                                img-id="{{ $image->id }}">
+                                                                img-id="{{ $image->id }}" height="100px" width="75px">
                                                             <div class="upload-img-cross">
                                                                 <i class="fa-regular fa-circle-xmark remove_uploaded"></i>
                                                             </div>
@@ -124,6 +124,7 @@
                                                     @endforeach
 
                                                 </div>
+                                                <div class="upload-img-preview"></div>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -324,7 +325,7 @@
                 previewImages(this, 'div.upload-img-preview');
             });
 
-            $('.remove_uploaded').on('click', function() {
+            $(document).on('click', '.remove_uploaded', function() {
                 var total_img = parseInt($('#total-img-preview').val())
                 if (total_img > 5) {
                     $(this).parent('div').parent('div').remove();
