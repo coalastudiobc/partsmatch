@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dealer;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PartsManagerRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -14,7 +15,7 @@ class PartsManagerController extends Controller
         $users = User::where('working_for', auth()->user()->id)->get();
         return view('dealer.parts_manager.index', compact('users'));
     }
-    public function store(Request $request)
+    public function store(PartsManagerRequest $request)
     {
         $user = [
             'name' => $request->name,

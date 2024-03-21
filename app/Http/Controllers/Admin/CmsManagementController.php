@@ -20,7 +20,11 @@ class CmsManagementController extends Controller
     }
     public function update(Request $request, CmsPage $page)
     {
-        $request->validate([], [
+        $request->validate([
+            'name' => 'required',
+            'content' => 'required',
+            'image' => 'required',
+        ], [
             'name.required' => 'Please enter the name',
             'content.required' => 'Please enter the content',
             'image.required' => 'Please enter the image',

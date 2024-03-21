@@ -13,7 +13,7 @@
                             <x-alert-component />
 
                             <div class="card-body">
-                                <form id="Userupdate" action="{{ route('dealer.partsmanager.update', [$user->id]) }}"
+                                <form id="parts_manager" action="{{ route('dealer.partsmanager.update', [$user->id]) }}"
                                     enctype="multipart/form-data" method="post">
                                     @csrf
                                     <div class="row">
@@ -137,4 +137,5 @@
 @endsection
 
 @push('scripts')
+    @includeFirst(['validation.dealer.js_parts_manager'])
 @endpush

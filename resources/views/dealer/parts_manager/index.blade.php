@@ -132,9 +132,14 @@
                                     <div class="form-group">
                                         <label for="">Full Name</label>
                                         <div class="form-field">
-                                            <input type="text" name="name" class="form-control"
+                                            <input type="text" name="name"
+                                                class="form-control @error('name') is-invalid @enderror"
                                                 placeholder="Full Name">
-
+                                            @error('status')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -142,8 +147,14 @@
                                     <div class="form-group">
                                         <label for="">Email</label>
                                         <div class="form-field">
-                                            <input type="email" name="email" class="form-control" placeholder="Email">
-
+                                            <input type="email" name="email"
+                                                class="form-control @error('email') is-invalid @enderror"
+                                                placeholder="Email">
+                                            @error('email')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -151,9 +162,14 @@
                                     <div class="form-group">
                                         <label for="">Phone Number</label>
                                         <div class="form-field">
-                                            <input type="text" name="phone_number" class="form-control"
+                                            <input type="text" name="phone_number"
+                                                class="form-control @error('phone_number') is-invalid @enderror"
                                                 placeholder="Phone Number">
-
+                                            @error('phone_number')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -161,8 +177,14 @@
                                     <div class="form-group">
                                         <label for="">Assign Role</label>
                                         <div class="form-field">
-                                            <input type="text" class="form-control" placeholder="Assign Role">
-
+                                            <input type="text"
+                                                class="form-control @error('phone_number') is-invalid @enderror"
+                                                placeholder="Assign Role">
+                                            @error('phone_number')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -171,9 +193,14 @@
                                     <div class="form-group">
                                         <label for="">Password</label>
                                         <div class="form-field">
-                                            <input type="password" name="password" class="form-control"
+                                            <input type="password" id="manager_confirm_password" name="password"
+                                                class="form-control @error('password') is-invalid @enderror"
                                                 placeholder="Password">
-
+                                            @error('password')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -181,9 +208,14 @@
                                     <div class="form-group">
                                         <label for="">Confirm Password</label>
                                         <div class="form-field">
-                                            <input type="password" name="confirm_password" class="form-control"
+                                            <input type="password" name="confirm_password"
+                                                class="form-control @error('confirm_password') is-invalid @enderror"
                                                 placeholder="Confirm Password">
-
+                                            @error('confirm_password')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -195,27 +227,31 @@
                         </form>
                     </div>
                 </div>
-                <!-- <div class="modal-footer">
-                                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                              <button type="button" class="btn btn-primary">Save changes</button>
-                                            </div> -->
             </div>
         </div>
     </div>
 @endsection
 @push('scripts')
+    @includeFirst(['validation.dealer.js_parts_manager'])
     <script>
-        $("#file-upload").change(function() {
-            if (this.files && this.files[0]) {
+        $(document).ready(function() {
+            $("#file-upload").change(function() {
+                if (this.files && this.files[0]) {
 
-                var reader = new FileReader();
+                    var reader = new FileReader();
 
-                reader.onload = function(e) {
-                    $('#Userimage').attr('src', e.target.result);
+                    reader.onload = function(e) {
+                        $('#Userimage').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(this.files[0]);
                 }
-
-                reader.readAsDataURL(this.files[0]);
-            }
+            });
+            @if (count($errors))
+                {
+                    $('#add-manager-model').modal('show');
+                }
+            @endif
         });
     </script>
 @endpush

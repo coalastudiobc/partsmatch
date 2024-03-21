@@ -9,6 +9,7 @@ use App\Models\ProductImage;
 use GrahamCampbell\ResultType\Success;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -101,7 +102,12 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        dd($request);
+        foreach ($request->image_id as $image) {
+            $id = $image;
+            $ids[] = explode(',', $id);
+        }
+        // dd($ids);
+        // dd($request->toArray());
 
         try {
 
@@ -124,21 +130,30 @@ class ProductController extends Controller
             DB::beginTransaction();
             $product->update($products);
 
-            $images = ProductImage::where('product_id', $product->id)->get();
-            // dd($images, $request->file('images'));
-            if (count($request->file('images')) > 0) {
+            if (isset($request->images) && count($request->file('images')) > 0) {
                 foreach ($request->file('images') as $key => $file) {
                     $image = store_image($file, 'products/images');
                     if ($image != null) {
                         $productimage[] = [
-                            // $images['product_id'] => $product->id,
-                            $images['file_name'] => $image['name'],
-                            $images['file_url'] => $image['url'],
+                            'product_id' => $product->id,
+                            'file_name' => $image['name'],
+                            'file_url' => $image['url'],
                         ];
                     }
-                    $images->update($productimage);
+                }
+                ProductImage::insert($productimage);
+            }
+
+            // $images = ProductImage::where('product_id', $product->id)->get();
+
+            foreach ($ids as $id) {
+                foreach ($id as $id) {
+                    $image = ProductImage::where('id', $id)->first();
+                    Storage::disk('public')->delete('products/images', $image->file_url);
+                    $image->delete();
                 }
             }
+            // dd($images, $request->file('images'));
 
 
             DB::commit();

@@ -13,7 +13,8 @@
                             <x-alert-component />
 
                             <div class="card-body">
-                                <form id="cms" enctype="multipart/form-data" method="post">
+                                <form id="cms" action="{{ route('admin.cms.update', [$page->id]) }}"
+                                    enctype="multipart/form-data" method="post">
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-6">
@@ -130,33 +131,33 @@
 @push('scripts')
     @includeFirst(['validation.js_cms'])
     <script>
-        jQuery(document).ready(function() {
-            jQuery('#submit').click(function(e) {
-                e.preventDefault();
-                if (jQuery('#cms').valid()) {
-                    var formData = new FormData($('form#cms').get(0));
-                    url = "{{ route('admin.cms.update', [$page->id]) }}";
-                    var response = ajaxCall(url, 'post', formData);
-                    response.then(editCmsPage).catch(editCmsPageError)
+        // jQuery(document).ready(function() {
+        //     jQuery('#submit').click(function(e) {
+        //         e.preventDefault();
+        //         if (jQuery('#cms').valid()) {
+        //             var formData = new FormData($('form#cms').get(0));
+        //             url = "{{ route('admin.cms.update', [$page->id]) }}";
+        //             var response = ajaxCall(url, 'post', formData);
+        //             response.then(editCmsPage).catch(editCmsPageError)
 
-                    function editCmsPage(response) {
-                        if (response.success == true) {
-                            if (response.url) {
-                                window.location.replace(response.url);
-                            }
-                        } else if (response.success == false) {
-                            return iziToast.error({
-                                message: response.msg,
-                                position: 'topRight'
-                            });
-                        }
-                    }
+        //             function editCmsPage(response) {
+        //                 if (response.success == true) {
+        //                     if (response.url) {
+        //                         window.location.replace(response.url);
+        //                     }
+        //                 } else if (response.success == false) {
+        //                     return iziToast.error({
+        //                         message: response.msg,
+        //                         position: 'topRight'
+        //                     });
+        //                 }
+        //             }
 
-                    function editCmsPageError(error) {
-                        console.log('error', error)
-                    }
-                }
-            });
-        });
+        //             function editCmsPageError(error) {
+        //                 console.log('error', error)
+        //             }
+        //         }
+        //     });
+        // });
     </script>
 @endpush
