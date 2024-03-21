@@ -218,10 +218,16 @@
                                                                                     <label for="">Password</label>
                                                                                     <div class="form-field">
                                                                                         <input type="password"
+                                                                                            id="manager_confirm_password"
                                                                                             name="password"
-                                                                                            class="form-control"
+                                                                                            class="form-control @error('password') is-invalid @enderror"
                                                                                             placeholder="Password">
-
+                                                                                        @error('password')
+                                                                                            <span class="invalid-feedback"
+                                                                                                role="alert">
+                                                                                                <strong>{{ $message }}</strong>
+                                                                                            </span>
+                                                                                        @enderror
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -232,9 +238,14 @@
                                                                                     <div class="form-field">
                                                                                         <input type="password"
                                                                                             name="confirm_password"
-                                                                                            class="form-control"
+                                                                                            class="form-control @error('confirm_password') is-invalid @enderror"
                                                                                             placeholder="Confirm Password">
-
+                                                                                        @error('confirm_password')
+                                                                                            <span class="invalid-feedback"
+                                                                                                role="alert">
+                                                                                                <strong>{{ $message }}</strong>
+                                                                                            </span>
+                                                                                        @enderror
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -248,10 +259,6 @@
                                                                     </form>
                                                                 </div>
                                                             </div>
-                                                            <!-- <div class="modal-footer">
-                                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                  <button type="button" class="btn btn-primary">Save changes</button>
-                                                </div> -->
                                                         </div>
                                                     </div>
                                                 </div>

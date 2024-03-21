@@ -9,7 +9,7 @@
                             <x-alert-component />
 
                             <div class="card-body">
-                                <form id="productupdate" action="{{ route('dealer.products.update', $product->id) }}"
+                                <form id="product" action="{{ route('dealer.products.update', $product->id) }}"
                                     enctype="multipart/form-data" method="post">
                                     @csrf
                                     <div class="row">
@@ -106,12 +106,15 @@
                                                         mixlength="5">
                                                     <input type="hidden" name="total-img-preview" id="total-img-preview"
                                                         value={{ count($product->productImage) }}>
+                                                    <input type="hidden" name="image_id[]" value="imageid[]"
+                                                        id="get_image_id">
 
                                                 </label>
                                                 <div class="pre-upload-img-preview">
                                                     @foreach ($product->productImage as $image)
                                                         <div class="upload-img-box">
-                                                            <img src="{{ Storage::url($image->file_url) }}" alt="img"
+                                                            <img src="{{ Storage::url($image->file_url) }}"
+                                                                class="uploadedimage" alt="img"
                                                                 img-id="{{ $image->id }}" height="100px" width="75px">
                                                             <div class="upload-img-cross">
                                                                 <i class="fa-regular fa-circle-xmark remove_uploaded"></i>
@@ -277,6 +280,7 @@
 @endsection
 
 @push('scripts')
+    @includeFirst(['validation.dealer.js_product'])
     <script>
         jQuery(document).on('change', ".category", function() {
             var id = $(this).val();
@@ -321,11 +325,18 @@
                 previewImages(this, 'div.upload-img-preview');
             });
 
+            var getid = []
             $(document).on('click', '.remove_uploaded', function() {
                 var total_img = parseInt($('#total-img-preview').val())
                 if (total_img > 5) {
                     $(this).parent('div').parent('div').remove();
                     $('#total-img-preview').val(total_img - 1)
+
+
+                    getimgid = $(this).parent().prev().attr('img-id')
+                    getid.push(getimgid)
+                    console.log(getid, $.type(getid), "again check");
+                    $('#get_image_id').val(getid);
                 } else {
                     return iziToast.error({
                         message: "bsdk phle img dal",
