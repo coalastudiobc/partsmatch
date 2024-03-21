@@ -115,147 +115,139 @@
 
                                                 </label>
                                                 <div class="pre-upload-img-preview">
-                                                    <div class="pre-upload-img-preview">
-                                                        @foreach ($product->productImage as $image)
-                                                            <div class="upload-img-box">
-                                                                <img src="{{ Storage::url($image->file_url) }}"
-                                                                    alt="img" img-id="{{ $image->id }}"
-                                                                    height="100px" width="75px">
-                                                                <img src="{{ Storage::url($image->file_url) }}"
-                                                                    class="uploadedimage" alt="img"
-                                                                    img-id="{{ $image->id }}" height="100px"
-                                                                    width="75px">
-                                                                <div class="upload-img-cross">
-                                                                    <i
-                                                                        class="fa-regular fa-circle-xmark remove_uploaded"></i>
-                                                                </div>
+                                                    @foreach ($product->productImage as $image)
+                                                        <div class="upload-img-box">
+                                                            <img src="{{ Storage::url($image->file_url) }}" alt="img"
+                                                                img-id="{{ $image->id }}" height="100px" width="75px">
+                                                            <div class="upload-img-cross">
+                                                                <i class="fa-regular fa-circle-xmark remove_uploaded"></i>
                                                             </div>
-                                                        @endforeach
+                                                        </div>
+                                                    @endforeach
 
-                                                    </div>
-                                                    <div class="upload-img-preview"></div>
-                                                    <div class="upload-img-preview"></div>
+                                                </div>
+                                                <div class="upload-img-preview"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="">Product Quantity</label>
+                                                <div class="form-field">
+                                                    <input type="text" name="stocks_avaliable"
+                                                        class="form-control @error('quantity') is-invalid @enderror"
+                                                        value="{{ old('stocks_avaliable', $product->stocks_avaliable) }}">
+                                                    @error('stocks_avaliable')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="">Product Quantity</label>
-                                                    <div class="form-field">
-                                                        <input type="text" name="stocks_avaliable"
-                                                            class="form-control @error('quantity') is-invalid @enderror"
-                                                            value="{{ old('stocks_avaliable', $product->stocks_avaliable) }}">
-                                                        @error('stocks_avaliable')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
-                                                        @enderror
-                                                    </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="">Product Price</label>
+                                                <div class="form-field">
+                                                    <input type="text" name="price"
+                                                        class="form-control @error('price') is-invalid @enderror"
+                                                        value="{{ old('price', $product->price) }}">
+                                                    @error('price')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="">Product Price</label>
-                                                    <div class="form-field">
-                                                        <input type="text" name="price"
-                                                            class="form-control @error('price') is-invalid @enderror"
-                                                            value="{{ old('price', $product->price) }}">
-                                                        @error('price')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        </div>
 
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="">Shipping Price</label>
-                                                    <div class="form-field">
-                                                        <input type="text" name="shipping_price"
-                                                            class="form-control @error('shipping_price') is-invalid @enderror"
-                                                            value="{{ old('shipping_price', $product->shipping_price) }}">
-                                                        @error('shipping_price')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
-                                                        @enderror
-                                                    </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="">Shipping Price</label>
+                                                <div class="form-field">
+                                                    <input type="text" name="shipping_price"
+                                                        class="form-control @error('shipping_price') is-invalid @enderror"
+                                                        value="{{ old('shipping_price', $product->shipping_price) }}">
+                                                    @error('shipping_price')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="">Model</label>
-                                                    <div class="form-field">
-                                                        <select class="form-control api_call" name="car_years"
-                                                            id="car-years"></select>
-                                                        {{-- <select class="form-control" name="Select your country"
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="">Model</label>
+                                                <div class="form-field">
+                                                    <select class="form-control api_call" name="car_years"
+                                                        id="car-years"></select>
+                                                    {{-- <select class="form-control" name="Select your country"
                                                             id="Select your country">
                                                             <option>Select your model</option>
                                                             <option value="model1">Model1</option>
                                                             <option value="model2">Model2</option>
                                                             <option value="model3">Model3</option>
                                                         </select> --}}
-                                                        <span class="form-icon">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="14"
-                                                                height="8" viewBox="0 0 14 8" fill="none">
-                                                                <path d="M13 1L7 7L1 1" stroke="#272643" stroke-width="2"
-                                                                    stroke-miterlimit="10" stroke-linecap="round"
-                                                                    stroke-linejoin="round"></path>
-                                                            </svg>
-                                                        </span>
-                                                    </div>
+                                                    <span class="form-icon">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="14"
+                                                            height="8" viewBox="0 0 14 8" fill="none">
+                                                            <path d="M13 1L7 7L1 1" stroke="#272643" stroke-width="2"
+                                                                stroke-miterlimit="10" stroke-linecap="round"
+                                                                stroke-linejoin="round"></path>
+                                                        </svg>
+                                                    </span>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="">Brand</label>
-                                                    <div class="form-field">
-                                                        <select class="form-control api_call" name="car_makes"
-                                                            id="car-makes"></select>
-                                                        {{-- <select class="form-control" name="Select your country"
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="">Brand</label>
+                                                <div class="form-field">
+                                                    <select class="form-control api_call" name="car_makes"
+                                                        id="car-makes"></select>
+                                                    {{-- <select class="form-control" name="Select your country"
                                                             id="Select your country">
                                                             <option>Select your country</option>
                                                             <option value="brand1">Brand1</option>
                                                             <option value="brand2">Brand2</option>
                                                             <option value="brand3">brand3</option>
                                                         </select> --}}
-                                                        <span class="form-icon">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="14"
-                                                                height="8" viewBox="0 0 14 8" fill="none">
-                                                                <path d="M13 1L7 7L1 1" stroke="#272643" stroke-width="2"
-                                                                    stroke-miterlimit="10" stroke-linecap="round"
-                                                                    stroke-linejoin="round"></path>
-                                                            </svg>
-                                                        </span>
-                                                    </div>
+                                                    <span class="form-icon">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="14"
+                                                            height="8" viewBox="0 0 14 8" fill="none">
+                                                            <path d="M13 1L7 7L1 1" stroke="#272643" stroke-width="2"
+                                                                stroke-miterlimit="10" stroke-linecap="round"
+                                                                stroke-linejoin="round"></path>
+                                                        </svg>
+                                                    </span>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="">Make</label>
-                                                    <div class="form-field">
-                                                        <select class="form-control api_call" name="car_models"
-                                                            id="car-models"></select>
-                                                        {{-- <select class="form-control" name="Select your country"
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="">Make</label>
+                                                <div class="form-field">
+                                                    <select class="form-control api_call" name="car_models"
+                                                        id="car-models"></select>
+                                                    {{-- <select class="form-control" name="Select your country"
                                                             id="Select your country">
                                                             <option>Select your make</option>
                                                             <option value="make1">Make1</option>
                                                             <option value="make2">Make2</option>
                                                             <option value="make3">make3</option>
                                                         </select> --}}
-                                                        <span class="form-icon">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="14"
-                                                                height="8" viewBox="0 0 14 8" fill="none">
-                                                                <path d="M13 1L7 7L1 1" stroke="#272643" stroke-width="2"
-                                                                    stroke-miterlimit="10" stroke-linecap="round"
-                                                                    stroke-linejoin="round"></path>
-                                                            </svg>
-                                                        </span>
-                                                    </div>
+                                                    <span class="form-icon">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="14"
+                                                            height="8" viewBox="0 0 14 8" fill="none">
+                                                            <path d="M13 1L7 7L1 1" stroke="#272643" stroke-width="2"
+                                                                stroke-miterlimit="10" stroke-linecap="round"
+                                                                stroke-linejoin="round"></path>
+                                                        </svg>
+                                                    </span>
                                                 </div>
                                             </div>
-                                            {{-- <div class="col-md-6">
+                                        </div>
+                                        {{-- <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="">Image</label>
                                                 <div class="form-field">
@@ -270,15 +262,15 @@
                                             </div>
                                         </div> --}}
 
-                                            <div class="col-md-6">
-                                                <a href="{{ route('dealer.products.index') }}"
-                                                    class="btn secondary-btn full-btn mr-1">Back</a>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <button class="btn primary-btn full-btn mr-1" id="submit"
-                                                    type="submit">Submit</button>
-                                            </div>
+                                        <div class="col-md-6">
+                                            <a href="{{ route('dealer.products.index') }}"
+                                                class="btn secondary-btn full-btn mr-1">Back</a>
                                         </div>
+                                        <div class="col-md-6">
+                                            <button class="btn primary-btn full-btn mr-1" id="submit"
+                                                type="submit">Submit</button>
+                                        </div>
+                                    </div>
                                 </form>
 
                             </div>
