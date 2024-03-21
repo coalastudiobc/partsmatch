@@ -1292,14 +1292,16 @@ button.btn-close {
     color: #C8C9D8;
 }
 
-.upload-img-preview {
+.upload-img-preview,
+.pre-upload-img-preview {
     display: flex;
     gap: 10px;
     align-items: center;
     flex-wrap: wrap;
 }
 
-.upload-img-preview img {
+.upload-img-preview img,
+.pre-upload-img-preview img {
     width: 80px;
     height: 100px;
     object-fit: cover;

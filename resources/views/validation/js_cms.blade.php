@@ -33,10 +33,11 @@
             status: {
                 required: true,
             },
-            image: {
-                // filesize: profilePicSize,
-                // extension: profilePicMimes
-            }
+            // image: {
+            //     required: true
+            //     // filesize: profilePicSize,
+            //     // extension: profilePicMimes
+            // }
 
         }
         const messages = {
@@ -72,10 +73,9 @@
             status: {
                 required: `{{ __('customvalidation.cms.status.required') }}`,
             },
-            image: {
-                filesize: `{{ __('customvalidation.cms.image.size', ['min' => '${profilePicSize}']) }}`,
-                extension: `{{ __('customvalidation.cms.image.mimes', ['mime' => '${profilePicMimes}']) }}`
-            },
+            // image: {
+            //     required: `{{ __('customvalidation.cms.image.required') }}`
+            // },
         };
 
         handleValidation('cms', rules, messages);

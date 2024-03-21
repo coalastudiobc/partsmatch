@@ -1,6 +1,5 @@
 <script>
     jQuery(document).ready(function() {
-        console.log("hwrerere");
         const rules = {
             name: {
                 required: true,

@@ -251,6 +251,7 @@ return [
 
         ],
         'profile_pic' => [
+            'required' => 'Image is required',
             'size' => 'File size should not be greater than :min MB',
             'mimes' => 'Supported only JPEG, JPG, PNG file type',
             'file' => 'filenot supported',
@@ -267,6 +268,32 @@ return [
             'required' => 'Please check terms & condition',
         ],
 
+    ],
+    'product' => [
+        'name' => [
+            'required' => 'Please enter product Name',
+        ],
+        'category' => [
+            'required' => 'Please enter product Category',
+        ],
+        'subcategory' => [
+            'required' => 'Please enter product Subcategory',
+        ],
+        'description' => [
+            'required' => 'Please enter product Description',
+        ],
+        'images' => [
+            'required' => 'Please enter product Images',
+        ],
+        'stocks_avaliable' => [
+            'required' => 'Please enter product Stock',
+        ],
+        'price' => [
+            'required' => 'Please enter product Price',
+        ],
+        'shipping_price' => [
+            'required' => 'Please enter product Shipping price',
+        ],
     ],
 
     'media' => [

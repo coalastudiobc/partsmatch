@@ -24,7 +24,6 @@ Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer'
         Route::get('/products/delete/{product}', [ProductController::class, 'destroy'])->name('delete');
         Route::get('/products/subcategory/{id}', [ProductController::class, 'subcategory'])->name('subcategory');
     });
-
     Route::name('partsmanager.')->group(function () {
         Route::get('parts/manager/index', [PartsManagerController::class, 'index'])->name('index');
         Route::post('parts/manager/store', [PartsManagerController::class, 'store'])->name('store');
