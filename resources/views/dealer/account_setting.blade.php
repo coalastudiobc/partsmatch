@@ -77,7 +77,7 @@
                                                 <label for="">Email ID or Phone Number</label>
                                                 <div class="form-field">
                                                     <input type="email" name="email"
-                                                        value="{{ old('name', $user->email ?? $user->email) }}"
+                                                        value="{{ old('email', $user->email ?? $user->email) }}"
                                                         class="form-control @error('email') is-invalid @enderror disabled-inputs"
                                                         disabled placeholder="Email">
                                                     @error('email')
@@ -99,19 +99,50 @@
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="">Phone number</label>
+                                                <div class="form-field">
+                                                    <input type="text" name="phone_number" disabled
+                                                        class="form-control @error('phone_number') is-invalid @enderror disabled-inputs"
+                                                        value="{{ old('phone_number', $user->phone_number ?? $user->phone_number) }}"
+                                                        placeholder="Phone number">
+                                                    @error('phone_number')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                    <div class="input-icon">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="12"
+                                                            height="15" viewBox="0 0 12 15" fill="none">
+                                                            <path
+                                                                d="M5.89286 15C6.01369 14.9993 6.13075 14.9578 6.225 14.8821C6.42857 14.7 11.7857 10.3821 11.7857 5.89286C11.7857 4.32997 11.1649 2.8311 10.0597 1.72598C8.95461 0.620853 7.45574 0 5.89286 0C4.32997 0 2.8311 0.620853 1.72598 1.72598C0.620853 2.8311 0 4.32997 0 5.89286C0 10.3821 5.35714 14.7 5.56071 14.8821C5.65497 14.9578 5.77202 14.9993 5.89286 15ZM1.07143 5.89286C1.07143 4.61413 1.5794 3.38779 2.48359 2.48359C3.38779 1.5794 4.61413 1.07143 5.89286 1.07143C7.17158 1.07143 8.39793 1.5794 9.30212 2.48359C10.2063 3.38779 10.7143 4.61413 10.7143 5.89286C10.7143 9.26786 7.03393 12.7554 5.89286 13.7625C4.75179 12.7554 1.07143 9.26786 1.07143 5.89286Z"
+                                                                fill="#727272" />
+                                                            <path
+                                                                d="M8.57199 5.89305C8.57199 5.36328 8.41489 4.8454 8.12057 4.40492C7.82624 3.96443 7.40791 3.62111 6.91846 3.41837C6.42902 3.21564 5.89045 3.16259 5.37085 3.26595C4.85126 3.3693 4.37399 3.62441 3.99938 3.99901C3.62478 4.37362 3.36967 4.8509 3.26631 5.37049C3.16296 5.89008 3.216 6.42865 3.41874 6.9181C3.62147 7.40754 3.96479 7.82588 4.40528 8.1202C4.84577 8.41453 5.36365 8.57162 5.89342 8.57162C6.60382 8.57162 7.28512 8.28942 7.78745 7.78709C8.28978 7.28476 8.57199 6.60345 8.57199 5.89305ZM4.28627 5.89305C4.28627 5.57519 4.38053 5.26446 4.55713 5.00017C4.73372 4.73588 4.98472 4.52988 5.27839 4.40824C5.57206 4.2866 5.8952 4.25478 6.20696 4.31679C6.51871 4.3788 6.80508 4.53187 7.02984 4.75663C7.2546 4.98139 7.40767 5.26776 7.46968 5.57951C7.53169 5.89127 7.49986 6.21441 7.37822 6.50808C7.25658 6.80174 7.05059 7.05275 6.7863 7.22934C6.522 7.40594 6.21128 7.50019 5.89342 7.50019C5.46718 7.50019 5.05839 7.33087 4.75699 7.02947C4.4556 6.72807 4.28627 6.31929 4.28627 5.89305Z"
+                                                                fill="#727272" />
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="">Industry</label>
                                                 <div class="form-field">
                                                     <!-- <input type="text" class="form-control" placeholder="Select industry"> -->
                                                     <select name="industry_type" id="industury"
-                                                        value="{{ old('name', $user->industry_type ?? $user->industry_type) }}"
+                                                        value="{{ old('industury', $user->industry_type ?? $user->industry_type) }}"
                                                         disabled
                                                         class="form-control @error('industry_type') is-invalid @enderror disabled-inputs">
-                                                        <option value="volvo">Automobile</option>
-                                                        <option value="saab">Automobile</option>
-                                                        <option value="opel">Automobile</option>
-                                                        <option value="audi">Automobile</option>
+                                                        <option value="volvo">{{ $user->industry_type }}</option>
+                                                        <option value="saab">Volvo</option>
+                                                        <option value="saab">Saab</option>
+                                                        <option value="opel">Opel</option>
+                                                        <option value="audi">Audi</option>
+
+
                                                     </select>
                                                     @error('industry_type')
                                                         <span class="invalid-feedback" role="alert">
@@ -127,9 +158,36 @@
                                                 <div class="form-field">
                                                     <input type="text" name="address" disabled
                                                         class="form-control @error('address') is-invalid @enderror disabled-inputs"
-                                                        value="{{ old('name', $user->address ?? $user->address) }}"
+                                                        value="{{ old('address', $user->address ?? $user->address) }}"
                                                         placeholder="Complete address">
                                                     @error('address')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                    <div class="input-icon">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="12"
+                                                            height="15" viewBox="0 0 12 15" fill="none">
+                                                            <path
+                                                                d="M5.89286 15C6.01369 14.9993 6.13075 14.9578 6.225 14.8821C6.42857 14.7 11.7857 10.3821 11.7857 5.89286C11.7857 4.32997 11.1649 2.8311 10.0597 1.72598C8.95461 0.620853 7.45574 0 5.89286 0C4.32997 0 2.8311 0.620853 1.72598 1.72598C0.620853 2.8311 0 4.32997 0 5.89286C0 10.3821 5.35714 14.7 5.56071 14.8821C5.65497 14.9578 5.77202 14.9993 5.89286 15ZM1.07143 5.89286C1.07143 4.61413 1.5794 3.38779 2.48359 2.48359C3.38779 1.5794 4.61413 1.07143 5.89286 1.07143C7.17158 1.07143 8.39793 1.5794 9.30212 2.48359C10.2063 3.38779 10.7143 4.61413 10.7143 5.89286C10.7143 9.26786 7.03393 12.7554 5.89286 13.7625C4.75179 12.7554 1.07143 9.26786 1.07143 5.89286Z"
+                                                                fill="#727272" />
+                                                            <path
+                                                                d="M8.57199 5.89305C8.57199 5.36328 8.41489 4.8454 8.12057 4.40492C7.82624 3.96443 7.40791 3.62111 6.91846 3.41837C6.42902 3.21564 5.89045 3.16259 5.37085 3.26595C4.85126 3.3693 4.37399 3.62441 3.99938 3.99901C3.62478 4.37362 3.36967 4.8509 3.26631 5.37049C3.16296 5.89008 3.216 6.42865 3.41874 6.9181C3.62147 7.40754 3.96479 7.82588 4.40528 8.1202C4.84577 8.41453 5.36365 8.57162 5.89342 8.57162C6.60382 8.57162 7.28512 8.28942 7.78745 7.78709C8.28978 7.28476 8.57199 6.60345 8.57199 5.89305ZM4.28627 5.89305C4.28627 5.57519 4.38053 5.26446 4.55713 5.00017C4.73372 4.73588 4.98472 4.52988 5.27839 4.40824C5.57206 4.2866 5.8952 4.25478 6.20696 4.31679C6.51871 4.3788 6.80508 4.53187 7.02984 4.75663C7.2546 4.98139 7.40767 5.26776 7.46968 5.57951C7.53169 5.89127 7.49986 6.21441 7.37822 6.50808C7.25658 6.80174 7.05059 7.05275 6.7863 7.22934C6.522 7.40594 6.21128 7.50019 5.89342 7.50019C5.46718 7.50019 5.05839 7.33087 4.75699 7.02947C4.4556 6.72807 4.28627 6.31929 4.28627 5.89305Z"
+                                                                fill="#727272" />
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="">zipcode</label>
+                                                <div class="form-field">
+                                                    <input type="text" name="zipcode" disabled
+                                                        class="form-control @error('zipcode') is-invalid @enderror disabled-inputs"
+                                                        value="{{ old('zipcode', $user->zipcode ?? $user->zipcode) }}"
+                                                        placeholder="zip code">
+                                                    @error('zipcode')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
@@ -174,7 +232,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-5">
+                    {{-- <div class="col-md-5">
                         <div class="cstm-card banking-detail-card">
                             <div class="bank-img-txt">
                                 <img src="images/banking-img.png" alt="">
@@ -268,7 +326,7 @@
                                 <a href="#"><i class="fa-solid fa-pen-to-square" style="color: #3EBE62;"></i></a>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
 
             </div>
@@ -296,7 +354,7 @@
                                     <div class="form-field">
                                         <input type="password" name="old_password"
                                             class="form-control @error('old_password') is-invalid @enderror"
-                                            placeholder="**************************">
+                                            placeholder="">
                                         @error('old_password')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -322,9 +380,9 @@
                                 <div class="form-group">
                                     <label for="">New Password</label>
                                     <div class="form-field">
-                                        <input type="password" name="password"
+                                        <input type="password" id="cpassword" name="password"
                                             class="form-control @error('password') is-invalid @enderror"
-                                            placeholder="**************************">
+                                            placeholder="">
                                         @error('password')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -352,7 +410,7 @@
                                     <div class="form-field">
                                         <input type="password" name="confirm_password"
                                             class="form-control @error('confirm_password') is-invalid @enderror"
-                                            placeholder="**************************">
+                                            placeholder="">
                                         @error('confirm_password')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>

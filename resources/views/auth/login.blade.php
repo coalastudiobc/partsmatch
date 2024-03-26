@@ -18,9 +18,8 @@
                             <div class="form-group">
                                 <label for="">Email or Phone Number</label>
                                 <div class="form-field">
-                                    <input id="email" 
-                                        class="form-control @error('email') is-invalid @enderror" name="email"
-                                        value="{{ old('email') }}" autocomplete="email" autofocus
+                                    <input id="email" class="form-control @error('email') is-invalid @enderror"
+                                        name="email" value="{{ old('email') }}" autocomplete="email" autofocus
                                         placeholder="Enter email or phone number">
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
@@ -46,13 +45,15 @@
                                     <input id="password" type="password"
                                         class="form-control @error('password') is-invalid @enderror" name="password"
                                         autocomplete="current-password" placeholder="Enter your password">
-
+                                    <span class="input-icon toggle-password">
+                                        <i style="color: #9f9f9f;" class="fas fa-eye"></i>
+                                    </span>
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
                                             {{ $message }}
                                         </span>
                                     @enderror
-                                    <div class="input-icon eye-icon">
+                                    {{-- <div class="input-icon eye-icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="19"
                                             viewBox="0 0 26 19" fill="none">
                                             <g clip-path="url(#clip0_47_6228)">
@@ -71,14 +72,14 @@
                                                 </clipPath>
                                             </defs>
                                         </svg>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                             <a href="{{ route('password.request') }}" class="forgot-password">Forgot Password</a>
                             <button type="submit" class="btn secondary-btn full-btn">Log in</button>
                             <div class="sign-up-link-box">
                                 <p>Don’t have an account?</p>
-                                <a href="#">Sign Up</a>
+                                <a href="{{ route('register') }}">Sign Up</a>
                             </div>
                         </form>
                     </div>
@@ -93,4 +94,15 @@
 @push('scripts')
     @includeFirst(['validation'])
     @includeFirst(['validation.js_login'])
+    @includeFirst(['validation.js_show_password'])
+    @if (session()->has('status') && session()->get('status') == 'restricted')
+        <script>
+            $(document).ready(function() {
+                return iziToast.error({
+                    message: "{{ session()->get('msg') }}",
+                    position: 'topRight'
+                });
+            });
+        </script>
+    @endif
 @endpush

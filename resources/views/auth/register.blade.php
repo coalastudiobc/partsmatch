@@ -2,9 +2,9 @@
 @section('title', 'register')
 
 @section('content')
-    @if ($errors->any())
+    {{-- @if ($errors->any())
         {{ implode('', $errors->all('<div>:message</div>')) }}
-    @endif
+    @endif --}}
     <div class="signup-sec">
         <div class="container">
             <div class="signup-wrapper">

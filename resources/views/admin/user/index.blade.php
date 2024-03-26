@@ -87,7 +87,7 @@
                 </table>
             </div>
         </div>
-        <div class="pagination-wrapper">
+        {{-- <div class="pagination-wrapper">
             <div class="pagination-boxes">
                 <div class="pagination-box">
                     <i class="fa-solid fa-angle-left"></i>
@@ -111,7 +111,7 @@
                     <i class="fa-solid fa-angle-right"></i>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 
 @endsection

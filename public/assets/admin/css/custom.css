@@ -454,10 +454,16 @@
 .analyics-tabs-btns.active .analyics-tabs-name span svg path,
 .analyics-tabs-btns:hover .analyics-tabs-name span svg path {
     fill: var(--white);
+
 }
 
 .analyics-tabs-btns.active .analyics-tabs-name span svg g,
 .analyics-tabs-btns:hover .analyics-tabs-name span svg g {
+    opacity: 1;
+}
+
+.analyics-tabs-btns.active .analyics-tabs-name span svg,
+.analyics-tabs-btns:hover .analyics-tabs-name span svg {
     opacity: 1;
 }
 

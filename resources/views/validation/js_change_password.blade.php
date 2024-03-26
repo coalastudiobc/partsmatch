@@ -17,7 +17,7 @@
             },
             confirm_password: {
                 required: true,
-                equalTo: "#cpassword"
+                // equalTo: "#cpassword"
             },
         }
         const messages = {

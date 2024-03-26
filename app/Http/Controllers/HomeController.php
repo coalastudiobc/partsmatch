@@ -85,6 +85,7 @@ class HomeController extends Controller
                 return response()->json(['status' => 'error', 'message' => 'status' . ' has not been updated.'], 400);
             }
         } catch (\Exception $e) {
+            dd('herererror');
             return response()->json(['status' => 'error', 'message' => $e->getMessage()], 400);
         }
     }

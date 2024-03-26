@@ -6,7 +6,7 @@
 @section('content')
 
     <div class="dashboard-right-box">
-        <h2>User</h2>
+        <h2>CMS</h2>
         <div class="product-detail-table cms-list-table">
             <div class="table-responsive">
                 <table class="table">
@@ -55,10 +55,11 @@
                                     {{-- <span class="custom-switch-indicator"></span> --}}
                                 </p>
                                 <div class="toggle-btn">
-                                    <input type="checkbox" id="switch10" class="custom-switch-input"
+                                    <input type="checkbox" id="switch10{{ $page->id }}" class="custom-switch-input"
                                         @if ($page->status == '1') checked="checked" @endif
                                         onchange="toggleStatus(this, 'CmsPage', '{{ $page->id }}');"
-                                        url="{{ route('cms.status') }}"><label for="switch10">Toggle</label>
+                                        url="{{ route('cms.status') }}"><label
+                                        for="switch10{{ $page->id }}">Toggle</label>
                                 </div>
 
                             </td>
@@ -87,7 +88,7 @@
                 </table>
             </div>
         </div>
-        <div class="pagination-wrapper">
+        {{-- <div class="pagination-wrapper">
             <div class="pagination-boxes">
                 <div class="pagination-box">
                     <i class="fa-solid fa-angle-left"></i>
@@ -111,7 +112,7 @@
                     <i class="fa-solid fa-angle-right"></i>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 
 @endsection

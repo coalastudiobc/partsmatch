@@ -23,10 +23,10 @@
 
                                                 <div class="form-group">
                                                     <label for="">Parent Category</label>
+
                                                     <select name="main_category"
                                                         class="form-control @error('main_category') is-invalid @enderror">
                                                         <option value="">Select </option>
-
                                                         @foreach ($selective as $categories)
                                                             @if ($category->id == $categories->id)
                                                                 @continue
