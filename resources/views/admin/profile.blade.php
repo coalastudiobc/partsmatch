@@ -59,7 +59,7 @@
                                         <div class="form-field">
                                             <input type="tel" name="phone_number" class="form-control disabled-inputs"
                                                 placeholder="Enter phone number" name="phone_number" disabled
-                                                value="{{ old('phone_number', $authUser->phonr_number) }}">
+                                                value="{{ old('phone_number', $authUser->phone_number) }}">
 
                                         </div>
                                     </div>
@@ -69,7 +69,7 @@
                                     <div class="form-group">
                                         <label for="">Password</label>
                                         <div class="form-field">
-                                            <input type="tel" name="password" class="form-control disabled-inputs"
+                                            <input type="password" name="password" class="form-control disabled-inputs"
                                                 placeholder="*********" disabled value="{{ old('password') }}">
 
                                         </div>
@@ -79,7 +79,7 @@
                                     <div class="form-group">
                                         <label for="">Confirm password</label>
                                         <div class="form-field">
-                                            <input type="tel" name="confirm_password"
+                                            <input type="password" name="confirm_password"
                                                 class="form-control disabled-inputs" placeholder="*********" disabled
                                                 value="{{ old('confirm_password') }}">
 

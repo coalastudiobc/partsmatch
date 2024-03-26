@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="{{ asset('assets/admin/css/custom.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/admin/css/login-register.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/admin/css/responsive.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/admin/css/iziToast.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/admin/css/toaster.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/admin/css/slick.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/admin/css/slick-theme.css') }}">
 
@@ -57,7 +59,7 @@
                                                     <ul class="dropdown-menu">
                                                         <li><a class="dropdown-item"
                                                                 href="{{ route('admin.profile.view') }}">Profile</a></li>
-                                                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                                                        {{-- <li><a class="dropdown-item" href="#">Another action</a></li> --}}
                                                         <li><a class="dropdown-item" href="{{ route('logout') }}">
                                                                 Logout
                                                             </a>
@@ -115,6 +117,8 @@
     <script src="{{ asset('assets/admin/js/daterangepicker.js') }}"></script>
     <script src="{{ asset('assets/admin/js/slick.js') }}"></script>
     <script src="{{ asset('assets/admin/js/validate.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/iziToast.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/toaster.min.js') }}"></script>
     <script src="{{ asset('assets/admin/js/custom.js') }}"></script>
     <script src="{{ asset('assets/admin/js/common.js') }}?ver={{ now() }}"></script>
     @stack('scripts')
