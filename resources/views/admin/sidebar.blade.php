@@ -123,6 +123,7 @@
                                             </span>
 
                                             <h4>Dealers</h4>
+                                            <h4>Dealers</h4>
 
                                         </div>
                                         {{-- <p class="analyics-tabs-num">200</p> --}}
@@ -205,6 +206,7 @@
                 <li class="analyics-tabs-list">
 
                     {{-- <div class="accordion accordion-flush" id="accordionFlushExample">
+                    {{-- <div class="accordion accordion-flush" id="accordionFlushExample">
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="flush-headingOne">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -277,11 +279,7 @@
                                     </a>
                                 </button>
                             </h2>
-<<<<<<< HEAD
                            
-=======
-
->>>>>>> 29452a88d09b112fef4493834e065711e217f768
                         </div>
                     </div> --}}
                 </li>
