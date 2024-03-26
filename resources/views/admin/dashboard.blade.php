@@ -12,7 +12,7 @@
 
                      <div class="card-body">
                          <div class="fillter-mainbox">
-                             <div class="form-group date-picker-group">
+                             {{-- <div class="form-group date-picker-group">
                                  <div class="formfield">
                                      <input type="text" id="email" class="form-control " name="email"
                                          placeholder="03/12/2024 - 03/12/2024" value="">
@@ -29,9 +29,9 @@
                                      </span>
                                  </div>
 
-                             </div>
+                             </div> --}}
 
-                             <button type="button" class="btn primary-btn filter">
+                             {{-- <button type="button" class="btn primary-btn filter">
                                  <svg class="mr-2" width="19" height="15" viewBox="0 0 19 15" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
                                      <path
@@ -45,7 +45,7 @@
                                          fill="CurrentColor"></path>
                                  </svg>Apply
                              </button>
-                             <button type="button" class="btn secondary-btn clear">Clear Filter</button>
+                             <button type="button" class="btn secondary-btn clear">Clear Filter</button> --}}
                          </div>
                          <div class="card-box">
                              <div class="row g-5">
