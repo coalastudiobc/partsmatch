@@ -7,9 +7,6 @@ use App\Http\Controllers\Dealer\PartsManagerController;
 use App\Http\Controllers\Dealer\ProductController;
 use Illuminate\Support\Facades\Route;
 
-<<<<<<< HEAD
-Route::get('/products/status', [App\Http\Controllers\HomeController::class, 'togglestatus'])->name('dealer.products.status');
-=======
 Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/products/status', [App\Http\Controllers\HomeController::class, 'togglestatus'])->name('dealer.products.status');
@@ -17,7 +14,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // cms page
     Route::get('view/{slug}', [CmsManagementController::class, 'cms'])->name('view');
 });
->>>>>>> 29452a88d09b112fef4493834e065711e217f768
 Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer')->name('dealer.')->group(function () {
     Route::get('/dashboard', [DealerController::class, 'dashboard'])->name('dashboard');
     Route::get('/profile', [AccountSettingController::class, 'profile'])->name('profile');
