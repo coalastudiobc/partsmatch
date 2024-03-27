@@ -123,8 +123,6 @@
                                             </span>
 
                                             <h4>Dealers</h4>
-                                            <h4>Dealers</h4>
-
                                         </div>
                                         {{-- <p class="analyics-tabs-num">200</p> --}}
                                     </a>
