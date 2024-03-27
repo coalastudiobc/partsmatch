@@ -1316,4 +1316,11 @@ button.btn-close {
     position: absolute;
     right: 0;
     top: 0;
+<<<<<<< HEAD
+=======
+}
+
+.navbar-nav:first-child .nav-item .nav-link {
+    color: var(--heading-color);
+>>>>>>> 29452a88d09b112fef4493834e065711e217f768
 }

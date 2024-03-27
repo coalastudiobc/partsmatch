@@ -64,7 +64,7 @@
                                      <div class="dashboard-card">
                                          <div class="dashboard-card-stats">
                                              <h4>total customer</h4>
-                                             <p>14</p>
+                                             <p> {{ $dealers }} </p>
                                          </div>
                                          <div class="dashboard-card-img">
                                              <img src="http://parts_match.in/assets/banner/2.png" alt="">

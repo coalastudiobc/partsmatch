@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\Storage;
 
 class CmsManagementController extends Controller
 {
+
+    public function cms($slug)
+    {
+        $cms = CmsPage::where('slug', $slug)->first();
+        return view('dealer.cms_page', compact('cms'));
+    }
     public function index()
     {
         $cms_pages = CmsPage::get();

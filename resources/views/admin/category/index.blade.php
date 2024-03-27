@@ -51,7 +51,7 @@
                                 <div class="toggle-btn">
                                     <input type="checkbox" id="switch100" class="custom-switch-input"
                                         @if ($category->status == '1') checked="checked" @endif
-                                        onchange="toggleStatus(this, 'Category', '{{ jsencode_userdata($category->id) }}');"><label
+                                        onchange="toggleStatus(this, 'Category', '{{ $category->id }}');"><label
                                         for="switch100">Toggle</label>
                                 </div>
 

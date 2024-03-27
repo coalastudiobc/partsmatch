@@ -19,6 +19,7 @@
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-6">
+                                            {{-- @dd($selective) --}}
                                             @if ($selective == null || !$selective->isEmpty())
 
                                                 <div class="form-group">
