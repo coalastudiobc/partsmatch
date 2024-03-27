@@ -348,7 +348,7 @@
                                 $('#get_image_id').val(getid);
                             } else {
                                 return iziToast.error({
-                                    message: "bsdk phle img dal",
+                                    message: "Please insert a image",
                                     position: 'topRight'
                                 });
                             }
