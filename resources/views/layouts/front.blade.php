@@ -42,13 +42,15 @@
                         <div class="custm-nav-menu login-nav">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link" aria-current="page" href="#">Home</a>
+                                    <a class="nav-link" aria-current="page" href="">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" aria-current="page" href="#">About Us</a>
+                                    <a class="nav-link" aria-current="page"
+                                        href="{{ route('view', ['slug' => 'about-us']) }}">About Us</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" aria-current="page" href="#">Contact Us</a>
+                                    <a class="nav-link" aria-current="page"
+                                        href="{{ route('view', ['slug' => 'contact-us']) }}">Contact Us</a>
                                 </li>
                             </ul>
                             @guest
@@ -97,7 +99,6 @@
                                 </ul>
                             @endauth
                         </div>
-
                     </div>
                 </nav>
             </div>

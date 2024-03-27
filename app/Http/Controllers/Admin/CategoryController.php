@@ -20,13 +20,13 @@ class CategoryController extends Controller
     public function create()
     {
         $category = new Category;
-        $selective = Category::where('status','1')->where('parent_id',null)->get();
+        $selective = Category::where('status', '1')->where('parent_id', null)->get();
+        // dd($selective);
 
-
-        return view ('admin.category.add',compact('category','selective'));
+        return view('admin.category.add', compact('category', 'selective'));
     }
-    
-    public function store(CategoryRequest $request ,$id = null)
+
+    public function store(CategoryRequest $request, $id = null)
     {
 
         if ($id != null) {
@@ -38,42 +38,41 @@ class CategoryController extends Controller
                 'name' => $request->name,
                 'status' => $request->status,
             ];
-            if($request->has('icon')) {
+            if ($request->has('icon')) {
                 $data['icon'] = $request->icon;
             }
-            if($request->has('main_category')) {
-                
+            if ($request->has('main_category')) {
+
                 $data['parent_id'] = $request->main_category;
             }
 
             if ($id == null) {
                 Category::create($data);
             } else {
-                $category = Category::where('id',$id)->firstOrFail();
-                
+                $category = Category::where('id', $id)->firstOrFail();
+
                 if ($category) {
                     $category->update($data);
                 } else {
                     return response()->json([
                         'success'    =>  false,
                         'msg'       =>   "Category not found"
-                    ],200);
+                    ], 200);
                 }
             }
             DB::commit();
-            if($id == null) {
+            if ($id == null) {
                 $message = "Category created sucessfully";
             } else {
                 $message = "Category updated sucessfully";
             }
             $url = route('admin.category.index');
-            session()->flash('status','success');
-            session()->flash('message',$message);
+            session()->flash('status', 'success');
+            session()->flash('message', $message);
             return response()->json([
                 'success'    =>  true,
                 'url'       =>   $url
-            ],200);
-
+            ], 200);
         } catch (\Exception $e) {
             DB::rollback();
 
@@ -90,9 +89,8 @@ class CategoryController extends Controller
             $id = jsdecode_userdata($id);
         }
         $category = Category::where('id', $id)->first();
-        $selective = Category::where('status','Active')->get();
-
-        return view('admin.category.add', compact('category','selective'));
+        $selective = Category::where('status', '1')->where('parent_id', null)->get();
+        return view('admin.category.add', compact('category', 'selective'));
     }
 
     public function destroy($id)
@@ -101,24 +99,22 @@ class CategoryController extends Controller
             $id = jsdecode_userdata($id);
         }
         $category = Category::where('id', $id)->firstOrFail();
-        $subcategories = Category::where('parent_id',$id)->get();
+        $subcategories = Category::where('parent_id', $id)->get();
         DB::beginTransaction();
-        try {     
-            foreach($subcategories as $subcategory) {
-                Category::where('id',$subcategory->id)->update(['parent_id' => null]);
+        try {
+            foreach ($subcategories as $subcategory) {
+                Category::where('id', $subcategory->id)->update(['parent_id' => null]);
             }
             $category->delete();
             DB::commit();
             $status = "danger";
             $message = "Category deleted sucessfully";
-        
         } catch (\Exception $e) {
             DB::rollback();
             $status = "danger";
             $message = "Category deletion failed";
         }
 
-        return redirect()->route('admin.category.index')->with(['status' => $status , 'message' => $message] );
-
+        return redirect()->route('admin.category.index')->with(['status' => $status, 'message' => $message]);
     }
 }

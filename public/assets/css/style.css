@@ -1317,3 +1317,7 @@ button.btn-close {
     right: 0;
     top: 0;
 }
+
+.navbar-nav:first-child .nav-item .nav-link {
+    color: var(--heading-color);
+}

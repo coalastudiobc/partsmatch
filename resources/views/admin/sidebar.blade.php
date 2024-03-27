@@ -204,7 +204,7 @@
                 </li>
                 <li class="analyics-tabs-list">
 
-                    {{-- <div class="accordion accordion-flush" id="accordionFlushExample">
+                    <div class="accordion accordion-flush" id="accordionFlushExample">
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="flush-headingOne">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -240,11 +240,11 @@
                                 </button>
                             </h2>
                         </div>
-                    </div> --}}
+                    </div>
                 </li>
                 <li class="analyics-tabs-list">
 
-                    {{-- <div class="accordion accordion-flush" id="accordionFlushExample">
+                    <div class="accordion accordion-flush" id="accordionFlushExample">
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="flush-headingOne">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -277,9 +277,9 @@
                                     </a>
                                 </button>
                             </h2>
-                           
+
                         </div>
-                    </div> --}}
+                    </div>
                 </li>
                 {{-- <li class="analyics-tabs-list">
 
