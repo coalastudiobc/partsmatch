@@ -22,7 +22,7 @@
         <div class="container">
             <div class="page-content-wrapper">
                 <div class="row">
-                    <div class="col-md-7">
+                    <div class="col-md-12">
                         <x-alert-component />
                         {{-- <div class="cstm-card account-detail-card">
                             <div class="accounts-form">
@@ -211,9 +211,22 @@
                                         class="fa-sharp fa-solid fa-close"></i></span>
                             </div>
                         </div> --}}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="cms-txt">
+                                    <h3>dgheuiogb</h3>
+                                    <p>{{ $cms->page_content }}</p>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="cms-img-box">
+                                    <img src="{{ asset('assets/images/cms-img-part3.png') }}" alt="img">
+                                </div>
+                            </div>
+                        </div>
 
 
-                        {{ $cms->page_content }}
                     </div>
 
                 </div>
