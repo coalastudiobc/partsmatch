@@ -1,11 +1,11 @@
 @extends('layouts.admin')
 @section('title', 'Users')
-@section('heading', 'User')
+@section('heading', 'Dealers')
 
 @section('content')
 
     <div class="dashboard-right-box">
-        <h2>User</h2>
+        <h2>Dealers</h2>
         <div class="product-detail-table user-list-table">
             <div class="table-responsive">
                 <table class="table">

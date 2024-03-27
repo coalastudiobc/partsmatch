@@ -95,6 +95,16 @@
     @includeFirst(['validation'])
     @includeFirst(['validation.js_login'])
     @includeFirst(['validation.js_show_password'])
+    <script>
+        $("input").keypress(function(e) {
+            if (e.which === 32 && !this.value.length) {
+                e.preventDefault();
+            }
+            var k;
+            document.all ? k = e.keyCode : k = e.which;
+            return ((k > 64 && k < 91) || (k > 96 && k < 123) || k == 8 || k == 32);
+        });
+    </script>
     @if (session()->has('status') && session()->get('status') == 'restricted')
         <script>
             $(document).ready(function() {

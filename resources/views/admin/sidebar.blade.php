@@ -4,9 +4,8 @@
             <ul>
                 <li class="analyics-tabs-list">
 
-                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                    {{-- <div class="accordion accordion-flush" id="accordionFlushExample">
                         <div class="accordion-item">
-                            {{-- <a href="{{ route('admin.dashboard') }}" > --}}
                             <h2 class="accordion-header" id="flush-headingOne">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#flush-collapseOne1" aria-expanded="false"
@@ -31,9 +30,8 @@
                                     </a>
                                 </button>
                             </h2>
-                            {{-- </a> --}}
                         </div>
-                    </div>
+                    </div> --}}
                 </li>
                 <li class="analyics-tabs-list">
                     <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -232,7 +230,7 @@
                                                     </defs>
                                                 </svg>
                                             </span>
-                                            <h4>stripe setting</h4>
+                                            <h4>Stripe Setting</h4>
                                         </div>
                                         <p class="analyics-tabs-num"></p>
                                     </a>

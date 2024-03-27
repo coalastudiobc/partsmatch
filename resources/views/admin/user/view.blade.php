@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title', 'User')
-@section('heading', 'User')
+@section('heading', 'Dealer')
 
 @section('content')
     <div class="main-content">

@@ -224,5 +224,14 @@
                 reader.readAsDataURL(this.files[0]);
             }
         });
+
+        $("input").keypress(function(e) {
+            if (e.which === 32 && !this.value.length) {
+                e.preventDefault();
+            }
+            var k;
+            document.all ? k = e.keyCode : k = e.which;
+            return ((k > 64 && k < 91) || (k > 96 && k < 123) || k == 8 || k == 32);
+        });
     </script>
 @endpush
