@@ -56,7 +56,7 @@
                                              <p>14</p>
                                          </div>
                                          <div class="dashboard-card-img">
-                                             <img src="asset(assets/banner/2.png)" alt="">
+                                             <img src="asset('assets/banner/2.png')" alt="">
                                          </div>
                                      </div>
                                  </div>
@@ -67,7 +67,7 @@
                                              <p> {{ $dealers }} </p>
                                          </div>
                                          <div class="dashboard-card-img">
-                                             <img src="asset(assets/banner/2.png)" alt="">
+                                             <img src="asset('assets/banner/2.png')" alt="">
                                          </div>
                                      </div>
                                  </div>
@@ -78,7 +78,7 @@
                                              <p>14</p>
                                          </div>
                                          <div class="dashboard-card-img">
-                                             <img src="asset(assets/banner/2.png)" alt="">
+                                             <img src="asset('assets/banner/2.png')" alt="">
                                          </div>
                                      </div>
                                  </div>
@@ -89,7 +89,7 @@
                                              <p>14</p>
                                          </div>
                                          <div class="dashboard-card-img">
-                                             <img src="asset(assets/banner/2.png)" alt="">
+                                             <img src="asset('assets/banner/2.png')" alt="">
                                          </div>
                                      </div>
                                  </div>
