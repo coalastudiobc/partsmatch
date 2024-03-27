@@ -8,10 +8,10 @@
             <div class="banner-content-wrapper">
                 <div class="banner-content-heading flex-heading">
                     <div class="back-page-btn">
-                        <div class="back-round-icon">
+                        {{-- <div class="back-round-icon">
                             <i class="fa-solid fa-angle-left"></i>
-                        </div>
-                        <p>Back</p>
+                        </div> --}}
+                        {{-- <p>Back</p> --}}
                     </div>
                     <h2>{{ $cms->name }}</h2>
                 </div>
@@ -214,7 +214,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="cms-txt">
-                                    <h3>dgheuiogb</h3>
+                                    <h3>{{ $cms->name }}</h3>
                                     <p>{{ $cms->page_content }}</p>
                                 </div>
 
@@ -336,66 +336,8 @@
                     </form>
                 </div>
             </div>
-            <!-- <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div> -->
+
         </div>
     </div>
 </div>
 @include('layouts.include.footer')
-
-@push('scripts')
-    {{-- <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/slick.js"></script>
-    <script src="js/slick.min.js"></script> --}}
-
-    {{-- <script>
-        $('.slick-carousel').slick({
-            infinite: true,
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            arrows: true,
-
-            dots: false,
-            prevArrow: $('.prev-btn'),
-            nextArrow: $('.next-btn'),
-        });
-    </script>
-    <script>
-        $(document).ready(function() {
-            $('#editProfile').click(function(e) {
-                e.preventDefault();
-                $(this).addClass('d-none')
-                $('#closeEditProfile').removeClass('d-none')
-                $('.disabled-inputs').removeAttr('disabled');
-                $('.editable').removeClass('d-none');
-            });
-            $('#closeEditProfile').click(function(e) {
-                e.preventDefault();
-                $(this).addClass('d-none')
-                $('#editProfile').removeClass('d-none')
-                $('.disabled-inputs').attr('disabled', 'disabled');
-                $('.editable').addClass('d-none');
-            });
-        });
-    </script>
-    <script>
-        $("#file-upload").change(function() {
-            if (this.files && this.files[0]) {
-
-                var reader = new FileReader();
-
-                reader.onload = function(e) {
-                    $('#Userimage').attr('src', e.target.result);
-                }
-
-                reader.readAsDataURL(this.files[0]);
-            }
-        });
-    </script>
-    @includeFirst(['validation'])
-    @includeFirst(['validation.dealer.js_profile'])
-    @includeFirst(['validation.js_change_password']) --}}
-@endpush
