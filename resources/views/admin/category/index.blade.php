@@ -20,7 +20,7 @@
                             <p>Name</p>
                         </th>
                         <th>
-                            <p>icon</p>
+                            <p>Icon</p>
                         </th>
                         <th>
                             <p>Parent Category</p>
@@ -70,7 +70,7 @@
                     @empty
                         <tr>
                             <td class="no-record-found">
-                                <center>Did not found any Category </center>
+                                <center>Did not found any category </center>
                             </td>
                         </tr>
                     @endforelse

@@ -5,7 +5,7 @@
         const rules = {
             email: {
                 required: true,
-                regex: emailRegex,
+                // regex: emailRegex,
             },
             password: {
                 required: true,
@@ -17,7 +17,7 @@
 
             email: {
                 required: `{{ __('customvalidation.login.email.required') }}`,
-                regex: `{{ __('customvalidation.login.email.regex', ['regex' => '${emailRegex}']) }}`,
+                // regex: `{{ __('customvalidation.login.email.regex', ['regex' => '${emailRegex}']) }}`,
             },
             password: {
                 required: `{{ __('customvalidation.login.password.required') }}`,

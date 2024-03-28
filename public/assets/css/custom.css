@@ -1022,3 +1022,8 @@
 .single-heading {
     grid-template-columns: auto;
 }
+
+.cms-list-table table tr th:last-child {
+    padding-right: 25px;
+    width: 100px;
+}

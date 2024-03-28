@@ -19,7 +19,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">Name</label>
+                                                <label for="">Name*</label>
                                                 <div class="form-field">
                                                     <input type="text" name="name"
                                                         class="form-control @error('name') is-invalid @enderror"
@@ -45,7 +45,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">Content</label>
+                                                <label for="">Content*</label>
                                                 <div class="form-field">
                                                     <textarea name="content" class="form-control summernote @error('content') is-invalid @enderror">{{ $page->page_content ?? $page->page_content }}</textarea>
                                                     @error('content')

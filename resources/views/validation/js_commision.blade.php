@@ -6,6 +6,7 @@
             },
             ordercommission: {
                 required: true,
+                regex: '/(\d+(?:\.\d+)?)/'
 
             }
         }
@@ -16,35 +17,36 @@
             },
             ordercommission: {
                 required: `{{ __('customvalidation.commission.ordercommission.required') }}`,
+                regex: 'Only accept numbers'
             }
         };
 
-        jQuery('#checkcommission').on('keyup', function(e) {
-            var $this = $('#checkcommission');
+        // jQuery('#checkcommission').on('keyup', function(e) {
+        //     var $this = $('#checkcommission');
 
-            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
-                $this.val('');
-                return false;
-            } else {
+        //     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+        //         $this.val('');
+        //         return false;
+        //     } else {
 
-                if (jQuery('#checktype :selected').val() == 'Percentage') {
-                    var val = $this.val();
-                    if (val > 100) {
-                        $this.val($this.val().substring(0, val == 100 ? 3 : 2));
-                    } else if (val < 1) {
-                        $this.val('');
-                    }
+        //         if (jQuery('#checktype :selected').val() == 'Percentage') {
+        //             var val = $this.val();
+        //             if (val > 100) {
+        //                 $this.val($this.val().substring(0, val == 100 ? 3 : 2));
+        //             } else if (val < 1) {
+        //                 $this.val('');
+        //             }
 
-                } else {
-                    var val = $this.val();
-                    if (val > 9999) {
-                        $this.val($this.val().substring(0, 4));
-                    } else if (val < 1) {
-                        $this.val('');
-                    }
-                }
-            }
-            handleValidation('commission', rules, messages);
-        });
+        //         } else {
+        //             var val = $this.val();
+        //             if (val > 9999) {
+        //                 $this.val($this.val().substring(0, 4));
+        //             } else if (val < 1) {
+        //                 $this.val('');
+        //             }
+        //         }
+        //     }
+        // });
+        handleValidation('commission', rules, messages);
     });
 </script>

@@ -512,12 +512,14 @@
 
 .product-detail-table table tr th {
     border-bottom: 0;
+    padding: 12px 22px 12px 22px;
 }
 
 .product-detail-table table tr th p {
     font-size: 16px;
     font-weight: 500;
     color: var(--gray-color);
+    white-space: nowrap;
 }
 
 .product-detail-table table tr th:last-child {

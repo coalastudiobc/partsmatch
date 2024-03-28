@@ -773,6 +773,8 @@ header {
     border-radius: 5px;
     border: 1.81px solid #E8E8E8;
     padding: 12px 17px;
+    font-size: 14px;
+    color: var(--text-color);
 
 }
 
@@ -1175,4 +1177,8 @@ header {
     object-fit: cover;
     box-shadow: 0px 1px 4px 2px #b3a9a9ee;
     padding: 2px;
+}
+
+table tr th {
+    padding: 12px 22px !important;
 }

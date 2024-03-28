@@ -27,9 +27,9 @@ class CommissionRequest extends FormRequest
                 'ordercommission_type' => 'required',
             ];
             if (request()->ordercommission_type == 'Percentage') {
-                $rules['ordercommission'] = 'required | integer | min:1 | max:99';
+                $rules['ordercommission'] = 'required | numeric | min:1 | max:99 | regex:/(\d+(?:\.\d+)?)/';
             } else {
-                $rules['ordercommission'] = 'required | integer |min:1 | max:9999';
+                $rules['ordercommission'] = 'required | numeric |min:1 | max:9999 | regex:/(\d+(?:\.\d+)?)/';
             }
             return $rules;
         }
@@ -43,6 +43,7 @@ class CommissionRequest extends FormRequest
             'ordercommission.required' => "order commission is required",
             'ordercommission.min' => "order commission should be grater than 1",
             'ordercommission.max' => "order commission should be less than 99",
+            'ordercommission.regex' => "only number allowed"
         ];
     }
 }

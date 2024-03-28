@@ -795,6 +795,8 @@ header {
     border-radius: 5px;
     border: 1.81px solid #E8E8E8;
     padding: 12px 17px;
+    font-size: 14px;
+    color: var(--text-color);
 
 }
 
@@ -1316,11 +1318,23 @@ button.btn-close {
     position: absolute;
     right: 0;
     top: 0;
-<<<<<<< HEAD
-=======
 }
 
 .navbar-nav:first-child .nav-item .nav-link {
     color: var(--heading-color);
->>>>>>> 29452a88d09b112fef4493834e065711e217f768
+}
+
+.cms-list-table table tr th:last-child {
+    text-align: right;
+    padding-right: 25px;
+    width: 100px;
+}
+
+.file-upload-box span {
+    position: absolute;
+    width: 100%;
+    display: block;
+    min-width: 200px;
+    left: -54px;
+    bottom: -48px;
 }

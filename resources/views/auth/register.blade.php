@@ -32,7 +32,8 @@
                                 <p>It is a long established fact that a reader will be distracted by</p>
                             </div>
                             <div class="sign-up-form">
-                                <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
+                                <form id="register" method="POST" action="{{ route('register') }}"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     <div class="upload-img">
                                         <div class="file-upload-box">
@@ -42,7 +43,9 @@
                                                         alt="">
 
                                                 </div>
-                                                <input type="file" id="file-upload" value="" name="image">
+                                                <input type="file" id="file-upload"
+                                                    class=" @error('image') is-invalid @enderror" value=""
+                                                    name="image">
                                                 <div class="upload-icon">
                                                     <img src="{{ asset('assets/images/upload.png') }}" alt="">
                                                 </div>
@@ -53,14 +56,14 @@
                                                 @enderror
                                             </label>
                                         </div>
-                                        <h3>Upload profile picture</h3>
+                                        <h3>Upload profile picture*</h3>
                                     </div>
                                     {{-- <div class="sign-up-form">
                                 <form action=""> --}}
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">Name</label>
+                                                <label for="">Name*</label>
                                                 <div class="form-field">
                                                     <input type="text" name="name" value="{{ old('name') }}"
                                                         class="form-control @error('name') is-invalid @enderror"
@@ -76,7 +79,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">Email</label>
+                                                <label for="">Email*</label>
                                                 <div class="form-field">
                                                     <input type="email" name="email" value="{{ old('email') }}"
                                                         class="form-control @error('email') is-invalid @enderror"
@@ -92,7 +95,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">Phone</label>
+                                                <label for="">Phone*</label>
                                                 <div class="form-field">
                                                     <input type="text" name="phone_number"
                                                         value="{{ old('phone_number') }}"
@@ -109,7 +112,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">Complete Address</label>
+                                                <label for="">Complete Address*</label>
                                                 <div class="form-field">
                                                     <input type="text" name="address" value="{{ old('address') }}"
                                                         class="form-control @error('address') is-invalid @enderror"
@@ -125,7 +128,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">Zip Code</label>
+                                                <label for="">Zip Code*</label>
                                                 <div class="form-field">
                                                     <input type="text" name="zipcode" value="{{ old('zipcode') }}"
                                                         class="form-control @error('zipcode') is-invalid @enderror"
@@ -164,7 +167,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">Password</label>
+                                                <label for="">Password*</label>
                                                 <div class="form-field">
                                                     <input type="password" name="password" value="{{ old('password') }}"
                                                         class="form-control @error('password') is-invalid @enderror"
@@ -180,7 +183,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">Confirm Password</label>
+                                                <label for="">Confirm Password*</label>
                                                 <div class="form-field">
                                                     <input type="password" name="password_confirmation"
                                                         value="{{ old('password_confirmation') }}"
@@ -211,6 +214,8 @@
     </div>
 @endsection
 @push('scripts')
+    @includeFirst(['validation'])
+    @includeFirst(['validation.js_register'])
     <script>
         $("#file-upload").change(function() {
             if (this.files && this.files[0]) {
@@ -220,18 +225,8 @@
                 reader.onload = function(e) {
                     $('#Userimage').attr('src', e.target.result);
                 }
-
                 reader.readAsDataURL(this.files[0]);
             }
-        });
-
-        $("input").keypress(function(e) {
-            if (e.which === 32 && !this.value.length) {
-                e.preventDefault();
-            }
-            var k;
-            document.all ? k = e.keyCode : k = e.which;
-            return ((k > 64 && k < 91) || (k > 96 && k < 123) || k == 8 || k == 32);
         });
     </script>
 @endpush
