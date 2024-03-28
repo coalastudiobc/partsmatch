@@ -6,8 +6,7 @@
             },
             ordercommission: {
                 required: true,
-                regex: '/(\d+(?:\.\d+)?)/'
-
+                decimal: true,
             }
         }
         const messages = {
@@ -17,8 +16,9 @@
             },
             ordercommission: {
                 required: `{{ __('customvalidation.commission.ordercommission.required') }}`,
-                regex: 'Only accept numbers'
-            }
+                decimal: "Only numbers!",
+            },
+
         };
 
         // jQuery('#checkcommission').on('keyup', function(e) {

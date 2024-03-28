@@ -45,15 +45,15 @@
                                     <input id="password" type="password"
                                         class="form-control @error('password') is-invalid @enderror" name="password"
                                         autocomplete="current-password" placeholder="Enter your password">
-                                    <span class="input-icon toggle-password">
+                                    {{-- <span class="input-icon toggle-password">
                                         <i style="color: #9f9f9f;" class="fas fa-eye"></i>
-                                    </span>
+                                    </span> --}}
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
                                             {{ $message }}
                                         </span>
                                     @enderror
-                                    {{-- <div class="input-icon eye-icon">
+                                    <div class="input-icon eye-icon d-none" id="eye-cinon">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="19"
                                             viewBox="0 0 26 19" fill="none">
                                             <g clip-path="url(#clip0_47_6228)">
@@ -72,7 +72,28 @@
                                                 </clipPath>
                                             </defs>
                                         </svg>
-                                    </div> --}}
+                                    </div>
+                                    <div id="eye-cross-icon" class="input-icon">
+                                        <svg width="28" height="20" viewBox="0 0 28 20" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <mask id="mask0_17_18" style="mask-type:luminance" maskUnits="userSpaceOnUse"
+                                                x="1" y="0" width="25" height="19">
+                                                <path d="M26 0H1V19H26V0Z" fill="white" />
+                                            </mask>
+                                            <g mask="url(#mask0_17_18)">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M2.03888 9.49718C2.03888 9.49718 6.20556 1.05273 13.4972 1.05273C20.7889 1.05273 24.9556 9.49718 24.9556 9.49718C24.9556 9.49718 20.7889 17.9416 13.4972 17.9416C6.20556 17.9416 2.03888 9.49718 2.03888 9.49718Z"
+                                                    stroke="#727272" stroke-width="1.80952" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                                <path
+                                                    d="M13.4981 12.6654C15.224 12.6654 16.6231 11.2476 16.6231 9.4987C16.6231 7.7498 15.224 6.33203 13.4981 6.33203C11.7722 6.33203 10.3731 7.7498 10.3731 9.4987C10.3731 11.2476 11.7722 12.6654 13.4981 12.6654Z"
+                                                    stroke="#727272" stroke-width="1.80952" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                            </g>
+                                            <rect y="1.63831" width="2" height="31.5487" rx="1"
+                                                transform="rotate(-55 0 1.63831)" fill="#727272" />
+                                        </svg>
+                                    </div>
                                 </div>
                             </div>
                             <a href="{{ route('password.request') }}" class="forgot-password">Forgot Password</a>

@@ -1338,3 +1338,12 @@ button.btn-close {
     left: -54px;
     bottom: -48px;
 }
+
+.file-upload-box label#file-upload-error {
+    position: absolute;
+    width: 100%;
+    display: block;
+    min-width: 200px;
+    left: -54px;
+    bottom: -48px;
+}

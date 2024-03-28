@@ -36,7 +36,7 @@
             },
             password_confirmation: {
                 required: true,
-                equalTo: "#password_confirmation"
+                // equalTo: "#password_confirmation"
             }
         }
         const messages = {
@@ -47,7 +47,7 @@
                 regex: `{{ __('customvalidation.user.name.regex', ['regex' => '${nameRegex}']) }}`,
             },
             phone_number: {
-                required: 'Please enter the phone number',
+                required: 'Please enter the phone number.',
             },
             email: {
                 required: `{{ __('customvalidation.user.email.required') }}`,
@@ -55,16 +55,16 @@
                 regex: `{{ __('customvalidation.user.email.regex', ['regex' => '${emailRegex}']) }}`,
             },
             address: {
-                required: 'Please enter the address',
+                required: 'Please enter the address.',
             },
             zipcode: {
-                required: 'please enter the zipcode',
+                required: 'please enter the zipcode.',
             },
             country_id: {
                 required: `{{ __('customvalidation.user.country.required') }}`,
             },
             image: {
-                required: `{{ __('customvalidation.user.image.required') }}`
+                required: `The image field is required.`
             },
             password: {
                 required: `{{ __('customvalidation.user.password.required') }}`,
@@ -74,10 +74,10 @@
 
             },
             password_confirmation: {
-                equalTo: `{{ __('customvalidation.user.confirm_password.equal') }}`,
+                // equalTo: `{{ __('customvalidation.user.confirm_password.equal') }}`,
                 required: `{{ __('customvalidation.user.confirm_password.required') }}`,
             }
         };
-        handleValidation('register', rules, messages);
+        // handleValidation('register', rules, messages);
     });
 </script>
