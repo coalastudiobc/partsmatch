@@ -78,6 +78,6 @@
                 required: `{{ __('customvalidation.user.confirm_password.required') }}`,
             }
         };
-        // handleValidation('register', rules, messages);
+        handleValidation('register', rules, messages);
     });
 </script>
