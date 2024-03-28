@@ -9,7 +9,8 @@
                     <div class="dealer-profile-detail-form">
                         <span id="editProfile"><i class="fa-sharp fa-solid fa-edit"></i></span>
                         <span id="closeEditProfile" class='d-none'><i class="fa-sharp fa-solid fa-close"></i></span>
-                        <form action="{{ route('admin.profile.update') }}" enctype="multipart/form-data" method="POST">
+                        <form id="adminprofile" action="{{ route('admin.profile.update') }}" enctype="multipart/form-data"
+                            method="POST">
                             @csrf
                             <div class="row">
                                 <div class="col-md-12">
@@ -34,7 +35,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="">Name</label>
+                                        <label for="">Name*</label>
                                         <div class="form-field">
                                             <input type="text" name="name" class="form-control disabled-inputs"
                                                 placeholder="John Doe" disabled value="{{ old('name', $authUser->name) }}">
@@ -44,7 +45,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="">Email</label>
+                                        <label for="">Email*</label>
                                         <div class="form-field">
                                             <input type="email" name="email" class="form-control disabled-inputs"
                                                 placeholder="johndoe@gmail.com" disabled
@@ -101,6 +102,7 @@
     </div>
 @endsection
 @push('scripts')
+    @includeFirst(['validation.js_admin_profile'])
     <script>
         $(document).ready(function() {
             $('#editProfile').click(function(e) {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -12,9 +13,13 @@ class DealerController extends Controller
     {
         $request = request();
 
-        $users = User::where('id', '!=', 1)->Search()->get();
-
+        $users = User::with('product')->where('id', '!=', 1)->Search()->get();
         return view('admin.user.index', compact('users'));
+    }
+    public function products(User $user)
+    {
+        $products = Product::where('user_id', $user->id)->get();
+        return view('admin.user.product_list', compact('products', 'user'));
     }
     public function toggleStatus(Request $request)
     {

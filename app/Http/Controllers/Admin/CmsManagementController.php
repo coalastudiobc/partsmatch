@@ -29,13 +29,12 @@ class CmsManagementController extends Controller
         $request->validate([
             'name' => 'required',
             'content' => 'required',
-            'image' => 'required',
+            'image' => 'mimes:jpeg,png,jpg',
         ], [
             'name.required' => 'Please enter the name',
             'content.required' => 'Please enter the content',
-            'image.required' => 'Please enter the image',
+            'image' => 'Image accepts only jpeg,png,jpg',
         ]);
-
         if ($request->hasFile('image')) {
             $file = $request->image;
             if (isset($page->media_url)) {
@@ -44,14 +43,13 @@ class CmsManagementController extends Controller
             $media_name = $file->getClientOriginalName();
             $path = Storage::disk('public')->put('cms_pics', $file);
         }
-
         $page->update([
             'name' => $request->name,
             'slug' => $page->slug,
             'page_content' => $request->content,
             'page_title' => $request->page_title,
-            'media_name' => $media_name,
-            'media_url' => $path,
+            'media_name' => $media_name ?? null,
+            'media_url' => $path ?? null,
             'status' => $request->status == '1' ? '1' : '0',
         ]);
 

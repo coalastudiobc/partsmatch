@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::match(['GET', "POST"], 'cms/status', 'App\Http\Controllers\HomeController@toggleStatus')->name('cms.status');
+Route::match(['GET', "POST"], 'product/status', 'App\Http\Controllers\HomeController@toggleStatus')->name('product.status');
+Route::match(['GET', "POST"], 'category/status', 'App\Http\Controllers\HomeController@toggleStatus')->name('category.status');
 
 Route::middleware(['auth', 'verified', 'admin'])->namespace('App\Http\Controllers\Admin')->name('admin.')->group(function () {
    Route::match('get', 'dashboard', 'AdminController@dashboard')->name('dashboard');
@@ -57,11 +59,8 @@ Route::middleware(['auth', 'verified', 'admin'])->namespace('App\Http\Controller
    Route::name('dealers.')->group(function () {
       Route::get('dealers', 'DealerController@index')->name('all');
       Route::match(['GET', "POST"], 'dealers/status', 'DealerController@toggleStatus')->name('status');
-
-      // Route::get('pre/users', 'UserController@preLaunchIndex')->name('pre.launch.all');
-
-      // Route::get('add/user', 'UserController@create')->name('add');
       Route::get('dealer/profile/{user}', 'DealerController@dealerProfile')->name('show');
+      Route::get('product/list/{user}', 'DealerController@products')->name('product.list');
       // // Route::post('user/store/{id?}', 'UserController@store')->name('store');
       // Route::get('user/edit/{id}', 'UserController@edit')->name('edit');
       // Route::get('user/delete/{id}', 'UserController@destroy')->name('delete');
@@ -82,5 +81,4 @@ Route::middleware(['auth', 'verified', 'admin'])->namespace('App\Http\Controller
       Route::get('/profile', 'ProfileController@profile')->name('view');
       Route::post('/profile/update', 'ProfileController@update')->name('update');
    });
-
 });

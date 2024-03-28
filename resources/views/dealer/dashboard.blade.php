@@ -1,6 +1,6 @@
 @extends('layouts.dealer')
-@section('title', 'dashboard')
-@section('heading', 'Dashboad')
+@section('title', 'Dashboard')
+@section('heading', 'Dashboard')
 
 @section('content')
     <div class="dashboard-right-box">

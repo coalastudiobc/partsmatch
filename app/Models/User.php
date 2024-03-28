@@ -56,6 +56,13 @@ class User extends Authenticatable
     {
         return $this->hasOne(PaymentDetail::class, 'user_id', 'id');
     }
+
+    public function product()
+    {
+        return $this->hasMany(Product::class,  'user_id', 'id');
+    }
+
+
     public function scopeSearch($query)
     {
         $request = request();

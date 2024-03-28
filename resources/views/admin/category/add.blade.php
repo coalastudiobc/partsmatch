@@ -48,7 +48,7 @@
                                         </div>
                                         <div class="@if ($selective == null || !$selective->isEmpty()) col-md-6 @else col-md-12 @endif">
                                             <div class="form-group">
-                                                <label for="">Name</label>
+                                                <label for="">Name*</label>
                                                 <div class="form-field">
                                                     <input type="text" name="name"
                                                         class="form-control @error('name') is-invalid @enderror"

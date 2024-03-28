@@ -33,7 +33,7 @@
                         </th>
 
                     </tr>
-                    @forelse($categories as $category)
+                    @forelse($categories as $key => $category)
                         <tr>
                             <td>
                                 <p>{{ $category->name ? $category->name : '' }}</p>
@@ -49,10 +49,11 @@
 
                                     {{-- <span class="custom-switch-indicator"></span> --}}
                                 <div class="toggle-btn">
-                                    <input type="checkbox" id="switch100" class="custom-switch-input"
+                                    <input type="checkbox" id="switch10{{ $key }}" class="custom-switch-input"
                                         @if ($category->status == '1') checked="checked" @endif
-                                        onchange="toggleStatus(this, 'Category', '{{ $category->id }}');"><label
-                                        for="switch100">Toggle</label>
+                                        onchange="toggleStatus(this, 'Category', '{{ $category->id }}');"
+                                        url="{{ route('category.status') }}"><label
+                                        for="switch10{{ $key }}">Toggle</label>
                                 </div>
 
                                 </p>
