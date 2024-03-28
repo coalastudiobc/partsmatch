@@ -74,7 +74,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">Email ID or Phone Number</label>
+                                                <label for="">Email ID</label>
                                                 <div class="form-field">
                                                     <input type="email" name="email"
                                                         value="{{ old('email', $user->email ?? $user->email) }}"

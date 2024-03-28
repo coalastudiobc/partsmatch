@@ -1182,3 +1182,19 @@ header {
 table tr th {
     padding: 12px 22px !important;
 }
+
+.serach-and-filter-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pro-search-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pro-search-box .primary-btn {
+    min-width: 106px;
+}

@@ -158,7 +158,6 @@ class ProductController extends Controller
             DB::commit();
             return redirect()->back();
         } catch (\Exception $e) {
-            dd($e->getMessage());
             DB::rollBack();
             return redirect()->back()->with('error', $e->getMessage());
         }

@@ -65,7 +65,7 @@
                                                 <div class="form-group">
                                                     <label for="">Industry</label>
                                                     <div class="form-field">
-                                                        {{ $user->industry ? $user->industry : 'N/A' }}
+                                                        {{ $user->industry_type ? $user->industry_type : 'N/A' }}
 
 
                                                     </div>

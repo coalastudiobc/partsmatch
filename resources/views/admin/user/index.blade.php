@@ -5,7 +5,20 @@
 @section('content')
 
     <div class="dashboard-right-box">
-        <h2>Dealers</h2>
+        {{-- <h2>Dealers</h2>
+        < class=""> --}}
+        <div class="serach-and-filter-box">
+            <h3>All Managers</h3>
+            <form action="">
+                <div class="pro-search-box">
+                    <input type="text" name="filter_by_name" class="form-control" placeholder="Search Product By Name">
+                    <button type="submit" class="btn primary-btn">Search</button>
+                </div>
+            </form>
+
+        </div>
+
+
         <div class="product-detail-table user-list-table">
             <div class="table-responsive">
                 <table class="table">
