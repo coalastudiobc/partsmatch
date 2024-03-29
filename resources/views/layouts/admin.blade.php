@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="{{ asset('assets/admin/css/toaster.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/admin/css/slick.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/admin/css/slick-theme.css') }}">
+    @include('layouts.include.favicon')
 
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.8/slick-theme.min.css"> -->
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.8/slick.css  "> -->
