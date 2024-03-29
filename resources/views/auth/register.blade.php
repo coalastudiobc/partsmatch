@@ -35,28 +35,33 @@
                                 <form id="register" method="POST" action="{{ route('register') }}"
                                     enctype="multipart/form-data">
                                     @csrf
-                                    <div class="upload-img">
-                                        <div class="file-upload-box">
-                                            <label for="file-upload">
-                                                <div class="profile-without-img">
-                                                    <img src="{{ asset('assets/images/user.png') }}" id="Userimage"
-                                                        alt="">
+                                    <div class="upload-box">
+                                        <div class="upload-img @error('image') is-invalid @enderror">
+                                            <div class="file-upload-box">
+                                                <label for="file-upload">
+                                                    <div class="profile-without-img">
+                                                        <img src="{{ asset('assets/images/user.png') }}" id="Userimage"
+                                                            alt="">
 
-                                                </div>
-                                                <input type="file" id="file-upload"
-                                                    class=" @error('image') is-invalid @enderror" value=""
-                                                    name="image">
-                                                <div class="upload-icon">
-                                                    <img src="{{ asset('assets/images/upload.png') }}" alt="">
-                                                </div>
+                                                    </div>
+                                                    <input type="file" id="file-upload" value=""
+                                                        class="image-input" name="image">
+
+                                                    <div class="upload-icon">
+                                                        <img src="{{ asset('assets/images/upload.png') }}" alt="">
+                                                    </div>
+
+                                                </label>
+                                            </div>
+                                            <h3>Upload profile picture*</h3>
+                                            <div id="errorViewer">
                                                 @error('image')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
                                                 @enderror
-                                            </label>
+                                            </div>
                                         </div>
-                                        <h3>Upload profile picture*</h3>
                                     </div>
                                     {{-- <div class="sign-up-form">
                                 <form action=""> --}}
@@ -199,7 +204,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <button class="btn secondary-btn full-btn">Submit</button>
+                                    <button type="submit" id="submit"
+                                        class="btn secondary-btn full-btn">Submit</button>
                                     <div class="sign-up-link-box">
                                         <p>Already have an account?</p>
                                         <a href="{{ route('login') }}">Log In</a>
@@ -226,6 +232,14 @@
                     $('#Userimage').attr('src', e.target.result);
                 }
                 reader.readAsDataURL(this.files[0]);
+            }
+        });
+
+        $('#submit').on('click', function(e) {
+            e.preventDefault();
+            jQuery('#register').validate();
+            if (jQuery('#register').valid()) {
+                jQuery('#register').submit();
             }
         });
     </script>

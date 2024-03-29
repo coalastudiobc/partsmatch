@@ -1,6 +1,6 @@
 <?php
 return [
-        'name_regex' =>'/^[^-\s][a-zA-Z\s]{1,50}$/',
+        'name_regex' => '/^[^-\s][a-zA-Z\s]{1,50}$/',
         'name_regex_message' =>  '/^[a-zA-Z]+[a-zA-Z\s]{1,50}$/',
         'name_minlength' => 2,
         'name_maxlength' => 50,
@@ -8,12 +8,12 @@ return [
         'descriptionMaxLength' => 1000,
 
 
-        'first_name_regex' =>'/^[a-zA-Z]{1,30}$/',
+        'first_name_regex' => '/^[a-zA-Z]{1,30}$/',
         'first_name_regex_message' =>  'Only alphabets allowed',
         'first_name_minlength' => 2,
         'first_name_maxlength' => 30,
 
-        'last_name_regex' =>'/^[a-zA-Z]{1,30}$/',
+        'last_name_regex' => '/^[a-zA-Z]{1,30}$/',
         'last_name_regex_message' =>  'Only alphabets allowed',
         'last_name_minlength' => 2,
         'last_name_maxlength' => 30,
@@ -57,7 +57,7 @@ return [
         'username_regex' => '/^[a-zA-Z0-9]+([._]?[a-zA-Z0-9]+){1,50}$/',
         'media_mimes' => 'jpeg,png,jpg,wmv,avi,mov,3gp,mp4',
 
-        'package_regex' =>'/^[^-\s][a-zA-Z\s]{10,100000}$/',
+        'package_regex' => '/^[^-\s][a-zA-Z\s]{10,100000}$/',
         'package_minlength' => 10,
         'package_maxlength' => 1000,
 
@@ -66,9 +66,9 @@ return [
 
         'routing_minlength' => 9,
         'routing_maxlength' => 12,
-        'package_maxlength' => 100000,
+        'js_package_maxlength' => 100000,
 
         'pdf_max_size' =>  250000000,
-        'pdf_extension' => 'pdf' ,
+        'pdf_extension' => 'pdf',
         'php_pdf_max_size' =>  26000,
 ];

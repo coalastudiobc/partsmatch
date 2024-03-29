@@ -5,34 +5,38 @@
                 required: true,
                 minlength: nameMinLength,
                 maxlength: nameMaxLength,
-                regex: nameRegex,
+                regex: nameRegex
             },
             phone_number: {
                 required: true,
+                digits: true,
+                minlength: 10,
+                maxlength: 10
             },
 
             email: {
                 required: true,
                 email: true,
-                regex: emailRegex,
+                regex: emailRegex
             },
             country_id: {
-                required: true,
+                required: true
             },
             address: {
-                required: true,
+                required: true
             },
             zipcode: {
-                required: true,
+                required: true
             },
             image: {
-                required: true,
+                imageExtension: true,
+                required: true
             },
             password: {
                 required: true,
                 minlength: passwordMinLength,
                 maxlength: passwordMaxLength,
-                regex: passwordRegex,
+                regex: passwordRegex
             },
             password_confirmation: {
                 required: true,
@@ -48,6 +52,8 @@
             },
             phone_number: {
                 required: 'Please enter the phone number.',
+                minlength: 'Phone number must be 10 digits.',
+                maxlength: 'Phone number must be 10 digits.'
             },
             email: {
                 required: `{{ __('customvalidation.user.email.required') }}`,
@@ -64,7 +70,8 @@
                 required: `{{ __('customvalidation.user.country.required') }}`,
             },
             image: {
-                required: `The image field is required.`
+                required: `The image field is required.`,
+                imageExtension: "Only image type jpg/png/jpeg is allowed.",
             },
             password: {
                 required: `{{ __('customvalidation.user.password.required') }}`,
@@ -79,5 +86,6 @@
             }
         };
         handleValidation('register', rules, messages);
+
     });
 </script>

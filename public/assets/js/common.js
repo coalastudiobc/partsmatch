@@ -51,6 +51,15 @@ jQuery(document).ready(function () {
 
 
 // Jquery custom validations
+$.validator.addMethod("imageExtension", function (value, element) {
+    // Get file extension
+    var extension = value.split('.').pop().toLowerCase();
+    // List of allowed extensions
+    var allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+    // Check if the extension is in the list of allowed extensions
+    return $.inArray(extension, allowedExtensions) !== -1;
+}, "Please choose a valid image file (jpg, jpeg, png)");
+
 jQuery.validator.addMethod('filesize', function (value, element, param) {
     return this.optional(element) || (element.files[0].size <= param)
 }, 'File size must be less than {0}');
@@ -105,6 +114,8 @@ function handleValidation(form, rules, messages = {}, submitHandler = false) {
                 label.removeClass('invalid-feedback').addClass('cstm-selectric-invalid').insertAfter(jQuery(element).parent().siblings('.selectric'))
             } else if (jQuery(element).hasClass('select2-error')) {
                 label.insertAfter($(element).parent())
+            } else if (jQuery(element).hasClass('image-input')) {
+                $('#errorViewer').html(label);
             } else {
                 label.insertAfter(element)
             }

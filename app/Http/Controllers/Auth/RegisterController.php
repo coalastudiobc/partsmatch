@@ -55,11 +55,11 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'phone_number' => ['required', 'unique:users'],
+            'phone_number' => ['required', 'unique:users', 'max:10', 'min:10'],
             'address' => ['required'],
-            'zipcode' => ['required'],
+            'zipcode' => ['required', 'min:6', 'max:6'],
             'industry_type' => ['required'],
-            'image' => ['required'],
+            'image' => ['required', 'mimes:jpeg,png,jpg'],
         ]);
     }
 

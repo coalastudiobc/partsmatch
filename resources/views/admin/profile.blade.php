@@ -38,7 +38,8 @@
                                         <label for="">Name*</label>
                                         <div class="form-field">
                                             <input type="text" name="name" class="form-control disabled-inputs"
-                                                placeholder="John Doe" disabled value="{{ old('name', $authUser->name) }}">
+                                                placeholder="Enter name" disabled
+                                                value="{{ old('name', $authUser->name) }}">
 
                                         </div>
                                     </div>
@@ -48,7 +49,7 @@
                                         <label for="">Email*</label>
                                         <div class="form-field">
                                             <input type="email" name="email" class="form-control disabled-inputs"
-                                                placeholder="johndoe@gmail.com" disabled
+                                                placeholder="Enter email" disabled
                                                 value="{{ old('email', $authUser->email) }}">
 
                                         </div>
@@ -70,8 +71,9 @@
                                     <div class="form-group">
                                         <label for="">Password</label>
                                         <div class="form-field">
-                                            <input type="password" name="password" class="form-control disabled-inputs"
-                                                placeholder="*********" disabled value="{{ old('password') }}">
+                                            <input type="password" name="password" id="password"
+                                                class="form-control disabled-inputs" placeholder="*********" disabled
+                                                value="{{ old('password') }}">
 
                                         </div>
                                     </div>

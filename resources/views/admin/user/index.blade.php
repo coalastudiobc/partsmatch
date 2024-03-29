@@ -94,7 +94,7 @@
                     @empty
                         <tr>
                             <td class="no-record-found">
-                                <center>Did not found any User </center>
+                                <center>Did not found any dealer </center>
                             </td>
                         </tr>
                     @endforelse

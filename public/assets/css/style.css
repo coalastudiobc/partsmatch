@@ -1330,20 +1330,7 @@ button.btn-close {
     width: 100px;
 }
 
-.file-upload-box span {
-    position: absolute;
-    width: 100%;
+.upload-img.is-invalid .invalid-feedback {
     display: block;
-    min-width: 200px;
-    left: -54px;
-    bottom: -48px;
-}
-
-.file-upload-box label#file-upload-error {
-    position: absolute;
-    width: 100%;
-    display: block;
-    min-width: 200px;
-    left: -54px;
-    bottom: -48px;
+    text-align: center;
 }

@@ -19,7 +19,7 @@
                 regex: passwordRegex,
             },
             password_confirmation: {
-                equalTo: "#password_confirmation"
+                equalTo: "#password"
             },
             profile_pic: {
                 filesize: profilePicSize,
