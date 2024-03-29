@@ -1,5 +1,5 @@
 <script>
-  jQuery(document).ready(function(){
+    jQuery(document).ready(function() {
         const rules = {
             name: {
                 required: true,
@@ -11,12 +11,12 @@
         const messages = {
 
             name: {
-                required:  `{{ __('customvalidation.category.name.required') }}`,
-                regex:     `{{ __('customvalidation.category.name.regex', ['regex' => '${nameRegex}']) }}`,
+                required: `{{ __('customvalidation.category.name.required') }}`,
+                regex: `{{ __('customvalidation.category.name.regex', ['regex' => '${nameRegex}']) }}`,
             }
         };
 
-        handleValidation('category', rules, messages);
+        handleValidation('category', rules, messages, true);
 
     });
 </script>

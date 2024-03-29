@@ -40,7 +40,7 @@
             },
             password_confirmation: {
                 required: true,
-                // equalTo: "#password_confirmation"
+                equalTo: "#password_confirmation"
             }
         }
         const messages = {
@@ -81,11 +81,11 @@
 
             },
             password_confirmation: {
-                // equalTo: `{{ __('customvalidation.user.confirm_password.equal') }}`,
+                equalTo: `{{ __('customvalidation.user.confirm_password.equal') }}`,
                 required: `{{ __('customvalidation.user.confirm_password.required') }}`,
             }
         };
-        handleValidation('register', rules, messages);
+        handleValidation('register', rules, messages, true);
 
     });
 </script>

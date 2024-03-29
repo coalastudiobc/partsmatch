@@ -174,7 +174,8 @@
                                             <div class="form-group">
                                                 <label for="">Password*</label>
                                                 <div class="form-field">
-                                                    <input type="password" name="password" value="{{ old('password') }}"
+                                                    <input id="password_confirmation" type="password" name="password"
+                                                        value="{{ old('password') }}"
                                                         class="form-control @error('password') is-invalid @enderror"
                                                         placeholder="**********">
 
@@ -235,12 +236,12 @@
             }
         });
 
-        $('#submit').on('click', function(e) {
-            e.preventDefault();
-            jQuery('#register').validate();
-            if (jQuery('#register').valid()) {
-                jQuery('#register').submit();
-            }
-        });
+        // $('form#register').on('submit', function(e) {
+        //     e.preventDefault();
+        //     jQuery('form#register').validate();
+        //     if (jQuery('form#register').valid()) {
+        //         $(this).unbind('submit').submit();
+        //     }
+        // });
     </script>
 @endpush

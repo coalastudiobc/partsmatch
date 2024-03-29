@@ -103,10 +103,11 @@
                                         </div> --}}
                                         <div class="col-md-6">
                                             <a class="btn secondary-btn full-btn  mr-1"
-                                                href="{{ route('admin.category.index') }}">Back</a>
+                                                href="{{ url()->previous() }}">Back</a>
                                         </div>
                                         <div class="col-md-6">
-                                            <button class="btn primary-btn full-btn mr-1" id="submit">Submit</button>
+                                            <button type="button" class="btn primary-btn full-btn mr-1"
+                                                id="submit">Submit</button>
                                         </div>
                                     </div>
                                 </form>
@@ -122,6 +123,13 @@
     @includeFirst(['validation.js_category'])
     <script>
         jQuery(document).ready(function() {
+            //     $('#submit').on('click', function(e) {
+            //         e.preventDefault();
+            //         jQuery('#category').validate();
+            //         if (jQuery('#category').valid()) {
+            //             jQuery('#category').submit();
+            //         }
+            //     });
             jQuery('#submit').click(function(e) {
                 e.preventDefault();
                 if (jQuery('#category').valid()) {
