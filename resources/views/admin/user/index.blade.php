@@ -8,10 +8,10 @@
         {{-- <h2>Dealers</h2>
         < class=""> --}}
         <div class="serach-and-filter-box">
-            <h3>All Managers</h3>
+            <h3></h3>
             <form action="">
                 <div class="pro-search-box">
-                    <input type="text" name="filter_by_name" class="form-control" placeholder="Search Product By Name">
+                    <input type="text" name="filter_by_name" class="form-control" placeholder="Search Dealer By Name">
                     <button type="submit" class="btn primary-btn">Search</button>
                 </div>
             </form>
@@ -41,9 +41,9 @@
                         <th>
                             <p>Status</p>
                         </th>
-                        <th>
-                            <p>Action</p>
-                        </th>
+                        {{-- <th>
+                            <p>View</p>
+                        </th> --}}
                     </tr>
                     @forelse ($users as $key => $user)
                         <tr>
@@ -59,9 +59,9 @@
                             <td>
                                 <p>{{ $user->address ? $user->address : 'N/A' }}</p>
                             </td>
-                            <td>
-                                <a
-                                    @if (isset($user->product)) href="{{ route('admin.dealers.product.list', [$user->id]) }}" @endif>{{ $user->product ? count($user->product) : 'N/A' }}</a>
+                            <td> 0
+                                {{-- <a
+                                    @if (isset($user->product)) href="{{ route('admin.dealers.product.list', [$user->id]) }}" @endif>{{ $user->product ? count($user->product) : 'N/A' }}</a> --}}
                             </td>
                             {{-- <td>
                                 <p>{{ $user->industry_type ? $user->industry_type : 'N/A' }}</p>

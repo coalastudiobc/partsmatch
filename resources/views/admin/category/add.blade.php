@@ -11,9 +11,9 @@
                         <div class="card">
                             <div class='ajax-response'></div>
                             <x-alert-component />
-                            <div class="card-header">
+                            {{-- <div class="card-header">
                                 <h4>{{ $category->id ? 'Update Category' : 'Add Category' }}</h4>
-                            </div>
+                            </div> --}}
                             <div class="card-body">
                                 <form id="category" enctype="multipart/form-data" method="post">
                                     @csrf

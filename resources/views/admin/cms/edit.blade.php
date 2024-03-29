@@ -34,30 +34,6 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">Slug</label>
-                                                <div class="form-field">
-                                                    <input type="text" name="slug"
-                                                        class="form-control @error('slug') is-invalid @enderror"
-                                                        value="{{ old('slug', $page->slug ?? $page->slug) }}" disabled>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="">Content*</label>
-                                                <div class="form-field">
-                                                    <textarea name="content" class="form-control summernote @error('content') is-invalid @enderror">{{ $page->page_content ?? $page->page_content }}</textarea>
-                                                    @error('content')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
                                                 <label for="">Page Title</label>
                                                 <div class="form-field">
                                                     <input type="text" name="page_title"
@@ -71,6 +47,31 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        {{-- <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="">Slug</label>
+                                                <div class="form-field">
+                                                    <input type="text" name="slug"
+                                                        class="form-control @error('slug') is-invalid @enderror"
+                                                        value="{{ old('slug', $page->slug ?? $page->slug) }}" disabled>
+
+                                                </div>
+                                            </div>
+                                        </div> --}}
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="">Content*</label>
+                                                <div class="form-field">
+                                                    <textarea name="content" class="form-control summernote @error('content') is-invalid @enderror">{{ $page->page_content ?? $page->page_content }}</textarea>
+                                                    @error('content')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        </div>
+
 
                                         <div class="col-md-6">
                                             <div class="form-group">

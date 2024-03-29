@@ -5,7 +5,7 @@
             {!! $message !!}
             <button type="button" class="close btn-close" data-bs-dismiss="alert" aria-label="Close">
                 @role('Administrator')
-                    <span aria-hidden="true">&times;</span>
+                    {{-- <span aria-hidden="true">&times;</span> --}}
                 @endrole
             </button>
         </div>
@@ -18,7 +18,7 @@
             {!! $message !!}
             <button type="button" class="close btn-close" data-bs-dismiss="alert" aria-label="Close">
                 @role('Administrator')
-                    <span aria-hidden="true">&times;</span>
+                    {{-- <span aria-hidden="true">&times;</span> --}}
                 @endrole
             </button>
         </div>

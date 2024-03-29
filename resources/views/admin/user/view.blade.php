@@ -7,6 +7,7 @@
     <div class="main-content">
         <section class="page-content-sec">
             <div class="container">
+
                 <div class="page-content-wrapper">
                     <div class="dealer-profile-box">
                         <div class="dealer-profile-content">
@@ -91,9 +92,10 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
-                                                {{-- <div class="dealer-profile-form-btn">
-                                                    <a href="#" class="btn primary-btn">Send Message</a>
-                                                </div> --}}
+                                                <div class="dealer-profile-form-btn">
+                                                    <a class="btn primary-btn " href="{{ url()->previous() }}">Back</a>
+
+                                                </div>
                                             </div>
                                         </div>
 
