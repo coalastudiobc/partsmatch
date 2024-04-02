@@ -2,6 +2,7 @@
 
 use App\Models\AdminSetting;
 use App\Models\Category;
+use App\Models\CmsPage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
@@ -122,6 +123,14 @@ if (!function_exists('get_admin_setting')) {
             return $record->value;
         }
         return null;
+    }
+}
+
+if (!function_exists('get_cms')) {
+    function get_cms()
+    {
+        $cms = CmsPage::where('status', 1)->get();
+        return $cms;
     }
 }
 // if (!function_exists('stripe_details_validate')) {

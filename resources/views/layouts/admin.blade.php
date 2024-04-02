@@ -55,9 +55,9 @@
                                                         data-bs-toggle="dropdown" aria-expanded="false">
                                                         <img src="{{ Storage::url($authUser->profile_picture_url) }}"
                                                             alt="">
-                                                        {{ $authUser->name }}
+                                                        <p>{{ $authUser->name }}</p>
                                                     </button>
-                                                    <ul class="dropdown-menu">
+                                                    <ul class="dropdown-menu dropdown-menu-end">
                                                         <li><a class="dropdown-item"
                                                                 href="{{ route('admin.profile.view') }}">Profile</a></li>
                                                         {{-- <li><a class="dropdown-item" href="#">Another action</a></li> --}}

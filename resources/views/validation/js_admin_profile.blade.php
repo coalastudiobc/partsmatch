@@ -13,13 +13,18 @@
                 email: true,
                 regex: emailRegex,
             },
+            phone_number: {
+                digits: true,
+                minlength: 10,
+                maxlength: 10,
+            },
             password: {
                 minlength: passwordMinLength,
                 maxlength: passwordMaxLength,
                 regex: passwordRegex,
             },
-            password_confirmation: {
-                equalTo: "#password"
+            confirm_password: {
+                equalTo: "#conPassword",
             },
             profile_pic: {
                 filesize: profilePicSize,
@@ -38,6 +43,11 @@
                 email: `{{ __('customvalidation.profile.email.email') }}`,
                 regex: `{{ __('customvalidation.profile.email.regex', ['regex' => '${emailRegex}']) }}`,
             },
+            phone_number: {
+                digits: `{{ __('customvalidation.profile.phone_number.digits') }}`,
+                minlength: `{{ __('customvalidation.profile.phone_number.minlength') }}`,
+                maxlength: `{{ __('customvalidation.profile.phone_number.maxlength') }}`,
+            },
             profile_pic: {
                 filesize: `{{ __('customvalidation.profile.profile_pic.size', ['min' => '${profilePicSize}']) }}`,
                 extension: `{{ __('customvalidation.profile.profile_pic.mimes', ['mime' => '${profilePicMimes}']) }}`,
@@ -50,7 +60,7 @@
                 regex: `{{ __('customvalidation.user.password.regex', ['regex' => '${passwordRegex}']) }}`,
 
             },
-            password_confirmation: {
+            confirm_password: {
                 equalTo: `{{ __('customvalidation.user.confirm_password.equal') }}`,
                 // required: `{{ __('customvalidation.user.confirm_password.required') }}`,
             }

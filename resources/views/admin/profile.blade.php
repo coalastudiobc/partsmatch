@@ -37,10 +37,15 @@
                                     <div class="form-group">
                                         <label for="">Name*</label>
                                         <div class="form-field">
-                                            <input type="text" name="name" class="form-control disabled-inputs"
+                                            <input type="text" name="name"
+                                                class="form-control disabled-inputs @error('name') is-invalid @enderror"
                                                 placeholder="Enter name" disabled
                                                 value="{{ old('name', $authUser->name) }}">
-
+                                            @error('name')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -48,10 +53,15 @@
                                     <div class="form-group">
                                         <label for="">Email*</label>
                                         <div class="form-field">
-                                            <input type="email" name="email" class="form-control disabled-inputs"
+                                            <input type="email" name="email"
+                                                class="form-control disabled-inputs @error('email') is-invalid @enderror"
                                                 placeholder="Enter email" disabled
                                                 value="{{ old('email', $authUser->email) }}">
-
+                                            @error('email')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -59,10 +69,15 @@
                                     <div class="form-group">
                                         <label for="">Phone Number</label>
                                         <div class="form-field">
-                                            <input type="tel" name="phone_number" class="form-control disabled-inputs"
+                                            <input type="tel" name="phone_number"
+                                                class="form-control disabled-inputs @error('phone_number') is-invalid @enderror"
                                                 placeholder="Enter phone number" name="phone_number" disabled
                                                 value="{{ old('phone_number', $authUser->phone_number) }}">
-
+                                            @error('phone_number')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -71,10 +86,14 @@
                                     <div class="form-group">
                                         <label for="">Password</label>
                                         <div class="form-field">
-                                            <input type="password" name="password" id="password"
-                                                class="form-control disabled-inputs" placeholder="*********" disabled
-                                                value="{{ old('password') }}">
-
+                                            <input type="password" name="password" id="conPassword"
+                                                class="form-control disabled-inputs @error('password') is-invalid @enderror"
+                                                placeholder="*********" disabled value="{{ old('password') }}">
+                                            @error('password')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -83,9 +102,13 @@
                                         <label for="">Confirm password</label>
                                         <div class="form-field">
                                             <input type="password" name="confirm_password"
-                                                class="form-control disabled-inputs" placeholder="*********" disabled
-                                                value="{{ old('confirm_password') }}">
-
+                                                class="form-control disabled-inputs @error('confirm_password') is-invalid @enderror"
+                                                placeholder="*********" disabled value="{{ old('confirm_password') }}">
+                                            @error('confirm_password')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>

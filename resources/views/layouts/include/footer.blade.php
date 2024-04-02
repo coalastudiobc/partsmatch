@@ -29,10 +29,22 @@
                             <div class="footer-social-list">
                                 <h4>Information</h4>
                                 <ul>
-                                    <li><a href="{{ route('view', ['slug' => 'about-us']) }}">About Us</a></li>
+
+                                    @foreach (get_cms() as $cms)
+                                        <li>
+                                            <a href="{{ route('view', ['slug' => $cms->slug]) }}">{{ $cms->name }}</a>
+                                        </li>
+                                    @endforeach
+                                    {{-- <li><a href="{{ route('view', ['slug' => 'about-us']) }}">About Us</a></li>
+
                                     <li><a href="{{ route('view', ['slug' => 'terms & conditions']) }}">Terms &
                                             Conditions</a></li>
-                                    <li><a href="{{ route('view', ['slug' => 'privacy policy']) }}">Privacy Policy</a></li>
+                                    <li><a href="{{ route('view', ['slug' => 'faq']) }}">FAQ</a></li>
+                                    <li><a href="{{ route('view', ['slug' => 'contact-us']) }}">Contact us</a>
+                                    </li>
+                                    <li><a href="{{ route('view', ['slug' => 'how it works']) }}">How it Works</a>
+                                    </li>
+                                    <li><a href="{{ route('view', ['slug' => 'privacy policy']) }}">Privacy Policy</a></li> --}}
                                 </ul>
                             </div>
                         </div>

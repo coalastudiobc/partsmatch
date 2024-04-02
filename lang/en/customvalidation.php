@@ -120,6 +120,21 @@ return [
             'size' => 'File size should not be greater than 2 MB',
             'mimes' => 'Supported only JPEG, JPG, PNG file type'
         ],
+        'phone_number' => [
+            'digits' => 'Please enter only digits',
+            'minlength' => 'phone number should be 10 digits',
+            'maxlength' => 'phone number should be 10 digits',
+        ],
+        'password' => [
+            'min' => 'Password can be :min - :max characters',
+            'max' => 'Password can be :min - :max characters',
+            'regex' => 'Password can be alphanumeric and (@#$%^&*) these special characters *At least one uppercase *One lowercase *One numeric',
+
+        ],
+        'confirm_password' => [
+            'equal' => 'Confirm password not match',
+
+        ],
     ],
 
     'category' => [
@@ -163,6 +178,7 @@ return [
             'required' => 'Please enter the name',
             'min' => 'Name can be :min - :max characters',
             'max' => 'Name can be :min - :max characters',
+            'regex' => 'Only alphabets and in between space are allowed',
         ],
         'slug' => [
             'required' => 'Please enter the slug',
@@ -220,6 +236,8 @@ return [
             'required' => 'Please enter the phone number',
             'digits' => 'Phone number must be of :digits',
             'phoneUS' => 'Phone number must be of :digits digits',
+            'minlength' => 'Phone number should be 10 digits.',
+            'maxlength' => 'Phone number should be 10 digits.'
         ],
         'industry_type' => [
             'required' => 'Please enter the industry type',
@@ -266,6 +284,15 @@ return [
         ],
         'terms' => [
             'required' => 'Please check terms & condition',
+        ],
+        'image' => [
+            'required' => 'Image is required',
+            'imageExtension' => 'Only image type jpg/png/jpeg is allowed.',
+        ],
+        'zipcode' => [
+            'required' => 'please enter the zipcode.',
+            'minlength' => 'zipcode should be 6 digits.',
+            'maxlength' => 'zipcode should be 6 digits.',
         ],
 
     ],

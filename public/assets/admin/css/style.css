@@ -343,6 +343,17 @@ header {
     background: transparent;
     border: 0;
     color: #000;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.nav-profile .dropdown-toggle p {
+    display: inline-block;
+    max-width: 135px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .navbar-nav .nav-item .nav-link {

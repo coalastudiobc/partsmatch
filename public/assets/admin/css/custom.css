@@ -506,7 +506,7 @@
 }
 
 .product-detail-table table tr td p {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
 }
 
@@ -523,7 +523,7 @@
 }
 
 .product-detail-table table tr th:last-child {
-    text-align: right;
+    text-align: left;
     padding-right: 40px;
     width: 100px;
 }
