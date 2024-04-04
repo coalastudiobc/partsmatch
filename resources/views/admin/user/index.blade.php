@@ -81,8 +81,8 @@
 
                             </td>
                             <td>
-                                <p><a href="{{ route('admin.dealers.show', [$user->id]) }}"class=""><i
-                                            class="fa-solid fa-eye"></i></a>
+                                <p><a href="{{ route('admin.dealers.show', [$user->id]) }}" class="btn btn-secondary">View
+                                        details</a>
                                 </p>
                             </td>
                             {{-- <td>

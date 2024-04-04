@@ -5,10 +5,12 @@
     <div class="page-content-wrapper">
         <div class="dealer-profile-box">
             <div class="dealer-profile-content">
+                <x-alert-component />
+
                 <div class="dealer-profile-form-box">
                     <div class="dealer-profile-detail-form">
                         <span id="editProfile"><i class="fa-sharp fa-solid fa-edit"></i></span>
-                        <span id="closeEditProfile" class='d-none'><i class="fa-sharp fa-solid fa-close"></i></span>
+                        {{-- <span id="closeEditProfile" class='d-none'><i class="fa-sharp fa-solid fa-close"></i></span> --}}
                         <form id="adminprofile" action="{{ route('admin.profile.update') }}" enctype="multipart/form-data"
                             method="POST">
                             @csrf
@@ -19,8 +21,10 @@
                                             <div class="file-upload-box">
                                                 <label for="file-upload">
                                                     <div class="profile-without-img">
-                                                        <img src="{{ $authUser->profile_picture_url ? Storage::url($authUser->profile_picture_url) : asset('assets/images/user.png') }}"
+                                                        <img src="{{ asset('storage/' . $authUser->profile_picture_url) ?? asset('assets/images/user.png') }}"
                                                             alt="" id="Userimage">
+                                                        {{-- <img src="{{ $authUser->profile_picture_url ? Storage::url($authUser->profile_picture_url) : asset('assets/images/user.png') }}"
+                                                            alt="" id="Userimage"> --}}
                                                     </div>
                                                     <div class="upload-icon d-none editable">
                                                         <i class="fa-sharp fa-solid fa-pen"></i>
@@ -113,8 +117,14 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <div class="dealer-profile-form-btn">
-                                        <button class="btn primary-btn d-none editable">Submit</button>
+                                    <div class="d-flex justify-content-center gap-3">
+                                        <div class="dealer-profile-form-btn">
+                                            <button class="btn primary-btn d-none editable">Submit</button>
+                                        </div>
+                                        <div>
+                                            <a href="{{ url()->current() }}"
+                                                class="cancelbtn btn primary-btn d-none editable">Cancel</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

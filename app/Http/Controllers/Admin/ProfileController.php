@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 
+use App\Http\Requests\AdminProfileRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -14,7 +15,7 @@ class ProfileController extends Controller
 
         return view('admin.profile');
     }
-    public function update(Request $request)
+    public function update(AdminProfileRequest $request)
     {
         $data = [
             'name' => $request->name,
@@ -34,6 +35,6 @@ class ProfileController extends Controller
 
         auth()->user()->update($data);
 
-        return redirect()->back()->with(['status' => "success", "message" => 'Updated successfully']);
+        return redirect()->back()->with(['status' => "success", "message" => 'Profile Updated successfully']);
     }
 }

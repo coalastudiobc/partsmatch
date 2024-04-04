@@ -55,7 +55,7 @@ class CmsManagementController extends Controller
 
         $url = route('admin.cms.index');
         // session()->flash('status', 'data updated successfully');
-        return redirect()->route('admin.cms.index')->with(['Message' => 'updated successfully']);
+        return redirect()->route('admin.cms.index')->with(['message' => 'updated successfully']);
         // return response()->json(['success' => true, 'status' => 'success', 'message' => 'Page updated successfully', 'url' => $url]);
     }
     // public function toggleStatus(Request $request)

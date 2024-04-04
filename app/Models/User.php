@@ -30,6 +30,7 @@ class User extends Authenticatable
         'industry_type',
         'address',
         'zipcode',
+        'email_verification_token'
     ];
 
     /**

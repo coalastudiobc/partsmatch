@@ -6,9 +6,10 @@
 @section('content')
 
     <div class="dashboard-right-box">
+        <x-alert-component />
+
         <h2>CMS</h2>
 
-        {{-- <x-alert-component /> --}}
         <div class="product-detail-table cms-list-table">
             <div class="table-responsive">
                 <table class="table">

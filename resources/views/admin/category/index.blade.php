@@ -6,6 +6,7 @@
 @section('content')
 
     <div class="dashboard-right-box">
+        <x-alert-component />
 
         <div class="card-header-form padding">
             <h2>Categories</h2>
@@ -62,8 +63,8 @@
                                 <div class="action-btns">
                                     <a href="{{ route('admin.category.edit', [jsencode_userdata($category->id)]) }}"><i
                                             class="fa-solid fa-pen-to-square" style="color: #3EBE62;"></i></a>
-                                    <a href="{{ route('admin.category.delete', [jsencode_userdata($category->id)]) }}"><i
-                                            class="fa-regular fa-trash-can" style="color: #E13F3F;"></i></a>
+                                    <a href="{{ route('admin.category.delete', [jsencode_userdata($category->id)]) }}"
+                                        class="delete"><i class="fa-regular fa-trash-can" style="color: #E13F3F;"></i></a>
                                 </div>
                             </td>
                         </tr>

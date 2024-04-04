@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->string('zipcode')->nullable();
             $table->enum('status', ['ACTIVE', 'INACTIVE', 'APPROVED', 'REJECTED'])->default('ACTIVE');
+            $table->longtext('email_verification_token')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

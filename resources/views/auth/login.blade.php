@@ -8,6 +8,8 @@
                     <div class="logo-box">
                         <img src="{{ asset('assets/images/header-logo.png') }}" alt="">
                     </div>
+                    <x-alert-component />
+
                     <div class="login-txt">
                         <h2>Login Here</h2>
                         <p>It is a long established fact that a reader will be distracted by</p>

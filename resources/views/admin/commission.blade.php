@@ -40,6 +40,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Order Commission<span class="required-field">*</span></label>
+                                            <div class="symbol"></div>
                                             <input type="text" id="checkcommission" name="ordercommission"
                                                 class="form-control @error('ordercommission') is-invalid @enderror"
                                                 value="{{ old('name', $commission->value) }}">
@@ -71,4 +72,26 @@
 @endsection
 @push('scripts')
     @includeFirst(['validation.js_commision'])
+    <script>
+        $(document).ready(function() {
+            var type = $('#checktype').val();
+
+            if (type == 'Percentage') {
+                $('.symbol').text('%');
+
+            } else {
+                $('.symbol').text('$');
+            }
+            $('#checktype').on('click', function() {
+                var type = $('#checktype').val();
+                if (type == 'Percentage') {
+                    $('.symbol').text('%');
+
+                } else {
+                    $('.symbol').text('$');
+                }
+            })
+
+        });
+    </script>
 @endpush

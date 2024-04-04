@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Dealer\DealerController;
 use App\Http\Controllers\Dealer\ProfileController;
 use Illuminate\Support\Facades\Auth;
@@ -26,6 +27,8 @@ Route::get('/', function () {
 })->name('welcome');
 
 Route::get('redirect-to-dashboard', [HomeController::class, 'redirectToDashboard'])->name('redirect-to-dashboard');
+Route::get('verify-email/{user}/{token}', [RegisterController::class, 'verifyEmail'])->name('verify-email');
+
 Auth::routes();
 
 

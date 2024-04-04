@@ -17,6 +17,10 @@
     <link rel="stylesheet" href="{{ asset('assets/admin/css/toaster.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/admin/css/slick.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/admin/css/slick-theme.css') }}">
+    <script src="
+                                                https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
+        integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     @include('layouts.include.favicon')
 
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.8/slick-theme.min.css"> -->
@@ -53,7 +57,7 @@
                                                 <div class="dropdown">
                                                     <button class="btn btn-secondary dropdown-toggle" type="button"
                                                         data-bs-toggle="dropdown" aria-expanded="false">
-                                                        <img src="{{ Storage::url($authUser->profile_picture_url) }}"
+                                                        <img src="{{ asset('storage/' . $authUser->profile_picture_url) ?? asset('assets/admin/images/user.png') }}"
                                                             alt="">
                                                         <p>{{ $authUser->name }}</p>
                                                     </button>
