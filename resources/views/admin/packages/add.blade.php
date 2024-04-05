@@ -14,7 +14,9 @@
                                 <h4>{{ $package->id ? 'Update Subscription Plan' : 'Add Subscription Plan' }}</h4>
                             </div>
                             <div class="card-body">
-                                <form id="package" enctype="multipart/form-data" method="post">
+                                <form id="package"
+                                    action="{{ $package->id ? route('admin.packages.store', [jsencode_userdata($package->id)]) : route('admin.packages.store') }}";
+                                    enctype="multipart/form-data" method="post">
                                     @csrf
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
@@ -31,10 +33,11 @@
                                         <div class="form-group col-md-6">
                                             <label>Price<span class="required-field">*</span></label>
                                             <div class="doller-input-field">
-                                            <input type="text" name="price"
-                                                class="form-control two-decimals @error('price') is-invalid @enderror"
-                                                value="{{ old('price', $package->price ?? $package->price) }}">
-                                                <span class="doller-symbol-txt">$</span>
+                                                {{-- <div class="symbol">$</div> --}}
+                                                <input type="text" name="price"
+                                                    class="form-control two-decimals @error('price') is-invalid @enderror"
+                                                    value="{{ old('price', $package ?? $package) }}">
+                                                <span class="doller-symbol-txt symbol">$</span>
                                             </div>
                                             @error('price')
                                                 <span class="invalid-feedback" role="alert">
@@ -42,16 +45,20 @@
                                                 </span>
                                             @enderror
                                         </div>
-                                        
+
                                     </div>
                                     {{-- @dd($package) --}}
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label>Type<span class="required-field">*</span></label>
                                             <select name="time_type"
-                                                class="form-control @error('time_type') is-invalid @enderror" >
-                                                <option value="{{ jsencode_userdata('year') }}" @if ($package->billing_cycle == 'ANNUALLY	')selected @endif>Yearly </option>
-                                                <option value="{{ jsencode_userdata('month') }}" @if ($package->billing_cycle == 'MONTHLY')selected @endif>Monthly</option> 
+                                                class="form-control @error('time_type') is-invalid @enderror">
+                                                <option value="{{ jsencode_userdata('Yearly') }}">Yearly </option>
+                                                <option value="{{ jsencode_userdata('Monthly') }}">Monthly</option>
+                                                <option value="{{ jsencode_userdata('Quarterly') }}">Every 3 months
+                                                </option>
+                                                <option value="{{ jsencode_userdata('Halfly') }}">Every 6 months
+                                                </option>
                                                 {{-- <option value="QUATERLY"@if ($package->time_type == '2')selected @endif>Days</option> --}}
                                             </select>
                                             @error('time_type')
@@ -65,10 +72,9 @@
                                             <label>Status</label>
                                             <select name="status"
                                                 class="form-control @error('status') is-invalid @enderror">
-                                                <option value="1">Select </option>
-                                                <option value="1" @if ($package->status == '1') selected @endif>
+                                                <option value="1">
                                                     Active</option>
-                                                <option value="0"@if ($package->status == '0') selected @endif>
+                                                <option value="0">
                                                     Inactive</option>
                                             </select>
                                             @error('status')
@@ -84,10 +90,9 @@
                                             <textarea class="form-control summernote @error('description') is-invalid @enderror" name="description">{{ $package->description ?? $package->description }}</textarea>
                                         </div>
                                     </div>
-                                    <div class="card-footer text-right">
-                                        <a class="btn btn-primary mr-1"
-                                        href="{{ route('admin.packages.all') }}">Back</a>
-                                        <button class="btn btn-primary " id="submit">Submit</button>
+                                    <div>
+                                        <a class="btn secondary-btn mr-1" href="{{ route('admin.packages.all') }}">Back</a>
+                                        <button class="btn secondary-btn " id="submit">Submit</button>
                                     </div>
                                 </form>
                             </div>
@@ -123,45 +128,47 @@
     </script>
     @includeFirst(['validation.js_package'])
     <script>
-        jQuery(document).ready(function() {
-            jQuery('#submit').click(function(e) {
-                e.preventDefault();
-                if (jQuery('#package').valid()) {
-                    var formData = new FormData($('form#package').get(0));
-                    url =
-                        "{{ $package->id ? route('admin.packages.store', [jsencode_userdata($package->id)]) : route('admin.packages.store') }}";
-                    var response = ajaxCall(url, 'post', formData);
-                    response.then(handlePackage).catch(handlePackageError)
+        // jQuery(document).ready(function() {
+        //     jQuery('#submit').click(function(e) {
+        //         e.preventDefault();
+        //         if (jQuery('#package').valid()) {
+        //             var formData = new FormData($('form#package').get(0));
+        //             
+        //             var response = ajaxCall(url, 'post', formData);
+        //             response.then(handlePackage).catch(handlePackageError)
 
-                    function handlePackage(response) {
-                        if (response.success == true && response.url) {
+        //             function handlePackage(response) {
+        //                 if (response.success == true && response.url) {
 
-                            window.location.replace(response.url);
+        //                     window.location.replace(response.url);
 
-                        } else if (response.success == false) {
-                            if ('errortype' in response && response.errortype) {
-                                var response_ajax = jQuery(document).find(".ajax-response-" + response
-                                    .errortype);
-                            } else {
-                                var response_ajax = jQuery(document).find(".ajax-response");
-                                $("html, body").animate({
-                                    scrollTop: 0
-                                }, "fast");
-                            }
-                            response_ajax.html(
-                                '<div class="alert alert-danger alert-dismissible fade show k" role="alert">' +
-                                response.msg +
-                                '<button type="button" class="btn-close close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
-                                );
-                        }
-                    }
+        //                 } else if (response.success == false) {
+        //                     if ('errortype' in response && response.errortype) {
+        //                         var response_ajax = jQuery(document).find(".ajax-response-" + response
+        //                             .errortype);
+        //                     } else {
+        //                         var response_ajax = jQuery(document).find(".ajax-response");
+        //                         $("html, body").animate({
+        //                             scrollTop: 0
+        //                         }, "fast");
+        //                     }
+        //                     response_ajax.html(
+        //                         '<div class="alert alert-danger alert-dismissible fade show k" role="alert">' +
+        //                         response.msg +
+        //                         '<button type="button" class="btn-close close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
+        //                     );
+        //                 }
+        //             }
 
-                    function handlePackageError(error) {
-                        console.log('error', error)
-                    }
-                }
-            });
-        });
+        //             function handlePackageError(error) {
+        //                 console.log('error', error)
+        //             }
+        //         }
+        //     });
+        // });
+
+
+
         // $(document).ready(function() {
         //     $('.summernote').summernote();
         // });

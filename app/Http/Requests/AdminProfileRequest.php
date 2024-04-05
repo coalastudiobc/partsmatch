@@ -25,8 +25,7 @@ class AdminProfileRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required'],
             'phone_number' => ['numeric'],
-
-
+            'password' => ['same:confirm_password'],
         ];
     }
     public function messages()

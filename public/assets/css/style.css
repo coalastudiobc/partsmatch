@@ -1286,7 +1286,8 @@ button.btn-close {
 }
 
 .form-field:has(.is-invalid) .input-icon {
-    display: none;
+    /* display: none; */
+    top: 25px;
 }
 
 
@@ -1342,4 +1343,39 @@ button.btn-close {
 .upload-img.is-invalid .invalid-feedback {
     display: block;
     text-align: center;
+}
+
+.form-control.is-invalid,
+.was-validated .form-control:invalid {
+    background-image: unset;
+}
+
+
+
+.custm-dropdown .dropdown .dropdown-toggle {
+    border-radius: 5px;
+    border: 1.81px solid #E8E8E8;
+    padding: 12px 17px;
+    font-size: 14px;
+    color: var(--text-color);
+}
+
+.custm-dropdown .dropdown .dropdown-menu.show {
+    width: 100%;
+    padding: 0;
+    overflow: hidden;
+}
+
+.dropdown-toggle::after {
+    display: none;
+}
+
+.custm-drop-icon {
+    position: absolute;
+    right: 15px;
+    transition: all 0.3s ease-in;
+}
+
+.dropdown:has(.dropdown-menu.show) .custm-drop-icon {
+    transform: rotate(180deg) translateX(-4px) translateY(-1px);
 }

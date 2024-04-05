@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::match(['GET', "POST"], 'cms/status', 'App\Http\Controllers\HomeController@toggleStatus')->name('cms.status');
 Route::match(['GET', "POST"], 'product/status', 'App\Http\Controllers\HomeController@toggleStatus')->name('product.status');
 Route::match(['GET', "POST"], 'category/status', 'App\Http\Controllers\HomeController@toggleStatus')->name('category.status');
+Route::match(['GET', "POST"], 'package/status', 'App\Http\Controllers\HomeController@toggleStatus')->name('package.status');
 
 Route::middleware(['auth', 'verified', 'admin'])->namespace('App\Http\Controllers\Admin')->name('admin.')->group(function () {
    Route::match('get', 'dashboard', 'AdminController@dashboard')->name('dashboard');
@@ -47,13 +48,13 @@ Route::middleware(['auth', 'verified', 'admin'])->namespace('App\Http\Controller
    });
 
    //package 
-   // Route::name('packages.')->group(function () {
-   //    Route::get('packages', 'PackageController@index')->name('all');
-   //    Route::get('add/packages', 'PackageController@create')->name('add');
-   //    Route::post('packages/store/{id?}', 'PackageController@store')->name('store');
-   //    Route::get('packages/edit/{id}', 'PackageController@edit')->name('edit');
-   //    Route::get('packages/delete/{id}', 'PackageController@destroy')->name('delete');
-   // });
+   Route::name('packages.')->group(function () {
+      Route::get('packages', 'PackageController@index')->name('all');
+      Route::get('add/packages', 'PackageController@create')->name('add');
+      Route::post('packages/store/{id?}', 'PackageController@store')->name('store');
+      Route::get('packages/edit/{id}', 'PackageController@edit')->name('edit');
+      Route::get('packages/delete/{id}', 'PackageController@destroy')->name('delete');
+   });
 
    //users 
    Route::name('dealers.')->group(function () {

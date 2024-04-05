@@ -1226,7 +1226,7 @@ table tr th {
 .symbol {
     position: absolute;
     top: 50px;
-    left: 25px;
+    left: 22px;
 }
 
 .form-group:has(.symbol) input {
@@ -1235,4 +1235,36 @@ table tr th {
 
 .form-group:has(.symbol) {
     position: relative;
+}
+
+.action-view-btn {
+    font-size: 12px;
+    padding: 8px 10px;
+    background-color: var(--secondary-color);
+    color: #fff;
+    min-width: 90px;
+}
+
+.action-view-btn:hover {
+    color: var(--secondary-color);
+    border: 1px solid var(--secondary-color);
+    background-color: #fff;
+}
+
+.custm-dropdown .dropdown .dropdown-toggle {
+    border-radius: 5px;
+    border: 1.81px solid #E8E8E8;
+    padding: 12px 17px;
+    font-size: 14px;
+    color: var(--text-color);
+}
+
+.custm-dropdown .dropdown .dropdown-menu.show {
+    width: 100%;
+    padding: 0;
+    overflow: hidden;
+}
+
+span.doller-symbol-txt.symbol {
+    left: 14px;
 }

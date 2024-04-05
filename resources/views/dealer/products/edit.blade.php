@@ -1,3 +1,5 @@
+@extends('layouts.dealer')
+
 @section('content')
     <div class="main-content">
         <section class="section">

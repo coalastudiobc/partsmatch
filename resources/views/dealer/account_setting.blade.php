@@ -362,19 +362,9 @@
                                             </span>
                                         @enderror
                                         <div class="input-icon toggle-password">
-                                            <svg class="eye-icon " xmlns="http://www.w3.org/2000/svg" width="17"
-                                                height="13" viewBox="0 0 17 13" fill="none">
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                    d="M1 6.44444C1 6.44444 3.72222 1 8.48611 1C13.25 1 15.9722 6.44444 15.9722 6.44444C15.9722 6.44444 13.25 11.8889 8.48611 11.8889C3.72222 11.8889 1 6.44444 1 6.44444Z"
-                                                    stroke="#727272" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                                <path
-                                                    d="M8.48698 8.48714C9.61456 8.48714 10.5286 7.57306 10.5286 6.44548C10.5286 5.31789 9.61456 4.40381 8.48698 4.40381C7.3594 4.40381 6.44531 5.31789 6.44531 6.44548C6.44531 7.57306 7.3594 8.48714 8.48698 8.48714Z"
-                                                    stroke="#727272" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                            </svg>
 
-                                            <svg class="eye-cross-icon d-none" width="17" height="13"
+
+                                            <svg class="eye-cross-icon" width="17" height="13"
                                                 viewBox="0 0 28 20" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <mask id="mask0_17_18" style="mask-type:luminance"
@@ -394,6 +384,18 @@
                                                 </g>
                                                 <rect y="1.63831" width="2" height="31.5487" rx="1"
                                                     transform="rotate(-55 0 1.63831)" fill="#727272" />
+                                            </svg>
+
+                                            <svg class="eye-icon d-none" xmlns="http://www.w3.org/2000/svg"
+                                                width="17" height="13" viewBox="0 0 17 13" fill="none">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M1 6.44444C1 6.44444 3.72222 1 8.48611 1C13.25 1 15.9722 6.44444 15.9722 6.44444C15.9722 6.44444 13.25 11.8889 8.48611 11.8889C3.72222 11.8889 1 6.44444 1 6.44444Z"
+                                                    stroke="#727272" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                                <path
+                                                    d="M8.48698 8.48714C9.61456 8.48714 10.5286 7.57306 10.5286 6.44548C10.5286 5.31789 9.61456 4.40381 8.48698 4.40381C7.3594 4.40381 6.44531 5.31789 6.44531 6.44548C6.44531 7.57306 7.3594 8.48714 8.48698 8.48714Z"
+                                                    stroke="#727272" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
                                             </svg>
                                         </div>
                                     </div>
@@ -412,19 +414,9 @@
                                             </span>
                                         @enderror
                                         <div class="input-icon toggle-password">
-                                            <svg class="eye-icon " xmlns="http://www.w3.org/2000/svg" width="17"
-                                                height="13" viewBox="0 0 17 13" fill="none">
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                    d="M1 6.44444C1 6.44444 3.72222 1 8.48611 1C13.25 1 15.9722 6.44444 15.9722 6.44444C15.9722 6.44444 13.25 11.8889 8.48611 11.8889C3.72222 11.8889 1 6.44444 1 6.44444Z"
-                                                    stroke="#727272" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                                <path
-                                                    d="M8.48698 8.48714C9.61456 8.48714 10.5286 7.57306 10.5286 6.44548C10.5286 5.31789 9.61456 4.40381 8.48698 4.40381C7.3594 4.40381 6.44531 5.31789 6.44531 6.44548C6.44531 7.57306 7.3594 8.48714 8.48698 8.48714Z"
-                                                    stroke="#727272" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                            </svg>
 
-                                            <svg class="eye-cross-icon d-none" width="17" height="13"
+
+                                            <svg class="eye-cross-icon " width="17" height="13"
                                                 viewBox="0 0 28 20" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <mask id="mask0_17_18" style="mask-type:luminance"
@@ -444,6 +436,18 @@
                                                 </g>
                                                 <rect y="1.63831" width="2" height="31.5487" rx="1"
                                                     transform="rotate(-55 0 1.63831)" fill="#727272" />
+                                            </svg>
+
+                                            <svg class="eye-icon d-none" xmlns="http://www.w3.org/2000/svg"
+                                                width="17" height="13" viewBox="0 0 17 13" fill="none">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M1 6.44444C1 6.44444 3.72222 1 8.48611 1C13.25 1 15.9722 6.44444 15.9722 6.44444C15.9722 6.44444 13.25 11.8889 8.48611 11.8889C3.72222 11.8889 1 6.44444 1 6.44444Z"
+                                                    stroke="#727272" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                                <path
+                                                    d="M8.48698 8.48714C9.61456 8.48714 10.5286 7.57306 10.5286 6.44548C10.5286 5.31789 9.61456 4.40381 8.48698 4.40381C7.3594 4.40381 6.44531 5.31789 6.44531 6.44548C6.44531 7.57306 7.3594 8.48714 8.48698 8.48714Z"
+                                                    stroke="#727272" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
                                             </svg>
                                         </div>
                                     </div>
@@ -462,19 +466,9 @@
                                             </span>
                                         @enderror
                                         <div class="input-icon toggle-password">
-                                            <svg class="eye-icon " xmlns="http://www.w3.org/2000/svg" width="17"
-                                                height="13" viewBox="0 0 17 13" fill="none">
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                    d="M1 6.44444C1 6.44444 3.72222 1 8.48611 1C13.25 1 15.9722 6.44444 15.9722 6.44444C15.9722 6.44444 13.25 11.8889 8.48611 11.8889C3.72222 11.8889 1 6.44444 1 6.44444Z"
-                                                    stroke="#727272" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                                <path
-                                                    d="M8.48698 8.48714C9.61456 8.48714 10.5286 7.57306 10.5286 6.44548C10.5286 5.31789 9.61456 4.40381 8.48698 4.40381C7.3594 4.40381 6.44531 5.31789 6.44531 6.44548C6.44531 7.57306 7.3594 8.48714 8.48698 8.48714Z"
-                                                    stroke="#727272" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                            </svg>
 
-                                            <svg class="eye-cross-icon d-none" width="17" height="13"
+
+                                            <svg class="eye-cross-icon" width="17" height="13"
                                                 viewBox="0 0 28 20" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <mask id="mask0_17_18" style="mask-type:luminance"
@@ -494,6 +488,17 @@
                                                 </g>
                                                 <rect y="1.63831" width="2" height="31.5487" rx="1"
                                                     transform="rotate(-55 0 1.63831)" fill="#727272" />
+                                            </svg>
+                                            <svg class="eye-icon d-none" xmlns="http://www.w3.org/2000/svg"
+                                                width="17" height="13" viewBox="0 0 17 13" fill="none">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M1 6.44444C1 6.44444 3.72222 1 8.48611 1C13.25 1 15.9722 6.44444 15.9722 6.44444C15.9722 6.44444 13.25 11.8889 8.48611 11.8889C3.72222 11.8889 1 6.44444 1 6.44444Z"
+                                                    stroke="#727272" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                                <path
+                                                    d="M8.48698 8.48714C9.61456 8.48714 10.5286 7.57306 10.5286 6.44548C10.5286 5.31789 9.61456 4.40381 8.48698 4.40381C7.3594 4.40381 6.44531 5.31789 6.44531 6.44548C6.44531 7.57306 7.3594 8.48714 8.48698 8.48714Z"
+                                                    stroke="#727272" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
                                             </svg>
                                         </div>
                                     </div>

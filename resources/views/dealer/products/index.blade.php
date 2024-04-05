@@ -63,8 +63,8 @@
                                             class="fa-regular fa-trash-can" style="color: #E13F3F;"></i></a>
                                 </div>
                             </td>
-                            @foreach ($products as $key => $product)
-                        <tr>
+                            {{-- @foreach ($products as $key => $product) --}}
+                            {{-- <tr>
                             <td>
                                 <div class="pro-img-box" data-bs-toggle="modal" data-bs-target="#pro-detail-model">
                                     <img src="{{ Storage::url($product->productImage["$key"]->file_url) }}" alt="img">
@@ -94,7 +94,7 @@
                                 </div>
                             </td>
 
-                        </tr>
+                        </tr> --}}
                     @endforeach
 
                 </table>
@@ -132,9 +132,9 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <!-- <div class="modal-header">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         </div> -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         </div> -->
                 <div class="modal-body">
                     <div class="add-pro-form">
                         <h2>Add New Products</h2>
@@ -482,7 +482,6 @@
                         <h2>Bulk Upload</h2>
                         <form action="">
                             <div class="row">
-
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="">Upload File</label>
@@ -500,137 +499,135 @@
                         </form>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
 
 
+    <div class="modal fade" id="pro-detail-model" tabindex="-1" aria-labelledby="bulk-upload" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <!-- <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div> -->
+                <div class="modal-body">
+                    <div class="pro-detail-body">
+                        <img class="model-pro-img" src="images/collect1.png" alt="">
+                        <div class="product-infography">
+                            <h2>R1 Concepts® – eLINE Series Plain Brake Rotors</h2>
+                            <span>( Product Category )</span>
+                            <p>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out
+                                print, graphic or web designs. </p>
+                            <div class="product-quantity-box">
+                                <p>Quantity</p>
+                                <div class="left-input">
+                                    <input type="text" placeholder="3">
+                                </div>
+                            </div>
+                            <div class="singlr-pro-detail model-more-info-box">
+                                <div class="product-name-detail">
+                                    <h3>Product Name</h3>
+                                    <h3>$700</h3>
+                                </div>
+                                <div class="more-info-box ">
+                                    <div class="accordion" id="accordionExample">
 
-                <div class="modal fade" id="pro-detail-model" tabindex="-1" aria-labelledby="bulk-upload"
-                    aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <!-- <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div> -->
-                            <div class="modal-body">
-                                <div class="pro-detail-body">
-                                    <img class="model-pro-img" src="images/collect1.png" alt="">
-                                    <div class="product-infography">
-                                        <h2>R1 Concepts® – eLINE Series Plain Brake Rotors</h2>
-                                        <span>( Product Category )</span>
-                                        <p>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out
-                                            print, graphic or web designs. </p>
-                                        <div class="product-quantity-box">
-                                            <p>Quantity</p>
-                                            <div class="left-input">
-                                                <input type="text" placeholder="3">
-                                            </div>
-                                        </div>
-                                        <div class="singlr-pro-detail model-more-info-box">
-                                            <div class="product-name-detail">
-                                                <h3>Product Name</h3>
-                                                <h3>$700</h3>
-                                            </div>
-                                            <div class="more-info-box ">
-                                                <div class="accordion" id="accordionExample">
-
-                                                    <div class="accordion-item">
-                                                        <h2 class="accordion-header">
-                                                            <button class="accordion-button collapsed" type="button"
-                                                                data-bs-toggle="collapse"
-                                                                data-bs-target="#additional-information"
-                                                                aria-expanded="false" aria-controls="collapseTwo">
-                                                                Additional Information
-                                                            </button>
-                                                        </h2>
-                                                        <div id="additional-information"
-                                                            class="accordion-collapse collapse"
-                                                            data-bs-parent="#accordionExample">
-                                                            <div class="accordion-body">
-                                                                <p>Lorem ipsum, or lipsum as it is sometimes known, is dummy
-                                                                    text used in laying out print, graphic or web designs.
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header">
+                                                <button class="accordion-button collapsed" type="button"
+                                                    data-bs-toggle="collapse" data-bs-target="#additional-information"
+                                                    aria-expanded="false" aria-controls="collapseTwo">
+                                                    Additional Information
+                                                </button>
+                                            </h2>
+                                            <div id="additional-information" class="accordion-collapse collapse"
+                                                data-bs-parent="#accordionExample">
+                                                <div class="accordion-body">
+                                                    <p>Lorem ipsum, or lipsum as it is sometimes known, is dummy
+                                                        text used in laying out print, graphic or web designs.
+                                                    </p>
                                                 </div>
                                             </div>
-
                                         </div>
+
                                     </div>
                                 </div>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
+
                             </div>
-                            <!-- <div class="modal-footer">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <button type="button" class="btn btn-primary">Save changes</button>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     </div> -->
                         </div>
                     </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-
-            @endsection
-            @push('scripts')
-                @includeFirst(['validation.dealer.js_product'])
-                <script type="text/javascript">
-                    // $(document).ready({
-                    //     function() {
-                    //         var carquery = new CarQuery();
-                    //         carquery.init();
-                    //         carquery.initYearMakeModelTrim('car-years', 'car-makes', 'car-models', 'car-model-trims');
-                    //     }
-                    // });
+                <!-- <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                                </div> -->
+            </div>
+        </div>
+    </div>
 
 
-                    jQuery(document).on('change', ".category", function() {
-                        var id = $(this).val();
-                        if ($(this).val()) {
-                            $.ajax({
-                                url: APP_URL + "/dealer/products/subcategory/" + id,
-                                success: function(result) {
-                                    if (result.status == true) {
-                                        if (result.subcategory) {
-                                            $("#subcategory").html(result.subcategory);
-                                        }
-                                    }
-                                }
+@endsection
 
-                            })
-                        }
-                    })
-                </script>
-                <script>
-                    $(function() {
-                        var carquery = new CarQuery();
-                        carquery.init();
-                        carquery.initYearMakeModelTrim('car-years', 'car-makes', 'car-models', 'car-model-trims');
-
-                        // Multiple images preview with JavaScript
-                        var previewImages = function(input, imgPreviewPlaceholder) {
-                            if (input.files) {
-                                var filesAmount = input.files.length;
-                                for (i = 0; i < filesAmount; i++) {
-                                    var reader = new FileReader();
-                                    reader.onload = function(event) {
-                                        var element =
-                                            '<div class="upload-img-box"><img src="' + event.target.result +
-                                            '" alt="img"> <div class = "upload-img-cross" > <i class = "fa-regular fa-circle-xmark remove_uploaded"></i></div></div>';
-                                        console.log(element);
-                                        jQuery(element).appendTo(imgPreviewPlaceholder);
-                                    }
-                                    reader.readAsDataURL(input.files[i]);
-                                }
+@push('scripts')
+    @includeFirst(['validation.dealer.js_product'])
+    <script type="text/javascript">
+        // $(document).ready({
+        //     function() {
+        //         var carquery = new CarQuery();
+        //         carquery.init();
+        //         carquery.initYearMakeModelTrim('car-years', 'car-makes', 'car-models', 'car-model-trims');
+        //     }
+        // });
+        jQuery(document).on('change', ".category", function() {
+            var id = $(this).val();
+            if ($(this).val()) {
+                $.ajax({
+                    url: APP_URL + "/dealer/products/subcategory/" + id,
+                    success: function(result) {
+                        if (result.status == true) {
+                            if (result.subcategory) {
+                                $("#subcategory").html(result.subcategory);
                             }
-                        };
-                        $('#upload-image').on('change', function() {
-                            previewImages(this, 'div.upload-img-preview');
-                        });
+                        }
+                    }
 
-                        $(document).on('click', '.remove_uploaded', function() {
-                            $(this).parent('div').parent('div').remove();
-                        });
+                })
+            }
+        })
+    </script>
+    <script>
+        $(function() {
+            var carquery = new CarQuery();
+            carquery.init();
+            carquery.initYearMakeModelTrim('car-years', 'car-makes', 'car-models', 'car-model-trims');
 
-                    });
-                </script>
-            @endpush
+            // Multiple images preview with JavaScript
+            var previewImages = function(input, imgPreviewPlaceholder) {
+                if (input.files) {
+                    var filesAmount = input.files.length;
+                    for (i = 0; i < filesAmount; i++) {
+                        var reader = new FileReader();
+                        reader.onload = function(event) {
+                            var element =
+                                '<div class="upload-img-box"><img src="' + event.target.result +
+                                '" alt="img"> <div class = "upload-img-cross" > <i class = "fa-regular fa-circle-xmark remove_uploaded"></i></div></div>';
+                            console.log(element);
+                            jQuery(element).appendTo(imgPreviewPlaceholder);
+                        }
+                        reader.readAsDataURL(input.files[i]);
+                    }
+                }
+            };
+            $('#upload-image').on('change', function() {
+                previewImages(this, 'div.upload-img-preview');
+            });
+
+            $(document).on('click', '.remove_uploaded', function() {
+                $(this).parent('div').parent('div').remove();
+            });
+
+        });
+    </script>
+@endpush
