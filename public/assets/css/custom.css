@@ -1027,3 +1027,109 @@
     padding-right: 25px;
     width: 100px;
 }
+
+/*================================================ Plan Page ============================================*/
+
+.plan-wrapper {
+    background-color: #fff;
+    padding: 60px 40px;
+    border-radius: 15px;
+    box-shadow: 0px 1px 9px 4px #0000001f;
+}
+
+.cards {
+    max-width: 350px;
+    margin: 0 auto;
+    border-radius: 15px;
+    border: 1px solid #5c5c5c;
+    padding: 40px 20px;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 400px;
+    position: relative;
+}
+
+.cards:hover {
+    background-color: var(--secondary-color);
+}
+
+/* .cards:hover .card-details > span{
+    color: var(--heading-color);
+    border-color: var(--heading-color);
+} */
+.cards .card-details>span {
+    color: var(--primary-color);
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1;
+    border-bottom: 1px solid var(--primary-color);
+    margin: 30px 0px 20px;
+    display: inline-block;
+}
+
+.cards:hover .card-details h3,
+.cards:hover .card-details p,
+.cards:hover .card-details ul li p {
+    color: #fff;
+}
+
+.cards:hover .card-details ul li::marker {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.cards .card-details h3 {
+    font-size: 42px;
+    line-height: 1;
+    margin-bottom: 20px;
+}
+
+.cards .card-details h3 span {
+    font-size: 20px;
+
+}
+
+.cards .card-details>p {
+    font-size: 18px;
+    line-height: 1;
+    margin-bottom: 20px;
+
+}
+
+.card-tag {
+    position: absolute;
+    left: -20px;
+    top: 15px;
+}
+
+.card-list {
+    margin-bottom: 40px;
+    padding-left: 20px;
+}
+
+ul.card-list li {
+    list-style: disc;
+    padding-left: 0px;
+}
+
+.cards:hover .secondary-btn {
+    background-color: var(--primary-color);
+}
+
+.plan-wrapper>.row {
+    justify-content: center;
+}
+
+#card-parchase-Modal .modal-body {
+    padding: 40px 20px;
+    position: relative;
+}
+
+#card-parchase-Modal .card-detail-box {
+    padding: 24px 20px;
+}
+
+/*================================================ Plan Page ============================================*/

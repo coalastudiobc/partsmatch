@@ -1374,8 +1374,35 @@ button.btn-close {
     position: absolute;
     right: 15px;
     transition: all 0.3s ease-in;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .dropdown:has(.dropdown-menu.show) .custm-drop-icon {
-    transform: rotate(180deg) translateX(-4px) translateY(-1px);
+    transform: rotate(180deg) translateX(-4px) translateY(13px);
+}
+
+.dropdown-menu.show li a:hover {
+    background-color: var(--secondary-color);
+    color: var(--white);
+}
+
+.btn-check:focus+.btn,
+.btn:focus {
+    outline: 0;
+    box-shadow: unset;
+}
+
+.action-btns i {
+    font-size: 22px;
+}
+
+.action-btns {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.edit i {
+    font-size: 22px;
 }

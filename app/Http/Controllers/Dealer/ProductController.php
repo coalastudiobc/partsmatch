@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dealer;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\FeaturedProduct;
 use App\Models\Product;
 use App\Models\ProductImage;
 use GrahamCampbell\ResultType\Success;
@@ -19,7 +20,9 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::with('productImage')->get();
-        return view('dealer.products.index', compact('products'));
+        // dd($products);
+        $subscription =  DB::table('subscriptions')->where('user_id', auth()->user()->id)->first();
+        return view('dealer.products.index', compact('products', 'subscription'));
     }
 
     /**
@@ -55,6 +58,14 @@ class ProductController extends Controller
 
             DB::beginTransaction();
             $product = Product::create($product);
+
+            $featured_product = [
+                'user_id' => auth()->user()->id,
+                'product_id' => $product->id,
+                'category_id' => $request->category
+            ];
+
+            FeaturedProduct::create($featured_product);
 
             if (count($request->file('images')) > 0) {
                 foreach ($request->file('images') as $file) {

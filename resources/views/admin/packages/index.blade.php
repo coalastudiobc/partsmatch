@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('title', 'Subscription Plans')
+@section('heading', 'Subscription Plans')
 
 @section('content')
     <div class="dashboard-right-box">
@@ -9,7 +10,7 @@
         <div class="card-header-form padding">
             <h2>Subscription Plans</h2>
             {{-- <x-search-form :dateField="false" /> --}}
-            <a class="btn btn-primary header-cart-btm" href="{{ route('admin.packages.add') }}">Add
+            <a class="btn   primary-btn" href="{{ route('admin.packages.add') }}">Add
                 Subscription Plan</a>
         </div>
         <div class="product-detail-table">
@@ -61,9 +62,10 @@
                             <td>
                                 <div class="action-btns">
                                     <a href="{{ route('admin.packages.edit', [jsencode_userdata($package->id)]) }}"><i
-                                            class="fa-solid fa-pen-to-square" style="color: #3EBE62;"></i></a>
+                                            class="fa-solid fa-pen-to-square" style="color: #3EBE62;"
+                                            title="edit"></i></a>
                                     <a href="{{ route('admin.packages.delete', [jsencode_userdata($package->id)]) }}"><i
-                                            class="fa-regular fa-trash-can" style="color: #E13F3F;"></i></a>
+                                            class="fa-regular fa-trash-can" style="color: #E13F3F;" title="delete"></i></a>
                                 </div>
 
                             </td>

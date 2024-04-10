@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('title', $package->id ? 'Update Subscription Plan' : 'Add Subscription Plan')
+@section('heading', 'Subscription Plans')
 
 @section('content')
     <div class="main-content">
@@ -18,8 +19,8 @@
                                     action="{{ $package->id ? route('admin.packages.store', [jsencode_userdata($package->id)]) : route('admin.packages.store') }}";
                                     enctype="multipart/form-data" method="post">
                                     @csrf
-                                    <div class="form-row">
-                                        <div class="form-group col-md-6">
+                                    <div class="form-row ">
+                                        <div class="form-group  col-md-6">
                                             <label>Name<span class="required-field">*</span></label>
                                             <input type="text" name="name"
                                                 class="form-control @error('name') is-invalid @enderror"
@@ -29,6 +30,15 @@
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
+                                            <div class="input-icon-custm tooltip-open">
+                                                <span>
+                                                    <i class="fa-solid fa-question"></i>
+                                                </span>
+                                                <div class="tooltip">
+                                                    <p>ghfvjvhm</p>
+                                                </div>
+                                            </div>
+
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label>Price<span class="required-field">*</span></label>
@@ -44,6 +54,14 @@
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
+                                            <div class="input-icon-custm tooltip-open">
+                                                <span>
+                                                    <i class="fa-solid fa-question"></i>
+                                                </span>
+                                                <div class="tooltip">
+                                                    <p>ghfvjvhm</p>
+                                                </div>
+                                            </div>
                                         </div>
 
                                     </div>
@@ -51,7 +69,7 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label>Type<span class="required-field">*</span></label>
-                                            <select name="time_type"
+                                            {{-- <select name="time_type"
                                                 class="form-control @error('time_type') is-invalid @enderror">
                                                 <option value="{{ jsencode_userdata('Yearly') }}">Yearly </option>
                                                 <option value="{{ jsencode_userdata('Monthly') }}">Monthly</option>
@@ -59,24 +77,102 @@
                                                 </option>
                                                 <option value="{{ jsencode_userdata('Halfly') }}">Every 6 months
                                                 </option>
-                                                {{-- <option value="QUATERLY"@if ($package->time_type == '2')selected @endif>Days</option> --}}
-                                            </select>
-                                            @error('time_type')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
+                                               
+                                            </select> --}}
+
+                                            <input type="hidden" name="time_type" value="" id=""
+                                                class="time_type @error('time_type') is-invalid @enderror">
+                                            <div class="custm-dropdown">
+                                                <div class="dropdown">
+                                                    <div class="dropdown-toggle " type="button" id="dropdownMenuButton1"
+                                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <div id="selectedItem">
+                                                            Select
+
+                                                        </div>
+                                                        <span class="custm-drop-icon">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="23" viewBox="0 0 24 23" fill="none">
+                                                                <path d="M19 9.00006L14 14.0001L9 9.00006" stroke="#151515"
+                                                                    stroke-width="1.8" stroke-linecap="round"
+                                                                    stroke-linejoin="round" />
+                                                            </svg>
+                                                        </span>
+                                                    </div>
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+
+                                                        <li><a class="dropdown-item custom_dropdown_item"
+                                                                data-value="{{ jsencode_userdata('Yearly') }}"
+                                                                data-text="Yearly" href="javascript:void(0)">Yearly</a>
+                                                        </li>
+                                                        <li><a class="dropdown-item custom_dropdown_item"
+                                                                data-value="{{ jsencode_userdata('Monthly') }}"
+                                                                data-text="Yearly" href="javascript:void(0)">Monthly</a>
+                                                        </li>
+                                                        <li><a class="dropdown-item custom_dropdown_item"
+                                                                data-value="{{ jsencode_userdata('Quarterly') }}"
+                                                                data-text="Yearly" href="javascript:void(0)">Every 3
+                                                                months</a>
+                                                        </li>
+                                                        <li><a class="dropdown-item custom_dropdown_item"
+                                                                data-value="{{ jsencode_userdata('Halfly') }}"
+                                                                data-text="Yearly" href="javascript:void(0)">Every 6
+                                                                months</a>
+                                                        </li>
+
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div id="errorshow">
+                                                @error('time_type')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
                                         </div>
 
                                         <div class="form-group col-md-6">
                                             <label>Status</label>
-                                            <select name="status"
+                                            {{-- <select name="status"
                                                 class="form-control @error('status') is-invalid @enderror">
                                                 <option value="1">
                                                     Active</option>
                                                 <option value="0">
                                                     Inactive</option>
-                                            </select>
+                                            </select> --}}
+                                            <input type="hidden" name="status" value="1" id="">
+                                            <div class="custm-dropdown">
+                                                <div class="dropdown">
+                                                    <div class="dropdown-toggle " type="button" id="dropdownMenuButton1"
+                                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <div id="selectedstatus">
+                                                            Active
+
+                                                        </div>
+                                                        <span class="custm-drop-icon">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="23" viewBox="0 0 24 23" fill="none">
+                                                                <path d="M19 9.00006L14 14.0001L9 9.00006" stroke="#151515"
+                                                                    stroke-width="1.8" stroke-linecap="round"
+                                                                    stroke-linejoin="round" />
+                                                            </svg>
+                                                        </span>
+                                                    </div>
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+
+                                                        <li><a class="dropdown-item custom_dropdown_status" data-value="1"
+                                                                data-text="Active" href="javascript:void(0)">Active</a>
+                                                        </li>
+                                                        <li><a class="dropdown-item custom_dropdown_status" data-value="0"
+                                                                data-text="Inactive"
+                                                                href="javascript:void(0)">Inactive</a>
+                                                        </li>
+
+                                                    </ul>
+                                                </div>
+                                            </div>
                                             @error('status')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -88,10 +184,19 @@
                                         <div class="form-group col-md-12">
                                             <label>Description</label>
                                             <textarea class="form-control summernote @error('description') is-invalid @enderror" name="description">{{ $package->description ?? $package->description }}</textarea>
+                                            <div class="input-icon-custm tooltip-open">
+                                                <span>
+                                                    <i class="fa-solid fa-question"></i>
+                                                </span>
+                                                <div class="tooltip">
+                                                    <p>ghfvjvhm</p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div>
-                                        <a class="btn secondary-btn mr-1" href="{{ route('admin.packages.all') }}">Back</a>
+                                        <a class="btn secondary-btn mr-1"
+                                            href="{{ route('admin.packages.all') }}">Back</a>
                                         <button class="btn secondary-btn " id="submit">Submit</button>
                                     </div>
                                 </form>
@@ -172,5 +277,22 @@
         // $(document).ready(function() {
         //     $('.summernote').summernote();
         // });
+
+        // dropdown
+        jQuery(document).ready(function() {
+            jQuery('.custom_dropdown_item').on('click', function() {
+                var selectitem = jQuery(this).attr('data-value')
+                var selecttext = jQuery(this).attr('data-text')
+                jQuery('#selectedItem').text(selecttext)
+                jQuery(document).find('input[name="time_type"]').val(selectitem);
+            })
+            jQuery('.custom_dropdown_status').on('click', function() {
+                var selectitem = jQuery(this).attr('data-value')
+                var selecttext = jQuery(this).attr('data-text')
+                jQuery('#selectedstatus').text(selecttext)
+                jQuery(document).find('input[name="status"]').val(selectitem);
+
+            });
+        });
     </script>
 @endpush

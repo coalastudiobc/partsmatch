@@ -151,19 +151,24 @@
                                             <div class="form-group">
                                                 <label for="">Select industry</label>
                                                 <div class="form-field">
-                                                    <select name="industry_type" id="industury" class="form-control">
+                                                    {{-- <select name="industry_type" id="industury" class="form-control">
                                                         <option value="volvo">Select industry</option>
                                                         <option value="saab">Volvo</option>
                                                         <option value="saab">Saab</option>
                                                         <option value="opel">Opel</option>
                                                         <option value="audi">Audi</option>
-                                                    </select>
-                                                    {{-- <div class="custm-dropdown">
+                                                    </select> --}}
+                                                    <input type="hidden" id="industry" name="industry_type"
+                                                        value="Volvo"
+                                                        class="@error('industry_type') is-invalid @enderror">
+                                                    <div class="custm-dropdown">
                                                         <div class="dropdown">
-                                                            <div class="dropdown-toggle" type="button"
+                                                            <div class="dropdown-toggle " type="button"
                                                                 id="dropdownMenuButton1" data-bs-toggle="dropdown"
                                                                 aria-expanded="false">
-                                                                Select industry
+                                                                <div id="selectedItem">
+                                                                    Volvo
+                                                                </div>
                                                                 <span class="custm-drop-icon">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                                         height="23" viewBox="0 0 24 23"
@@ -177,15 +182,22 @@
                                                             </div>
                                                             <ul class="dropdown-menu"
                                                                 aria-labelledby="dropdownMenuButton1">
-                                                                <li><a class="dropdown-item" href="#">Volvo</a>
+                                                                <li><a class="dropdown-item custom_dropdown_item"
+                                                                        data-value="Volvo"
+                                                                        href="javascript:void(0)">Volvo</a>
                                                                 </li>
-                                                                <li><a class="dropdown-item" href="#">Saab
+                                                                <li><a class="dropdown-item custom_dropdown_item"
+                                                                        data-value="Saab" href="javascript:void(0)">Saab
                                                                     </a></li>
-                                                                <li><a class="dropdown-item" href="#">Opel</a></li>
-                                                                <li><a class="dropdown-item" href="#">Audi</a></li>
+                                                                <li><a class="dropdown-item custom_dropdown_item"
+                                                                        data-value="Opel"
+                                                                        href="javascript:void(0)">Opel</a></li>
+                                                                <li><a class="dropdown-item custom_dropdown_item"
+                                                                        data-value="Audi"
+                                                                        href="javascript:void(0)">Audi</a></li>
                                                             </ul>
                                                         </div>
-                                                    </div> --}}
+                                                    </div>
 
                                                     {{-- <input type="text" name="industry_type" value="{{ old('industry_type') }}"
                                                         class="form-control @error('industry_type') is-invalid @enderror"
@@ -272,5 +284,15 @@
         //         $(this).unbind('submit').submit();
         //     }
         // });
+    </script>
+    <script>
+        jQuery(document).ready(function() {
+            jQuery('.custom_dropdown_item').on('click', function() {
+                var selectitem = jQuery(this).attr('data-value')
+                jQuery('#selectedItem').text(selectitem)
+                jQuery(document).find('input[name="industry_type"]').val(selectitem);
+
+            })
+        });
     </script>
 @endpush

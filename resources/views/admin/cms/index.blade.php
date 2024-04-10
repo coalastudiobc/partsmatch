@@ -71,7 +71,7 @@
                             </td> --}}
                             <td>
                                 <a href="{{ route('admin.cms.edit', [$page->id]) }}" class="edit"><i style="color: green"
-                                        class="fa-solid fa-pen-to-square"></i></a>
+                                        class="fa-solid fa-pen-to-square" title="edit"></i></a>
 
                             </td>
 

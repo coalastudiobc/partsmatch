@@ -1,5 +1,5 @@
     <div class="dashboard-left-box">
-        <h2>Analytics</h2>
+        {{-- <h2>Analytics</h2> --}}
         <div class="analyics-tabs">
             <ul>
                 <li class="analyics-tabs-list">
@@ -388,7 +388,7 @@
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#flush-collapseOne5" aria-expanded="false"
                                     aria-controls="flush-collapseOne">
-                                    <div class="analyics-tabs-btns ">
+                                    <a href="{{ route('admin.packages.all') }}" class="analyics-tabs-btns ">
                                         <div class="analyics-tabs-name">
                                             <span>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17"
@@ -408,10 +408,10 @@
                                             <h4>Packages</h4>
                                         </div>
                                         <p class="analyics-tabs-num"></p>
-                                    </div>
+                                    </a>
                                 </button>
                             </h2>
-                            <div id="flush-collapseOne5" class="accordion-collapse collapse"
+                            {{-- <div id="flush-collapseOne5" class="accordion-collapse collapse"
                                 aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body">
                                     <ul class="sub-menu">
@@ -423,7 +423,7 @@
                                             </a></li>
                                     </ul>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </li>

@@ -25,7 +25,7 @@
                                                 <div class="form-group">
                                                     <label for="">Parent Category</label>
 
-                                                    <select name="main_category"
+                                                    {{-- <select name="main_category"
                                                         class="form-control @error('main_category') is-invalid @enderror">
                                                         <option value="">Select </option>
                                                         @foreach ($selective as $categories)
@@ -36,7 +36,41 @@
                                                                 @if ($categories->id == $category->parent_id) selected @endif>
                                                                 {{ $categories->name }}</option>
                                                         @endforeach
-                                                    </select>
+                                                    </select> --}}
+                                                    <input type="hidden" name="main_category" value=""
+                                                        id="">
+                                                    <div class="custm-dropdown">
+                                                        <div class="dropdown">
+                                                            <div class="dropdown-toggle " type="button"
+                                                                id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                                                                aria-expanded="false">
+                                                                <div id="selectedItem">
+                                                                    Select
+
+                                                                </div>
+                                                                <span class="custm-drop-icon">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                        height="23" viewBox="0 0 24 23" fill="none">
+                                                                        <path d="M19 9.00006L14 14.0001L9 9.00006"
+                                                                            stroke="#151515" stroke-width="1.8"
+                                                                            stroke-linecap="round"
+                                                                            stroke-linejoin="round" />
+                                                                    </svg>
+                                                                </span>
+                                                            </div>
+                                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                                @foreach ($selective as $categories)
+                                                                    <li><a class="dropdown-item custom_dropdown_item"
+                                                                            @if ($categories->id == $category->parent_id) selected @endif
+                                                                            data-value="{{ $categories->id }}"
+                                                                            data-text="{{ $categories->name }}"
+                                                                            href="javascript:void(0)">{{ $categories->name }}</a>
+                                                                    </li>
+                                                                @endforeach
+
+                                                            </ul>
+                                                        </div>
+                                                    </div>
                                                     @error('main_category')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
@@ -58,6 +92,14 @@
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
+                                                    <div class="input-icon-custm tooltip-open">
+                                                        <span>
+                                                            <i class="fa-solid fa-question"></i>
+                                                        </span>
+                                                        <div class="tooltip">
+                                                            <p>ghfvjvhm</p>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -68,7 +110,14 @@
                                                     <input type="text" name="icon"
                                                         class="form-control @error('icon') is-invalid @enderror"
                                                         value="{{ old('icon', $category->icon ?? $category->icon) }}">
-
+                                                    <div class="input-icon-custm tooltip-open">
+                                                        <span>
+                                                            <i class="fa-solid fa-question"></i>
+                                                        </span>
+                                                        <div class="tooltip">
+                                                            <p>ghfvjvhm</p>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -76,7 +125,7 @@
                                             <div class="form-group">
                                                 <label for="">Status</label>
                                                 <div class="form-field">
-                                                    <select name="status"
+                                                    {{-- <select name="status"
                                                         class="form-control @error('status') is-invalid @enderror">
                                                         <option value="1"
                                                             @if ($category->status == '1') selected @endif>Active
@@ -84,7 +133,43 @@
                                                         <option
                                                             value="0"@if ($category->status == '0') selected @endif>
                                                             Inactive</option>
-                                                    </select>
+                                                    </select> --}}
+                                                    <input type="hidden" name="status" value="1" id="">
+                                                    <div class="custm-dropdown">
+                                                        <div class="dropdown">
+                                                            <div class="dropdown-toggle " type="button"
+                                                                id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                                                                aria-expanded="false">
+                                                                <div id="selectedstatus">
+                                                                    Active
+
+                                                                </div>
+                                                                <span class="custm-drop-icon">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                        height="23" viewBox="0 0 24 23" fill="none">
+                                                                        <path d="M19 9.00006L14 14.0001L9 9.00006"
+                                                                            stroke="#151515" stroke-width="1.8"
+                                                                            stroke-linecap="round"
+                                                                            stroke-linejoin="round" />
+                                                                    </svg>
+                                                                </span>
+                                                            </div>
+                                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+
+                                                                <li><a class="dropdown-item custom_dropdown_status"
+                                                                        @if ($category->status == '1') selected @endif
+                                                                        data-value="1" data-text="Active"
+                                                                        href="javascript:void(0)">Active</a>
+                                                                </li>
+                                                                <li><a class="dropdown-item custom_dropdown_status"
+                                                                        @if ($category->status == '0') selected @endif
+                                                                        data-value="0" data-text="Inactive"
+                                                                        href="javascript:void(0)">Inactive</a>
+                                                                </li>
+
+                                                            </ul>
+                                                        </div>
+                                                    </div>
                                                     @error('status')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
@@ -138,6 +223,24 @@
                         "{{ $category->id ? route('admin.category.store', [jsencode_userdata($category->id)]) : route('admin.category.store') }}";
                     addUserAjaxCall(url, 'post', formData);
                 }
+            });
+
+            // dropdown
+            jQuery(document).ready(function() {
+                jQuery('.custom_dropdown_item').on('click', function() {
+                    var selectitem = jQuery(this).attr('data-value')
+                    var selecttext = jQuery(this).attr('data-text')
+                    jQuery('#selectedItem').text(selecttext)
+                    jQuery(document).find('input[name="main_category"]').val(selectitem);
+                })
+
+                jQuery('.custom_dropdown_status').on('click', function() {
+                    var selectitem = jQuery(this).attr('data-value')
+                    var selecttext = jQuery(this).attr('data-text')
+                    jQuery('#selectedstatus').text(selecttext)
+                    jQuery(document).find('input[name="status"]').val(selectitem);
+
+                });
             });
         });
     </script>

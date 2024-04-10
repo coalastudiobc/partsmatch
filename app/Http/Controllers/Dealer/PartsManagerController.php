@@ -12,7 +12,9 @@ class PartsManagerController extends Controller
 {
     public function index()
     {
-        $users = User::where('working_for', auth()->user()->id)->get();
+        $request = request();
+        $users = User::where('working_for', auth()->user()->id)->Search()->get();
+
         return view('dealer.parts_manager.index', compact('users'));
     }
     public function store(PartsManagerRequest $request)

@@ -37,6 +37,14 @@
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
+                                            <div class="input-icon-custm tooltip-open">
+                                                <span>
+                                                    <i class="fa-solid fa-question"></i>
+                                                </span>
+                                                <div class="tooltip">
+                                                    <p>ghfvjvhm</p>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="form-group">
                                             <label>Order Commission<span class="required-field">*</span></label>
@@ -50,6 +58,14 @@
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
+                                            <div class="input-icon-custm tooltip-open">
+                                                <span>
+                                                    <i class="fa-solid fa-question"></i>
+                                                </span>
+                                                <div class="tooltip">
+                                                    <p>ghfvjvhm</p>
+                                                </div>
+                                            </div>
                                         </div>
 
                                         <div class="col-md-6">

@@ -5,6 +5,7 @@ use App\Http\Controllers\Dealer\AccountSettingController;
 use App\Http\Controllers\Dealer\DealerController;
 use App\Http\Controllers\Dealer\PartsManagerController;
 use App\Http\Controllers\Dealer\ProductController;
+use App\Http\Controllers\Dealer\SubscriptionController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -31,6 +32,12 @@ Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer'
         Route::get('/products/delete/{product}', [ProductController::class, 'destroy'])->name('delete');
         Route::get('/products/subcategory/{id}', [ProductController::class, 'subcategory'])->name('subcategory');
     });
+    // subscription
+    Route::name('subscription.')->group(function () {
+        Route::get('subscription/plans', [SubscriptionController::class, 'index'])->name('plan');
+        Route::post('subscription/plans/purchase', [SubscriptionController::class, 'purchaseSubscription'])->name('plan.purchase');
+    });
+
     Route::name('partsmanager.')->group(function () {
         Route::get('parts/manager/index', [PartsManagerController::class, 'index'])->name('index');
         Route::post('parts/manager/store', [PartsManagerController::class, 'store'])->name('store');

@@ -110,12 +110,17 @@ function handleValidation(form, rules, messages = {}, submitHandler = false) {
             jQuery(element).removeClass("is-invalid");
         },
         errorPlacement: function (label, element) {
+            console.log(element);
             if (jQuery(element).hasClass('selectric')) {
                 label.removeClass('invalid-feedback').addClass('cstm-selectric-invalid').insertAfter(jQuery(element).parent().siblings('.selectric'))
             } else if (jQuery(element).hasClass('select2-error')) {
                 label.insertAfter($(element).parent())
             } else if (jQuery(element).hasClass('image-input')) {
                 $('#errorViewer').html(label);
+            }
+            else if (jQuery(element).hasClass('time_type')) {
+                console.log(element);
+                label.insertAfter($(element).children().children().children())
             } else {
                 label.insertAfter(element)
             }
