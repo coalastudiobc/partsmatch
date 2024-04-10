@@ -136,6 +136,7 @@ if (!function_exists('get_cms')) {
 if (!function_exists('plan_validity')) {
     function plan_validity()
     {
+
         // $test = Auth::user()->subscription('trial_package')->onGracePeriod();
         // dd($test,'jg');
         $purchased = Auth::user()->subscriptions;
