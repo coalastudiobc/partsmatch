@@ -19,10 +19,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::with('productImage')->get();
-        // dd($products);
-        $subscription =  DB::table('subscriptions')->where('user_id', auth()->user()->id)->first();
-        return view('dealer.products.index', compact('products', 'subscription'));
+        $products = Product::with('productImage', 'featuredProduct')->Search()->get();
+
+        // $subscription =  DB::table('subscriptions')->where('user_id', auth()->user()->id)->first();
+        return view('dealer.products.index', compact('products'));
     }
 
     /**
@@ -183,8 +183,13 @@ class ProductController extends Controller
         return redirect()->back()->with(['success' => true, 'message' => "successfully deleted"]);
     }
 
-    public function togglestatus()
+    public function featuredproductdelete(FeaturedProduct $id)
     {
+        $id->delete();
+        return response()->json([
+            'status' => true,
+            'message' => "Successfully deleted"
+        ], 200);
     }
     public function subcategory($id)
     {

@@ -133,6 +133,29 @@ if (!function_exists('get_cms')) {
         return $cms;
     }
 }
+if (!function_exists('plan_validity')) {
+    function plan_validity()
+    {
+        // $test = Auth::user()->subscription('trial_package')->onGracePeriod();
+        // dd($test,'jg');
+        $purchased = Auth::user()->subscriptions;
+        $purchasedPlan = $purchased->where('stripe_status', 'active')->first();
+        if ($purchasedPlan) {
+            if (is_null($purchasedPlan->ends_at)) {
+
+                return $purchasedPlan;
+            } else {
+                $daysLeft =  now()->diffInDays($purchasedPlan->ends_at, false);
+                if ($daysLeft >= 0) {
+
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+}
 // if (!function_exists('stripe_details_validate')) {
 //     function stripe_details_validate($key, $secret)
 //     {

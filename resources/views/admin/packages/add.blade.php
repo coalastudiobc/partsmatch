@@ -11,9 +11,9 @@
                         <div class="card">
                             <div class='ajax-response'></div>
                             <x-alert-component />
-                            <div class="card-header">
+                            {{-- <div class="card-header">
                                 <h4>{{ $package->id ? 'Update Subscription Plan' : 'Add Subscription Plan' }}</h4>
-                            </div>
+                            </div> --}}
                             <div class="card-body">
                                 <form id="package"
                                     action="{{ $package->id ? route('admin.packages.store', [jsencode_userdata($package->id)]) : route('admin.packages.store') }}";
@@ -81,7 +81,7 @@
                                             </select> --}}
 
                                             <input type="hidden" name="time_type" value="" id=""
-                                                class="time_type @error('time_type') is-invalid @enderror">
+                                                class="image-input @error('time_type') is-invalid @enderror">
                                             <div class="custm-dropdown">
                                                 <div class="dropdown">
                                                     <div class="dropdown-toggle " type="button" id="dropdownMenuButton1"
@@ -124,7 +124,7 @@
                                                     </ul>
                                                 </div>
                                             </div>
-                                            <div id="errorshow">
+                                            <div id="errorViewer">
                                                 @error('time_type')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>

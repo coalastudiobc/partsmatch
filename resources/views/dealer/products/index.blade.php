@@ -5,10 +5,12 @@
 @section('content')
     <div class="dashboard-right-box">
         <div class="serach-and-filter-box">
-            <div class="pro-search-box">
-                <input type="text" class="form-control" placeholder="Search Product By Name">
-                <a href="#" class="btn primary-btn">Search</a>
-            </div>
+            <form action="">
+                <div class="pro-search-box">
+                    <input type="text" name="filter_by_name" class="form-control" placeholder="Search Product By Name">
+                    <button type="submit" class="btn primary-btn">Search</button>
+                </div>
+            </form>
             <a href="javascript:void(0)" class="btn primary-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 + Add New Product
             </a>
@@ -30,10 +32,13 @@
                             <p>Status</p>
                         </th>
                         <th>
+                            <p>Featured Status</p>
+                        </th>
+                        <th>
                             <p>Action</p>
                         </th>
                     </tr>
-
+                    {{-- @dd($products[3]->featuredProduct[]->id); --}}
                     @foreach ($products as $key => $product)
                         <tr>
                             @foreach ($product->productImage as $a => $image)
@@ -58,6 +63,16 @@
                                     onchange="toggleStatus(this, 'Product', '{{ $product->id }}');"
                                     url="{{ route('dealer.products.status') }}"><label
                                     for="switch100{{ $key }}">Toggle</label>
+                            </div>
+                        </td>
+
+                        <td>
+                            <div class="toggle-btn">
+                                <input type="checkbox" id="switch1{{ $key }}"
+                                    data-id=" @if (isset($product->featuredProduct->id)) {{ $product->featuredProduct->id }} @endif"
+                                    class="custom-switch-input feature-switch"
+                                    @if (isset($product->featuredProduct) && $product->featuredProduct != null) checked="checked" @else disabled @endif><label
+                                    for="switch1{{ $key }}">Toggle</label>
                             </div>
                         </td>
                         <td>
@@ -326,12 +341,13 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col-md-6">
                                 <div class="form-group">
                                     {{-- <label for="">Product Price</label> --}}
                                     <div class="form-field">
                                         <input type="checkbox" name="subscription_status"
-                                            @if ($subscription->stripe_status == 'active') checked @else disabled @endif>
+                                            @if (isset(plan_validity()->stripe_status) && plan_validity()->stripe_status == 'active') checked @else disabled @endif>
 
                                     </div>
                                 </div>
@@ -606,6 +622,21 @@
                         if (result.subcategory) {
                             $("#subcategory").html(result.subcategory);
                         }
+                    }
+                }
+
+            })
+        }
+    })
+    jQuery(document).on('click', ".feature-switch", function() {
+        var id = $(this).attr('data-id');
+        // console.log(id, "herererererer");
+        if (id) {
+            $.ajax({
+                url: APP_URL + "/dealer/featured/products/delete/" + id,
+                success: function(result) {
+                    if (result.status == true) {
+                        $(".feature-switch").addClass(disabled);
                     }
                 }
 

@@ -118,10 +118,7 @@ function handleValidation(form, rules, messages = {}, submitHandler = false) {
             } else if (jQuery(element).hasClass('image-input')) {
                 $('#errorViewer').html(label);
             }
-            else if (jQuery(element).hasClass('time_type')) {
-                console.log(element);
-                label.insertAfter($(element).children().children().children())
-            } else {
+            else {
                 label.insertAfter(element)
             }
         }
