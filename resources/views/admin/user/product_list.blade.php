@@ -53,7 +53,8 @@
                                 </div>
                             </td>
                             <td>
-                                <a href="{{ route('admin.dealers.product.edit',[$product->id])}}"class="btn action-view-btn">View
+                                <a
+                                    href="{{ route('admin.dealers.product.edit', [$product->id]) }}"class="btn action-view-btn">View
                                     details</a>
                             </td>
                         </tr>
