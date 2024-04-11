@@ -198,7 +198,7 @@
 @endsection
 
 @push('scripts')
-    @includeFirst(['validation.js_cms'])
+    {{-- @includeFirst(['validation.js_cms']) --}}
     <script>
         // jQuery(document).ready(function() {
         //     jQuery('#submit').click(function(e) {

@@ -18,13 +18,11 @@
 
                                 <form id="commission" action="{{ route('admin.commission') }}" enctype="multipart/form-data"
                                     method="post">
-                                    <form id="commission" action="{{ route('admin.commission') }}"
-                                        enctype="multipart/form-data" method="post">
-                                        @csrf
-                                        <div class="row">
-                                            <div class="form-group">
-                                                <label>Order Commission Type</label>
-                                                {{-- <select id="checktype" name="order_commission_type"
+                                    @csrf
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <label>Order Commission Type</label>
+                                            <select id="checktype" name="order_commission_type"
                                                 class="form-control @error('order_commission_type') is-invalid @enderror">
                                                 <option value="Percentage"
                                                     @if (get_admin_setting('order_commission_type') == 'Percentage') selected @endif>
@@ -35,49 +33,47 @@
                                                 </option>
                                             </select> --}}
 
-                                                <input type="hidden" name="order_commission_type" value="Percentage"
-                                                    id=""
-                                                    class="@error('order_commission_type') is-invalid @enderror">
-                                                <div class="custm-dropdown">
-                                                    <div class="dropdown">
-                                                        <div class="dropdown-toggle " type="button"
-                                                            id="dropdownMenuButton1" data-bs-toggle="dropdown"
-                                                            aria-expanded="false">
-                                                            <div id="selectedcommission">
-                                                                Percentage
+                                            <input type="hidden" name="order_commission_type" value="Percentage"
+                                                id="" class="@error('order_commission_type') is-invalid @enderror">
+                                            <div class="custm-dropdown">
+                                                <div class="dropdown">
+                                                    <div class="dropdown-toggle " type="button" id="dropdownMenuButton1"
+                                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <div id="selectedcommission">
+                                                            Percentage
 
-                                                            </div>
-                                                            <span class="custm-drop-icon">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                    height="23" viewBox="0 0 24 23" fill="none">
-                                                                    <path d="M19 9.00006L14 14.0001L9 9.00006"
-                                                                        stroke="#151515" stroke-width="1.8"
-                                                                        stroke-linecap="round" stroke-linejoin="round" />
-                                                                </svg>
-                                                            </span>
                                                         </div>
-                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-
-                                                            <li><a class="dropdown-item custom_dropdown_commission"
-                                                                    @if (get_admin_setting('order_commission_type') == 'Percentage') selected @endif
-                                                                    data-value="Percentage" data-text="Percentage"
-                                                                    href="javascript:void(0)">Percentage</a>
-                                                            </li>
-                                                            <li><a class="dropdown-item custom_dropdown_commission"
-                                                                    @if (get_admin_setting('order_commission_type') == 'Fixed') selected @endif
-                                                                    data-value="Fixed" data-text="Fixed"
-                                                                    href="javascript:void(0)">Fixed</a>
-                                                            </li>
-
-                                                        </ul>
+                                                        <span class="custm-drop-icon">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="23" viewBox="0 0 24 23" fill="none">
+                                                                <path d="M19 9.00006L14 14.0001L9 9.00006" stroke="#151515"
+                                                                    stroke-width="1.8" stroke-linecap="round"
+                                                                    stroke-linejoin="round" />
+                                                            </svg>
+                                                        </span>
                                                     </div>
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+
+                                                        <li><a class="dropdown-item custom_dropdown_commission"
+                                                                @if (get_admin_setting('order_commission_type') == 'Percentage') selected @endif
+                                                                data-value="Percentage" data-text="Percentage"
+                                                                href="javascript:void(0)">Percentage</a>
+                                                        </li>
+                                                        <li><a class="dropdown-item custom_dropdown_commission"
+                                                                @if (get_admin_setting('order_commission_type') == 'Fixed') selected @endif
+                                                                data-value="Fixed" data-text="Fixed"
+                                                                href="javascript:void(0)">Fixed</a>
+                                                        </li>
+
+                                                    </ul>
                                                 </div>
-                                                @error('order_commission_type')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                                {{-- <div class="input-icon-custm tooltip-open">
+                                            </div>
+                                            @error('order_commission_type')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                            {{-- <div class="input-icon-custm tooltip-open">
                                                 <span>
                                                     <i class="fa-solid fa-question"></i>
                                                 </span>
@@ -85,39 +81,39 @@
                                                     <p>ghfvjvhm</p>
                                                 </div>
                                             </div> --}}
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Order Commission<span class="required-field">*</span></label>
-                                                <div class="symbol"></div>
-                                                <input type="text" id="checkcommission" name="order_commission"
-                                                    class="form-control @error('order_commission') is-invalid @enderror two-decimals"
-                                                    value="{{ old('order_commission', get_admin_setting('order_commission')) }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Order Commission<span class="required-field">*</span></label>
+                                            <div class="symbol"></div>
+                                            <input type="text" id="checkcommission" name="order_commission"
+                                                class="form-control @error('order_commission') is-invalid @enderror two-decimals"
+                                                value="{{ old('order_commission', get_admin_setting('order_commission')) }}">
 
-                                                @error('order_commission')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                                <div class="input-icon-custm tooltip-open">
-                                                    <span>
-                                                        <i class="fa-solid fa-question"></i>
-                                                    </span>
-                                                    <div class="tooltip">
-                                                        <p>ghfvjvhm</p>
-                                                    </div>
+                                            @error('order_commission')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                            <div class="input-icon-custm tooltip-open">
+                                                <span>
+                                                    <i class="fa-solid fa-question"></i>
+                                                </span>
+                                                <div class="tooltip">
+                                                    <p>ghfvjvhm</p>
                                                 </div>
                                             </div>
-
-                                            <div class="col-md-6">
-                                                <a class="btn secondary-btn full-btn mr-1"
-                                                    href="{{ route('admin.commission') }}">Back</a>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <button class="btn primary-btn full-btn mr-1" id="submit"
-                                                    type="submit">Submit</button>
-                                            </div>
                                         </div>
-                                    </form>
+
+                                        <div class="col-md-6">
+                                            <a class="btn secondary-btn full-btn mr-1"
+                                                href="{{ route('admin.commission') }}">Back</a>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <button class="btn primary-btn full-btn mr-1" id="submit"
+                                                type="submit">Submit</button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
