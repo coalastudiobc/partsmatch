@@ -19,7 +19,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::with('productImage', 'featuredProduct')->Search()->get();
+        $products = Product::with('productImage', 'featuredProduct')->where('user_id', auth()->user()->id)->Search()->get();
 
         // $subscription =  DB::table('subscriptions')->where('user_id', auth()->user()->id)->first();
         return view('dealer.products.index', compact('products'));
@@ -183,9 +183,33 @@ class ProductController extends Controller
         return redirect()->back()->with(['success' => true, 'message' => "successfully deleted"]);
     }
 
+    public function featuredproductcreate(Product $product)
+    {
+        if (isset(plan_validity()->stripe_status) && plan_validity()->stripe_status != 'active') {
+            session()->flash('success', 'Please purchase plan');
+            return response()->json([
+                'status' => false,
+                'message' => 'Please purchase plan'
+            ], 200);
+        }
+        $category = Category::where('id', $product->subcategory_id)->first();
+        $featured_product = [
+            'user_id' => auth()->user()->id,
+            'product_id' => $product->id,
+            'category_id' => $category->id
+        ];
+
+        FeaturedProduct::create($featured_product);
+        session()->flash('success', 'Successfully created');
+        return response()->json([
+            'status' => true,
+            'message' => 'Successfully created'
+        ], 200);
+    }
     public function featuredproductdelete(FeaturedProduct $id)
     {
         $id->delete();
+        session()->flash('success', 'Successfully deleted');
         return response()->json([
             'status' => true,
             'message' => "Successfully deleted"

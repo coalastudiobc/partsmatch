@@ -148,43 +148,65 @@
                                                 <div class="profile-without-img">
                                                     <img src="images/user.png" id="Userimage" alt="">
                                                 </div>
-                                                <input type="file" name="image" id="file-upload">
+                                                <input type="file" name="image" id="file-upload"
+                                                    class="@error('image') is-invalid @enderror">
+                                                @error('image')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                                 <div class="upload-icon">
                                                     <img src="images/upload.png" alt="">
                                                     <img src="images/upload.png" alt="">
                                                 </div>
                                             </label>
                                         </div>
-                                        <h3>Upload profile picture</h3>
+                                        <h3>Upload profile picture*</h3>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="">Full Name</label>
+                                        <label for="">Full Name*</label>
                                         <div class="form-field">
-                                            <input type="text" name="name" class="form-control"
+                                            <input type="text" name="name"
+                                                class="form-control @error('name') is-invalid @enderror"
                                                 placeholder="Full Name">
-
+                                            @error('name')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="">Email</label>
+                                        <label for="">Email*</label>
                                         <div class="form-field">
-                                            <input type="email" name="email" class="form-control" placeholder="Email">
-
+                                            <input type="email" name="email"
+                                                class="form-control @error('email') is-invalid @enderror"
+                                                placeholder="Email">
+                                            @error('email')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="">Phone
-                                            Number</label>
+                                            Number*</label>
                                         <div class="form-field">
-                                            <input type="text" name="phone_number" class="form-control"
+                                            <input type="text" name="phone_number"
+                                                class="form-control @error('phone_number') is-invalid @enderror"
                                                 placeholder="Phone Number">
-
+                                            @error('phone_number')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -193,7 +215,7 @@
                                         <label for="">Assign
                                             Role</label>
                                         <div class="form-field">
-                                            <input type="text" class="form-control" placeholder="Assign Role">
+                                            <input type="text" class="form-control " placeholder="Assign Role">
 
                                         </div>
                                     </div>
@@ -201,7 +223,7 @@
 
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="">Password</label>
+                                        <label for="">Password*</label>
                                         <div class="form-field">
                                             <input type="password" id="manager_confirm_password" name="password"
                                                 class="form-control @error('password') is-invalid @enderror"

@@ -42,10 +42,9 @@
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label>Price<span class="required-field">*</span></label>
-                                            <div class="doller-input-field">
+                                            <div class="doller-input-field @error('price') is-invalid @enderror">
                                                 {{-- <div class="symbol">$</div> --}}
-                                                <input type="text" name="price"
-                                                    class="form-control two-decimals @error('price') is-invalid @enderror"
+                                                <input type="text" name="price" class="form-control two-decimals"
                                                     value="{{ old('price', $package ?? $package) }}">
                                                 <span class="doller-symbol-txt symbol">$</span>
                                             </div>
@@ -80,9 +79,8 @@
                                                
                                             </select> --}}
 
-                                            <input type="hidden" name="time_type" value="" id=""
-                                                class="image-input @error('time_type') is-invalid @enderror">
-                                            <div class="custm-dropdown">
+
+                                            <div class="custm-dropdown ">
                                                 <div class="dropdown">
                                                     <div class="dropdown-toggle " type="button" id="dropdownMenuButton1"
                                                         data-bs-toggle="dropdown" aria-expanded="false">
@@ -125,6 +123,8 @@
                                                 </div>
                                             </div>
                                             <div id="errorViewer">
+                                                <input type="hidden" name="time_type" value="" id=""
+                                                    class="image-input @error('time_type') is-invalid @enderror">
                                                 @error('time_type')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>

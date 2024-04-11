@@ -4,6 +4,8 @@
 
 @section('content')
     <div class="dashboard-right-box">
+        <x-alert-component />
+
         <div class="serach-and-filter-box">
             <form action="">
                 <div class="pro-search-box">
@@ -69,9 +71,10 @@
                         <td>
                             <div class="toggle-btn">
                                 <input type="checkbox" id="switch1{{ $key }}"
-                                    data-id=" @if (isset($product->featuredProduct->id)) {{ $product->featuredProduct->id }} @endif"
-                                    class="custom-switch-input feature-switch"
-                                    @if (isset($product->featuredProduct) && $product->featuredProduct != null) checked="checked" @else disabled @endif><label
+                                    data-id=" @if (isset($product->featuredProduct->id)) {{ $product->featuredProduct->id }} @else 0 @endif"
+                                    product-id="{{ $product->id }}" class="custom-switch-input feature-switch"
+                                    @if (isset($product->featuredProduct) && $product->featuredProduct != null) checked="checked" @endif
+                                    @if (!plan_validity()) disabled @endif><label
                                     for="switch1{{ $key }}">Toggle</label>
                             </div>
                         </td>
@@ -631,12 +634,28 @@
     jQuery(document).on('click', ".feature-switch", function() {
         var id = $(this).attr('data-id');
         // console.log(id, "herererererer");
-        if (id) {
+        if (id != 0) {
             $.ajax({
                 url: APP_URL + "/dealer/featured/products/delete/" + id,
                 success: function(result) {
                     if (result.status == true) {
-                        $(".feature-switch").addClass(disabled);
+                        $(".feature-switch").addClass('checked', false);
+                        location.reload();
+
+                    }
+
+                }
+
+            })
+        } else {
+            var id = $(this).attr('product-id');
+            $.ajax({
+                url: APP_URL + "/dealer/featured/products/create/" + id,
+                success: function(result) {
+                    if (result.status == true) {
+                        location.reload();
+                    } else {
+                        $(".feature-switch").addClass('checked', false);
                     }
                 }
 

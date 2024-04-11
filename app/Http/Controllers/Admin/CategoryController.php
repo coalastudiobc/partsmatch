@@ -28,7 +28,6 @@ class CategoryController extends Controller
 
     public function store(CategoryRequest $request, $id = null)
     {
-
         if ($id != null) {
             $id = jsdecode_userdata($id);
         }

@@ -16,23 +16,23 @@
                             </div> --}}
                             <div class="card-body">
 
-                                <form id="commission" action="{{ route('admin.commission', [$commission->id]) }}"
-                                    enctype="multipart/form-data" method="post">
+                                <form id="commission" action="{{ route('admin.commission') }}" enctype="multipart/form-data"
+                                    method="post">
                                     @csrf
                                     <div class="row">
                                         <div class="form-group">
                                             <label>Order Commission Type</label>
-                                            <select id="checktype" name="ordercommission_type"
-                                                class="form-control @error('ordercommission_type') is-invalid @enderror">
+                                            <select id="checktype" name="order_commission_type"
+                                                class="form-control @error('order_commission_type') is-invalid @enderror">
                                                 <option value="Percentage"
-                                                    @if ($commission->type == 'Percentage') selected @endif>
+                                                    @if (get_admin_setting('order_commission_type') == 'Percentage') selected @endif>
                                                     Percentage
                                                 </option>
-                                                <option value="Fixed" @if ($commission->type == 'Fixed') selected @endif>
+                                                <option value="Fixed" @if (get_admin_setting('order_commission_type') == 'Fixed') selected @endif>
                                                     Fixed
                                                 </option>
                                             </select>
-                                            @error('ordercommission_type')
+                                            @error('order_commission_type')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -49,11 +49,11 @@
                                         <div class="form-group">
                                             <label>Order Commission<span class="required-field">*</span></label>
                                             <div class="symbol"></div>
-                                            <input type="text" id="checkcommission" name="ordercommission"
-                                                class="form-control @error('ordercommission') is-invalid @enderror"
-                                                value="{{ old('name', $commission->value) }}">
+                                            <input type="text" id="checkcommission" name="order_commission"
+                                                class="form-control @error('order_commission') is-invalid @enderror two-decimals"
+                                                value="{{ old('order_commission', get_admin_setting('order_commission')) }}">
 
-                                            @error('ordercommission')
+                                            @error('order_commission')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -88,6 +88,28 @@
 @endsection
 @push('scripts')
     @includeFirst(['validation.js_commision'])
+    <script>
+        $(".two-decimals").on("keypress", function(evt) {
+            var txtBox = $(this);
+            var charCode = (evt.which) ? evt.which : evt.keyCode
+            if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode != 46)
+                return false;
+            else {
+                var len = txtBox.val().length;
+                var index = txtBox.val().indexOf('.');
+                if (index > 0 && charCode == 46) {
+                    return false;
+                }
+                if (index > 0) {
+                    var charAfterdot = (len + 1) - index;
+                    if (charAfterdot > 3) {
+                        return false;
+                    }
+                }
+            }
+            return txtBox;
+        });
+    </script>
     <script>
         $(document).ready(function() {
             var type = $('#checktype').val();

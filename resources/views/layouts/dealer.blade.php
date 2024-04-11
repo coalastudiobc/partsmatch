@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/slick.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/iziToast.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/toaster.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/slick-theme.css') }}">
     @include('layouts.include.favicon')
 
@@ -126,10 +127,11 @@
     <script src="{{ asset('assets/js/slick.js') }}"></script>
     <script src="{{ asset('assets/js/validate.min.js') }}"></script>
     <script src="{{ asset('assets/js/iziToast.min.js') }}"></script>
+    <script src="{{ asset('assets/js/toaster.min.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
     <script src="{{ asset('assets/js/common.js') }}?ver={{ now() }}"></script>
     {{-- <script type="text/javascript" src="http://www.carqueryapi.com/js/jquery.min.js"></script> --}}
-    <script type="text/javascript" src="http://www.carqueryapi.com/js/carquery.0.3.4.js"></script>
+    {{-- <script type="text/javascript" src="http://www.carqueryapi.com/js/carquery.0.3.4.js"></script> --}}
     @stack('scripts')
 </body>
 

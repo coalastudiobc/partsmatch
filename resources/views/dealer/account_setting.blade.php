@@ -49,7 +49,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">Full name</label>
+                                                <label for="">Full name*</label>
                                                 <div class="form-field">
                                                     <input type="text"
                                                         class="form-control @error('name') is-invalid @enderror disabled-inputs"
@@ -74,7 +74,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">Email ID</label>
+                                                <label for="">Email ID*</label>
                                                 <div class="form-field">
                                                     <input type="email" name="email"
                                                         value="{{ old('email', $user->email ?? $user->email) }}"
@@ -103,7 +103,7 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">Phone number</label>
+                                                <label for="">Phone number*</label>
                                                 <div class="form-field">
                                                     <input type="text" name="phone_number" disabled
                                                         class="form-control @error('phone_number') is-invalid @enderror disabled-inputs"
@@ -130,7 +130,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">Industry</label>
+                                                <label for="">Industry*</label>
                                                 <div class="form-field">
                                                     <!-- <input type="text" class="form-control" placeholder="Select industry"> -->
                                                     {{-- <select name="industry_type" id="industury"
@@ -194,7 +194,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">Complete address</label>
+                                                <label for="">Complete address*</label>
                                                 <div class="form-field">
                                                     <input type="text" name="address" disabled
                                                         class="form-control @error('address') is-invalid @enderror disabled-inputs"

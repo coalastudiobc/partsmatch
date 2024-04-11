@@ -31,6 +31,8 @@ Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer'
         Route::post('/products/update/{product}', [ProductController::class, 'update'])->name('update');
         Route::get('/products/delete/{product}', [ProductController::class, 'destroy'])->name('delete');
         Route::get('/products/subcategory/{id}', [ProductController::class, 'subcategory'])->name('subcategory');
+        Route::get('/featured/products/create/{product}', [ProductController::class, 'featuredproductcreate'])->name('create');
+
         Route::get('/featured/products/delete/{id}', [ProductController::class, 'featuredproductdelete'])->name('featured.products.delete');
     });
     // subscription

@@ -66,6 +66,18 @@ return [
         ],
     ],
 
+    'commission' => [
+        'ordercommission_type' => [
+            'required' => 'order commission type is required'
+        ],
+        'ordercommission' => [
+            'required' => 'order commission is required',
+            'min' => 'order commission should be grater than 1',
+            'max' => 'order commission should be less than 99',
+            'regex' => 'only number allowed'
+        ],
+    ],
+
     'admin' => [
         'name' => [
             'required' => 'Please enter the name',
@@ -103,6 +115,7 @@ return [
             'numeric' => 'Only numerics are allowed',
         ],
     ],
+
     'profile' => [
         'name' => [
             'required' => 'Please enter the name',
@@ -342,11 +355,14 @@ return [
     ],
 
     'package' => [
+        'name' => [
+            'required' => 'Please enter the package name'
+        ],
         'timeduration' => [
             'required' => 'Please enter the time duration',
         ],
         'timetype' => [
-            'required' => 'Please select the time type',
+            'required' => 'Please select the time type'
         ],
         'description' => [
             'min' => 'Description can be :min - :max characters',
@@ -359,7 +375,7 @@ return [
             'required' => 'Please select any category',
         ],
         'price' => [
-            'required' => 'Please enter price',
+            'required' => 'Please enter price'
         ],
     ],
 

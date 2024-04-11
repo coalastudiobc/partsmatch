@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CmsRequest extends FormRequest
+class PackageRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,18 +22,19 @@ class CmsRequest extends FormRequest
     public function rules(): array
     {
         return [
+
             'name' => ['required'],
-            'content' => ['required'],
-            'image' => ['required', 'mimes:jpeg,png,jpg'],
+            'price' => ['required', 'digits:value'],
+            'time_type' => ['required'],
         ];
     }
+
     public function messages()
     {
         return [
-            'name.required' => __('customvalidation.cms.name.required'),
-            'content.required' => __('customvalidation.cms.content.required'),
-            'image.required' => __('customvalidation.cms.image.required'),
-
+            'name.required' => __('customvalidation.package.name.required'),
+            'price.required' => __('customvalidation.packageprice.price.required'),
+            'time_type.required' => __('customvalidation.package.timetype.required'),
         ];
     }
 }

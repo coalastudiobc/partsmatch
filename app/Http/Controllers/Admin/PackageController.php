@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PackageRequest;
 use App\Models\Package;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -29,7 +30,7 @@ class PackageController extends Controller
         return view('admin.packages.add', compact('package'));
     }
 
-    public function store(Request $request, $id = null)
+    public function store(PackageRequest $request, $id = null)
     {
         // dd($request->toArray());
         $id = jsdecode_userdata($id);

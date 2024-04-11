@@ -115,20 +115,18 @@ class AdminController extends Controller
         return redirect()->route('admin.settings.view');
     }
 
-    public function commission(CommissionRequest $request, Commission $commissionid)
+    public function commission(CommissionRequest $request)
     {
         if ($request->method() == "POST") {
-            $commissionid->update([
-                'type' => $request->ordercommission_type,
-                'value' => $request->ordercommission
-            ]);
+            AdminSetting::where('name', 'order_commission_type')->update(['value' => $request->order_commission_type]);
+            AdminSetting::where('name', 'order_commission')->update(['value' => $request->order_commission]);
+
+
             session()->flash('status', 'success');
             session()->flash('message', 'Data updated successfully');
             return redirect()->route('admin.commission');
         }
 
-        $commission = Commission::first();
-
-        return view('admin.commission', compact('commission'));
+        return view('admin.commission');
     }
 }

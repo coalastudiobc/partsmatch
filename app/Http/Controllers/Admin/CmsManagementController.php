@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CmsRequest;
 use App\Models\CmsPage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -24,17 +25,17 @@ class CmsManagementController extends Controller
     {
         return view('admin.cms.edit', compact('page'));
     }
-    public function update(Request $request, CmsPage $page)
+    public function update(CmsRequest $request, CmsPage $page)
     {
-        $request->validate([
-            'name' => 'required',
-            'content' => 'required',
-            'image' => 'mimes:jpeg,png,jpg',
-        ], [
-            'name.required' => 'Please enter the name',
-            'content.required' => 'Please enter the content',
-            'image' => 'Image accepts only jpeg,png,jpg',
-        ]);
+        // $request->validate([
+        //     'name' => 'required',
+        //     'content' => 'required',
+        //     'image' => ,
+        // ], [
+        //     'name.required' => 'Please enter the name',
+        //     'content.required' => 'Please enter the content',
+        //     'image' => 'Image accepts only jpeg,png,jpg',
+        // ]);
         if ($request->hasFile('image')) {
             $file = $request->image;
             if (isset($page->media_url)) {
