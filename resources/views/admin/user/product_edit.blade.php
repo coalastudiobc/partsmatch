@@ -171,6 +171,21 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
+                                                <label for="">Shipping Price</label>
+                                                <div class="form-field">
+                                                    <input type="text" name="shipping_price"
+                                                        class="form-control @error('shipping_price') is-invalid @enderror"
+                                                        value="{{ old('shipping_price', $product->shipping_price) }}">
+                                                    @error('shipping_price')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
                                                 <label for="">Model</label>
                                                 <div class="form-field">
                                                     <select class="form-control api_call" name="car_years"
