@@ -53,7 +53,7 @@
                                 <div class="toggle-btn">
                                     <input type="checkbox" id="switch101" class="custom-switch-input"
                                         @if ($user->status == 'ACTIVE') checked="checked" @endif
-                                        onchange="toggleStatus(this, 'User', '{{ jsencode_userdata($user->id) }}');"
+                                        onchange="toggleStatus(this, 'User', '{{ $user->id }}');"
                                         url="{{ route('dealer.status') }}"><label for="switch101">Toggle</label>
                                 </div>
                             </td>
@@ -146,7 +146,8 @@
                                         <div class="file-upload-box">
                                             <label for="file-upload">
                                                 <div class="profile-without-img">
-                                                    <img src="images/user.png" id="Userimage" alt="">
+                                                    <img src="{{ asset('assets/images/user.png') }}" id="Userimage"
+                                                        alt="">
                                                 </div>
                                                 <input type="file" name="image" id="file-upload"
                                                     class="@error('image') is-invalid @enderror">
@@ -156,8 +157,8 @@
                                                     </span>
                                                 @enderror
                                                 <div class="upload-icon">
-                                                    <img src="images/upload.png" alt="">
-                                                    <img src="images/upload.png" alt="">
+                                                    <img src="{{ asset('assets/images/upload.png') }}" alt="">
+                                                    {{-- <img src="{{ asset('assets/images/upload.png') }}" alt=""> --}}
                                                 </div>
                                             </label>
                                         </div>

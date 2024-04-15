@@ -19,7 +19,7 @@
                                     action="{{ $package->id ? route('admin.packages.store', [jsencode_userdata($package->id)]) : route('admin.packages.store') }}";
                                     enctype="multipart/form-data" method="post">
                                     @csrf
-                                    <div class="form-row ">
+                                    <div class="form-row row ">
                                         <div class="form-group  col-md-6">
                                             <label>Name<span class="required-field">*</span></label>
                                             <input type="text" name="name"
@@ -62,10 +62,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
-                                    </div>
-                                    {{-- @dd($package) --}}
-                                    <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label>Type<span class="required-field">*</span></label>
                                             {{-- <select name="time_type"
@@ -179,8 +175,6 @@
                                                 </span>
                                             @enderror
                                         </div>
-                                    </div>
-                                    <div class="form-row">
                                         <div class="form-group col-md-12">
                                             <label>Description</label>
                                             <textarea class="form-control summernote @error('description') is-invalid @enderror" name="description">{{ $package->description ?? $package->description }}</textarea>
@@ -194,6 +188,8 @@
                                             </div>
                                         </div>
                                     </div>
+                                    {{-- @dd($package) --}}
+
                                     <div>
                                         <a class="btn secondary-btn mr-1"
                                             href="{{ route('admin.packages.all') }}">Back</a>

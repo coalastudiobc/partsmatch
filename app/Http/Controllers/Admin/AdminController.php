@@ -129,4 +129,19 @@ class AdminController extends Controller
 
         return view('admin.commission');
     }
+
+    public function shipping(Request $request)
+    {
+        if ($request->method() == "POST") {
+            AdminSetting::where('name', 'shipping_charge_type')->update(['value' => $request->shipping_charge_type]);
+            AdminSetting::where('name', 'shipping_charge')->update(['value' => $request->shipping_charge]);
+
+
+            session()->flash('status', 'success');
+            session()->flash('message', 'Data updated successfully');
+            return redirect()->route('admin.shipping');
+        }
+
+        return view('admin.shipping_price');
+    }
 }

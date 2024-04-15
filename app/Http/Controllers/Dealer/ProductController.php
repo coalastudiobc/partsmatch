@@ -19,14 +19,14 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::with('productImage', 'featuredProduct')->where('user_id', auth()->user()->id)->Search()->get();
+        $products = Product::with('productImage', 'featuredProduct')->where('user_id', auth()->user()->id)->Search()->Paginate(5);
 
         // $subscription =  DB::table('subscriptions')->where('user_id', auth()->user()->id)->first();
         return view('dealer.products.index', compact('products'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new resource.   
      */
     public function create()
     {
@@ -200,7 +200,7 @@ class ProductController extends Controller
         ];
 
         FeaturedProduct::create($featured_product);
-        session()->flash('success', 'Successfully created');
+        session()->flash('success', 'Featured plan created Successfully');
         return response()->json([
             'status' => true,
             'message' => 'Successfully created'
@@ -209,7 +209,7 @@ class ProductController extends Controller
     public function featuredproductdelete(FeaturedProduct $id)
     {
         $id->delete();
-        session()->flash('success', 'Successfully deleted');
+        session()->flash('success', 'Featured plan deleted Successfully');
         return response()->json([
             'status' => true,
             'message' => "Successfully deleted"

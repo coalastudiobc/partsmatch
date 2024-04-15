@@ -123,31 +123,7 @@
             </table>
         </div>
     </div>
-    <div class="pagination-wrapper">
-        <div class="pagination-boxes">
-            <div class="pagination-box">
-                <i class="fa-solid fa-angle-left"></i>
-            </div>
-            <div class="pagination-box active">
-                <p>1</p>
-            </div>
-            <div class="pagination-box">
-                <p>2</p>
-            </div>
-            <div class="pagination-box">
-                <p>3</p>
-            </div>
-            <div class="pagination-box">
-                <p>4</p>
-            </div>
-            <div class="pagination-box">
-                <p>5</p>
-            </div>
-            <div class="pagination-box">
-                <i class="fa-solid fa-angle-right"></i>
-            </div>
-        </div>
-    </div>
+    {!! $products->links('dealer.pagination') !!}
 </div>
 @endsection
 @section('modals')

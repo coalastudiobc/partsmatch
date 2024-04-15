@@ -9,7 +9,7 @@
         <x-alert-component />
 
         <div class="card-header-form padding">
-            <h2>Categories</h2>
+            {{-- <h2>Categories</h2> --}}
             <a class="btn primary-btn btn-lg float-end" href="{{ route('admin.category.add') }}">Add
                 Category</a>
         </div>

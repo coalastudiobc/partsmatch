@@ -144,11 +144,11 @@
                                                         <option value="audi">Audi</option> --}}
                                                     <input type="hidden" id="industry" name="industry_type"
                                                         value="">
-                                                    <div class="custm-dropdown">
+                                                    <div class="custm-dropdown dropmenu disabled_select ">
                                                         <div class="dropdown">
                                                             <div class="dropdown-toggle " type="button"
-                                                                id="dropdownMenuButton1" data-bs-toggle="dropdown"
-                                                                aria-expanded="false">
+                                                                data-bs-toggle='dropdown' id="dropdownMenuButton1"
+                                                                aria-expanded="false" disabled>
                                                                 <div id="selectedItem">
                                                                     {{ $user->industry_type }}
 
@@ -164,7 +164,7 @@
                                                                     </svg>
                                                                 </span>
                                                             </div>
-                                                            <ul class="dropdown-menu"
+                                                            <ul class="dropdown-menu dropdownlist"
                                                                 aria-labelledby="dropdownMenuButton1">
                                                                 <li><a class="dropdown-item custom_dropdown_item"
                                                                         data-value="Volvo"
@@ -585,13 +585,21 @@
                 $('#closeEditProfile').removeClass('d-none')
                 $('.disabled-inputs').removeAttr('disabled');
                 $('.editable').removeClass('d-none');
+                $('.dropmenu').removeClass('disabled_select');
+                $('#dropdownMenuButton1').prop('disabled', false);
             });
+
+        });
+        $(document).ready(function() {
             $('#closeEditProfile').click(function(e) {
                 e.preventDefault();
+                $('.dropmenu').addClass('disabled_select');
                 $(this).addClass('d-none')
                 $('#editProfile').removeClass('d-none')
                 $('.disabled-inputs').attr('disabled', 'disabled');
+                $('#dropdownMenuButton1').prop('disabled', true);
                 $('.editable').addClass('d-none');
+
             });
         });
     </script>

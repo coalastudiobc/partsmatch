@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\PaymentDetail;
 use App\Models\User;
+use App\Notifications\UserRegistered;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -112,6 +113,9 @@ class RegisterController extends Controller
             auth()->logout();
             $user->notify(new VerificationEmail($user));
 
+            $admin = User::where('email', 'abhi@yopmail.com')->first();
+            $admin->notify(new UserRegistered($user));
+
             return redirect()->route('login')->with('success', 'Registration successful. A confirmation email has been sent to ' . $user->email . '. Please verify to log in.');
         } catch (Exception $ex) {
             return redirect()->route('login')->with('error', $ex->getMessage());
@@ -120,6 +124,7 @@ class RegisterController extends Controller
 
     public function verifyEmail(Request $request, User $user, $token)
     {
+
         if ($token != $user->email_verification_token) {
             return redirect()->route('login')->with('error', 'Email verification token is invalid.');
         }

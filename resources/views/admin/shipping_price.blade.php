@@ -1,6 +1,6 @@
 @extends('layouts.admin')
-@section('title', 'commision')
-@section('heading', 'Commision')
+@section('title', 'shipping')
+@section('heading', 'shipping')
 
 @section('content')
     <div class="main-content">
@@ -16,25 +16,24 @@
                             </div> --}}
                             <div class="card-body">
 
-                                <form id="commission" action="{{ route('admin.commission') }}" enctype="multipart/form-data"
+                                <form id="shipping" action="{{ route('admin.shipping') }}" enctype="multipart/form-data"
                                     method="post">
                                     @csrf
                                     <div class="row">
                                         <div class="form-group">
-                                            <label>Order Commission Type</label>
-                                            {{-- <select id="checktype" name="order_commission_type"
-                                                class="form-control @error('order_commission_type') is-invalid @enderror">
+                                            <label>Shipping Charge Type</label>
+                                            {{-- <select id="checktype" name="shipping_charge_type"
+                                                class="form-control @error('shipping_charge_type') is-invalid @enderror">
                                                 <option value="Percentage"
-                                                    @if (get_admin_setting('order_commission_type') == 'Percentage') selected @endif>
+                                                    @if (get_admin_setting('shipping_charge_type') == 'Percentage') selected @endif>
                                                     Percentage
                                                 </option>
-                                                <option value="Fixed" @if (get_admin_setting('order_commission_type') == 'Fixed') selected @endif>
+                                                <option value="Fixed" @if (get_admin_setting('shipping_charge_type') == 'Fixed') selected @endif>
                                                     Fixed
                                                 </option>
                                             </select> --}}
-
-                                            <input type="hidden" name="order_commission_type" value="Percentage"
-                                                id="" class="@error('order_commission_type') is-invalid @enderror">
+                                            <input type="hidden" name="shipping_charge_type" value="Percentage"
+                                                id="" class="@error('shipping_charge_type') is-invalid @enderror">
                                             <div class="custm-dropdown">
                                                 <div class="dropdown">
                                                     <div class="dropdown-toggle " type="button" id="dropdownMenuButton1"
@@ -55,12 +54,12 @@
                                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 
                                                         <li><a class="dropdown-item custom_dropdown_commission"
-                                                                @if (get_admin_setting('order_commission_type') == 'Percentage') selected @endif
+                                                                @if (get_admin_setting('shipping_charge_type') == 'Percentage') selected @endif
                                                                 data-value="Percentage" data-text="Percentage"
                                                                 href="javascript:void(0)">Percentage</a>
                                                         </li>
                                                         <li><a class="dropdown-item custom_dropdown_commission"
-                                                                @if (get_admin_setting('order_commission_type') == 'Fixed') selected @endif
+                                                                @if (get_admin_setting('shipping_charge_type') == 'Fixed') selected @endif
                                                                 data-value="Fixed" data-text="Fixed"
                                                                 href="javascript:void(0)">Fixed</a>
                                                         </li>
@@ -68,7 +67,7 @@
                                                     </ul>
                                                 </div>
                                             </div>
-                                            @error('order_commission_type')
+                                            @error('shipping_charge_type')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -83,13 +82,13 @@
                                             </div> --}}
                                         </div>
                                         <div class="form-group">
-                                            <label>Order Commission<span class="required-field">*</span></label>
+                                            <label>Shipping Charge<span class="required-field">*</span></label>
                                             <div class="symbol"></div>
-                                            <input type="text" id="checkcommission" name="order_commission"
-                                                class="form-control @error('order_commission') is-invalid @enderror two-decimals"
-                                                value="{{ old('order_commission', get_admin_setting('order_commission')) }}">
+                                            <input type="text" id="checkcommission" name="shipping_charge"
+                                                class="form-control @error('shipping_charge') is-invalid @enderror two-decimals"
+                                                value="{{ old('order_commission', get_admin_setting('shipping_charge')) }}">
 
-                                            @error('order_commission')
+                                            @error('shipping_charge')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -106,7 +105,7 @@
 
                                         <div class="col-md-6">
                                             <a class="btn secondary-btn full-btn mr-1"
-                                                href="{{ route('admin.commission') }}">Back</a>
+                                                href="{{ route('admin.shipping') }}">Back</a>
                                         </div>
                                         <div class="col-md-6">
                                             <button class="btn primary-btn full-btn mr-1" id="submit"
@@ -123,7 +122,7 @@
     </div>
 @endsection
 @push('scripts')
-    @includeFirst(['validation.js_commision'])
+    {{-- @includeFirst(['validation.js_commision']) --}}
     <script>
         $(".two-decimals").on("keypress", function(evt) {
             var txtBox = $(this);
@@ -175,7 +174,7 @@
                 var selecttext = jQuery(this).attr('data-text')
                 console.log(selectitem, selecttext)
                 jQuery('#selectedcommission').text(selecttext)
-                jQuery(document).find('input[name="order_commission_type"]').val(selectitem);
+                jQuery(document).find('input[name="shipping_charge_type"]').val(selectitem);
 
             });
         });

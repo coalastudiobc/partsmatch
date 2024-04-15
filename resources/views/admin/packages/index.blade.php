@@ -8,7 +8,7 @@
         <x-alert-component />
 
         <div class="card-header-form padding">
-            <h2>Subscription Plans</h2>
+            {{-- <h2>Subscription Plans</h2> --}}
             {{-- <x-search-form :dateField="false" /> --}}
             <a class="btn   primary-btn" href="{{ route('admin.packages.add') }}">Add
                 Subscription Plan</a>

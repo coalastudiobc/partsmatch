@@ -4,6 +4,7 @@ return [
         'name_regex_message' =>  '/^[a-zA-Z]+[a-zA-Z\s]{1,50}$/',
         'name_minlength' => 2,
         'name_maxlength' => 50,
+        'pagination_number' => 5,
 
         'descriptionMaxLength' => 1000,
 

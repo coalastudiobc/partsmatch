@@ -8,7 +8,7 @@
     <div class="dashboard-right-box">
         <x-alert-component />
 
-        <h2>CMS</h2>
+        {{-- <h2>CMS</h2> --}}
 
         <div class="product-detail-table cms-list-table">
             <div class="table-responsive">
