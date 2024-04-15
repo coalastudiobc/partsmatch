@@ -38,7 +38,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
+
         try {
             $product = [
                 'name' => $request->name,
@@ -66,7 +66,6 @@ class ProductController extends Controller
             ];
 
             FeaturedProduct::create($featured_product);
-
             if (count($request->file('images')) > 0) {
                 foreach ($request->file('images') as $file) {
                     $image = store_image($file, 'products/images');
@@ -79,6 +78,7 @@ class ProductController extends Controller
                     }
                 }
             }
+
             ProductImage::insert($productimage);
 
             DB::commit();
@@ -139,7 +139,7 @@ class ProductController extends Controller
 
             DB::beginTransaction();
             $product->update($products);
-
+            // dd($request->images);
             if (isset($request->images) && count($request->file('images')) > 0) {
                 foreach ($request->file('images') as $key => $file) {
                     $image = store_image($file, 'products/images');
@@ -151,16 +151,20 @@ class ProductController extends Controller
                         ];
                     }
                 }
-                ProductImage::insert($productimage);
+                $productImage = ProductImage::insert($productimage);
+                // dd($productImage);
             }
 
             // $images = ProductImage::where('product_id', $product->id)->get();
 
             foreach ($ids as $id) {
                 foreach ($id as $id) {
-                    $image = ProductImage::where('id', $id)->first();
-                    Storage::disk('public')->delete('products/images', $image->file_url);
-                    $image->delete();
+                    if ($id != "imageid[]") {
+                        $image = ProductImage::where('id', $id)->first();
+                        Storage::disk('public')->delete('products/images', $image->file_url);
+                        $image->delete();
+                    }
+                    break;
                 }
             }
             // dd($images, $request->file('images'));

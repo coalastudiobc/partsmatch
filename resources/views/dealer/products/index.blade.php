@@ -200,7 +200,7 @@
                                     <label class="img-upload-box">
                                         <p>Upload Images</p>
                                         <input type="file" name="images[]" id="upload-image" multiple
-                                            minlength="5">
+                                            minlength="5" upload-image-count="0">
 
                                     </label>
                                     <div class="upload-img-preview">
@@ -338,7 +338,8 @@
                                         data-bs-target="#bulk-upload">Bulk Upload</a>
                                 </div>
                                 <div class="col-md-6">
-                                    <button type="submit" class="btn primary-btn full-btn">submit</button>
+                                    <button type="submit" id="submit"
+                                        class="btn primary-btn full-btn">submit</button>
                                 </div>
                             </div>
                         </div>
@@ -640,6 +641,21 @@
     })
 </script>
 <script>
+    jQuery(document).ready(function() {
+        jQuery('#submit').click(function(e) {
+            var no_image = $('#upload-image').attr('upload-image-count');
+            if (parseInt(no_image) < 5) {
+                e.preventDefault();
+                return toastr.error("Please enter atleast 5 images");
+            }
+            // var formData = new FormData($('form#product').get(0));
+
+            $('#product').valid()
+
+
+        });
+    });
+
     $(function() {
         // var carquery = new CarQuery();
         // carquery.init();
@@ -660,6 +676,10 @@
                     }
                     reader.readAsDataURL(input.files[i]);
                 }
+
+                var noimage = $('#upload-image').attr('upload-image-count');
+                totalimg = parseInt(noimage) + filesAmount;
+                $('#upload-image').attr('upload-image-count', totalimg)
             }
         };
         $('#upload-image').on('change', function() {
@@ -667,6 +687,10 @@
         });
 
         $(document).on('click', '.remove_uploaded', function() {
+            totalimage = $('#upload-image').attr('upload-image-count');
+            remaningimg = parseInt(totalimage) - 1;
+            totalimage = $('#upload-image').attr('upload-image-count', remaningimg);
+
             $(this).parent('div').parent('div').remove();
         });
 
