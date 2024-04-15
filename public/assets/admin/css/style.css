@@ -1449,3 +1449,21 @@ span.doller-symbol-txt.symbol {
 .form-group:has(.form-field) .form-field.is-invalid .input-icon-custm {
     top: 34%;
 }
+.upload-img-box {
+    position: relative;
+}
+.upload-img-preview,
+.pre-upload-img-preview {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.upload-img-preview img,
+.pre-upload-img-preview img {
+    width: 80px;
+    height: 100px;
+    object-fit: cover;
+
+}

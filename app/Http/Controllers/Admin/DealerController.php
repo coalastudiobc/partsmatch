@@ -71,7 +71,6 @@ class DealerController extends Controller
                     'additional_details' => $request->additional_details,
                     'stocks_avaliable' => $request->stocks_avaliable,
                     'price' => $request->price,
-                    'shipping_price' => $request->shipping_price,
                     'other_specification' => $request->other_specification,
                     'year' => $request->car_years,
                     'brand' => $request->car_makes,
