@@ -71,6 +71,7 @@ class DealerController extends Controller
                     'additional_details' => $request->additional_details,
                     'stocks_avaliable' => $request->stocks_avaliable,
                     'price' => $request->price,
+                    'shipping_price' => $request->shipping_price,
                     'other_specification' => $request->other_specification,
                     'year' => $request->car_years,
                     'brand' => $request->car_makes,
@@ -96,12 +97,10 @@ class DealerController extends Controller
                             'file_url' => $path
                         ]);
                     }
-                   
                 }
                 DB::commit();
                 return redirect()->back();
-            }   
-            catch (\Exception $e) {
+            } catch (\Exception $e) {
                 DB::rollBack();
                 return redirect()->back()->with('error', $e->getMessage());
             }

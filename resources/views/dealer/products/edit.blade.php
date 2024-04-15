@@ -18,6 +18,15 @@
                                     </ul>
                                 </div>
                             @endif
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
 
                             <div class="card-body">
                                 <form id="product" action="{{ route('dealer.products.update', $product->id) }}"
@@ -311,9 +320,6 @@
     </script>
     <script>
         $(function() {
-            // var carquery = new CarQuery();
-            // carquery.init();
-            // carquery.initYearMakeModelTrim('car-years', 'car-makes', 'car-models', 'car-model-trims');
             // var carquery = new CarQuery();
             // carquery.init();
             // carquery.initYearMakeModelTrim('car-years', 'car-makes', 'car-models', 'car-model-trims');
