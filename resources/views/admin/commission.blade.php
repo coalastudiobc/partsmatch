@@ -22,7 +22,7 @@
                                     <div class="row">
                                         <div class="form-group">
                                             <label>Order Commission Type</label>
-                                            <select id="checktype" name="order_commission_type"
+                                            {{-- <select id="checktype" name="order_commission_type"
                                                 class="form-control @error('order_commission_type') is-invalid @enderror">
                                                 <option value="Percentage"
                                                     @if (get_admin_setting('order_commission_type') == 'Percentage') selected @endif>
