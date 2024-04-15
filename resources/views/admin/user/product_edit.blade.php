@@ -1,4 +1,6 @@
-@extends('layouts.dealer')
+@extends('layouts.admin')
+@section('title', 'product edit')
+@section('heading', 'product editing')
 
 @section('content')
     <div class="main-content">
@@ -20,7 +22,7 @@
                             @endif
 
                             <div class="card-body">
-                                <form id="product" action="{{ route('dealer.products.update', $product->id) }}"
+                                <form id="product" action="{{ route('admin.dealers.product.edit', $product->id) }}"
                                     enctype="multipart/form-data" method="post">
                                     @csrf
                                     <div class="row">

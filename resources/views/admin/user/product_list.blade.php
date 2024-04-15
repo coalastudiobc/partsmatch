@@ -26,8 +26,8 @@
                             <p>Status</p>
                         </th>
                         <!-- <th>
-                            <p>View details</p>
-                        </th> -->
+                                <p>View details</p>
+                            </th> -->
                     </tr>
                     @forelse ($products as $key => $product)
                         <tr>
@@ -53,8 +53,8 @@
                                 </div>
                             </td>
                             <td>
-                                <a href="#"class="btn action-view-btn">View
-                                        details</a>
+                                <a href="{{ route('admin.dealers.product.edit',[$product->id])}}"class="btn action-view-btn">View
+                                    details</a>
                             </td>
                         </tr>
                     @empty
@@ -66,11 +66,11 @@
                     @endforelse
                 </table>
                 <div class="col-md-12">
-                                        <div class="dealer-profile-form-btn">
-                                            <a class="btn primary-btn " href="{{ url()->previous() }}">Back</a>
+                    <div class="dealer-profile-form-btn">
+                        <a class="btn primary-btn " href="{{ url()->previous() }}">Back</a>
 
-                                        </div>
-                                    </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

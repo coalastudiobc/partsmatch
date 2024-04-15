@@ -3,9 +3,13 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AdminProductRequest;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\ProductImage;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class DealerController extends Controller
 {
@@ -51,5 +55,57 @@ class DealerController extends Controller
         $paymentdetail = $user->paymentDetail;
 
         return view('admin.user.view', compact('user', 'paymentdetail'));
+    }
+
+    public function productedit(AdminProductRequest $request, Product $product)
+    {
+        if ($request->method() == 'GET') {
+            return view('admin.user.product_edit', compact('product'));
+        } else {
+            try {
+                DB::beginTransaction();
+                $product->update([
+                    'name' => $request->name,
+                    'subcategory_id' => $request->subcategory,
+                    'description' => $request->description,
+                    'additional_details' => $request->additional_details,
+                    'stocks_avaliable' => $request->stocks_avaliable,
+                    'price' => $request->price,
+                    'shipping_price' => $request->shipping_price,
+                    'other_specification' => $request->other_specification,
+                    'year' => $request->car_years,
+                    'brand' => $request->car_makes,
+                    'model' => $request->car_models,
+                ]);
+                if ($request->hasFile('images')) {
+                    $images = $request->file('images');
+                    foreach ($images as $image) {
+                        // dd("got something?");
+                        // if (!is_null($product->productImage)) {
+                        //     dd("yeah!");
+                        //     $existingFile = $product->productImage->file_name;
+                        //     if (!is_null($existingFile) && Storage::exists($existingFile)){
+                        //         Storage::disk('public')->delete('products', $existingFile);
+                        //     }
+                        // }
+                        // dd('what are you doin...?', $images);
+                        $fileName = $image->getClientOriginalName();
+                        $path = Storage::disk('public')->put('products', $image);
+                        ProductImage::create([
+                            'product_id' => $product->id,
+                            'file_name' => $fileName,
+                            'file_url' => $path
+                        ]);
+                    }
+                   
+                }
+                DB::commit();
+                return redirect()->back();
+            }   
+            catch (\Exception $e) {
+                DB::rollBack();
+                return redirect()->back()->with('error', $e->getMessage());
+            }
+        }
     }
 }

@@ -641,9 +641,9 @@
 </script>
 <script>
     $(function() {
-        var carquery = new CarQuery();
-        carquery.init();
-        carquery.initYearMakeModelTrim('car-years', 'car-makes', 'car-models', 'car-model-trims');
+        // var carquery = new CarQuery();
+        // carquery.init();
+        // carquery.initYearMakeModelTrim('car-years', 'car-makes', 'car-models', 'car-model-trims');
 
         // Multiple images preview with JavaScript
         var previewImages = function(input, imgPreviewPlaceholder) {
