@@ -28,8 +28,6 @@
                         <!-- <th>
                                 <p>View details</p>
                             </th> -->
-                                <p>View details</p>
-                            </th> -->
                     </tr>
                     @forelse ($products as $key => $product)
                         <tr>
