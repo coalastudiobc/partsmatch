@@ -101,16 +101,20 @@
                                                         </li>
                                                         <li><a class="dropdown-item custom_dropdown_item"
                                                                 data-value="{{ jsencode_userdata('Monthly') }}"
-                                                                data-text="Yearly" href="javascript:void(0)">Monthly</a>
+                                                                data-text="Monthly" href="javascript:void(0)">Monthly</a>
                                                         </li>
                                                         <li><a class="dropdown-item custom_dropdown_item"
                                                                 data-value="{{ jsencode_userdata('Quarterly') }}"
-                                                                data-text="Yearly" href="javascript:void(0)">Every 3
+                                                                data-text="Every 3
+                                                                months"
+                                                                href="javascript:void(0)">Every 3
                                                                 months</a>
                                                         </li>
                                                         <li><a class="dropdown-item custom_dropdown_item"
                                                                 data-value="{{ jsencode_userdata('Halfly') }}"
-                                                                data-text="Yearly" href="javascript:void(0)">Every 6
+                                                                data-text="Every 6
+                                                                months"
+                                                                href="javascript:void(0)">Every 6
                                                                 months</a>
                                                         </li>
 
