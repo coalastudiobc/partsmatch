@@ -86,6 +86,10 @@
                                                         <li><a class="dropdown-item"
                                                                 href="{{ route('dealer.profile') }}">Profile</a>
                                                         </li>
+                                                        <li><a class="dropdown-item"
+                                                                href="{{ route('dealer.subscription.plan') }}">Subscription
+                                                                Plan</a>
+                                                        </li>
                                                         {{-- <li><a class="dropdown-item" href="#">Another action</a></li> --}}
                                                         <li><a class="dropdown-item" href="{{ route('logout') }}">
                                                                 Logout

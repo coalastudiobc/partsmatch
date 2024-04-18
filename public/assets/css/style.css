@@ -1420,7 +1420,11 @@ button.btn-close {
     background: #e8ebee;
 }
 
-#file-upload-error {
+.upload-box {
+    position: relative;
+}
+
+.add-pro-form #file-upload-error {
     position: absolute;
     white-space: nowrap;
     bottom: -46px;

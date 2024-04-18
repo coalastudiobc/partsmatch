@@ -78,7 +78,8 @@
                                             <div class="form-group">
                                                 <label for="">Content*</label>
                                                 <div class="form-field">
-                                                    <textarea name="content" class="form-control summernote @error('content') is-invalid @enderror">{{ $page->page_content ?? $page->page_content }}</textarea>
+                                                    <textarea name="content" class="form-control summernote @error('content') is-invalid @enderror" cols=""
+                                                        rows="6">{{ $page->page_content ?? $page->page_content }}</textarea>
                                                     @error('content')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
