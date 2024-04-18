@@ -33,9 +33,9 @@
                         <th>
                             <p>Status</p>
                         </th>
-                        <th>
+                        {{-- <th>
                             <p>Featured Status</p>
-                        </th>
+                        </th> --}}
                         <th>
                             <p>Action</p>
                         </th>
@@ -68,7 +68,7 @@
                             </div>
                         </td>
 
-                        <td>
+                        {{-- <td>
                             <div class="toggle-btn">
                                 <input type="checkbox" id="switch1{{ $key }}"
                                     data-id=" @if (isset($product->featuredProduct->id)) {{ $product->featuredProduct->id }} @else 0 @endif"
@@ -77,7 +77,7 @@
                                     @if (!plan_validity()) disabled @endif><label
                                     for="switch1{{ $key }}">Toggle</label>
                             </div>
-                        </td>
+                        </td> --}}
                         <td>
                             <div class="action-btns">
                                 <a href="{{ route('dealer.products.edit', $product->id) }}"><i
@@ -143,7 +143,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">Product Name</label>
+                                    <label for="">Product Name*</label>
                                     <div class="form-field">
                                         <input type="text" name="name" class="form-control"
                                             placeholder="Product Name">
@@ -153,7 +153,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">Product Category</label>
+                                    <label for="">Product Category*</label>
                                     <div class="form-field">
                                         <select type="text" name="category" class="form-control category"
                                             placeholder="Product Category">
@@ -167,7 +167,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">Product SubCategory</label>
+                                    <label for="">Product SubCategory*</label>
                                     <div class="form-field subcategory">
                                         <select type="text" name="subcategory" class="form-control"
                                             placeholder="Product SubCategory" id="subcategory">
@@ -178,7 +178,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="">Product Description</label>
+                                    <label for="">Product Description*</label>
                                     <div class="form-field">
                                         <textarea name="description" class="form-control" id="" cols="30" rows="2"></textarea>
 
@@ -196,7 +196,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="">Add Product Images (Up to 5)</label>
+                                    <label for="">Add Product Images* (Up to 5)</label>
                                     <label class="img-upload-box">
                                         <p>Upload Images</p>
                                         <input type="file" name="images[]" id="upload-image" multiple
@@ -220,7 +220,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">Product Price</label>
+                                    <label for="">Product Price*</label>
                                     <div class="form-field">
                                         <input type="text" name="price" class="form-control"
                                             placeholder="$000">
@@ -240,7 +240,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">Shipping Price</label>
+                                    <label for="">Shipping Price*</label>
                                     <div class="form-field">
                                         <input type="text" name="shipping_price" class="form-control"
                                             placeholder="$000">
@@ -250,7 +250,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">Model</label>
+                                    <label for="">Model*</label>
                                     <div class="form-field">
                                         <select class="form-control api_call" name="car_years"
                                             id="car-years"></select>
@@ -274,7 +274,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">Brand</label>
+                                    <label for="">Brand*</label>
                                     <div class="form-field">
                                         <select class="form-control api_call" name="car_makes"
                                             id="car-makes"></select>
@@ -298,7 +298,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">Make</label>
+                                    <label for="">Make*</label>
                                     <div class="form-field">
                                         <select class="form-control api_call" name="car_models"
                                             id="car-models"></select>

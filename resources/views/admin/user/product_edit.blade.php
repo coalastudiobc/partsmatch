@@ -272,7 +272,7 @@
                                         </div> --}}
 
                                         <div class="col-md-6">
-                                            <a href="{{ route('dealer.products.index') }}"
+                                            <a href="{{ route('admin.dealers.all') }}"
                                                 class="btn secondary-btn full-btn mr-1">Back</a>
                                         </div>
                                         <div class="col-md-6">

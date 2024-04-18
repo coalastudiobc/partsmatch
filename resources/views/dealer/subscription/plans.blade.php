@@ -8,7 +8,7 @@
         <x-alert-component />
 
         <div class="row g-4 align-items-center">
-            @foreach ($plans as $plan)
+            @forelse  ($plans as $plan)
                 <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                     <div class="cards" id="card{{ $plan->id }}">
                         <div class="card-details">
@@ -38,7 +38,9 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                <div>No Plans</div>
+            @endforelse
         </div>
     </div>
 

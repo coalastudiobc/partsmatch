@@ -24,7 +24,7 @@ class CmsRequest extends FormRequest
         return [
             'name' => ['required'],
             'content' => ['required'],
-            'image' => ['required', 'mimes:jpeg,png,jpg'],
+            'image' => ['mimes:jpeg,png,jpg'],
         ];
     }
     public function messages()
@@ -32,7 +32,7 @@ class CmsRequest extends FormRequest
         return [
             'name.required' => __('customvalidation.cms.name.required'),
             'content.required' => __('customvalidation.cms.content.required'),
-            'image.required' => __('customvalidation.cms.image.required'),
+            // 'image.required' => __('customvalidation.cms.image.required'),
 
         ];
     }

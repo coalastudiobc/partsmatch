@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('title', 'Update ' . $page->name)
-@section('heading', 'Cms')
+@section('heading', 'CMS')
 
 @section('content')
     <div class="main-content">
@@ -198,7 +198,7 @@
 @endsection
 
 @push('scripts')
-    {{-- @includeFirst(['validation.js_cms']) --}}
+    @includeFirst(['validation.js_cms'])
     <script>
         // jQuery(document).ready(function() {
         //     jQuery('#submit').click(function(e) {

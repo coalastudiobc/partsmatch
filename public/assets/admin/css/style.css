@@ -1449,9 +1449,11 @@ span.doller-symbol-txt.symbol {
 .form-group:has(.form-field) .form-field.is-invalid .input-icon-custm {
     top: 34%;
 }
+
 .upload-img-box {
     position: relative;
 }
+
 .upload-img-preview,
 .pre-upload-img-preview {
     display: flex;
@@ -1466,4 +1468,10 @@ span.doller-symbol-txt.symbol {
     height: 100px;
     object-fit: cover;
 
+}
+
+.upload-img-cross {
+    position: absolute;
+    top: 5px;
+    right: 5px;
 }

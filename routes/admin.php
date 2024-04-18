@@ -25,6 +25,7 @@ Route::middleware(['auth', 'verified', 'admin'])->namespace('App\Http\Controller
    Route::get('edit', 'AdminController@edit')->name('edit');
    Route::match(["GET", "POST"], "commission", 'AdminController@commission')->name('commission');
    Route::match(["GET", "POST"], "shipping", 'AdminController@shipping')->name('shipping');
+   Route::match(["GET", "POST"], "featured/product", 'AdminController@featured_list')->name('featured.product');
 
 
    // Stripe settings

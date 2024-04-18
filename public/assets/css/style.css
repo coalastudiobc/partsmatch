@@ -1419,3 +1419,10 @@ button.btn-close {
 .disabled_select {
     background: #e8ebee;
 }
+
+#file-upload-error {
+    position: absolute;
+    white-space: nowrap;
+    bottom: -46px;
+    left: -58px;
+}

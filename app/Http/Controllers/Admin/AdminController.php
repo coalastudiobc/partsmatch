@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CommissionRequest;
 use App\Models\AdminSetting;
 use App\Models\Commission;
+use App\Models\FeaturedProduct;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Contracts\Validation\Validator as ValidationValidator;
 use Illuminate\Http\Request;
@@ -143,5 +145,14 @@ class AdminController extends Controller
         }
 
         return view('admin.shipping_price');
+    }
+    public function featured_list()
+    {
+        // $users = User::with('product', 'product.featuredProduct')->get();
+        // $products = Product::with('featuredProduct', 'user', 'category', 'user.subscription')->get();
+        // dd($products->toArray());
+        $feature_products = FeaturedProduct::with('product', 'product.user.subscription', 'product.productImage')->get();
+        // dd($feature_products->toArray());
+        return view('admin.featured_list', compact('feature_products'));
     }
 }

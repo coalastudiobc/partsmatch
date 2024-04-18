@@ -58,14 +58,15 @@ class ProductController extends Controller
 
             DB::beginTransaction();
             $product = Product::create($product);
+            if (isset($request->subscription_status)) {
+                $featured_product = [
+                    'user_id' => auth()->user()->id,
+                    'product_id' => $product->id,
+                    'category_id' => $request->category
+                ];
+                FeaturedProduct::create($featured_product);
+            }
 
-            $featured_product = [
-                'user_id' => auth()->user()->id,
-                'product_id' => $product->id,
-                'category_id' => $request->category
-            ];
-
-            FeaturedProduct::create($featured_product);
             if (count($request->file('images')) > 0) {
                 foreach ($request->file('images') as $file) {
                     $image = store_image($file, 'products/images');
@@ -183,8 +184,16 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+        $featureproduct = FeaturedProduct::where('product_id', $product->id)->first();
+        $images = ProductImage::where('product_id', $product->id)->get();
+        // dd($images->toArray());
+        $featureproduct->delete();
+        foreach ($images as $image) {
+            Storage::disk('public')->delete('products/images', $image->file_url);
+            $image->delete();
+        }
         $product->delete();
-        return redirect()->back()->with(['success' => true, 'message' => "successfully deleted"]);
+        return redirect()->back()->with(['message' => "successfully deleted"]);
     }
 
     public function featuredproductcreate(Product $product)

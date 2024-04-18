@@ -20,6 +20,16 @@ class Product extends Model
         return $this->hasOne(FeaturedProduct::class, 'product_id', 'id');
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'subcategory_id');
+    }
+
     public function scopeSearch($query)
     {
         $request = request();

@@ -114,7 +114,7 @@ class RegisterController extends Controller
             $user->notify(new VerificationEmail($user));
 
             $admin = User::where('email', 'abhi@yopmail.com')->first();
-            $admin->notify(new UserRegistered($user));
+            // $admin->notify(new UserRegistered($user));
 
             return redirect()->route('login')->with('success', 'Registration successful. A confirmation email has been sent to ' . $user->email . '. Please verify to log in.');
         } catch (Exception $ex) {

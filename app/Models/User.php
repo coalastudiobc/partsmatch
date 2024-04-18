@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Cashier\Billable;
+use Laravel\Cashier\Subscription;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -63,7 +64,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Product::class,  'user_id', 'id');
     }
-
+    public function subscription()
+    {
+        return $this->hasMany(Subscription::class,  'user_id', 'id');
+    }
     public function scopeSearch($query)
     {
         $request = request();

@@ -24,7 +24,7 @@ class PackageRequest extends FormRequest
         return [
 
             'name' => ['required'],
-            'price' => ['required', 'digits:value'],
+            'price' => ['required'],
             'time_type' => ['required'],
         ];
     }

@@ -11,9 +11,12 @@
                     <button type="submit" class="btn primary-btn">Search</button>
                 </div>
             </form>
+            {{-- @can('role-view') --}}
             <a href="#" class="btn primary-btn" data-bs-toggle="modal" data-bs-target="#add-manager-model">
                 + Add New Manager
             </a>
+            {{-- @endcan --}}
+
         </div>
         <div class="product-detail-table product-list-table pro-manage-table">
             <div class="table-responsive">
@@ -213,15 +216,41 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="">Assign
-                                            Role</label>
-                                        <div class="form-field">
-                                            <input type="text" class="form-control " placeholder="Assign Role">
+                                        <label for="">Role</label>
+                                        <input type="hidden" name="permission_type" value="Basic" id=""
+                                            class="@error('order_commission_type') is-invalid @enderror">
+                                        <div class="custm-dropdown">
+                                            <div class="dropdown">
+                                                <div class="dropdown-toggle " type="button" id="dropdownMenuButton1"
+                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <div id="selectedcommission">
+                                                        Basic
+                                                    </div>
+                                                    <span class="custm-drop-icon">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                            height="23" viewBox="0 0 24 23" fill="none">
+                                                            <path d="M19 9.00006L14 14.0001L9 9.00006" stroke="#151515"
+                                                                stroke-width="1.8" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                        </svg>
+                                                    </span>
+                                                </div>
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 
+                                                    <li><a class="dropdown-item custom_dropdown_commission"
+                                                            data-value="Basic" data-text="Basic"
+                                                            href="javascript:void(0)">Basic</a>
+                                                    </li>
+                                                    <li><a class="dropdown-item custom_dropdown_commission"
+                                                            data-value="Advanced" data-text="Advanced"
+                                                            href="javascript:void(0)">Advanced</a>
+                                                    </li>
+
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="">Password*</label>
@@ -269,6 +298,18 @@
 @endsection
 @push('scripts')
     @includeFirst(['validation.dealer.js_parts_manager'])
+    <script>
+        jQuery(document).ready(function() {
+            jQuery('.custom_dropdown_commission').on('click', function() {
+                var selectitem = jQuery(this).attr('data-value')
+                var selecttext = jQuery(this).attr('data-text')
+                console.log(selectitem, selecttext)
+                jQuery('#selectedcommission').text(selecttext)
+                jQuery(document).find('input[name="order_commission_type"]').val(selectitem);
+
+            });
+        });
+    </script>
     <script>
         $(document).ready(function() {
             $("#file-upload").change(function() {

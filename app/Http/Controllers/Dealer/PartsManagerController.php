@@ -34,6 +34,7 @@ class PartsManagerController extends Controller
 
         $userdetails = User::create($user);
         $userdetails->assignRole('Manager');
+        // $userdetails->givePermissionTo('role-view');
         return redirect()->back()->with(['status' => 'success', 'message' => "created successfully"]);
     }
 

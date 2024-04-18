@@ -39,7 +39,8 @@
                                                     <div class="dropdown-toggle " type="button" id="dropdownMenuButton1"
                                                         data-bs-toggle="dropdown" aria-expanded="false">
                                                         <div id="selectedcommission">
-                                                            Percentage
+                                                            {{ get_admin_setting('shipping_charge_type') == 'Fixed' ? 'Fixed' : 'Percentage' }}
+
 
                                                         </div>
                                                         <span class="custm-drop-icon">
@@ -86,7 +87,7 @@
                                             <div class="symbol"></div>
                                             <input type="text" id="checkcommission" name="shipping_charge"
                                                 class="form-control @error('shipping_charge') is-invalid @enderror two-decimals"
-                                                value="{{ old('order_commission', get_admin_setting('shipping_charge')) }}">
+                                                value="{{ old('shipping_charge', get_admin_setting('shipping_charge')) }}">
 
                                             @error('shipping_charge')
                                                 <span class="invalid-feedback" role="alert">

@@ -88,7 +88,7 @@
                                                 <div class="form-field">
                                                     <input type="email" name="email" value="{{ old('email') }}"
                                                         class="form-control @error('email') is-invalid @enderror"
-                                                        placeholder="Email ID">
+                                                        placeholder="Email">
 
                                                     @error('email')
                                                         <span class="invalid-feedback" role="alert">
@@ -105,7 +105,7 @@
                                                     <input type="text" name="phone_number"
                                                         value="{{ old('phone_number') }}"
                                                         class="form-control @error('phone_number') is-invalid @enderror"
-                                                        placeholder="phone_number">
+                                                        placeholder="Phone Number">
 
                                                     @error('phone_number')
                                                         <span class="invalid-feedback" role="alert">
@@ -137,7 +137,7 @@
                                                 <div class="form-field">
                                                     <input type="text" name="zipcode" value="{{ old('zipcode') }}"
                                                         class="form-control @error('zipcode') is-invalid @enderror"
-                                                        placeholder="Zip code">
+                                                        placeholder="Zip Code">
 
                                                     @error('zipcode')
                                                         <span class="invalid-feedback" role="alert">
@@ -218,7 +218,7 @@
                                                     <input id="password_confirmation" type="password" name="password"
                                                         value="{{ old('password') }}"
                                                         class="form-control @error('password') is-invalid @enderror"
-                                                        placeholder="**********">
+                                                        placeholder="Password">
 
                                                     @error('password')
                                                         <span class="invalid-feedback" role="alert">
@@ -235,7 +235,7 @@
                                                     <input type="password" name="password_confirmation"
                                                         value="{{ old('password_confirmation') }}"
                                                         class="form-control @error('password_confirmation') is-invalid @enderror"
-                                                        placeholder="**********">
+                                                        placeholder="Password Confirmation">
 
                                                     @error('password_confirmation')
                                                         <span class="invalid-feedback" role="alert">

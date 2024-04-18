@@ -40,7 +40,7 @@
                                                     <div class="dropdown-toggle " type="button" id="dropdownMenuButton1"
                                                         data-bs-toggle="dropdown" aria-expanded="false">
                                                         <div id="selectedcommission">
-                                                            Percentage
+                                                            {{ get_admin_setting('order_commission_type') == 'Fixed' ? 'Fixed' : 'Percentage' }}
 
                                                         </div>
                                                         <span class="custm-drop-icon">

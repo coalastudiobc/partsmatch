@@ -32,8 +32,8 @@
                 maxlength: 6,
             },
             image: {
-                imageExtension: true,
-                required: true
+                required: true,
+                imageExtension: true
             },
             password: {
                 required: true,
@@ -88,8 +88,8 @@
 
             },
             password_confirmation: {
-                equalTo: `{{ __('customvalidation.user.confirm_password.equal') }}`,
                 required: `{{ __('customvalidation.user.confirm_password.required') }}`,
+                equalTo: `{{ __('customvalidation.user.confirm_password.equal') }}`,
             }
         };
         handleValidation('register', rules, messages, true);
