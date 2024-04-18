@@ -498,6 +498,8 @@
     width: 100%;
     border-radius: 5px;
     border: 1px solid #DDD;
+    position: sticky;
+    top: 270px;
 }
 
 .analyics-tabs-btns {
@@ -680,6 +682,9 @@
 /* ------------------------------------- Cart Page ----------------------- */
 .banner-content-sec {
     background-color: var(--secondary-color);
+    position: sticky;
+    top: 90px;
+    z-index: 999;
 }
 
 .banner-content-wrapper {
@@ -1035,6 +1040,7 @@
     padding: 60px 40px;
     border-radius: 15px;
     box-shadow: 0px 1px 9px 4px #0000001f;
+    width: 100%;
 }
 
 .cards {

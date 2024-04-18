@@ -303,7 +303,7 @@ return [
             'imageExtension' => 'Only image type jpg/png/jpeg is allowed.',
         ],
         'zipcode' => [
-            'required' => 'please enter the zip code.',
+            'required' => 'Please enter the zip code.',
             'minlength' => 'zipcode should be 6 digits.',
             'maxlength' => 'zipcode should be 6 digits.',
         ],
