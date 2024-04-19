@@ -117,6 +117,8 @@ function handleValidation(form, rules, messages = {}, submitHandler = false) {
                 label.insertAfter($(element).parent())
             } else if (jQuery(element).hasClass('image-input')) {
                 $('#errorViewer').html(label);
+            } else if (jQuery(element).hasClass('input-industry')) {
+                $('#Viewererror').html(label);
             }
             else {
                 label.insertAfter(element)

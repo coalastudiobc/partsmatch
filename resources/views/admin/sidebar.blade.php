@@ -427,7 +427,8 @@
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#flush-collapseOne5" aria-expanded="false"
                                     aria-controls="flush-collapseOne">
-                                    <a href="{{ route('admin.packages.all') }}" class="analyics-tabs-btns ">
+                                    <a href="{{ route('admin.packages.all') }}"
+                                        class="analyics-tabs-btns @if (Route::is('admin.packages.*')) active @endif ">
                                         <div class="analyics-tabs-name">
                                             <span>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17"

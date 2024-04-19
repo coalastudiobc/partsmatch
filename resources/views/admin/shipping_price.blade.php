@@ -125,7 +125,7 @@
     </div>
 @endsection
 @push('scripts')
-    {{-- @includeFirst(['validation.js_commision']) --}}
+    @includeFirst(['validation.js_shipping'])
     <script>
         $(".two-decimals").on("keypress", function(evt) {
             var txtBox = $(this);

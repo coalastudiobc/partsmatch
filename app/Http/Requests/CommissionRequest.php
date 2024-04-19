@@ -38,12 +38,21 @@ class CommissionRequest extends FormRequest
 
     public function messages()
     {
-        return [
+
+        $message = [
             'order_commission_type.required' => "order commission type is required",
             'order_commission.required' => "order commission is required",
             'order_commission.min' => "order commission should be grater than 1",
-            'order_commission.max' => "order commission should be less than 99",
             'order_commission.regex' => "only number allowed"
         ];
+
+        if (request()->ordercommission_type == 'Percentage') {
+            $message['order_commission.max'] = "order commission should be less than 99";
+        } else {
+            $message['order_commission.max'] = "order commission should be less than 9999";
+        }
+
+
+        return $message;
     }
 }

@@ -76,7 +76,7 @@ class PackageController extends Controller
                 $package = Package::where('id', $id)->firstOrFail();
 
                 if ($package) {
-                    $this->stripe->products->update($package->stripe_id, ['name' => $request->name]);
+                    $product =  $this->stripe->products->update($package->stripe_id, ['name' => $request->name]);
                     if ($package->price <> $request->price) {
                         $product_price = $this->stripe->prices->create([
                             'unit_amount' => $request->price * 100,
@@ -89,6 +89,7 @@ class PackageController extends Controller
                             'currency' =>   'USD',
                         ]);
                     }
+
                     $package->update($data);
                     $message = "Package updated sucessfully";
                     session()->flash('message', $message);

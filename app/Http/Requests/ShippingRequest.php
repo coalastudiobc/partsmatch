@@ -38,12 +38,19 @@ class ShippingRequest extends FormRequest
 
     public function messages()
     {
-        return [
+        $message = [
             'shipping_charge_type.required' => "shipping charge type is required",
             'shipping_charge.required' => "shipping charge is required",
             'shipping_charge.min' => "shipping charge should be grater than 1",
-            'shipping_charge.max' => "shipping charge should be less than 99",
             'shipping_charge.regex' => "only number allowed"
         ];
+
+        if (request()->shipping_charge_type == 'Percentage') {
+            $message['shipping_charge.max'] = "order commission should be less than 99";
+        } else {
+            $message['shipping_charge.max'] = "order commission should be less than 9999";
+        }
+
+        return $message;
     }
 }

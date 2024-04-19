@@ -172,6 +172,14 @@ return [
             'required' => 'Please enter the oder commission',
         ],
     ],
+    'shipping' => [
+        'shipping_charge_type' => [
+            'required' => 'Please select the shipping charge type',
+        ],
+        'shipping_charge' => [
+            'required' => 'Please enter the shipping charge',
+        ],
+    ],
     'hashtags' => [
         'title' => [
             'required' => 'Please enter the hashtag Title',
@@ -253,7 +261,7 @@ return [
             'maxlength' => 'Phone number should be 10 digits.'
         ],
         'industry_type' => [
-            'required' => 'Please enter the industry type',
+            'required' => 'Please select the industry type',
         ],
         'bio' => [
             'min' => 'Bio can be :min - :max characters',

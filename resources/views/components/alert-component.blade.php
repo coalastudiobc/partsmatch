@@ -30,7 +30,7 @@
                 <div class="d-flex align-items-center justify-content-between">
                     <div class="d-flex align-items-center gap-3">
                         <span class="alert-icon "><i class="fas fa-info-circle"></i></span>
-                        <h6>Message</h6>
+                        {{-- <h6>Message</h6> --}}
                     </div>
                     <a class="alert-cross close" data-bs-dismiss="alert" aria-label="Close">
                         <svg width="7" height="7" viewBox="0 0 7 7" fill="none"

@@ -78,7 +78,7 @@
                                         <div class="form-group">
                                             <label>Order Commission<span class="required-field">*</span></label>
                                             <div class="symbol"></div>
-                                            <input type="text" id="checkcommission" name="order_commission"
+                                            <input type="number" id="checkcommission" name="order_commission"
                                                 class="form-control @error('order_commission') is-invalid @enderror two-decimals"
                                                 value="{{ old('order_commission', get_admin_setting('order_commission')) }}">
 

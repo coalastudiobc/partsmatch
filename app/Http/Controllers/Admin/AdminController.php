@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 
 use App\Http\Requests\CommissionRequest;
+use App\Http\Requests\ShippingRequest;
 use App\Models\AdminSetting;
 use App\Models\Commission;
 use App\Models\FeaturedProduct;
@@ -132,7 +133,7 @@ class AdminController extends Controller
         return view('admin.commission');
     }
 
-    public function shipping(Request $request)
+    public function shipping(ShippingRequest $request)
     {
         if ($request->method() == "POST") {
             AdminSetting::where('name', 'shipping_charge_type')->update(['value' => $request->shipping_charge_type]);

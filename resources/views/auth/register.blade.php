@@ -159,15 +159,15 @@
                                                         <option value="audi">Audi</option>
                                                     </select> --}}
                                                     <input type="hidden" id="industry" name="industry_type"
-                                                        value="Volvo"
-                                                        class="@error('industry_type') is-invalid @enderror">
+                                                        value=""
+                                                        class="input-industry @error('industry_type') is-invalid @enderror">
                                                     <div class="custm-dropdown">
                                                         <div class="dropdown">
-                                                            <div class="dropdown-toggle " type="button"
+                                                            <div class="dropdown-toggle" type="button"
                                                                 id="dropdownMenuButton1" data-bs-toggle="dropdown"
                                                                 aria-expanded="false">
                                                                 <div id="selectedItem">
-                                                                    Volvo
+                                                                    Industry
                                                                 </div>
                                                                 <span class="custm-drop-icon">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -182,6 +182,9 @@
                                                             </div>
                                                             <ul class="dropdown-menu"
                                                                 aria-labelledby="dropdownMenuButton1">
+                                                                {{-- <li><a class="dropdown-item custom_dropdown_item"
+                                                                        data-value="" href="javascript:void(0)">Volvo</a>
+                                                                </li> --}}
                                                                 <li><a class="dropdown-item custom_dropdown_item"
                                                                         data-value="Volvo"
                                                                         href="javascript:void(0)">Volvo</a>
@@ -202,12 +205,12 @@
                                                     {{-- <input type="text" name="industry_type" value="{{ old('industry_type') }}"
                                                         class="form-control @error('industry_type') is-invalid @enderror"
                                                         placeholder="Select industry"> --}}
-
                                                     @error('industry_type')
-                                                        <span class="invalid-feedback" role="alert">
+                                                        <span id="Viewererror" class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
+
                                                 </div>
                                             </div>
                                         </div>
@@ -232,7 +235,7 @@
                                             <div class="form-group">
                                                 <label for="">Confirm Password*</label>
                                                 <div class="form-field">
-                                                    <input type="password" name="password_confirmation"
+                                                    <input id="password" type="password" name="password_confirmation"
                                                         value="{{ old('password_confirmation') }}"
                                                         class="form-control @error('password_confirmation') is-invalid @enderror"
                                                         placeholder="Password Confirmation">

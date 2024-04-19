@@ -35,15 +35,19 @@
                 required: true,
                 imageExtension: true
             },
+            industry_type: {
+                required: true,
+            },
             password: {
                 required: true,
                 minlength: passwordMinLength,
                 maxlength: passwordMaxLength,
                 regex: passwordRegex
+                equalTo: "#password",
             },
             password_confirmation: {
                 required: true,
-                equalTo: "#password_confirmation"
+                // equalTo: "#password_confirmation"
             }
         }
         const messages = {
@@ -80,16 +84,19 @@
                 required: `{{ __('customvalidation.user.image.required') }}`,
                 imageExtension: `{{ __('customvalidation.user.image.imageExtension') }}`,
             },
+            industry_type: {
+                required: `{{ __('customvalidation.user.industry_type.required') }}`,
+            },
             password: {
                 required: `{{ __('customvalidation.user.password.required') }}`,
                 minlength: `{{ __('customvalidation.user.password.min', ['min' => '${passwordMinLength}', 'max' => '${passwordMaxLength}']) }}`,
                 maxlength: `{{ __('customvalidation.user.password.max', ['min' => '${passwordMinLength}', 'max' => '${passwordMaxLength}']) }}`,
                 regex: `{{ __('customvalidation.user.password.regex', ['regex' => '${passwordRegex}']) }}`,
+                equalTo: `{{ __('customvalidation.user.confirm_password.equal') }}`,
 
             },
             password_confirmation: {
                 required: `{{ __('customvalidation.user.confirm_password.required') }}`,
-                equalTo: `{{ __('customvalidation.user.confirm_password.equal') }}`,
             }
         };
         handleValidation('register', rules, messages, true);

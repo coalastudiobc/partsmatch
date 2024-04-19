@@ -62,6 +62,7 @@
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div class="form-group col-md-6">
                                             <label>Type<span class="required-field">*</span></label>
                                             {{-- <select name="time_type"
@@ -81,7 +82,7 @@
                                                     <div class="dropdown-toggle " type="button" id="dropdownMenuButton1"
                                                         data-bs-toggle="dropdown" aria-expanded="false">
                                                         <div id="selectedItem">
-                                                            Select
+                                                            {{ $package->billing_cycle ?? 'select' }}
 
                                                         </div>
                                                         <span class="custm-drop-icon">
@@ -123,7 +124,8 @@
                                                 </div>
                                             </div>
                                             <div id="errorViewer">
-                                                <input type="hidden" name="time_type" value="" id=""
+                                                <input type="hidden" name="time_type"
+                                                    value="{{ $package->billing_cycle ?? '' }}" id=""
                                                     class="image-input @error('time_type') is-invalid @enderror">
                                                 @error('time_type')
                                                     <span class="invalid-feedback" role="alert">
