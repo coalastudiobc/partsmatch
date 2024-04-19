@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title', 'Cms Management')
-@section('heading', 'Cms')
+@section('heading', 'CMS')
 
 @section('content')
 

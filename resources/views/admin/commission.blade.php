@@ -22,21 +22,14 @@
                                     <div class="row">
                                         <div class="form-group">
                                             <label>Order Commission Type</label>
-                                            {{-- <select id="checktype" name="order_commission_type"
-                                                class="form-control @error('order_commission_type') is-invalid @enderror">
-                                                <option value="Percentage"
-                                                    @if (get_admin_setting('order_commission_type') == 'Percentage') selected @endif>
-                                                    Percentage
-                                                </option>
-                                                <option value="Fixed" @if (get_admin_setting('order_commission_type') == 'Fixed') selected @endif>
-                                                    Fixed
-                                                </option>
-                                            </select> --}}
 
-                                            <input type="hidden" name="order_commission_type" value="Percentage"
-                                                id="" class="@error('order_commission_type') is-invalid @enderror">
+
+                                            <input type="hidden" name="order_commission_type"
+                                                value="{{ get_admin_setting('order_commission_type') == 'Fixed' ? 'Fixed' : 'Percentage' }}"
+                                                id="checktype"
+                                                class="@error('order_commission_type') is-invalid @enderror checktype">
                                             <div class="custm-dropdown">
-                                                <div class="dropdown">
+                                                <div class="dropdown checktype">
                                                     <div class="dropdown-toggle " type="button" id="dropdownMenuButton1"
                                                         data-bs-toggle="dropdown" aria-expanded="false">
                                                         <div id="selectedcommission">
@@ -148,36 +141,43 @@
     </script>
     <script>
         $(document).ready(function() {
-            var type = $('#checktype').val();
+            // change symbols
+            var type = $('.checktype').val();
 
             if (type == 'Percentage') {
+                $('#checkcommission').attr('min', '1');
+                $('#checkcommission').attr('max', '99');
                 $('.symbol').text('%');
-
             } else {
+                $('#checkcommission').removeAttr('min', '1');
+                $('#checkcommission').removeAttr('max', '99');
                 $('.symbol').text('$');
             }
-            $('#checktype').on('click', function() {
-                var type = $('#checktype').val();
+            $('.checktype').on('click', function() {
+                var type = $('.checktype').val();
+
                 if (type == 'Percentage') {
+                    $('#checkcommission').attr('min', '1');
+                    $('#checkcommission').attr('max', '99');
                     $('.symbol').text('%');
 
                 } else {
+                    $('#checkcommission').removeAttr('min', '1');
+                    $('#checkcommission').removeAttr('max', '99');
                     $('.symbol').text('$');
                 }
-            })
+            });
 
-        });
-    </script>
-    <script>
-        jQuery(document).ready(function() {
+
+            // change type
             jQuery('.custom_dropdown_commission').on('click', function() {
                 var selectitem = jQuery(this).attr('data-value')
                 var selecttext = jQuery(this).attr('data-text')
-                console.log(selectitem, selecttext)
                 jQuery('#selectedcommission').text(selecttext)
                 jQuery(document).find('input[name="order_commission_type"]').val(selectitem);
 
             });
+
         });
     </script>
 @endpush

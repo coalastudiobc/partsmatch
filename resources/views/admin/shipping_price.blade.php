@@ -32,10 +32,12 @@
                                                     Fixed
                                                 </option>
                                             </select> --}}
-                                            <input type="hidden" name="shipping_charge_type" value="Percentage"
-                                                id="" class="@error('shipping_charge_type') is-invalid @enderror">
+                                            <input type="hidden" name="shipping_charge_type"
+                                                value="{{ get_admin_setting('shipping_charge_type') == 'Fixed' ? 'Fixed' : 'Percentage' }}"
+                                                id=""
+                                                class="@error('shipping_charge_type') is-invalid @enderror checktype">
                                             <div class="custm-dropdown">
-                                                <div class="dropdown">
+                                                <div class="dropdown checktype">
                                                     <div class="dropdown-toggle " type="button" id="dropdownMenuButton1"
                                                         data-bs-toggle="dropdown" aria-expanded="false">
                                                         <div id="selectedcommission">
@@ -85,7 +87,7 @@
                                         <div class="form-group">
                                             <label>Shipping Charge<span class="required-field">*</span></label>
                                             <div class="symbol"></div>
-                                            <input type="text" id="checkcommission" name="shipping_charge"
+                                            <input type="number" id="checkcommission" name="shipping_charge"
                                                 class="form-control @error('shipping_charge') is-invalid @enderror two-decimals"
                                                 value="{{ old('shipping_charge', get_admin_setting('shipping_charge')) }}">
 
@@ -148,28 +150,36 @@
     </script>
     <script>
         $(document).ready(function() {
-            var type = $('#checktype').val();
+            // change symbols
+            var type = $('.checktype').val();
 
             if (type == 'Percentage') {
-                $('.symbol').text('%');
 
+                $('#checkcommission').attr('min', '1');
+                $('#checkcommission').attr('max', '99');
+                $('.symbol').text('%');
             } else {
+                $('#checkcommission').removeAttr('min', '1');
+                $('#checkcommission').removeAttr('max', '99');
                 $('.symbol').text('$');
             }
-            $('#checktype').on('click', function() {
-                var type = $('#checktype').val();
+            $('.checktype').on('click', function() {
+                var type = $('.checktype').val();
+
                 if (type == 'Percentage') {
+                    $('#checkcommission').attr('min', '1');
+                    $('#checkcommission').attr('max', '99');
                     $('.symbol').text('%');
 
                 } else {
+                    $('#checkcommission').removeAttr('min', '1');
+                    $('#checkcommission').removeAttr('max', '99');
                     $('.symbol').text('$');
                 }
-            })
+            });
 
-        });
-    </script>
-    <script>
-        jQuery(document).ready(function() {
+            // change value
+
             jQuery('.custom_dropdown_commission').on('click', function() {
                 var selectitem = jQuery(this).attr('data-value')
                 var selecttext = jQuery(this).attr('data-text')
@@ -178,6 +188,7 @@
                 jQuery(document).find('input[name="shipping_charge_type"]').val(selectitem);
 
             });
+
         });
     </script>
 @endpush
