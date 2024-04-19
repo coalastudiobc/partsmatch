@@ -444,7 +444,7 @@
                                                     </defs>
                                                 </svg>
                                             </span>
-                                            <h4>Packages</h4>
+                                            <h4>Subscription Plan</h4>
                                         </div>
                                         <p class="analyics-tabs-num"></p>
                                     </a>

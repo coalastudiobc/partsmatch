@@ -73,7 +73,7 @@
                     @empty
                         <tr>
                             <td class="no-record-found">
-                                <center>Did not found any product</center>
+                                <center>Did not found any subscription plan</center>
                             </td>
                         </tr>
                     @endforelse
