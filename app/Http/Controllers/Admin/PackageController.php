@@ -88,8 +88,12 @@ class PackageController extends Controller
                             ],
                             'currency' =>   'USD',
                         ]);
+                        $data['stripe_id'] = $product->id;
+                        $data['stripe_price'] = $product_price->id;
+                        $data['trial_days'] = $product_price->recurring->trial_period_days;
+                        $package->update($data);
                     }
-
+                    $data = ['name' => $request->name];
                     $package->update($data);
                     $message = "Package updated sucessfully";
                     session()->flash('message', $message);
