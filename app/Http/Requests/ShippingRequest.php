@@ -46,9 +46,9 @@ class ShippingRequest extends FormRequest
         ];
 
         if (request()->shipping_charge_type == 'Percentage') {
-            $message['shipping_charge.max'] = "order commission should be less than 99";
+            $message['shipping_charge.max'] = "shipping charge should be less than 99";
         } else {
-            $message['shipping_charge.max'] = "order commission should be less than 9999";
+            $message['shipping_charge.max'] = "shipping charge should be less than 9999";
         }
 
         return $message;

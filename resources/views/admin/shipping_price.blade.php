@@ -155,25 +155,25 @@
 
             if (type == 'Percentage') {
 
-                $('#checkcommission').attr('min', '1');
-                $('#checkcommission').attr('max', '99');
+                // $('#checkcommission').attr('min', '1');
+                // $('#checkcommission').attr('max', '99');
                 $('.symbol').text('%');
             } else {
-                $('#checkcommission').removeAttr('min', '1');
-                $('#checkcommission').removeAttr('max', '99');
+                // $('#checkcommission').removeAttr('min', '1');
+                // $('#checkcommission').removeAttr('max', '99');
                 $('.symbol').text('$');
             }
             $('.checktype').on('click', function() {
                 var type = $('.checktype').val();
 
                 if (type == 'Percentage') {
-                    $('#checkcommission').attr('min', '1');
-                    $('#checkcommission').attr('max', '99');
+                    // $('#checkcommission').attr('min', '1');
+                    // $('#checkcommission').attr('max', '99');
                     $('.symbol').text('%');
 
                 } else {
-                    $('#checkcommission').removeAttr('min', '1');
-                    $('#checkcommission').removeAttr('max', '99');
+                    // $('#checkcommission').removeAttr('min', '1');
+                    // $('#checkcommission').removeAttr('max', '99');
                     $('.symbol').text('$');
                 }
             });

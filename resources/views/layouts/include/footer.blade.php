@@ -51,7 +51,7 @@
                     </div>
                 </div>
                 <div class="footer-small">
-                    <p class="right-reserve">@2024 partsmatch.com All Right Reserved</p>
+                    <p class="right-reserve">{{ date('Y') }} partsmatch.com All Right Reserved</p>
                 </div>
             </div>
         </div>

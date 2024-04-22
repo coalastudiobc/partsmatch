@@ -26,7 +26,7 @@ class CommissionRequest extends FormRequest
             $rules =  [
                 'order_commission_type' => 'required',
             ];
-            if (request()->ordercommission_type == 'Percentage') {
+            if (request()->order_commission_type == 'Percentage') {
                 $rules['order_commission'] = 'required | numeric | min:1 | max:99 | regex:/(\d+(?:\.\d+)?)/';
             } else {
                 $rules['order_commission'] = 'required | numeric |min:1 | max:9999 | regex:/(\d+(?:\.\d+)?)/';
@@ -46,7 +46,7 @@ class CommissionRequest extends FormRequest
             'order_commission.regex' => "only number allowed"
         ];
 
-        if (request()->ordercommission_type == 'Percentage') {
+        if (request()->order_commission_type == 'Percentage') {
             $message['order_commission.max'] = "order commission should be less than 99";
         } else {
             $message['order_commission.max'] = "order commission should be less than 9999";

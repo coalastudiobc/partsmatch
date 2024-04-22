@@ -112,7 +112,7 @@ class PackageController extends Controller
             // ], 200);
         } catch (\Exception $e) {
             DB::rollback();
-
+            dd($e->getMessage());
             return response()->json([
                 'success'    =>  false,
                 'msg'      =>  $e->getMessage()
