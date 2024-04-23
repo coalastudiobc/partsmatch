@@ -125,7 +125,8 @@
                                             </div>
                                             <div id="errorViewer">
                                                 <input type="hidden" name="time_type"
-                                                    value="{{ $package->billing_cycle ?? '' }}" id=""
+                                                    value="{{ jsencode_userdata($package->billing_cycle) ?? '' }}"
+                                                    id=""
                                                     class="image-input @error('time_type') is-invalid @enderror">
                                                 @error('time_type')
                                                     <span class="invalid-feedback" role="alert">
@@ -150,8 +151,7 @@
                                                     <div class="dropdown-toggle " type="button" id="dropdownMenuButton1"
                                                         data-bs-toggle="dropdown" aria-expanded="false">
                                                         <div id="selectedstatus">
-                                                            Active
-
+                                                            {{ $package->status == 1 ? 'Active' : 'Inactive' }}
                                                         </div>
                                                         <span class="custm-drop-icon">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="24"
