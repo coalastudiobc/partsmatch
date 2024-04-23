@@ -1,11 +1,10 @@
 @extends('layouts.admin')
 @section('title', 'product')
-@section('heading', 'product list')
+@section('heading', $user->name . '\'s Products')
 
 @section('content')
 
     <div class="dashboard-right-box">
-        <h2>{{ $user->name }}</h2>
         <div class="product-detail-table user-list-table">
             <div class="table-responsive">
                 <table class="table">
@@ -14,20 +13,20 @@
                             <p>Name</p>
                         </th>
                         <th>
-                            <p>stocks_avaliable</p>
+                            <p>Stocks Avaliable</p>
                         </th>
                         <th>
-                            <p>price</p>
+                            <p>Price</p>
                         </th>
                         <th>
-                            <p>shipping_price</p>
+                            <p>Shipping Price</p>
                         </th>
                         <th>
                             <p>Status</p>
                         </th>
                         <!-- <th>
-                                <p>View details</p>
-                            </th> -->
+                                                                                <p>View details</p>
+                                                                            </th> -->
                     </tr>
                     @forelse ($products as $key => $product)
                         <tr>
@@ -52,10 +51,10 @@
                                         url="{{ route('product.status') }}"><label for="switch{{ $key }}"></label>
                                 </div>
                             </td>
-                            <td>
+                            {{-- <td>
                                 <a href="{{ route('admin.dealers.product.edit',[$product->id])}}"class="btn action-view-btn">View
                                     details</a>
-                            </td>
+                            </td> --}}
                         </tr>
                     @empty
                         <tr>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CmsManagementController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\Dealer\AccountSettingController;
 use App\Http\Controllers\Dealer\DealerController;
 use App\Http\Controllers\Dealer\PartsManagerController;
@@ -35,6 +36,14 @@ Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer'
 
         Route::get('/featured/products/delete/{id}', [ProductController::class, 'featuredproductdelete'])->name('featured.products.delete');
     });
+
+    // cart
+    Route::name('cart.')->group(function () {
+        Route::get('cart/index', [CartController::class, 'index'])->name('cart.index');
+        Route::post('add/to/cart/{product_id}', [CartController::class, 'addToCart'])->name('cart');
+        Route::get('delete/to/cart/{cart_id}', [CartController::class, 'removeFromCart'])->name('remove');
+    });
+
     // subscription
     Route::name('subscription.')->group(function () {
         Route::get('subscription/plans', [SubscriptionController::class, 'index'])->name('plan');

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ChangePasswordRequest;
+use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -28,7 +30,9 @@ class HomeController extends Controller
 
     public function index()
     {
-        return view('welcome');
+        $category = Category::get();
+        $products = Product::with('productImage')->where('status', '1')->inRandomOrder()->get();
+        return view('welcome', compact('category', 'products'));
     }
 
     public function changePassword(ChangePasswordRequest $request)

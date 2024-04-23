@@ -59,9 +59,9 @@
                             <td>
                                 <p>{{ $user->address ? $user->address : 'N/A' }}</p>
                             </td>
-                            <td> 
-                             <a
-                                    @if (isset($user->product)) href="{{ route('admin.dealers.product.list', [$user->id]) }}" @endif>{{ $user->product ? count($user->product) : 'N/A' }}</a> 
+                            <td>
+                                <a
+                                    @if (isset($user->product)) href="{{ route('admin.dealers.product.list', [$user->id]) }}" @endif>{{ $user->product ? count($user->product) : 'N/A' }}</a>
                             </td>
                             {{-- <td>
                                 <p>{{ $user->industry_type ? $user->industry_type : 'N/A' }}</p>
@@ -81,7 +81,8 @@
 
                             </td>
                             <td>
-                                <p><a href="{{ route('admin.dealers.show', [$user->id]) }}" class="btn action-view-btn">View
+                                <p><a href="{{ route('admin.dealers.show', [$user->id]) }}"
+                                        class="btn action-view-btn">View
                                         details</a>
                                 </p>
                             </td>

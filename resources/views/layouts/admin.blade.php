@@ -127,6 +127,34 @@
     <script src="{{ asset('assets/admin/js/toaster.min.js') }}"></script>
     <script src="{{ asset('assets/admin/js/custom.js') }}"></script>
     <script src="{{ asset('assets/admin/js/common.js') }}?ver={{ now() }}"></script>
+    <script>
+        $(document).ready(function() {
+            // Check if the CSS file(s) are loaded
+            var cssLoaded = false;
+
+            // Function to check if CSS is loaded
+            function checkCSSLoaded() {
+                var stylesheets = document.styleSheets;
+                for (var i = 0; i < stylesheets.length; i++) {
+                    if (stylesheets[i].href && stylesheets[i].href.indexOf('style.css') !== -1) {
+                        cssLoaded = true;
+                        break;
+                    }
+                }
+                return cssLoaded;
+            }
+
+            // Check CSS load status every 100 milliseconds
+            var checkInterval = setInterval(function() {
+                if (checkCSSLoaded()) {
+                    clearInterval(checkInterval);
+                    // CSS is loaded, now you can proceed with page load
+                    console.log("CSS is loaded, proceeding with page load...");
+                    // Here you can trigger the rest of your page load functionality
+                }
+            }, 100);
+        });
+    </script>
     @stack('scripts')
 </body>
 

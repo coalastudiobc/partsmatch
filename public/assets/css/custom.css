@@ -1139,3 +1139,103 @@ ul.card-list li {
 }
 
 /*================================================ Plan Page ============================================*/
+
+
+/*================================================ Cart Page ============================================*/
+.cart-sidebar-box {
+    background: #FFF;
+    padding: 23px 35px;
+}
+
+.cart-total-box {
+    background: #FFF;
+}
+
+.cart-box-header h3 {
+    text-transform: capitalize;
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--secondary-color);
+    padding-bottom: 37px;
+}
+
+.cart-wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 35px;
+}
+
+.cart-txt {
+    color: #5C5C5C;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.price-txt {
+    color: var(--secondary-color);
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.sub-total-wrapper {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #f6f6f6;
+    padding-top: 20px;
+}
+
+.db-table-box {
+    padding: 0 32px 23px;
+}
+
+.tb-table table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0 12px;
+}
+
+.cart-table-wrapper {
+    background: #fff;
+}
+
+.tb-table table thead tr th {
+    color: #727272;
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.db-table-box .tb-table tbody tr td {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 25px 10px;
+    color: #272643;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.tb-table table thead tr th {
+    padding: 15px 10px;
+}
+
+.cart-checkout a {
+    margin-top: 18px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.cart-product-image {
+    width: 92px;
+    height: 92px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.quantity-brd {
+    border-radius: 5px;
+    border: 1px solid #E8E8E8;
+    background: #fff;
+}
+
+
+/*================================================ Cart Page ============================================*/
