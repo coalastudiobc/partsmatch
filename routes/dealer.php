@@ -42,6 +42,7 @@ Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer'
         Route::get('cart/index', [CartController::class, 'index'])->name('cart.index');
         Route::post('add/to/cart/{product_id}', [CartController::class, 'addToCart'])->name('cart');
         Route::get('delete/to/cart/{cart_id}', [CartController::class, 'removeFromCart'])->name('remove');
+        Route::post('update/to/cart/{cart_id}/{product_id}', [CartController::class, 'updateToCart'])->name('update');
     });
 
     // subscription

@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/login-register.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/admin/css/iziToast.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/admin/css/toaster.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/slick.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/slick-theme.css') }}">
@@ -79,6 +80,7 @@
                                         <a class="nav-link" aria-current="page"
                                             href="{{ route('dealer.cart.cart.index') }}">
                                             <div class="nav-msg-icon">
+                                                <p class="">{{ count(auth()->user()->cart) }}</p>
                                                 <img src="{{ asset('assets/images/cart.png') }}" alt="img">
                                             </div>
                                         </a>
@@ -128,6 +130,7 @@
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/admin/js/iziToast.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/toaster.min.js') }}"></script>
     <script src="{{ asset('assets/js/slick.js') }}"></script>
     <script src="{{ asset('assets/js/validate.min.js') }}"></script>
     <script src="{{ asset('assets/js/common.js') }}?ver={{ now() }}"></script>

@@ -83,15 +83,22 @@ class HomeController extends Controller
 
             if ($result->update(['status' => $status])) {
                 if ($status == '1') {
-                    return response()->json(['status' => 'success', 'message' => $request->model . " has been activated"], 200);
+                    if ($class != "App\Models\Package") {
+                        return response()->json(['status' => 'success', 'message' => $request->model . " has been activated"], 200);
+                    } else {
+                        return response()->json(['status' => 'success', 'message' => "Subscription plan" . " has been activated"], 200);
+                    }
                 } else {
-                    return response()->json(['status' => 'danger', 'message' => $request->model . " has been deactivated"], 200);
+                    if ($class != "App\Models\Package") {
+                        return response()->json(['status' => 'danger', 'message' => $request->model . " has been deactivated"], 200);
+                    } else {
+                        return response()->json(['status' => 'danger', 'message' => "Subscription plan" . " has been deactivated"], 200);
+                    }
                 }
             } else {
                 return response()->json(['status' => 'error', 'message' => 'status' . ' has not been updated.'], 400);
             }
         } catch (\Exception $e) {
-            dd('herererror');
             return response()->json(['status' => 'error', 'message' => $e->getMessage()], 400);
         }
     }

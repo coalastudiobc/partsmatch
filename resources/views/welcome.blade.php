@@ -3,6 +3,8 @@
 @section('content')
     <section class="hero-section">
         <div class="container">
+            <x-alert-component />
+
             <div class="hero-wrapper">
                 <div class="slick-carousel">
                     <!-- Inside the containing div, add one div for each slide -->
@@ -1513,13 +1515,25 @@
 
         $(document).ready(function() {
             $('.addtocart').on('click', function() {
+                console.log('hrerererer');
                 var product_id = $(this).attr('product-id')
                 url = APP_URL + '/dealer/add/to/cart/' + product_id
                 console.log(url);
-                var response = ajaxCall(url, 'post');
-                if (response.success == true) {
-                    console.log('hererererer')
-                    // return return toastr.success("Cart added successfully");
+                var response = ajaxCall(url, 'post', null, false);
+                response.then(handleStateData).catch(handleStateError)
+
+                function handleStateData(response) {
+                    if (response.success == true) {
+                        console.log('hererererer')
+                        return toastr.success(response.msg);
+                    } else {
+                        jQuery('#errormessage').html(response.error);
+                    }
+                }
+
+                function handleStateError(error) {
+                    console.log('error', error)
+
                 }
             });
         });
