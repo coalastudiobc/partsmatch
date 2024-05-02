@@ -203,7 +203,7 @@
                                             @enderror
                                         </div>
                                         <div class="form-group col-md-12">
-                                            <label>Description</label>
+                                            <label>Description*</label>
                                             <textarea class="form-control summernote @error('description') is-invalid @enderror" name="description">{{ $package->description ? $package->description : '        ' }}</textarea>
                                             <div class="input-icon-custm tooltip-open">
                                                 <span>

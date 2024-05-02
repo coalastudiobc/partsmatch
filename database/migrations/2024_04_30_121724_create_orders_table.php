@@ -15,8 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->enum('status', [0, 1])->default(1);
-            $table->float('price')->nullable();
-            $table->float('tax_price')->nullable();
             $table->float('shipment_price')->nullable();
             $table->float('total_amount')->nullable();
             $table->string('payment_method')->nullable();

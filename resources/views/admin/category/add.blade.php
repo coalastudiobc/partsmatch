@@ -45,7 +45,7 @@
                                                                 id="dropdownMenuButton1" data-bs-toggle="dropdown"
                                                                 aria-expanded="false">
                                                                 <div id="selectedItem">
-                                                                    {{ $category->id ? ($category->parent ? $category->parent->name : '--select--') : '--select--' }}
+                                                                    {{ $category->id ? ($category->parent ? $category->parent->name : 'select') : 'select' }}
                                                                 </div>
                                                                 <span class="custm-drop-icon">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -142,7 +142,7 @@
                                                                 id="dropdownMenuButton1" data-bs-toggle="dropdown"
                                                                 aria-expanded="false">
                                                                 <div id="selectedstatus">
-                                                                    {{ $category->id ? ($category->status == '1' ? 'Active' : 'Inactive') : '--select--' }}
+                                                                    {{ $category->id ? ($category->status == '1' ? 'Active' : 'Inactive') : 'select' }}
                                                                 </div>
                                                                 <span class="custm-drop-icon">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24"

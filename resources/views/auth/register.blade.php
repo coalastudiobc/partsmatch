@@ -150,7 +150,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">Select industry</label>
+                                                <label for="">Select Industry*</label>
                                                 <div class="form-field">
                                                     {{-- <select name="industry_type" id="industury" class="form-control">
                                                         <option value="volvo">Select industry</option>
