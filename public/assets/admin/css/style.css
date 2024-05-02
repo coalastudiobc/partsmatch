@@ -1475,3 +1475,8 @@ span.doller-symbol-txt.symbol {
     top: 5px;
     right: 5px;
 }
+
+.dropdown-menu.show li .active {
+    background-color: var(--secondary-color);
+    color: var(--white);
+}

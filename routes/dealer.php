@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CmsManagementController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\Dealer\AccountSettingController;
+use App\Http\Controllers\dealer\CheckoutController;
 use App\Http\Controllers\Dealer\DealerController;
 use App\Http\Controllers\Dealer\PartsManagerController;
 use App\Http\Controllers\Dealer\ProductController;
@@ -23,6 +24,9 @@ Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer'
     Route::post('change-password', [AccountSettingController::class, 'updatePassword'])->name('changepassword');
     Route::match(['GET', "POST"], 'dealers/status', [DealerController::class, 'toggleStatus'])->name('status');
 
+    Route::get('state/{country}', [CheckoutController::class, 'state'])->name('state');
+    Route::get('cities/{state}', [CheckoutController::class, 'cities'])->name('cities');
+
     // products
     Route::name('products.')->group(function () {
         Route::get('/products/create', [ProductController::class, 'create'])->name('create');
@@ -32,7 +36,7 @@ Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer'
         Route::post('/products/update/{product}', [ProductController::class, 'update'])->name('update');
         Route::get('/products/delete/{product}', [ProductController::class, 'destroy'])->name('delete');
         Route::get('/products/subcategory/{id}', [ProductController::class, 'subcategory'])->name('subcategory');
-        Route::get('/featured/products/create/{product}', [ProductController::class, 'featuredproductcreate'])->name('create');
+        Route::post('/featured/products/create/{product}', [ProductController::class, 'featuredproductcreate'])->name('featured.create');
 
         Route::get('/featured/products/delete/{id}', [ProductController::class, 'featuredproductdelete'])->name('featured.products.delete');
     });
@@ -43,6 +47,9 @@ Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer'
         Route::post('add/to/cart/{product_id}', [CartController::class, 'addToCart'])->name('cart');
         Route::get('delete/to/cart/{cart_id}', [CartController::class, 'removeFromCart'])->name('remove');
         Route::post('update/to/cart/{cart_id}/{product_id}', [CartController::class, 'updateToCart'])->name('update');
+    });
+    Route::name('checkout.')->group(function () {
+        Route::get('checkout/create', [CheckoutController::class, 'create'])->name('create');
     });
 
     // subscription

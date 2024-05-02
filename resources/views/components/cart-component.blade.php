@@ -99,7 +99,7 @@
 
             </div>
             <div class="cart-checkout">
-                <a href="#" class="btn secondary-btn view-btn">
+                <a href="{{ route('dealer.checkout.create') }}" class="btn secondary-btn view-btn">
                     Checkout
                 </a>
             </div>

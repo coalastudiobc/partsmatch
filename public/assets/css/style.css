@@ -1430,3 +1430,8 @@ button.btn-close {
     bottom: -46px;
     left: -58px;
 }
+
+.outer-box {
+    min-height: 300px !important;
+    overflow: auto !important;
+}

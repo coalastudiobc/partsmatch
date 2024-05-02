@@ -1,5 +1,7 @@
 <script>
     jQuery(document).ready(function() {
+        // $("#submit").attr('disabled', false);
+
         const rules = {
             name: {
                 required: true,
@@ -27,7 +29,7 @@
             },
             zipcode: {
                 required: true,
-                // digits: true,
+                digits: true,
                 minlength: 6,
                 maxlength: 6,
             },
@@ -42,12 +44,12 @@
                 required: true,
                 minlength: passwordMinLength,
                 maxlength: passwordMaxLength,
-                regex: passwordRegex
-                equalTo: "#password",
+                regex: passwordRegex,
             },
             password_confirmation: {
                 required: true,
-                // equalTo: "#password_confirmation"
+                equalTo: "#password",
+
             }
         }
         const messages = {
@@ -92,14 +94,20 @@
                 minlength: `{{ __('customvalidation.user.password.min', ['min' => '${passwordMinLength}', 'max' => '${passwordMaxLength}']) }}`,
                 maxlength: `{{ __('customvalidation.user.password.max', ['min' => '${passwordMinLength}', 'max' => '${passwordMaxLength}']) }}`,
                 regex: `{{ __('customvalidation.user.password.regex', ['regex' => '${passwordRegex}']) }}`,
-                equalTo: `{{ __('customvalidation.user.confirm_password.equal') }}`,
 
             },
             password_confirmation: {
                 required: `{{ __('customvalidation.user.confirm_password.required') }}`,
+                equalTo: `{{ __('customvalidation.user.confirm_password.equal') }}`,
+
             }
         };
-        handleValidation('register', rules, messages, true);
+        handleValidation('register', rules, messages);
 
+        // $("#submit").on("submit", function() {
+        //     if ($('#register').valid()) {
+        //         $("#submit").attr('disabled', true);
+        //     }
+        // });
     });
 </script>

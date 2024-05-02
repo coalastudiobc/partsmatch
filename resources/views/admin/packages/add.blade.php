@@ -82,8 +82,27 @@
                                                     <div class="dropdown-toggle " type="button" id="dropdownMenuButton1"
                                                         data-bs-toggle="dropdown" aria-expanded="false">
                                                         <div id="selectedItem">
-                                                            {{ $package->billing_cycle ?? 'select' }}
+                                                            {{-- {{ $package->billing_cycle ?? 'select' }} --}}
+                                                            @switch($package->billing_cycle)
+                                                                @case('Yearly')
+                                                                    Yearly
+                                                                @break
 
+                                                                @case('Monthly')
+                                                                    Monthly
+                                                                @break
+
+                                                                @case('Quarterly')
+                                                                    Every 3 months
+                                                                @break
+
+                                                                @case('Halfly')
+                                                                    Every 6 months
+                                                                @break
+
+                                                                @default
+                                                                    select
+                                                            @endswitch
                                                         </div>
                                                         <span class="custm-drop-icon">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -145,13 +164,15 @@
                                                 <option value="0">
                                                     Inactive</option>
                                             </select> --}}
-                                            <input type="hidden" name="status" value="1" id="">
+                                            <input type="hidden" name="status"
+                                                value="{{ (!isset($package->status) ? 1 : $package->status == 1) ? 1 : 0 }}"
+                                                id="">
                                             <div class="custm-dropdown">
                                                 <div class="dropdown">
                                                     <div class="dropdown-toggle " type="button" id="dropdownMenuButton1"
                                                         data-bs-toggle="dropdown" aria-expanded="false">
                                                         <div id="selectedstatus">
-                                                            {{ $package->status == 1 ? 'Active' : 'Inactive' }}
+                                                            {{ $package->id ? ($package->status == 1 ? 'Active' : 'Inactive') : 'select' }}
                                                         </div>
                                                         <span class="custm-drop-icon">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -193,21 +214,24 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class=" col-md-6">
+                                            <a class="btn secondary-btn mr-1 full-btn"
+                                                href="{{ route('admin.packages.all') }}">Back</a>
+                                        </div>
+                                        <div class=" col-md-6">
+                                            <button class="btn primary-btn full-btn" id="submit">Submit</button>
+                                        </div>
                                     </div>
                                     {{-- @dd($package) --}}
 
-                                    <div>
-                                        <a class="btn secondary-btn mr-1"
-                                            href="{{ route('admin.packages.all') }}">Back</a>
-                                        <button class="btn secondary-btn " id="submit">Submit</button>
-                                    </div>
-                                </form>
                             </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+    </div>
+    </section>
     </div>
 @endsection
 @push('scripts')

@@ -156,6 +156,18 @@ if (!function_exists('plan_validity')) {
 
         return false;
     }
+
+    if (!function_exists('get_categories')) {
+        function get_categories($parentid)
+        {
+            // dd($parentid);
+            $record = Category::where('id', $parentid)->first();
+            if ($record) {
+                return $record;
+            }
+            return null;
+        }
+    }
 }
 // if (!function_exists('stripe_details_validate')) {
 //     function stripe_details_validate($key, $secret)

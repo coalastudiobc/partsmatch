@@ -45,7 +45,7 @@
 
                                                     </div>
                                                     <input type="file" id="file-upload" value=""
-                                                        class="image-input" name="image">
+                                                        class="custom_input_image" name="image">
 
                                                     <div class="upload-icon">
                                                         <img src="{{ asset('assets/images/upload.png') }}" alt="">
@@ -54,14 +54,15 @@
                                                 </label>
                                             </div>
                                             <h3>Upload profile picture*</h3>
-                                            <div id="errorViewer">
-                                                @error('image')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
+                                            @error('image')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                            <div class="errorViewer">
                                             </div>
                                         </div>
+
                                     </div>
                                     {{-- <div class="sign-up-form">
                                 <form action=""> --}}
@@ -159,8 +160,13 @@
                                                         <option value="audi">Audi</option>
                                                     </select> --}}
                                                     <input type="hidden" id="industry" name="industry_type"
-                                                        value=""
-                                                        class="input-industry @error('industry_type') is-invalid @enderror">
+                                                        class="custom_input @error('industry_type') is-invalid @enderror"
+                                                        value="">
+                                                    @error('industry_type')
+                                                        <span id="Viewererror" class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                     <div class="custm-dropdown">
                                                         <div class="dropdown">
                                                             <div class="dropdown-toggle" type="button"
@@ -205,20 +211,17 @@
                                                     {{-- <input type="text" name="industry_type" value="{{ old('industry_type') }}"
                                                         class="form-control @error('industry_type') is-invalid @enderror"
                                                         placeholder="Select industry"> --}}
-                                                    @error('industry_type')
-                                                        <span id="Viewererror" class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
+
 
                                                 </div>
+                                                <div class="errorViewer"></div>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="">Password*</label>
                                                 <div class="form-field">
-                                                    <input id="password_confirmation" type="password" name="password"
+                                                    <input id="password" type="password" name="password"
                                                         value="{{ old('password') }}"
                                                         class="form-control @error('password') is-invalid @enderror"
                                                         placeholder="Password">
@@ -235,7 +238,7 @@
                                             <div class="form-group">
                                                 <label for="">Confirm Password*</label>
                                                 <div class="form-field">
-                                                    <input id="password" type="password" name="password_confirmation"
+                                                    <input type="password" name="password_confirmation"
                                                         value="{{ old('password_confirmation') }}"
                                                         class="form-control @error('password_confirmation') is-invalid @enderror"
                                                         placeholder="Password Confirmation">
@@ -280,13 +283,13 @@
             }
         });
 
-        // $('form#register').on('submit', function(e) {
-        //     e.preventDefault();
-        //     jQuery('form#register').validate();
-        //     if (jQuery('form#register').valid()) {
-        //         $(this).unbind('submit').submit();
-        //     }
-        // });
+        $('form#register').on('submit', function(e) {
+            e.preventDefault();
+            jQuery('form#register').validate();
+            if (jQuery('form#register').valid()) {
+                $(this).unbind('submit').submit();
+            }
+        });
     </script>
     <script>
         jQuery(document).ready(function() {

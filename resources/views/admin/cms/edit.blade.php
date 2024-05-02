@@ -111,14 +111,15 @@
                                                             @if ($page->status == 1) selected @endif>
                                                             Active</option>
                                                     </select> --}}
-                                                    <input type="hidden" name="status" value="1" id="">
+                                                    <input type="hidden" name="status"
+                                                        value="{{ $page->status == '1' ? '1' : '0' }}" id="">
                                                     <div class="custm-dropdown">
                                                         <div class="dropdown">
                                                             <div class="dropdown-toggle " type="button"
                                                                 id="dropdownMenuButton1" data-bs-toggle="dropdown"
                                                                 aria-expanded="false">
                                                                 <div id="selectedstatus">
-                                                                    Active
+                                                                    {{ $page->status == '1' ? 'Active' : 'Inactive' }}
 
                                                                 </div>
                                                                 <span class="custm-drop-icon">

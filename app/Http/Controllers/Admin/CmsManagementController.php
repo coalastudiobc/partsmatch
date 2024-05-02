@@ -49,8 +49,8 @@ class CmsManagementController extends Controller
             'slug' => $page->slug,
             'page_content' => $request->content,
             'page_title' => $request->page_title,
-            'media_name' => $media_name ?? null,
-            'media_url' => $path ?? null,
+            'media_name' => $media_name ?? $page->media_name,
+            'media_url' => $path ?? $page->media_url,
             'status' => $request->status == '1' ? '1' : '0',
         ]);
 

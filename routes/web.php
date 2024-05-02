@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\dealer\CheckoutController;
 use App\Http\Controllers\Dealer\DealerController;
 use App\Http\Controllers\Dealer\ProfileController;
 use App\Models\Category;
@@ -30,6 +31,8 @@ Route::get('/', function () {
 Route::get('welcome', [HomeController::class, 'index'])->name('welcome.index');
 Route::get('redirect-to-dashboard', [HomeController::class, 'redirectToDashboard'])->name('redirect-to-dashboard');
 Route::get('verify-email/{user}/{token}', [RegisterController::class, 'verifyEmail'])->name('verify-email');
+
+
 
 Auth::routes();
 

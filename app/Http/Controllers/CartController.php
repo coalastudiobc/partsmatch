@@ -60,42 +60,48 @@ class CartController extends Controller
 
     public function updateToCart(Request $request, Cart $cart_id, Product $product_id)
     {
-        if ($request->dataminus != "minusQuantity") {
+        // dd($request->toArray(), $product_id);
+        if ($request->quantity <= $product_id->stocks_avaliable) {
 
-            $totalamount = $request->quantity * $product_id->price;
-            $cart = [
-                'user_id' => auth()->user()->id,
-                'amount' => $totalamount,
-                'status' => 1,
-            ];
-            $cart = $cart_id->update($cart);
-            // dd($cart_id);
-            $cartProduct = CartProduct::where('cart_id', $cart_id->id)->first();
-            $cart_product = [
-                'product_id' => $product_id->id,
-                'cart_id' => $cart_id->id,
-                'quantity' => $request->quantity,
-                'product_price' => $product_id->price,
-            ];
-            $cartProduct->update($cart_product);
+            if ($request->dataquantity == "plusQuantity") {
+                // dd($request);
+                $totalamount = $request->quantity * $product_id->price;
+                $cart = [
+                    'user_id' => auth()->user()->id,
+                    'amount' => $totalamount,
+                    'status' => 1,
+                ];
+                $cart = $cart_id->update($cart);
+                // dd($cart_id);
+                $cartProduct = CartProduct::where('cart_id', $cart_id->id)->first();
+                $cart_product = [
+                    'product_id' => $product_id->id,
+                    'cart_id' => $cart_id->id,
+                    'quantity' => $request->quantity,
+                    'product_price' => $product_id->price,
+                ];
+                $cartProduct->update($cart_product);
+            } elseif ($request->dataquantity == 'minusQuantity') {
+
+                $totalamount = $cart_id->amount - $product_id->price;
+                $cart = [
+                    'user_id' => auth()->user()->id,
+                    'amount' => $totalamount,
+                    'status' => 1,
+                ];
+                $cart = $cart_id->update($cart);
+                // dd($cart_id);
+                $cartProduct = CartProduct::where('cart_id', $cart_id->id)->first();
+                $cart_product = [
+                    'product_id' => $product_id->id,
+                    'cart_id' => $cart_id->id,
+                    'quantity' => $request->quantity,
+                    'product_price' => $product_id->price,
+                ];
+                $cartProduct->update($cart_product);
+            }
         } else {
-
-            $totalamount = $cart_id->amount - $product_id->price;
-            $cart = [
-                'user_id' => auth()->user()->id,
-                'amount' => $totalamount,
-                'status' => 1,
-            ];
-            $cart = $cart_id->update($cart);
-            // dd($cart_id);
-            $cartProduct = CartProduct::where('cart_id', $cart_id->id)->first();
-            $cart_product = [
-                'product_id' => $product_id->id,
-                'cart_id' => $cart_id->id,
-                'quantity' => $request->quantity,
-                'product_price' => $product_id->price,
-            ];
-            $cartProduct->update($cart_product);
+            return response()->json(['success' => false, 'message' => "Product not available"]);
         }
         return response()->json(['success' => true]);
     }

@@ -45,8 +45,7 @@
                                                                 id="dropdownMenuButton1" data-bs-toggle="dropdown"
                                                                 aria-expanded="false">
                                                                 <div id="selectedItem">
-                                                                    Select
-
+                                                                    {{ $category->id ? ($category->parent ? $category->parent->name : '--select--') : '--select--' }}
                                                                 </div>
                                                                 <span class="custm-drop-icon">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -59,12 +58,12 @@
                                                                 </span>
                                                             </div>
                                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                                @foreach ($selective as $categories)
-                                                                    <li><a class="dropdown-item custom_dropdown_item"
-                                                                            @if ($categories->id == $category->parent_id) selected @endif
-                                                                            data-value="{{ $categories->id }}"
-                                                                            data-text="{{ $categories->name }}"
-                                                                            href="javascript:void(0)">{{ $categories->name }}</a>
+                                                                @foreach ($selective as $option)
+                                                                    <li><a class="dropdown-item custom_dropdown_item @if ($option->id == $category->parent_id) active @endif"
+                                                                            @if ($option->id == $category->parent_id) selected @endif
+                                                                            data-value="{{ $option->id }}"
+                                                                            data-text="{{ $option->name }}"
+                                                                            href="javascript:void(0)">{{ $option->name }}</a>
                                                                     </li>
                                                                 @endforeach
 
@@ -134,15 +133,16 @@
                                                             value="0"@if ($category->status == '0') selected @endif>
                                                             Inactive</option>
                                                     </select> --}}
-                                                    <input type="hidden" name="status" value="1" id="">
+                                                    <input type="hidden" name="status"
+                                                        value="{{ (!isset($category->status) ? '1' : $category->status == '1') ? '1' : '0' }}"
+                                                        id="">
                                                     <div class="custm-dropdown">
                                                         <div class="dropdown">
                                                             <div class="dropdown-toggle " type="button"
                                                                 id="dropdownMenuButton1" data-bs-toggle="dropdown"
                                                                 aria-expanded="false">
                                                                 <div id="selectedstatus">
-                                                                    Active
-
+                                                                    {{ $category->id ? ($category->status == '1' ? 'Active' : 'Inactive') : '--select--' }}
                                                                 </div>
                                                                 <span class="custm-drop-icon">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24"
