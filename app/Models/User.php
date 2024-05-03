@@ -73,6 +73,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(Cart::class, 'user_id');
     }
+
+    public function shippingAddress()
+    {
+        return $this->hasOne(ShippingAddress::class, 'user_id');
+    }
     public function scopeSearch($query)
     {
         $request = request();

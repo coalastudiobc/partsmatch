@@ -50,6 +50,7 @@ Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer'
     });
     Route::name('checkout.')->group(function () {
         Route::get('checkout/create', [CheckoutController::class, 'create'])->name('create');
+        Route::post('checkout/store', [CheckoutController::class, 'store'])->name('store');
     });
 
     // subscription

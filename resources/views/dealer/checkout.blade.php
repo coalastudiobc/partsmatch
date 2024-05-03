@@ -8,7 +8,9 @@
                         <div class="checkout-main-card cstm-card">
                             <h2>Delivery Address</h2>
                             <div class="delivery-form">
-                                <form action="">
+                                <form id="product-card-details" action="{{ route('dealer.checkout.store') }}" method="post"
+                                    enctype="multipart/form-data">
+                                    @csrf
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
@@ -23,14 +25,15 @@
                                                     </select>
                                                 </div> --}}
 
-                                                <input type="hidden" name="country" value="" id="">
+                                                <input type="hidden" name="country" value="{{ $country->id ?? '' }}"
+                                                    id="">
                                                 <div class="custm-dropdown">
                                                     <div class="dropdown">
                                                         <div class="dropdown-toggle " type="button"
                                                             id="dropdownMenuButton1" data-bs-toggle="dropdown"
                                                             aria-expanded="false">
                                                             <div id="selectedItem">
-                                                                Select
+                                                                {{ $country->name ?? 'Select' }}
 
                                                             </div>
                                                             <span class="custm-drop-icon">
@@ -63,7 +66,8 @@
                                                 <label for="">First Name</label>
                                                 <div class="form-field">
                                                     <input type="text" class="form-control" name="first_name"
-                                                        value="{{ old('first_name') }}" placeholder="First Name">
+                                                        value="{{ old('first_name', auth()->user()->shippingAddress->name ?? '') }}"
+                                                        placeholder="First Name">
 
                                                 </div>
                                             </div>
@@ -73,7 +77,8 @@
                                                 <label for="">Last Name</label>
                                                 <div class="form-field">
                                                     <input type="text" class="form-control" name="last_name"
-                                                        value="{{ old('last_name') }}" placeholder="Last Name">
+                                                        value="{{ old('last_name', auth()->user()->shippingAddress->last_name ?? '') }}"
+                                                        placeholder="Last Name">
 
                                                 </div>
                                             </div>
@@ -82,7 +87,8 @@
                                             <div class="form-group">
                                                 <label for="">Address 1</label>
                                                 <div class="form-field">
-                                                    <input type="text" class="form-control" name="shiping_address"
+                                                    <input type="text" class="form-control" name="shiping_address1"
+                                                        value="{{ auth()->user()->shippingAddress->address1 ?? '' }}"
                                                         placeholder="Address">
 
                                                 </div>
@@ -95,7 +101,8 @@
                                             <div class="form-group">
                                                 <label for="">Address 2</label>
                                                 <div class="form-field">
-                                                    <input type="text" class="form-control" name="shiping_address"
+                                                    <input type="text" class="form-control" name="shiping_address2"
+                                                        value="{{ auth()->user()->shippingAddress->address2 ?? '' }}"
                                                         placeholder="Address">
 
                                                 </div>
@@ -122,19 +129,20 @@
                                                         <option value="audi">Audi</option>
                                                     </select> --}}
 
-                                                    <input type="hidden" name="state" value="">
+                                                    <input type="hidden" name="state" value="{{ $state->id ?? '' }}">
                                                     <div class="custm-dropdown">
                                                         <div class="dropdown">
                                                             <div class="dropdown-toggle " type="button"
                                                                 id="dropdownMenuButton1" data-bs-toggle="dropdown"
                                                                 aria-expanded="false">
                                                                 <div id="selectedState">
-                                                                    Select
+                                                                    {{ $state->name ?? 'select' }}
 
                                                                 </div>
                                                                 <span class="custm-drop-icon">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="23" viewBox="0 0 24 23" fill="none">
+                                                                        height="23" viewBox="0 0 24 23"
+                                                                        fill="none">
                                                                         <path d="M19 9.00006L14 14.0001L9 9.00006"
                                                                             stroke="#151515" stroke-width="1.8"
                                                                             stroke-linecap="round"
@@ -170,14 +178,14 @@
                                                         <option value="audi">Audi</option>
                                                     </select> --}}
 
-                                                    <input type="hidden" name="city" value="">
+                                                    <input type="hidden" name="city" value="{{ $city->id ?? '' }}">
                                                     <div class="custm-dropdown">
                                                         <div class="dropdown">
                                                             <div class="dropdown-toggle " type="button"
                                                                 id="dropdownMenuButton1" data-bs-toggle="dropdown"
                                                                 aria-expanded="false">
                                                                 <div id="selectedCity">
-                                                                    Select
+                                                                    {{ $city->name ?? 'Select' }}
 
                                                                 </div>
                                                                 <span class="custm-drop-icon">
@@ -212,6 +220,7 @@
                                                 <label for="">PIN code</label>
                                                 <div class="form-field">
                                                     <input type="text" name="pin_code" class="form-control"
+                                                        value="{{ auth()->user()->shippingAddress->post_code ?? '' }}"
                                                         placeholder="PIN code">
 
                                                 </div>
@@ -229,13 +238,13 @@
                                             </div>
                                         </div> --}}
                                     </div>
-                                </form>
+                                    {{-- </form> --}}
                             </div>
                             <div class="payment-page">
                                 <h3>Payment</h3>
                                 <p>All transactions are secure and encrypted.</p>
-                                <form action="">
-                                    {{-- <div class="card-selector">
+                                {{-- <form action=""> --}}
+                                {{-- <div class="card-selector">
                                         <div class="type-accounts-radio">
                                             <label class="radio-button-container">Credit card
                                                 <input type="radio" name="radio">
@@ -243,55 +252,74 @@
                                             </label>
                                         </div>
                                     </div> --}}
-                                    <div class="card-detail-box">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label for="">Card Number</label>
-                                                    <div class="form-field">
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Card-number">
+                                <div class="card-detail-box">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="">Card Number</label>
+                                                <div class="form-field" id="cardNumberElement">
+                                                    <input type="text" class="form-control" placeholder="Card-number">
+                                                    <label for="card-number" class="stripe-error-messages"></label>
 
-                                                    </div>
+                                                </div>
+                                                <div class="is-invalid" id="cardNumberError"></div>
+                                                {{-- <div class="form-field">
+                                                    <input type="text" class="form-control" placeholder="Card-number">
+
+                                                </div> --}}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="">Expiration date</label>
+                                                <div class="form-field" id="cardExpiryElement">
+                                                    <input type="text" class="form-control" placeholder="MM / YY">
+                                                    <label for="card-expiry" class="stripe-error-messages"></label>
+                                                </div>
+                                                <div class="is-invalid" id="cardExpiryError"></div>
+
+                                                {{-- <div class="form-field">
+                                                    <input type="text" class="form-control" placeholder="MM / YY">
+
+                                                </div> --}}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="">Security Code</label>
+                                                <div class="form-field" id="cardCVCElement">
+
+                                                    <input type="password" class="form-control" placeholder="****">
+
+                                                </div>
+                                                <div class="is-invalid" id="cardCVVError"></div>
+                                                {{-- <div class="form-field">
+                                                    <input type="password" class="form-control" placeholder="****">
+
+                                                </div> --}}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="">Name On Card</label>
+                                                <div class="form-field">
+                                                    <input type="text" name="name" id="card-holder-name"
+                                                        class="form-control" placeholder="John Doe">
+
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="">Expiration date</label>
-                                                    <div class="form-field">
-                                                        <input type="text" class="form-control" placeholder="MM / YY">
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="">Security Code</label>
-                                                    <div class="form-field">
-                                                        <input type="password" class="form-control" placeholder="****">
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label for="">Name On Card</label>
-                                                    <div class="form-field">
-                                                        <input type="text" class="form-control"
-                                                            placeholder="John Doe">
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            {{-- <div class="col-md-12">
+                                        </div>
+                                        {{-- <div class="col-md-12">
                                                 <div class="form-checkbox">
                                                     <input type="checkbox" class="custm-check" id="form-check">
                                                     <label for="form-check">Use shipping address as billing address</label>
                                                 </div>
                                             </div> --}}
-                                        </div>
                                     </div>
-                                    <a href="#" class="btn secondary-btn full-btn">Pay Now</a>
+                                </div>
+                                <input type="hidden" name="total_amount" value="{{ $total_amount }}">
+                                <button type="submit" class="btn secondary-btn full-btn">Pay Now
+                                    {{ $total_amount }}</button>
                                 </form>
                             </div>
                         </div>
@@ -441,5 +469,78 @@
         })
         // })
         // })
+    </script>
+
+    {{-- purchase product --}}
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+        const stripe = Stripe('{{ env('STRIPE_KEY') }}')
+        const client_secret = "{{ $intent->client_secret }}"
+        const elements = stripe.elements()
+
+
+        var cardNumberElement = elements.create('cardNumber');
+        cardNumberElement.mount('#cardNumberElement');
+        var cardExpiryElement = elements.create('cardExpiry');
+        cardExpiryElement.mount('#cardExpiryElement');
+        var cardCvcElement = elements.create('cardCvc');
+        cardCvcElement.mount('#cardCVCElement');
+
+
+        cardNumberElement.on('change', function(event) {
+            if (event.error) {
+                jQuery('#cardNumberError').text(event.error.message);
+            } else {
+                jQuery('#cardNumberError').text('');
+            }
+        });
+        cardExpiryElement.on('change', function(event) {
+            if (event.error) {
+                jQuery('#cardExpiryError').text(event.error.message);
+            } else {
+                jQuery('#cardExpiryError').text('');
+            }
+        });
+        cardCvcElement.on('change', function(event) {
+            if (event.error) {
+                jQuery('#cardCVVError').text(event.error.message);
+            } else {
+                jQuery('#cardCVVError').text('');
+            }
+        });
+
+
+        const form = document.getElementById('product-card-details')
+        const cardBtn = document.getElementById('payNow')
+        const cardHolderName = document.getElementById('card-holder-name')
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault()
+
+
+            const {
+                setupIntent,
+                error
+            } = await stripe.confirmCardSetup(
+                client_secret, {
+                    payment_method: {
+                        card: cardNumberElement,
+                        billing_details: {
+                            name: cardHolderName.value
+                        }
+                    }
+                }
+            )
+            if (error) {
+                cardBtn.disable = false
+            } else {
+                let token = document.createElement('input')
+                token.setAttribute('type', 'hidden')
+                token.setAttribute('name', 'token')
+                token.setAttribute('value', setupIntent.payment_method)
+                form.appendChild(token)
+                form.submit();
+            }
+        })
     </script>
 @endpush

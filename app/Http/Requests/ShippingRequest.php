@@ -26,7 +26,7 @@ class ShippingRequest extends FormRequest
             $rules =  [
                 'shipping_charge_type' => 'required',
             ];
-            if (request()->ordercommission_type == 'Percentage') {
+            if (request()->shipping_charge_type == 'Percentage') {
                 $rules['shipping_charge'] = 'required | numeric | min:1 | max:99 | regex:/(\d+(?:\.\d+)?)/';
             } else {
                 $rules['shipping_charge'] = 'required | numeric |min:1 | max:9999 | regex:/(\d+(?:\.\d+)?)/';

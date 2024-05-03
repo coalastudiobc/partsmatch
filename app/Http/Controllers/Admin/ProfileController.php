@@ -35,6 +35,6 @@ class ProfileController extends Controller
 
         auth()->user()->update($data);
 
-        return redirect()->back()->with(['status' => "success", "message" => 'Profile Updated successfully']);
+        return redirect()->back()->with(['status' => "success", "message" => 'Profile Updated successfully.']);
     }
 }

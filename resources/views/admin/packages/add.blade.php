@@ -142,16 +142,15 @@
                                                     </ul>
                                                 </div>
                                             </div>
+                                            <input type="hidden" name="time_type"
+                                                value="{{ jsencode_userdata($package->billing_cycle) ?? '' }}"
+                                                id="" class="image-input @error('time_type') is-invalid @enderror">
+                                            @error('time_type')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                             <div id="errorViewer">
-                                                <input type="hidden" name="time_type"
-                                                    value="{{ jsencode_userdata($package->billing_cycle) ?? '' }}"
-                                                    id=""
-                                                    class="image-input @error('time_type') is-invalid @enderror">
-                                                @error('time_type')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
                                             </div>
                                         </div>
 
