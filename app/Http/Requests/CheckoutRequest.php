@@ -35,14 +35,14 @@ class CheckoutRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'first_name.required' => __('customvalidation.user.first_name'),
-            'last_name.required' => __('customvalidation.user.first_name'),
-            'pin_code.required' => __('customvalidation.user.pin_code'),
-            'country.required' => __('customvalidation.user.pin_code'),
-            'state.required' => __('customvalidation.user.pin_code'),
-            'city.required' => __('customvalidation.user.pin_code'),
-            'shipping_address1.required' => __('customvalidation.user.pin_code'),
-            'shipping_address2.required' => __('customvalidation.user.pin_code'),
+            'first_name.required' => __('customvalidation.user.name.required'),
+            // 'last_name.required' => __('customvalidation.user.first_name'),
+            'pin_code.required' => __('customvalidation.user.pin_code.required'),
+            'country.required' => __('customvalidation.user.country.required'),
+            'state.required' => __('customvalidation.user.state.required'),
+            'city.required' => __('customvalidation.user.city.required'),
+            'shipping_address1.required' => __('customvalidation.user.address.required'),
+            'shipping_address2.required' => __('customvalidation.user.address.required'),
         ];
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\dealer;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CheckoutRequest;
 use App\Models\AdminSetting;
 use App\Models\Cart;
 use App\Models\CartProduct;
@@ -109,7 +110,7 @@ class CheckoutController extends Controller
             'metadata' => [
                 'order_id' => $order->id, // Add your custom order ID as metadata
             ],
-            'return_url' => route('welcome.index')
+            'return_url' => route('dealer.partsmanager.index')
         ]);
 
         // $charge = Charge::create([
@@ -138,6 +139,15 @@ class CheckoutController extends Controller
         //     // ],
         // ]);
         // dd($intent);
-        return redirect()->route('welcome.index');
+        return redirect()->route('dealer.partsmanager.index');
+    }
+
+    public function order()
+    {
+        $user = auth()->user();
+        $data = $user->shippingAddress;
+        $order_item = Orderitem::with('product', 'order')->get();
+        // dd($order_item->toArray());
+        return view('dealer.order.order_list', compact('order_item'));
     }
 }

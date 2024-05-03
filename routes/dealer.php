@@ -40,6 +40,10 @@ Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer'
 
         Route::get('/featured/products/delete/{id}', [ProductController::class, 'featuredproductdelete'])->name('featured.products.delete');
     });
+    //order
+    Route::name('order.')->group(function () {
+        Route::get('order', [CheckoutController::class, 'order'])->name('orderlist');
+    });
 
     // cart
     Route::name('cart.')->group(function () {

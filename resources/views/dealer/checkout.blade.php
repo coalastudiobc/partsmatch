@@ -25,8 +25,7 @@
                                                     </select>
                                                 </div> --}}
 
-                                                <input type="hidden" name="country" value="{{ $country->id ?? '' }}"
-                                                    id="">
+
                                                 <div class="custm-dropdown">
                                                     <div class="dropdown">
                                                         <div class="dropdown-toggle " type="button"
@@ -58,16 +57,29 @@
                                                         </ul>
                                                     </div>
                                                 </div>
-
+                                                <input type="hidden" name="country" value="{{ $country->id ?? '' }}"
+                                                    class="@error('country') is-invalid @enderror">
+                                                @error('country')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="">First Name</label>
                                                 <div class="form-field">
-                                                    <input type="text" class="form-control" name="first_name"
+                                                    <input type="text"
+                                                        class="form-control @error('first_name') is-invalid @enderror"
+                                                        name="first_name"
                                                         value="{{ old('first_name', auth()->user()->shippingAddress->name ?? '') }}"
                                                         placeholder="First Name">
+                                                    @error('first_name')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
 
                                                 </div>
                                             </div>
@@ -76,10 +88,16 @@
                                             <div class="form-group">
                                                 <label for="">Last Name</label>
                                                 <div class="form-field">
-                                                    <input type="text" class="form-control" name="last_name"
+                                                    <input type="text"
+                                                        class="form-control @error('last_name') is-invalid @enderror"
+                                                        name="last_name"
                                                         value="{{ old('last_name', auth()->user()->shippingAddress->last_name ?? '') }}"
                                                         placeholder="Last Name">
-
+                                                    @error('first_name')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                 </div>
                                             </div>
                                         </div>
@@ -87,10 +105,16 @@
                                             <div class="form-group">
                                                 <label for="">Address 1</label>
                                                 <div class="form-field">
-                                                    <input type="text" class="form-control" name="shiping_address1"
+                                                    <input type="text"
+                                                        class="form-control @error('shiping_address1') is-invalid @enderror"
+                                                        name="shiping_address1"
                                                         value="{{ auth()->user()->shippingAddress->address1 ?? '' }}"
                                                         placeholder="Address">
-
+                                                    @error('shiping_address1')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                 </div>
                                             </div>
                                             {{-- <div class="add-adress">
@@ -101,10 +125,16 @@
                                             <div class="form-group">
                                                 <label for="">Address 2</label>
                                                 <div class="form-field">
-                                                    <input type="text" class="form-control" name="shiping_address2"
+                                                    <input type="text"
+                                                        class="form-control @error('shiping_address2') is-invalid @enderror"
+                                                        name="shiping_address2"
                                                         value="{{ auth()->user()->shippingAddress->address2 ?? '' }}"
                                                         placeholder="Address">
-
+                                                    @error('shiping_address2')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                 </div>
                                             </div>
                                         </div>
@@ -129,7 +159,6 @@
                                                         <option value="audi">Audi</option>
                                                     </select> --}}
 
-                                                    <input type="hidden" name="state" value="{{ $state->id ?? '' }}">
                                                     <div class="custm-dropdown">
                                                         <div class="dropdown">
                                                             <div class="dropdown-toggle " type="button"
@@ -163,6 +192,13 @@
                                                             </ul>
                                                         </div>
                                                     </div>
+                                                    <input type="hidden" name="state" value="{{ $state->id ?? '' }}"
+                                                        class="@error('state') is-invalid @enderror">
+                                                    @error('state')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                 </div>
                                             </div>
                                         </div>
@@ -178,7 +214,6 @@
                                                         <option value="audi">Audi</option>
                                                     </select> --}}
 
-                                                    <input type="hidden" name="city" value="{{ $city->id ?? '' }}">
                                                     <div class="custm-dropdown">
                                                         <div class="dropdown">
                                                             <div class="dropdown-toggle " type="button"
@@ -212,6 +247,13 @@
                                                             </ul>
                                                         </div>
                                                     </div>
+                                                    <input type="hidden" name="city" value="{{ $city->id ?? '' }}"
+                                                        class="@error('city') is-invalid @enderror">
+                                                    @error('city')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                 </div>
                                             </div>
                                         </div>
@@ -219,10 +261,15 @@
                                             <div class="form-group">
                                                 <label for="">PIN code</label>
                                                 <div class="form-field">
-                                                    <input type="text" name="pin_code" class="form-control"
+                                                    <input type="text" name="pin_code"
+                                                        class="form-control @error('pin_code') is-invalid @enderror"
                                                         value="{{ auth()->user()->shippingAddress->post_code ?? '' }}"
                                                         placeholder="PIN code">
-
+                                                    @error('pin_code')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                 </div>
                                             </div>
                                         </div>
@@ -532,7 +579,7 @@
                 }
             )
             if (error) {
-                cardBtn.disable = false
+                // cardBtn.disable = false
             } else {
                 let token = document.createElement('input')
                 token.setAttribute('type', 'hidden')

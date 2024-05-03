@@ -303,6 +303,12 @@ return [
         'country' => [
             'required' => 'Please select country',
         ],
+        'state' => [
+            'required' => 'Please select state',
+        ],
+        'city' => [
+            'required' => 'Please select city',
+        ],
         'terms' => [
             'required' => 'Please check terms & condition',
         ],
@@ -314,6 +320,11 @@ return [
             'required' => 'Please enter the zip code.',
             'minlength' => 'zipcode should be 6 digits.',
             'maxlength' => 'zipcode should be 6 digits.',
+        ],
+        'pin_code' => [
+            'required' => 'Please enter the zip code.',
+            'minlength' => 'pincode should be 6 digits.',
+            'maxlength' => 'pincode should be 6 digits.',
         ],
 
     ],

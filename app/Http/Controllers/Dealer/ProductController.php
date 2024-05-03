@@ -50,9 +50,9 @@ class ProductController extends Controller
                 'price' => $request->price,
                 'shipping_price' => $request->shipping_price,
                 'other_specification' => $request->other_specification,
-                'year' => $request->year,
-                'brand' => $request->brand,
-                'model' => $request->model,
+                'year' => $request->car_years,
+                'brand' => $request->car_make,
+                'model' => $request->car_model,
                 'status' => '1',
             ];
 
