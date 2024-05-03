@@ -218,9 +218,9 @@
             <div class="top-categories-wrapper">
                 <h2 class="sec-heading">Top Categories</h2>
                 <div class="categories-boxes">
-                    @foreach ($category as $category)
+                    @foreach ($category as $key => $category)
                         <div class="categories-box">
-                            <img src="images/categorie1.png" alt="">
+                            <img src="{{ asset('assets/images/categorie1.png') }}" alt="">
                             <p>{{ $category->name }}</p>
                         </div>
                     @endforeach
@@ -1008,7 +1008,7 @@
                             <div class="more-product-boxes">
                                 <div class="more-product-cards">
                                     <div class="product-cards-img">
-                                        <img src="images/product1.png" alt="">
+                                        <img src="{{ asset('assets/images/product1.png') }}" alt="">
                                     </div>
                                     <div class="product-deails">
                                         <p>R1 Concepts® – eLINE Series Plain Brake Rotors</p>
@@ -1405,86 +1405,86 @@
 
                 <div class="sp-brands">
                     <div class="brands-image">
-                        <img src="./images/car-logo1.png" alt="" class="">
+                        <img src="{{ asset('assets/images/car-logo1.png') }}" alt="" class="">
                         <div class="brands-image-content">
                             <h6>Mercedes Benz</h6>
                         </div>
                     </div>
                     <div class="brands-image">
-                        <img src="./images/car-logo2.png" alt="" class="">
+                        <img src="{{ asset('assets/images/car-logo2.png') }}" alt="" class="">
                         <div class="brands-image-content">
                             <h6>BMW</h6>
                         </div>
                     </div>
                     <div class="brands-image">
-                        <img src="./images/car-logo3.png" alt="" class="">
+                        <img src="{{ asset('assets/images/car-logo3.png') }}" alt="" class="">
                         <div class="brands-image-content">
                             <h6>Infinity</h6>
                         </div>
                     </div>
                     <div class="brands-image">
-                        <img src="./images/car-logo4.png" alt="" class="">
+                        <img src="{{ asset('assets/images/car-logo4.png') }}" alt="" class="">
                         <div class="brands-image-content">
                             <h6>Audi</h6>
                         </div>
                     </div>
                     <div class="brands-image">
-                        <img src="./images/car-logo5.png" alt="" class="">
+                        <img src="{{ asset('assets/images/car-logo5.png') }}" alt="" class="">
                         <div class="brands-image-content">
                             <h6>Hondaz</h6>
                         </div>
                     </div>
                     <div class="brands-image">
-                        <img src="./images/car-logo6.png" alt="" class="">
+                        <img src="{{ asset('assets/images/car-logo6.png') }}" alt="" class="">
                         <div class="brands-image-content">
                             <h6>Volkswagen</h6>
                         </div>
                     </div>
                     <div class="brands-image">
-                        <img src="./images/car-logo1.png" alt="" class="">
+                        <img src="{{ asset('assets/images/car-logo1.png') }}" alt="" class="">
                         <div class="brands-image-content">
                             <h6>Ford</h6>
                         </div>
                     </div>
                     <!--  -->
                     <div class="brands-image">
-                        <img src="./images/car-logo2.png" alt="" class="">
+                        <img src="{{ asset('assets/images/car-logo2.png') }}" alt="" class="">
                         <div class="brands-image-content">
                             <h6>Mercedes Benz</h6>
                         </div>
                     </div>
                     <div class="brands-image">
-                        <img src="./images/car-logo3.png" alt="" class="">
+                        <img src="{{ asset('assets/images/car-logo3.png') }}" alt="" class="">
                         <div class="brands-image-content">
                             <h6>BMW</h6>
                         </div>
                     </div>
                     <div class="brands-image">
-                        <img src="./images/car-logo4.png" alt="" class="">
+                        <img src="{{ asset('assets/images/car-logo4.png') }}" alt="" class="">
                         <div class="brands-image-content">
                             <h6>Infinity</h6>
                         </div>
                     </div>
                     <div class="brands-image">
-                        <img src="./images/car-logo5.png" alt="" class="">
+                        <img src="{{ asset('assets/images/car-logo5.png') }}" alt="" class="">
                         <div class="brands-image-content">
                             <h6>Audi</h6>
                         </div>
                     </div>
                     <div class="brands-image">
-                        <img src="./images/car-logo6.png" alt="" class="">
+                        <img src="{{ asset('assets/images/car-logo6.png') }}" alt="" class="">
                         <div class="brands-image-content">
                             <h6>Honda</h6>
                         </div>
                     </div>
                     <div class="brands-image">
-                        <img src="./images/car-logo1.png" alt="" class="">
+                        <img src="{{ asset('assets/images/car-logo1.png') }}" alt="" class="">
                         <div class="brands-image-content">
                             <h6>BMW</h6>
                         </div>
                     </div>
                     <div class="brands-image">
-                        <img src="./images/car-logo2.png" alt="" class="">
+                        <img src="{{ asset('assets/images/car-logo2.png') }}" alt="" class="">
                         <div class="brands-image-content">
                             <h6>Audi</h6>
                         </div>
