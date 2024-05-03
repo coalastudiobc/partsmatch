@@ -25,7 +25,7 @@
 
 
                                             <input type="hidden" name="order_commission_type"
-                                                value="{{ get_admin_setting('order_commission_type') == 'Fixed' ? 'Fixed' : 'Percentage' }}"
+                                                value="{{ old('order_commission_type', get_admin_setting('order_commission_type') == 'Fixed' ? 'Fixed' : 'Percentage') }}"
                                                 id="checktype"
                                                 class="@error('order_commission_type') is-invalid @enderror checktype">
                                             <div class="custm-dropdown">
@@ -33,7 +33,7 @@
                                                     <div class="dropdown-toggle " type="button" id="dropdownMenuButton1"
                                                         data-bs-toggle="dropdown" aria-expanded="false">
                                                         <div id="selectedcommission">
-                                                            {{ get_admin_setting('order_commission_type') == 'Fixed' ? 'Fixed' : 'Percentage' }}
+                                                            {{ old('order_commission_type', get_admin_setting('order_commission_type') == 'Fixed' ? 'Fixed' : 'Percentage') }}
 
                                                         </div>
                                                         <span class="custm-drop-icon">

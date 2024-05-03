@@ -33,7 +33,7 @@
                                                 </option>
                                             </select> --}}
                                             <input type="hidden" name="shipping_charge_type"
-                                                value="{{ get_admin_setting('shipping_charge_type') == 'Fixed' ? 'Fixed' : 'Percentage' }}"
+                                                value="{{ old('shipping_charge_type', get_admin_setting('shipping_charge_type') == 'Fixed' ? 'Fixed' : 'Percentage') }}"
                                                 id=""
                                                 class="@error('shipping_charge_type') is-invalid @enderror checktype">
                                             <div class="custm-dropdown">
@@ -41,7 +41,7 @@
                                                     <div class="dropdown-toggle " type="button" id="dropdownMenuButton1"
                                                         data-bs-toggle="dropdown" aria-expanded="false">
                                                         <div id="selectedcommission">
-                                                            {{ get_admin_setting('shipping_charge_type') == 'Fixed' ? 'Fixed' : 'Percentage' }}
+                                                            {{ old('shipping_charge_type', get_admin_setting('shipping_charge_type') == 'Fixed' ? 'Fixed' : 'Percentage') }}
 
 
                                                         </div>
