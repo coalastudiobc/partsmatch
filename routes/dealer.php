@@ -3,7 +3,7 @@
 use App\Http\Controllers\Admin\CmsManagementController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\Dealer\AccountSettingController;
-use App\Http\Controllers\dealer\CheckoutController;
+use App\Http\Controllers\Dealer\CheckoutController;
 use App\Http\Controllers\Dealer\DealerController;
 use App\Http\Controllers\Dealer\PartsManagerController;
 use App\Http\Controllers\Dealer\ProductController;
