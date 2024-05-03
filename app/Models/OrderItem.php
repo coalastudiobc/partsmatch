@@ -18,7 +18,7 @@ class OrderItem extends Model
     }
     public function order()
     {
-        return $this->belongsTo(Order::class, 'product_id');
+        return $this->belongsTo(Order::class, 'order_id');
     }
 
     // public function scopeSearch($query)
