@@ -51,6 +51,7 @@ class CheckoutController extends Controller
             $country = Country::where('id', $data->country_id)->first();
             $state = State::where('id', $data->state_id)->first();
             $city = City::where('id', $data->city_id)->first();
+
             return view('dealer.checkout', compact('countries', 'intent', 'total_amount', 'country', 'state', 'city', 'data'));
         }
         return view('dealer.checkout', compact('countries', 'intent', 'total_amount'));
