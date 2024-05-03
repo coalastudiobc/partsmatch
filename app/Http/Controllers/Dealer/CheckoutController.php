@@ -111,7 +111,7 @@ class CheckoutController extends Controller
             'metadata' => [
                 'order_id' => $order->id, // Add your custom order ID as metadata
             ],
-            'return_url' => route('dealer.partsmanager.index')
+            'return_url' => route('dealer.order.orderlist')
         ]);
 
         // $charge = Charge::create([
@@ -140,7 +140,7 @@ class CheckoutController extends Controller
         //     // ],
         // ]);
         // dd($intent);
-        return redirect()->route('dealer.partsmanager.index');
+        return redirect()->route('dealer.order.orderlist');
     }
 
     public function order()
