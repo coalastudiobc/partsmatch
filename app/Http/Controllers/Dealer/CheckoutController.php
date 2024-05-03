@@ -100,12 +100,15 @@ class CheckoutController extends Controller
         }
 
         $user =  auth()->user();
+
+        $stripeCustomer = $user->createOrGetStripeCustomer();
+        // dd("hererer", $stripeCustomer->id);
         $intent = PaymentIntent::create([
             'amount' => floatval($request->total_amount) * 100, // amount in cents
             'currency' => 'usd',
             'payment_method' => $request->token,
             'confirmation_method' => 'manual',
-            'customer' => $user->stripe_id,
+            'customer' => $stripeCustomer->id,
             'confirm' => true,
             'description' => jsencode_userdata($order->id),
             'metadata' => [
