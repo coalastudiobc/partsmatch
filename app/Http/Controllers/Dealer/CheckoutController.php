@@ -151,7 +151,7 @@ class CheckoutController extends Controller
     {
         $user = auth()->user();
         $data = $user->shippingAddress;
-        $order_item = Orderitem::with('product', 'order')->get();
+        $order_item = Orderitem::with('product', 'order')->orderByDesc('id')->get();
         // dd($order_item->toArray());
         return view('dealer.order.order_list', compact('order_item'));
     }
