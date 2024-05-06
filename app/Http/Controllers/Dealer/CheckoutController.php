@@ -59,6 +59,8 @@ class CheckoutController extends Controller
     public function store(Request $request)
     {
         \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+        $user =  auth()->user();
+        $stripeCustomer = $user->createOrGetStripeCustomer();
 
         // dd('herere', $request);
         $carts = Cart::with('cart_product')->where('user_id', auth()->user()->id)->get();
@@ -99,9 +101,8 @@ class CheckoutController extends Controller
             OrderItem::create($order_item);
         }
 
-        $user =  auth()->user();
 
-        $stripeCustomer = $user->createOrGetStripeCustomer();
+
         // dd("hererer", $stripeCustomer->id);
         $intent = PaymentIntent::create([
             'amount' => floatval($request->total_amount) * 100, // amount in cents
