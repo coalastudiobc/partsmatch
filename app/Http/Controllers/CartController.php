@@ -13,7 +13,7 @@ class CartController extends Controller
     public function index()
     {
         $carts =  Cart::with('cart_product.product.productImage')->where('user_id', auth()->user()->id)->get();
-        $totalamount = Cart::sum('amount');
+        $totalamount = Cart::where('user_id', auth()->user()->id)->sum('amount');
         $shippingCharge = AdminSetting::where('name', 'shipping_charge')->first();
 
         return view('dealer.cart.index', compact('carts', 'totalamount', 'shippingCharge'));

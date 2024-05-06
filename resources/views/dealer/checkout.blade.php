@@ -66,6 +66,7 @@
                                                 @enderror
                                             </div>
                                         </div>
+                                        <input type="hidden" name="stripeCustomer_id" value="{{ $stripeCustomer->id }}">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="">First Name</label>

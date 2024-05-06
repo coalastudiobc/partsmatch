@@ -2,7 +2,7 @@
     <h2>Analytics</h2>
     <div class="analyics-tabs">
         <ul>
-            <li class="analyics-tabs-list">
+            {{-- <li class="analyics-tabs-list">
                 <div class="accordion accordion-flush" id="accordionFlushExample">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="flush-headingOne">
@@ -22,14 +22,14 @@
                                                 </g>
                                             </svg>
                                         </span>
-                                        <h4>dashboard</h4>
+                                        <h4>Dashboard</h4>
                                     </div>
                                 </a>
                             </button>
                         </h2>
                     </div>
                 </div>
-            </li>
+            </li> --}}
             <li class="analyics-tabs-list">
                 <div class="accordion accordion-flush" id="accordionFlushExample">
                     <div class="accordion-item">
@@ -50,7 +50,7 @@
                                                 </g>
                                             </svg>
                                         </span>
-                                        <h4>products</h4>
+                                        <h4>Products</h4>
                                     </div>
                                 </a>
                             </button>
@@ -78,7 +78,7 @@
                                                 </g>
                                             </svg>
                                         </span>
-                                        <h4>parts manager</h4>
+                                        <h4>Parts Manager</h4>
                                     </div>
                                 </a>
                             </button>

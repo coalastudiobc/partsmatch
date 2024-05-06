@@ -23,12 +23,12 @@
                         <th>
                             <p>Price</p>
                         </th>
-                        <th>
+                        {{-- <th>
                             <p>Price Id</p>
-                        </th>
-                        <th>
+                        </th> --}}
+                        {{-- <th>
                             <p>Subscription Plan Id</p>
-                        </th>
+                        </th> --}}
                         <th>
                             <p>Status</p>
                         </th>
@@ -41,8 +41,8 @@
                         <tr>
                             <td>{{ $package->name ? ucFirst($package->name) : '' }}</td>
                             <td>{{ $package->price ? "$" . $package->price : '' }}</td>
-                            <td>{{ $package->stripe_price ? $package->stripe_price : '' }}</td>
-                            <td>{{ $package->stripe_id ? $package->stripe_id : '' }}</td>
+                            {{-- <td>{{ $package->stripe_price ? $package->stripe_price : '' }}</td> --}}
+                            {{-- <td>{{ $package->stripe_id ? $package->stripe_id : '' }}</td> --}}
                             <td>
                                 {{-- <label>
                                     <input type="checkbox" class="custom-switch-input"
@@ -63,9 +63,9 @@
                                 <div class="action-btns">
                                     <a href="{{ route('admin.packages.edit', [jsencode_userdata($package->id)]) }}"><i
                                             class="fa-solid fa-pen-to-square" style="color: #3EBE62;"
-                                            title="edit"></i></a>
+                                            title="Edit"></i></a>
                                     <a href="{{ route('admin.packages.delete', [jsencode_userdata($package->id)]) }}"><i
-                                            class="fa-regular fa-trash-can" style="color: #E13F3F;" title="delete"></i></a>
+                                            class="fa-regular fa-trash-can" style="color: #E13F3F;" title="Delete"></i></a>
                                 </div>
 
                             </td>

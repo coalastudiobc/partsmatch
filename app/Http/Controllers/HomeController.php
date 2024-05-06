@@ -61,7 +61,7 @@ class HomeController extends Controller
 
             return redirect()->route('admin.category.index');
         } else if (Auth::user()->hasRole("Dealer")) {
-            return redirect()->route('dealer.dashboard');
+            return redirect()->route('dealer.products.index');
         } else if (Auth::user()->hasRole("Manager")) {
             return redirect()->route('dealer.dashboard');
         } else {

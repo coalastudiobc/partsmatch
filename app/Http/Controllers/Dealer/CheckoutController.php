@@ -41,10 +41,11 @@ class CheckoutController extends Controller
     public function create()
     {
         $countries = Country::get();
-        $total_amount = Cart::sum('amount');
+        $total_amount = Cart::where('user_id', auth()->user()->id)->sum('amount');
+
         $user = auth()->user();
         $intent = $user->createSetupIntent();
-
+        $stripeCustomer = $user->createOrGetStripeCustomer();
         $data = $user->shippingAddress;
         if (!is_null($data)) {
 
@@ -52,15 +53,15 @@ class CheckoutController extends Controller
             $state = State::where('id', $data->state_id)->first();
             $city = City::where('id', $data->city_id)->first();
 
-            return view('dealer.checkout', compact('countries', 'intent', 'total_amount', 'country', 'state', 'city', 'data'));
+            return view('dealer.checkout', compact('countries', 'intent', 'total_amount', 'country', 'state', 'city', 'data', 'stripeCustomer'));
         }
-        return view('dealer.checkout', compact('countries', 'intent', 'total_amount'));
+        return view('dealer.checkout', compact('countries', 'intent', 'total_amount', 'stripeCustomer'));
     }
     public function store(Request $request)
     {
         \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
         $user =  auth()->user();
-        $stripeCustomer = $user->createOrGetStripeCustomer();
+
 
         // dd('herere', $request);
         $carts = Cart::with('cart_product')->where('user_id', auth()->user()->id)->get();
@@ -103,13 +104,12 @@ class CheckoutController extends Controller
 
 
 
-        // dd("hererer", $stripeCustomer->id);
         $intent = PaymentIntent::create([
             'amount' => floatval($request->total_amount) * 100, // amount in cents
             'currency' => 'usd',
+            'customer' => $request->stripeCustomer_id,
             'payment_method' => $request->token,
             'confirmation_method' => 'manual',
-            'customer' => $stripeCustomer->id,
             'confirm' => true,
             'description' => jsencode_userdata($order->id),
             'metadata' => [
