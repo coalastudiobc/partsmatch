@@ -4,7 +4,7 @@
 @section('content')
     <div class="dashboard-right-box parts-manager-table-box">
         <div class="serach-and-filter-box">
-            <h3>All Managers</h3>
+            {{-- <h3>All Managers</h3> --}}
             <form action="">
                 <div class="pro-search-box">
                     <input type="text" class="form-control" name="filter_by_name" placeholder="Search User By Name">
