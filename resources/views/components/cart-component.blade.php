@@ -16,29 +16,32 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($carts as $cart)
+                                @forelse ($carts as $cart)
                                     {{-- @dd($cart) --}}
                                     <tr>
                                         <td>
                                             <div class="cart-product-image">
-                                                <img src="{{ Storage::url($cart->cart_product->product->productImage[0]->file_url) }}"
+                                                <img src="{{ isset($cart->cart_product->product->productImage[0]) ? Storage::url($cart->cart_product->product->productImage[0]->file_url) : '' }}"
                                                     alt="">
                                             </div>
                                         </td>
-                                        <td>{{ $cart->cart_product->product->name }}</td>
-                                        <td>{{ $cart->cart_product->product->price }} </td>
+                                        <td>{{ $cart->cart_product->product->name ?? '' }}</td>
+                                        <td>{{ $cart->cart_product->product->price ?? '' }} </td>
                                         <td>
                                             <div class="product-quantity-box">
                                                 <div class="quantity-btn quantity-brd">
-                                                    <a href="javascript:void(0)" class="minus cartupdateminus"
-                                                        cartid="{{ $cart->id }}"
-                                                        product-id="{{ $cart->cart_product->product->id }}">-</a>
+                                                    @if (isset($cart->cart_product) && $cart->cart_product->quantity != 1)
+                                                        <a href="javascript:void(0)" class="minus cartupdateminus"
+                                                            cartid="{{ $cart->id }}"
+                                                            product-id="{{ $cart->cart_product->product->id }}">-</a>
+                                                    @endif
                                                     <input type="text" name="quantity" class="quantity"
-                                                        value="{{ $cart->cart_product->quantity }}" placeholder="">
+                                                        value="{{ $cart->cart_product->quantity ?? '' }}"
+                                                        placeholder="">
                                                     <a href="javascript:void(0)" class="plus cartupdateplus"
                                                         cartid="{{ $cart->id }}"
-                                                        product-id="{{ $cart->cart_product->product->id }}"
-                                                        productQuantity="{{ $cart->cart_product->product->stocks_avaliable }}">+</a>
+                                                        product-id="{{ $cart->cart_product->product->id ?? '' }}"
+                                                        productQuantity="{{ $cart->cart_product->product->stocks_avaliable ?? '' }}">+</a>
                                                 </div>
                                             </div>
                                         </td>
@@ -48,7 +51,9 @@
                                                 class="cartDelete"><i style="color: #E13F3F;"
                                                     class="fa-regular fa-trash-can"></i></a></td>
                                     </tr>
-                                @endforeach
+                                @empty
+                                    {{-- <div>no cart</div> --}}
+                                @endforelse
                                 {{-- <tr>
                                             <td>
                                                 <div class="cart-product-image">

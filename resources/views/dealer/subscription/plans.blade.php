@@ -15,7 +15,7 @@
                             <span>{{ $plan->billing_cycle }}</span>
                             <h3>${{ $plan->price }}<span>/{{ $plan->billing_cycle }}</span></h3>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi</p>
-                            <ul class="card-list">
+                            {{-- <ul class="card-list">
                                 <li>
                                     <p>Lorem ipsum dolor sit</p>
                                 </li>
@@ -28,7 +28,7 @@
                                 <li>
                                     <p>Lorem ipsum dolor sit</p>
                                 </li>
-                            </ul>
+                            </ul> --}}
                         </div>
                         <div>
                             <a href="javascript:void(0)" class="btn secondary-btn full-btn parchase"

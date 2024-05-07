@@ -21,7 +21,6 @@
             });
             $(document).on('click', '.minus', function() {
                 // descreass the number of product
-
                 var element = $(this).next();
                 var quan = element.val();
                 var sum = parseInt(quan) - 1;
@@ -72,9 +71,9 @@
                 function handleStateData(response) {
                     if (response.success == true) {
                         console.log('hererererer')
-                        location.reload();
-                        // $('#cartContainer').html(response.cart);
-                        // return toastr.success("Cart added successfully");
+                        // location.reload();
+                        $('#cartContainer').html(response.cart);
+                        return toastr.success("Cart product updated successfully");
                     } else {
                         // jQuery('#errormessage').html(response.error);
                         location.reload();
@@ -110,9 +109,9 @@
                 function handleStateData(response) {
                     if (response.success == true) {
                         console.log('hererererer')
-                        location.reload();
-                        // $('#cartContainer').html(response.cart);
-                        // return toastr.success("Cart added successfully");
+                        // location.reload();
+                        $('#cartContainer').html(response.cart);
+                        return toastr.success("Cart product decrease by 1 successfully");
                     } else {
                         jQuery('#errormessage').html(response.error);
                     }
@@ -147,8 +146,10 @@
                 function handleStateData(response) {
                     if (response.success == true) {
                         console.log('hererererer')
-                        location.reload();
-                        // return toastr.success("Cart added successfully");
+                        // location.reload();
+                        $('#cartContainer').html(response.cart);
+
+                        return toastr.success("Cart product updated successfully");
                     } else {
                         // jQuery('#errormessage').html(response.error);
                         location.reload();
