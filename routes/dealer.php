@@ -5,7 +5,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\Dealer\AccountSettingController;
 use App\Http\Controllers\Dealer\CheckoutController;
 use App\Http\Controllers\Dealer\DealerController;
-use App\Http\Controllers\dealer\OrderController;
+use App\Http\Controllers\Dealer\OrderController;
 use App\Http\Controllers\Dealer\PartsManagerController;
 use App\Http\Controllers\Dealer\ProductController;
 use App\Http\Controllers\Dealer\SubscriptionController;
