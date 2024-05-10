@@ -1520,3 +1520,7 @@ button.btn-close {
 .heading-with-tab .heading-tab .nav-item .nav-link:hover {
     border-bottom: 3px solid #000 !important;
 }
+
+button.nav-link.navButton.active {
+    border-bottom: 3px solid #000 !important;
+}

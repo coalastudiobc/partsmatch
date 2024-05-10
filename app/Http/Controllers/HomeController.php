@@ -32,24 +32,43 @@ class HomeController extends Controller
     {
         // dd('home', $subcategory_id);
         $category = Category::where('status', '1')->get();
-        $subcategories = Category::where('parent_id', '!=', null)->inRandomOrder()->limit(4)->get();
-        if ($subcategory_id == null) {
-            $products = Product::with('productImage')->where('status', '1')->inRandomOrder()->limit(4)->get();
-            $randomproducts = Product::with('productImage')->where('status', '1')->inRandomOrder()->limit(4)->get();
-        } else {
-            $products = Product::with('productImage')->where('status', '1')->where('subcategory_id', $subcategory_id)->inRandomOrder()->limit(4)->get();
-            $randomproducts = Product::with('productImage')->where('status', '1')->where('subcategory_id', $subcategory_id)->inRandomOrder()->limit(4)->get();
-            $homeProduct = view('components.home-product', compact('products'))->render();
-            $homerandomProducts = view('components.home-product-tab', compact('randomproducts'))->render();
-            return response()->json(['success' => true, 'homeProducts' => $homeProduct, 'homerandomProducts' => $homerandomProducts]);
-        }
+        $collections = Category::with('products')->where('parent_id', '!=', null)->where('status', '1')->inRandomOrder()->get();
+        $subcategories = Category::with('products')->where('parent_id', '!=', null)->where('status', '1')->inRandomOrder()->get();
 
-        return view('welcome', compact('category', 'products', 'subcategories', 'randomproducts'));
+        // if ($subcategory_id == null) {
+        //     $products = Product::with('productImage')->where('status', '1')->inRandomOrder()->limit(4)->get();
+        //     $randomproducts = Product::with('productImage')->where('status', '1')->inRandomOrder()->limit(4)->get();
+        // } else {
+        //     $products = Product::with('productImage')->where('status', '1')->where('subcategory_id', $subcategory_id)->inRandomOrder()->limit(4)->get();
+        //     $randomproducts = Product::with('productImage')->where('status', '1')->where('subcategory_id', $subcategory_id)->inRandomOrder()->limit(4)->get();
+        //     $homeProduct = view('components.home-product', compact('products'))->render();
+        //     $homerandomProducts = view('components.home-product-tab', compact('randomproducts'))->render();
+        //     return response()->json(['success' => true, 'homeProducts' => $homeProduct, 'homerandomProducts' => $homerandomProducts]);
+        // }
+
+        return view('welcome', compact('category', 'subcategories', 'collections'));
     }
     public function categoryCard()
     {
         $categories = Category::all();
         return view('category_card', compact('categories'));
+    }
+    public function getProductsForCategory(Request $request, Category $category)
+    {
+        $products = $category->products;
+
+        $data = view('components.home-product-tab', compact('products'))->render();
+
+        return response()->json(['status' => true, 'message' => 'products fetched successfully', 'data' => $data], 200);
+    }
+
+    public function getProductsCollectionForCategory(Request $request, Category $category)
+    {
+        $products = $category->products;
+
+        $data = view('components.home-product', compact('products'))->render();
+
+        return response()->json(['status' => true, 'message' => 'products fetched successfully', 'data' => $data], 200);
     }
     public function changePassword(ChangePasswordRequest $request)
     {

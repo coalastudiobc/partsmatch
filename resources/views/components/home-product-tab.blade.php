@@ -1,4 +1,4 @@
-@foreach ($randomproducts as $product)
+@foreach ($products as $product)
     <div class="more-product-cards">
         <a href="{{ route('dealer.products.details', $product->id) }}">
             <div class="product-cards-img">

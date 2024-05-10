@@ -1,4 +1,4 @@
-@foreach ($products as $product)
+@forelse ($products as $product)
     <div class="collection-box">
         <a href="{{ route('dealer.products.details', $product->id) }}">
 
@@ -41,4 +41,6 @@
         </div>
 
     </div>
-@endforeach
+@empty
+    <div> No products avaliable at the moment</div>
+@endforelse
