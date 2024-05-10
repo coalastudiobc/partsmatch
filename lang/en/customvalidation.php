@@ -18,7 +18,7 @@ return [
         ],
         'password_confirmation' => [
             'required' => 'Please enter the confirmation password',
-            'equalTo' => 'confoirm password does not match'
+            'equalTo' => 'Confirm password does not match'
         ]
     ],
 

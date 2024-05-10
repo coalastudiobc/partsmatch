@@ -38,6 +38,7 @@
                 function handleStateData(response) {
                     if (response.success == true) {
                         $('#cartContainer').html(response.cart);
+                        $('.cart-icon').html(response.cart_icon);
                         return toastr.success("Cart product delete successfully");
                     } else {
                         jQuery('#errormessage').html(response.error);

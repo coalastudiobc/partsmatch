@@ -5,9 +5,11 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\Dealer\AccountSettingController;
 use App\Http\Controllers\Dealer\CheckoutController;
 use App\Http\Controllers\Dealer\DealerController;
+use App\Http\Controllers\dealer\OrderController;
 use App\Http\Controllers\Dealer\PartsManagerController;
 use App\Http\Controllers\Dealer\ProductController;
 use App\Http\Controllers\Dealer\SubscriptionController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -16,6 +18,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // cms page
     Route::get('view/{slug}', [CmsManagementController::class, 'cms'])->name('view');
+});
+Route::name('dealer.products.')->group(function () {
+    Route::get('/products/interior/{subcategory}', [ProductController::class, 'interior'])->name('interior.page');
+    Route::get('/products/interior', [ProductController::class, 'show'])->name('interior');
+
+    Route::get('/products/details/{product}', [ProductController::class, 'details'])->name('details');
 });
 Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer')->name('dealer.')->group(function () {
     Route::get('/dashboard', [DealerController::class, 'dashboard'])->name('dashboard');
@@ -26,7 +34,7 @@ Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer'
 
     Route::get('state/{country}', [CheckoutController::class, 'state'])->name('state');
     Route::get('cities/{state}', [CheckoutController::class, 'cities'])->name('cities');
-
+    Route::get('/profile/view/{user}', [DealerController::class, 'dealerProfile'])->name('view.profile');
     // products
     Route::name('products.')->group(function () {
         Route::get('/products/create', [ProductController::class, 'create'])->name('create');
@@ -41,10 +49,13 @@ Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer'
         Route::get('/featured/products/delete/{id}', [ProductController::class, 'featuredproductdelete'])->name('featured.products.delete');
     });
     //order
-    Route::name('order.')->group(function () {
+    Route::name('myorder.')->group(function () {
         Route::get('order', [CheckoutController::class, 'order'])->name('orderlist');
     });
 
+    Route::name('order.')->group(function () {
+        Route::get('order/management', [OrderController::class, 'order'])->name('orderlist');
+    });
     // cart
     Route::name('cart.')->group(function () {
         Route::get('cart/index', [CartController::class, 'index'])->name('cart.index');

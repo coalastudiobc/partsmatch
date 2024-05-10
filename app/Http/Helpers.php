@@ -94,6 +94,14 @@ if (!function_exists('get_category')) {
         return $record;
     }
 }
+if (!function_exists('get_subcategory')) {
+    function get_subcategory($subcategory_id)
+    {
+        $record = Category::where('parent_id', $subcategory_id)->orderBy('name', 'ASC')->get();
+
+        return $record;
+    }
+}
 // if (!function_exists('get_country')) {
 //     function get_country()
 //     {

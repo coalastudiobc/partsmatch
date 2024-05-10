@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Dealer;
 
 use App\Http\Controllers\Controller;
+use App\Models\AdminSetting;
 use App\Models\Category;
 use App\Models\FeaturedProduct;
 use App\Models\Product;
 use App\Models\ProductImage;
+use App\Models\User;
 use GrahamCampbell\ResultType\Success;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -93,9 +95,20 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request)
     {
-        //
+        $category = Category::with('children', 'parent')->where('id', $request->category)->first();
+        if ($category->parent) {
+            $products = Product::with('productImage', 'user')->where('subcategory_id', $category->id)->Paginate(5);
+            $parent = $category->parent->id;
+        } else {
+
+            $subcategories = $category->children->pluck('id');
+            $products = Product::with('productImage', 'user')->whereIn('subcategory_id', $subcategories->toArray())->Paginate(5);
+            $parent = $category->id;
+        }
+        $active_id = $category->id;
+        return view('dealer.products.interior_accessories', compact('products', 'active_id',  'parent'));
     }
 
     /**
@@ -236,4 +249,22 @@ class ProductController extends Controller
             'subcategory' => view('dealer.include.subcategory', compact('subcategories'))->render(),
         ], 200);
     }
+
+    public function details(Product $product)
+    {
+        $user = User::where('id', $product->user_id)->first();
+
+        $productImages = $product->productImage;
+
+        $shippingCharge = AdminSetting::where('name', 'shipping_charge')->first();
+        $allproducts = Product::with('productImage')->where('user_id', $user->id)->inRandomOrder()->limit(6)->get();
+
+        return view('dealer.products.product_details', compact('product', 'productImages', 'shippingCharge', 'user', 'allproducts'));
+    }
+
+    // public function interior($subcategory_id)
+    // {
+    //     $products = Product::with('productImage')->where('subcategory_id', $subcategory_id)->get();
+    //     return view('dealer.products.interior_accessories', compact('products'));
+    // }
 }

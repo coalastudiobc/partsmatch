@@ -80,6 +80,7 @@
                 </table>
             </div>
         </div>
+        {!! $categories->links('admin.pagination') !!}
         {{-- <div class="pagination-wrapper">
             <div class="pagination-boxes">
                 <div class="pagination-box">

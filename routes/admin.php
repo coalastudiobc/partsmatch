@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\OrderController;
 use Illuminate\Support\Facades\Route;
 // use QrCode;
 
@@ -49,6 +50,10 @@ Route::middleware(['auth', 'verified', 'admin'])->namespace('App\Http\Controller
       Route::post('cms/update/{page}', 'CmsManagementController@update')->name('update');
    });
 
+   //order
+   Route::name('order.')->group(function () {
+      Route::get('order/management', [OrderController::class, 'index'])->name('orderlist');
+   });
    //package 
    Route::name('packages.')->group(function () {
       Route::get('packages', 'PackageController@index')->name('all');

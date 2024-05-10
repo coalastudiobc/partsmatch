@@ -950,9 +950,9 @@
     position: relative;
 }
 
-.cstm-card.account-detail-card .upload-img {
+/* .cstm-card.account-detail-card .upload-img {
     align-items: flex-start;
-}
+} */
 
 .cstm-card.account-detail-card .profile-without-img {
     width: 95px;
@@ -1375,3 +1375,164 @@ ul.order-summary-list li:last-child {
 }
 
 /*=============  end checkout =========*/
+
+/*================================================ Interior Accessories Page ============================================*/
+.bg-white {
+    background-color: var(--white);
+}
+
+.sp-content-wrapper {
+    display: flex;
+    align-items: start;
+    gap: 20px;
+}
+
+.interior-content-left {
+    padding: 30px 23px;
+    background: #FFF;
+    max-width: 402px;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #DDD;
+}
+
+.interior-content-left h3 {
+    font-size: 25px;
+    font-weight: 700;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.interior-category-tabs .accordion-button {
+    padding: 15px 20px;
+    color: #272643;
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.interior-category-tabs .accordion-button:not(.collapsed) {
+    color: #272643;
+    background-color: #F5F5F5;
+    box-shadow: none;
+}
+
+
+.interior-category-content ul {
+    margin: 8px 0;
+}
+
+.interior-category-tabs .accordion-button {
+    background-color: #f5f5f5;
+}
+
+.interior-category-tabs .accordion-body {
+    padding: 0px 0px;
+}
+
+.interior-category-tabs .categories-item {
+    padding: 12px 22px;
+    width: 100%;
+    color: #5C5C5C;
+    font-size: 14px;
+    font-weight: 400;
+    text-transform: capitalize;
+}
+
+.interior-category-content ul {
+    margin: 10px 0px;
+}
+
+.interior-category-tabs .categories-item:hover {
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    text-transform: capitalize;
+}
+
+.categories-item.active {
+    background-color: #f5f5f5;
+    border-radius: 5px;
+}
+
+.interior-category-tabs .categories-item:hover {
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    color: #272643;
+    font-size: 14px;
+    font-weight: 400 !important;
+    text-transform: capitalize;
+}
+
+.interior-content-right {
+    border-radius: 5px;
+    border: 1px solid #DDD;
+    padding: 20px 20px;
+    width: 100%;
+    background: #F5F5F5;
+}
+
+.interior-content-heading {
+    color: #272643;
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.interior-content-left .accordion-item {
+    border: none;
+    margin-top: 15px;
+}
+
+.accessories-parts-box .product-cards-img {
+    width: 152px;
+    height: 152px;
+}
+
+.accessories-parts-box .pro-dealer-box {
+    padding: 0px;
+    width: 100%;
+}
+
+.accessories-parts-box .pro-dealer-box h4 {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--gray-color);
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border-top: 1px solid #E9ECEF;
+    padding-top: 10px;
+}
+
+.interior-content-right .pagination-wrapper {
+    margin-top: 26px;
+}
+
+.accessories-parts-box .more-product-cards {
+    max-width: unset;
+}
+
+.accessories-parts-box .pro-dealer-box h4 {
+    font-size: 14px;
+    color: var(--gray-color);
+    border-radius: 0;
+}
+
+.accessories-parts-box .dealer-img-txt h5 {
+    font-size: 14px;
+}
+
+.accessories-parts-box .dealer-img-txt p {
+    font-size: 12px;
+}
+
+.accessories-parts-box .dealer-img-box {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+}
+
+.accessories-parts-box .pro-dealer-info {
+    gap: 10px;
+}
+
+/*================================================ Interior Accessories Page ============================================*/

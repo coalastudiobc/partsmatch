@@ -4,9 +4,9 @@
         $("#reset_password").find('button').attr('disabled', false);
         const rules = {
             email: {
-                required: true,
-                //email: true,
-                regex: emailRegex,
+                // required: true,
+                // //email: true,
+                // regex: emailRegex,
             },
             password: {
                 required: true,
@@ -21,9 +21,9 @@
         const messages = {
 
             email: {
-                required: `{{ __('customvalidation.login.email.required') }}`,
-                //email: `{{ __('customvalidation.login.email.email') }}`,
-                regex: `{{ __('customvalidation.login.email.regex', ['regex' => '${emailRegex}']) }}`,
+                // required: `{{ __('customvalidation.login.email.required') }}`,
+                // //email: `{{ __('customvalidation.login.email.email') }}`,
+                // regex: `{{ __('customvalidation.login.email.regex', ['regex' => '${emailRegex}']) }}`,
             },
             password: {
                 required: `{{ __('customvalidation.login.password.required') }}`,

@@ -41,7 +41,8 @@ class CartController extends Controller
             ];
             CartProduct::create($cart_product);
 
-            return response()->json(['success' => true, 'msg' => "Cart added successfully"]);
+            $cart_icon = view('components.cart-icon')->render();
+            return response()->json(['success' => true, 'cart_icon' => $cart_icon, 'msg' => "Cart added successfully"]);
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
@@ -58,7 +59,8 @@ class CartController extends Controller
         $shippingCharge = AdminSetting::where('name', 'shipping_charge')->first();
 
         $cart = view('components.cart-component', compact('carts', 'totalamount', 'shippingCharge'))->render();
-        $data = ['success' => true, 'cart' => $cart];
+        $cart_icon = view('components.cart-icon')->render();
+        $data = ['success' => true, 'cart_icon' => $cart_icon, 'cart' => $cart];
         return response()->json($data);
     }
 

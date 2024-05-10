@@ -37,4 +37,11 @@ class Category extends Model
             });
         })->get();
     }
+
+    public function children()
+    {
+        // $test = ->get();
+        // dd($test, $this->id);
+        return $this->hasMany(self::class, 'parent_id');
+    }
 }

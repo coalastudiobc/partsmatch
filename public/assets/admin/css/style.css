@@ -1480,3 +1480,9 @@ span.doller-symbol-txt.symbol {
     background-color: var(--secondary-color);
     color: var(--white);
 }
+
+.product-detail-table tr td .pro-status .dropdown .badge {
+    color: #219653;
+    background-color: #ECFEF3;
+    cursor: pointer;
+}

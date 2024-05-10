@@ -75,16 +75,11 @@
                                 </ul>
                             @endguest
                             @auth
+
                                 <ul class="navbar-nav">
-                                    <li class="nav-item">
-                                        <a class="nav-link" aria-current="page"
-                                            href="{{ route('dealer.cart.cart.index') }}">
-                                            <div class="nav-msg-icon">
-                                                <p class="">{{ count(auth()->user()->cart) }}</p>
-                                                <img src="{{ asset('assets/images/cart.png') }}" alt="img">
-                                            </div>
-                                        </a>
-                                    </li>
+                                    <div class="cart-icon">
+                                        @include('components.cart-icon')
+                                    </div>
                                     <li>
                                         <div class="nav-profile">
                                             <div class="nav-profile-img">

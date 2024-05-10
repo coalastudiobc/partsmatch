@@ -28,7 +28,9 @@ Route::get('/', function () {
         return redirect()->route('welcome.index');
 })->name('welcome');
 
-Route::get('welcome', [HomeController::class, 'index'])->name('welcome.index');
+Route::match(['get', 'post'], 'welcome/{subcategory?}/{category?}', [HomeController::class, 'index'])->name('welcome.index');
+Route::get('category', [HomeController::class, 'categoryCard'])->name('categories');
+
 Route::get('redirect-to-dashboard', [HomeController::class, 'redirectToDashboard'])->name('redirect-to-dashboard');
 Route::get('verify-email/{user}/{token}', [RegisterController::class, 'verifyEmail'])->name('verify-email');
 

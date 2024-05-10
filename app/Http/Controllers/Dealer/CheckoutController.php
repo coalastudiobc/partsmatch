@@ -127,7 +127,7 @@ class CheckoutController extends Controller
                 'metadata' => [
                     'order_id' => $order->id, // Add your custom order ID as metadata
                 ],
-                'return_url' => route('dealer.order.orderlist')
+                'return_url' => route('dealer.myorder.orderlist')
             ]);
             DB::commit();
 
@@ -157,10 +157,9 @@ class CheckoutController extends Controller
             //     // ],
             // ]);
             // dd($intent);
-            return redirect()->route('dealer.order.orderlist');
+            return redirect()->route('dealer.myorder.orderlist');
         } catch (Exception $e) {
             DB::rollback();
-
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
@@ -169,8 +168,8 @@ class CheckoutController extends Controller
     {
         $user = auth()->user();
         $data = $user->shippingAddress;
-        $order_item = Orderitem::with('product', 'order')->whereRelation('order', 'orders.user_id', auth()->id())->orderByDesc('id')->get();
+        $order_item = Orderitem::with('product', 'order')->whereRelation('order', 'orders.user_id', auth()->id())->orderByDesc('id')->paginate(10);
         // dd($order_item->toArray());
-        return view('dealer.order.order_list', compact('order_item'));
+        return view('dealer.myorder.order_list', compact('order_item'));
     }
 }

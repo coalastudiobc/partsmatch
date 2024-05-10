@@ -281,6 +281,7 @@
                 }
                 reader.readAsDataURL(this.files[0]);
             }
+            jQuery('.errorViewer').text('');
         });
 
         $('form#register').on('submit', function(e) {
@@ -297,7 +298,8 @@
                 var selectitem = jQuery(this).attr('data-value')
                 jQuery('#selectedItem').text(selectitem)
                 jQuery(document).find('input[name="industry_type"]').val(selectitem);
-
+                jQuery(document).find('input[name="industry_type"]').removeClass('is-invalid');
+                jQuery('.errorViewer').text('');
             })
         });
     </script>
