@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dealer;
 
 use App\Http\Controllers\Controller;
 use App\Models\AdminSetting;
+use App\Models\Cart;
 use App\Models\Category;
 use App\Models\FeaturedProduct;
 use App\Models\Product;
@@ -197,10 +198,13 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+        // Cart::where('product_id', $product->id)->first();
         $featureproduct = FeaturedProduct::where('product_id', $product->id)->first();
         $images = ProductImage::where('product_id', $product->id)->get();
         // dd($images->toArray());
-        $featureproduct->delete();
+        if ($featureproduct) {
+            $featureproduct->delete();
+        }
         foreach ($images as $image) {
             Storage::disk('public')->delete('products/images', $image->file_url);
             $image->delete();
