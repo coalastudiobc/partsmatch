@@ -47,6 +47,6 @@ class Category extends Model
 
     public function products()
     {
-        return $this->hasMany(Product::class, 'subcategory_id', 'id');
+        return $this->hasMany(Product::class, 'subcategory_id', 'id')->limit(5);
     }
 }

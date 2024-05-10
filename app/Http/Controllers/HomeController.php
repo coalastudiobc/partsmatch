@@ -32,8 +32,8 @@ class HomeController extends Controller
     {
         // dd('home', $subcategory_id);
         $category = Category::where('status', '1')->get();
-        $collections = Category::with('products')->where('parent_id', '!=', null)->where('status', '1')->inRandomOrder()->limit(5)->get();
-        $subcategories = Category::with('products')->where('parent_id', '!=', null)->where('status', '1')->inRandomOrder()->limit(5)->get();
+        $collections = Category::with('products')->where('parent_id', '!=', null)->where('status', '1')->inRandomOrder()->get();
+        $subcategories = Category::with('products')->where('parent_id', '!=', null)->where('status', '1')->inRandomOrder()->get();
 
         // if ($subcategory_id == null) {
         //     $products = Product::with('productImage')->where('status', '1')->inRandomOrder()->limit(4)->get();
