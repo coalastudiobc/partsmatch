@@ -108,9 +108,12 @@ if (!function_exists('authCartProducts')) {
     function authCartProducts()
     {
         $cart = Cart::where('user_id', auth()->user()->id)->first();
-        $cartItems = CartProduct::where('cart_id', $cart->id)->get()->pluck('product_id');
-        $cart_products = $cartItems ? $cartItems->toArray()     : [];
-        return $cart_products;
+        if ($cart) {
+            $cartItems = CartProduct::where('cart_id', $cart->id)->get()->pluck('product_id');
+            $cart_products = $cartItems ? $cartItems->toArray()     : [];
+            return $cart_products;
+        }
+        return [];
     }
 }
 // if (!function_exists('get_country')) {
