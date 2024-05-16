@@ -13,6 +13,7 @@ use App\Models\User;
 use GrahamCampbell\ResultType\Success;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
@@ -20,8 +21,36 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public $sdk;
+    public function __construct()
+    {
+        $this->sdk = \CarApiSdk\CarApi::build([
+            'token' => "5cfff17f-9363-494e-bafc-5c65ce9f0c4c",
+            'secret' => "fcaa1162aca998a01f3a0c937e669385",
+        ]);
+
+        $filePath = asset('text.txt');
+        $jwt = file_get_contents($filePath);
+        // if (empty($jwt) || $this->sdk->loadJwt($jwt)->isJwtExpired() !== false) {
+        //     try {
+        $jwt = $this->sdk->authenticate();
+        dd($jwt, "here");
+        //         file_put_contents($filePath, $jwt);
+        //     } catch (\CarApiSdk\CarApiException $e) {
+        //         // handle errors here
+        //         Log::channel('daily')->info("error:" . $e->getMessage());
+        //     }
+        // }
+    }
     public function index()
     {
+        // $sdk = \CarApiSdk\CarApi::build([
+        //     'token' => env('CAR_API_KEY'),
+        //     'secret' => env('CAR_API_SECRET'),
+        // ]);
+        dd($this->sdk);
+        $years = $this->sdk->years();
+
         $products = Product::with('productImage', 'featuredProduct')->where('user_id', auth()->user()->id)->Search()->Paginate(5);
 
         // $subscription =  DB::table('subscriptions')->where('user_id', auth()->user()->id)->first();
