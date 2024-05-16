@@ -138,14 +138,15 @@
                                     <div class="pro-dealer-info">
                                         <div class="pro-dealer-img-box">
                                             <div class="dealer-img-box">
-                                                <img src="{{ Storage::url($user->profile_picture_url) }}" alt="">
+                                                <img src="{{ Storage::url($userdetails->profile_picture_url) }}"
+                                                    alt="">
                                             </div>
                                             <div class="dealer-img-txt">
-                                                <h5>{{ $user->name }}</h5>
-                                                <p>{{ $user->email }}</p>
+                                                <h5>{{ $userdetails->name }}</h5>
+                                                <p>{{ $userdetails->email }}</p>
                                             </div>
                                         </div>
-                                        <a @if (auth()->user()) href="{{ route('dealer.view.profile', $user->id) }}" @else href="javascript:void(0)" @endif
+                                        <a @if (auth()->user()) href="{{ route('dealer.view.profile', $userdetails->id) }}" @else href="javascript:void(0)" @endif
                                             class="btn secondary-btn">View
                                             Profile</a>
                                     </div>

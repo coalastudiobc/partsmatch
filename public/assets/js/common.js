@@ -117,7 +117,7 @@ function handleValidation(form, rules, messages = {}, submitHandler = false) {
                 label.insertAfter($(element).parent())
             } else if (jQuery(element).hasClass('custom_input')) {
                 console.log($(element).parent());
-                $(element).parent().parent().find('.errorViewer').html(label);
+                $(element).parent().parent().find('.errorViewers').html(label);
             } else if (jQuery(element).hasClass('custom_input_image')) {
                 $(element).parent().parent().parent().find('.errorViewer').html(label);
             }

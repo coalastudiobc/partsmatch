@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ChangePasswordRequest;
+use App\Models\Cart;
+use App\Models\CartProduct;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -32,21 +35,10 @@ class HomeController extends Controller
     {
         // dd('home', $subcategory_id);
         $category = Category::where('status', '1')->get();
-        $collections = Category::with('products')->where('parent_id', '!=', null)->where('status', '1')->inRandomOrder()->get();
+        $collections = Category::with('products.cartProduct')->where('parent_id', '!=', null)->where('status', '1')->inRandomOrder()->get();
         $subcategories = Category::with('products')->where('parent_id', '!=', null)->where('status', '1')->inRandomOrder()->get();
 
-        // if ($subcategory_id == null) {
-        //     $products = Product::with('productImage')->where('status', '1')->inRandomOrder()->limit(4)->get();
-        //     $randomproducts = Product::with('productImage')->where('status', '1')->inRandomOrder()->limit(4)->get();
-        // } else {
-        //     $products = Product::with('productImage')->where('status', '1')->where('subcategory_id', $subcategory_id)->inRandomOrder()->limit(4)->get();
-        //     $randomproducts = Product::with('productImage')->where('status', '1')->where('subcategory_id', $subcategory_id)->inRandomOrder()->limit(4)->get();
-        //     $homeProduct = view('components.home-product', compact('products'))->render();
-        //     $homerandomProducts = view('components.home-product-tab', compact('randomproducts'))->render();
-        //     return response()->json(['success' => true, 'homeProducts' => $homeProduct, 'homerandomProducts' => $homerandomProducts]);
-        // }
-
-        return view('welcome', compact('category', 'subcategories', 'collections'));
+        return view('welcome', compact('category', 'subcategories', 'collections', "subcategory_id"));
     }
     public function categoryCard()
     {

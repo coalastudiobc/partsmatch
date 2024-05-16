@@ -214,7 +214,7 @@
 
 
                                                 </div>
-                                                <div class="errorViewer"></div>
+                                                <div class="errorViewers"></div>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -299,7 +299,7 @@
                 jQuery('#selectedItem').text(selectitem)
                 jQuery(document).find('input[name="industry_type"]').val(selectitem);
                 jQuery(document).find('input[name="industry_type"]').removeClass('is-invalid');
-                jQuery('.errorViewer').text('');
+                jQuery('.errorViewers').text('');
             })
         });
     </script>

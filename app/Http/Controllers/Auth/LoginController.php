@@ -52,7 +52,7 @@ class LoginController extends Controller
     {
         if ($user->status == "INACTIVE") {
             Auth::logout();
-            return redirect()->back()->with(['status' => 'restricted', 'msg' => 'your account has been suspended by admin']);
+            return redirect()->back()->with(['status' => 'restricted', 'message' => 'your account has been suspended by admin']);
         } else {
             return redirect($this->redirectTo);
         }

@@ -12,6 +12,8 @@
                 required: true,
                 minlength: passwordMinLength,
                 maxlength: passwordMaxLength,
+                regex: passwordRegex,
+
             },
             password_confirmation: {
                 required: true,
@@ -29,6 +31,7 @@
                 required: `{{ __('customvalidation.login.password.required') }}`,
                 minlength: `{{ __('customvalidation.login.password.min', ['min' => '${passwordMinLength}', 'max' => '${passwordMaxLength}']) }}`,
                 maxlength: `{{ __('customvalidation.login.password.max', ['min' => '${passwordMinLength}', 'max' => '${passwordMaxLength}']) }}`,
+                regex: `{{ __('customvalidation.user.password.regex', ['regex' => '${passwordRegex}']) }}`,
             },
             password_confirmation: {
                 required: `{{ __('customvalidation.login.password_confirmation.required') }}`,

@@ -2,7 +2,9 @@
 
 namespace App\Observers;
 
+use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Product;
 
 class OrderItemObserver
 {
@@ -11,7 +13,20 @@ class OrderItemObserver
      */
     public function created(OrderItem $orderItem): void
     {
-        // dd($orderItem);
+        $order = Order::where('id', $orderItem->order_id)->first();
+        $orderProducts = orderItem::where('order_id', $order->id)->get();
+        $total = 0;
+        foreach ($orderProducts as $orderProduct) {
+            $total += $orderProduct->quantity * $orderProduct->product_price;
+        }
+        $order->update([
+            'total_amount' => $total,
+        ]);
+
+        $product = Product::where('id', $orderItem->product_id)->first();
+
+        $quantity = $product->stocks_avaliable - $orderItem->quantity;
+        $product->update(['stocks_avaliable' => $quantity]);
     }
 
     /**
@@ -19,7 +34,15 @@ class OrderItemObserver
      */
     public function updated(OrderItem $orderItem): void
     {
-        //
+        // $order = Order::where('id', $orderItem->order_id)->first();
+        // $orderProducts = orderItem::where('order_id', $order->id)->get();
+        // $total = 0;
+        // foreach ($orderProducts as $orderProduct) {
+        //     $total += $orderProduct->quantity * $orderProduct->product_price;
+        // }
+        // $order->update([
+        //     'total_amount' => $total,
+        // ]);
     }
 
     /**

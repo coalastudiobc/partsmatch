@@ -60,8 +60,8 @@ Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer'
     Route::name('cart.')->group(function () {
         Route::get('cart/index', [CartController::class, 'index'])->name('cart.index');
         Route::post('add/to/cart/{product_id}', [CartController::class, 'addToCart'])->name('cart');
-        Route::get('delete/to/cart/{cart_id}', [CartController::class, 'removeFromCart'])->name('remove');
-        Route::post('update/to/cart/{cart_id}/{product_id}', [CartController::class, 'updateToCart'])->name('update');
+        Route::get('delete/to/cart/{product}', [CartController::class, 'removeFromCart'])->name('remove');
+        Route::post('update/to/cart/{product}', [CartController::class, 'updateToCart'])->name('update');
     });
     Route::name('checkout.')->group(function () {
         Route::get('checkout/create', [CheckoutController::class, 'create'])->name('create');

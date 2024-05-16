@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('shipping_addresses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('order_id')->constrained('orders');
             $table->foreignId('country_id');
             $table->foreignId('state_id');
             $table->foreignId('city_id');

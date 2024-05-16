@@ -263,9 +263,11 @@
                         </defs>
                     </svg>
                 </a>
+
                 <div>
                     <div class="slick-tab ">
                         @foreach ($collections as $collection)
+                            {{-- @dump($collection, $products) --}}
                             <a href="javascript:void(0)"
                                 data-url="{{ route('dealer.products.interior', ['category' => $collection->id]) }}"
                                 data-id = "{{ $collection->id }}"
@@ -312,7 +314,8 @@
                             <li class="nav-item {{ $loop->first ? 'active' : '' }}" role="presentation">
                                 <button
                                     data-url="{{ route('dealer.products.interior', ['category' => $subcategory->id]) }}"
-                                    data-id = "{{ $subcategory->id }}" class="nav-link navButton productsubcategory"
+                                    data-id = "{{ $subcategory->id }}"
+                                    class="nav-link navButton productsubcategory {{ $loop->first ? 'active' : '' }}"
                                     type="button">{{ $subcategory->name }}</button>
                             </li>
                         @endforeach
@@ -485,7 +488,7 @@
 
 
     $(document).ready(function() {
-        $('.addtocart').on('click', function() {
+        $(document).on('click', '.addtocart', function() {
             console.log('hrerererer');
             var product_id = $(this).attr('product-id')
             url = APP_URL + '/dealer/add/to/cart/' + product_id
@@ -512,6 +515,7 @@
 
         $('.collectionSubcategory').on('click', function() {
             console.log('here');
+            element = jQuery(this);
             dataUrl = $(this).attr('data-url');
             jQuery('#collectioViewAll').attr('href', dataUrl);
             id = $(this).attr('data-id');
@@ -522,6 +526,8 @@
             function handleCategoriezedData(response) {
                 if (response.status == true) {
                     jQuery('.productIndex').html(response.data)
+                    jQuery('.collectionSubcategory').removeClass('active');
+                    element.addClass('active');
                 } else {
                     console.log('error', response.message)
                 }
@@ -535,6 +541,7 @@
 
         $('.productsubcategory').on('click', function() {
             console.log('here');
+            element = jQuery(this)
             dataUrl = $(this).attr('data-url');
             jQuery('#subcategoryViewAll').attr('href', dataUrl);
             id = $(this).attr('data-id');
@@ -545,6 +552,8 @@
             function handleCategoriezedData(response) {
                 if (response.status == true) {
                     jQuery('.tabProduct').html(response.data)
+                    jQuery('.productsubcategory').removeClass('active');
+                    element.addClass('active');
                 } else {
                     console.log('error', response.message)
                 }

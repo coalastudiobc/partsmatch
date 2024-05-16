@@ -652,7 +652,7 @@ header {
     text-align: center;
     line-height: 1;
     color: #5C5C5C;
-
+    margin: 0;
     margin-bottom: 13px;
 }
 
@@ -1512,15 +1512,64 @@ button.btn-close {
     min-height: 400px;
 }
 
-
-.heading-with-tab .heading-tab .nav-item .nav-link {
-    border-bottom: 3px solid transparent !important;
-}
-
 .heading-with-tab .heading-tab .nav-item .nav-link:hover {
     border-bottom: 3px solid #000 !important;
 }
 
 button.nav-link.navButton.active {
     border-bottom: 3px solid #000 !important;
+}
+
+
+
+
+/* loader */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body,
+html {
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    /* Ensure it stays on top */
+}
+
+.loader {
+    border: 16px solid #f3f3f3;
+    border-top: 16px solid #3498db;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.delivery-form .custm-dropdown .dropdown .dropdown-menu {
+    max-height: 300px !important;
 }

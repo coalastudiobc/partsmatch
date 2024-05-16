@@ -16,44 +16,51 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($carts as $cart)
-                                    {{-- @dd($cart) --}}
-                                    <tr>
-                                        <td>
-                                            <div class="cart-product-image">
-                                                <img src="{{ isset($cart->cart_product->product->productImage[0]) ? Storage::url($cart->cart_product->product->productImage[0]->file_url) : '' }}"
-                                                    alt="">
-                                            </div>
-                                        </td>
-                                        <td>{{ $cart->cart_product->product->name ?? '' }}</td>
-                                        <td>{{ $cart->cart_product->product->price ?? '' }} </td>
-                                        <td>
-                                            <div class="product-quantity-box">
-                                                <div class="quantity-btn quantity-brd">
-                                                    @if (isset($cart->cart_product) && $cart->cart_product->quantity != 1)
-                                                        <a href="javascript:void(0)" class="minus cartupdateminus"
-                                                            cartid="{{ $cart->id }}"
-                                                            product-id="{{ $cart->cart_product->product->id }}">-</a>
-                                                    @endif
-                                                    <input type="text" name="quantity" class="quantity"
-                                                        value="{{ $cart->cart_product->quantity ?? '' }}"
-                                                        placeholder="">
-                                                    <a href="javascript:void(0)" class="plus cartupdateplus"
-                                                        cartid="{{ $cart->id }}"
-                                                        product-id="{{ $cart->cart_product->product->id ?? '' }}"
-                                                        productQuantity="{{ $cart->cart_product->product->stocks_avaliable ?? '' }}">+</a>
+                                @if (isset($cart->cartProducts))
+                                    @forelse ($cart->cartProducts as $product)
+                                        <tr>
+                                            <td>
+                                                <div class="cart-product-image">
+                                                    <img src="{{ isset($product->product->productImage[0]) ? Storage::url($product->product->productImage[0]->file_url) : '' }}"
+                                                        alt="">
                                                 </div>
-                                            </div>
-                                        </td>
-                                        <td class="total">{{ $cart->amount }}
-                                        </td>
-                                        <td> <a cart_id="{{ $cart->id }}" href="javascript:void(0)"
-                                                class="cartDelete"><i style="color: #E13F3F;"
-                                                    class="fa-regular fa-trash-can"></i></a></td>
-                                    </tr>
-                                @empty
-                                    {{-- <div>no cart</div> --}}
-                                @endforelse
+                                            </td>
+                                            <td>{{ $product->product ? $product->product->name : '' }}</td>
+                                            <td>{{ $product->product ? $product->product->price : '' }} </td>
+                                            <td>
+                                                <div class="product-quantity-box">
+                                                    <div class="quantity-btn quantity-brd">
+                                                        @if ($product->quantity != 1)
+                                                            <a href="javascript:void(0)" class="minus cartupdate"
+                                                                data-product_id="{{ $product->id }}"
+                                                                data_quantity_id="{{ '#quantity' . $product->id }}"
+                                                                data-stocks="{{ $product->product ? $product->product->stocks_avaliable : '' }}">-</a>
+                                                        @endif
+                                                        <input type="text" name="quantity" class="quantity"
+                                                            id="{{ 'quantity' . $product->id }}"
+                                                            value="{{ $product->quantity ?? '' }}"
+                                                            data-product_id="{{ $product->id }}"
+                                                            data_quantity_id="{{ '#quantity' . $product->id }}"
+                                                            placeholder="">
+                                                        <a href="javascript:void(0)" class="plus cartupdate"
+                                                            data-product_id="{{ $product->id }}"
+                                                            data_quantity_id="{{ '#quantity' . $product->id }}"
+                                                            data-stocks="{{ $product->product ? $product->product->stocks_avaliable : '' }}">+</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="total">{{ $product->quantity * $product->product->price }}
+                                            </td>
+                                            <td> <a data-product_id="{{ $product->id }}" href="javascript:void(0)"
+                                                    class="cartDelete"><i style="color: #E13F3F;"
+                                                        class="fa-regular fa-trash-can"></i></a></td>
+                                        </tr>
+                                    @empty
+                                        <div class="empty-data">no cart</div>
+                                    @endforelse
+                                @else
+                                    <p class="empty-data">No product in the cart</p>
+                                @endif
                                 {{-- <tr>
                                             <td>
                                                 <div class="cart-product-image">
@@ -90,7 +97,8 @@
                 <div class="cart-box-content">
                     <div class="cart-wrapper">
                         <p class="cart-txt">SubTotal</p>
-                        <p class="price-txt">{{ number_format($totalamount, 2, '.', ',') }}</p>
+                        <p class="price-txt">
+                            {{ isset($cart->amount) ? number_format($cart->amount, 2, '.', ',') : '' }}</p>
                     </div>
                     <div class="cart-wrapper">
                         <p class="cart-txt">Shipping</p>
@@ -98,7 +106,8 @@
                     </div>
                     <div class="sub-total-wrapper">
                         <h3>Payable Total</h3>
-                        <h3>{{ number_format($totalamount + $shippingCharge->value, 2, '.', ',') }}</h3>
+                        <h3>{{ isset($cart->amount) ? number_format($cart->amount + $shippingCharge->value, 2, '.', ',') : '' }}
+                        </h3>
                     </div>
                 </div>
 

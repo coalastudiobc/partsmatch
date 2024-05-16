@@ -19,7 +19,7 @@
                     <table class="table">
                         <tr>
                             <th>
-                                <p>Product Name</p>
+                                <p>Total product</p>
                             </th>
                             <th>
                                 <p>Ammont</p>
@@ -35,17 +35,19 @@
                                 <p>Status</p>
                             </th>
                         </tr>
-                        @forelse ($orders as $order)
-                            {{-- @dd($order->toArray()) --}}
+                        {{-- @forelse ($orders as $order) --}}
+                        {{-- @dd($order->toArray()) --}}
+                        @if ($order)
                             <tr>
                                 <td>
                                     <div class="pro-list-name">
                                         {{-- <input type="checkbox" class="custm-check" class="custm-check"> --}}
-                                        <h4>{{ $order->product->name }}</h4>
+                                        <h4>{{ count($order->orderItem) }}</h4>
                                     </div>
                                 </td>
+
                                 <td>
-                                    <p>{{ $order->order->total_amount }}</p>
+                                    <p>{{ $order->total_amount }}</p>
                                 </td>
                                 <td>
                                     <p>{{ date('d-m-Y', strtotime($order->created_at)) }}</p>
@@ -117,9 +119,11 @@
                                     </div>
                                 </td>
                             </tr>
-                        @empty
+                        @else
                             <p class="empty-data">Did not found any order</p>
-                        @endforelse
+                            {{-- @empty
+                                @endforelse --}}
+                        @endif
                     </table>
                 </div>
             </div>
@@ -148,7 +152,7 @@
                     <i class="fa-solid fa-angle-right"></i>
                 </div> --}}
             {{-- </div> --}}
-            {!! $orders->links('dealer.pagination') !!}
+            {{-- {!! $orders->links('dealer.pagination') !!} --}}
         </div>
     </div>
 @endsection

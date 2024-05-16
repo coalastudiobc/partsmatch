@@ -14,6 +14,11 @@ class CartProductObserver
      */
     public function created(CartProduct $cartProduct): void
     {
+        $cart = Cart::where('id', $cartProduct->cart_id)->first();
+        $totalamount = ($cartProduct->quantity * $cartProduct->product_price) + $cart->amount;
+        $cart->update([
+            'amount' => $totalamount,
+        ]);
     }
 
     /**
@@ -23,11 +28,13 @@ class CartProductObserver
     {
         // if (request()->dataquantity == 'plusQuantity') {
         $cart = Cart::where('id', $cartProduct->cart_id)->first();
-        $totalamount = $cartProduct->quantity * $cartProduct->product_price;
+        $cartProducts = CartProduct::where('cart_id', $cart->id)->get();
+        $total = 0;
+        foreach ($cartProducts as $cartProduct) {
+            $total += $cartProduct->quantity * $cartProduct->product_price;
+        }
         $cart->update([
-            'user_id' => auth()->user()->id,
-            'amount' => $totalamount,
-            'status' => $cart->status
+            'amount' => $total,
         ]);
 
 
@@ -48,7 +55,11 @@ class CartProductObserver
      */
     public function deleted(CartProduct $cartProduct): void
     {
-        //
+        $cart = Cart::where('id', $cartProduct->cart_id)->first();
+        $totalamount = $cart->amount -  ($cartProduct->quantity * $cartProduct->product_price);
+        $cart->update([
+            'amount' => $totalamount,
+        ]);
     }
 
     /**

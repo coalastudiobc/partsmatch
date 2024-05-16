@@ -23,34 +23,34 @@
                     <table class="table">
                         <tr>
                             <th>OrderId</th>
-                            <th>Product</th>
+                            <th>Total product</th>
                             <th>Total price</th>
                             <th>Quantity</th>
                             <th>Date</th>
                             <th>Status</th>
                         </tr>
 
-                        @forelse ($order_item as $data)
+                        @forelse ($orders as $key => $order)
                             <tr>
                                 <td>
                                     <div class="pro-list-name">
                                         {{-- <input type="checkbox" class="custm-check" class="custm-check"> --}}
-                                        <h4>{{ $data->order_id }}</h4>
+                                        <h4>{{ $order->id }}</h4>
                                     </div>
                                 </td>
                                 <td>
-                                    <p>{{ $data->product->name }}</p>
+                                    <p>{{ count($order->orderItem) }}</p>
                                 </td>
                                 <td>
-                                    <p>{{ $data->order->total_amount }}</p>
+                                    <p>{{ $order->total_amount }}</p>
                                 </td>
 
                                 <td>
-                                    <p>{{ $data->quantity }}</p>
+                                    {{-- <p>{{ $order->orderItem->quantity }}</p> --}}
 
                                 </td>
                                 <td>
-                                    <p>{{ date('d-m-Y', strtotime($data->created_at)) }}</p>
+                                    <p>{{ date('d-m-Y', strtotime($order->created_at)) }}</p>
                                 </td>
 
                                 <td>
@@ -145,7 +145,7 @@
                                     <i class="fa-solid fa-angle-right"></i>
                                 </div>
                             </div> --}}
-            {!! $order_item->links('dealer.pagination') !!}
+            {!! $orders->links('dealer.pagination') !!}
         </div>
     </div>
     {{-- </div>

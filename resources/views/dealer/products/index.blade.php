@@ -210,7 +210,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">Product Quantity</label>
+                                    <label for="">Product Quantity*</label>
                                     <div class="form-field">
                                         <input type="text" name="stocks_avaliable" class="form-control"
                                             placeholder="Product Quantity">

@@ -28,6 +28,9 @@
 </head>
 
 <body>
+    <div id="overlay">
+        <div id="loader"></div>
+    </div>
     <header>
         <div class="custm-nav">
             <div class="container">

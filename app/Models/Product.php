@@ -30,6 +30,10 @@ class Product extends Model
         return $this->belongsTo(Category::class, 'subcategory_id');
     }
 
+    public function cartProduct()
+    {
+        return $this->belongsTo(CartProduct::class, 'id', 'product_id');
+    }
     public function scopeSearch($query)
     {
         $request = request();

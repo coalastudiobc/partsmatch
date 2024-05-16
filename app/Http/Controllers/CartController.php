@@ -6,17 +6,17 @@ use App\Models\AdminSetting;
 use App\Models\Cart;
 use App\Models\CartProduct;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
     public function index()
     {
-        $carts =  Cart::with('cart_product.product.productImage')->where('user_id', auth()->user()->id)->get();
-        $totalamount = Cart::where('user_id', auth()->user()->id)->sum('amount');
+        $cart =  Cart::with('cartProducts', 'cartProducts.product', 'cartProducts.product.productImage')->where('user_id', auth()->id())->first();
         $shippingCharge = AdminSetting::where('name', 'shipping_charge')->first();
-
-        return view('dealer.cart.index', compact('carts', 'totalamount', 'shippingCharge'));
+        $user =  User::with('cart', 'cart.cartProducts')->where('id', auth()->user()->id)->first();
+        return view('dealer.cart.index', compact('cart', 'shippingCharge', 'user'));
     }
 
     public function cart()
@@ -27,12 +27,16 @@ class CartController extends Controller
     {
         try {
             $product = Product::where('id', $product_id)->first();
-            $cart = [
-                'user_id' => auth()->user()->id,
-                'amount' => $product->price,
-                'status' => 1,
-            ];
-            $cart = Cart::create($cart);
+
+            $cart = Cart::where('user_id', auth()->id())->first();
+            if (!$cart) {
+                $cart = [
+                    'user_id' => auth()->user()->id,
+                    'amount' => null,
+                    'status' => 1,
+                ];
+                $cart = Cart::create($cart);
+            }
             $cart_product = [
                 'product_id' => $product->id,
                 'cart_id' => $cart->id,
@@ -41,84 +45,51 @@ class CartController extends Controller
             ];
             CartProduct::create($cart_product);
 
-            $cart_icon = view('components.cart-icon')->render();
+            $user =  User::with('cart', 'cart.cartProducts')->where('id', auth()->user()->id)->first();
+
+
+            $cart_icon = view('components.cart-icon', compact('user'))->render();
             return response()->json(['success' => true, 'cart_icon' => $cart_icon, 'msg' => "Cart added successfully"]);
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
 
-    public function removeFromCart(Cart $cart_id)
+    public function removeFromCart(CartProduct $product)
     {
-        $cartproduct = CartProduct::where('cart_id', $cart_id->id)->first();
-        $cartproduct->delete();
-        $cart_id->delete();
+        $product->delete();
 
-        $carts =  Cart::where('user_id', auth()->user()->id)->with('cart_product.product.productImage')->get();
-        $totalamount = Cart::where('user_id', auth()->user()->id)->sum('amount');
+        $cart =  Cart::with('cartProducts', 'cartProducts.product', 'cartProducts.product.productImage')->where('user_id', auth()->id())->first();
         $shippingCharge = AdminSetting::where('name', 'shipping_charge')->first();
-
-        $cart = view('components.cart-component', compact('carts', 'totalamount', 'shippingCharge'))->render();
-        $cart_icon = view('components.cart-icon')->render();
+        $user =  User::with('cart', 'cart.cartProducts')->where('id', auth()->user()->id)->first();
+        $cart = view('components.cart-component', compact('cart', 'shippingCharge'))->render();
+        $cart_icon = view('components.cart-icon', compact('user'))->render();
         $data = ['success' => true, 'cart_icon' => $cart_icon, 'cart' => $cart];
         return response()->json($data);
     }
 
-    public function updateToCart(Request $request, Cart $cart_id, Product $product_id)
+    public function updateToCart(Request $request,  CartProduct $product)
     {
         try {
-            if ($request->quantity <= $product_id->stocks_avaliable) {
+            $productDetails = Product::find($product->product_id);
 
-                // if ($request->dataquantity == "plusQuantity") {
-
-                // $totalamount = $request->quantity * $product_id->price;
-                // $cart = [
-                //     'user_id' => auth()->user()->id,
-                //     'amount' => $totalamount,
-                //     'status' => 1,
-                // ];
-                // $cart = $cart_id->update($cart);
-
-                $cartProduct = CartProduct::where('cart_id', $cart_id->id)->first();
-                $cart_product = [
-                    'product_id' => $product_id->id,
-                    'cart_id' => $cart_id->id,
-                    'quantity' => $request->quantity,
-                    'product_price' => $product_id->price,
-                ];
-                $cartProduct->update($cart_product);
-                // }
-                //  elseif ($request->dataquantity == 'minusQuantity') {
-
-                //     $totalamount = $cart_id->amount - $product_id->price;
-                //     $cart = [
-                //         'user_id' => auth()->user()->id,
-                //         'amount' => $totalamount,
-                //         'status' => 1,
-                //     ];
-                //     $cart = $cart_id->update($cart);
-                //   
-                //     $cartProduct = CartProduct::where('cart_id', $cart_id->id)->first();
-                //     $cart_product = [
-                //         'product_id' => $product_id->id,
-                //         'cart_id' => $cart_id->id,
-                //         'quantity' => $request->quantity,
-                //         'product_price' => $product_id->price,
-                //     ];
-                //     $cartProduct->update($cart_product);
-                // }
-                $carts =  Cart::where('user_id', auth()->user()->id)->with('cart_product.product.productImage')->get();
-                $totalamount = Cart::where('user_id', auth()->user()->id)->sum('amount');
+            if (intval($request->quantity) <= intval($productDetails->stocks_avaliable)) {
+                $product->update(['quantity' => $request->quantity]);
+                $cart =  Cart::with('cartProducts', 'cartProducts.product', 'cartProducts.product.productImage')->where('user_id', auth()->id())->first();
                 $shippingCharge = AdminSetting::where('name', 'shipping_charge')->first();
-
-                $cart = view('components.cart-component', compact('carts', 'totalamount', 'shippingCharge'))->render();
-                $data = ['success' => true, 'cart' => $cart];
+                $cart = view('components.cart-component', compact('cart', 'shippingCharge'))->render();
+                $data = ['success' => true, 'cart' => $cart, 'status' => true, "message" => "product Quantity updated  successfully"];
                 return response()->json($data);
             } else {
-                return response()->json(['success' => false, 'message' => "Product not available"]);
+                $cart =  Cart::with('cartProducts', 'cartProducts.product', 'cartProducts.product.productImage')->where('user_id', auth()->id())->first();
+                $shippingCharge = AdminSetting::where('name', 'shipping_charge')->first();
+                $cart = view('components.cart-component', compact('cart', 'shippingCharge'))->render();
+                $data = ['success' => true, 'cart' => $cart, 'status' => false, 'message' => "stocks not available"];
+                return response()->json($data);
             }
         } catch (\Exception $e) {
-            return redirect()->back()->with('message', $e->getMessage());
+
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
         }
     }
 }

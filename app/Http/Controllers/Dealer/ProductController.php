@@ -201,7 +201,7 @@ class ProductController extends Controller
         // Cart::where('product_id', $product->id)->first();
         $featureproduct = FeaturedProduct::where('product_id', $product->id)->first();
         $images = ProductImage::where('product_id', $product->id)->get();
-        // dd($images->toArray());
+
         if ($featureproduct) {
             $featureproduct->delete();
         }
@@ -256,14 +256,15 @@ class ProductController extends Controller
 
     public function details(Product $product)
     {
-        $user = User::where('id', $product->user_id)->first();
+        $userdetails = User::where('id', $product->user_id)->first();
+
 
         $productImages = $product->productImage;
 
         $shippingCharge = AdminSetting::where('name', 'shipping_charge')->first();
-        $allproducts = Product::with('productImage')->where('user_id', $user->id)->inRandomOrder()->limit(6)->get();
+        $allproducts = Product::with('productImage')->where('user_id', $userdetails->id)->inRandomOrder()->limit(6)->get();
 
-        return view('dealer.products.product_details', compact('product', 'productImages', 'shippingCharge', 'user', 'allproducts'));
+        return view('dealer.products.product_details', compact('product', 'productImages', 'shippingCharge', 'userdetails', 'allproducts'));
     }
 
     // public function interior($subcategory_id)

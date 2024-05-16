@@ -22,10 +22,10 @@
             city: {
                 required: true
             },
-            shipping_address1: {
+            shiping_address1: {
                 required: true
             },
-            shipping_address2: {
+            shiping_address2: {
                 required: true
             },
             pin_code: {
@@ -71,6 +71,6 @@
 
 
         };
-        // handleValidation('product-card-details', rules, messages);
+        handleValidation('product-card-details', rules, messages, true);
     });
 </script>

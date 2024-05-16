@@ -9,12 +9,12 @@ class Order extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'user_id', 'status', 'shipment_price', 'total_amount', 'payment_method'
+        'user_id', 'cart_id', 'order_for', 'status', 'shipment_price', 'total_amount', 'payment_method'
     ];
 
     public function orderItem()
     {
-        return $this->hasMany(OrderItem::class);
+        return $this->hasMany(OrderItem::class, 'order_id', 'id');
     }
 
     public function scopeSearch($query)

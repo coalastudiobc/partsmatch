@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Http\Client\Request;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\{Auth, DB, Hash};
 use Illuminate\Support\Str;
 
@@ -42,6 +44,6 @@ class ResetPasswordController extends Controller
         Auth::logout();
         $this->redirectTo = 'login';
 
-        return redirect($this->redirectTo);
+        return redirect($this->redirectTo)->with(['status' => true, 'message' => 'password updated successfully']);
     }
 }

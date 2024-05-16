@@ -94,7 +94,7 @@
                                                         name="last_name"
                                                         value="{{ old('last_name', auth()->user()->shippingAddress->last_name ?? '') }}"
                                                         placeholder="Last Name">
-                                                    @error('first_name')
+                                                    @error('last_name')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
@@ -376,24 +376,27 @@
                         <div class="order-summary cstm-card">
                             <h2>order summary</h2>
                             <ul class="order-summary-list">
-                                <li>
-                                    <div class="summary-list-box">
-                                        <div class="summary-img-txt">
-                                            <div class="summary-img-box">
-                                                <img src="images/part-img.png" alt="">
-                                                <div class="order-sum-number">
-                                                    <span>2</span>
+                                @foreach ($carts as $cart)
+                                    <li>
+                                        <div class="summary-list-box">
+                                            <div class="summary-img-txt">
+                                                <div class="summary-img-box">
+                                                    <img src="{{ asset('assets/images/part-img.png') }}" alt="">
+                                                    {{-- <div class="order-sum-number">
+                                                        <span>2</span>
+                                                    </div> --}}
+                                                </div>
+                                                <div class="summary-txt-box">
+                                                    <h3>{{ $cart->cart_product->product->name }}</h3>
+                                                    <p>(Automobile)</p>
                                                 </div>
                                             </div>
-                                            <div class="summary-txt-box">
-                                                <h3>Car Engine 700219 Whitewall</h3>
-                                                <p>(Automobile)</p>
-                                            </div>
+                                            <p>{{ $cart->amount }}</p>
                                         </div>
-                                        <p>$700</p>
-                                    </div>
-                                </li>
-                                <li>
+                                    </li>
+                                @endforeach
+
+                                {{-- <li>
                                     <div class="summary-list-box">
                                         <div class="summary-img-txt">
                                             <div class="summary-img-box">
@@ -409,7 +412,7 @@
                                         </div>
                                         <p>$700</p>
                                     </div>
-                                </li>
+                                </li> --}}
                             </ul>
                         </div>
                     </div>
@@ -420,6 +423,8 @@
 @endsection
 @include('layouts.include.footer')
 @push('scripts')
+    @includeFirst(['validation'])
+    @includeFirst(['validation.dealer.js_checkout'])
     <script>
         jQuery(document).ready(function() {
             jQuery('.custom_dropdown_item').on('click', function() {
