@@ -912,11 +912,11 @@
 }
 
 .quantity-btn input {
-    max-width: 20px;
-    border: 0;
-    font-size: 12px;
+	max-width: 20px;
+	border: 0;
+	font-size: 12px;
+	text-align: center;
 }
-
 .dropdown-item:focus,
 .dropdown-item:hover {
     color: #fff;

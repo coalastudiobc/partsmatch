@@ -279,6 +279,8 @@
 
                 </div>
 
+
+                {{-- @if (!$collections) --}}
                 <a href="{{ route('dealer.products.interior', ['category' => $collections[0]->id]) }}"
                     class="btn secondary-btn view-btn" id="collectioViewAll">
                     View All
@@ -302,6 +304,7 @@
             </div>
         </div>
     </div>
+    {{-- @endif --}}
 </section>
 <section class="more-product-sec">
     <div class="container">
@@ -322,16 +325,17 @@
 
 
                         <li class="nav-item" role="presentation">
-                            <a href="{{ route('dealer.products.interior', ['category' => $subcategories[0]->id]) }}"
-                                class="nav-link" id="subcategoryViewAll">
-                                View All
-                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12"
-                                    viewBox="0 0 14 12" fill="none">
-                                    <path
-                                        d="M13.9075 5.80869L10.7257 3.09486C10.6114 2.98103 10.4106 2.96776 10.2771 3.06527C10.1436 3.16275 10.1281 3.33408 10.2424 3.44791C10.2531 3.45852 10.2647 3.46843 10.2771 3.47751L12.9148 5.72998H0.318166C0.142458 5.72998 0 5.85149 0 6.00138C0 6.15127 0.142458 6.27275 0.318166 6.27275H12.9148L10.2771 8.52249C10.1436 8.61998 10.1281 8.7913 10.2424 8.90514C10.3567 9.01897 10.5576 9.03224 10.691 8.93473C10.7035 8.92563 10.7151 8.91575 10.7257 8.90514L13.9075 6.19131C14.0308 6.0855 14.0308 5.91455 13.9075 5.80869Z"
-                                        fill="#272643" />
-                                </svg>
-                            </a>
+                            @if (!$collections)
+                                <a href="{{ route('dealer.products.interior', ['category' => $subcategories[0]->id]) }}"
+                                    class="nav-link" id="subcategoryViewAll">
+                                    View All
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12"
+                                        viewBox="0 0 14 12" fill="none">
+                                        <path
+                                            d="M13.9075 5.80869L10.7257 3.09486C10.6114 2.98103 10.4106 2.96776 10.2771 3.06527C10.1436 3.16275 10.1281 3.33408 10.2424 3.44791C10.2531 3.45852 10.2647 3.46843 10.2771 3.47751L12.9148 5.72998H0.318166C0.142458 5.72998 0 5.85149 0 6.00138C0 6.15127 0.142458 6.27275 0.318166 6.27275H12.9148L10.2771 8.52249C10.1436 8.61998 10.1281 8.7913 10.2424 8.90514C10.3567 9.01897 10.5576 9.03224 10.691 8.93473C10.7035 8.92563 10.7151 8.91575 10.7257 8.90514L13.9075 6.19131C14.0308 6.0855 14.0308 5.91455 13.9075 5.80869Z"
+                                            fill="#272643" />
+                                    </svg>
+                                </a>
                         </li>
                     </ul>
 
@@ -349,9 +353,11 @@
                     </div>
                 </div>
             </div>
+            @endif
         </div>
     </div>
 </section>
+
 <section class="shop-by-brands-sec">
     <div class="container">
         <div class="shop-by-brands-wrapper">
