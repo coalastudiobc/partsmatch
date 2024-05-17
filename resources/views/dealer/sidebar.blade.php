@@ -1,4 +1,10 @@
 <div class="dashboard-left-box">
+
+
+    <span class="sidebar-cross-icon">
+        <i class="fa-solid fa-xmark"></i>
+    </span>
+
     <h2>Analytics</h2>
     <div class="analyics-tabs">
         <ul>
