@@ -9,6 +9,7 @@
                 <div class="pro-search-box">
                     <input type="text" class="form-control" name="filter_by_name" placeholder="Search User By Name">
                     <button type="submit" class="btn primary-btn">Search</button>
+                    <a href="#" class="btn secondary-btn filter-open-btn">Filter</a>
                 </div>
             </form>
             {{-- @can('role-view') --}}
@@ -133,7 +134,7 @@
                                                     <div class="modal-dialog modal-dialog-centered">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                               
+
                                                                 <button type="button" class="btn-close"
                                                                     data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div> --}}
@@ -309,6 +310,9 @@
 
             });
         });
+
+        
+
     </script>
     <script>
         $(document).ready(function() {

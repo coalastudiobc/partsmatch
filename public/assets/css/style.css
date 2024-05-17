@@ -611,6 +611,7 @@ header {
 
     border: 0.893px solid #DDD;
     max-width: 300px;
+    width: 100%;
     padding: 40px 10px;
     display: flex;
     flex-direction: column;
@@ -1600,19 +1601,50 @@ html {
 	border-radius: 50%;
 }
 
+.sidebar-toggle-icon img, .sidebar-cross-icon img {
+	max-width: 30px;
+	display: inline-block;
+    cursor: pointer;
+}
+.pro-search-box button {
+    width: fit-content;
+    min-width: fit-content;
+}
+.secondary-btn.filter-open-btn {
+    min-width: fit-content;
+    display: none;
+}
+span.sidebar-cross-icon {
+    width: 100%;
+    display: none;
+    justify-content: flex-end;
+}
+span.sidebar-cross-icon i{
+    font-size: 18px;
+}
+@media(max-width:1024px){
+    .page-content-sec .dashboard-left-box {
+        position: fixed;
+        left: 0;
+        max-width: 300px;
+        z-index: 9999;
+     transform: translateX(-100%);
+        transition: all 0.3s linear;
+        height: 100%;
+        top: 0;
+    }
 
-.page-content-sec .dashboard-left-box {
-	position: fixed;
-	left: 0;
-	max-width: 300px;
-	z-index: 9999;
-	/* transform: translateX(-100%); */
-	transition: all 0.3s linear;
-	height: 100%;
-	top: 0;
+    .page-content-sec .dashboard-right-box {
+        width: 100%;
+        padding: 30px 16px;
+    }
+    .secondary-btn.filter-open-btn {
+        min-width: fit-content;
+        display: block;
+    }
+    span.sidebar-cross-icon{
+        display: flex;
+    }
 }
 
-.page-content-sec .dashboard-right-box {
-	width: 100%;
-	padding: 30px 16px;
-}
+
