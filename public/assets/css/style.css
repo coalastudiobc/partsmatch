@@ -162,7 +162,7 @@ h4 {
     font-size: 24px;
 }
 h6{
-    font-size: 20px;   
+    font-size: 20px;
 } */
 
 
@@ -1572,4 +1572,47 @@ html {
 
 .delivery-form .custm-dropdown .dropdown .dropdown-menu {
     max-height: 300px !important;
+}
+
+/* 17-05-2024 */
+
+
+.page-content-sec .db-table-box {
+	padding: 0 30px 10px;
+}
+
+.page-content-sec .db-table-box .tb-table tbody tr td {
+	padding: 18px 10px;
+	color: #5C5C5C;
+	font-size: 16px;
+}
+.page-content-sec .cart-product-image {
+	max-width: 44px;
+	height: 44px;
+	width: auto;
+}
+.page-content-sec .cart-product-image img {
+	width: 100%;
+	max-width: 100%;
+	height: 100%;
+	display: block;
+	object-fit: cover;
+	border-radius: 50%;
+}
+
+
+.page-content-sec .dashboard-left-box {
+	position: fixed;
+	left: 0;
+	max-width: 300px;
+	z-index: 9999;
+	/* transform: translateX(-100%); */
+	transition: all 0.3s linear;
+	height: 100%;
+	top: 0;
+}
+
+.page-content-sec .dashboard-right-box {
+	width: 100%;
+	padding: 30px 16px;
 }
