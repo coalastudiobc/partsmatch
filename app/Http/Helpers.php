@@ -1,7 +1,10 @@
 <?php
 
 use App\Models\AdminSetting;
+use App\Models\Cart;
+use App\Models\CartProduct;
 use App\Models\Category;
+use App\Models\CmsPage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
@@ -93,6 +96,26 @@ if (!function_exists('get_category')) {
         return $record;
     }
 }
+if (!function_exists('get_subcategory')) {
+    function get_subcategory($subcategory_id)
+    {
+        $record = Category::where('parent_id', $subcategory_id)->orderBy('name', 'ASC')->get();
+
+        return $record;
+    }
+}
+if (!function_exists('authCartProducts')) {
+    function authCartProducts()
+    {
+        $cart = Cart::where('user_id', auth()->user()->id)->first();
+        if ($cart) {
+            $cartItems = CartProduct::where('cart_id', $cart->id)->get()->pluck('product_id');
+            $cart_products = $cartItems ? $cartItems->toArray()     : [];
+            return $cart_products;
+        }
+        return [];
+    }
+}
 // if (!function_exists('get_country')) {
 //     function get_country()
 //     {
@@ -122,6 +145,50 @@ if (!function_exists('get_admin_setting')) {
             return $record->value;
         }
         return null;
+    }
+}
+
+if (!function_exists('get_cms')) {
+    function get_cms()
+    {
+        $cms = CmsPage::where('status', 1)->get();
+        return $cms;
+    }
+}
+if (!function_exists('plan_validity')) {
+    function plan_validity()
+    {
+
+        // $test = Auth::user()->subscription('trial_package')->onGracePeriod();
+        // dd($test,'jg');
+        $purchased = Auth::user()->subscriptions;
+        $purchasedPlan = $purchased->where('stripe_status', 'active')->first();
+        if ($purchasedPlan) {
+            if (is_null($purchasedPlan->ends_at)) {
+
+                return $purchasedPlan;
+            } else {
+                $daysLeft =  now()->diffInDays($purchasedPlan->ends_at, false);
+                if ($daysLeft >= 0) {
+
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    if (!function_exists('get_categories')) {
+        function get_categories($parentid)
+        {
+            // dd($parentid);
+            $record = Category::where('id', $parentid)->first();
+            if ($record) {
+                return $record;
+            }
+            return null;
+        }
     }
 }
 // if (!function_exists('stripe_details_validate')) {

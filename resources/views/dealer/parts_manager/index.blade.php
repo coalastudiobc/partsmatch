@@ -4,14 +4,19 @@
 @section('content')
     <div class="dashboard-right-box parts-manager-table-box">
         <div class="serach-and-filter-box">
-            <h3>All Managers</h3>
-            <div class="pro-search-box">
-                <input type="text" class="form-control" placeholder="Search Product By Name">
-                <a href="#" class="btn primary-btn">Search</a>
-            </div>
+            {{-- <h3>All Managers</h3> --}}
+            <form action="">
+                <div class="pro-search-box">
+                    <input type="text" class="form-control" name="filter_by_name" placeholder="Search User By Name">
+                    <button type="submit" class="btn primary-btn">Search</button>
+                </div>
+            </form>
+            {{-- @can('role-view') --}}
             <a href="#" class="btn primary-btn" data-bs-toggle="modal" data-bs-target="#add-manager-model">
                 + Add New Manager
             </a>
+            {{-- @endcan --}}
+
         </div>
         <div class="product-detail-table product-list-table pro-manage-table">
             <div class="table-responsive">
@@ -51,16 +56,17 @@
                                 <div class="toggle-btn">
                                     <input type="checkbox" id="switch101" class="custom-switch-input"
                                         @if ($user->status == 'ACTIVE') checked="checked" @endif
-                                        onchange="toggleStatus(this, 'User', '{{ jsencode_userdata($user->id) }}');"
+                                        onchange="toggleStatus(this, 'User', '{{ $user->id }}');"
                                         url="{{ route('dealer.status') }}"><label for="switch101">Toggle</label>
                                 </div>
                             </td>
                             <td>
                                 <div class="action-btns">
                                     <a href="{{ route('dealer.partsmanager.edit', [$user->id]) }}"><i
-                                            class="fa-solid fa-pen-to-square" style="color: #3EBE62;"></i></a>
+                                            class="fa-solid fa-pen-to-square" style="color: #3EBE62;"
+                                            title="edit"></i></a>
                                     <a href="{{ route('dealer.partsmanager.delete', [$user->id]) }}"><i
-                                            class="fa-regular fa-trash-can" style="color: #E13F3F;"></i></a>
+                                            class="fa-regular fa-trash-can" style="color: #E13F3F;" title="delete"></i></a>
                                 </div>
                             </td>
 
@@ -69,7 +75,7 @@
                 </table>
             </div>
         </div>
-        <div class="pagination-wrapper">
+        {{-- <div class="pagination-wrapper">
             <div class="pagination-boxes">
                 <div class="pagination-box">
                     <i class="fa-solid fa-angle-left"></i>
@@ -93,7 +99,7 @@
                     <i class="fa-solid fa-angle-right"></i>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 @endsection
 @section('modals')
@@ -105,7 +111,7 @@
                     {{-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> --}}
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                {{-- <div class="modal-body">
                     <div class="add-pro-form">
                         <h2>Add New Manager</h2>
                         <form id="parts_manager" action="{{ route('dealer.partsmanager.store') }}" method="post"
@@ -127,163 +133,202 @@
                                                     <div class="modal-dialog modal-dialog-centered">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                {{-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> --}}
+                                                               
                                                                 <button type="button" class="btn-close"
                                                                     data-bs-dismiss="modal" aria-label="Close"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <div class="add-pro-form">
-                                                                    <h2>Add New Manager</h2>
-                                                                    <form id="parts_manager"
-                                                                        action="{{ route('dealer.partsmanager.store') }}"
-                                                                        method="post" enctype="multipart/form-data">
-                                                                        @csrf
-                                                                        <div class="row">
-                                                                            <div class="col-md-12">
-                                                                                <div class="upload-img">
-                                                                                    <div class="file-upload-box">
-                                                                                        <label for="file-upload">
-                                                                                            <div
-                                                                                                class="profile-without-img">
-                                                                                                <img src="images/user.png"
-                                                                                                    id="Userimage"
-                                                                                                    alt="">
-                                                                                            </div>
-                                                                                            <input type="file"
-                                                                                                name="image"
-                                                                                                id="file-upload">
-                                                                                            <div class="upload-icon">
-                                                                                                <img src="images/upload.png"
-                                                                                                    alt="">
-                                                                                                <img src="images/upload.png"
-                                                                                                    alt="">
-                                                                                            </div>
-                                                                                        </label>
-                                                                                    </div>
-                                                                                    <h3>Upload profile picture</h3>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-md-6">
-                                                                                <div class="form-group">
-                                                                                    <label for="">Full Name</label>
-                                                                                    <div class="form-field">
-                                                                                        <input type="text"
-                                                                                            name="name"
-                                                                                            class="form-control"
-                                                                                            placeholder="Full Name">
-
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-md-6">
-                                                                                <div class="form-group">
-                                                                                    <label for="">Email</label>
-                                                                                    <div class="form-field">
-                                                                                        <input type="email"
-                                                                                            name="email"
-                                                                                            class="form-control"
-                                                                                            placeholder="Email">
-
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-md-6">
-                                                                                <div class="form-group">
-                                                                                    <label for="">Phone
-                                                                                        Number</label>
-                                                                                    <div class="form-field">
-                                                                                        <input type="text"
-                                                                                            name="phone_number"
-                                                                                            class="form-control"
-                                                                                            placeholder="Phone Number">
-
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-md-6">
-                                                                                <div class="form-group">
-                                                                                    <label for="">Assign
-                                                                                        Role</label>
-                                                                                    <div class="form-field">
-                                                                                        <input type="text"
-                                                                                            class="form-control"
-                                                                                            placeholder="Assign Role">
-
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col-md-6">
-                                                                                <div class="form-group">
-                                                                                    <label for="">Password</label>
-                                                                                    <div class="form-field">
-                                                                                        <input type="password"
-                                                                                            id="manager_confirm_password"
-                                                                                            name="password"
-                                                                                            class="form-control @error('password') is-invalid @enderror"
-                                                                                            placeholder="Password">
-                                                                                        @error('password')
-                                                                                            <span class="invalid-feedback"
-                                                                                                role="alert">
-                                                                                                <strong>{{ $message }}</strong>
-                                                                                            </span>
-                                                                                        @enderror
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-md-6">
-                                                                                <div class="form-group">
-                                                                                    <label for="">Confirm
-                                                                                        Password</label>
-                                                                                    <div class="form-field">
-                                                                                        <input type="password"
-                                                                                            name="confirm_password"
-                                                                                            class="form-control @error('confirm_password') is-invalid @enderror"
-                                                                                            placeholder="Confirm Password">
-                                                                                        @error('confirm_password')
-                                                                                            <span class="invalid-feedback"
-                                                                                                role="alert">
-                                                                                                <strong>{{ $message }}</strong>
-                                                                                            </span>
-                                                                                        @enderror
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-md-12">
-                                                                                <button type="submit"
-                                                                                    class="btn secondary-btn full-btn">Submit
-                                                                                    Details</button>
-                                                                            </div>
-
-                                                                        </div>
-                                                                    </form>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                            </div> --}}
+                <div class="modal-body">
+                    <div class="add-pro-form">
+                        <h2>Add New Manager</h2>
+                        <form id="parts_manager" action="{{ route('dealer.partsmanager.store') }}" method="post"
+                            enctype="multipart/form-data">
+                            @csrf
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="upload-img">
+                                        <div class="file-upload-box">
+                                            <label for="file-upload">
+                                                <div class="profile-without-img">
+                                                    <img src="{{ asset('assets/images/user.png') }}" id="Userimage"
+                                                        alt="">
                                                 </div>
-                                            @endsection
-                                            @push('scripts')
-                                                @includeFirst(['validation.dealer.js_parts_manager'])
-                                                <script>
-                                                    $(document).ready(function() {
-                                                        $("#file-upload").change(function() {
-                                                            if (this.files && this.files[0]) {
+                                                <input type="file" name="image" id="file-upload"
+                                                    class="@error('image') is-invalid @enderror">
+                                                @error('image')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                                <div class="upload-icon">
+                                                    <img src="{{ asset('assets/images/upload.png') }}" alt="">
+                                                    {{-- <img src="{{ asset('assets/images/upload.png') }}" alt=""> --}}
+                                                </div>
+                                            </label>
+                                        </div>
+                                        <h3>Upload profile picture*</h3>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="">Full Name*</label>
+                                        <div class="form-field">
+                                            <input type="text" name="name"
+                                                class="form-control @error('name') is-invalid @enderror"
+                                                placeholder="Full Name">
+                                            @error('name')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="">Email*</label>
+                                        <div class="form-field">
+                                            <input type="email" name="email"
+                                                class="form-control @error('email') is-invalid @enderror"
+                                                placeholder="Email">
+                                            @error('email')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="">Phone
+                                            Number*</label>
+                                        <div class="form-field">
+                                            <input type="text" name="phone_number"
+                                                class="form-control @error('phone_number') is-invalid @enderror"
+                                                placeholder="Phone Number">
+                                            @error('phone_number')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="">Role</label>
+                                        <input type="hidden" name="permission_type" value="Basic" id=""
+                                            class="@error('order_commission_type') is-invalid @enderror">
+                                        <div class="custm-dropdown">
+                                            <div class="dropdown">
+                                                <div class="dropdown-toggle " type="button" id="dropdownMenuButton1"
+                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <div id="selectedcommission">
+                                                        Basic
+                                                    </div>
+                                                    <span class="custm-drop-icon">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                            height="23" viewBox="0 0 24 23" fill="none">
+                                                            <path d="M19 9.00006L14 14.0001L9 9.00006" stroke="#151515"
+                                                                stroke-width="1.8" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                        </svg>
+                                                    </span>
+                                                </div>
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 
-                                                                var reader = new FileReader();
+                                                    <li><a class="dropdown-item custom_dropdown_commission"
+                                                            data-value="Basic" data-text="Basic"
+                                                            href="javascript:void(0)">Basic</a>
+                                                    </li>
+                                                    <li><a class="dropdown-item custom_dropdown_commission"
+                                                            data-value="Advanced" data-text="Advanced"
+                                                            href="javascript:void(0)">Advanced</a>
+                                                    </li>
 
-                                                                reader.onload = function(e) {
-                                                                    $('#Userimage').attr('src', e.target.result);
-                                                                }
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="">Password*</label>
+                                        <div class="form-field">
+                                            <input type="password" id="manager_confirm_password" name="password"
+                                                class="form-control @error('password') is-invalid @enderror"
+                                                placeholder="Password">
+                                            @error('password')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="">Confirm
+                                            Password</label>
+                                        <div class="form-field">
+                                            <input type="password" name="confirm_password"
+                                                class="form-control @error('confirm_password') is-invalid @enderror"
+                                                placeholder="Confirm Password">
+                                            @error('confirm_password')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
 
-                                                                reader.readAsDataURL(this.files[0]);
-                                                            }
-                                                        });
-                                                        @if (count($errors))
-                                                            {
-                                                                $('#add-manager-model').modal('show');
-                                                            }
-                                                        @endif
-                                                    });
-                                                </script>
-                                            @endpush
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn secondary-btn full-btn">Submit
+                                        Details</button>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+@push('scripts')
+    @includeFirst(['validation.dealer.js_parts_manager'])
+    <script>
+        jQuery(document).ready(function() {
+            jQuery('.custom_dropdown_commission').on('click', function() {
+                var selectitem = jQuery(this).attr('data-value')
+                var selecttext = jQuery(this).attr('data-text')
+                console.log(selectitem, selecttext)
+                jQuery('#selectedcommission').text(selecttext)
+                jQuery(document).find('input[name="order_commission_type"]').val(selectitem);
+
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#file-upload").change(function() {
+                if (this.files && this.files[0]) {
+
+                    var reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        $('#Userimage').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
+            @if (count($errors))
+                {
+                    $('#add-manager-model').modal('show');
+                }
+            @endif
+        });
+    </script>
+@endpush

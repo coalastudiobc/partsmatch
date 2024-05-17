@@ -98,6 +98,7 @@ function handleValidation(form, rules, messages = {}, submitHandler = false) {
             } else {
                 jQuery(element).parent().removeClass("is-invalid");
             }
+
             jQuery(element).removeClass("is-invalid");
         },
         errorPlacement: function (label, element) {
@@ -105,6 +106,8 @@ function handleValidation(form, rules, messages = {}, submitHandler = false) {
                 label.removeClass('invalid-feedback').addClass('cstm-selectric-invalid').insertAfter(jQuery(element).parent().siblings('.selectric'))
             } else if (jQuery(element).hasClass('select2-error')) {
                 label.insertAfter($(element).parent())
+            } else if (jQuery(element).hasClass('image-input')) {
+                $('#errorViewer').html(label);
             } else {
                 label.insertAfter(element)
             }
@@ -213,7 +216,7 @@ function addUserAjaxCall(url, method, params, loader = true) {
                             var response_ajax = jQuery(document).find(".ajax-response");
                             $("html, body").animate({ scrollTop: 0 }, "fast");
                         }
-                        response_ajax.html('<div class="alert alert-danger alert-dismissible fade show k" role="alert">' + data.msg + '<button type="button" class="btn-close close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
+                        response_ajax.html('<div class="alert alert-danger alert-dismissible fade show k" role="alert">' + data.message + '<button type="button" class="btn-close close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
                     }
                 },
                 error: function (error) {

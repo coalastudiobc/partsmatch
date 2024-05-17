@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('title', 'Update ' . $page->name)
-@section('heading', 'Cms')
+@section('heading', 'CMS')
 
 @section('content')
     <div class="main-content">
@@ -29,6 +29,14 @@
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
+                                                    <div class="input-icon-custm tooltip-open">
+                                                        <span>
+                                                            <i class="fa-solid fa-question"></i>
+                                                        </span>
+                                                        <div class="tooltip">
+                                                            <p>ghfvjvhm</p>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -44,6 +52,14 @@
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
+                                                    <div class="input-icon-custm tooltip-open">
+                                                        <span>
+                                                            <i class="fa-solid fa-question"></i>
+                                                        </span>
+                                                        <div class="tooltip">
+                                                            <p>ghfvjvhm</p>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -62,12 +78,21 @@
                                             <div class="form-group">
                                                 <label for="">Content*</label>
                                                 <div class="form-field">
-                                                    <textarea name="content" class="form-control summernote @error('content') is-invalid @enderror">{{ $page->page_content ?? $page->page_content }}</textarea>
+                                                    <textarea name="content" class="form-control summernote @error('content') is-invalid @enderror" cols=""
+                                                        rows="6">{{ $page->page_content ?? $page->page_content }}</textarea>
                                                     @error('content')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
+                                                    <div class="input-icon-custm tooltip-open">
+                                                        <span>
+                                                            <i class="fa-solid fa-question"></i>
+                                                        </span>
+                                                        <div class="tooltip">
+                                                            <p>ghfvjvhm</p>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -77,7 +102,7 @@
                                             <div class="form-group">
                                                 <label for="">Status</label>
                                                 <div class="form-field">
-                                                    <select name="status"
+                                                    {{-- <select name="status"
                                                         class="form-control @error('status') is-invalid @enderror">
                                                         <option
                                                             value="0"@if ($page->status == 0) selected @endif>
@@ -85,7 +110,44 @@
                                                         <option value="1"
                                                             @if ($page->status == 1) selected @endif>
                                                             Active</option>
-                                                    </select>
+                                                    </select> --}}
+                                                    <input type="hidden" name="status"
+                                                        value="{{ $page->status == '1' ? '1' : '0' }}" id="">
+                                                    <div class="custm-dropdown">
+                                                        <div class="dropdown">
+                                                            <div class="dropdown-toggle " type="button"
+                                                                id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                                                                aria-expanded="false">
+                                                                <div id="selectedstatus">
+                                                                    {{ $page->status == '1' ? 'Active' : 'Inactive' }}
+
+                                                                </div>
+                                                                <span class="custm-drop-icon">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                        height="23" viewBox="0 0 24 23" fill="none">
+                                                                        <path d="M19 9.00006L14 14.0001L9 9.00006"
+                                                                            stroke="#151515" stroke-width="1.8"
+                                                                            stroke-linecap="round"
+                                                                            stroke-linejoin="round" />
+                                                                    </svg>
+                                                                </span>
+                                                            </div>
+                                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+
+                                                                <li><a class="dropdown-item custom_dropdown_status"
+                                                                        @if ($page->status == '1') selected @endif
+                                                                        data-value="1" data-text="Active"
+                                                                        href="javascript:void(0)">Active</a>
+                                                                </li>
+                                                                <li><a class="dropdown-item custom_dropdown_status"
+                                                                        @if ($page->status == '0') selected @endif
+                                                                        data-value="0" data-text="Inactive"
+                                                                        href="javascript:void(0)">Inactive</a>
+                                                                </li>
+
+                                                            </ul>
+                                                        </div>
+                                                    </div>
                                                     @error('status')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
@@ -105,6 +167,14 @@
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
+                                                    <div class="input-icon-custm tooltip-open">
+                                                        <span>
+                                                            <i class="fa-solid fa-question"></i>
+                                                        </span>
+                                                        <div class="tooltip">
+                                                            <p>ghfvjvhm</p>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -160,5 +230,17 @@
         //         }
         //     });
         // });
+        // dropdown
+        jQuery(document).ready(function() {
+
+
+            jQuery('.custom_dropdown_status').on('click', function() {
+                var selectitem = jQuery(this).attr('data-value')
+                var selecttext = jQuery(this).attr('data-text')
+                jQuery('#selectedstatus').text(selecttext)
+                jQuery(document).find('input[name="status"]').val(selectitem);
+
+            });
+        });
     </script>
 @endpush

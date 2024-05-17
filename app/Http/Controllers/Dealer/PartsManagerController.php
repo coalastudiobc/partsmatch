@@ -12,7 +12,9 @@ class PartsManagerController extends Controller
 {
     public function index()
     {
-        $users = User::where('working_for', auth()->user()->id)->get();
+        $request = request();
+        $users = User::where('working_for', auth()->user()->id)->Search()->get();
+
         return view('dealer.parts_manager.index', compact('users'));
     }
     public function store(PartsManagerRequest $request)
@@ -32,6 +34,7 @@ class PartsManagerController extends Controller
 
         $userdetails = User::create($user);
         $userdetails->assignRole('Manager');
+        // $userdetails->givePermissionTo('role-view');
         return redirect()->back()->with(['status' => 'success', 'message' => "created successfully"]);
     }
 
@@ -40,7 +43,7 @@ class PartsManagerController extends Controller
         return view('dealer.parts_manager.edit', compact('user'));
     }
 
-    public function update(Request $request, User $user)
+    public function update(PartsManagerRequest $request, User $user)
     {
         $users = [
             'name' => $request->name,
@@ -48,8 +51,8 @@ class PartsManagerController extends Controller
             'phone_number' => $request->phone_number,
             'working_for' => auth()->user()->id,
         ];
-        if ($request->image) {
-            $image = store_image($request->image, 'profile_pictures');
+        if ($request->editimage) {
+            $image = store_image($request->editimage, 'profile_pictures');
             $users['profile_picture_url'] = $image['url'];
             $users['profile_picture_file'] = $image['name'];
         }

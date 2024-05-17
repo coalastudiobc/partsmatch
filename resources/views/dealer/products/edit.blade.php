@@ -1,3 +1,5 @@
+@extends('layouts.dealer')
+
 @section('content')
     <div class="main-content">
         <section class="section">
@@ -7,6 +9,24 @@
                         <div class="card">
                             <div class='ajax-response'></div>
                             <x-alert-component />
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
 
                             <div class="card-body">
                                 <form id="product" action="{{ route('dealer.products.update', $product->id) }}"
@@ -44,7 +64,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        {{-- @dd($product) --}}
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="">Product SubCategory</label>
@@ -301,9 +320,9 @@
     </script>
     <script>
         $(function() {
-            var carquery = new CarQuery();
-            carquery.init();
-            carquery.initYearMakeModelTrim('car-years', 'car-makes', 'car-models', 'car-model-trims');
+            // var carquery = new CarQuery();
+            // carquery.init();
+            // carquery.initYearMakeModelTrim('car-years', 'car-makes', 'car-models', 'car-model-trims');
 
             // Multiple images preview with JavaScript
             var previewImages = function(input, imgPreviewPlaceholder) {
@@ -343,7 +362,7 @@
                     $('#get_image_id').val(getid);
                 } else {
                     return iziToast.error({
-                        message: "bsdk phle img dal",
+                        message: "please provide images",
                         position: 'topRight'
                     });
                 }

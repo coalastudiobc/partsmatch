@@ -5,8 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 
 use App\Http\Requests\CommissionRequest;
+use App\Http\Requests\ShippingRequest;
 use App\Models\AdminSetting;
 use App\Models\Commission;
+use App\Models\FeaturedProduct;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Contracts\Validation\Validator as ValidationValidator;
 use Illuminate\Http\Request;
@@ -115,20 +118,42 @@ class AdminController extends Controller
         return redirect()->route('admin.settings.view');
     }
 
-    public function commission(CommissionRequest $request, Commission $commissionid)
+    public function commission(CommissionRequest $request)
     {
         if ($request->method() == "POST") {
-            $commissionid->update([
-                'type' => $request->ordercommission_type,
-                'value' => $request->ordercommission
-            ]);
+            AdminSetting::where('name', 'order_commission_type')->update(['value' => $request->order_commission_type]);
+            AdminSetting::where('name', 'order_commission')->update(['value' => $request->order_commission]);
+
+
             session()->flash('status', 'success');
             session()->flash('message', 'Data updated successfully');
             return redirect()->route('admin.commission');
         }
 
-        $commission = Commission::first();
+        return view('admin.commission');
+    }
 
-        return view('admin.commission', compact('commission'));
+    public function shipping(ShippingRequest $request)
+    {
+        if ($request->method() == "POST") {
+            AdminSetting::where('name', 'shipping_charge_type')->update(['value' => $request->shipping_charge_type]);
+            AdminSetting::where('name', 'shipping_charge')->update(['value' => $request->shipping_charge]);
+
+
+            session()->flash('status', 'success');
+            session()->flash('message', 'Data updated successfully');
+            return redirect()->route('admin.shipping');
+        }
+
+        return view('admin.shipping_price');
+    }
+    public function featured_list()
+    {
+        // $users = User::with('product', 'product.featuredProduct')->get();
+        // $products = Product::with('featuredProduct', 'user', 'category', 'user.subscription')->get();
+        // dd($products->toArray());
+        $feature_products = FeaturedProduct::with('product', 'product.user.subscription', 'product.productImage')->get();
+        // dd($feature_products->toArray());
+        return view('admin.featured_list', compact('feature_products'));
     }
 }

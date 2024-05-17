@@ -49,7 +49,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">Full name</label>
+                                                <label for="">Full name*</label>
                                                 <div class="form-field">
                                                     <input type="text"
                                                         class="form-control @error('name') is-invalid @enderror disabled-inputs"
@@ -74,7 +74,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">Email ID</label>
+                                                <label for="">Email ID*</label>
                                                 <div class="form-field">
                                                     <input type="email" name="email"
                                                         value="{{ old('email', $user->email ?? $user->email) }}"
@@ -103,7 +103,7 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">Phone number</label>
+                                                <label for="">Phone number*</label>
                                                 <div class="form-field">
                                                     <input type="text" name="phone_number" disabled
                                                         class="form-control @error('phone_number') is-invalid @enderror disabled-inputs"
@@ -130,10 +130,10 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">Industry</label>
+                                                <label for="">Industry*</label>
                                                 <div class="form-field">
                                                     <!-- <input type="text" class="form-control" placeholder="Select industry"> -->
-                                                    <select name="industry_type" id="industury"
+                                                    {{-- <select name="industry_type" id="industury"
                                                         value="{{ old('industury', $user->industry_type ?? $user->industry_type) }}"
                                                         disabled
                                                         class="form-control @error('industry_type') is-invalid @enderror disabled-inputs">
@@ -141,8 +141,47 @@
                                                         <option value="saab">Volvo</option>
                                                         <option value="saab">Saab</option>
                                                         <option value="opel">Opel</option>
-                                                        <option value="audi">Audi</option>
+                                                        <option value="audi">Audi</option> --}}
+                                                    <input type="hidden" id="industry" name="industry_type"
+                                                        value="">
+                                                    <div class="custm-dropdown dropmenu disabled_select ">
+                                                        <div class="dropdown">
+                                                            <div class="dropdown-toggle " type="button"
+                                                                data-bs-toggle='dropdown' id="dropdownMenuButton1"
+                                                                aria-expanded="false" disabled>
+                                                                <div id="selectedItem">
+                                                                    {{ $user->industry_type }}
 
+                                                                </div>
+                                                                <span class="custm-drop-icon">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                        height="23" viewBox="0 0 24 23"
+                                                                        fill="none">
+                                                                        <path d="M19 9.00006L14 14.0001L9 9.00006"
+                                                                            stroke="#151515" stroke-width="1.8"
+                                                                            stroke-linecap="round"
+                                                                            stroke-linejoin="round" />
+                                                                    </svg>
+                                                                </span>
+                                                            </div>
+                                                            <ul class="dropdown-menu dropdownlist"
+                                                                aria-labelledby="dropdownMenuButton1">
+                                                                <li><a class="dropdown-item custom_dropdown_item"
+                                                                        data-value="Volvo"
+                                                                        href="javascript:void(0)">Volvo</a>
+                                                                </li>
+                                                                <li><a class="dropdown-item custom_dropdown_item"
+                                                                        data-value="Saab" href="javascript:void(0)">Saab
+                                                                    </a></li>
+                                                                <li><a class="dropdown-item custom_dropdown_item"
+                                                                        data-value="Opel"
+                                                                        href="javascript:void(0)">Opel</a></li>
+                                                                <li><a class="dropdown-item custom_dropdown_item"
+                                                                        data-value="Audi"
+                                                                        href="javascript:void(0)">Audi</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
 
                                                     </select>
                                                     @error('industry_type')
@@ -155,7 +194,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">Complete address</label>
+                                                <label for="">Complete address*</label>
                                                 <div class="form-field">
                                                     <input type="text" name="address" disabled
                                                         class="form-control @error('address') is-invalid @enderror disabled-inputs"
@@ -361,9 +400,33 @@
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
-                                        <div class="input-icon">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="13"
-                                                viewBox="0 0 17 13" fill="none">
+                                        <div class="input-icon toggle-password">
+
+
+                                            <svg class="eye-cross-icon" width="17" height="13"
+                                                viewBox="0 0 28 20" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <mask id="mask0_17_18" style="mask-type:luminance"
+                                                    maskUnits="userSpaceOnUse" x="1" y="0" width="25"
+                                                    height="19">
+                                                    <path d="M26 0H1V19H26V0Z" fill="white" />
+                                                </mask>
+                                                <g mask="url(#mask0_17_18)">
+                                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                                        d="M2.03888 9.49718C2.03888 9.49718 6.20556 1.05273 13.4972 1.05273C20.7889 1.05273 24.9556 9.49718 24.9556 9.49718C24.9556 9.49718 20.7889 17.9416 13.4972 17.9416C6.20556 17.9416 2.03888 9.49718 2.03888 9.49718Z"
+                                                        stroke="#727272" stroke-width="1.80952"
+                                                        stroke-linecap="round" stroke-linejoin="round" />
+                                                    <path
+                                                        d="M13.4981 12.6654C15.224 12.6654 16.6231 11.2476 16.6231 9.4987C16.6231 7.7498 15.224 6.33203 13.4981 6.33203C11.7722 6.33203 10.3731 7.7498 10.3731 9.4987C10.3731 11.2476 11.7722 12.6654 13.4981 12.6654Z"
+                                                        stroke="#727272" stroke-width="1.80952"
+                                                        stroke-linecap="round" stroke-linejoin="round" />
+                                                </g>
+                                                <rect y="1.63831" width="2" height="31.5487" rx="1"
+                                                    transform="rotate(-55 0 1.63831)" fill="#727272" />
+                                            </svg>
+
+                                            <svg class="eye-icon d-none" xmlns="http://www.w3.org/2000/svg"
+                                                width="17" height="13" viewBox="0 0 17 13" fill="none">
                                                 <path fill-rule="evenodd" clip-rule="evenodd"
                                                     d="M1 6.44444C1 6.44444 3.72222 1 8.48611 1C13.25 1 15.9722 6.44444 15.9722 6.44444C15.9722 6.44444 13.25 11.8889 8.48611 11.8889C3.72222 11.8889 1 6.44444 1 6.44444Z"
                                                     stroke="#727272" stroke-linecap="round"
@@ -389,9 +452,33 @@
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
-                                        <div class="input-icon">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="13"
-                                                viewBox="0 0 17 13" fill="none">
+                                        <div class="input-icon toggle-password">
+
+
+                                            <svg class="eye-cross-icon " width="17" height="13"
+                                                viewBox="0 0 28 20" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <mask id="mask0_17_18" style="mask-type:luminance"
+                                                    maskUnits="userSpaceOnUse" x="1" y="0" width="25"
+                                                    height="19">
+                                                    <path d="M26 0H1V19H26V0Z" fill="white" />
+                                                </mask>
+                                                <g mask="url(#mask0_17_18)">
+                                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                                        d="M2.03888 9.49718C2.03888 9.49718 6.20556 1.05273 13.4972 1.05273C20.7889 1.05273 24.9556 9.49718 24.9556 9.49718C24.9556 9.49718 20.7889 17.9416 13.4972 17.9416C6.20556 17.9416 2.03888 9.49718 2.03888 9.49718Z"
+                                                        stroke="#727272" stroke-width="1.80952"
+                                                        stroke-linecap="round" stroke-linejoin="round" />
+                                                    <path
+                                                        d="M13.4981 12.6654C15.224 12.6654 16.6231 11.2476 16.6231 9.4987C16.6231 7.7498 15.224 6.33203 13.4981 6.33203C11.7722 6.33203 10.3731 7.7498 10.3731 9.4987C10.3731 11.2476 11.7722 12.6654 13.4981 12.6654Z"
+                                                        stroke="#727272" stroke-width="1.80952"
+                                                        stroke-linecap="round" stroke-linejoin="round" />
+                                                </g>
+                                                <rect y="1.63831" width="2" height="31.5487" rx="1"
+                                                    transform="rotate(-55 0 1.63831)" fill="#727272" />
+                                            </svg>
+
+                                            <svg class="eye-icon d-none" xmlns="http://www.w3.org/2000/svg"
+                                                width="17" height="13" viewBox="0 0 17 13" fill="none">
                                                 <path fill-rule="evenodd" clip-rule="evenodd"
                                                     d="M1 6.44444C1 6.44444 3.72222 1 8.48611 1C13.25 1 15.9722 6.44444 15.9722 6.44444C15.9722 6.44444 13.25 11.8889 8.48611 11.8889C3.72222 11.8889 1 6.44444 1 6.44444Z"
                                                     stroke="#727272" stroke-linecap="round"
@@ -417,9 +504,32 @@
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
-                                        <div class="input-icon">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="13"
-                                                viewBox="0 0 17 13" fill="none">
+                                        <div class="input-icon toggle-password">
+
+
+                                            <svg class="eye-cross-icon" width="17" height="13"
+                                                viewBox="0 0 28 20" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <mask id="mask0_17_18" style="mask-type:luminance"
+                                                    maskUnits="userSpaceOnUse" x="1" y="0" width="25"
+                                                    height="19">
+                                                    <path d="M26 0H1V19H26V0Z" fill="white" />
+                                                </mask>
+                                                <g mask="url(#mask0_17_18)">
+                                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                                        d="M2.03888 9.49718C2.03888 9.49718 6.20556 1.05273 13.4972 1.05273C20.7889 1.05273 24.9556 9.49718 24.9556 9.49718C24.9556 9.49718 20.7889 17.9416 13.4972 17.9416C6.20556 17.9416 2.03888 9.49718 2.03888 9.49718Z"
+                                                        stroke="#727272" stroke-width="1.80952"
+                                                        stroke-linecap="round" stroke-linejoin="round" />
+                                                    <path
+                                                        d="M13.4981 12.6654C15.224 12.6654 16.6231 11.2476 16.6231 9.4987C16.6231 7.7498 15.224 6.33203 13.4981 6.33203C11.7722 6.33203 10.3731 7.7498 10.3731 9.4987C10.3731 11.2476 11.7722 12.6654 13.4981 12.6654Z"
+                                                        stroke="#727272" stroke-width="1.80952"
+                                                        stroke-linecap="round" stroke-linejoin="round" />
+                                                </g>
+                                                <rect y="1.63831" width="2" height="31.5487" rx="1"
+                                                    transform="rotate(-55 0 1.63831)" fill="#727272" />
+                                            </svg>
+                                            <svg class="eye-icon d-none" xmlns="http://www.w3.org/2000/svg"
+                                                width="17" height="13" viewBox="0 0 17 13" fill="none">
                                                 <path fill-rule="evenodd" clip-rule="evenodd"
                                                     d="M1 6.44444C1 6.44444 3.72222 1 8.48611 1C13.25 1 15.9722 6.44444 15.9722 6.44444C15.9722 6.44444 13.25 11.8889 8.48611 11.8889C3.72222 11.8889 1 6.44444 1 6.44444Z"
                                                     stroke="#727272" stroke-linecap="round"
@@ -475,13 +585,21 @@
                 $('#closeEditProfile').removeClass('d-none')
                 $('.disabled-inputs').removeAttr('disabled');
                 $('.editable').removeClass('d-none');
+                $('.dropmenu').removeClass('disabled_select');
+                $('#dropdownMenuButton1').prop('disabled', false);
             });
+
+        });
+        $(document).ready(function() {
             $('#closeEditProfile').click(function(e) {
                 e.preventDefault();
+                $('.dropmenu').addClass('disabled_select');
                 $(this).addClass('d-none')
                 $('#editProfile').removeClass('d-none')
                 $('.disabled-inputs').attr('disabled', 'disabled');
+                $('#dropdownMenuButton1').prop('disabled', true);
                 $('.editable').addClass('d-none');
+
             });
         });
     </script>
@@ -499,7 +617,18 @@
             }
         });
     </script>
+    <script>
+        jQuery(document).ready(function() {
+            jQuery('.custom_dropdown_item').on('click', function() {
+                var selectitem = jQuery(this).attr('data-value')
+                jQuery('#selectedItem').text(selectitem)
+                jQuery(document).find('input[name="industry_type"]').val(selectitem);
+
+            })
+        });
+    </script>
     @includeFirst(['validation'])
     @includeFirst(['validation.dealer.js_profile'])
     @includeFirst(['validation.js_change_password'])
+    @includeFirst(['validation.dealer.js_show_password'])
 @endpush

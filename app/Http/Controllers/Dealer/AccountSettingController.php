@@ -36,7 +36,7 @@ class AccountSettingController extends Controller
 
         auth()->user()->update($data);
 
-        return redirect()->back()->with(['status' => "success", "message" => 'Updated successfully']);
+        return redirect()->back()->with(["message" => 'Updated successfully']);
     }
 
     public function updatePassword(ChangePasswordRequest $request)
@@ -50,6 +50,6 @@ class AccountSettingController extends Controller
 
         $newPassword = Hash::make($request->password);
         User::where('id', $user->id)->update(['password' => $newPassword]);
-        return redirect()->back()->with(['status' => "success", "message" => 'Updated successfully']);
+        return redirect()->back()->with(["message" => 'Updated successfully']);
     }
 }

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\dealer\CheckoutController;
 use App\Http\Controllers\Dealer\DealerController;
 use App\Http\Controllers\Dealer\ProfileController;
+use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -22,10 +25,19 @@ Route::get('/', function () {
     if (Auth::check())
         return redirect()->route('redirect-to-dashboard');
     else
-        return view('welcome');
+        return redirect()->route('welcome.index');
 })->name('welcome');
 
+Route::match(['get', 'post'], 'welcome/{subcategory?}/{category?}', [HomeController::class, 'index'])->name('welcome.index');
+Route::get('category', [HomeController::class, 'categoryCard'])->name('categories');
+Route::get('get/categorized/products/{category}', [HomeController::class, 'getProductsForCategory'])->name('categories');
+Route::get('get/categorized/collection/products/{category}', [HomeController::class, 'getProductsCollectionForCategory'])->name('categories');
+
 Route::get('redirect-to-dashboard', [HomeController::class, 'redirectToDashboard'])->name('redirect-to-dashboard');
+Route::get('verify-email/{user}/{token}', [RegisterController::class, 'verifyEmail'])->name('verify-email');
+
+
+
 Auth::routes();
 
 

@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/slick.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/iziToast.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/toaster.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/slick-theme.css') }}">
     @include('layouts.include.favicon')
 
@@ -61,7 +62,10 @@
                                                     <ul class="dropdown-menu">
                                                         <li><a class="dropdown-item"
                                                                 href="{{ route('dealer.profile') }}">Profile</a></li>
-                                                        {{-- <li><a class="dropdown-item" href="#">Another action</a></li> --}}
+                                                        <li><a class="dropdown-item"
+                                                                href="{{ route('dealer.subscription.plan') }}">Subscription
+                                                                Plan</a>
+                                                        </li>
                                                         <li><a class="dropdown-item" href="{{ route('logout') }}">
                                                                 Logout
                                                             </a>
@@ -123,10 +127,37 @@
     <script src="{{ asset('assets/js/slick.js') }}"></script>
     <script src="{{ asset('assets/js/validate.min.js') }}"></script>
     <script src="{{ asset('assets/js/iziToast.min.js') }}"></script>
+    <script src="{{ asset('assets/js/toaster.min.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
     <script src="{{ asset('assets/js/common.js') }}?ver={{ now() }}"></script>
-    {{-- <script type="text/javascript" src="http://www.carqueryapi.com/js/jquery.min.js"></script> --}}
-    <script type="text/javascript" src="http://www.carqueryapi.com/js/carquery.0.3.4.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Check if the CSS file(s) are loaded
+            var cssLoaded = false;
+
+            // Function to check if CSS is loaded
+            function checkCSSLoaded() {
+                var stylesheets = document.styleSheets;
+                for (var i = 0; i < stylesheets.length; i++) {
+                    if (stylesheets[i].href && stylesheets[i].href.indexOf('your-style.css') !== -1) {
+                        cssLoaded = true;
+                        break;
+                    }
+                }
+                return cssLoaded;
+            }
+
+            // Check CSS load status every 100 milliseconds
+            var checkInterval = setInterval(function() {
+                if (checkCSSLoaded()) {
+                    clearInterval(checkInterval);
+                    // CSS is loaded, now you can proceed with page load
+                    console.log("CSS is loaded, proceeding with page load...");
+                    // Here you can trigger the rest of your page load functionality
+                }
+            }, 100);
+        });
+    </script>
     @stack('scripts')
 </body>
 

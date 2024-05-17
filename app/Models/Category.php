@@ -37,4 +37,16 @@ class Category extends Model
             });
         })->get();
     }
+
+    public function children()
+    {
+        // $test = ->get();
+        // dd($test, $this->id);
+        return $this->hasMany(self::class, 'parent_id');
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'subcategory_id', 'id')->inRandomOrder()->limit(5);
+    }
 }

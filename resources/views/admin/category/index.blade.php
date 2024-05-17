@@ -6,9 +6,10 @@
 @section('content')
 
     <div class="dashboard-right-box">
+        <x-alert-component />
 
         <div class="card-header-form padding">
-            <h2>Categories</h2>
+            {{-- <h2>Categories</h2> --}}
             <a class="btn primary-btn btn-lg float-end" href="{{ route('admin.category.add') }}">Add
                 Category</a>
         </div>
@@ -49,7 +50,8 @@
 
                                     {{-- <span class="custom-switch-indicator"></span> --}}
                                 <div class="toggle-btn">
-                                    <input type="checkbox" id="switch10{{ $key }}" class="custom-switch-input"
+                                    <input type="checkbox" title="status" id="switch10{{ $key }}"
+                                        class="custom-switch-input"
                                         @if ($category->status == '1') checked="checked" @endif
                                         onchange="toggleStatus(this, 'Category', '{{ $category->id }}');"
                                         url="{{ route('category.status') }}"><label
@@ -60,9 +62,10 @@
                             </td>
                             <td>
                                 <div class="action-btns">
-                                    <a href="{{ route('admin.category.edit', [jsencode_userdata($category->id)]) }}"><i
-                                            class="fa-solid fa-pen-to-square" style="color: #3EBE62;"></i></a>
-                                    <a href="{{ route('admin.category.delete', [jsencode_userdata($category->id)]) }}"><i
+                                    <a href="{{ route('admin.category.edit', [jsencode_userdata($category->id)]) }}"
+                                        title="edit"><i class="fa-solid fa-pen-to-square" style="color: #3EBE62;"></i></a>
+                                    <a href="{{ route('admin.category.delete', [jsencode_userdata($category->id)]) }}"
+                                        class="delete" data-bs-toggle="tooltip" data-bs-placement="top" title="delete"><i
                                             class="fa-regular fa-trash-can" style="color: #E13F3F;"></i></a>
                                 </div>
                             </td>
@@ -77,6 +80,7 @@
                 </table>
             </div>
         </div>
+        {!! $categories->links('admin.pagination') !!}
         {{-- <div class="pagination-wrapper">
             <div class="pagination-boxes">
                 <div class="pagination-box">

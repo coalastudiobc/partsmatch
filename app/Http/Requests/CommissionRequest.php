@@ -24,12 +24,12 @@ class CommissionRequest extends FormRequest
         if (request()->method() == "POST") {
 
             $rules =  [
-                'ordercommission_type' => 'required',
+                'order_commission_type' => 'required',
             ];
-            if (request()->ordercommission_type == 'Percentage') {
-                $rules['ordercommission'] = 'required | numeric | min:1 | max:99 | regex:/(\d+(?:\.\d+)?)/';
+            if (request()->order_commission_type == 'Percentage') {
+                $rules['order_commission'] = 'required | numeric | min:1 | max:99 | regex:/(\d+(?:\.\d+)?)/';
             } else {
-                $rules['ordercommission'] = 'required | numeric |min:1 | max:9999 | regex:/(\d+(?:\.\d+)?)/';
+                $rules['order_commission'] = 'required | numeric |min:1 | max:9999 | regex:/(\d+(?:\.\d+)?)/';
             }
             return $rules;
         }
@@ -38,12 +38,21 @@ class CommissionRequest extends FormRequest
 
     public function messages()
     {
-        return [
-            'ordercommission_type.required' => "order commission type is required",
-            'ordercommission.required' => "order commission is required",
-            'ordercommission.min' => "order commission should be grater than 1",
-            'ordercommission.max' => "order commission should be less than 99",
-            'ordercommission.regex' => "only number allowed"
+
+        $message = [
+            'order_commission_type.required' => "order commission type is required",
+            'order_commission.required' => "order commission is required",
+            'order_commission.min' => "order commission should be grater than 1",
+            'order_commission.regex' => "only number allowed"
         ];
+
+        if (request()->order_commission_type == 'Percentage') {
+            $message['order_commission.max'] = "order commission should be less than 99";
+        } else {
+            $message['order_commission.max'] = "order commission should be less than 9999";
+        }
+
+
+        return $message;
     }
 }

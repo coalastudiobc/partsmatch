@@ -18,7 +18,7 @@ return [
         ],
         'password_confirmation' => [
             'required' => 'Please enter the confirmation password',
-            'equalTo' => 'confoirm password does not match'
+            'equalTo' => 'Confirm password does not match'
         ]
     ],
 
@@ -66,6 +66,18 @@ return [
         ],
     ],
 
+    'commission' => [
+        'ordercommission_type' => [
+            'required' => 'order commission type is required'
+        ],
+        'ordercommission' => [
+            'required' => 'order commission is required',
+            'min' => 'order commission should be grater than 1',
+            'max' => 'order commission should be less than 99',
+            'regex' => 'only number allowed'
+        ],
+    ],
+
     'admin' => [
         'name' => [
             'required' => 'Please enter the name',
@@ -103,6 +115,7 @@ return [
             'numeric' => 'Only numerics are allowed',
         ],
     ],
+
     'profile' => [
         'name' => [
             'required' => 'Please enter the name',
@@ -119,6 +132,21 @@ return [
             'required' => 'Please upload your profile picture',
             'size' => 'File size should not be greater than 2 MB',
             'mimes' => 'Supported only JPEG, JPG, PNG file type'
+        ],
+        'phone_number' => [
+            'digits' => 'Please enter only digits',
+            'minlength' => 'phone number should be 10 digits',
+            'maxlength' => 'phone number should be 10 digits',
+        ],
+        'password' => [
+            'min' => 'Password can be :min - :max characters',
+            'max' => 'Password can be :min - :max characters',
+            'regex' => 'Password can be alphanumeric and (@#$%^&*) these special characters *At least one uppercase *One lowercase *One numeric',
+
+        ],
+        'confirm_password' => [
+            'equal' => 'Confirm password not match',
+
         ],
     ],
 
@@ -144,6 +172,14 @@ return [
             'required' => 'Please enter the oder commission',
         ],
     ],
+    'shipping' => [
+        'shipping_charge_type' => [
+            'required' => 'Please select the shipping charge type',
+        ],
+        'shipping_charge' => [
+            'required' => 'Please enter the shipping charge',
+        ],
+    ],
     'hashtags' => [
         'title' => [
             'required' => 'Please enter the hashtag Title',
@@ -163,6 +199,7 @@ return [
             'required' => 'Please enter the name',
             'min' => 'Name can be :min - :max characters',
             'max' => 'Name can be :min - :max characters',
+            'regex' => 'Only alphabets and in between space are allowed',
         ],
         'slug' => [
             'required' => 'Please enter the slug',
@@ -220,9 +257,11 @@ return [
             'required' => 'Please enter the phone number',
             'digits' => 'Phone number must be of :digits',
             'phoneUS' => 'Phone number must be of :digits digits',
+            'minlength' => 'Phone number should be 10 digits.',
+            'maxlength' => 'Phone number should be 10 digits.'
         ],
         'industry_type' => [
-            'required' => 'Please enter the industry type',
+            'required' => 'Please select the industry type',
         ],
         'bio' => [
             'min' => 'Bio can be :min - :max characters',
@@ -264,8 +303,28 @@ return [
         'country' => [
             'required' => 'Please select country',
         ],
+        'state' => [
+            'required' => 'Please select state',
+        ],
+        'city' => [
+            'required' => 'Please select city',
+        ],
         'terms' => [
             'required' => 'Please check terms & condition',
+        ],
+        'image' => [
+            'required' => 'Image is required',
+            'imageExtension' => 'Only image type jpg/png/jpeg is allowed.',
+        ],
+        'zipcode' => [
+            'required' => 'Please enter the zip code.',
+            'minlength' => 'zipcode should be 6 digits.',
+            'maxlength' => 'zipcode should be 6 digits.',
+        ],
+        'pin_code' => [
+            'required' => 'Please enter the zip code.',
+            'minlength' => 'pincode should be 6 digits.',
+            'maxlength' => 'pincode should be 6 digits.',
         ],
 
     ],
@@ -315,11 +374,14 @@ return [
     ],
 
     'package' => [
+        'name' => [
+            'required' => 'Please enter the package name'
+        ],
         'timeduration' => [
             'required' => 'Please enter the time duration',
         ],
         'timetype' => [
-            'required' => 'Please select the time type',
+            'required' => 'Please select the time type'
         ],
         'description' => [
             'min' => 'Description can be :min - :max characters',
@@ -332,7 +394,7 @@ return [
             'required' => 'Please select any category',
         ],
         'price' => [
-            'required' => 'Please enter price',
+            'required' => 'Please enter price'
         ],
     ],
 

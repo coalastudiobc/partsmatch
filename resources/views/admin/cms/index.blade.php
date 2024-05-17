@@ -1,12 +1,15 @@
 @extends('layouts.admin')
 
 @section('title', 'Cms Management')
-@section('heading', 'Cms')
+@section('heading', 'CMS')
 
 @section('content')
 
     <div class="dashboard-right-box">
-        <h2>CMS</h2>
+        <x-alert-component />
+
+        {{-- <h2>CMS</h2> --}}
+
         <div class="product-detail-table cms-list-table">
             <div class="table-responsive">
                 <table class="table">
@@ -68,7 +71,7 @@
                             </td> --}}
                             <td>
                                 <a href="{{ route('admin.cms.edit', [$page->id]) }}" class="edit"><i style="color: green"
-                                        class="fa-solid fa-pen-to-square"></i></a>
+                                        class="fa-solid fa-pen-to-square" title="edit"></i></a>
 
                             </td>
 

@@ -8,6 +8,8 @@
                     <div class="logo-box">
                         <img src="{{ asset('assets/images/header-logo.png') }}" alt="">
                     </div>
+                    <x-alert-component />
+
                     <div class="login-txt">
                         <h2>Login Here</h2>
                         <p>It is a long established fact that a reader will be distracted by</p>
@@ -96,7 +98,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="{{ route('password.request') }}" class="forgot-password">Forgot Password</a>
+                            <a href="{{ route('password.request') }}" class="forgot-password">Forgot Password?</a>
                             <button type="submit" class="btn secondary-btn full-btn">Log in</button>
                             <div class="sign-up-link-box">
                                 <p>Don’t have an account?</p>

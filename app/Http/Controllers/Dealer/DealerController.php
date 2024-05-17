@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Dealer;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DealerController extends Controller
@@ -10,6 +12,13 @@ class DealerController extends Controller
     public function dashboard()
     {
         return view('dealer.dashboard');
+    }
+
+    public function dealerProfile(User $user)
+    {
+        $allproducts = Product::with('productImage')->where('user_id', $user->id)->limit(5)->get();
+
+        return view('dealer.profile.dealer_profile', compact('user', 'allproducts'));
     }
     public function toggleStatus(Request $request)
     {

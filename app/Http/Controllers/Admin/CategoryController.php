@@ -12,7 +12,7 @@ class CategoryController extends Controller
 {
     public function index(Request $request)
     {
-        $categories = Category::with('parent')->search()->latest()->paginate(config('constants.pagination'));
+        $categories = Category::with('parent')->search()->latest()->paginate(5);
 
         return view('admin.category.index', compact('categories'));
     }
@@ -28,7 +28,6 @@ class CategoryController extends Controller
 
     public function store(CategoryRequest $request, $id = null)
     {
-
         if ($id != null) {
             $id = jsdecode_userdata($id);
         }
@@ -67,8 +66,9 @@ class CategoryController extends Controller
                 $message = "Category updated sucessfully";
             }
             $url = route('admin.category.index');
-            session()->flash('status', 'success');
-            session()->flash('message', $message);
+            session()->flash('success', $message);
+            // session()->flash('status', 'success');
+            // session()->flash('message', $message);
             return response()->json([
                 'success'    =>  true,
                 'url'       =>   $url
@@ -107,14 +107,13 @@ class CategoryController extends Controller
             }
             $category->delete();
             DB::commit();
-            $status = "danger";
+            $status = "success";
             $message = "Category deleted sucessfully";
         } catch (\Exception $e) {
             DB::rollback();
             $status = "danger";
             $message = "Category deletion failed";
         }
-
-        return redirect()->route('admin.category.index')->with(['status' => $status, 'message' => $message]);
+        return redirect()->route('admin.category.index')->with($status, $message);
     }
 }

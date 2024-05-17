@@ -21,13 +21,24 @@ class PartsManagerRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $parameter = $this->route()->parameter('user');
+
+
+        $rules = [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255'],
             'phone_number' => ['required'],
-            'password' => ['required', 'same:confirm_password'],
-            'confirm_password' => ['required']
+
         ];
+
+        if (!$parameter) {
+            $rules['image'] = ['required'];
+            $rules['email'] = ['required', 'string', 'email', 'max:255', 'unique:users'];
+            $rules['password'] =  ['required', 'same:confirm_password'];
+            $rules['confirm_password'] = ['required'];
+        }
+
+        return $rules;
     }
 
     public function messages()

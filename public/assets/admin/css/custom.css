@@ -503,10 +503,11 @@
     padding: 12px 40px 12px 22px;
     vertical-align: middle;
     border-bottom: 0;
+    height: 74px;
 }
 
 .product-detail-table table tr td p {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
 }
 
@@ -523,7 +524,7 @@
 }
 
 .product-detail-table table tr th:last-child {
-    text-align: right;
+    text-align: left;
     padding-right: 40px;
     width: 100px;
 }
@@ -643,4 +644,31 @@ span#editProfile {
     top: 25px;
     right: 25px;
     cursor: pointer;
+}
+.img-upload-box {
+    padding: 35px 0px;
+    border: 2px dashed #E8E8E8;
+    border-radius: 5px;
+
+}
+
+.img-upload-box img {
+    margin: 0 auto;
+    display: block;
+}
+
+.img-upload-box p {
+    font-size: 14px;
+    color: #5c5c5c;
+    text-align: center;
+}
+
+.img-upload-box {
+    margin: 0;
+    width: 100%;
+    cursor: pointer;
+}
+
+.img-upload-box input {
+    display: none;
 }

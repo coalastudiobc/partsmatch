@@ -5,10 +5,12 @@
     <div class="page-content-wrapper">
         <div class="dealer-profile-box">
             <div class="dealer-profile-content">
+                <x-alert-component />
+
                 <div class="dealer-profile-form-box">
                     <div class="dealer-profile-detail-form">
                         <span id="editProfile"><i class="fa-sharp fa-solid fa-edit"></i></span>
-                        <span id="closeEditProfile" class='d-none'><i class="fa-sharp fa-solid fa-close"></i></span>
+                        {{-- <span id="closeEditProfile" class='d-none'><i class="fa-sharp fa-solid fa-close"></i></span> --}}
                         <form id="adminprofile" action="{{ route('admin.profile.update') }}" enctype="multipart/form-data"
                             method="POST">
                             @csrf
@@ -19,8 +21,10 @@
                                             <div class="file-upload-box">
                                                 <label for="file-upload">
                                                     <div class="profile-without-img">
-                                                        <img src="{{ $authUser->profile_picture_url ? Storage::url($authUser->profile_picture_url) : asset('assets/images/user.png') }}"
+                                                        <img src="{{ asset('storage/' . $authUser->profile_picture_url) ?? asset('assets/images/user.png') }}"
                                                             alt="" id="Userimage">
+                                                        {{-- <img src="{{ $authUser->profile_picture_url ? Storage::url($authUser->profile_picture_url) : asset('assets/images/user.png') }}"
+                                                            alt="" id="Userimage"> --}}
                                                     </div>
                                                     <div class="upload-icon d-none editable">
                                                         <i class="fa-sharp fa-solid fa-pen"></i>
@@ -37,10 +41,15 @@
                                     <div class="form-group">
                                         <label for="">Name*</label>
                                         <div class="form-field">
-                                            <input type="text" name="name" class="form-control disabled-inputs"
+                                            <input type="text" name="name"
+                                                class="form-control disabled-inputs @error('name') is-invalid @enderror"
                                                 placeholder="Enter name" disabled
                                                 value="{{ old('name', $authUser->name) }}">
-
+                                            @error('name')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -48,10 +57,15 @@
                                     <div class="form-group">
                                         <label for="">Email*</label>
                                         <div class="form-field">
-                                            <input type="email" name="email" class="form-control disabled-inputs"
+                                            <input type="email" name="email"
+                                                class="form-control disabled-inputs @error('email') is-invalid @enderror"
                                                 placeholder="Enter email" disabled
                                                 value="{{ old('email', $authUser->email) }}">
-
+                                            @error('email')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -59,10 +73,15 @@
                                     <div class="form-group">
                                         <label for="">Phone Number</label>
                                         <div class="form-field">
-                                            <input type="tel" name="phone_number" class="form-control disabled-inputs"
+                                            <input type="tel" name="phone_number"
+                                                class="form-control disabled-inputs @error('phone_number') is-invalid @enderror"
                                                 placeholder="Enter phone number" name="phone_number" disabled
                                                 value="{{ old('phone_number', $authUser->phone_number) }}">
-
+                                            @error('phone_number')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -71,10 +90,14 @@
                                     <div class="form-group">
                                         <label for="">Password</label>
                                         <div class="form-field">
-                                            <input type="password" name="password" id="password"
-                                                class="form-control disabled-inputs" placeholder="*********" disabled
-                                                value="{{ old('password') }}">
-
+                                            <input type="password" name="password" id="conPassword"
+                                                class="form-control disabled-inputs @error('password') is-invalid @enderror"
+                                                placeholder="*********" disabled value="{{ old('password') }}">
+                                            @error('password')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -83,15 +106,25 @@
                                         <label for="">Confirm password</label>
                                         <div class="form-field">
                                             <input type="password" name="confirm_password"
-                                                class="form-control disabled-inputs" placeholder="*********" disabled
-                                                value="{{ old('confirm_password') }}">
-
+                                                class="form-control disabled-inputs @error('confirm_password') is-invalid @enderror"
+                                                placeholder="*********" disabled value="{{ old('confirm_password') }}">
+                                            @error('confirm_password')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <div class="dealer-profile-form-btn">
-                                        <button class="btn primary-btn d-none editable">Submit</button>
+                                    <div class="d-flex justify-content-center gap-3">
+                                        <div class="dealer-profile-form-btn">
+                                            <button class="btn primary-btn d-none editable">Submit</button>
+                                        </div>
+                                        <div>
+                                            <a href="{{ url()->current() }}"
+                                                class="cancelbtn btn primary-btn d-none editable">Cancel</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

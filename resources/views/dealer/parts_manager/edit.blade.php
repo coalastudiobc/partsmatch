@@ -19,7 +19,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">Name</label>
+                                                <label for="">Name*</label>
                                                 <div class="form-field">
                                                     <input type="text" name="name"
                                                         class="form-control @error('name') is-invalid @enderror"
@@ -34,12 +34,16 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">email</label>
+                                                <label for="">email*</label>
                                                 <div class="form-field">
                                                     <input type="text" name="email"
                                                         class="form-control @error('email') is-invalid @enderror"
                                                         value="{{ old('email', $user->email) }}">
-
+                                                    @error('email')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                 </div>
                                             </div>
                                         </div>
@@ -58,7 +62,7 @@
                                         </div> --}}
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">phone</label>
+                                                <label for="">phone*</label>
                                                 <div class="form-field">
                                                     <input type="text" name="phone_number"
                                                         class="form-control @error('phone_number') is-invalid @enderror"
@@ -105,7 +109,7 @@
                                             <div class="form-group">
                                                 <label for="">Image</label>
                                                 <div class="form-field">
-                                                    <input type="file" name="image"
+                                                    <input type="file" name="editimage"
                                                         class="form-control @error('image') is-invalid @enderror">
                                                     @error('image')
                                                         <span class="invalid-feedback" role="alert">

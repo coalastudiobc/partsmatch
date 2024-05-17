@@ -300,6 +300,7 @@
 
 .profile-without-img img {
     object-fit: cover;
+    height: 100%;
 }
 
 .upload-icon {

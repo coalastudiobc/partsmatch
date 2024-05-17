@@ -19,6 +19,9 @@
             images: {
                 required: true,
             },
+            stocks_avaliable: {
+                required: true,
+            },
             price: {
                 required: true,
             },
@@ -43,6 +46,9 @@
             },
             images: {
                 required: `{{ __('customvalidation.product.images.required') }}`,
+            },
+            stocks_avaliable: {
+                required: `{{ __('customvalidation.product.stocks_avaliable.required') }}`,
             },
             price: {
                 required: `{{ __('customvalidation.product.price.required') }}`,

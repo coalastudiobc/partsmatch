@@ -10,6 +10,8 @@
                     </div>
                     <div class="login-txt">
                         <h2>Reset Password</h2>
+                        <p>It is a long established fact that a reader will be distracted by</p>
+
                     </div>
                     <div class="login-form">
                         @if (session('status'))
@@ -34,7 +36,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="password">{{ __('Password') }}</label>
+                                <label for="password">{{ __('Password*') }}</label>
                                 <div class="form-field">
                                     <input id="password" type="password"
                                         class="form-control @error('password') is-invalid @enderror" name="password"
@@ -47,7 +49,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="confirm-password">{{ __('Confirm Password') }}</label>
+                                <label for="confirm-password">{{ __('Confirm Password*') }}</label>
                                 <div class="form-field">
                                     <input id="password-confirm" type="password" class="form-control"
                                         name="password_confirmation" autocomplete="new-password">
@@ -58,7 +60,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <button type="submit" class="btn secondary-btn full-btn">Send Password Reset Link</button>
+                            <button type="submit" class="btn secondary-btn full-btn">Reset password</button>
                         </form>
                     </div>
                 </div>
