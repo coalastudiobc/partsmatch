@@ -44,10 +44,7 @@ class ProductController extends Controller
     }
     public function index()
     {
-        // $sdk = \CarApiSdk\CarApi::build([
-        //     'token' => env('CAR_API_KEY'),
-        //     'secret' => env('CAR_API_SECRET'),
-        // ]);
+
         $years = $this->sdk->years();
 
         $products = Product::with('productImage', 'featuredProduct')->where('user_id', auth()->user()->id)->Search()->Paginate(5);
@@ -300,4 +297,25 @@ class ProductController extends Controller
     //     $products = Product::with('productImage')->where('subcategory_id', $subcategory_id)->get();
     //     return view('dealer.products.interior_accessories', compact('products'));
     // }
+
+    public function model($year)
+    {
+        $models = $this->sdk->makes(['query' => ['year' => $year]]);
+        // $make = $this->sdk->models(['query' => ['make' => 'Toyota']]);
+        $modeldata = $models->data;
+        // dd($modeldata, $make, $this->sdk->years());
+        $model = view('components.model-component', compact('modeldata'))->render();
+
+        return response()->json(['success' => true, 'models' => $model]);
+    }
+
+    public function make($model)
+    {
+
+        $make = $this->sdk->models(['query' => ['make' => $model]]);
+        $makedata = $make->data;
+        $make = view('components.make-component', compact('makedata'))->render();
+
+        return response()->json(['success' => true, 'makes' => $make]);
+    }
 }

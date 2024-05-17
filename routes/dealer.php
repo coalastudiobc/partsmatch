@@ -47,6 +47,9 @@ Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer'
         Route::post('/featured/products/create/{product}', [ProductController::class, 'featuredproductcreate'])->name('featured.create');
 
         Route::get('/featured/products/delete/{id}', [ProductController::class, 'featuredproductdelete'])->name('featured.products.delete');
+
+        Route::get('/model/{year}', [ProductController::class, 'model'])->name('model');
+        Route::get('/make/{model}', [ProductController::class, 'make'])->name('make');
     });
     //order
     Route::name('myorder.')->group(function () {

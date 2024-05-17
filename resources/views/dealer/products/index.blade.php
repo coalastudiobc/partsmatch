@@ -254,16 +254,12 @@
                                     <div class="form-field">
                                         {{-- <select class="form-control api_call" name="car_years"
                                             id="car-years"></select> --}}
-                                        <select class="form-control" name="car_years" id="">
+                                        <select class="form-control" name="car_years" id="carYear">
                                             <option>Select year</option>
-                                            <option value="2018">2018</option>
-                                            <option value="2019">2019</option>
-                                            <option value="2020">2020</option>
-                                            <option value="2017">2017</option>
-                                            <option value="2021">2021</option>
-                                            <option value="2016">2016</option>
-                                            <option value="2019">2019</option>
-                                            <option value="2022">2022</option>
+                                            @foreach($years as $year)
+                                            <option value="{{$year}}">{{$year}}</option>
+                                            @endforeach
+                                          
                                         </select>
                                         <span class="form-icon">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8"
@@ -282,16 +278,9 @@
                                     <div class="form-field">
                                         {{-- <select class="form-control api_call" name="car_model"
                                             id="car-makes"></select> --}}
-                                        <select class="form-control" name="car_model" id="">
+                                        <select class="form-control" name="car_model" id="carModel">
                                             <option>Select your country</option>
-                                            <option value="Camry">Camry</option>
-                                            <option value="Civic">Civic</option>
-                                            <option value="F">F</option>
-                                            <option value="Malibu">Malibu</option>
-                                            <option value="3">3</option>
-                                            <option value="E">E</option>
-                                            <option value="A4">A4</option>
-                                            <option value="Sonata">Sonata</option>
+                                            
                                         </select>
                                         <span class="form-icon">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8"
@@ -310,16 +299,9 @@
                                     <div class="form-field">
                                         {{-- <select class="form-control api_call" name="car_make"
                                             id="car-models"></select> --}}
-                                        <select class="form-control" name="car_make" id="Select your country">
+                                        <select class="form-control" name="car_make" id="carMake">
                                             <option>Select your make</option>
-                                            <option value="Toyota">Toyota</option>
-                                            <option value="Honda">Honda</option>
-                                            <option value="Ford">Ford</option>
-                                            <option value="Chevrolet">Chevrolet</option>
-                                            <option value="BMW">BMW</option>
-                                            <option value="Mercedes">Mercedes</option>
-                                            <option value="Audi">Audi</option>
-                                            <option value="Hyundai">Hyundai</option>
+                                           
                                         </select>
                                         <span class="form-icon">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8"
@@ -358,140 +340,7 @@
                     </form>
                 </div>
             </div>
-            {{-- <div class="modal-body">
-                    <div class="add-pro-form">
-                        <h2>Add New Products</h2>
-                        <form action="">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Product Name</label>
-                                        <div class="form-field">
-                                            <input type="text" class="form-control" placeholder="Product Name">
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Product Category</label>
-                                        <div class="form-field">
-                                            <input type="text" class="form-control" placeholder="Product Category">
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Product Description</label>
-                                        <div class="form-field">
-                                            <input type="text" class="form-control" placeholder="Product Description">
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Additional details</label>
-                                        <div class="form-field">
-                                            <input type="text" class="form-control" placeholder="Additional details">
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="">Add Product Images (Up to 5)</label>
-                                        <label class="img-upload-box">
-                                            <img src="images/upload-img.png" alt="">
-                                            <p>Upload Images</p>
-                                            <input type="file">
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Product Quantity</label>
-                                        <div class="form-field">
-                                            <input type="text" class="form-control" placeholder="Product Quantity">
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Product Price</label>
-                                        <div class="form-field">
-                                            <input type="text" class="form-control" placeholder="$000">
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Other specifications</label>
-                                        <div class="form-field">
-                                            <input type="text" class="form-control"
-                                                placeholder="Other specifications">
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Shipping Price</label>
-                                        <div class="form-field">
-                                            <input type="text" class="form-control" placeholder="$000">
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Brand</label>
-                                        <div class="form-field">
-                                            <input type="text" class="form-control" placeholder="Brand">
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Model</label>
-                                        <div class="form-field">
-                                            <input type="text" class="form-control" placeholder="Model">
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Make</label>
-                                        <div class="form-field">
-                                            <input type="text" class="form-control" placeholder="Make">
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <select name="car-years" id="car-years"></select>
-                                    <select name="car-makes" id="car-makes"></select>
-                                    <select name="car-models" id="car-models"></select>
-                                    <select name="car-model-trims" id="car-model-trims"></select>
-                                    <div class="col-md-6">
-                                        <a href="#" class="btn secondary-btn full-btn" data-bs-toggle="modal"
-                                            data-bs-target="#bulk-upload">Bulk Upload</a>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <a href="#" class="btn primary-btn full-btn">submit</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div> --}}
-
-
+           
         </div>
     </div>
 </div>
@@ -597,13 +446,7 @@
 @push('scripts')
 @includeFirst(['validation.dealer.js_product'])
 <script type="text/javascript">
-    // $(document).ready({
-    //     function() {
-    //         var carquery = new CarQuery();
-    //         carquery.init();
-    //         carquery.initYearMakeModelTrim('car-years', 'car-makes', 'car-models', 'car-model-trims');
-    //     }
-    // });
+   
     jQuery(document).on('change', ".category", function() {
         var id = $(this).val();
         if ($(this).val()) {
@@ -653,6 +496,52 @@
     })
 </script>
 <script>
+    jQuery(document).ready(function(){
+        jQuery(document).on('change', '#carYear', function() {
+            
+           var year = jQuery(this).val();
+           var url = APP_URL + '/dealer/model/' + year
+           var response = ajaxCall(url, 'get', null, false);
+                response.then(handleStateData).catch(handleStateError)
+
+                function handleStateData(response) {
+                    if (response.success == true) {
+                        console.log(response.model)
+                        jQuery('#carModel').html(response.models)
+                    } else {
+                        jQuery('#errormessage').html(response.error);
+                    }
+                }
+
+                function handleStateError(error) {
+                    console.log('error', error)
+
+                }
+       });
+
+       jQuery(document).on('change', '#carModel', function() {
+            
+           var model = jQuery(this).val();
+           var url = APP_URL + '/dealer/make/' + model
+           var response = ajaxCall(url, 'get', null, false);
+                response.then(handleStateData).catch(handleStateError)
+
+                function handleStateData(response) {
+                    if (response.success == true) {
+                        console.log(response.model)
+                        jQuery('#carMake').html(response.makes)
+                    } else {
+                        jQuery('#errormessage').html(response.error);
+                    }
+                }
+
+                function handleStateError(error) {
+                    console.log('error', error)
+
+                }
+       });
+    });
+
     jQuery(document).ready(function() {
         jQuery('#submit').click(function(e) {
             var no_image = $('#upload-image').attr('upload-image-count');
@@ -661,18 +550,11 @@
                 return toastr.error("Please enter atleast 5 images");
             }
             // var formData = new FormData($('form#product').get(0));
-
             $('#product').valid()
-
-
         });
     });
 
     $(function() {
-        // var carquery = new CarQuery();
-        // carquery.init();
-        // carquery.initYearMakeModelTrim('car-years', 'car-makes', 'car-models', 'car-model-trims');
-
         // Multiple images preview with JavaScript
         var previewImages = function(input, imgPreviewPlaceholder) {
             if (input.files) {
@@ -705,7 +587,6 @@
 
             $(this).parent('div').parent('div').remove();
         });
-
     });
 </script>
 @endpush
