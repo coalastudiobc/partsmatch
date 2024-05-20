@@ -162,7 +162,7 @@ h4 {
     font-size: 24px;
 }
 h6{
-    font-size: 20px;   
+    font-size: 20px;
 } */
 
 
@@ -1486,3 +1486,11 @@ span.doller-symbol-txt.symbol {
     background-color: #ECFEF3;
     cursor: pointer;
 }
+.table-responsive::-webkit-scrollbar:horizontal {
+    width: 2px;
+}
+
+.sidebar-filter{
+    margin: 0 0 20px;
+}
+

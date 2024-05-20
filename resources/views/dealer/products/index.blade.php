@@ -3,9 +3,15 @@
 @section('heading', 'Product Management')
 
 @section('content')
+
     <div class="dashboard-right-box">
         <x-alert-component />
-
+        <div class="sidebar-filter">
+            <a href="#" id="sidebar-btn" class="btn secondary-btn sidebar-filter-btn">
+                <i class="fa-solid fa-filter"></i>
+                Filter
+            </a>
+        </div>
         <div class="serach-and-filter-box">
             <form action="">
                 <div class="pro-search-box">
@@ -256,10 +262,10 @@
                                             id="car-years"></select> --}}
                                         <select class="form-control" name="car_years" id="carYear">
                                             <option>Select year</option>
-                                            @foreach($years as $year)
-                                            <option value="{{$year}}">{{$year}}</option>
+                                            @foreach ($years as $year)
+                                                <option value="{{ $year }}">{{ $year }}</option>
                                             @endforeach
-                                          
+
                                         </select>
                                         <span class="form-icon">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8"
@@ -280,7 +286,7 @@
                                             id="car-makes"></select> --}}
                                         <select class="form-control" name="car_model" id="carModel">
                                             <option>Select your country</option>
-                                            
+
                                         </select>
                                         <span class="form-icon">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8"
@@ -301,7 +307,7 @@
                                             id="car-models"></select> --}}
                                         <select class="form-control" name="car_make" id="carMake">
                                             <option>Select your make</option>
-                                           
+
                                         </select>
                                         <span class="form-icon">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8"
@@ -340,7 +346,7 @@
                     </form>
                 </div>
             </div>
-           
+
         </div>
     </div>
 </div>
@@ -446,7 +452,6 @@
 @push('scripts')
 @includeFirst(['validation.dealer.js_product'])
 <script type="text/javascript">
-   
     jQuery(document).on('change', ".category", function() {
         var id = $(this).val();
         if ($(this).val()) {
@@ -496,50 +501,50 @@
     })
 </script>
 <script>
-    jQuery(document).ready(function(){
+    jQuery(document).ready(function() {
         jQuery(document).on('change', '#carYear', function() {
-            
-           var year = jQuery(this).val();
-           var url = APP_URL + '/dealer/model/' + year
-           var response = ajaxCall(url, 'get', null, false);
-                response.then(handleStateData).catch(handleStateError)
 
-                function handleStateData(response) {
-                    if (response.success == true) {
-                        console.log(response.model)
-                        jQuery('#carModel').html(response.models)
-                    } else {
-                        jQuery('#errormessage').html(response.error);
-                    }
+            var year = jQuery(this).val();
+            var url = APP_URL + '/dealer/model/' + year
+            var response = ajaxCall(url, 'get', null, false);
+            response.then(handleStateData).catch(handleStateError)
+
+            function handleStateData(response) {
+                if (response.success == true) {
+                    console.log(response.model)
+                    jQuery('#carModel').html(response.models)
+                } else {
+                    jQuery('#errormessage').html(response.error);
                 }
+            }
 
-                function handleStateError(error) {
-                    console.log('error', error)
+            function handleStateError(error) {
+                console.log('error', error)
 
+            }
+        });
+
+        jQuery(document).on('change', '#carModel', function() {
+
+            var model = jQuery(this).val();
+            var url = APP_URL + '/dealer/make/' + model
+            var response = ajaxCall(url, 'get', null, false);
+            response.then(handleStateData).catch(handleStateError)
+
+            function handleStateData(response) {
+                if (response.success == true) {
+                    console.log(response.model)
+                    jQuery('#carMake').html(response.makes)
+                } else {
+                    jQuery('#errormessage').html(response.error);
                 }
-       });
+            }
 
-       jQuery(document).on('change', '#carModel', function() {
-            
-           var model = jQuery(this).val();
-           var url = APP_URL + '/dealer/make/' + model
-           var response = ajaxCall(url, 'get', null, false);
-                response.then(handleStateData).catch(handleStateError)
+            function handleStateError(error) {
+                console.log('error', error)
 
-                function handleStateData(response) {
-                    if (response.success == true) {
-                        console.log(response.model)
-                        jQuery('#carMake').html(response.makes)
-                    } else {
-                        jQuery('#errormessage').html(response.error);
-                    }
-                }
-
-                function handleStateError(error) {
-                    console.log('error', error)
-
-                }
-       });
+            }
+        });
     });
 
     jQuery(document).ready(function() {

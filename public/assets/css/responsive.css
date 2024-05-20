@@ -199,6 +199,10 @@
     .messanger-product-img {
         min-width: 47px;
     }
+    .sidebar-filter{
+        margin: 0 0 20px;
+        display: block;
+    }
 }
 
 @media screen and (max-width:992px) {
