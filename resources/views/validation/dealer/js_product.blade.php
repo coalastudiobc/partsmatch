@@ -60,5 +60,12 @@
         };
 
         handleValidation('product', rules, messages);
+        jQuery('#sidebar-btn').on('click', function(e) {
+            jQuery('.dashboard-left-box').addClass('open');
+        });
+        jQuery('.sidebar-cross-icon').on('click', function(e) {
+            jQuery('.dashboard-left-box').removeClass('open');
+        });
+
     });
 </script>

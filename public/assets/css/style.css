@@ -1482,10 +1482,12 @@ button.btn-close {
     justify-content: center;
     align-items: center;
     position: absolute;
-    top: -18px;
-    right: 0px;
+    top: -8px;
+    right: -6px;
+    height: 18px;
     width: 18px;
     color: #fff;
+    font-size: 11px;
 }
 
 .categories-boxes>a {
@@ -1622,6 +1624,27 @@ span.sidebar-cross-icon {
 span.sidebar-cross-icon i{
     font-size: 18px;
 }
+
+.table-responsive::-webkit-scrollbar:horizontal {
+    height: 2px;
+}
+
+.sidebar-filter{
+    margin: 0 0 20px;
+    display: none;
+}
+.page-content-sec .dashboard-left-box.open{
+    transform: translateX(0);
+}
+.collection-box .add-cart-btn:has(span){
+    padding: 8px;
+    border-radius: 10px;
+    font-size: 13px;
+}
+.collection-box .add-cart-btn span{
+    text-transform: capitalize;
+}
+
 @media(max-width:1024px){
     .page-content-sec .dashboard-left-box {
         position: fixed;

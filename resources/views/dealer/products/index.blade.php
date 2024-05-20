@@ -3,9 +3,15 @@
 @section('heading', 'Product Management')
 
 @section('content')
+
     <div class="dashboard-right-box">
         <x-alert-component />
-
+        <div class="sidebar-filter">
+            <a href="#" id="sidebar-btn" class="btn secondary-btn sidebar-filter-btn">
+                <i class="fa-solid fa-filter"></i>
+                Filter
+            </a>
+        </div>
         <div class="serach-and-filter-box">
             <form action="">
                 <div class="pro-search-box">

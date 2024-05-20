@@ -94,7 +94,7 @@
                                                             alt="">
                                                         {{ $authUser->name }}
                                                     </button>
-                                                    <ul class="dropdown-menu">
+                                                    <ul class="dropdown-menu dropdown-menu-end">
                                                         <li><a class="dropdown-item"
                                                                 href="{{ route('dealer.profile') }}">Profile</a>
                                                         </li>
