@@ -47,14 +47,14 @@ class ProductController extends Controller
 
         $years = $this->sdk->years();
 
-        $products = Product::with('productImage', 'featuredProduct')->where('user_id', auth()->user()->id)->Search()->Paginate(5);
+        $products = Product::with('productImage', 'featuredProduct')->where('user_id', auth()->user()->id)->orderBy('id', 'DESC')->Search()->Paginate(5);
 
         // $subscription =  DB::table('subscriptions')->where('user_id', auth()->user()->id)->first();
         return view('dealer.products.index', compact('years', 'products'));
     }
 
     /**
-     * Show the form for creating a new resource.   
+     * Show the form for creating a new resource.
      */
     public function create()
     {

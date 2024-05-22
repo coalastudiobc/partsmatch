@@ -310,21 +310,16 @@
 
             });
         });
-
-        
-
     </script>
     <script>
         $(document).ready(function() {
             $("#file-upload").change(function() {
                 if (this.files && this.files[0]) {
-
                     var reader = new FileReader();
-
                     reader.onload = function(e) {
                         $('#Userimage').attr('src', e.target.result);
                     }
-
+                    jQuery('#file-upload-error').hide();
                     reader.readAsDataURL(this.files[0]);
                 }
             });

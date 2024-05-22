@@ -22,7 +22,8 @@ class DealerController extends Controller
     }
     public function products(User $user)
     {
-        $products = Product::where('user_id', $user->id)->get();
+        $products = Product::where('user_id', $user->id)->Search()->get();
+
         return view('admin.user.product_list', compact('products', 'user'));
     }
     public function toggleStatus(Request $request)

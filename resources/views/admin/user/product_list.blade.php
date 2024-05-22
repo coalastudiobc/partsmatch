@@ -5,9 +5,16 @@
 @section('content')
 
     <div class="dashboard-right-box">
+        <form action="">
+            <div class="pro-search-box">
+                <input type="text" name="filter_by_name" class="form-control" placeholder="Search Product By Name">
+                <button type="submit" class="btn primary-btn">Search</button>
+            </div>
+        </form>
         <div class="product-detail-table user-list-table">
             <div class="table-responsive">
                 <table class="table">
+
                     <tr>
                         <th>
                             <p>Name</p>
@@ -25,8 +32,8 @@
                             <p>Status</p>
                         </th>
                         <!-- <th>
-                                                                                <p>View details</p>
-                                                                            </th> -->
+                                   <p>View details</p>
+                                 </th> -->
                     </tr>
                     @forelse ($products as $key => $product)
                         <tr>

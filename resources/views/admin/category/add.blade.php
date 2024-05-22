@@ -59,12 +59,16 @@
                                                             </div>
                                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                                                 @foreach ($selective as $option)
-                                                                    <li><a class="dropdown-item custom_dropdown_item @if ($option->id == $category->parent_id) active @endif"
-                                                                            @if ($option->id == $category->parent_id) selected @endif
-                                                                            data-value="{{ $option->id }}"
-                                                                            data-text="{{ $option->name }}"
-                                                                            href="javascript:void(0)">{{ $option->name }}</a>
-                                                                    </li>
+                                                                    @if ($option->id == $category->id)
+                                                                        @continue;
+                                                                    @else
+                                                                        <li><a class="dropdown-item custom_dropdown_item @if ($option->id == $category->parent_id) active @endif"
+                                                                                @if ($option->id == $category->parent_id) selected @endif
+                                                                                data-value="{{ $option->id }}"
+                                                                                data-text="{{ $option->name }}"
+                                                                                href="javascript:void(0)">{{ $option->name }}</a>
+                                                                        </li>
+                                                                    @endif
                                                                 @endforeach
 
                                                             </ul>
