@@ -274,12 +274,12 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">Model*</label>
+                                    <label for="">Make*</label>
                                     <div class="form-field">
                                         {{-- <select class="form-control api_call" name="car_model"
                                             id="car-makes"></select> --}}
                                         <select class="form-control" name="car_model" id="carModel">
-                                            <option>Select your country</option>
+                                            <option>Select your make</option>
                                             
                                         </select>
                                         <span class="form-icon">
@@ -295,12 +295,12 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">Make*</label>
+                                    <label for="">Model*</label>
                                     <div class="form-field">
                                         {{-- <select class="form-control api_call" name="car_make"
                                             id="car-models"></select> --}}
                                         <select class="form-control" name="car_make" id="carMake">
-                                            <option>Select your make</option>
+                                            <option>Select your model</option>
                                            
                                         </select>
                                         <span class="form-icon">
