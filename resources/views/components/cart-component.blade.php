@@ -49,7 +49,9 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td class="total">{{ $product->quantity * $product->product->price }}
+                                            {{-- @dd($product->quantity, $product->product->price); --}}
+                                            <td class="total">
+                                                {{ $product->quantity ? ($product->product ? $product->quantity * $product->product->price : ' ') : ' ' }}
                                             </td>
                                             <td> <a data-product_id="{{ $product->id }}" href="javascript:void(0)"
                                                     class="cartDelete"><i style="color: #E13F3F;"
