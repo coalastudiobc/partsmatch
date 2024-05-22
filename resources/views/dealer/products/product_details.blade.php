@@ -100,11 +100,17 @@
                                     </div>
                                     <div class="shipping-charge">
                                         <h3>Shipping Charges</h3>
-                                        <h5>${{ $shippingCharge->value }}</h5>
+                                        <h5>${{ $shippingCharge->value ?? 'shippingCharge->value' }}</h5>
                                     </div>
                                     <div class="product-total">
                                         <h3>Total</h3>
-                                        <h5>${{ $product->price + $shippingCharge->value }}</h5>
+                                        @isset($shippingCharge->value)
+                                            <h5>${{ $product->price + $shippingCharge->value }}</h5>
+                                        @else
+                                            <h5>there is shipping charges vlaue</h5>
+                                        @endisset
+
+
                                     </div>
                                 </div>
                                 @if (auth()->user())

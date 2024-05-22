@@ -113,11 +113,16 @@
     background: var(--white);
     margin: 0px 9px;
     max-width: 232px;
+    height: 232px;
     cursor: pointer;
     border: 2px solid transparent;
 
 }
-
+.multi-img-box img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
 .multi-img-box:hover {
     border: 2px solid var(--border-color);
 }
@@ -163,10 +168,15 @@
     justify-content: center;
     align-items: center;
     padding: 40px 0px;
+    max-width: 400px;
+    margin: 0 auto;
+    height: 400px;
 }
 
 .parts-image-box img {
-    max-width: 540px;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .next-btn-parts.slick-arrow {
@@ -893,9 +903,9 @@
     color: red;
 }
 
-.singlr-pro-detail {
+/* .singlr-pro-detail {
     background-color: #F6F6F6;
-}
+} */
 
 .singlr-pro-detail .accordion-button {
     background-color: #F6F6F6;
@@ -905,6 +915,7 @@
 
 .singlr-pro-detail .accordion-item {
     background-color: #F6F6F6;
+    padding: 10px;
 }
 
 .quantity-btn input {
@@ -912,11 +923,11 @@
 }
 
 .quantity-btn input {
-    max-width: 20px;
-    border: 0;
-    font-size: 12px;
+	max-width: 20px;
+	border: 0;
+	font-size: 12px;
+	text-align: center;
 }
-
 .dropdown-item:focus,
 .dropdown-item:hover {
     color: #fff;

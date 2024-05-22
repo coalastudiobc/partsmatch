@@ -49,7 +49,9 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td class="total">{{ $product->quantity * $product->product->price }}
+                                            {{-- @dd($product->quantity, $product->product->price); --}}
+                                            <td class="total">
+                                                {{ $product->quantity ? ($product->product ? $product->quantity * $product->product->price : ' ') : ' ' }}
                                             </td>
                                             <td> <a data-product_id="{{ $product->id }}" href="javascript:void(0)"
                                                     class="cartDelete"><i style="color: #E13F3F;"
@@ -102,7 +104,9 @@
                     </div>
                     <div class="cart-wrapper">
                         <p class="cart-txt">Shipping</p>
-                        <p class="price-txt">{{ number_format($shippingCharge->value, 2, '.', ',') }}</p>
+                        <p class="price-txt">
+                            {{ number_format($shippingCharge->value, 2, '.', ',') }}
+                        </p>
                     </div>
                     <div class="sub-total-wrapper">
                         <h3>Payable Total</h3>

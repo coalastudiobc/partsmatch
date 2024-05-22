@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ChangePasswordRequest;
 use App\Models\Cart;
-use App\Models\CartProduct;
-use App\Models\Category;
-use App\Models\Product;
 use App\Models\User;
+use App\Models\Product;
+use App\Models\Category;
+use App\Models\CartProduct;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\ChangePasswordRequest;
 
 class HomeController extends Controller
 {
@@ -33,11 +34,10 @@ class HomeController extends Controller
 
     public function index($subcategory_id = null)
     {
-        // dd('home', $subcategory_id);
         $category = Category::where('status', '1')->get();
         $collections = Category::with('products.cartProduct')->where('parent_id', '!=', null)->where('status', '1')->inRandomOrder()->get();
+        // dd('home', $collections);
         $subcategories = Category::with('products')->where('parent_id', '!=', null)->where('status', '1')->inRandomOrder()->get();
-
         return view('welcome', compact('category', 'subcategories', 'collections', "subcategory_id"));
     }
     public function categoryCard()

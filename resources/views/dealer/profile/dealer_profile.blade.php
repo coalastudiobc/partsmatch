@@ -24,7 +24,8 @@
                                                     <div class="file-upload-box">
                                                         <label for="file-upload">
                                                             <div class="profile-without-img">
-                                                                <img src="{{ Storage::url($user->profile_picture_url) }}"
+                                                                {{-- @dd($user->profile_picture_url) --}}
+                                                                <img src="{{ Storage::url($user->profile_picture_url) }} "
                                                                     alt="img">
                                                                 {{-- <div class="upload-icon">
                                                                     <i class="fa-sharp fa-solid fa-pen"></i>

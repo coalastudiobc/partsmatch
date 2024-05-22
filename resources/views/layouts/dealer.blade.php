@@ -59,7 +59,7 @@
                                                             alt="">
                                                         {{ $authUser->name }}
                                                     </button>
-                                                    <ul class="dropdown-menu">
+                                                    <ul class="dropdown-menu dropdown-menu-end">
                                                         <li><a class="dropdown-item"
                                                                 href="{{ route('dealer.profile') }}">Profile</a></li>
                                                         <li><a class="dropdown-item"
@@ -96,7 +96,9 @@
     </section>
     <main>
         <section class="page-content-sec">
+
             <div class="container">
+
                 <div class="page-content-wrapper">
                     <div class="dc-content-wrapper">
                         @include('dealer.sidebar')
@@ -104,6 +106,7 @@
                     </div>
 
                 </div>
+
             </div>
         </section>
     </main>

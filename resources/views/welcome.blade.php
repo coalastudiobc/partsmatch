@@ -279,6 +279,8 @@
 
                 </div>
 
+
+                {{-- @if (!$collections) --}}
                 <a href="{{ route('dealer.products.interior', ['category' => $collections[0]->id]) }}"
                     class="btn secondary-btn view-btn" id="collectioViewAll">
                     View All
@@ -298,10 +300,13 @@
                 </a>
             </div>
             <div class="collection-boxes productIndex">
-                @include('components.home-product', ['products' => $collections[0]->products])
+
+                @include('components.home-product', ['products' => $collections[0]->productForWelcome])
             </div>
         </div>
     </div>
+
+    {{-- @endif --}}
 </section>
 <section class="more-product-sec">
     <div class="container">
@@ -322,6 +327,7 @@
 
 
                         <li class="nav-item" role="presentation">
+                            {{-- @if (!$collections) --}}
                             <a href="{{ route('dealer.products.interior', ['category' => $subcategories[0]->id]) }}"
                                 class="nav-link" id="subcategoryViewAll">
                                 View All
@@ -343,15 +349,17 @@
                         aria-labelledby="home-tab" tabindex="0">
                         <div class="more-product-boxes tabProduct">
                             @include('components.home-product-tab', [
-                                'products' => $subcategories[0]->products,
+                                'products' => $subcategories[0]->productForWelcome,
                             ])
                         </div>
                     </div>
                 </div>
             </div>
+            {{-- @endif --}}
         </div>
     </div>
 </section>
+
 <section class="shop-by-brands-sec">
     <div class="container">
         <div class="shop-by-brands-wrapper">
@@ -514,7 +522,6 @@
         });
 
         $('.collectionSubcategory').on('click', function() {
-            console.log('here');
             element = jQuery(this);
             dataUrl = $(this).attr('data-url');
             jQuery('#collectioViewAll').attr('href', dataUrl);
