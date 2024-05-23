@@ -461,7 +461,7 @@
                                                                         Thanks for Signing Up,</h2> --}}
                                                                     <h4
                                                                         style="font-size: 27px; color: #323232 !important;text-align: center;font-style: normal;font-weight: bold;letter-spacing: -1px;padding-top: 5px;">
-                                                                        Hello</h4>
+                                                                        Hello Admin</h4>
                                                                     <p
                                                                         style="box-sizing: border-box; position: relative; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; margin-top: 0; font-size: 16px; font-family: 'Inter', sans-serif; color: #606060; line-height: 24px;text-align:center;">
                                                                         Welcome to Parts Match. </p>
@@ -470,8 +470,9 @@
                                                                         {{ $user->name }} is registered successfully
                                                                     </p>
                                                                     <strong
-                                                                        style="box-sizing: border-box; font-family: 'Inter', sans-serif; position: relative;">Please
-                                                                        verify your email below to join the party.
+                                                                        style="box-sizing: border-box; font-family: 'Inter', sans-serif; position: relative;">
+                                                                        {{-- Please
+                                                                         verify your email below to join the party. --}}
                                                                     </strong>
                                                                 </td>
                                                                 <td style="width: 10%;"></td>

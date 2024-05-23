@@ -31,10 +31,10 @@ class ProductController extends Controller
 
         $filePath = asset('text.txt');
         $jwt = file_get_contents($filePath);
+        // dd($jwt);
         if (empty($jwt) || $this->sdk->loadJwt($jwt)->isJwtExpired() !== false) {
             try {
                 $jwt = $this->sdk->authenticate();
-                // dd($jwt, "here");
                 file_put_contents($filePath, $jwt);
             } catch (\CarApiSdk\CarApiException $e) {
                 // handle errors here
@@ -142,9 +142,10 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
+        $years = $this->sdk->years();
         $category = Category::where('id', $product->subcategory_id)->first();
         $images = ProductImage::where('product_id', $product->id)->get();
-        return view('dealer.products.edit', compact('product', 'category', 'images'));
+        return view('dealer.products.edit', compact('years', 'product', 'category', 'images'));
     }
 
     /**
@@ -255,10 +256,10 @@ class ProductController extends Controller
         ];
 
         FeaturedProduct::create($featured_product);
-        session()->flash('success', 'Featured plan created Successfully');
+        // session()->flash('success', 'Featured plan created Successfully');
         return response()->json([
             'status' => true,
-            'message' => 'Successfully created'
+            'message' => 'Featured plan created Successfully'
         ], 200);
     }
     public function featuredproductdelete(FeaturedProduct $id)

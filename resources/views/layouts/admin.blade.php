@@ -118,6 +118,8 @@
         </div>
 
     </footer>
+    @yield('modals')
+
     <script src="{{ asset('assets/admin/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/admin/js/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/admin/js/daterangepicker.js') }}"></script>

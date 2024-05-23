@@ -365,9 +365,11 @@
                                             </div> --}}
                                     </div>
                                 </div>
-                                <input type="hidden" name="total_amount" value="{{ $total_amount }}">
+
+                                <input type="hidden" name="total_amount"
+                                    value="{{ $total_amount + $shippingCharge->value }}">
                                 <button type="submit" class="btn secondary-btn full-btn">Pay Now
-                                    {{ $total_amount }}</button>
+                                    {{ $total_amount + $shippingCharge->value }}</button>
                                 </form>
                             </div>
                         </div>

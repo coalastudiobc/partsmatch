@@ -11,10 +11,9 @@
                 <button type="submit" class="btn primary-btn">Search</button>
             </div>
         </form>
-        <div class="product-detail-table user-list-table">
+        <div class="product-detail-table product-list-table">
             <div class="table-responsive">
                 <table class="table">
-
                     <tr>
                         <th>
                             <p>Name</p>
@@ -25,15 +24,15 @@
                         <th>
                             <p>Price</p>
                         </th>
-                        <th>
+                        {{-- <th>
                             <p>Shipping Price</p>
-                        </th>
+                        </th> --}}
                         <th>
                             <p>Status</p>
                         </th>
-                        <!-- <th>
-                                   <p>View details</p>
-                                 </th> -->
+                        <th>
+                            <p>View details</p>
+                        </th>
                     </tr>
                     @forelse ($products as $key => $product)
                         <tr>
@@ -46,9 +45,9 @@
                             <td>
                                 <p>{{ $product->price ? $product->price : 'N/A' }}</p>
                             </td>
-                            <td>
+                            {{-- <td>
                                 <p>{{ $product->shipping_price ? $product->shipping_price : 'N/A' }}</p>
-                            </td>
+                            </td> --}}
 
                             <td>
                                 <div class="toggle-btn">
@@ -58,10 +57,11 @@
                                         url="{{ route('product.status') }}"><label for="switch{{ $key }}"></label>
                                 </div>
                             </td>
-                            {{-- <td>
-                                <a href="{{ route('admin.dealers.product.edit',[$product->id])}}"class="btn action-view-btn">View
+                            <td>
+                                <a href="javascript:void(0)" class="btn action-view-btn productDetails"
+                                    data-url="{{ route('admin.dealers.product.detail', [$product->id]) }}">View
                                     details</a>
-                            </td> --}}
+                            </td>
                         </tr>
                     @empty
                         <tr>
@@ -81,6 +81,70 @@
         </div>
     </div>
 @endsection
-
+@section('modals')
+    <div id="productDetailsModel">
+        <div class="modal fade" id="pro-detail-model" tabindex="-1" aria-labelledby="bulk-upload" aria-hidden="true"
+            data-bs-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content" id="ajax-form-html">
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
 @push('scripts')
+    <script>
+        jQuery(document).ready(function() {
+            jQuery('.productDetails').on('click', function() {
+                var url = $(this).attr('data-url');
+                var response = ajaxCall(url, 'get', null, false);
+                response.then(handleStateData).catch(handleStateError)
+
+                function handleStateData(response) {
+                    if (response.success == true) {
+                        jQuery("#pro-detail-model").modal('show');
+                        jQuery('#ajax-form-html').html(response.model)
+
+                    } else {
+                        jQuery('#errormessage').html(response.error);
+                    }
+                }
+
+                function handleStateError(error) {
+                    console.log('error', error)
+
+                }
+            })
+        });
+    </script>
+    {{-- <script>
+        jQuery(document).ready(function() {
+            $(document).lord('.product-slider').slick({
+                dots: false,
+                infinite: true,
+                speed: 500,
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 2000,
+                arrows: true,
+                responsive: [{
+                        breakpoint: 600,
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 1
+                        }
+                    },
+                    {
+                        breakpoint: 400,
+                        settings: {
+                            arrows: false,
+                            slidesToShow: 1,
+                            slidesToScroll: 1
+                        }
+                    }
+                ]
+            });
+        });
+    </script> --}}
 @endpush

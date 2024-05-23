@@ -70,6 +70,7 @@ Route::middleware(['auth', 'verified', 'admin'])->namespace('App\Http\Controller
       Route::get('dealer/profile/{user}', 'DealerController@dealerProfile')->name('show');
       Route::get('product/list/{user?}', 'DealerController@products')->name('product.list');
       Route::match(['GET', 'POST'], 'product/edit/{product}', 'DealerController@productedit')->name('product.edit');
+      Route::match(['GET', 'POST'], 'product/details/{product}', 'DealerController@productdetail')->name('product.detail');
       // // Route::post('user/store/{id?}', 'UserController@store')->name('store');
       // Route::get('user/edit/{id}', 'UserController@edit')->name('edit');
       // Route::get('user/delete/{id}', 'UserController@destroy')->name('delete');
