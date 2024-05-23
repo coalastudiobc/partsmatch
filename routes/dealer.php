@@ -83,5 +83,6 @@ Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer'
         Route::get('parts/manager/edit/{user}', [PartsManagerController::class, 'edit'])->name('edit');
         Route::post('parts/manager/update/{user}', [PartsManagerController::class, 'update'])->name('update');
         Route::get('parts/manager/delete/{user}', [PartsManagerController::class, 'delete'])->name('delete');
+        Route::get('partsmanager/userDetails/{user}', [PartsManagerController::class, 'getPartManagerDetail'])->name('userDetails');
     });
 });

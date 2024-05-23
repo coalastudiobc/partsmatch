@@ -88,7 +88,7 @@
                             <div class="action-btns">
                                 <a href="{{ route('dealer.products.edit', $product->id) }}"><i
                                         class="fa-solid fa-pen-to-square" style="color: #3EBE62;"></i></a>
-                                <a href="{{ route('dealer.products.delete', $product->id) }}"><i
+                                <a class="delete" href="{{ route('dealer.products.delete', $product->id) }}"><i
                                         class="fa-regular fa-trash-can" style="color: #E13F3F;"></i></a>
                             </div>
                         </td>

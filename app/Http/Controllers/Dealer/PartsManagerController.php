@@ -45,25 +45,49 @@ class PartsManagerController extends Controller
 
     public function update(PartsManagerRequest $request, User $user)
     {
-        $users = [
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone_number' => $request->phone_number,
-            'working_for' => auth()->user()->id,
-        ];
-        if ($request->editimage) {
-            $image = store_image($request->editimage, 'profile_pictures');
-            $users['profile_picture_url'] = $image['url'];
-            $users['profile_picture_file'] = $image['name'];
-        }
 
-        $userdetails = $user->update($users);
-        // $userdetails->assignRole('Manager');
-        return redirect()->back()->with(['status' => 'success', 'message' => "created successfully"]);
+        try {
+            $users = [
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone_number' => $request->phone_number,
+                'working_for' => auth()->user()->id,
+            ];
+
+            if ($request->password && $request->confirm_password) {
+                if ($request->password === $request->confirm_password) {
+                    $users = ['password' => Hash::make($request->password)];
+                } else {
+                    return redirect()->back()->with(['status' => 'error', 'message' => config('customvalidation.user.confirm_password.required')]);
+                }
+            }
+            if ($request->editimage) {
+                $image = store_image($request->editimage, 'profile_pictures');
+                $users['profile_picture_url'] = $image['url'];
+                $users['profile_picture_file'] = $image['name'];
+            }
+
+            $userdetails = $user->update($users);
+            // $userdetails->assignRole('Manager');
+            return redirect()->back()->with(['status' => 'success', 'message' => "User details update successfully"]);
+        } catch (\Throwable $th) {
+            return redirect()->back()->with(['status' => 'error', 'message' => $th->getMessage()]);
+        }
     }
     public function delete(User $user)
     {
         $user->delete();
         return redirect()->back()->with(['status' => "success", 'message' => 'successfully deleted']);
+    }
+    public function getPartManagerDetail(User $user)
+    {
+        $data = [
+            'name' => $user->name,
+            'email' => $user->email,
+            'phone' => $user->phone_number,
+            'role' => $user->role,
+            'profile_pic_url' => $user->profile_picture_url,
+        ];
+        return response()->json(['data' => $data]);
     }
 }

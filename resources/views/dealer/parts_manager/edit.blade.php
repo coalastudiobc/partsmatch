@@ -17,6 +17,28 @@
                                     enctype="multipart/form-data" method="post">
                                     @csrf
                                     <div class="row">
+                                        <div class="upload-img">
+                                            <div class="file-upload-box">
+                                                <label for="file-upload">
+                                                    <div class="profile-without-img">
+                                                        <img src=" @if ($user->profile_picture_url) {{ Storage::url($user->profile_picture_url) }}  @else {{ asset('assets/images/user.png') }} @endif "
+                                                            id="Userimage" alt="">
+                                                    </div>
+                                                    <input type="file" name="editimage" id="file-upload"
+                                                        class="@error('editimage') is-invalid @enderror">
+                                                    @error('editimage')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>ksajdfklaskl</strong>
+                                                        </span>
+                                                    @enderror
+                                                    <div class="upload-icon">
+                                                        <img src="{{ asset('assets/images/upload.png') }}" alt="">
+
+                                                    </div>
+                                                </label>
+                                            </div>
+                                            <h3>Upload profile picture*</h3>
+                                        </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="">Name*</label>
@@ -90,7 +112,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        {{-- <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="">role</label>
                                                 <div class="form-field">
@@ -118,8 +140,35 @@
                                                     @enderror
                                                 </div>
                                             </div>
+                                        </div> --}}
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="Password">Password</label>
+                                                <div class="form-field">
+                                                    <input type="password" name="password"
+                                                        class="form-control @error('password') is-invalid @enderror">
+                                                    @error('password')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
                                         </div>
-
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="">Confirm Password</label>
+                                                <div class="form-field">
+                                                    <input type="password" name="confirm_password"
+                                                        class="form-control @error('confirm_password') is-invalid @enderror">
+                                                    @error('confirm_password')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="col-md-6">
                                             <a href="{{ route('dealer.partsmanager.index') }}"
                                                 class="btn secondary-btn full-btn mr-1">Back</a>
@@ -138,8 +187,26 @@
             </div>
         </section>
     </div>
-@endsection
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var fileUpload = document.getElementById('file-upload');
+            var userImage = document.getElementById('Userimage');
+            // var fileUploadError = document.getElementById('file-upload-error');
 
+            fileUpload.addEventListener('change', function() {
+                if (this.files && this.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        userImage.setAttribute('src', e.target.result);
+                    };
+                    // fileUploadError.style.display = 'none';
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
+        });
+    </script>
+@endsection
+{{--
 @push('scripts')
     @includeFirst(['validation.dealer.js_parts_manager'])
-@endpush
+@endpush --}}

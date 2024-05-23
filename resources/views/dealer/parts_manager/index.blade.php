@@ -3,6 +3,7 @@
 @section('heading', 'parts manager')
 @section('content')
     <div class="dashboard-right-box parts-manager-table-box">
+        <x-alert-component />
         <div class="serach-and-filter-box">
             {{-- <h3>All Managers</h3> --}}
             <form action="">
@@ -19,6 +20,7 @@
             {{-- @endcan --}}
 
         </div>
+
         <div class="product-detail-table product-list-table pro-manage-table">
             <div class="table-responsive">
                 <table class="table">
@@ -43,22 +45,25 @@
                         <tr>
                             <td>
                                 <div class="parts-mang-img-box" data-bs-toggle="modal" data-bs-target="#pro-detail-model">
-                                    <img src="{{ $user->profile_picture_url ? Storage::url($user->profile_picture_url) : asset('assets/images/user.png') }}"
-                                        alt="">
+                                    <img class="profile_pics"
+                                        src="{{ $user->profile_picture_url ? Storage::url($user->profile_picture_url) : asset('assets/images/user.png') }}"
+                                        alt="part manager profile pic" title="profile pic" data-bs-toggle="modal"
+                                        data-bs-target="#view-manager-model" data={{ $user->id }}>
                                 </div>
                             </td>
                             <td>
-                                <p>{{ $user->name }}</p>
+                                <p id="user_name">{{ $user->name }}</p>
                             </td>
                             <td>
                                 <p>{{ $user->email }}</p>
                             </td>
                             <td>
                                 <div class="toggle-btn">
-                                    <input type="checkbox" id="switch101" class="custom-switch-input"
+                                    <input type="checkbox" id="switch{{ $key }}" class="custom-switch-input"
                                         @if ($user->status == 'ACTIVE') checked="checked" @endif
                                         onchange="toggleStatus(this, 'User', '{{ $user->id }}');"
-                                        url="{{ route('dealer.status') }}"><label for="switch101">Toggle</label>
+                                        url="{{ route('dealer.status') }}"><label
+                                        for="switch{{ $key }}">Toggle</label>
                                 </div>
                             </td>
                             <td>
@@ -66,8 +71,9 @@
                                     <a href="{{ route('dealer.partsmanager.edit', [$user->id]) }}"><i
                                             class="fa-solid fa-pen-to-square" style="color: #3EBE62;"
                                             title="edit"></i></a>
-                                    <a href="{{ route('dealer.partsmanager.delete', [$user->id]) }}"><i
-                                            class="fa-regular fa-trash-can" style="color: #E13F3F;" title="delete"></i></a>
+                                    <a class="delete"
+                                        href="{{ route('dealer.partsmanager.delete', ['user' => $user->id]) }}"><i
+                                            class="fa-regular fa-trash-can " style="color: #E13F3F;" title="delete"></i></a>
                                 </div>
                             </td>
 
@@ -140,7 +146,7 @@
                                                             </div> --}}
                 <div class="modal-body">
                     <div class="add-pro-form">
-                        <h2>Add New Manager</h2>
+                        <h2 id="modal_title">Add New Manager</h2>
                         <form id="parts_manager" action="{{ route('dealer.partsmanager.store') }}" method="post"
                             enctype="multipart/form-data">
                             @csrf
@@ -297,6 +303,78 @@
         </div>
     </div>
 @endsection
+@section('view_manager_modals')
+    <div class="modal fade" id="view-manager-model" tabindex="-1" aria-labelledby="viewexampleModalLabel"
+        aria-hidden="true" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    {{-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> --}}
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="add-pro-form">
+                        <h2 id="viewmodal_title">Parts Manager Details</h2>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="upload-img">
+                                    <div class="file-upload-box">
+                                        <label for="file-uploads">
+                                            <div class="profile-without-img">
+                                                <img src="" id="Userimageview" alt="">
+                                            </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Full Name*</label>
+                                    <div class="form-field">
+                                        <input type="text" name="viewname"
+                                            class="form-control @error('name') is-invalid @enderror"
+                                            placeholder="Full Name" readonly disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Email*</label>
+                                    <div class="form-field">
+                                        <input type="email" name="viewemail"
+                                            class="form-control @error('email') is-invalid @enderror" placeholder="Email"
+                                            readonly disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Phone
+                                        Number*</label>
+                                    <div class="form-field">
+                                        <input type="text" name="viewphone_number"
+                                            class="form-control @error('phone_number') is-invalid @enderror"
+                                            placeholder="Phone Number" readonly disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Role</label>
+                                    <div class="form-field">
+                                        <input type="text" name="viewpermission_type"
+                                            class="form-control @error('viewpermission_type') is-invalid @enderror"
+                                            readonly disabled>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
 @push('scripts')
     @includeFirst(['validation.dealer.js_parts_manager'])
     <script>
@@ -328,6 +406,37 @@
                     $('#add-manager-model').modal('show');
                 }
             @endif
+            jQuery('.profile_pics').on('click', function() {
+                var user_id = jQuery(this).attr('data');
+                console.log(user_id);
+                url = APP_URL + '/dealer/partsmanager/userDetails/' + user_id
+                var response = new Promise((resolve, reject) => {
+                    jQuery.ajax({
+                        url: url,
+                        method: 'GET',
+                        dataType: 'json',
+                        success: function(response) {
+                            resolve(response)
+                        },
+                        error: function(error) {
+                            reject(error)
+                        }
+                    })
+                });
+                response.then(function(data) {
+                    // If the promise resolves successfully, handle the response data
+                    jQuery('input[name="viewname"]').val(data.data.name);
+                    jQuery('input[name="viewemail"]').val(data.data.email);
+                    jQuery('input[name="viewphone_number"]').val(data.data.phone);
+                    jQuery('input[name="viewpermission_type"]').val(data.data.role);
+                    var image = `{{ Storage::url('`+data.data.profile_pic_url+`') }}`;
+                    jQuery('#Userimageview').attr('src', image);
+                }).catch(function(error) {
+                    // If the promise rejects (i.e., error occurs), handle the error
+                    jQuery('#viewmodal_title').html(error.statusText);
+                    console.error('Error:', error);
+                });
+            });
         });
     </script>
 @endpush

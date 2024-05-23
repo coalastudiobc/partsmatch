@@ -28,13 +28,15 @@ class PartsManagerRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255'],
             'phone_number' => ['required'],
+            'password' =>  ['sometimes', 'nullable', 'between:8,32', 'same:confirm_password'],
+            'confirm_password' => ['sometimes',  'nullable', 'between:8,32'],
 
         ];
 
         if (!$parameter) {
             $rules['image'] = ['required'];
             $rules['email'] = ['required', 'string', 'email', 'max:255', 'unique:users'];
-            $rules['password'] =  ['required', 'same:confirm_password'];
+            $rules['password'] =  ['required'];
             $rules['confirm_password'] = ['required'];
         }
 

@@ -290,7 +290,7 @@ function showMessage(message = null) {
     return toastr.success(message);
 }
 
-/* 
+/*
     Show other Modal
     Close current modal
     Open Modal
