@@ -29,9 +29,8 @@ class ProductController extends Controller
             'secret' => "fcaa1162aca998a01f3a0c937e669385",
         ]);
 
-        $filePath = asset('text.txt');
+        $filePath = storage::path('text.txt');
         $jwt = file_get_contents($filePath);
-        // dd($jwt);
         if (empty($jwt) || $this->sdk->loadJwt($jwt)->isJwtExpired() !== false) {
             try {
                 $jwt = $this->sdk->authenticate();
