@@ -25,8 +25,8 @@ class ProductController extends Controller
     public function __construct()
     {
         $this->sdk = \CarApiSdk\CarApi::build([
-            'token' => "5cfff17f-9363-494e-bafc-5c65ce9f0c4c",
-            'secret' => "fcaa1162aca998a01f3a0c937e669385",
+            'token' => "1e9f178a-f016-4aa9-b582-99934fc52ff9",
+            'secret' => "37e149448eeae0e28026dcdbaea8d8c7",
         ]);
 
         $filePath = storage::path('text.txt');
