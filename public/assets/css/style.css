@@ -1587,6 +1587,7 @@ html {
 
 .page-content-sec .db-table-box {
     padding: 0 30px 10px;
+    position: relative;
 }
 
 .page-content-sec .db-table-box .tb-table tbody tr td {

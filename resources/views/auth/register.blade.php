@@ -64,8 +64,7 @@
                                         </div>
 
                                     </div>
-                                    {{-- <div class="sign-up-form">
-                                <form action=""> --}}
+
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -252,8 +251,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <button type="submit" id="submit"
-                                        class="btn secondary-btn full-btn">Submit</button>
+                                    <button type="submit" class="btn secondary-btn full-btn">Submit</button>
                                     <div class="sign-up-link-box">
                                         <p>Already have an account?</p>
                                         <a href="{{ route('login') }}">Log In</a>
@@ -284,13 +282,13 @@
             jQuery('.errorViewer').text('');
         });
 
-        $('form#register').on('submit', function(e) {
-            e.preventDefault();
-            jQuery('form#register').validate();
-            if (jQuery('form#register').valid()) {
-                $(this).unbind('submit').submit();
-            }
-        });
+        // $('form#register').on('submit', function(e) {
+        //     e.preventDefault();
+        //     jQuery('form#register').validate();
+        //     if (jQuery('form#register').valid()) {
+        //         $(this).unbind('submit').submit();
+        //     }
+        // });
     </script>
     <script>
         jQuery(document).ready(function() {

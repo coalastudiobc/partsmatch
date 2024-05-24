@@ -95,6 +95,36 @@
 @push('scripts')
     <script>
         jQuery(document).ready(function() {
+            function loadSlick() {
+
+                $('.product-slider').slick({
+                    dots: false,
+                    infinite: true,
+                    speed: 500,
+                    slidesToShow: 4,
+                    slidesToScroll: 1,
+                    autoplay: true,
+                    autoplaySpeed: 2000,
+                    arrows: true,
+                    responsive: [{
+                            breakpoint: 600,
+                            settings: {
+                                slidesToShow: 2,
+                                slidesToScroll: 1
+                            }
+                        },
+                        {
+                            breakpoint: 400,
+                            settings: {
+                                arrows: false,
+                                slidesToShow: 1,
+                                slidesToScroll: 1
+                            }
+                        }
+                    ]
+                });
+            }
+
             jQuery('.productDetails').on('click', function() {
                 var url = $(this).attr('data-url');
                 var response = ajaxCall(url, 'get', null, false);
@@ -102,8 +132,9 @@
 
                 function handleStateData(response) {
                     if (response.success == true) {
-                        jQuery("#pro-detail-model").modal('show');
                         jQuery('#ajax-form-html').html(response.model)
+                        loadSlick();
+                        jQuery("#pro-detail-model").modal('show');
 
                     } else {
                         jQuery('#errormessage').html(response.error);
@@ -117,34 +148,4 @@
             })
         });
     </script>
-    {{-- <script>
-        jQuery(document).ready(function() {
-            $(document).lord('.product-slider').slick({
-                dots: false,
-                infinite: true,
-                speed: 500,
-                slidesToShow: 3,
-                slidesToScroll: 1,
-                autoplay: true,
-                autoplaySpeed: 2000,
-                arrows: true,
-                responsive: [{
-                        breakpoint: 600,
-                        settings: {
-                            slidesToShow: 2,
-                            slidesToScroll: 1
-                        }
-                    },
-                    {
-                        breakpoint: 400,
-                        settings: {
-                            arrows: false,
-                            slidesToShow: 1,
-                            slidesToScroll: 1
-                        }
-                    }
-                ]
-            });
-        });
-    </script> --}}
 @endpush

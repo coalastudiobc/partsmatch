@@ -49,7 +49,8 @@
                                                 placeholder="Product Category">
                                                 <option value="">Select the category</option>
                                                 @foreach (get_category() as $category)
-                                                    <option value="{{ $category->id }}">
+                                                    <option value="{{ $category->id }}"
+                                                        @if ($product->category->parent_id == $category->id) Selected @endif>
                                                         {{ $category->name }}
                                                     </option>
                                                 @endforeach
@@ -63,8 +64,8 @@
                                         <div class="form-field subcategory">
                                             <select type="text" name="subcategory" class="form-control"
                                                 placeholder="Product SubCategory" id="subcategory">
-                                                <option value="{{ $category->id }}">
-                                                    {{ $category->name ? $category->name : 'Select the subcategory' }}
+                                                <option value="{{ $product->subcategory_id }}">
+                                                    {{ $product->category ? $product->category->name : 'Select the subcategory' }}
                                                 </option>
                                             </select>
                                         </div>

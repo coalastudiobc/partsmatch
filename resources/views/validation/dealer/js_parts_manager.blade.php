@@ -20,7 +20,9 @@
             },
             phone_number: {
                 required: true,
-
+                digits: true,
+                minlength: 10,
+                maxlength: 10
             },
             password: {
                 required: true,
@@ -52,6 +54,9 @@
             },
             phone_number: {
                 required: `{{ __('customvalidation.user.phone_number.required') }}`,
+                digits: "only number allowed",
+                minlength: `{{ __('customvalidation.user.phone_number.minlength') }}`,
+                maxlength: `{{ __('customvalidation.user.phone_number.maxlength') }}`,
             },
             password: {
                 required: `{{ __('customvalidation.user.password.required') }}`,

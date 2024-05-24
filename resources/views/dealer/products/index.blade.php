@@ -15,7 +15,8 @@
         <div class="serach-and-filter-box">
             <form action="">
                 <div class="pro-search-box">
-                    <input type="text" name="filter_by_name" class="form-control" placeholder="Search Product By Name">
+                    <input type="text" name="filter_by_name" class="form-control" value=""
+                        placeholder="Search Product By Name">
                     <button type="submit" class="btn primary-btn">Search</button>
                 </div>
             </form>
@@ -488,10 +489,12 @@
                 methode: 'POST',
                 success: function(result) {
                     if (result.status == true) {
-                        // location.reload();
+                        location.reload();
                         return toastr.success(result.message);
                     } else {
+
                         $(".feature-switch").addClass('checked', false);
+                        return toastr.error(result.message);
                     }
                 }
 

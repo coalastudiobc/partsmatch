@@ -1,12 +1,14 @@
 <div class="modal-body">
-    <div class="pro-detail-body product-slider">
+    <div class="pro-detail-body ">
 
-        @foreach ($product['product_image'] as $a => $image)
-            <img class="model-pro-img" src="{{ Storage::url($image['file_url']) }}" alt="">
-        @endforeach
+        <div class="product-slider">
+            @foreach ($product['product_image'] as $a => $image)
+                <img class="model-pro-img" src="{{ Storage::url($image['file_url']) }}" alt="">
+            @endforeach
+        </div>
         <div class="product-infography">
 
-            <h2>{{ $product['name'] }}</h2>
+            <h2 class="mt-3">{{ $product['name'] }}</h2>
             {{-- <span>{{ $product->subcategory_id }}</span> --}}
             <p>{{ $product['description'] }} </p>
             <div class="product-quantity-box">

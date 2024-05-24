@@ -10,6 +10,7 @@ use App\Models\FeaturedProduct;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\User;
+use Exception;
 use GrahamCampbell\ResultType\Success;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -139,8 +140,9 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Product $product)
+    public function edit($product)
     {
+        $product = Product::with('category')->where('id', $product)->first();
         $years = $this->sdk->years();
         $category = Category::where('id', $product->subcategory_id)->first();
         $images = ProductImage::where('product_id', $product->id)->get();
@@ -240,26 +242,40 @@ class ProductController extends Controller
 
     public function featuredproductcreate(Product $product)
     {
-        if (isset(plan_validity()->stripe_status) && plan_validity()->stripe_status != 'active') {
-            session()->flash('success', 'Please purchase plan');
-            return response()->json([
-                'status' => false,
-                'message' => 'Please purchase plan'
-            ], 200);
-        }
-        $category = Category::where('id', $product->subcategory_id)->first();
-        $featured_product = [
-            'user_id' => auth()->user()->id,
-            'product_id' => $product->id,
-            'category_id' => $category->id
-        ];
+        try {
+            if (isset(plan_validity()->stripe_status) && plan_validity()->stripe_status != 'active') {
 
-        FeaturedProduct::create($featured_product);
-        // session()->flash('success', 'Featured plan created Successfully');
-        return response()->json([
-            'status' => true,
-            'message' => 'Featured plan created Successfully'
-        ], 200);
+                session()->flash('success', 'Please purchase plan');
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Please purchase plan'
+                ], 200);
+            }
+            if (!plan_validity()) {
+
+                // session()->flash('success', 'Please purchase plan');
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Please purchase plan'
+                ], 200);
+            }
+
+            $category = Category::where('id', $product->subcategory_id)->first();
+            $featured_product = [
+                'user_id' => auth()->user()->id,
+                'product_id' => $product->id,
+                'category_id' => $category->id
+            ];
+
+            FeaturedProduct::create($featured_product);
+            // session()->flash('success', 'Featured plan created Successfully');
+            return response()->json([
+                'status' => true,
+                'message' => 'Featured plan created Successfully'
+            ], 200);
+        } catch (Exception $e) {
+            return response()->json(['status' => false, 'message' => $e->getMessage()]);
+        }
     }
     public function featuredproductdelete(FeaturedProduct $id)
     {
