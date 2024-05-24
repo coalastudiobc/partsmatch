@@ -476,6 +476,7 @@
                     if (result.status == true) {
                         $(".feature-switch").addClass('checked', false);
                         location.reload();
+                        return toastr.error(result.message);
 
                     }
 

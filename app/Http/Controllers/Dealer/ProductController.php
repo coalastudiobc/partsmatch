@@ -280,10 +280,10 @@ class ProductController extends Controller
     public function featuredproductdelete(FeaturedProduct $id)
     {
         $id->delete();
-        session()->flash('success', 'Featured plan deleted Successfully');
+        // session()->flash('success', 'Featured plan deleted Successfully');
         return response()->json([
             'status' => true,
-            'message' => "Successfully deleted"
+            'message' => "Featured plan deleted Successfully"
         ], 200);
     }
     public function subcategory($id)
