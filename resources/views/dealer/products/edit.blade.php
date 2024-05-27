@@ -110,13 +110,57 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="">Specifications and dimensions</label>
+                                        <div class="form-field">
+                                            <textarea name="Specifications_and_dimensions"
+                                                class="form-control @error('Specifications_and_dimensions') is-invalid @enderror" id="" cols="30"
+                                                rows="2">{{ $product->Specifications_and_dimensions ? $product->Specifications_and_dimensions : '' }}</textarea>
+                                            @error('other_specification')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="">Shipping info</label>
+                                        <div class="form-field">
+                                            <textarea name="Shipping_info" class="form-control @error('Shipping_info') is-invalid @enderror" id=""
+                                                cols="30" rows="2">{{ $product->Shipping_info ? $product->Shipping_info : '' }}</textarea>
+                                            @error('Shipping_info')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="">field 3</label>
+                                        <div class="form-field">
+                                            <textarea name="field_3" class="form-control @error('field_3') is-invalid @enderror" id="" cols="30"
+                                                rows="2">{{ $product->field_3 ? $product->field_3 : '' }}</textarea>
+                                            @error('field_3')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
                                 {{-- @dd($product) --}}
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="">Add Product Images (Up to 5)</label>
                                         <label class="img-upload-box">
                                             <p>Upload Images</p>
-                                            <input type="file" name="images[]" id="upload-image" multiple mixlength="5">
+                                            <input type="file" name="images[]" id="upload-image" multiple
+                                                mixlength="5">
                                             <input type="hidden" name="total-img-preview" id="total-img-preview"
                                                 value={{ count($product->productImage) }}>
                                             <input type="hidden" name="image_id[]" value="imageid[]" id="get_image_id">

@@ -246,6 +246,33 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="">Specifications and dimensions</label>
+                                    <div class="form-field">
+                                        <textarea name="Specifications_and_dimensions" class="form-control" id="" cols="30" rows="2"></textarea>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="">Shipping info</label>
+                                    <div class="form-field">
+                                        <textarea name="Shipping_info" class="form-control" id="" cols="30" rows="2"></textarea>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="">field 3</label>
+                                    <div class="form-field">
+                                        <textarea name="field_3" class="form-control" id="" cols="30" rows="2"></textarea>
+
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">Shipping Price*</label>

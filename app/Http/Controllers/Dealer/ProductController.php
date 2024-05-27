@@ -78,6 +78,9 @@ class ProductController extends Controller
                 'price' => $request->price,
                 'shipping_price' => $request->shipping_price,
                 'other_specification' => $request->other_specification,
+                'Specifications_and_dimensions' => $request->Specifications_and_dimensions,
+                'Shipping_info' => $request->Shipping_info,
+                'field_3' => $request->field_3,
                 'year' => $request->car_years,
                 'brand' => $request->car_make,
                 'model' => $request->car_model,
@@ -158,8 +161,7 @@ class ProductController extends Controller
             $id = $image;
             $ids[] = explode(',', $id);
         }
-        // dd($ids);
-        // dd($request->toArray());
+
 
         try {
 
@@ -173,6 +175,9 @@ class ProductController extends Controller
                 'price' => $request->price,
                 'shipping_price' => $request->shipping_price,
                 'other_specification' => $request->other_specification,
+                'Specifications_and_dimensions' => $request->Specifications_and_dimensions,
+                'Shipping_info' => $request->Shipping_info,
+                'field_3' => $request->field_3,
                 'year' => $request->year,
                 'brand' => $request->brand,
                 'model' => $request->model,
