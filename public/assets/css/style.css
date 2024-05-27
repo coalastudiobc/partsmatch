@@ -610,7 +610,7 @@ header {
 .collection-box {
 
     border: 0.893px solid #DDD;
-    /* max-width: 300px; */
+    max-width: 300px;
     width: 100%;
     padding: 40px 10px;
     display: flex;
