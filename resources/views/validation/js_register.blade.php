@@ -1,6 +1,6 @@
 <script>
     jQuery(document).ready(function() {
-        // $("#submit").attr('disabled', false);
+        $("#submit").attr('disabled', false);
 
         const rules = {
             name: {
@@ -35,7 +35,7 @@
             },
             image: {
                 required: true,
-                imageExtension: true
+                imageExtension: true,
             },
             industry_type: {
                 required: true,
@@ -104,10 +104,10 @@
         };
         handleValidation('register', rules, messages);
 
-        // $("#submit").on("submit", function() {
-        //     if ($('#register').valid()) {
-        //         $("#submit").attr('disabled', true);
-        //     }
-        // });
+        $("#register").on("submit", function() {
+            if ($('#register').valid()) {
+                $("#register").find('button').attr('disabled', true);
+            }
+        });
     });
 </script>

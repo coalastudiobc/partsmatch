@@ -9,9 +9,10 @@
         < class=""> --}}
         <div class="serach-and-filter-box">
             <h3></h3>
-            <form action="">
+            <form action="{{ route('admin.dealers.all') }}">
                 <div class="pro-search-box">
-                    <input type="text" name="filter_by_name" class="form-control" placeholder="Search Dealer By Name">
+                    <input type="text" name="filter_by_name" value="{{ old('filter_by_name', request()->filter_by_name) }}"
+                        class="form-control" placeholder="Search Dealer By Name">
                     <button type="submit" class="btn primary-btn">Search</button>
                 </div>
             </form>
@@ -127,7 +128,7 @@
                 </div>
             </div>
         </div> --}}
-        {!! $users->links('admin.pagination') !!}
+        {!! $users->appends('filter_by_name', request()->filter_by_name)->links('admin.pagination') !!}
     </div>
 
 @endsection

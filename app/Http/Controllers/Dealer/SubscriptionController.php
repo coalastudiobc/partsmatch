@@ -13,7 +13,7 @@ class SubscriptionController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $plans = Package::get();
+        $plans = Package::where('status', '1')->get();
         $intent = $user->createSetupIntent();
         return view('dealer.subscription.plans', compact('plans', 'intent'));
     }

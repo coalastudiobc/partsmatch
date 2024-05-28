@@ -1,6 +1,6 @@
 @extends('layouts.dealer')
 @section('title', 'edit')
-@section('heading', 'edit')
+@section('heading', 'Edit Parts Manager')
 
 @section('content')
     <div class="main-content">

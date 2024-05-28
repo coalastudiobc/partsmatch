@@ -1,6 +1,8 @@
 <script>
     jQuery(document).ready(function() {
         console.log("product");
+        $("#submit").attr('disabled', false);
+
         const rules = {
             name: {
                 required: true,
@@ -60,6 +62,13 @@
         };
 
         handleValidation('product', rules, messages);
+
+        $("#product").on("submit", function() {
+            if ($('#product').valid()) {
+                $("#product").find('button').attr('disabled', true);
+            }
+        });
+
         jQuery('#sidebar-btn').on('click', function(e) {
             jQuery('.dashboard-left-box').addClass('open');
         });

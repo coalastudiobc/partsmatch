@@ -107,4 +107,14 @@ class DealerController extends Controller
             }
         }
     }
+
+    public function productdetail(Product $product)
+    {
+        $productdata = Product::with('productImage')->where('id', $product->id)->first();
+        $product = $productdata->toArray();
+        // dd($product);
+        $model = view('components.product-details-component', compact('product'))->render();
+
+        return response()->json(['success' => true, 'model' => $model]);
+    }
 }

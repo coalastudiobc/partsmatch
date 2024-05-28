@@ -1,6 +1,8 @@
 <script>
     jQuery(document).ready(function() {
         console.log("hwrerere");
+        $("#submit").attr('disabled', false);
+
         const rules = {
             name: {
                 required: true,
@@ -20,7 +22,9 @@
             },
             phone_number: {
                 required: true,
-
+                digits: true,
+                minlength: 10,
+                maxlength: 10
             },
             password: {
                 required: true,
@@ -28,7 +32,7 @@
                 maxlength: passwordMaxLength,
                 regex: passwordRegex,
             },
-            password_confirmation: {
+            confirm_password: {
                 required: true,
                 equalTo: "#manager_confirm_password"
             }
@@ -52,6 +56,9 @@
             },
             phone_number: {
                 required: `{{ __('customvalidation.user.phone_number.required') }}`,
+                digits: "only number allowed",
+                minlength: `{{ __('customvalidation.user.phone_number.minlength') }}`,
+                maxlength: `{{ __('customvalidation.user.phone_number.maxlength') }}`,
             },
             password: {
                 required: `{{ __('customvalidation.user.password.required') }}`,
@@ -60,12 +67,18 @@
                 regex: `{{ __('customvalidation.user.password.regex', ['regex' => '${passwordRegex}']) }}`,
 
             },
-            password_confirmation: {
+            confirm_password: {
                 equalTo: `{{ __('customvalidation.user.confirm_password.equal') }}`,
                 required: `{{ __('customvalidation.user.confirm_password.required') }}`,
             }
         };
 
         handleValidation('parts_manager', rules, messages);
+        $("#parts_manager").on("submit", function(e) {
+            e.preventDefault();
+            if ($('#parts_manager').valid()) {
+                $("#parts_manager").find('button').attr('disabled', true);
+            }
+        });
     });
 </script>

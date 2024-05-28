@@ -58,7 +58,7 @@
                                                         class="fa-regular fa-trash-can"></i></a></td>
                                         </tr>
                                     @empty
-                                        <div class="empty-data">no cart</div>
+                                        <div class="empty-data">No product in the cart</div>
                                     @endforelse
                                 @else
                                     <p class="empty-data">No product in the cart</p>

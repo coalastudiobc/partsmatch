@@ -44,6 +44,7 @@ class CheckoutController extends Controller
     {
         $countries = Country::get();
         $total_amount = Cart::where('user_id', auth()->user()->id)->sum('amount');
+        $shippingCharge = AdminSetting::where('name', 'shipping_charge')->first();
 
         $user = auth()->user();
         $stripeCustomer = $user->createOrGetStripeCustomer();
@@ -57,9 +58,9 @@ class CheckoutController extends Controller
             $state = State::where('id', $data->state_id)->first();
             $city = City::where('id', $data->city_id)->first();
 
-            return view('dealer.checkout', compact('countries', 'intent', 'total_amount', 'country', 'state', 'city', 'data', 'stripeCustomer', 'carts'));
+            return view('dealer.checkout', compact('countries', 'intent', 'total_amount', 'country', 'state', 'city', 'data', 'stripeCustomer', 'carts', 'shippingCharge'));
         }
-        return view('dealer.checkout', compact('countries', 'intent', 'total_amount', 'stripeCustomer', 'carts'));
+        return view('dealer.checkout', compact('countries', 'intent', 'total_amount', 'stripeCustomer', 'carts', 'shippingCharge'));
     }
     public function store(CheckoutRequest $request)
     {

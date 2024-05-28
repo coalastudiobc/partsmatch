@@ -18,10 +18,11 @@
                         <h3>Categories</h3>
                         <div class="interior-category-tabs">
                             <div class="accordion" id="accordionExample">
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="headingOne">
-                                        @foreach (get_category() as $key => $category)
-                                            <button class="accordion-button @if ($parent == $category->id) show @endif"
+                                @foreach (get_category() as $key => $category)
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingOne">
+                                            <button
+                                                class="accordion-button collapsed @if ($parent == $category->id) show @endif"
                                                 type="button" data-bs-toggle="collapse"
                                                 data-bs-target="#collapseOne{{ $key }}" aria-expanded="true"
                                                 aria-controls="collapseOne">
@@ -29,29 +30,29 @@
                                             </button>
 
 
-                                    </h2>
-                                    @foreach (get_subcategory($category->id) as $subcategory)
-                                        <div id="collapseOne{{ $key }}"
-                                            class="accordion-collapse collapse @if ($parent == $category->id) show @endif"
-                                            aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                            <div class="accordion-body">
-                                                <div class="interior-category-content">
-                                                    <ul>
-                                                        <li><a href="{{ route('dealer.products.interior', ['category' => $subcategory->id]) }}"
-                                                                class="categories-item @if ($active_id == $subcategory->id) active @endif">{{ $subcategory->name }}</a>
-                                                        </li>
-                                                        {{-- <li><a href="#" class="categories-item">Motor Oil</a></li>
+                                        </h2>
+                                        @foreach (get_subcategory($category->id) as $subcategory)
+                                            <div id="collapseOne{{ $key }}"
+                                                class="accordion-collapse collapse @if ($parent == $category->id) show @endif"
+                                                aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                                <div class="accordion-body">
+                                                    <div class="interior-category-content">
+                                                        <ul>
+                                                            <li><a href="{{ route('dealer.products.interior', ['category' => $subcategory->id]) }}"
+                                                                    class="categories-item @if ($active_id == $subcategory->id) active @endif">{{ $subcategory->name }}</a>
+                                                            </li>
+                                                            {{-- <li><a href="#" class="categories-item">Motor Oil</a></li>
                                                         <li><a href="#" class="categories-item">Motor Oil</a></li>
                                                         <li><a href="#" class="categories-item">Motor Oil</a></li>
                                                         <li><a href="#" class="categories-item">Motor Oil</a></li> --}}
-                                                    </ul>
+                                                        </ul>
 
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    @endforeach
-                                    @endforeach
-                                </div>
+                                        @endforeach
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>

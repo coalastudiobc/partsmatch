@@ -22,6 +22,9 @@ return new class extends Migration
             $table->integer('price')->nullable();
             $table->integer('shipping_price')->nullable();
             $table->text('other_specification')->nullable();
+            $table->text('Specifications_and_dimensions')->nullable();
+            $table->text('Shipping_info')->nullable();
+            $table->text('field_3')->nullable();
             $table->string('year')->nullable();
             $table->string('brand')->nullable();
             $table->string('model')->nullable();

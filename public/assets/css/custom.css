@@ -111,24 +111,44 @@
 .multi-img-box {
     border-radius: 5px;
     background: var(--white);
-    margin: 0px 9px;
-    max-width: 232px;
-    height: 232px;
+    margin: 0px 5px;
+    /* max-width: 150px; */
+    height: 100px;
     cursor: pointer;
-    border: 2px solid transparent;
+    border: 1px solid transparent;
 
 }
-.multi-img-box img{
+
+.multi-img-box img {
     width: 100%;
     height: 100%;
     object-fit: contain;
 }
+
 .multi-img-box:hover {
-    border: 2px solid var(--border-color);
+    border: 1px solid var(--border-color);
+}
+
+.pro-multi-img .slick-slide.slick-current.slick-active .multi-img-box {
+    border: 1px solid #272643;
 }
 
 .multi-img-slick {
     padding: 0;
+}
+
+.pro-multi-img {
+    padding: 0 32px;
+}
+
+.sticky-box {
+    position: sticky;
+    top: 107px;
+}
+
+.multi-img-slick-wrapper .slick-arrow {
+    background-color: #272643;
+    color: #fff;
 }
 
 .next-btn-multi.slick-arrow {
@@ -318,7 +338,7 @@
 
 .more-info-box .accordion-button::after {
     transform: rotate(-180deg);
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6' fill='none'%3E%3Cpath opacity='0.5' d='M4.73442 0.607264C4.57278 0.607264 4.41735 0.667667 4.293 0.782435L0.562711 4.40668C0.320242 4.64226 0.320242 5.02884 0.562711 5.26442C0.80518 5.5 1.20308 5.5 1.44555 5.26442L4.73442 2.063L8.0233 5.26442C8.26577 5.5 8.65745 5.5 8.89991 5.26442C9.14238 5.02884 9.14238 4.6483 8.89991 4.41272L5.17584 0.782435C5.0515 0.661627 4.89607 0.607264 4.73442 0.607264Z' fill='%23131313'/%3E%3C/svg%3E") !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23212529'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e") !important;
 }
 
 .more-info-box {
@@ -916,6 +936,7 @@
 .singlr-pro-detail .accordion-item {
     background-color: #F6F6F6;
     padding: 10px;
+    margin-bottom: 5px;
 }
 
 .quantity-btn input {
@@ -923,10 +944,10 @@
 }
 
 .quantity-btn input {
-	max-width: 20px;
-	border: 0;
-	font-size: 12px;
-	text-align: center;
+    max-width: 20px;
+    border: 0;
+    font-size: 12px;
+    text-align: center;
 }
 .dropdown-item:focus,
 .dropdown-item:hover {

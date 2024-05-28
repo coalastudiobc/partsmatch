@@ -1486,11 +1486,33 @@ span.doller-symbol-txt.symbol {
     background-color: #ECFEF3;
     cursor: pointer;
 }
+
 .table-responsive::-webkit-scrollbar:horizontal {
     width: 2px;
 }
 
-.sidebar-filter{
+.sidebar-filter {
     margin: 0 0 20px;
 }
 
+/* gjbjwbjbjbjkbjrb */
+.modal-dialog.modal-dialog-centered {
+    max-width: 700px;
+}
+
+.modal-body {
+    padding: 40px;
+    position: relative;
+}
+
+button.btn-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+}
+
+.add-pro-form h2 {
+    text-align: center;
+    font-size: 35px;
+    margin-bottom: 40px;
+}
