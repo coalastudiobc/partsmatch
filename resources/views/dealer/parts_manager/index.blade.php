@@ -285,7 +285,7 @@
                                 </div>
 
                                 <div class="col-md-12">
-                                    <button type="submit" class="btn secondary-btn full-btn">Submit
+                                    <button type="submit" id="submit" class="btn secondary-btn full-btn">Submit
                                         Details</button>
                                 </div>
 

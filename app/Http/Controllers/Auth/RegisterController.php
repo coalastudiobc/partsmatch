@@ -65,7 +65,7 @@ class RegisterController extends Controller
             'address' => ['required'],
             'zipcode' => ['required', 'min:6', 'max:6'],
             'industry_type' => ['required'],
-            'image' => ['required', 'mimes:jpeg,png,jpg'],
+            'image' => ['required', 'mimes:jpeg,jpg,png'],
         ]);
     }
 

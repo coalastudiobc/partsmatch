@@ -35,7 +35,7 @@
             },
             image: {
                 required: true,
-                imageExtension: true
+                imageExtension: true,
             },
             industry_type: {
                 required: true,
