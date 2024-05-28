@@ -90,7 +90,7 @@
                             <div class="action-btns">
                                 <a href="{{ route('dealer.products.edit', $product->id) }}"><i
                                         class="fa-solid fa-pen-to-square" style="color: #3EBE62;"></i></a>
-                                <a class="delete" href="{{ route('dealer.products.delete', $product->id) }}"><i
+                                <a href="{{ route('dealer.products.delete', $product->id) }}"><i
                                         class="fa-regular fa-trash-can" style="color: #E13F3F;"></i></a>
                             </div>
                         </td>
@@ -314,8 +314,6 @@
                                         {{-- <select class="form-control api_call" name="car_model"
                                             id="car-makes"></select> --}}
                                         <select class="form-control" name="car_model" id="carModel">
-                                            <option>Select your country</option>
-
                                             <option>Select your Model</option>
 
                                         </select>
