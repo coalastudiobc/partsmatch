@@ -29,6 +29,12 @@
     <script>
         const APP_URL = "{{ url('') }}";
     </script>
+    <style>
+        .image-container {
+            display: none;
+            /* Hide the image container by default */
+        }
+    </style>
 </head>
 
 <body>

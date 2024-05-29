@@ -35,6 +35,7 @@ class UserRegistered extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
+
         $user = $this->data;
         return (new MailMessage)->markdown('mail.user_registered', compact('user'));
     }

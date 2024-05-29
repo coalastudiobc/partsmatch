@@ -170,7 +170,6 @@ if (!function_exists('plan_validity')) {
             } else {
                 $daysLeft =  now()->diffInDays($purchasedPlan->ends_at, false);
                 if ($daysLeft >= 0) {
-
                     return true;
                 }
             }

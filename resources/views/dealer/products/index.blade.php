@@ -79,7 +79,7 @@
                         <td>
                             <div class="toggle-btn">
                                 <input type="checkbox" id="switch1{{ $key }}"
-                                    data-id=" @if (isset($product->featuredProduct->id)) {{ $product->featuredProduct->id }} @else 0 @endif"
+                                    data-id="{{ isset($product->featuredProduct) ? $product->featuredProduct->id : '0' }} "
                                     product-id="{{ $product->id }}" class="custom-switch-input feature-switch"
                                     @if (isset($product->featuredProduct) && $product->featuredProduct != null) checked="checked" @endif
                                     @if (!plan_validity()) disabled @endif><label

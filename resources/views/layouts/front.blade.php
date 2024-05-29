@@ -50,7 +50,13 @@
                         <div class="custm-nav-menu login-nav">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link" aria-current="page" href="{{ route('welcome') }}">Home</a>
+                                    <a class="nav-link" aria-current="page" href="{{ route('welcome') }}">
+                                        @if (auth()->user())
+                                            Dashboard
+                                        @else
+                                            Home
+                                        @endif
+                                    </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" aria-current="page"

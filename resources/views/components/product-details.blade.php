@@ -1,6 +1,7 @@
 <div class="modal-body">
-    <div class="pro-detail-body ">
 
+    <div class="pro-detail-body ">
+        <div id="loaderid" class="spinner-grow"></div>
         <div class="product-slider">
             @foreach ($product['product_image'] as $a => $image)
                 <img class="model-pro-img" src="{{ Storage::url($image['file_url']) }}" alt="">
@@ -62,3 +63,13 @@
     </div>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
+<script>
+    const hh = window.addEventListener('load', function() {
+        console.log('hloby');
+        // Show the image container once all images are loaded
+        document.querySelector('.product-slider').style.display = 'block';
+        // Hide the loader
+        document.getElementById('loaderid').style.display = "none";
+    });
+    console.log(hh);
+</script>

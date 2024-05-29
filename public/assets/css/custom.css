@@ -715,7 +715,7 @@
     background-color: var(--secondary-color);
     position: sticky;
     top: 90px;
-    z-index: 999;
+    z-index: 99;
 }
 
 .banner-content-wrapper {

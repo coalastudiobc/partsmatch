@@ -111,12 +111,16 @@
                                                     <div class="pro-dealer-info">
                                                         <div class="pro-dealer-img-box">
                                                             <div class="dealer-img-box">
-                                                                <img src="{{ Storage::url($product->user->profile_picture_url) }}"
-                                                                    alt="">
+                                                                @dump($product->user, $product);
+                                                                @if (isset($product->user->profile_picture_url))
+                                                                    <img src="{{ Storage::url($product->user->profile_picture_url) }}"
+                                                                        alt="">
+                                                                @endif
+
                                                             </div>
                                                             <div class="dealer-img-txt">
-                                                                <h5>{{ $product->user->name }}</h5>
-                                                                <p>{{ $product->user->email }}</p>
+                                                                <h5>{{ $product->user->name ?? ' ' }}</h5>
+                                                                <p>{{ $product->user->email ?? ' ' }}</p>
                                                             </div>
                                                         </div>
                                                         <a @if (auth()->user()) href="{{ route('dealer.view.profile', $product->user->id) }}" @else href="javascript:void(0)" @endif

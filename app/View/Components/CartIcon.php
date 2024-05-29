@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class make-component extends Component
+class CartIcon extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +21,6 @@ class make-component extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.make-component');
+        return view('components.cart-icon');
     }
 }

@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class model-component extends Component
+class HomeProductTab extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +21,6 @@ class model-component extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.model-component');
+        return view('components.home-product-tab');
     }
 }

@@ -62,7 +62,8 @@
                             </td>
                             <td>
                                 <a
-                                    @if (isset($user->product)) href="{{ route('admin.dealers.product.list', [$user->id]) }}" @endif>{{ $user->product ? count($user->product) : 'N/A' }}</a>
+                                    @if (isset($user->product)) href="{{ route('admin.dealers.product.list', [$user->id]) }}" @endif><u>
+                                        {{ $user->product ? count($user->product) : 'N/A' }}</u></a>
                             </td>
                             {{-- <td>
                                 <p>{{ $user->industry_type ? $user->industry_type : 'N/A' }}</p>

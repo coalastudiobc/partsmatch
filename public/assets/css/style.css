@@ -1699,3 +1699,7 @@ span.sidebar-cross-icon i {
         display: flex;
     }
 }
+.navbar-expand-lg .navbar-nav .dropdown-menu {
+    position: absolute;
+    z-index: 99;
+}

@@ -2,7 +2,7 @@
 @section('content')
     <section class="page-content-sec">
         <div class="container" id="cartContainer">
-            @include('components.cart-component')
+            @include('components.cart')
         </div>
     </section>
 @endsection

@@ -102,7 +102,7 @@
                                             <div class="form-group">
                                                 <label for="">Phone*</label>
                                                 <div class="form-field">
-                                                    <input type="text" name="phone_number"
+                                                    <input type="number" name="phone_number"
                                                         value="{{ old('phone_number') }}"
                                                         class="form-control @error('phone_number') is-invalid @enderror"
                                                         placeholder="Phone Number">
@@ -135,7 +135,7 @@
                                             <div class="form-group">
                                                 <label for="">Zip Code*</label>
                                                 <div class="form-field">
-                                                    <input type="text" name="zipcode" value="{{ old('zipcode') }}"
+                                                    <input type="number" name="zipcode" value="{{ old('zipcode') }}"
                                                         class="form-control @error('zipcode') is-invalid @enderror"
                                                         placeholder="Zip Code">
 
