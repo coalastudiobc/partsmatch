@@ -1703,3 +1703,6 @@ span.sidebar-cross-icon i {
     position: absolute;
     z-index: 99;
 }
+.accessories-parts-box {
+    height: 100%;
+}
