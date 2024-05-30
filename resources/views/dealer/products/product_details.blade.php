@@ -3,18 +3,19 @@
     <section class="single-product-sec">
         <div class="container">
             <div class="single-product-wrapper">
-                <div class="back-page-btn">
-                    <div class="back-round-icon">
-                        <i class="fa-solid fa-angle-left"></i>
-                    </div>
-                    <a href="{{ route('welcome.index') }}">
-                        <p>Back</p>
-                    </a>
-                </div>
+
                 <div class="songle-product-main">
                     <div class="row ">
                         <div class="col-xl-4 col-lg-12 col-md-12">
                             <div class="sticky-box">
+                                <div class="back-page-btn">
+                                    <div class="back-round-icon">
+                                        <i class="fa-solid fa-angle-left"></i>
+                                    </div>
+                                    <a href="{{ route('welcome.index') }}">
+                                        <p>Back</p>
+                                    </a>
+                                </div>
                                 <div class="single-pro-slide">
                                     <div class="slick-product">
                                         <!-- Inside the containing div, add one div for each slide -->
@@ -60,10 +61,13 @@
                         <div class="col-xl-5 col-lg-12 col-md-12">
                             <div class="sticky-box">
 
-                                <div class="single-img-info">
+                                <div class="single-img-info mt-5">
                                     <div class="product-infography">
                                         <h2>R1 Concepts® – eLINE Series Plain Brake Rotors</h2>
-                                        <span>( Product Category )</span>
+                                        <span>{{ $product->category->name }}</span><br>
+                                        <span>See more products by: </span> <a
+                                            @if (auth()->user()) href="{{ route('dealer.view.profile', $userdetails->id) }}" @else href="javascript:void(0)" @endif>
+                                            <u style="color: #0d6efd">{{ $userdetails->name }}</u></a>
                                         <p>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out
                                             print, graphic or web designs. </p>
                                         {{-- <div class="product-quantity-box">
@@ -92,13 +96,52 @@
                                                             data-bs-toggle="collapse"
                                                             data-bs-target="#additional-information" aria-expanded="false"
                                                             aria-controls="collapseTwo">
-                                                            Additional Information
+                                                            Description
                                                         </button>
                                                     </h2>
                                                     <div id="additional-information" class="accordion-collapse collapse"
                                                         data-bs-parent="#accordionExample">
                                                         <div class="accordion-body">
+                                                            <p>{{ $product->description }} </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="accordion" id="accordionExample">
+
+                                                <div class="accordion-item">
+                                                    <h2 class="accordion-header">
+                                                        <button class="accordion-button collapsed" type="button"
+                                                            data-bs-toggle="collapse"
+                                                            data-bs-target="#additional-information1" aria-expanded="false"
+                                                            aria-controls="collapseTwosumit">
+                                                            Additional Information
+                                                        </button>
+                                                    </h2>
+                                                    <div id="additional-information1" class="accordion-collapse collapse"
+                                                        data-bs-parent="#accordionExample">
+                                                        <div class="accordion-body">
                                                             <p>{{ $product->additional_details }} </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="accordion" id="accordionExample">
+
+                                                <div class="accordion-item">
+                                                    <h2 class="accordion-header">
+                                                        <button class="accordion-button collapsed" type="button"
+                                                            data-bs-toggle="collapse"
+                                                            data-bs-target="#additional-information2" aria-expanded="false"
+                                                            aria-controls="collapseTwodf">
+                                                            Other Specification
+                                                        </button>
+                                                    </h2>
+                                                    <div id="additional-information2" class="accordion-collapse collapse"
+                                                        data-bs-parent="#accordionExample">
+                                                        <div class="accordion-body">
+                                                            <p>{{ $product->other_specification }} </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -146,7 +189,7 @@
                                             </svg>
                                         </button>
                                     @endif
-                                    <div class="pro-dealer-box">
+                                    {{-- <div class="pro-dealer-box">
                                         <h4>Dealer</h4>
                                         <div class="pro-dealer-info">
                                             <div class="pro-dealer-img-box">
@@ -163,7 +206,7 @@
                                                 class="btn secondary-btn">View
                                                 Profile</a>
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                 </div>
                             </div>
@@ -186,13 +229,16 @@
                 <div class="dealer-product-category">
                     <div class="dealer-category-box">
                         @foreach ($allproducts as $product)
-                            <div class="collection-box cstm-card ">
-                                <div class="collection-img">
-                                    <img src="{{ Storage::url($product->productImage[0]->file_url) }}" alt="">
+                            <a href="{{ route('dealer.products.details', $product->id) }}">
+                                <div class="collection-box cstm-card ">
+                                    <div class="collection-img">
+                                        <img src="{{ Storage::url($product->productImage[0]->file_url) }}"
+                                            alt="">
+                                    </div>
+                                    <p>R1 Concepts® – eLINE Series Plain Brake Rotors</p>
+                                    <h4>${{ $product->price }}</h4>
                                 </div>
-                                <p>R1 Concepts® – eLINE Series Plain Brake Rotors</p>
-                                <h4>${{ $product->price }}</h4>
-                            </div>
+                            </a>
                         @endforeach
                         {{-- <div class="collection-box cstm-card">
                             <div class="collection-img">

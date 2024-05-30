@@ -17,7 +17,7 @@ class DealerController extends Controller
     {
         $request = request();
 
-        $users = User::with('product')->where('id', '!=', 1)->Search()->paginate(5);
+        $users = User::with('product')->where('id', '!=', 1)->orderBy('created_at', 'DESC')->Search()->paginate(5);
         return view('admin.user.index', compact('users'));
     }
     public function products(User $user)

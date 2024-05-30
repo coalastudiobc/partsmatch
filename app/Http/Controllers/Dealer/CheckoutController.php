@@ -2,24 +2,21 @@
 
 namespace App\Http\Controllers\Dealer;
 
+use Exception;
+use Stripe\Stripe;
+use App\Models\Cart;
+use App\Models\City;
+use App\Models\Order;
+use App\Models\State;
+use App\Models\Country;
+use App\Models\OrderItem;
+use Stripe\PaymentIntent;
+use App\Models\CartProduct;
+use App\Models\AdminSetting;
+use App\Models\ShippingAddress;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CheckoutRequest;
-use App\Models\AdminSetting;
-use App\Models\Cart;
-use App\Models\CartProduct;
-use App\Models\City;
-use App\Models\Country;
-use App\Models\Order;
-use App\Models\OrderItem;
-use App\Models\Product;
-use App\Models\ShippingAddress;
-use App\Models\State;
-use Exception;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Stripe;
-use Stripe\Charge;
-use Stripe\PaymentIntent;
 
 class CheckoutController extends Controller
 {
@@ -68,7 +65,7 @@ class CheckoutController extends Controller
             DB::beginTransaction();
 
             \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
-            $user =  auth()->user();
+            // $user =  auth()->user();
 
             $cart = Cart::where('user_id', auth()->user()->id)->first();
             $cartItems = CartProduct::with('product')->where('cart_id', $cart->id)->get();
@@ -121,16 +118,10 @@ class CheckoutController extends Controller
                 'address2' => $request->shiping_address2
             ];
             ShippingAddress::create($shiping_address);
-
-            // dd("herer", $cartItems);
-
             DB::commit();
-
             return redirect()->route('dealer.myorder.orderlist');
         } catch (Exception $e) {
-            dd($e->getMessage());
             DB::rollback();
-
             return redirect()->back()->with('error', $e->getMessage());
         }
     }

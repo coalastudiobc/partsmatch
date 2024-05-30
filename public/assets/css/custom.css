@@ -486,7 +486,7 @@
 
 .dealer-category-box {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(5, 1fr);
     gap: 20px;
     justify-items: center;
     justify-content: space-between;
@@ -713,9 +713,9 @@
 /* ------------------------------------- Cart Page ----------------------- */
 .banner-content-sec {
     background-color: var(--secondary-color);
-    position: sticky;
+    /* position: sticky;
     top: 90px;
-    z-index: 99;
+    z-index: 99; */
 }
 
 .banner-content-wrapper {
