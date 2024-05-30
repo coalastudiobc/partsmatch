@@ -62,7 +62,7 @@ class CartController extends Controller
         $cart =  Cart::with('cartProducts', 'cartProducts.product', 'cartProducts.product.productImage')->where('user_id', auth()->id())->first();
         $shippingCharge = AdminSetting::where('name', 'shipping_charge')->first();
         $user =  User::with('cart', 'cart.cartProducts')->where('id', auth()->user()->id)->first();
-        $cart = view('components.cart-component', compact('cart', 'shippingCharge'))->render();
+        $cart = view('components.cart', compact('cart', 'shippingCharge'))->render();
         $cart_icon = view('components.cart-icon', compact('user'))->render();
         $data = ['success' => true, 'cart_icon' => $cart_icon, 'cart' => $cart];
         return response()->json($data);
@@ -77,13 +77,13 @@ class CartController extends Controller
                 $product->update(['quantity' => $request->quantity]);
                 $cart =  Cart::with('cartProducts', 'cartProducts.product', 'cartProducts.product.productImage')->where('user_id', auth()->id())->first();
                 $shippingCharge = AdminSetting::where('name', 'shipping_charge')->first();
-                $cart = view('components.cart-component', compact('cart', 'shippingCharge'))->render();
+                $cart = view('components.cart', compact('cart', 'shippingCharge'))->render();
                 $data = ['success' => true, 'cart' => $cart, 'status' => true, "message" => "product Quantity updated  successfully"];
                 return response()->json($data);
             } else {
                 $cart =  Cart::with('cartProducts', 'cartProducts.product', 'cartProducts.product.productImage')->where('user_id', auth()->id())->first();
                 $shippingCharge = AdminSetting::where('name', 'shipping_charge')->first();
-                $cart = view('components.cart-component', compact('cart', 'shippingCharge'))->render();
+                $cart = view('components.cart', compact('cart', 'shippingCharge'))->render();
                 $data = ['success' => true, 'cart' => $cart, 'status' => false, 'message' => "stocks not available"];
                 return response()->json($data);
             }
