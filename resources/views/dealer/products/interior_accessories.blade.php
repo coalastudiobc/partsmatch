@@ -111,7 +111,7 @@
                                                     <div class="pro-dealer-info">
                                                         <div class="pro-dealer-img-box">
                                                             <div class="dealer-img-box">
-                                                                @dump($product->user, $product);
+
                                                                 @if (isset($product->user->profile_picture_url))
                                                                     <img src="{{ Storage::url($product->user->profile_picture_url) }}"
                                                                         alt="">
