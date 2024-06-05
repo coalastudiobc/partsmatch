@@ -10,6 +10,7 @@ use App\Models\AdminSetting;
 use App\Models\Commission;
 use App\Models\FeaturedProduct;
 use App\Models\Product;
+use App\Models\ShippingSetting;
 use App\Models\User;
 use Illuminate\Contracts\Validation\Validator as ValidationValidator;
 use Illuminate\Http\Request;
@@ -136,17 +137,71 @@ class AdminController extends Controller
     public function shipping(ShippingRequest $request)
     {
         if ($request->method() == "POST") {
-            AdminSetting::where('name', 'shipping_charge_type')->update(['value' => $request->shipping_charge_type]);
-            AdminSetting::where('name', 'shipping_charge')->update(['value' => $request->shipping_charge]);
+            try {
+                $data = [
+                    'range_from' => $request->range_from,
+                    'range_to' => $request->range_to,
+                    'type' => $request->shipping_charge_type,
+                    'value' => $request->shipping_charge,
+                ];
 
+                ShippingSetting::create($data);
 
-            session()->flash('status', 'success');
-            session()->flash('message', 'Data updated successfully');
-            return redirect()->route('admin.shipping');
+                session()->flash('status', 'success');
+                session()->flash('message', 'Data updated successfully');
+                return redirect()->route('admin.shipping');
+            } catch (\Throwable $e) {
+                session()->flash('status', 'error');
+                session()->flash('message', $e->getMessage());
+                return redirect()->back();
+            }
+        } else {
+            $shipping_details = ShippingSetting::orderBy('created_at', 'DESC')->paginate(5);
         }
 
-        return view('admin.shipping_price');
+        return view('admin.shipping_setting.index', compact('shipping_details'));
     }
+    public function shippingEdit(ShippingRequest $request, $shipping_id)
+    {
+        if ($request->method() == "POST") {
+            try {
+                $data = [
+                    'range_from' => $request->range_from,
+                    'range_to' => $request->range_to,
+                    'type' => $request->shipping_charge_type,
+                    'value' => $request->shipping_charge,
+                ];
+                $id = jsdecode_userdata($shipping_id);
+                $editrow =  ShippingSetting::where('id', $id)->first();
+                $editrow->update($data);
+                session()->flash('status', 'success');
+                session()->flash('message', 'Data updated successfully');
+                return redirect()->route('admin.shipping');
+            } catch (\Throwable $e) {
+                session()->flash('status', 'error');
+                session()->flash('message', $e->getMessage());
+                return redirect()->route('admin.shipping');
+            }
+        } else {
+            $id = jsdecode_userdata($shipping_id);
+            $data =  ShippingSetting::where('id', $id)->first();
+            return view('admin.shipping_setting.add', compact('data'));
+        }
+    }
+    public function shippingAdd()
+    {
+        return view('admin.shipping_setting.add');
+    }
+
+    public function shippingDestroy($shipping_id)
+    {
+        $id = jsdecode_userdata($shipping_id);
+        ShippingSetting::find($id)->delete();
+        session()->flash('status', 'success');
+        session()->flash('message', 'Data deleted successfully');
+        return redirect()->back();
+    }
+
     public function featured_list()
     {
         // $users = User::with('product', 'product.featuredProduct')->get();

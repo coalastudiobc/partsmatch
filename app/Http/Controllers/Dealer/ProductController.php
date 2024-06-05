@@ -14,6 +14,7 @@ use Exception;
 use GrahamCampbell\ResultType\Success;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
@@ -82,11 +83,10 @@ class ProductController extends Controller
                 'Shipping_info' => $request->Shipping_info,
                 'field_3' => $request->field_3,
                 'year' => $request->car_years,
-                'brand' => $request->car_make,
-                'model' => $request->car_model,
+                'brand' => $request->car_model,
+                'model' => $request->car_make,
                 'status' => '1',
             ];
-
             DB::beginTransaction();
             $product = Product::create($product);
             if (isset($request->subscription_status)) {
@@ -126,6 +126,17 @@ class ProductController extends Controller
      */
     public function show(Request $request)
     {
+        if ($request->globalquery) {
+            $products = Product::when(!empty($request->globalquery), function ($q) use ($request) {
+                $q->Where('name', 'like', '%' . $request->globalquery . '%')
+                    ->orWhere('price', 'like', '%' . $request->globalquery . '%')
+                    ->orWhere('year', 'like', '%' . $request->globalquery . '%')
+                    ->orWhere('brand', 'like', '%' . $request->globalquery . '%')
+                    ->orWhere('model', 'like', '%' . $request->globalquery . '%');
+            })->when(!empty($request->globalquery) && $request->globalquery == 'active', function ($q) use ($request) {
+                $q->where('status', '1');
+            });
+        }
         $category = Category::with('children', 'parent')->where('id', $request->category)->first();
         if ($category->parent) {
             $products = Product::with('productImage', 'user')->where('subcategory_id', $category->id)->Paginate(5);
@@ -291,6 +302,7 @@ class ProductController extends Controller
             'message' => "Featured plan deleted Successfully"
         ], 200);
     }
+
     public function subcategory($id)
     {
         $subcategories = Category::where('parent_id', $id)->get();
@@ -303,10 +315,7 @@ class ProductController extends Controller
     public function details(Product $product)
     {
         $userdetails = User::where('id', $product->user_id)->first();
-
-
         $productImages = $product->productImage;
-
         $shippingCharge = AdminSetting::where('name', 'shipping_charge')->first();
         $allproducts = Product::with('productImage')->where('user_id', $userdetails->id)->inRandomOrder()->limit(6)->get();
 
@@ -339,4 +348,22 @@ class ProductController extends Controller
 
         return response()->json(['success' => true, 'makes' => $make]);
     }
+    public function search(Request $request)
+    {
+        if (is_null($request->globalquery)) {
+            return redirect()->back();
+        }
+        $products = Product::when(!empty($request->globalquery), function ($q) use ($request) {
+            $q->Where('name', 'like', '%' . $request->globalquery . '%')
+                ->orWhere('price', 'like', '%' . $request->globalquery . '%')
+                ->orWhere('year', 'like', '%' . $request->globalquery . '%')
+                ->orWhere('brand', 'like', '%' . $request->globalquery . '%')
+                ->orWhere('model', 'like', '%' . $request->globalquery . '%');
+        })->when(!empty($request->globalquery) && $request->globalquery == 'active', function ($q) use ($request) {
+            $q->where('status', '1');
+        });
+        dd($products->get());
+        return view('dealer.products.interior_accessories', compact('products'));
+    }
 }
+    

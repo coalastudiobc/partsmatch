@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             CmsPageSeeder::class,
             CommissionSeeder::class,
             PermissionsSeeder::class,
+            AdminSettingSeeder::class,
         ]);
     }
 }

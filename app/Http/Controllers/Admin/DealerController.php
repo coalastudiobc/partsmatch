@@ -17,7 +17,7 @@ class DealerController extends Controller
     {
         $request = request();
 
-        $users = User::with('product')->where('id', '!=', 1)->orderBy('created_at', 'DESC')->Search()->paginate(5);
+        $users = User::with('product')->Dealers()->orderBy('created_at', 'DESC')->Search()->paginate(5);
         return view('admin.user.index', compact('users'));
     }
     public function products(User $user)
@@ -31,7 +31,6 @@ class DealerController extends Controller
         $id = $request->id;
         try {
             $class = "App\Models\\{$request->model}";
-
             if (empty($class)) {
                 return response()->json(['status' => 'error', 'message' => ucwords($request->model) . ' not found'], 404);
             }

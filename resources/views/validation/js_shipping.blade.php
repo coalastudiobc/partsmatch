@@ -1,6 +1,16 @@
 <script>
     jQuery(document).ready(function() {
-        rules = {
+        const rules = {
+            range_from: {
+                required: true,
+                decimal: true,
+                minlength: true,
+
+            },
+            range_to: {
+                required: true,
+                greaterThan: '#greaterFrom',
+            },
             shipping_charge_type: {
                 required: true,
             },
@@ -10,7 +20,16 @@
             }
         }
         const messages = {
-
+            range_from: {
+                required: "Please enter the value of Range From.",
+                decimal: "Only numbers!",
+                minlength: 'number should be greater than zero',
+            },
+            range_to: {
+                required: "Please enter the value of Range To.",
+                decimal: "Only numbers!",
+                greaterThan: "Please enter a value greater than the specified range_from.",
+            },
             shipping_charge_type: {
                 required: `{{ __('customvalidation.shipping.shipping_charge_type.required') }}`,
             },
@@ -47,6 +66,22 @@
         //         }
         //     }
         // });
-        handleValidation('shipping', rules, messages);
+        // jQuery('#submitFiveJune').on('click', function(e) {
+        //     if (jQuery('#shipping').valid()) {
+        //         jQuery('#shipping').submit();
+        //     } else {
+        //         handlevalidation('shipping', rules, messages, true)
+        //     }
+        // });
+        var check = jQuery('#shipping').validate({
+            rules,
+            messages
+        });
+        jQuery('#submitFiveJune').on('click', function(e) {
+            e.preventDefault();
+            if (jQuery('#shipping').valid()) {
+                jQuery('#shipping').submit();
+            }
+        });
     });
 </script>

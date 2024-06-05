@@ -16,7 +16,7 @@ class AllowedAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::user()->hasRole("Administrator")){
+        if (Auth::user()->hasRole("Administrator")) {
             return $next($request);
         }
         return redirect()->route('home');

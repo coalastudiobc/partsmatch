@@ -225,7 +225,7 @@
                                     <div class="form-group">
                                         <label for="">Role</label>
                                         <input type="hidden" name="permission_type" value="Basic" id=""
-                                            class="@error('order_commission_type') is-invalid @enderror">
+                                            class="role_dropdown @error('order_commission_type') is-invalid @enderror">
                                         <div class="custm-dropdown">
                                             <div class="dropdown">
                                                 <div class="dropdown-toggle " type="button" id="dropdownMenuButton1"
@@ -382,8 +382,8 @@
             jQuery('.custom_dropdown_commission').on('click', function() {
                 var selectitem = jQuery(this).attr('data-value')
                 var selecttext = jQuery(this).attr('data-text')
-                console.log(selectitem, selecttext)
                 jQuery('#selectedcommission').text(selecttext)
+                jQuery('.role_dropdown').val(selectitem);
                 jQuery(document).find('input[name="order_commission_type"]').val(selectitem);
 
             });

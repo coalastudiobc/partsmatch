@@ -78,6 +78,17 @@ class User extends Authenticatable
     {
         return $this->hasOne(ShippingAddress::class, 'user_id');
     }
+
+    public function scopeManagers($query)
+    {
+        return $query->role('Manager');
+    }
+
+    public function scopeDealers($query)
+    {
+        return $query->role('dealer');
+    }
+
     public function scopeSearch($query)
     {
         $request = request();

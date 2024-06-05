@@ -63,13 +63,17 @@
 
                                 <div class="single-img-info mt-5">
                                     <div class="product-infography">
-                                        <h2>R1 Concepts® – eLINE Series Plain Brake Rotors</h2>
+                                        {{-- <h2>R1 Concepts® – eLINE Series Plain Brake Rotors</h2> --}}
+                                        <h2>{{ $product->name }}® – Model-{{ $product->brand ?? 'Ford' }}   
+                                            series-{{ $product->model ?? 'endeavor' }}
+                                            Year-{{ $product->year ?? '2016' }}
+                                        </h2>
                                         <span>{{ $product->category->name }}</span><br>
                                         <span>See more products by: </span> <a
-                                            @if (auth()->user()) href="{{ route('dealer.view.profile', $userdetails->id) }}" @else href="javascript:void(0)" @endif>
+                                            href="{{ route('dealer.view.profile', $userdetails->id) }}">
                                             <u style="color: #0d6efd">{{ $userdetails->name }}</u></a>
-                                        <p>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out
-                                            print, graphic or web designs. </p>
+                                        <h2>${{ $product->price }}</h2>
+                                        <p>{{ $product->description }}</p>
                                         {{-- <div class="product-quantity-box">
                                         <p>Quantity</p>
                                         <div class="quantity-btn">
@@ -88,8 +92,7 @@
                                             <h3>${{ $product->price }}</h3>
                                         </div>
                                         <div class="more-info-box">
-                                            <div class="accordion" id="accordionExample">
-
+                                            {{-- <div class="accordion" id="accordionExample">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header">
                                                         <button class="accordion-button collapsed" type="button"
@@ -107,9 +110,8 @@
                                                     </div>
                                                 </div>
 
-                                            </div>
+                                            </div> --}}
                                             <div class="accordion" id="accordionExample">
-
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header">
                                                         <button class="accordion-button collapsed" type="button"
@@ -128,7 +130,6 @@
                                                 </div>
                                             </div>
                                             <div class="accordion" id="accordionExample">
-
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header">
                                                         <button class="accordion-button collapsed" type="button"
@@ -142,6 +143,24 @@
                                                         data-bs-parent="#accordionExample">
                                                         <div class="accordion-body">
                                                             <p>{{ $product->other_specification }} </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="accordion" id="accordionExample">
+                                                <div class="accordion-item">
+                                                    <h2 class="accordion-header">
+                                                        <button class="accordion-button collapsed" type="button"
+                                                            data-bs-toggle="collapse"
+                                                            data-bs-target="#additional-information3" aria-expanded="false"
+                                                            aria-controls="collapseTwodfd">
+                                                            Field 3
+                                                        </button>
+                                                    </h2>
+                                                    <div id="additional-information3" class="accordion-collapse collapse"
+                                                        data-bs-parent="#accordionExample">
+                                                        <div class="accordion-body">
+                                                            <p>{{ $product->field_3 }} </p>
                                                         </div>
                                                     </div>
                                                 </div>

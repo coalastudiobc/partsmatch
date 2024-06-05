@@ -6,6 +6,7 @@ use App\Models\AdminSetting;
 use App\Models\Cart;
 use App\Models\CartProduct;
 use App\Models\Product;
+use App\Models\ShippingSetting;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -14,6 +15,8 @@ class CartController extends Controller
     public function index()
     {
         $cart =  Cart::with('cartProducts', 'cartProducts.product', 'cartProducts.product.productImage')->where('user_id', auth()->id())->first();
+        $test = ShippingSetting::where('range_from', '<=', 60)->where('range_to', '>=', 60)->get();
+        // dd($cart->amount, $test->toArray());
         $shippingCharge = AdminSetting::where('name', 'shipping_charge')->first();
         $user =  User::with('cart', 'cart.cartProducts')->where('id', auth()->user()->id)->first();
         return view('dealer.cart.index', compact('cart', 'shippingCharge', 'user'));
@@ -58,7 +61,6 @@ class CartController extends Controller
     public function removeFromCart(CartProduct $product)
     {
         $product->delete();
-
         $cart =  Cart::with('cartProducts', 'cartProducts.product', 'cartProducts.product.productImage')->where('user_id', auth()->id())->first();
         $shippingCharge = AdminSetting::where('name', 'shipping_charge')->first();
         $user =  User::with('cart', 'cart.cartProducts')->where('id', auth()->user()->id)->first();
@@ -88,7 +90,6 @@ class CartController extends Controller
                 return response()->json($data);
             }
         } catch (\Exception $e) {
-
             return response()->json(['success' => false, 'message' => $e->getMessage()]);
         }
     }
