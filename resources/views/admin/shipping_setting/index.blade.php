@@ -18,11 +18,9 @@
                 <table class="table">
                     <tr>
                         <th>
-                            <p>Range_from</p>
+                            <p>Range</p>
                         </th>
-                        <th>
-                            <p>Range_To</p>
-                        </th>
+
                         <th>
                             <p>Type</p>
                         </th>
@@ -39,11 +37,11 @@
                     @forelse($shipping_details as $key => $shipping)
                         <tr>
                             <td>
-                                <p>{{ $shipping->range_from ?? '' }}</p>
-                            </td>
+                                <p>{{ $shipping->range_from ?? '' }} - {{ $shipping->range_to ?? '' }}</p>
+                                {{-- </td>
 
-                            <td>
-                                <p>{{ $shipping->range_to ?? '' }}</p>
+                            <td> --}}
+                                {{-- <p>{{ $shipping->range_to ?? '' }}</p> --}}
                             </td>
                             <td>
                                 <p>{{ $shipping->type ?? '' }}</p>

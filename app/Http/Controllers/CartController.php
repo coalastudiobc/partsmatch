@@ -15,11 +15,9 @@ class CartController extends Controller
     public function index()
     {
         $cart =  Cart::with('cartProducts', 'cartProducts.product', 'cartProducts.product.productImage')->where('user_id', auth()->id())->first();
-        $test = ShippingSetting::where('range_from', '<=', 60)->where('range_to', '>=', 60)->get();
-        // dd($cart->amount, $test->toArray());
-        $shippingCharge = AdminSetting::where('name', 'shipping_charge')->first();
+        $shippingCharges = ShippingSetting::all();
         $user =  User::with('cart', 'cart.cartProducts')->where('id', auth()->user()->id)->first();
-        return view('dealer.cart.index', compact('cart', 'shippingCharge', 'user'));
+        return view('dealer.cart.index', compact('cart', 'shippingCharges', 'user'));
     }
 
     public function cart()

@@ -23,7 +23,7 @@
                                         <div class="form-group">
                                             <div class="range">
                                                 <label for="range_from">Range From</label>
-                                                <input type="number" id="greaterFrom" name="range_from" placeholder="range_from"
+                                                <input type="number" id="range_from" name="range_from" placeholder="range_from"
                                                 value="@isset($data){{ $data->range_from }}@endisset" >
 
                                                 <label for="range_to">Range To</label>

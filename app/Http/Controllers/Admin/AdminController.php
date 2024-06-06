@@ -144,8 +144,17 @@ class AdminController extends Controller
                     'type' => $request->shipping_charge_type,
                     'value' => $request->shipping_charge,
                 ];
-
+                // $has_range_from = ShippingSetting::whereBetween('range_from', [$request->range_from, $request->range_to])->get();
+                // if ($has_range_from->toArray()) {
+                //     $has_range_to = ShippingSetting::whereBetween('range_to', [$request->range_from, $request->range_to])->get();
+                //     if ($has_range_to->toArray()) {
+                //         session()->flash('status', 'error');
+                //         session()->flash('message', 'you can');
+                //         return redirect()->back();
+                //     } else {
                 ShippingSetting::create($data);
+                //     }
+                // }
 
                 session()->flash('status', 'success');
                 session()->flash('message', 'Data updated successfully');
