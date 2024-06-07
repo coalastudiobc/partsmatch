@@ -34,7 +34,9 @@ class PartsManagerController extends Controller
 
         $userdetails = User::create($user);
         $userdetails->assignRole('Manager');
-        // $userdetails->givePermissionTo('role-view');
+        if ($request->role == "Basic") {
+            $userdetails->givePermissionTo('role-view');
+        }
         return redirect()->back()->with(['status' => 'success', 'message' => "created successfully"]);
     }
 
@@ -45,7 +47,6 @@ class PartsManagerController extends Controller
 
     public function update(PartsManagerRequest $request, User $user)
     {
-
         try {
             $users = [
                 'name' => $request->name,

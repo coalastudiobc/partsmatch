@@ -20,7 +20,7 @@
         </div>
 
 
-        <div class="product-detail-table user-list-table">
+        <div class="product-detail-table user-list-table min-width-1200">
             <div class="table-responsive">
                 <table class="table">
                     <tr>
@@ -41,6 +41,9 @@
                         </th>
                         <th>
                             <p>Status</p>
+                        </th>
+                        <th>
+                            <p>Commision</p>
                         </th>
                         {{-- <th>
                             <p>View</p>
@@ -80,6 +83,19 @@
                                 {{-- <div >
                                     <input type="checkbox" id="switch1"><label for="switch1">Toggle</label>
                                 </div> --}}
+                            <td>
+                                <p class="test"> @isset($user->ComissionDetails->commision_value)
+                                        <span>
+                                            {{ $user->ComissionDetails->commision_value }}{{ $user->ComissionDetails->commision_type == 'Percentage' ? '%' : '$' }}</span>
+                                        <a class="btn primary-btn "
+                                            href="{{ route('admin.commission', ['dealer_id' => jsencode_userdata($user->id)]) }}">edit</a>
+                                    @else
+                                        <span> N/A </span>
+                                        <a class="btn primary-btn"
+                                            href="{{ route('admin.commission', ['dealer_id' => jsencode_userdata($user->id)]) }}">add</a>
+                                    @endisset
+                                </p>
+                            </td>
 
                             </td>
                             <td>

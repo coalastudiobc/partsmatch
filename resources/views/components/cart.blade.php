@@ -105,12 +105,24 @@
                     <div class="cart-wrapper">
                         <p class="cart-txt">Shipping</p>
                         <p class="price-txt">
-                            {{ number_format($shippingCharge->value, 2, '.', ',') }}
+                            @php
+                                $shiping_value = 0;
+                                foreach ($shippingCharges as $charge) {
+                                    if ($cart->amount >= $charge->range_from && $cart->amount <= $charge->range_to) {
+                                        if ($charge->type == 'fixed') {
+                                            $shiping_value = $charge->value;
+                                        } else {
+                                            $shiping_value = $cart->amount * ($charge->value / 100);
+                                        }
+                                    }
+                                }
+                            @endphp
+                            {{ number_format($shiping_value, 2, '.', ',') }}
                         </p>
                     </div>
                     <div class="sub-total-wrapper">
                         <h3>Payable Total</h3>
-                        <h3>{{ isset($cart->amount) ? number_format($cart->amount + $shippingCharge->value, 2, '.', ',') : '' }}
+                        <h3>{{ isset($cart->amount) ? number_format($cart->amount + $shiping_value, 2, '.', ',') : '' }}
                         </h3>
                     </div>
                 </div>

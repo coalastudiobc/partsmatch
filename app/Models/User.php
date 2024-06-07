@@ -59,6 +59,10 @@ class User extends Authenticatable
     {
         return $this->hasOne(PaymentDetail::class, 'user_id', 'id');
     }
+    public function ComissionDetails()
+    {
+        return $this->hasOne(UserCommisionSetting::class, 'user_id', 'id');
+    }
 
     public function product()
     {
@@ -78,6 +82,17 @@ class User extends Authenticatable
     {
         return $this->hasOne(ShippingAddress::class, 'user_id');
     }
+
+    public function scopeManagers($query)
+    {
+        return $query->role('Manager');
+    }
+
+    public function scopeDealers($query)
+    {
+        return $query->role('dealer');
+    }
+
     public function scopeSearch($query)
     {
         $request = request();

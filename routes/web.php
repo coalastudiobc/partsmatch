@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\dealer\CheckoutController;
 use App\Http\Controllers\Dealer\DealerController;
+use App\Http\Controllers\Dealer\ProductController;
 use App\Http\Controllers\Dealer\ProfileController;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
@@ -36,6 +37,7 @@ Route::get('get/categorized/collection/products/{category}', [HomeController::cl
 Route::get('redirect-to-dashboard', [HomeController::class, 'redirectToDashboard'])->name('redirect-to-dashboard');
 Route::get('verify-email/{user}/{token}', [RegisterController::class, 'verifyEmail'])->name('verify-email');
 
+Route::get('/search', [ProductController::class, 'search'])->name('search');
 
 
 Auth::routes();

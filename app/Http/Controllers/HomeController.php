@@ -48,7 +48,6 @@ class HomeController extends Controller
     public function getProductsForCategory(Request $request, Category $category)
     {
         $products = $category->products;
-
         $data = view('components.home-product-tab', compact('products'))->render();
 
         return response()->json(['status' => true, 'message' => 'products fetched successfully', 'data' => $data], 200);

@@ -49,6 +49,15 @@
                     <div class="collapse navbar-collapse ms-auto" id="navbarNav">
                         <div class="custm-nav-menu login-nav">
                             <ul class="navbar-nav">
+                                <li>
+                                    <form action="{{ route('search') }}" method="GET">
+                                        <div class="pro-search-box">
+                                            <input type="text" name="globalquery" class="form-control" value=""
+                                                placeholder="Search...">
+                                            <button type="submit" class="btn primary-btn">Search</button>
+                                        </div>
+                                    </form>
+                                </li>
                                 <li class="nav-item">
                                     <a class="nav-link" aria-current="page" href="{{ route('welcome') }}">
                                         @if (auth()->user())
@@ -58,14 +67,15 @@
                                         @endif
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <a class="nav-link" aria-current="page"
                                         href="{{ route('view', ['slug' => 'about-us']) }}">About Us</a>
-                                </li>
-                                <li class="nav-item">
+                                </li> --}}
+                                {{-- <li class="nav-item">
                                     <a class="nav-link" aria-current="page"
-                                        href="{{ route('view', ['slug' => 'contact-us']) }}">Contact Us</a>
-                                </li>
+                                        href="{{ route('view', ['slug' => 'about-us']) }}">About Us</a>
+                                </li> --}}
+
                             </ul>
                             @guest
                                 <ul class="navbar-nav">

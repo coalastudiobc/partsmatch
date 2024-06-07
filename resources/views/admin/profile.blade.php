@@ -29,8 +29,14 @@
                                                     <div class="upload-icon d-none editable">
                                                         <i class="fa-sharp fa-solid fa-pen"></i>
                                                     </div>
-                                                    <input type="file" disabled class="d-none disabled-inputs"
+                                                    <input type="file" disabled accept=".jpg,.png,.jpeg"
+                                                        class="d-none disabled-inputs  @error('image') is-invalid @enderror"
                                                         name="image" id="file-upload">
+                                                    @error('image')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                 </label>
                                             </div>
                                         </div>
@@ -165,7 +171,7 @@
                 reader.onload = function(e) {
                     $('#Userimage').attr('src', e.target.result);
                 }
-
+                $('.invalid-feedback strong').text();
                 reader.readAsDataURL(this.files[0]);
             }
         });

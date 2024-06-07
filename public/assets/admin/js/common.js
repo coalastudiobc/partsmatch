@@ -51,6 +51,12 @@ jQuery(document).ready(function () {
 
 
 // Jquery custom validations
+$.validator.addMethod("greaterThan", function(value, element, param) {
+    console.log(value);
+    var $otherElement = $(param);
+    return parseFloat(value) > parseFloat($otherElement.val());
+}, "Please enter a value greater than the specified range_from.");
+
 jQuery.validator.addMethod('filesize', function (value, element, param) {
     return this.optional(element) || (element.files[0].size <= param)
 }, 'File size must be less than {0}');
@@ -76,7 +82,7 @@ jQuery.validator.addMethod("regex", function (value, element, regexp) {
 
 
 function handleValidation(form, rules, messages = {}, submitHandler = false) {
-    if (typeof form == "string")
+    if( typeof form == "string" )
         form = jQuery('form#' + form);
     let valdiationConfiguration = {
         errorClass: "invalid-feedback",
@@ -98,24 +104,27 @@ function handleValidation(form, rules, messages = {}, submitHandler = false) {
             } else {
                 jQuery(element).parent().removeClass("is-invalid");
             }
-
             jQuery(element).removeClass("is-invalid");
         },
         errorPlacement: function (label, element) {
             if (jQuery(element).hasClass('selectric')) {
                 label.removeClass('invalid-feedback').addClass('cstm-selectric-invalid').insertAfter(jQuery(element).parent().siblings('.selectric'))
-            } else if (jQuery(element).hasClass('select2-error')) {
-                label.insertAfter($(element).parent())
-            } else if (jQuery(element).hasClass('image-input')) {
-                $('#errorViewer').html(label);
+            }else if( jQuery(element).hasClass('select2-error') ){
+                label.insertAfter( $(element).parent() )
+            }else if( jQuery(element).hasClass('form-select') ){
+                label.insertAfter( $(element).parent().parent() )
+            }else if( jQuery(element).hasClass('form-class') ){
+                label.insertAfter( $(element).parent() )
+            }else if( jQuery(element).hasClass('star') ){
+                label.insertAfter( $(element).parent() )
             } else {
                 label.insertAfter(element)
             }
         }
     };
-    if (submitHandler)
+    if( submitHandler )
         valdiationConfiguration.submitHandler = submitHandler;
-    form.validate(valdiationConfiguration);
+    form.validate( valdiationConfiguration );
 }
 jQuery(document).ajaxStart(function (event, request, settings) {
     jQuery("body").addClass("loading");
@@ -277,7 +286,7 @@ function showMessage(message = null) {
     return toastr.success(message);
 }
 
-/* 
+/*
     Show other Modal
     Close current modal
     Open Modal

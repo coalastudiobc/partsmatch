@@ -16,24 +16,46 @@
                             </div> --}}
                             <div class="card-body">
 
-                                <form id="shipping" action="{{ route('admin.shipping') }}" enctype="multipart/form-data"
+                                <form id="shipping" action=" @isset($data) {{ route('admin.shipping.edit',['shipping_id'=>jsencode_userdata($data->id)]) }}  @else {{ route('admin.shipping') }} @endisset " enctype="multipart/form-data"
                                     method="post">
                                     @csrf
                                     <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="range_from">Range From</label>
+                                                <div class="form-field">
+                                                    <input class="form-control" type="number" id="range_from" name="range_from" placeholder="range_from"
+                                                    value="@isset($data){{ $data->range_from }}@endisset" >
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="range_to">Range To</label>
+                                                <div class="form-field">
+                                                    <input class="form-control" type="number" name="range_to" placeholder="range_to"
+                                                        value="@isset($data){{ $data->range_to }}@endisset" >
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <div class="form-group">
+
                                             <label>Shipping Charge Type</label>
                                             {{-- <select id="checktype" name="shipping_charge_type"
                                                 class="form-control @error('shipping_charge_type') is-invalid @enderror">
                                                 <option value="Percentage"
-                                                    @if (get_admin_setting('shipping_charge_type') == 'Percentage') selected @endif>
+                                                    @if ($data->'shpping_charge_type') == 'Percentage') selected @endif>
                                                     Percentage
                                                 </option>
-                                                <option value="Fixed" @if (get_admin_setting('shipping_charge_type') == 'Fixed') selected @endif>
+                                                <option value="Fixed" @if ($data->$id->type == 'Fixed') selected @endif>
                                                     Fixed
                                                 </option>
                                             </select> --}}
+
                                             <input type="hidden" name="shipping_charge_type"
-                                                value="{{ old('shipping_charge_type', get_admin_setting('shipping_charge_type') == 'Fixed' ? 'Fixed' : 'Percentage') }}"
+                                                value="@isset($data) {{ $data->type   == 'fixed' ? 'fixed' : 'Percentage' }}@endisset"
                                                 id=""
                                                 class="@error('shipping_charge_type') is-invalid @enderror checktype">
                                             <div class="custm-dropdown">
@@ -41,7 +63,7 @@
                                                     <div class="dropdown-toggle " type="button" id="dropdownMenuButton1"
                                                         data-bs-toggle="dropdown" aria-expanded="false">
                                                         <div id="selectedcommission">
-                                                            {{ old('shipping_charge_type', get_admin_setting('shipping_charge_type') == 'Fixed' ? 'Fixed' : 'Percentage') }}
+                                                            @isset($data) {{ $data->type   == 'fixed' ? 'fixed' : 'Percentage' }}@endisset
 
 
                                                         </div>
@@ -57,12 +79,12 @@
                                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 
                                                         <li><a class="dropdown-item custom_dropdown_commission"
-                                                                @if (get_admin_setting('shipping_charge_type') == 'Percentage') selected @endif
+                                                             @isset($data)   @if($data->type == 'Percentage') selected @endif @endisset
                                                                 data-value="Percentage" data-text="Percentage"
                                                                 href="javascript:void(0)">Percentage</a>
                                                         </li>
                                                         <li><a class="dropdown-item custom_dropdown_commission"
-                                                                @if (get_admin_setting('shipping_charge_type') == 'Fixed') selected @endif
+                                                            @isset($data)    @if ($data->type == 'Fixed') selected @endif @endisset
                                                                 data-value="Fixed" data-text="Fixed"
                                                                 href="javascript:void(0)">Fixed</a>
                                                         </li>
@@ -89,7 +111,7 @@
                                             <div class="symbol"></div>
                                             <input type="number" id="checkcommission" name="shipping_charge"
                                                 class="form-control @error('shipping_charge') is-invalid @enderror two-decimals"
-                                                value="{{ old('shipping_charge', get_admin_setting('shipping_charge')) }}">
+                                                value="@isset($data){{ $data->value }}@endisset">
 
                                             @error('shipping_charge')
                                                 <span class="invalid-feedback" role="alert">
@@ -101,7 +123,7 @@
                                                     <i class="fa-solid fa-question"></i>
                                                 </span>
                                                 <div class="tooltip">
-                                                    <p>ghfvjvhm</p>
+                                                    <p>Average shipping charge for every consignment.</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -149,12 +171,10 @@
         });
     </script>
     <script>
-        $(document).ready(function() {
+        jQuery(document).ready(function() {
             // change symbols
             var type = $('.checktype').val();
-
             if (type == 'Percentage') {
-
                 // $('#checkcommission').attr('min', '1');
                 // $('#checkcommission').attr('max', '99');
                 $('.symbol').text('%');
@@ -165,12 +185,10 @@
             }
             $('.checktype').on('click', function() {
                 var type = $('.checktype').val();
-
                 if (type == 'Percentage') {
                     // $('#checkcommission').attr('min', '1');
                     // $('#checkcommission').attr('max', '99');
                     $('.symbol').text('%');
-
                 } else {
                     // $('#checkcommission').removeAttr('min', '1');
                     // $('#checkcommission').removeAttr('max', '99');

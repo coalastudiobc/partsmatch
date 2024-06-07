@@ -5,6 +5,7 @@ use App\Models\Cart;
 use App\Models\CartProduct;
 use App\Models\Category;
 use App\Models\CmsPage;
+use App\Models\ShippingSetting;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
@@ -138,11 +139,11 @@ if (!function_exists('authCartProducts')) {
 //     }
 // }
 if (!function_exists('get_admin_setting')) {
-    function get_admin_setting($name)
+    function get_admin_setting($id = null)
     {
-        $record = AdminSetting::where('name', $name)->first();
+        $record = ShippingSetting::where('id', $id)->first();
         if ($record) {
-            return $record->value;
+            return $record;
         }
         return null;
     }
