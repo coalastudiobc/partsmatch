@@ -26,7 +26,7 @@ return [
 
         'php_profile_pic_mimes' => 'jpg,jpeg,png',
         'js_profile_pic_mimes' => 'jpg|jpeg|png',
-        'php_profile_pic_size' => '2000',
+        'php_profile_pic_size' => '2048',
         'php_profile_pic_size_user' => '10000',
         'js_profile_pic_size' => '2000000',
         'js_profile_pic_size_user' => '10000000',

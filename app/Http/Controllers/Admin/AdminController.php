@@ -12,6 +12,7 @@ use App\Models\FeaturedProduct;
 use App\Models\Product;
 use App\Models\ShippingSetting;
 use App\Models\User;
+use App\Models\UserCommisionSetting;
 use Illuminate\Contracts\Validation\Validator as ValidationValidator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -118,19 +119,49 @@ class AdminController extends Controller
         session()->flash('message', 'Data updated successfully');
         return redirect()->route('admin.settings.view');
     }
+    public function commisionAdd(CommissionRequest $request, $user_id = null)
+    {
+        try {
+            $get_dealer_id =  jsdecode_userdata($user_id);
 
-    public function commission(CommissionRequest $request)
+            $data = [
+                'user_id' => $get_dealer_id,
+                'commision_type' => $request->order_commission_type,
+                'commision_value' => $request->order_commission,
+            ];
+            $message = '';
+            if (UserCommisionSetting::where('user_id', $get_dealer_id)->exists()) {
+                UserCommisionSetting::where('user_id', $get_dealer_id)->update($data);
+                $message = "Commision updated  successfully";
+            } else {
+                UserCommisionSetting::create($data);
+                $message = "Commision created successfully";
+            }
+            session()->flash('status', 'success');
+            session()->flash('message', $message);
+            return redirect()->route('admin.dealers.all');
+        } catch (\Throwable $e) {
+            session()->flash('status', 'error');
+            session()->flash('message', $e->getMessage());
+            return redirect()->back();
+        }
+    }
+    public function commission(CommissionRequest $request, $dealer_id = null)
     {
         if ($request->method() == "POST") {
             AdminSetting::where('name', 'order_commission_type')->update(['value' => $request->order_commission_type]);
             AdminSetting::where('name', 'order_commission')->update(['value' => $request->order_commission]);
-
-
+            // UserCommisionSetting::
             session()->flash('status', 'success');
             session()->flash('message', 'Data updated successfully');
             return redirect()->route('admin.commission');
         }
-
+        if ($dealer_id) {
+            $get_dealer_id =  jsdecode_userdata($dealer_id);
+            $user =  User::where('id', $get_dealer_id)->first();
+            $username = $user->name;
+            return view('admin.commission', compact('user', 'username'));
+        }
         return view('admin.commission');
     }
 

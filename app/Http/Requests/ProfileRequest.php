@@ -25,6 +25,7 @@ class ProfileRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255'],
             'phone_number' => ['required'],
+            'image' => ['image', 'mimes:' . config('validation.php_profile_pic_mimes'), 'max:' . config('validation.php_profile_pic_size')],
             'industry_type' => ['required'],
             'address' => ['required'],
         ];
@@ -37,6 +38,9 @@ class ProfileRequest extends FormRequest
             'email.required' => __('customvalidation.user.email.required'),
             'address.required' => __('customvalidation.user.address.required'),
             'phone_number.required' => __('customvalidation.user.phone_number.required'),
+            'image.image' => 'The file must be an image.',
+            'image.mimes' => 'The file must be of type: ' . config('validation.php_profile_pic_mimes'),
+            'image.max' => 'The file may not be greater than' . config('validation.php_profile_pic_size'),
             'industry_type.required' => __('customvalidation.user.industry_type.required'),
         ];
     }

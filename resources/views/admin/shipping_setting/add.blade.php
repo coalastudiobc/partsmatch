@@ -20,21 +20,28 @@
                                     method="post">
                                     @csrf
                                     <div class="row">
-                                        <div class="form-group">
-                                            <div class="range">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
                                                 <label for="range_from">Range From</label>
-                                                <input type="number" id="range_from" name="range_from" placeholder="range_from"
-                                                value="@isset($data){{ $data->range_from }}@endisset" >
-
-                                                <label for="range_to">Range To</label>
-                                                <input type="number" name="range_to" placeholder="range_to"
-                                                    value="@isset($data){{ $data->range_to }}@endisset" >
-
-                                                <span class="invalid-feedback ">
-                                                    <strong class="range_to_error">asfasfasfdasfas</strong>
-                                                </span>
-
+                                                <div class="form-field">
+                                                    <input class="form-control" type="number" id="range_from" name="range_from" placeholder="range_from"
+                                                    value="@isset($data){{ $data->range_from }}@endisset" >
+                                                </div>
                                             </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="range_to">Range To</label>
+                                                <div class="form-field">
+                                                    <input class="form-control" type="number" name="range_to" placeholder="range_to"
+                                                        value="@isset($data){{ $data->range_to }}@endisset" >
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+
                                             <label>Shipping Charge Type</label>
                                             {{-- <select id="checktype" name="shipping_charge_type"
                                                 class="form-control @error('shipping_charge_type') is-invalid @enderror">
@@ -126,7 +133,7 @@
                                                 href="{{ route('admin.shipping') }}">Back</a>
                                         </div>
                                         <div class="col-md-6">
-                                            <button class="btn primary-btn full-btn mr-1" id="submitFiveJune"
+                                            <button class="btn primary-btn full-btn mr-1" id="submit"
                                                 type="submit">Submit</button>
                                         </div>
                                     </div>

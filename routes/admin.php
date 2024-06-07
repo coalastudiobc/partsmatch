@@ -24,7 +24,9 @@ Route::middleware(['auth', 'verified', 'admin'])->namespace('App\Http\Controller
     Route::match('get', 'dashboard', 'AdminController@dashboard')->name('dashboard');
     Route::get('show', 'AdminController@show')->name('show');
     Route::get('edit', 'AdminController@edit')->name('edit');
-    Route::match(["GET", "POST"], "commission", 'AdminController@commission')->name('commission');
+    Route::match(["GET", "POST"], "commission/{dealer_id?}", 'AdminController@commission')->name('commission');
+    Route::post('commision/setting/{user_id?}', 'AdminController@commisionAdd')->name('comission.add');
+
     Route::match(["GET", "POST"], "shipping", 'AdminController@shipping')->name('shipping');
     Route::match(["GET", "POST"], 'shipping/edit/{shipping_id}', 'AdminController@shippingEdit')->name('shipping.edit');
     Route::get('shipping/add', 'AdminController@shippingAdd')->name('shipping.add');
