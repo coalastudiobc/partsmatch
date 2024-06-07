@@ -39,7 +39,7 @@
                                                                 alt="" id="Userimage">
                                                         </div>
                                                         <input type="file" name="image" disabled
-                                                            class="disabled-inputs @error('image') is-invalid @enderror"
+                                                        accept=".jpg,.png,.jpeg"  class="disabled-inputs @error('image') is-invalid @enderror"
                                                             id="file-upload">
                                                         <div class="upload-icon d-none editable">
                                                             <i class="fa-sharp fa-solid fa-pen"></i>
