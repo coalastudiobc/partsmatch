@@ -331,7 +331,7 @@
                                     data-bs-target="#flush-collapseOne4" aria-expanded="false"
                                     aria-controls="flush-collapseOne">
                                     <a href="{{ route('admin.shipping') }}"
-                                        class="analyics-tabs-btns @if (Route::is('admin.shipping')) active @endif ">
+                                        class="analyics-tabs-btns @if (Route::is('admin.shipping.*')) active @endif ">
                                         <div class="analyics-tabs-name">
                                             <span>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17"
