@@ -88,6 +88,34 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="">Commission</label>
+                                            <div class="form-field">
+                                                @if (isset($user->ComissionDetails->commision_value))
+                                                    {{ $user->ComissionDetails->commision_value }}{{ $user->ComissionDetails->commision_type == 'Percentage' ? '%' : '$' }}
+                                                @else
+                                                    N/A
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="">Commission Action</label>
+                                            <div class="form-field">
+                                                <a class="btn primary-btn"
+                                                    href="{{ route('admin.commission', ['dealer_id' => jsencode_userdata($user->id)]) }}">
+                                                    @if (isset($user->ComissionDetails->commision_value))
+                                                        edit
+                                                    @else
+                                                        add
+                                                    @endif
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="col-md-12">
                                         <div class="dealer-profile-form-btn">
                                             <a class="btn primary-btn " href="{{ url()->previous() }}">Back</a>

@@ -5,6 +5,7 @@
 @section('content')
 
     <div class="dashboard-right-box">
+        <x-alert-component />
         {{-- <h2>Dealers</h2>
         < class=""> --}}
         <div class="serach-and-filter-box">
@@ -43,10 +44,10 @@
                             <p>Status</p>
                         </th>
                         <th>
-                            <p>Commision</p>
+                            <p>Action</p>
                         </th>
                         {{-- <th>
-                            <p>View</p>
+                            <p>Commision</p>
                         </th> --}}
                     </tr>
                     @forelse ($users as $key => $user)
@@ -68,9 +69,7 @@
                                     @if (isset($user->product)) href="{{ route('admin.dealers.product.list', [$user->id]) }}" @endif><u>
                                         {{ $user->product ? count($user->product) : 'N/A' }}</u></a>
                             </td>
-                            {{-- <td>
-                                <p>{{ $user->industry_type ? $user->industry_type : 'N/A' }}</p>
-                            </td> --}}
+
                             <td>
                                 <div class="toggle-btn">
                                     <input type="checkbox" id="switch{{ $key }}" class=""
@@ -79,23 +78,6 @@
                                         url="{{ route('admin.dealers.status') }}"><label
                                         for="switch{{ $key }}">Toggle</label>
                                 </div>
-                                {{-- <span class="custom-switch-indicator"></span> --}}
-                                {{-- <div >
-                                    <input type="checkbox" id="switch1"><label for="switch1">Toggle</label>
-                                </div> --}}
-                            <td>
-                                <p class="test"> @isset($user->ComissionDetails->commision_value)
-                                        <span>
-                                            {{ $user->ComissionDetails->commision_value }}{{ $user->ComissionDetails->commision_type == 'Percentage' ? '%' : '$' }}</span>
-                                        <a class="btn primary-btn "
-                                            href="{{ route('admin.commission', ['dealer_id' => jsencode_userdata($user->id)]) }}">edit</a>
-                                    @else
-                                        <span> N/A </span>
-                                        <a class="btn primary-btn"
-                                            href="{{ route('admin.commission', ['dealer_id' => jsencode_userdata($user->id)]) }}">add</a>
-                                    @endisset
-                                </p>
-                            </td>
 
                             </td>
                             <td>
@@ -104,7 +86,24 @@
                                         details</a>
                                 </p>
                             </td>
+                            {{-- <span class="custom-switch-indicator"></span> --}}
+                            {{-- <div >
+                                <input type="checkbox" id="switch1"><label for="switch1">Toggle</label>
+                            </div> --}}
                             {{-- <td>
+                            <p class="test"> @isset($user->ComissionDetails->commision_value)
+                                    <span>
+                                        {{ $user->ComissionDetails->commision_value }}{{ $user->ComissionDetails->commision_type == 'Percentage' ? '%' : '$' }}</span>
+                                    <a class="btn primary-btn "
+                                        href="{{ route('admin.commission', ['dealer_id' => jsencode_userdata($user->id)]) }}">edit</a>
+                                @else
+                                    <span> N/A </span>
+                                    <a class="btn primary-btn"
+                                        href="{{ route('admin.commission', ['dealer_id' => jsencode_userdata($user->id)]) }}">add</a>
+                                @endisset
+                            </p>
+                        </td>
+                         <td>
                                 <div class="table-pro-quantity">
                                     1
                                 </div>

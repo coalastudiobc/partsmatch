@@ -17,7 +17,7 @@
             {!! $message !!}
             <button type="button" class="close btn-close" data-bs-dismiss="alert" aria-label="Close">
                 @role('Administrator')
-                  
+
                 @endrole
             </button>
         </div>
@@ -108,4 +108,9 @@
             </div>
         </div>
     </div>
+@endif
+@if (Session::has('toast_success'))
+    <script>
+        toastr.success('{{ Session::get('toast_success') }}');
+    </script>
 @endif

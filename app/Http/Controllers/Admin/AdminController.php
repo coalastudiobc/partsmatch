@@ -2,23 +2,24 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-
-use App\Http\Requests\CommissionRequest;
-use App\Http\Requests\ShippingRequest;
-use App\Models\AdminSetting;
-use App\Models\Commission;
-use App\Models\FeaturedProduct;
-use App\Models\Product;
-use App\Models\ShippingSetting;
 use App\Models\User;
-use App\Models\UserCommisionSetting;
-use Illuminate\Contracts\Validation\Validator as ValidationValidator;
+
+use App\Models\Product;
+use App\Models\Commission;
+use App\Models\AdminSetting;
 use Illuminate\Http\Request;
+use App\Models\FeaturedProduct;
+use App\Models\ShippingSetting;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Models\UserCommisionSetting;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\ShippingRequest;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\CommissionRequest;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Contracts\Validation\Validator as ValidationValidator;
 
 class AdminController extends Controller
 {
@@ -139,6 +140,7 @@ class AdminController extends Controller
             }
             session()->flash('status', 'success');
             session()->flash('message', $message);
+            // Session::flash('toast_success', 'Your success message here');
             return redirect()->route('admin.dealers.all');
         } catch (\Throwable $e) {
             session()->flash('status', 'error');
