@@ -294,8 +294,15 @@
 
 }
 
+.profile-without-img img {
+    object-fit: cover;
+    width: 70px;
+    height: 70px;
+}
+
 .file-upload-box {
     position: relative;
+    text-align: center;
 }
 
 .profile-without-img img {
@@ -324,8 +331,14 @@
 
 .file-upload-box label {
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    width: fit-content;
+    margin: 0 auto;
 }
-
+.profile-main-img {
+    position: relative;
+}
 .upload-img {
     display: flex;
     flex-direction: column;

@@ -20,22 +20,27 @@
                                         <div class="upload-img">
                                             <div class="file-upload-box">
                                                 <label for="file-upload">
-                                                    <div class="profile-without-img">
-                                                        <img src=" @if ($user->profile_picture_url) {{ Storage::url($user->profile_picture_url) }}  @else {{ asset('assets/images/user.png') }} @endif "
-                                                            id="Userimage" alt="">
-                                                    </div>
-                                                    <input type="file" name="editimage" id="file-upload"
-                                                        class="@error('editimage') is-invalid @enderror">
-                                                    @error('editimage')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>ksajdfklaskl</strong>
-                                                        </span>
-                                                    @enderror
-                                                    <div class="upload-icon">
-                                                        <img src="{{ asset('assets/images/upload.png') }}" alt="">
+                                                    <div class="profile-main-img">
+                                                        <div class="profile-without-img">
+                                                            <img src=" @if ($user->profile_picture_url) {{ Storage::url($user->profile_picture_url) }}  @else {{ asset('assets/images/user.png') }} @endif "
+                                                                id="Userimage" alt="">
+                                                        </div>
 
+                                                        <div class="upload-icon">
+                                                            <img src="{{ asset('assets/images/upload.png') }}"
+                                                                alt="">
+
+                                                        </div>
                                                     </div>
                                                 </label>
+                                                <input type="file" name="image" id="file-upload"
+                                                    class="@error('image') is-invalid @enderror">
+                                                @error('image')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+
                                             </div>
                                             <h3>Upload profile picture*</h3>
                                         </div>

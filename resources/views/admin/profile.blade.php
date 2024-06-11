@@ -20,24 +20,26 @@
                                         <div class="upload-img">
                                             <div class="file-upload-box">
                                                 <label for="file-upload">
-                                                    <div class="profile-without-img">
-                                                        <img src="{{ asset('storage/' . $authUser->profile_picture_url) ?? asset('assets/images/user.png') }}"
-                                                            alt="" id="Userimage">
-                                                        {{-- <img src="{{ $authUser->profile_picture_url ? Storage::url($authUser->profile_picture_url) : asset('assets/images/user.png') }}"
-                                                            alt="" id="Userimage"> --}}
+                                                    <div class="pro-main-img">
+                                                        <div class="profile-without-img">
+                                                            <img src="{{ asset('storage/' . $authUser->profile_picture_url) ?? asset('assets/images/user.png') }}"
+                                                                alt="" id="Userimage">
+                                                            {{-- <img src="{{ $authUser->profile_picture_url ? Storage::url($authUser->profile_picture_url) : asset('assets/images/user.png') }}"
+                                                                alt="" id="Userimage"> --}}
+                                                        </div>
+                                                        <div class="upload-icon d-none editable">
+                                                            <i class="fa-sharp fa-solid fa-pen"></i>
+                                                        </div>
                                                     </div>
-                                                    <div class="upload-icon d-none editable">
-                                                        <i class="fa-sharp fa-solid fa-pen"></i>
-                                                    </div>
-                                                    <input type="file" disabled accept=".jpg,.png,.jpeg"
-                                                        class="d-none disabled-inputs  @error('image') is-invalid @enderror"
-                                                        name="image" id="file-upload">
-                                                    @error('image')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
                                                 </label>
+                                                <input type="file" disabled accept=".jpg,.png,.jpeg"
+                                                    class="d-none disabled-inputs  @error('image') is-invalid @enderror"
+                                                    name="image" id="file-upload">
+                                                @error('image')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>

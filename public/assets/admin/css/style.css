@@ -1548,3 +1548,17 @@ button.btn-close {
     min-width: 1200px;
 }
 
+.profile-without-img img {
+    object-fit: cover;
+    width: 70px;
+    height: 70px;
+}
+
+.file-upload-box {
+
+    text-align: center;
+}
+
+.pro-main-img {
+    position: relative;
+}

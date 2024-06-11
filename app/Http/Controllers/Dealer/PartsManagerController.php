@@ -63,8 +63,8 @@ class PartsManagerController extends Controller
                     return redirect()->back()->with(['status' => 'error', 'message' => config('customvalidation.user.confirm_password.required')]);
                 }
             }
-            if ($request->editimage) {
-                $image = store_image($request->editimage, 'profile_pictures');
+            if ($request->image) {
+                $image = store_image($request->image, 'profile_pictures');
                 $users['profile_picture_url'] = $image['url'];
                 $users['profile_picture_file'] = $image['name'];
             }
