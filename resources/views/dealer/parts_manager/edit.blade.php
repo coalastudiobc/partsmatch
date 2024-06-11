@@ -206,7 +206,3 @@
         });
     </script>
 @endsection
-{{--
-@push('scripts')
-    @includeFirst(['validation.dealer.js_parts_manager'])
-@endpush --}}

@@ -27,7 +27,7 @@ Route::middleware(['auth', 'verified', 'admin'])->namespace('App\Http\Controller
     Route::match(["GET", "POST"], "commission/{dealer_id?}", 'AdminController@commission')->name('commission');
     Route::post('commision/setting/{user_id?}', 'AdminController@commisionAdd')->name('comission.add');
 
-    Route::match(["GET", "POST"], "shipping", 'AdminController@shipping')->name('shipping');
+    Route::match(["GET", "POST"], "shipping/view", 'AdminController@shipping')->name('shipping.view');
     Route::match(["GET", "POST"], 'shipping/edit/{shipping_id}', 'AdminController@shippingEdit')->name('shipping.edit');
     Route::get('shipping/add', 'AdminController@shippingAdd')->name('shipping.add');
     Route::get('shipping/delete/{shipping_id}', 'AdminController@shippingDestroy')->name('shipping.delete');

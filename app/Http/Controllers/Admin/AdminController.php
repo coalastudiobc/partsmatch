@@ -248,9 +248,8 @@ class AdminController extends Controller
     {
         // $users = User::with('product', 'product.featuredProduct')->get();
         // $products = Product::with('featuredProduct', 'user', 'category', 'user.subscription')->get();
-        // dd($products->toArray());
+
         $feature_products = FeaturedProduct::with('product', 'product.user.subscription', 'product.productImage')->get();
-        // dd($feature_products->toArray());
         return view('admin.featured_list', compact('feature_products'));
     }
 }

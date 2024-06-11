@@ -37,6 +37,7 @@ class PartsManagerRequest extends FormRequest
             $rules['image'] = ['required'];
             $rules['email'] = ['required', 'string', 'email', 'max:255', 'unique:users'];
             $rules['password'] =  ['required'];
+            $rules['image'] = ['required', 'image', 'mimes:' . config('validation.php_profile_pic_mimes'), 'max:' . config('validation.php_profile_pic_size')];
             $rules['confirm_password'] = ['required'];
         }
 
@@ -52,6 +53,9 @@ class PartsManagerRequest extends FormRequest
             'phone_number.required' => __('customvalidation.user.phone_number.required'),
             'password.required' => __('customvalidation.user.password.required'),
             'confirm_password.required' => __('customvalidation.user.confirm_password.required'),
+            'image.image' => 'The file must be an image.',
+            'image.mimes' => 'The file must be of type: ' . config('validation.php_profile_pic_mimes'),
+            'image.max' => 'The file may not be greater than' . config('validation.php_profile_pic_size'),
         ];
     }
 }

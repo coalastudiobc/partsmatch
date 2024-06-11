@@ -21,8 +21,6 @@ class CategoryController extends Controller
     {
         $category = new Category;
         $selective = Category::where('status', '1')->where('parent_id', null)->get();
-        // dd($selective);
-
         return view('admin.category.add', compact('category', 'selective'));
     }
 

@@ -13,8 +13,7 @@ class PartsManagerController extends Controller
     public function index()
     {
         $request = request();
-        $users = User::where('working_for', auth()->user()->id)->Search()->get();
-
+        $users = User::where('working_for', auth()->user()->id)->Search()->orderBy('created_at', 'DESC')->Paginate(5);
         return view('dealer.parts_manager.index', compact('users'));
     }
     public function store(PartsManagerRequest $request)
@@ -25,6 +24,8 @@ class PartsManagerController extends Controller
             'password' => Hash::make($request->password),
             'phone_number' => $request->phone_number,
             'working_for' => auth()->user()->id,
+            'image' => ['image', 'mimes:' . config('validation.php_profile_pic_mimes'), 'max:' . config('validation.php_profile_pic_size')],
+
         ];
         if ($request->image) {
             $image = store_image($request->image, 'profile_pictures');

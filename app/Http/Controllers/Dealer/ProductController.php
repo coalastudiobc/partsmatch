@@ -30,7 +30,6 @@ class ProductController extends Controller
             'token' => "1e9f178a-f016-4aa9-b582-99934fc52ff9",
             'secret' => "37e149448eeae0e28026dcdbaea8d8c7",
         ]);
-
         $filePath = storage::path('text.txt');
         $jwt = file_get_contents($filePath);
         if (empty($jwt) || $this->sdk->loadJwt($jwt)->isJwtExpired() !== false) {
@@ -353,17 +352,42 @@ class ProductController extends Controller
         if (is_null($request->globalquery)) {
             return redirect()->back();
         }
-        $products = Product::when(!empty($request->globalquery), function ($q) use ($request) {
-            $q->Where('name', 'like', '%' . $request->globalquery . '%')
-                ->orWhere('price', 'like', '%' . $request->globalquery . '%')
-                ->orWhere('year', 'like', '%' . $request->globalquery . '%')
-                ->orWhere('brand', 'like', '%' . $request->globalquery . '%')
-                ->orWhere('model', 'like', '%' . $request->globalquery . '%');
-        })->when(!empty($request->globalquery) && $request->globalquery == 'active', function ($q) use ($request) {
-            $q->where('status', '1');
+        // Define initial query
+        $productsQuery = Product::query();
+
+        // Apply global search for products
+        $productsQuery->when(!empty($request->globalquery), function ($query) use ($request) {
+            $query->where(function ($query) use ($request) {
+                $query->where('name', 'like', '%' . $request->globalquery . '%')
+                    ->orWhere('price', 'like', '%' . $request->globalquery . '%')
+                    ->orWhere('year', 'like', '%' . $request->globalquery . '%')
+                    ->orWhere('brand', 'like', '%' . $request->globalquery . '%')
+                    ->orWhere('model', 'like', '%' . $request->globalquery . '%');
+            });
         });
-        dd($products->get());
-        return view('dealer.products.interior_accessories', compact('products'));
+
+        // Apply status filter if 'active' keyword is provided
+        $productsQuery->when(!empty($request->globalquery) && $request->globalquery == 'active', function ($query) {
+            $query->where('status', '1');
+        });
+        // Retrieve products
+        $products = $productsQuery->paginate(5)
+            ->appends($request->globalquery);
+
+        // // Retrieve categories for the products
+        // $categories = Category::with('children', 'parent')->get();
+
+        // // Extract parent category ID
+        // $parentCategoryId = null;
+        // if ($request->has('category')) {
+        //     $category = $categories->firstWhere('id', $request->category);
+        //     if ($category && $category->parent) {
+        //         $parentCategoryId = $category->parent->id;
+        //     }
+        // }
+
+        // Retrieve products
+
+        return view('dealer.products.search_products', compact('products'));
     }
 }
-    

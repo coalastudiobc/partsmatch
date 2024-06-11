@@ -331,12 +331,11 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">Model*</label>
-                                    <div class="form-field">
-                                        {{-- <select class="form-control api_call" name="car_make"
-                                            id="car-models"></select> --}}
-                                        <select class="form-control" name="car_make" id="carMake">
+                                    <div class="form-field modelselect">
+                                        <div id="output"></div>
+                                        <select class="form-control car-model" name="states[]" multiple="multiple"
+                                            id="carMake">
                                             <option>Select your make</option>
-
                                         </select>
                                         <span class="form-icon">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8"
@@ -541,7 +540,7 @@
 
             function handleStateData(response) {
                 if (response.success == true) {
-                    console.log(response.model)
+                    console.log(response.models)
                     jQuery('#carModel').html(response.models)
                 } else {
                     jQuery('#errormessage').html(response.error);
@@ -563,8 +562,11 @@
 
             function handleStateData(response) {
                 if (response.success == true) {
-                    console.log(response.model)
-                    jQuery('#carMake').html(response.makes)
+                    console.log(response.makes)
+                    jQuery('#carMake').html(response.makes);
+                    $('.car-model').select2({
+                        multiple: true
+                    });
                 } else {
                     jQuery('#errormessage').html(response.error);
                 }
@@ -578,6 +580,7 @@
     });
 
     jQuery(document).ready(function() {
+        jQuery('.car-model').select2(); // Initialize select2 plugin
         jQuery('#submit').click(function(e) {
             var no_image = $('#upload-image').attr('upload-image-count');
             if (parseInt(no_image) < 5) {

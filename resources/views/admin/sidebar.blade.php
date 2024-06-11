@@ -330,7 +330,7 @@
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#flush-collapseOne4" aria-expanded="false"
                                     aria-controls="flush-collapseOne">
-                                    <a href="{{ route('admin.shipping') }}"
+                                    <a href="{{ route('admin.shipping.view') }}"
                                         class="analyics-tabs-btns @if (Route::is('admin.shipping.*')) active @endif ">
                                         <div class="analyics-tabs-name">
                                             <span>

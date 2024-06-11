@@ -16,14 +16,12 @@ class DealerController extends Controller
     public function index()
     {
         $request = request();
-
         $users = User::with('product')->Dealers()->orderBy('created_at', 'DESC')->Search()->paginate(5);
         return view('admin.user.index', compact('users'));
     }
     public function products(User $user)
     {
         $products = Product::where('user_id', $user->id)->Search()->get();
-
         return view('admin.user.product_list', compact('products', 'user'));
     }
     public function toggleStatus(Request $request)
@@ -53,7 +51,6 @@ class DealerController extends Controller
     public function dealerProfile(Request $request, User $user)
     {
         $paymentdetail = $user->paymentDetail;
-
         return view('admin.user.view', compact('user', 'paymentdetail'));
     }
 
@@ -111,9 +108,7 @@ class DealerController extends Controller
     {
         $productdata = Product::with('productImage')->where('id', $product->id)->first();
         $product = $productdata->toArray();
-        // dd($product);
         $model = view('components.product-details', compact('product'))->render();
-
         return response()->json(['success' => true, 'model' => $model]);
     }
 }

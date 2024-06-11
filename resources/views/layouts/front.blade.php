@@ -75,7 +75,13 @@
                                     <a class="nav-link" aria-current="page"
                                         href="{{ route('view', ['slug' => 'about-us']) }}">About Us</a>
                                 </li> --}}
+                                @auth
 
+                                    <li class="nav-item">
+                                        <a class="nav-link" aria-current="page"
+                                            href="{{ route('welcome.index') }}">Home</a>
+                                    </li>
+                                @endauth
                             </ul>
                             @guest
                                 <ul class="navbar-nav">

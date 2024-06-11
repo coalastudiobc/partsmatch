@@ -12,7 +12,10 @@
 
                 </div>
             </a>
-            <p>{{ $product->description }}</p>
+            <a href="{{ route('dealer.products.details', $product->id) }}">
+
+                <p>{{ $product->name }}</p>
+            </a>
             <div class="price-and-cart">
                 <h4>${{ $product->price }}</h4>
                 @if (auth()->user())

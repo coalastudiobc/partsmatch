@@ -107,6 +107,7 @@
                 </div>
             </div>
         </div> --}}
+        {!! $users->links('admin.pagination') !!}
     </div>
 @endsection
 @section('modals')

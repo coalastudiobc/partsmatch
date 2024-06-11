@@ -10,7 +10,9 @@
                             <div class="sticky-box">
                                 <div class="back-page-btn">
                                     <div class="back-round-icon">
-                                        <i class="fa-solid fa-angle-left"></i>
+                                        <a href="{{ route('welcome.index') }}">
+                                            <i class="fa-solid fa-angle-left"></i>
+                                        </a>
                                     </div>
                                     <a href="{{ route('welcome.index') }}">
                                         <p>Back</p>
@@ -64,7 +66,7 @@
                                 <div class="single-img-info mt-5">
                                     <div class="product-infography">
                                         {{-- <h2>R1 Concepts® – eLINE Series Plain Brake Rotors</h2> --}}
-                                        <h2>{{ $product->name }}® – Model-{{ $product->brand ?? 'Ford' }}   
+                                        <h2>{{ $product->name }}® – Model-{{ $product->brand ?? 'Ford' }}
                                             series-{{ $product->model ?? 'endeavor' }}
                                             Year-{{ $product->year ?? '2016' }}
                                         </h2>

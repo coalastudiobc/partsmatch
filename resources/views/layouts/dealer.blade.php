@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="{{ asset('assets/css/login-register.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/slick.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/css/select2.min.css" rel="stylesheet" />
+
     <link rel="stylesheet" href="{{ asset('assets/css/iziToast.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/toaster.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/slick-theme.css') }}">
@@ -137,6 +139,7 @@
     <script src="{{ asset('assets/js/sweetalert.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
     <script src="{{ asset('assets/js/common.js') }}?ver={{ now() }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
         $(document).ready(function() {
             // Check if the CSS file(s) are loaded
