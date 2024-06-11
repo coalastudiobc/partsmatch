@@ -130,7 +130,7 @@
 
                                         <div class="col-md-6">
                                             <a class="btn secondary-btn full-btn mr-1"
-                                                href="{{ route('admin.shipping') }}">Back</a>
+                                                href="{{ route('admin.shipping.view') }}">Back</a>
                                         </div>
                                         <div class="col-md-6">
                                             <button class="btn primary-btn full-btn mr-1" id="submit"
