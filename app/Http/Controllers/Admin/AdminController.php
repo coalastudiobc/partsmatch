@@ -191,7 +191,7 @@ class AdminController extends Controller
 
                 session()->flash('status', 'success');
                 session()->flash('message', 'Data updated successfully');
-                return redirect()->route('admin.shipping');
+                return redirect()->route('admin.shipping.view');
             } catch (\Throwable $e) {
                 session()->flash('status', 'error');
                 session()->flash('message', $e->getMessage());
@@ -222,7 +222,7 @@ class AdminController extends Controller
             } catch (\Throwable $e) {
                 session()->flash('status', 'error');
                 session()->flash('message', $e->getMessage());
-                return redirect()->route('admin.shipping');
+                return redirect()->route('admin.shipping.view');
             }
         } else {
             $id = jsdecode_userdata($shipping_id);
