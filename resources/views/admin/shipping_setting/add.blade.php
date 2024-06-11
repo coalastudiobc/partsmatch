@@ -16,7 +16,7 @@
                             </div> --}}
                             <div class="card-body">
 
-                                <form id="shipping" action=" @isset($data) {{ route('admin.shipping.edit',['shipping_id'=>jsencode_userdata($data->id)]) }}  @else {{ route('admin.shipping') }} @endisset " enctype="multipart/form-data"
+                                <form id="shipping" action=" @isset($data) {{ route('admin.shipping.edit',['shipping_id'=>jsencode_userdata($data->id)]) }}  @else {{ route('admin.shipping.view') }} @endisset " enctype="multipart/form-data"
                                     method="post">
                                     @csrf
                                     <div class="row">
