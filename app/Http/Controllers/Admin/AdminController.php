@@ -4,8 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
 
-use App\Models\Product;
-use App\Models\Commission;
+
 use App\Models\AdminSetting;
 use Illuminate\Http\Request;
 use App\Models\FeaturedProduct;
@@ -15,11 +14,8 @@ use App\Http\Controllers\Controller;
 use App\Models\UserCommisionSetting;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\ShippingRequest;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\CommissionRequest;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Contracts\Validation\Validator as ValidationValidator;
 
 class AdminController extends Controller
 {
