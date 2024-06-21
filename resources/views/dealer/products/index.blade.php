@@ -85,6 +85,38 @@
                                         class="fa-regular fa-trash-can" style="color: #E13F3F;"></i></a>
                             </div>
                         </td>
+                          {{-- @foreach ($products as $key => $product) --}}
+                        {{-- <tr>
+                            <td>
+                                <div class="pro-img-box" data-bs-toggle="modal" data-bs-target="#pro-detail-model">
+                                    <img src="{{ Storage::url($product->productImage["$key"]->file_url) }}" alt="img">
+                                </div>
+                            </td>
+                            <td>
+                                <p>{{ $product->name }}</p>
+                            </td>
+                            <td>
+                                <p>{{ $product->price }}</p>
+                            </td>
+                            <td>
+                                <div class="toggle-btn">
+                                    <input type="checkbox" id="switch100{{ $key }}" class="custom-switch-input"
+                                        @if ($product->status == '1') checked="checked" @endif
+                                        onchange="toggleStatus(this, 'Product', '{{ $product->id }}');"
+                                        url="{{ route('dealer.products.status') }}"><label
+                                        for="switch100{{ $key }}">Toggle</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="action-btns">
+                                    <a href="{{ route('dealer.products.edit', $product->id) }}"><i
+                                            class="fa-solid fa-pen-to-square" style="color: #3EBE62;"></i></a>
+                                    <a href="{{ route('dealer.products.delete', $product->id) }}"><i
+                                            class="fa-regular fa-trash-can" style="color: #E13F3F;"></i></a>
+                                </div>
+                            </td>
+
+                        </tr> --}}
 
                     @empty
                     <tr>

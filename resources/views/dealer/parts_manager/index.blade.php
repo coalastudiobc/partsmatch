@@ -41,7 +41,7 @@
                             <p>Action</p>
                         </th>
                     </tr>
-                    @foreach ($users as $key => $user)
+                    @forelse ($users as $key => $user)
                         <tr>
                             <td>
                                 <div class="parts-mang-img-box" data-bs-toggle="modal" data-bs-target="#pro-detail-model">
@@ -78,7 +78,11 @@
                             </td>
 
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="5" style="text-align: center">No result found</td>
+                        </tr>
+                    @endforelse
                 </table>
             </div>
         </div>
