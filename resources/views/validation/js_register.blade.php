@@ -9,6 +9,12 @@
                 maxlength: nameMaxLength,
                 regex: nameRegex
             },
+            dealershipName: {
+                required: true,
+                minlength: nameMinLength,
+                maxlength: nameMaxLength,
+                regex: nameRegex
+            },
             phone_number: {
                 required: true,
                 digits: true,
@@ -58,6 +64,12 @@
                 minlength: `{{ __('customvalidation.user.name.min', ['min' => '${nameMinLength}', 'max' => '${nameMaxLength}']) }}`,
                 maxlength: `{{ __('customvalidation.user.name.max', ['min' => '${nameMinLength}', 'max' => '${nameMaxLength}']) }}`,
                 regex: `{{ __('customvalidation.user.name.regex', ['regex' => '${nameRegex}']) }}`,
+            },
+            dealershipName: {
+                required: `{{ __('customvalidation.user.dealershipName.required') }}`,
+                minlength: `{{ __('customvalidation.user.dealershipName.min', ['min' => '${nameMinLength}', 'max' => '${nameMaxLength}']) }}`,
+                maxlength: `{{ __('customvalidation.user.dealershipName.max', ['min' => '${nameMinLength}', 'max' => '${nameMaxLength}']) }}`,
+                regex: `{{ __('customvalidation.user.dealershipName.regex', ['regex' => '${nameRegex}']) }}`,
             },
             phone_number: {
                 required: `{{ __('customvalidation.user.phone_number.required') }}`,

@@ -1562,3 +1562,6 @@ button.btn-close {
 .pro-main-img {
     position: relative;
 }
+.invalid-feedback strong {
+    font-weight: lighter !important;
+}

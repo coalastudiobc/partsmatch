@@ -244,6 +244,14 @@ return [
             'regex' => 'Only alphabets and in between space are allowed in Name',
 
         ],
+        'dealershipName' => [
+            'required' => 'Please enter the dealership Name',
+            'min' => 'dealership Name can be :min - :max characters',
+            'max' => 'dealership Name can be :min - :max characters',
+            'string' => 'Only alphabets and in between space are allowed in dealership Name ',
+            'regex' => 'Only alphabets and in between space are allowed in dealership Name',
+
+        ],
         'email' => [
             'required' => 'Please enter your email',
             'email' => 'This is not a valid email address',
