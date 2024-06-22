@@ -8,6 +8,7 @@ use App\Models\Cart;
 use App\Models\Category;
 use App\Models\FeaturedProduct;
 use App\Models\Product;
+use App\Models\ProductCompatabilty;
 use App\Models\ProductImage;
 use App\Models\User;
 use Exception;
@@ -66,8 +67,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-
-        try {
+        // try {
             $product = [
                 'name' => $request->name,
                 'user_id' => auth()->user()->id,
@@ -81,9 +81,9 @@ class ProductController extends Controller
                 'Specifications_and_dimensions' => $request->Specifications_and_dimensions,
                 'Shipping_info' => $request->Shipping_info,
                 'field_3' => $request->field_3,
-                'year' => $request->car_years,
-                'brand' => $request->car_model,
-                'model' => $request->car_make,
+                // 'year' => $request->car_years,
+                // 'brand' => $request->car_model,
+                // 'model' => $request->car_make,
                 'status' => '1',
             ];
             DB::beginTransaction();
@@ -112,12 +112,24 @@ class ProductController extends Controller
 
             ProductImage::insert($productimage);
 
+            if ($request->has('compatable_with')) {
+                $compatables = explode(',', $request->compatable_with);
+                for ($i = 0 ;$i<count($compatables); $i++ ) {
+                    $item = $compatables[$i];
+                    if (preg_match('/(\d{4})\((.*?)\)(.*)/', $item, $matches)) {
+                        $year = $matches[1]; 
+                        $make = $matches[2];  
+                        $model = $matches[3];
+                        ProductCompatabilty::create(['year' => $year,'make' => $make , 'model'=>$model,'product_id'=>$product->id]);
+                    }
+                }
+            }
             DB::commit();
             return redirect()->back();
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return redirect()->back()->with('error', $e->getMessage());
-        }
+        // } catch (\Exception $e) {
+        //     DB::rollBack();
+        //     return redirect()->back()->with('error', $e->getMessage());
+        // }
     }
 
     /**

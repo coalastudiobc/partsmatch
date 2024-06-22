@@ -1706,3 +1706,74 @@ span.sidebar-cross-icon i {
 .accessories-parts-box {
     height: 100%;
 }
+
+
+
+
+.add-new-pro-modal .modal-dialog.modal-dialog-centered {
+    max-width: 900px;
+}
+.add-pro-submit {
+    margin-top: 37px;
+    text-align: center;
+    width: 100%;
+}
+
+.field-for-ymmm-box {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 20px;
+}
+.custm-field-for-ymmm {
+    display: flex;
+    gap: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1.81px solid #E8E8E8;
+    margin: 0 0 16px;
+}
+.field-for-ymmm-box .form-group{
+    width: 100%;
+}
+.ymmm-box-preview {
+    border-radius: 5px;
+    border: 1.81px solid #E8E8E8;
+    margin: 0 0 16px;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.ymmm-box-data {
+   
+}
+.ymmm-data-outer{
+    width: fit-content;
+    padding: 5px;
+    background-color: #e4e4e4;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    position: relative;
+}
+.ymmm-box-data {
+    margin-left: 30px;
+}
+span.ymmm-cross {
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    font-size: 30px;
+    line-height: 0.8;
+}
+.ymmm-data-outer::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 30px;
+    height: 100%;
+    width: 1.5px;
+    background-color: #aaaaaa;
+}
+
+

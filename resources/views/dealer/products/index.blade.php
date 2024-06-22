@@ -135,7 +135,8 @@
 </div>
 @endsection
 @section('modals')
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade add-new-pro-modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <!-- <div class="modal-header">
@@ -273,7 +274,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="">Shipping Price*</label>
                                     <div class="form-field">
@@ -283,14 +285,16 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                        </div>
+                        <div class="custm-field-for-ymmm">
+                            <div class="field-for-ymmm-box">
                                 <div class="form-group">
                                     <label for="">Year*</label>
                                     <div class="form-field">
                                         {{-- <select class="form-control api_call" name="car_years"
-                                            id="car-years"></select> --}}
+                                                                id="car-years"></select> --}}
                                         <select class="form-control" name="car_years" id="carYear">
-                                            <option>Select year</option>
+                                            <option id="selectYearDefault">Select year</option>
                                             @foreach ($years as $year)
                                                 <option value="{{ $year }}">{{ $year }}</option>
                                             @endforeach
@@ -306,16 +310,13 @@
                                         </span>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">Make*</label>
                                     <div class="form-field">
                                         {{-- <select class="form-control api_call" name="car_model"
-                                            id="car-makes"></select> --}}
+                                                                id="car-makes"></select> --}}
                                         <select class="form-control" name="car_model" id="carModel">
-                                            <option>Select your Model</option>
-
+                                            <option>please select year first</option>
                                         </select>
                                         <span class="form-icon">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8"
@@ -327,14 +328,11 @@
                                         </span>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">Model*</label>
                                     <div class="form-field modelselect">
                                         <div id="output"></div>
-                                        <select class="form-control car-model" name="states[]" multiple="multiple"
-                                            id="carMake">
+                                        <select class="form-control car-model" id="carMake">
                                             <option>Select your make</option>
                                         </select>
                                         <span class="form-icon">
@@ -348,35 +346,49 @@
                                     </div>
                                 </div>
                             </div>
+                            {{-- <i id="addValue" style="font-size: 20px; margin-top:50px;" class="fa-solid fa-circle-plus fa-fw"></i> --}}
+                        </div>
+                </div>
+                <input type="hidden" name="compatable_with" class="form-control" id="compatableProducts"
+                                            placeholder="Product Name">
+                <div id="test1234" class="ymmm-box-preview d-none">
+                    {{-- <div class="ymmm-data-outer">
+                        <div class="ymmm-box-data">
+                            <p>2023(Bentley)743</p>
+                        </div>
+                        <span class="ymmm-cross">×</span>
+                    </div> --}}
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <a href="#" class="btn secondary-btn full-btn" data-bs-toggle="modal"
+                            data-bs-target="#bulk-upload">Bulk Upload</a>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="submit" id="submit" class="btn primary-btn full-btn">submit</button>
+                    </div>
+                </div>
+            </div>
 
-                            <div class="col-md-6">
+
+
+            {{-- <div class="col-md-6">
                                 <div class="form-group">
-                                    {{-- <label for="">Product Price</label> --}}
                                     <div class="form-field">
                                         <input type="checkbox" name="subscription_status"
                                             @if (isset(plan_validity()->stripe_status) && plan_validity()->stripe_status == 'active') checked @else disabled @endif>
 
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <a href="#" class="btn secondary-btn full-btn" data-bs-toggle="modal"
-                                        data-bs-target="#bulk-upload">Bulk Upload</a>
-                                </div>
-                                <div class="col-md-6">
-                                    <button type="submit" id="submit"
-                                        class="btn primary-btn full-btn">submit</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
 
+            </form>
         </div>
     </div>
+
+</div>
+</div>
 </div>
 
 
@@ -531,6 +543,11 @@
 </script>
 <script>
     jQuery(document).ready(function() {
+        var models = [];
+        var selectedYear = "";
+        var selectedMake = "";
+        var selectedModel = "";
+        var selectedValue = "";
         jQuery(document).on('change', '#carYear', function() {
 
             var year = jQuery(this).val();
@@ -540,8 +557,8 @@
 
             function handleStateData(response) {
                 if (response.success == true) {
-                    console.log(response.models)
                     jQuery('#carModel').html(response.models)
+                    selectedYear = year;
                 } else {
                     jQuery('#errormessage').html(response.error);
                 }
@@ -562,11 +579,8 @@
 
             function handleStateData(response) {
                 if (response.success == true) {
-                    console.log(response.makes)
                     jQuery('#carMake').html(response.makes);
-                    $('.car-model').select2({
-                        multiple: true
-                    });
+                    selectedMake = model;
                 } else {
                     jQuery('#errormessage').html(response.error);
                 }
@@ -577,20 +591,53 @@
 
             }
         });
-    });
 
-    jQuery(document).ready(function() {
-        jQuery('.car-model').select2(); // Initialize select2 plugin
-        jQuery('#submit').click(function(e) {
-            var no_image = $('#upload-image').attr('upload-image-count');
-            if (parseInt(no_image) < 5) {
-                e.preventDefault();
-                return toastr.error("Please enter atleast 5 images");
+        jQuery(document).on('change', '#carMake', function() {
+
+            var model1 = jQuery(this).find('option:selected').attr('data-name');
+
+            selectedModel = model1;
+            var test = selectedYear + "(" + selectedMake + ")" + selectedModel;
+            if (!models.includes(test)) {
+                models.push(test);
             }
-            // var formData = new FormData($('form#product').get(0));
-            $('#product').valid()
+            jQuery('#compatableProducts').val(models);
+            var htmlText ="";
+            for(var i = 0;i<models.length;i++){
+                htmlText += `<div class="ymmm-data-outer">
+                        <div class="ymmm-box-data">
+                            <p>`+models[i]+`</p>
+                        </div>
+                        <span class="ymmm-cross">×</span>
+                    </div>`;
+            }
+            jQuery('#test1234').html(htmlText)
+            jQuery('#test1234').removeClass('d-none');
+        });
+
+        jQuery(document).on('click', '.ymmm-cross', function() {
+            var data = jQuery(this).siblings('.ymmm-box-data').find('p').text();
+            var index = models.indexOf(data);
+            if (index > -1) {
+                models.splice(index, 1);
+            }
+            jQuery(this).closest('.ymmm-data-outer').remove();
         });
     });
+
+
+    // jQuery(document).ready(function() {
+    //     jQuery('.car-model').select2(); // Initialize select2 plugin
+    //     jQuery('#submit').click(function(e) {
+    //         var no_image = $('#upload-image').attr('upload-image-count');
+    //         if (parseInt(no_image) < 5) {
+    //             e.preventDefault();
+    //             return toastr.error("Please enter atleast 5 images");
+    //         }
+    //         // var formData = new FormData($('form#product').get(0));
+    //         $('#product').valid()
+    //     });
+    // });
 
     $(function() {
         // Multiple images preview with JavaScript
