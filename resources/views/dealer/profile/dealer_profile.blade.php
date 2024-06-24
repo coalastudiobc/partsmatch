@@ -81,7 +81,11 @@
 
                                         <div class="col-md-12">
                                             <div class="dealer-profile-form-btn">
-                                                <a href="#" class="btn primary-btn">Send Message</a>
+                                                @if (auth()->user()->id === $user->id)
+                                                @else
+                                                    <a href="{{ route('dealer.chat.inbox.view', ['user_id' => jsencode_userdata($user->id)]) }}"
+                                                        class="btn primary-btn">Send Message</a>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>

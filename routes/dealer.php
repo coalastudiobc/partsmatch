@@ -10,6 +10,7 @@ use App\Http\Controllers\Dealer\PartsManagerController;
 use App\Http\Controllers\Dealer\ProductController;
 use App\Http\Controllers\Dealer\SubscriptionController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Dealer\ChatController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -84,5 +85,13 @@ Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer'
         Route::post('parts/manager/update/{user}', [PartsManagerController::class, 'update'])->name('update');
         Route::get('parts/manager/delete/{user}', [PartsManagerController::class, 'delete'])->name('delete');
         Route::get('partsmanager/userDetails/{user}', [PartsManagerController::class, 'getPartManagerDetail'])->name('userDetails');
+    });
+    Route::name('chat.')->group(function () {
+        // Route::get('chat/view', [ChatController::class, 'view'])->name('view');
+        Route::post('chat/messages', [ChatController::class, 'chatMessages'])->name('messages');
+        Route::match(['get', 'post'], 'chat/message/{user_id?}', [ChatController::class, 'inboxView'])->name('inbox.view');
+        Route::post('getuser/names', [ChatController::class, 'userNames'])->name('getuser.names.sa');
+        // Route::get('userimage', [ChatController::class, 'userImage'])->name('userimage');
+        Route::post('lastchat/update', [ChatController::class, 'lastchat_update'])->name('lastchat.update');
     });
 });

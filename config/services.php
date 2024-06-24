@@ -30,5 +30,16 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
+    'firebase.chat' => [
+
+        'apiKey' => env('apiKey'),
+        'authDomain' => env('authDomain'),
+        'databaseURL' => env('databaseURL'),
+        'projectId' => env('projectId'),
+        'storageBucket' => env('storageBucket'),
+        'messagingSenderId' => env('messagingSenderId'),
+        'appId' => env('appId'),
+    ],
+
 
 ];

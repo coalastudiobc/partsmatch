@@ -81,6 +81,11 @@
                                         <a class="nav-link" aria-current="page"
                                             href="{{ route('welcome.index') }}">Home</a>
                                     </li>
+                                    {{-- <li class="nav-item">
+                                        <a class="nav-link" aria-current="page"
+                                            href="{{ route('dealer.chat.view') }}">chat</a>
+                                    </li> --}}
+
                                 @endauth
                             </ul>
                             @guest
