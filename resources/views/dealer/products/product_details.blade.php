@@ -62,7 +62,6 @@
                         </div>
                         <div class="col-xl-5 col-lg-12 col-md-12">
                             <div class="sticky-box">
-
                                 <div class="single-img-info mt-5">
                                     <div class="product-infography">
                                         {{-- <h2>R1 Concepts® – eLINE Series Plain Brake Rotors</h2> --}}
@@ -73,7 +72,8 @@
                                         <span>{{ $product->category->name }}</span><br>
                                         <span>See more products by: </span> <a
                                             href="{{ route('dealer.view.profile', $userdetails->id) }}">
-                                            <u style="color: #0d6efd">{{ $userdetails->name }}</u></a>
+                                            <u
+                                                style="color: #0d6efd">{{ $userdetails->dealership_name ?? 'Dealership Name' }}</u></a>
                                         <h2>${{ $product->price }}</h2>
                                         <p>{{ $product->description }}</p>
                                         {{-- <div class="product-quantity-box">

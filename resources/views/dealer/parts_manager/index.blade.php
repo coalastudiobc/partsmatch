@@ -41,7 +41,7 @@
                             <p>Action</p>
                         </th>
                     </tr>
-                    @foreach ($users as $key => $user)
+                    @forelse ($users as $key => $user)
                         <tr>
                             <td>
                                 <div class="parts-mang-img-box" data-bs-toggle="modal" data-bs-target="#pro-detail-model">
@@ -78,7 +78,11 @@
                             </td>
 
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="5" style="text-align: center">No result found</td>
+                        </tr>
+                    @endforelse
                 </table>
             </div>
         </div>
@@ -154,24 +158,26 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="upload-img">
-                                        <div class="file-upload-box">
+                                        <div class="file-upload-box ">
                                             <label for="file-upload">
-                                                <div class="profile-without-img">
-                                                    <img src="{{ asset('assets/images/user.png') }}" id="Userimage"
-                                                        alt="">
-                                                </div>
-                                                <input type="file" name="image" id="file-upload"
-                                                    class="@error('image') is-invalid @enderror">
-                                                @error('image')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                                <div class="upload-icon">
-                                                    <img src="{{ asset('assets/images/upload.png') }}" alt="">
-                                                    {{-- <img src="{{ asset('assets/images/upload.png') }}" alt=""> --}}
+                                                <div class="profile-main-img">
+                                                    <div class="profile-without-img">
+                                                        <img src="{{ asset('assets/images/user.png') }}" id="Userimage"
+                                                            alt="">
+                                                    </div>
+                                                    <div class="upload-icon">
+                                                        <img src="{{ asset('assets/images/upload.png') }}" alt="">
+                                                        {{-- <img src="{{ asset('assets/images/upload.png') }}" alt=""> --}}
+                                                    </div>
                                                 </div>
                                             </label>
+                                            <input type="file" name="image" id="file-upload"
+                                                class="@error('image') is-invalid @enderror">
+                                            @error('image')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
                                         <h3>Upload profile picture*</h3>
                                     </div>
@@ -392,6 +398,16 @@
     </script>
     <script>
         $(document).ready(function() {
+            jQuery('.filter-open-btn').on('click', function(e) {
+                console.log('heo');
+                jQuery('.dashboard-left-box').addClass('open');
+            });
+            jQuery('.cross-filter').on('click', function(e) {
+                console.log('heo');
+                jQuery('.dashboard-left-box').removeClass('open');
+            });
+
+
             $("#file-upload").change(function() {
                 if (this.files && this.files[0]) {
                     var reader = new FileReader();

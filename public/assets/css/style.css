@@ -1706,6 +1706,9 @@ span.sidebar-cross-icon i {
 .accessories-parts-box {
     height: 100%;
 }
+.invalid-feedback strong {
+    font-weight: lighter !important;
+}
 
 
 
