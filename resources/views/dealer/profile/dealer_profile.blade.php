@@ -43,7 +43,7 @@
                                                 <label for="">Name</label>
                                                 <div class="form-field">
                                                     <input type="text" value="{{ $user->name }}" class="form-control"
-                                                        placeholder="">
+                                                        placeholder="" readonly>
 
                                                 </div>
                                             </div>
@@ -53,7 +53,7 @@
                                                 <label for="">Email</label>
                                                 <div class="form-field">
                                                     <input type="email" value="{{ $user->email }}" class="form-control"
-                                                        placeholder="">
+                                                        placeholder="" readonly>
 
                                                 </div>
                                             </div>
@@ -63,7 +63,7 @@
                                                 <label for="">Phone Number</label>
                                                 <div class="form-field">
                                                     <input type="tel" value="{{ $user->phone_number }}"
-                                                        class="form-control" placeholder="">
+                                                        class="form-control" placeholder="" readonly>
 
                                                 </div>
                                             </div>
@@ -73,7 +73,7 @@
                                                 <label for="">Industry</label>
                                                 <div class="form-field">
                                                     <input type="text" value="{{ $user->industry_type }}"
-                                                        class="form-control" placeholder="">
+                                                        class="form-control" placeholder="" readonly>
 
                                                 </div>
                                             </div>

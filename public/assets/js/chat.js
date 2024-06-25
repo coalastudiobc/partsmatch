@@ -356,7 +356,7 @@ $(document).on('click', '.chat-inbox-list-box .inbox-list .li-list', function ()
     //     console.log("here", get_chat_url);
     //     getMessages(get_chat_url, formData);
     // Example: Call a function passing receiverId
-    getMessages($(this).attr("get_chat_url"), receiverId);
+    getMessages($(this).attr("get_chat_url"), formData);
 
     // Prevent default action (if any) for the anchor element within .li-list
     return false;

@@ -77,33 +77,33 @@ class ChatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function chatImage(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'attachment' => 'file|required|mimetypes:image/*|max:' . 1024 * 10
-        ], [
-            'attachment.mimetypes'  =>  'Please upload valid image',
-            'attachment.max'        =>  'Please upload image less that 10Mb.'
-        ]);
-        try {
-            if ($validator->fails())
-                throw new \Exception($validator->errors()->first());
+    // public function chatImage(Request $request)
+    // {
+    //     $validator = Validator::make($request->all(), [
+    //         'attachment' => 'file|required|mimetypes:image/*|max:' . 1024 * 10
+    //     ], [
+    //         'attachment.mimetypes'  =>  'Please upload valid image',
+    //         'attachment.max'        =>  'Please upload image less that 10Mb.'
+    //     ]);
+    //     try {
+    //         if ($validator->fails())
+    //             throw new \Exception($validator->errors()->first());
 
-            $data = $this->uploadImage($request->file('attachment'));
-            ConversationMedia::create([
-                'conversation_id' => $request->Id,
-                'media_id' => $data->id,
-            ]);
+    //         $data = $this->uploadImage($request->file('attachment'));
+    //         ConversationMedia::create([
+    //             'conversation_id' => $request->Id,
+    //             'media_id' => $data->id,
+    //         ]);
 
-            return response()->json([
-                'status' => true,
-                'message' => 'image retrieved successfully',
-                'data'  => $data,
-            ]);
-        } catch (\Exception $e) {
-            return response()->json(['status' => 'error', 'message' => $e->getMessage()], 400);
-        }
-    }
+    //         return response()->json([
+    //             'status' => true,
+    //             'message' => 'image retrieved successfully',
+    //             'data'  => $data,
+    //         ]);
+    //     } catch (\Exception $e) {
+    //         return response()->json(['status' => 'error', 'message' => $e->getMessage()], 400);
+    //     }
+    // }
 
     public function chatMessages(Request $request)
     {
@@ -111,7 +111,6 @@ class ChatController extends Controller
             $receiverId = $request->receiverId;
             // $receiverId = jsdecode_userdata($request->receiverId);
             $chats = User::select('id', 'name', 'email', 'profile_picture_url')->where('id', $receiverId)->first();
-
             $type = 1;
             return response()->json(
                 [
@@ -179,33 +178,33 @@ class ChatController extends Controller
         return redirect()->away($user->frontend_profile_url);
     }
 
-    public function chatSearch($type, $search)
-    {
-        try {
+    // public function chatSearch($type, $search)
+    // {
+    //     try {
 
 
-            if ($type == 'chat') {
-                $chatlists = getchatmembers($search == 'null' ? '' : $search);
-            } else {
-                $chatlists = GroupMember::with(['group.getgroupmembers', 'group.getmedia.media', 'group.getgroupchat'])->getfilter($search)->whereUserId(auth()->user()->id)->orderByDesc('id')->limit(50)->get();
+    //         if ($type == 'chat') {
+    //             $chatlists = getchatmembers($search == 'null' ? '' : $search);
+    //         } else {
+    //             $chatlists = GroupMember::with(['group.getgroupmembers', 'group.getmedia.media', 'group.getgroupchat'])->getfilter($search)->whereUserId(auth()->user()->id)->orderByDesc('id')->limit(50)->get();
 
-                // print_r($chatlists->toArray()); die;
-            }
-            // dd($chatlists);
+    //             // print_r($chatlists->toArray()); die;
+    //         }
+    //         // dd($chatlists);
 
-            return response()->json([
-                'status'    =>  true,
-                'data'      =>  [
-                    'chatlists'  =>  view('include.chatlist', compact('chatlists', 'type'))->render(),
-                ]
-            ]);
-        } catch (\Exception $e) {
-            return response()->json([
-                'status'    =>  false,
-                'error'      =>  $e->getMessage()
-            ]);
-        }
-    }
+    //         return response()->json([
+    //             'status'    =>  true,
+    //             'data'      =>  [
+    //                 'chatlists'  =>  view('include.chatlist', compact('chatlists', 'type'))->render(),
+    //             ]
+    //         ]);
+    //     } catch (\Exception $e) {
+    //         return response()->json([
+    //             'status'    =>  false,
+    //             'error'      =>  $e->getMessage()
+    //         ]);
+    //     }
+    // }
 
     public function lastchat_update(Request $request)
     {
@@ -222,44 +221,44 @@ class ChatController extends Controller
         ], 200);
     }
 
-    public function chat_sort($sortby)
-    {
+    // public function chat_sort($sortby)
+    // {
 
-        try {
-            $type = 'chat';
-            if ($sortby == 'sort_by_name') {
-                $chatlists = chats_sort_by_name(getchatmembers());
-            } elseif ($sortby == 'sort_by_tip') {
-                $chatlists = chats_sort_by_tip(getchatmembers());
-            } else {
-                $chatlists = chats_sort_by_date(getchatmembers());
-            }
-            return response()->json([
-                'status'    =>  true,
-                'data'      =>  [
-                    'chatlists'  =>  view('include.chatlist', compact('chatlists', 'type'))->render(),
-                ]
-            ]);
-        } catch (\Exception $e) {
-            return response()->json([
-                'status'    =>  false,
-                'error'      =>  $e->getMessage()
-            ]);
-        }
-    }
+    //     try {
+    //         $type = 'chat';
+    //         if ($sortby == 'sort_by_name') {
+    //             $chatlists = chats_sort_by_name(getchatmembers());
+    //         } elseif ($sortby == 'sort_by_tip') {
+    //             $chatlists = chats_sort_by_tip(getchatmembers());
+    //         } else {
+    //             $chatlists = chats_sort_by_date(getchatmembers());
+    //         }
+    //         return response()->json([
+    //             'status'    =>  true,
+    //             'data'      =>  [
+    //                 'chatlists'  =>  view('include.chatlist', compact('chatlists', 'type'))->render(),
+    //             ]
+    //         ]);
+    //     } catch (\Exception $e) {
+    //         return response()->json([
+    //             'status'    =>  false,
+    //             'error'      =>  $e->getMessage()
+    //         ]);
+    //     }
+    // }
 
-    public function uploadImage($file)
-    {
+    // public function uploadImage($file)
+    // {
 
-        $image = store_image($file, 'chat/images');
-        if ($image != null) {
-            $data = Media::create([
-                'name' => $image['name'],
-                'type' => 'image/png',
-                'path' => $image['url'],
-            ]);
+    //     $image = store_image($file, 'chat/images');
+    //     if ($image != null) {
+    //         $data = Media::create([
+    //             'name' => $image['name'],
+    //             'type' => 'image/png',
+    //             'path' => $image['url'],
+    //         ]);
 
-            return $data;
-        }
-    }
+    //         return $data;
+    //     }
+    // }
 }

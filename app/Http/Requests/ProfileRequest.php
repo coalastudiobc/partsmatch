@@ -28,6 +28,7 @@ class ProfileRequest extends FormRequest
             'image' => ['image', 'mimes:' . config('validation.php_profile_pic_mimes'), 'max:' . config('validation.php_profile_pic_size')],
             'industry_type' => ['required'],
             'address' => ['required'],
+            'dealershipName' => ['required', 'string', 'regex:' . config('validation.name_regex'), 'max:255'],
         ];
     }
 
@@ -42,6 +43,11 @@ class ProfileRequest extends FormRequest
             'image.mimes' => 'The file must be of type: ' . config('validation.php_profile_pic_mimes'),
             'image.max' => 'The file may not be greater than' . config('validation.php_profile_pic_size'),
             'industry_type.required' => __('customvalidation.user.industry_type.required'),
+            'dealershipName.required' => __('customvalidation.user.dealershipName.required'),
+            'dealershipName.string' => __('customvalidation.user.dealershipName.string'),
+            'dealershipName.nameRegex' => __('customvalidation.user.dealershipName.regex'),
+            'dealershipName.max' => __('customvalidation.user.dealershipName.max'),
+
         ];
     }
 }

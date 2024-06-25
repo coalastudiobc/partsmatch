@@ -1769,7 +1769,7 @@ ul.order-summary-list li:last-child {
 
 .form-field textarea {
     width: 100%;
-    border: 0;
+    /* border: 0; */
     resize: none;
 }
 
@@ -1901,3 +1901,16 @@ ul.order-summary-list li:last-child {
     font-size: 16px;
     font-weight: 500;
 }
+.field-for-ymmm-box .form-group select option{
+    background-color: #fff;
+}
+.field-for-ymmm-box .form-group select option:hover{
+    background-color: #272643;
+    color: #Fff;
+}
+
+
+.cstm-card.account-detail-card .custm-dropdown.dropmenu .form-control{
+    min-height: 46px;
+}
+
