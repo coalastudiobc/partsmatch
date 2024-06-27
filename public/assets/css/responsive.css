@@ -1,0 +1,1096 @@
+@media screen and (min-width:576px) {}
+
+@media screen and (min-width:768px) {}
+
+@media screen and (min-width:880px) {}
+
+@media screen and (min-width:992px) {}
+
+@media screen and (min-width:1200px) {}
+
+
+
+@media screen and (min-width:1480px) {}
+
+
+
+@media screen and (max-width:1600px) {}
+
+@media screen and (max-width:1440px) {
+    .dashboard-left-box {
+        max-width: 303px;
+    }
+
+    .interior-content-left {
+        max-width: 300px;
+    }
+
+    .dashboard-right-box {
+        width: calc(100% - 303px);
+        padding: 30px 36px;
+    }
+
+}
+
+@media screen and (max-width:1365px) {
+    .hero-txt h1 {
+        font-size: 45px;
+    }
+
+    .bank-img-txt h3 {
+        font-size: 18px;
+    }
+
+    .cart-sidebar-box {
+        padding: 23px 20px;
+    }
+
+    .db-table-box {
+        padding: 0 0 32px;
+    }
+}
+
+@media screen and (max-width:1199px) {
+    .signup-img-txt img {
+        display: none;
+    }
+
+    .signup-img-txt {
+        margin-bottom: 20px;
+    }
+
+    .sign-up-card {
+        margin: 0 auto;
+    }
+
+    .banner-content-heading h2 {
+        font-size: 32px;
+    }
+
+    .more-product-boxes {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .form-group label {
+        font-size: 14px;
+    }
+
+    .form-checkbox label {
+        font-size: 12px;
+    }
+
+    .pro-search-box {
+        margin-right: 12px;
+    }
+
+    .pro-search-box input {
+        min-width: 280px;
+    }
+
+    .sp-content-wrapper {
+        flex-wrap: wrap;
+    }
+
+    .interior-content-left {
+        max-width: 100%;
+    }
+
+    .chat-inbox-box {
+        max-width: 338px;
+    }
+
+    .chat-profile-img {
+        width: 46px;
+        min-width: 46px;
+        height: 46px;
+    }
+
+    .chat-input-box {
+
+        padding: 10px 30px;
+    }
+
+    .chat-screen {
+        /* padding: 30px; */
+        height: calc(100vh - 500px);
+        overflow: auto;
+    }
+
+    .chat-main-box {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .messanger-product-detail>h3 {
+        font-size: 16px;
+    }
+
+    .chat-profile-txt p {
+        font-size: 12px;
+    }
+
+    .chat-profile-txt h3 {
+        font-size: 14px;
+    }
+
+    .chat-inbox-heading {
+
+        padding: 25px 30px 30px;
+        border-right: 1px solid var(--border-color);
+    }
+
+
+}
+
+@media screen and (max-width:1024px) {
+    .pagination-wrapper {
+        margin-top: 20px;
+    }
+
+    .signup-img-txt img {
+        display: none;
+    }
+
+    .sign-up-card {
+        margin: auto;
+    }
+
+    .signup-sec {
+        padding: 20px 0px;
+    }
+
+    .pro-dealer-info {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .pro-dealer-info a {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .collect-tab-btns {
+        flex-wrap: wrap;
+    }
+
+    .slick-tab {
+        background-color: unset;
+    }
+
+    .footer-logo-box h2 {
+        font-size: 30px;
+    }
+
+    .footer-link-list h4 {
+        font-size: 20px;
+    }
+
+    .accounts-btns {
+        flex-wrap: wrap;
+    }
+
+    .chat-screen-profile {
+        width: 46px;
+        height: 46px;
+        min-width: 46px;
+    }
+
+    .messanger-product-img {
+        min-width: 47px;
+    }
+    .sidebar-filter{
+        margin: 0 0 20px;
+        display: block;
+    }
+}
+
+@media screen and (max-width:992px) {
+    .navbar-nav {
+        flex-direction: row;
+    }
+
+    .navbar-nav .dropdown-menu {
+        position: absolute;
+    }
+
+    .heading-with-tab>h2 {
+        text-align: center;
+        width: 100%;
+    }
+
+    .slick-slider {
+        padding: 0px 40px;
+    }
+
+    .tab-outer {
+        order: 3;
+        width: 100%;
+    }
+
+    .collect-tab-btns .filter-btn {
+        order: 1;
+    }
+
+    .collect-tab-btns .review-btn {
+        order: 2;
+    }
+
+    .login-sec {
+        padding: 20px 0 20px;
+    }
+
+    .login-box {
+        padding: 20px 20px 20px;
+    }
+
+    .login-bg-img.right {
+        display: none;
+    }
+
+    .login-bg-img {
+        display: none;
+    }
+
+    .signup-img-txt h2 {
+        font-size: 26px;
+    }
+
+    /* .signup-img-txt img {
+        max-width: 350px;
+    } */
+    .banner-content-wrapper {
+        padding: 20px 0px;
+    }
+
+    .banner-content-heading h2 {
+        font-size: 25px;
+    }
+
+    .hero-txt h4 {
+        font-size: 25px;
+    }
+
+    .collect-tab-btns {
+        gap: 15px;
+    }
+
+    .collect-tab-btns .primary-btn {
+        order: 1;
+    }
+
+    .collect-tab-btns .view-btn {
+        order: 2;
+    }
+
+    .tabs-content {
+        order: 3;
+        width: 100%;
+    }
+
+    .interior-content-heading {
+        font-size: 28px;
+    }
+
+    .account-detail-card,
+    .cstm-card.banking-detail-card {
+        padding: 30px 15px;
+        position: relative;
+    }
+
+    .cart-box-header h3 {
+        text-align: center;
+    }
+
+    .dashboard-left-box {
+        max-width: 100%;
+        padding: 10px 10px;
+    }
+
+    .analyics-tabs ul,
+    .analyics-tabs {
+        display: grid;
+        /* grid-template-columns: repeat(3, 1fr); */
+        align-items: center;
+        gap: 10px;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    .analyics-tabs ul li+li {
+        margin-top: 0px;
+    }
+
+    .analyics-tabs-name h4 {
+        font-size: 14px;
+    }
+
+    .dealer-profile-content,
+    .dealer-profile-detail-form {
+        padding: 10px 10px;
+    }
+
+    .product-detail-table table {
+        min-width: 1100px;
+    }
+
+    .product-detail-table table tr th {
+        padding: 2px 0px 12px 12px;
+    }
+
+    .serach-and-filter-box {
+        flex-wrap: wrap;
+        gap: 10px;
+        overflow: hidden;
+    }
+
+    .product-detail-table table tr td {
+        padding: 11px 9px 12px 12px;
+    }
+
+    .product-list-table table tr th:last-child {
+        padding-right: 0;
+    }
+
+    .sign-up-txt h2 {
+        font-size: 32px;
+    }
+
+    .back-round-icon {
+        width: 20px;
+        height: 20px;
+    }
+
+    .footer-wrapper {
+        padding-bottom: 20px;
+    }
+
+    .right-reserve {
+        padding: 20px 0;
+    }
+
+    .dc-content-wrapper {
+        flex-wrap: wrap;
+    }
+
+    .analyics-tabs-btns {
+        margin: 0;
+    }
+
+    .chat-txt-box p {
+        font-size: 14px;
+    }
+
+    .chat-txt-wrapper h4 {
+        line-height: 18px;
+        margin-bottom: 5px;
+        font-size: 14px;
+    }
+
+    .chat-area-inner {
+        background-color: #F4F4F4;
+        padding: 20px 10px;
+        border-radius: 0px 0px 10px 10px;
+    }
+
+    .messanger-chat-area {
+        padding: 0px 20px 30px;
+    }
+
+    .chat-message-box.chat-open {
+        transform: translateX(0px);
+    }
+
+    .dashboard-right-box {
+        width: 100%;
+        padding: 30px 36px;
+    }
+
+}
+
+@media screen and (max-width:767px) {
+    h1 {
+        font-size: 60px;
+    }
+
+    .hero-txt h1 {
+        margin-bottom: 10px;
+    }
+
+    .hero-txt h4 {
+        font-size: 22px;
+        line-height: 30.4px;
+        margin-bottom: 8px;
+    }
+
+    h2 {
+        font-size: 28px;
+    }
+
+    .brands-header h3 {
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+
+    .hero-txt p {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    .footer-logo-box h2 {
+        font-size: 32px;
+    }
+
+    .ls-footer-title {
+        font-size: 14px;
+    }
+
+    .footer-btn {
+        padding-top: 20px;
+    }
+
+    .footer-logo-box a h6 {
+        font-size: 22px;
+    }
+
+    .footer-link-list h4 {
+        font-size: 22px;
+    }
+
+    .footer-link-list ul>li+li {
+        margin-top: 10px;
+    }
+
+    .slick-tab a {
+        font-size: 12px;
+        padding: 12px 14px;
+    }
+
+    .secondary-btn,
+    .primary-btn {
+        padding: 8px !important;
+        gap: 8px;
+        font-size: 12px !important;
+    }
+
+    .categories-box p {
+        font-size: 16px;
+    }
+
+    .search-box {
+        flex-direction: column;
+    }
+
+    .collection-box h4 {
+        font-size: 18px;
+    }
+
+    .heading-with-tab .heading-tab .nav-item .nav-link {
+        font-size: 14px;
+        padding: 6px 0px;
+        margin: 0px 8px;
+        min-width: 150px;
+    }
+
+    .heading-with-tab .heading-tab {
+        width: 100%;
+    }
+
+    .heading-with-tab .heading-tab UL {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .heading-with-tab .nav-tabs {
+        border-bottom: 0;
+    }
+
+    .heading-with-tab {
+        border-bottom: 0;
+    }
+
+    .slick-arrow {
+        width: 30px;
+        height: 30px;
+    }
+
+    .slick-slider {
+        padding: 0px 20px;
+    }
+
+    .slick-slider {
+        padding: 0px 20px;
+    }
+
+    .login-box {
+        padding: 50px 15px 33px;
+    }
+
+    .login-sec {
+        padding: 30px 0px 40px;
+    }
+
+    .logo-box {
+        margin-bottom: 20px;
+    }
+
+    .login-txt h2 {
+        font-size: 32px;
+    }
+
+    .login-txt {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        margin-bottom: 10px;
+        font-size: 14px;
+    }
+
+    .login-bg-img,
+    .login-bg-img.right {
+        filter: blur(2px);
+    }
+
+    .form-control {
+        font-size: 14px;
+    }
+
+    .sign-up-link-box p,
+    .sign-up-link-box a {
+        font-size: 14px;
+    }
+
+    .forgot-password {
+        margin-bottom: 15px;
+    }
+
+    .signup-img-txt h2 {
+        font-size: 24px;
+    }
+
+    .sign-up-txt h2 {
+        font-size: 32px;
+    }
+
+    .upload-img {
+        margin: 30px 0px 20px;
+    }
+
+    .login-nav .login-btn,
+    .login-nav .signup-btn {
+        min-width: 75px;
+        padding: 8px !important;
+    }
+
+    .login-nav .navbar-nav:first-child {
+        gap: 20px;
+    }
+
+    .dealer-profile-upload-box {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .signup-img-txt p {
+        padding-bottom: 15px;
+    }
+
+    .sign-up-txt p {
+        font-size: 12px;
+    }
+
+    .sign-up-card {
+        max-width: 750px;
+        padding: 20px 10px 10px;
+    }
+
+    .page-content-sec {
+        padding: 20px 0px;
+    }
+
+    .signup-img-txt h2 {
+        font-size: 20px;
+    }
+
+    .sign-up-txt h2 {
+        font-size: 25px;
+    }
+
+    .sign-up-card {
+        padding: 10px 10px 10px;
+    }
+
+    /* .signup-img-txt img {
+        max-width: 250px;
+    } */
+    .signup-sec {
+        padding: 10px 0px;
+    }
+
+    .banner-content-heading h2 {
+        font-size: 20px;
+    }
+
+
+    .dashboard-left-box h2 {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .analyics-tabs-btns {
+        padding: 10px 10px;
+    }
+
+    .cart-box-header h3 {
+        padding-bottom: 10px;
+    }
+
+    .cart-wrapper {
+        margin-bottom: 25px;
+    }
+
+    .product-list-table table {
+        min-width: 900px;
+    }
+
+    .hero-txt h1 {
+        font-size: 29px;
+    }
+
+    .hero-txt h4 {
+        font-size: 20px;
+        line-height: 2;
+    }
+
+    .dealer-product-bxx {
+        padding: 30px 20px;
+    }
+
+    .slick-tab a {
+        padding: 10px;
+    }
+
+    .slick-tab {
+        flex-wrap: wrap;
+    }
+
+    .heading-tab .nav {
+        justify-content: center;
+    }
+
+    .footer-logo-box h2 {
+        font-size: 18px;
+    }
+
+    .brands-header h3 {
+        font-size: 30px;
+    }
+
+    .bank-img-txt h3 {
+        font-size: 14px;
+    }
+
+    .cart-sidebar-box {
+        padding: 10px 10px;
+    }
+
+    .parts-image-box img {
+        max-width: 100%;
+    }
+
+    .product-deails>p {
+        font-size: 12px;
+    }
+
+    .pro-dealer-info a {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .search-box {
+        flex-wrap: wrap;
+    }
+
+    .hero-txt a {
+        margin-bottom: 8px;
+    }
+
+    .sub-total-wrapper h3 {
+        font-size: 16px;
+    }
+
+    .cart-product-image {
+        width: 62px;
+        height: 62px;
+    }
+
+    .card-detail-box {
+        padding: 24px 10px;
+    }
+
+    .summary-img-txt {
+        gap: 8px;
+    }
+
+    .related-pro-sec,
+    .single-product-sec {
+        padding: 20px 0px 20px;
+    }
+
+    .singlr-pro-detail {
+        margin-bottom: 0px;
+    }
+
+    .single-product-sec {
+        padding: 20px 0px 20px;
+    }
+
+    .signup-img-txt {
+        text-align: center;
+    }
+
+    /* .signup-img-txt img {
+        max-width: 250px;
+    } */
+    .db-table-box .tb-table tbody tr td {
+        padding: 10px 10px;
+        font-size: 14px;
+    }
+
+    .cart-product-image {
+        width: 50px;
+        height: 50px;
+    }
+
+    .summary-img-box {
+        width: 60px;
+        height: 60px;
+        min-width: 60px;
+    }
+
+    .order-summary-list li {
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+    }
+
+    .order-summary.cstm-card h2 {
+        margin-bottom: 20px;
+    }
+
+    .summary-txt-box h3 {
+        margin-bottom: 5px;
+    }
+
+    .price-box p {
+        font-size: 15px;
+    }
+
+    .checkout-main-card {
+        padding: 15px 15px;
+    }
+
+    .checkout-main-card.cstm-card h2 {
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
+
+    .footer-btn a {
+        padding: 6px 12px;
+    }
+
+    .footer-btn {
+        padding: 20px 0px;
+    }
+
+    .ls-footer-title {
+        font-size: 14px;
+    }
+
+    .footer-logo-box a h6 {
+        font-size: 25px;
+    }
+
+    .footer-main {
+        padding: 20px 0px;
+    }
+
+    .footer-link-list ul,
+    .footer-social-list ul {
+        margin-top: 0px;
+    }
+
+    .footer-link-list ul li a {
+        font-size: 14px;
+    }
+
+    .footer-link-list h4 {
+        font-size: 20px;
+    }
+
+    .tb-table table {
+        width: 100%;
+        border-collapse: collapse;
+        border-spacing: 0 12px;
+        min-width: 992px;
+    }
+
+    .analyics-tabs ul,
+    .analyics-tabs {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+
+    .pagination-box {
+        padding: 5px 0px;
+
+    }
+
+    .dashboard-right-box h2 {
+        font-size: 22px;
+    }
+
+    .product-total h5 {
+        font-size: 18px;
+    }
+
+    .pro-dealer-img-box {
+        gap: 10px;
+    }
+
+    .dealer-img-txt h5 {
+        font-size: 16px;
+    }
+
+    .dealer-img-txt p {
+        font-size: 13px;
+    }
+
+    .chat-box-area {
+        position: relative;
+    }
+
+    .chat-message-box {
+        width: 100%;
+        position: absolute;
+        background-color: #fff;
+        transition: all 0.3s ease-in;
+        transform: translateX(1000px);
+    }
+
+    .chat-inbox-box {
+        max-width: 100%;
+    }
+
+    .Chat-sec {
+        padding: 50px 0px;
+        overflow: hidden;
+    }
+
+    .pro-search-box input {
+        min-width: 197px;
+    }
+
+    .form-control {
+        padding: 8px 17px;
+    }
+
+    .dashboard-right-box {
+        width: 100%;
+        padding: 30px 10px;
+    }
+
+    .pro-filter p {
+        white-space: nowrap;
+    }
+
+    .add-pro-form h2 {
+        font-size: 22px;
+    }
+
+}
+
+@media screen and (max-width:575px) {
+    .slick-tab {
+        flex-direction: column;
+    }
+
+    .sign-up-card {
+        padding: 30px 20px 20px;
+    }
+
+    .form-group {
+        margin-bottom: 10px;
+    }
+
+    .slick-slider {
+        padding: 0px 30px;
+    }
+
+    .dealer-product-header a {
+        padding: 8px 12px;
+        font-size: 13px;
+        line-height: 1;
+    }
+
+    .dealer-profile-form-btn a {
+        width: 100%;
+    }
+
+    .order-summary.cstm-card h2 {
+        font-size: 16px;
+    }
+
+    .custm-nav-menu .navbar-nav:first-child {
+        margin-right: 10px;
+    }
+
+    .navbar-nav {
+        gap: 10px;
+    }
+
+    .nav-profile-img .dropdown button p {
+        display: none;
+    }
+
+    .nav-profile-img .dropdown-toggle::after {
+        display: none;
+    }
+
+    .navbar-nav .nav-item .nav-link {
+        font-size: 12px;
+    }
+
+    .nav-msg-icon img {
+        max-width: 15px;
+    }
+
+    .navbar-brand {
+        margin: 0;
+    }
+
+    .header-logo img {
+        max-width: 150px;
+    }
+
+    .cart-box-header h3 {
+        font-size: 20px;
+    }
+
+    .cart-txt,
+    .price-txt {
+        font-size: 16px;
+    }
+
+    .summary-list-box>p {
+        font-size: 14px;
+        white-space: nowrap;
+    }
+
+    .summary-txt-box h3 {
+        font-size: 13px;
+        margin: 0;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        line-height: 1.2;
+    }
+
+    .summary-txt-box p {
+        font-size: 13px;
+    }
+
+    .messanger-product-detail>h3 {
+        font-size: 13px;
+    }
+
+    .chat-txt-box {
+        padding: 13px 16px;
+    }
+
+    .chat-photo-box {
+        max-width: 250px;
+        height: 200px;
+        background-color: #fff;
+    }
+
+    .chat-input-box {
+        padding: 10px 10px;
+    }
+
+    .chat-input-box {
+        gap: 5px;
+    }
+
+    .chat-input-box svg {
+        max-width: 20px;
+    }
+
+    .chat-input-box .file-upload-box span svg {
+        max-width: 20px;
+    }
+
+    .chat-input-box .form-field textarea {
+        font-size: 12px;
+    }
+
+    .inbox-list li a {
+        padding: 15px 10px;
+    }
+
+    .chat-profile-img {
+        width: 30px;
+        min-width: 30px;
+        height: 30px;
+    }
+
+    .chat-profile {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+    }
+
+    .chat-inbox-list-box {
+        padding: 20px 10px 20px 10px;
+    }
+
+    .messanger-chat-area {
+        padding: 0px 10px 30px;
+    }
+
+    .chat-txt-box p {
+        font-size: 12px;
+    }
+
+    .pro-search-box input {
+        min-width: 159px;
+        font-size: 11px;
+    }
+}
+
+@media screen and (max-width:480px) {
+    .banner-content-heading h2 {
+        font-size: 15px;
+    }
+
+    .serach-and-filter-box a {
+        width: 100%;
+        text-align: center;
+    }
+
+    .pro-dealer-box {
+        flex-wrap: wrap;
+    }
+
+    .sign-up-txt h2 {
+        font-size: 20px;
+    }
+
+    .header-logo img {
+        max-width: 120px;
+    }
+
+}
+
+@media screen and (max-width:360px) {}
