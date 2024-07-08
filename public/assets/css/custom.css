@@ -1912,5 +1912,37 @@ ul.order-summary-list li:last-child {
 
 .cstm-card.account-detail-card .custm-dropdown.dropmenu .form-control{
     min-height: 46px;
+
+
 }
+
+
+.delivery-form .form-group .custm-dropdown .dropdown-toggle{
+    min-height: 47px;
+}
+.add-type-main {
+    border-radius: 5px;
+    border: 1.81px solid #E8E8E8;
+    padding: 5px 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    gap: 10px;
+    min-height: 47px;
+}
+.add-type-main label {
+    margin: 0;
+    width: 100%;
+    text-align: center;
+    background-color: #dfdfdf;
+    height: 100%;
+    padding: 6px;
+    cursor: pointer;
+}
+.add-type-main label:has(input:checked){
+    background-color: var(--primary-color);
+}
+
+
 

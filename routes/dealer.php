@@ -1,17 +1,18 @@
 <?php
 
-use App\Http\Controllers\Admin\CmsManagementController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\Dealer\AccountSettingController;
-use App\Http\Controllers\Dealer\CheckoutController;
-use App\Http\Controllers\Dealer\DealerController;
-use App\Http\Controllers\Dealer\OrderController;
-use App\Http\Controllers\Dealer\PartsManagerController;
-use App\Http\Controllers\Dealer\ProductController;
-use App\Http\Controllers\Dealer\SubscriptionController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Dealer\ChatController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ShippoController;
+use App\Http\Controllers\Dealer\ChatController;
+use App\Http\Controllers\Dealer\OrderController;
+use App\Http\Controllers\Dealer\DealerController;
+use App\Http\Controllers\Dealer\ProductController;
+use App\Http\Controllers\Dealer\CheckoutController;
+use App\Http\Controllers\Admin\CmsManagementController;
+use App\Http\Controllers\Dealer\PartsManagerController;
+use App\Http\Controllers\Dealer\SubscriptionController;
+use App\Http\Controllers\Dealer\AccountSettingController;
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
@@ -70,6 +71,8 @@ Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer'
     Route::name('checkout.')->group(function () {
         Route::get('checkout/create', [CheckoutController::class, 'create'])->name('create');
         Route::post('checkout/store', [CheckoutController::class, 'store'])->name('store');
+        Route::post('checkout/shiping/rates', [CheckoutController::class, 'getPaymentPage'])->name('rates');
+        // Route::get('/sachin/testing', [CheckoutController::class, 'testing']);
     });
 
     // subscription
@@ -89,9 +92,15 @@ Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer'
     Route::name('chat.')->group(function () {
         // Route::get('chat/view', [ChatController::class, 'view'])->name('view');
         Route::post('chat/messages', [ChatController::class, 'chatMessages'])->name('messages');
-        Route::match(['get', 'post'], 'chat/message/{user_id?}', [ChatController::class, 'inboxView'])->name('inbox.view');
+        Route::match(['get', 'post'], 'chat/setup/{user_id?}', [ChatController::class, 'inboxView'])->name('inbox.view');
         Route::post('getuser/names', [ChatController::class, 'userNames'])->name('getuser.names.sa');
         // Route::get('userimage', [ChatController::class, 'userImage'])->name('userimage');
         Route::post('lastchat/update', [ChatController::class, 'lastchat_update'])->name('lastchat.update');
+        Route::post('chat/image', [ChatController::class, 'chatImage'])->name('chat.image');
+    });
+    Route::name('address.')->group(function () {
+        Route::get('product/picking/address', [ShippoController::class, 'view'])->name('view');
+        Route::post('product/from/address', [ShippoController::class, 'from_address'])->name('from');
+        Route::post('product/shipping/toaddress', [CheckoutController::class, 'to_address'])->name('to');
     });
 });

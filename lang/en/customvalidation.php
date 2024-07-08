@@ -330,7 +330,7 @@ return [
             'maxlength' => 'zipcode should be 6 digits.',
         ],
         'pin_code' => [
-            'required' => 'Please enter the zip code.',
+            'required' => 'Please enter the pin code.',
             'minlength' => 'pincode should be 6 digits.',
             'maxlength' => 'pincode should be 6 digits.',
         ],
@@ -520,5 +520,19 @@ return [
             'mimes' => 'Supported only JPEG, JPG, PNG image type'
         ],
 
-    ]
+    ],
+    'addresses' => [
+        'address1' => [
+            'required' => "Street address is required.",
+            'min' => "Street address must be at least 10 characters long.",
+            'max' => "Street address must be 35 characters or fewer."
+
+        ],
+        'address2' => [
+            'max' => "Address must be 35 characters or fewer."
+        ],
+        'description' => [
+            'max' => "Description must be 100 characters or fewer."
+        ],
+    ],
 ];

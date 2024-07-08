@@ -19,21 +19,34 @@ class ChatController extends Controller
         return view('dealer.chat.dashboard', compact('chats', 'type'));
         // dd($response);
     }
-    public function inboxView($user_id)
+    public function inboxView($user_id = null)
     {
-        $id = jsdecode_userdata($user_id);
-        if ($id === auth()->user()->id) {
-            return redirect()->back();
-        }
-        if (check_chatId($id)) {
-            $chat = Chat::create(['chat_id' => Str::random(10), 'sender_id' => auth()->user()->id, 'reciever_id' => $id]);
-        }
+        if ($user_id) {
+            $id = jsdecode_userdata($user_id);
+            if ($id === auth()->user()->id) {
+                return redirect()->back();
+            }
+            if (check_chatId($id)) {
+                $chat = Chat::create(['chat_id' => Str::random(10), 'sender_id' => auth()->user()->id, 'reciever_id' => $id]);
+            }
+            $reciever = User::select('id', 'name', 'email', 'profile_picture_url')->where('id', $id)->first();
 
-        $chat_id =  getChat($id);
-        $chats =  getChatId();
-        $type = 0;
-        // $chatheader = view('components.chat-inbox-component', compact('reciever'))->render();
-        return view('dealer.chat.dashboard', compact('chats', 'chat_id', 'type',));
+            $chat_id =  getChat($id);
+            $chats =  getChatId();
+            $type = 0;
+            $reciever = User::find($id);
+            // $chatheader = view('components.chat-inbox-header-component', compact('reciever'))->render();
+            // $chatlist = view('components.chat-list-component', compact('chats', 'type'))->render();
+
+            // return response()->json([
+            //     'status' => 'success',
+            //     'message' => "Chat inserted successfully",
+            //     'chatheader' => $chatheader,
+
+            // ], 200);
+            return view('dealer.chat.dashboard', compact('chats', 'chat_id', 'type',));
+        }
+        return view('dealer.dashboard');
     }
     public function inbox($id = null)
     {
@@ -111,12 +124,15 @@ class ChatController extends Controller
             $receiverId = $request->receiverId;
             // $receiverId = jsdecode_userdata($request->receiverId);
             $chats = User::select('id', 'name', 'email', 'profile_picture_url')->where('id', $receiverId)->first();
+            $reciever = User::select('id', 'name', 'email', 'profile_picture_url')->where('id', $receiverId)->first();
+
             $type = 1;
             return response()->json(
                 [
                     'status' => true,
                     'message' => 'chat retrieved successfully',
                     'data'  => [
+                        'realchatheader' => view('components.chat-inbox-header-component', compact('reciever'))->render(),
                         'chatheader'  =>  view('components.chat-inbox-component', compact('chats', 'type'))->render(),
                         'getchatId'  =>  getChat($receiverId),
                     ],
@@ -129,7 +145,6 @@ class ChatController extends Controller
 
     public function muteUnmute($id)
     {
-        // dd($id);
         try {
             $user = User::find($id);
             // $user = auth()->user();
@@ -261,4 +276,30 @@ class ChatController extends Controller
     //         return $data;
     //     }
     // }
+    public function chatImage(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'attachment' => 'file|required|mimetypes:image/*|max:' . 1024 * 10
+        ], [
+            'attachment.mimetypes'  =>  'Please upload valid image',
+            'attachment.max'        =>  'Please upload image less that 10Mb.'
+        ]);
+        try {
+            if ($validator->fails())
+                throw new \Exception($validator->errors()->first());
+            $image = store_image($request->file('attachment'), 'chat/images');
+            // ConversationMedia::create([
+            //     'chat_id' => $request->Id,
+            //     'name' => $image['name'],
+            //     'url' => $image['url']
+            // ]);
+            return response()->json([
+                'status' => true,
+                'message' => 'image retrieved successfully',
+                'data'  => $image,
+            ]);
+        } catch (\Exception $e) {
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()], 400);
+        }
+    }
 }

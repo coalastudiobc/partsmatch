@@ -82,6 +82,10 @@ class User extends Authenticatable
     {
         return $this->hasOne(ShippingAddress::class, 'user_id');
     }
+    public function userShippoAdressId()
+    {
+        return $this->hasMany(UserAddresses::class);
+    }
 
     public function scopeManagers($query)
     {

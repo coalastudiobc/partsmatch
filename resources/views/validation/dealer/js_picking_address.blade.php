@@ -28,11 +28,16 @@
             city: {
                 required: true
             },
-            shiping_address1: {
-                required: true
+            street1: {
+                required: true,
+                minlength: 10,
+                maxlength: 35,
             },
-            shiping_address2: {
-                required: true
+            street2: {
+                maxlength: 35,
+            },
+            description: {
+                maxlength: 100,
             },
             pin_code: {
                 required: true,
@@ -45,30 +50,24 @@
 
         }
         const messages = {
-            name: {
+            first_name: {
                 required: `{{ __('customvalidation.user.name.required') }}`,
                 minlength: `{{ __('customvalidation.user.name.min', ['min' => '${nameMinLength}', 'max' => '${nameMaxLength}']) }}`,
                 maxlength: `{{ __('customvalidation.user.name.max', ['min' => '${nameMinLength}', 'max' => '${nameMaxLength}']) }}`,
                 regex: `{{ __('customvalidation.user.name.regex', ['regex' => '${nameRegex}']) }}`,
             },
+            last_name: {
+                required: `{{ __('customvalidation.user.name.required') }}`,
+                minlength: `{{ __('customvalidation.user.name.min', ['min' => '${nameMinLength}', 'max' => '${nameMaxLength}']) }}`,
+                maxlength: `{{ __('customvalidation.user.name.max', ['min' => '${nameMinLength}', 'max' => '${nameMaxLength}']) }}`,
+                regex: `{{ __('customvalidation.user.name.regex', ['regex' => '${nameRegex}']) }}`,
+            },
+
             phone_number: {
                 required: `{{ __('customvalidation.user.phone_number.required') }}`,
                 digits: "only number allowed",
                 minlength: `{{ __('customvalidation.user.phone_number.minlength') }}`,
                 maxlength: `{{ __('customvalidation.user.phone_number.maxlength') }}`,
-            },
-            shipping_address1: {
-                required: `{{ __('customvalidation.user.address.required') }}`,
-            },
-
-            shipping_address2: {
-                required: `{{ __('customvalidation.user.address.required') }}`,
-            },
-            pin_code: {
-                required: `{{ __('customvalidation.user.pin_code.required') }}`,
-                // digits: 'only number allowed',
-                minlength: `{{ __('customvalidation.user.pin_code.minlength') }}`,
-                maxlength: `{{ __('customvalidation.user.pin_code.maxlength') }}`,
             },
             country: {
                 required: `{{ __('customvalidation.user.country.required') }}`,
@@ -80,8 +79,26 @@
                 required: `{{ __('customvalidation.user.city.required') }}`,
             },
 
+            street1: {
+                required: `{{ __('customvalidation.addresses.address1.required') }}`,
+                minlength: `{{ __('customvalidation.addresses.address1.min') }}`,
+                maxlength: `{{ __('customvalidation.addresses.address1.max') }}`
+            },
+            street2: {
+                maxlength: `{{ __('customvalidation.addresses.address2.max') }}`
+            },
+            description: {
+                maxlength: `{{ __('customvalidation.addresses.description.max') }}`
+            },
+            pin_code: {
+                required: `{{ __('customvalidation.user.pin_code.required') }}`,
+                digits: 'only number allowed',
+                minlength: `{{ __('customvalidation.user.pin_code.minlength') }}`,
+                maxlength: `{{ __('customvalidation.user.pin_code.maxlength') }}`,
+            },
+
 
         };
-        handleValidation('product-card-details', rules, messages, true);
+        handleValidation('From_address', rules, messages, true);
     });
 </script>

@@ -51,22 +51,69 @@ function submitForm(e) {
     const currentTime = new Date().getTime();
     const timestamp = currentTime.toString();
     const messageInput = document.getElementById("message");
+    const attachmentInput = document.getElementById("file-upload");
     const message = parseHtml(messageInput.value);
     messageInput.value = '';
     const messageData = {
+        attachment: '',
         currentTime: currentTime,
         message: message,
         receiverId: ReceiverId,
         senderId: senderId,
     }
+    console.log(attachmentInput);
+    if (typeof attachmentInput.value != 'undefined' && attachmentInput.value != '') {
+        jQuery('#sendMessage').prop('disabled', true);
+        jQuery('#message').val('');
+        var formData = new FormData();
+        formData.append('attachment', attachmentInput.files[0]);
+        // formData.append('Id', Id);
+        chatImage(formData, chat_image_store_url)
+        async function chatImage(formData, chat_image_store_url) {
+            const response = await fetch(chat_image_store_url, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+            })
+                .then((response) => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    return response.json().then(function (errorBody) {
+                        // console.log(errorBody.message);
+                        throw new Error(errorBody.message);
+                    });
+                })
+                .then((responseJson) => {
+                    jQuery('#message').val(responseJson.data.name);
+                    messageData.attachment = responseJson.data.url;
+                    jQuery('#message').val('');
+                    jQuery('#attachment').val('');
+                    console.log("messageData", messageData);
+                    sendMessage(chatId, timestamp, messageData);
+                })
+                .catch((error) => {
+                    return iziToast.error({
+                        title: 'Error!',
+                        message: error.message,
+                        position: 'topRight'
+                    });
+                });
+            jQuery('#sendMessage').prop('disabled', false);
+        }
+    } else {
+        if (messageData.message != '') {
 
-    if (messageData.message != '') {
-        //console.log("messageData",messageData);
-        sendMessage(chatId, timestamp, messageData);
+            //console.log("messageData",messageData);
+            sendMessage(chatId, timestamp, messageData);
+        }
     }
 }
 
 function sendMessage(chatId, timestamp, data) {
+    console.log(data);
     console.log('sending..', data);
     jQuery('#sendMessage').prop('disabled', true);
     let response = new Promise((resolve, reject) => {
@@ -104,11 +151,12 @@ function loadMessages(chatId) {
             //console.log("change",change);
             if (change.type === "added") {
                 //console.log('fds', change.doc.data().senderId)
-
+                let imagePath = "{{ config('app.url') }}";
                 let sender = change.doc.data().senderId;
                 let message = change.doc.data().message;
                 let currentTime = change.doc.data().currentTime;
                 let attachment = ('attachment' in change.doc.data()) ? change.doc.data().attachment : '';
+                console.log(attachment);
                 var msgDate = moment(new Date(currentTime)).format('YYYY-MM-DD');
                 let date = moment(new Date()).format('YYYY-MM-DD');
                 if (date == msgDate) {
@@ -118,7 +166,8 @@ function loadMessages(chatId) {
                     var time = msgDate;
                 }
                 // console.log(sender, message,currentTime )
-
+                var assetPath = "http://partmatch.com/storage/";
+                // var assetPath = "{{ config('app.url') }}/storage/";
                 //console.log(sender, senderId)
                 if (sender == senderId) {
                     messageList += '<div class="chat-screen-right ">';
@@ -128,11 +177,7 @@ function loadMessages(chatId) {
                     messageList += "<span>" + time + "</span></div>";
                     if (attachment)
                         messageList +=
-                            '<div class="msg_media"><img src="' +
-                            imagePath +
-                            "/" +
-                            attachment +
-                            '"></div>';
+                            '<div class="msg_media"><img src="' + assetPath + '/' + attachment + '"></div>';
                     if (message)
                         messageList +=
                             '<div class="chat-txt-box">' +
@@ -224,7 +269,7 @@ function loadMessages(chatId) {
                 }
                 jQuery('#chatWindow').append(messageList);
                 _lastMsgUpdate(chatId);
-                // jQuery("#chatWindow").scrollTop($('#chatWindow')[0].scrollHeight);
+                jQuery("#chatWindow").scrollTop($('#chatWindow')[0].scrollHeight);
             });
     });
 
@@ -288,6 +333,8 @@ async function getMessages(get_chat_url, formData) {
             console.log("chatId", chatId);
             if (!chatId)
                 return;
+
+            jQuery('#chatheader').html(responseJson.data.realchatheader);
             loadMessages(chatId);
             // jQuery('#chatUser').html(responseJson.data.chatheader);
 
@@ -347,7 +394,6 @@ $(document).on('click', '.chat-inbox-list-box .inbox-list .li-list', function ()
     // Add 'active' class to the clicked .li-list
     $(this).addClass('active');
 
-    // Get receiverId from the clicked .li-list
     var receiverId = $(this).attr('receiverId');
     console.log('Receiver ID:', receiverId);
 

@@ -23,6 +23,9 @@
                                     @include('components.chat-list-component', ['chats' => $chats])
                                 </div>
                                 <div class="chat-message-box">
+                                    <div class="messanger-profile" id="chatheader">
+                                    </div>
+
                                     @include('components.chat-inbox-component', ['chats' => $chats])
                                 </div>
                             </div>
@@ -55,7 +58,36 @@
         var userImage = "{{ asset('assets/images/chat-pro1.png') }}";
         var get_user_names = "{{ route('dealer.chat.getuser.names.sa') }}";
         var last_msg_update_url = "{{ route('dealer.chat.lastchat.update') }}";
-        // get_chat_url = "{{ route('dealer.chat.messages') }}"
+        var get_chat_url = "{{ route('dealer.chat.messages') }}";
+        var chat_image_store_url = "{{ route('dealer.chat.chat.image') }}";
     </script>
     <script defer src="{{ asset('assets/js/chat.js') }}"></script>
+    {{-- <script>
+        $(document).ready(function() {
+            function sendMessageOnLoad() {
+                var dealer_id = $('.sendMessage').attr('data-id');
+                var url = "{{ route('dealer.chat.inbox.view', ':id') }}";
+                url = url.replace(':id', dealer_id);
+
+                var response = ajaxCall(url, 'get', null, false);
+                response.then(handleStateData).catch(handleStateError);
+
+                function handleStateData(response) {
+                    if (response.success == true) {
+                        $('.chat-message-box').append(response.chatheader);
+                        console.log('Success: ', response.chatlist);
+
+                    } else {
+                        $('#errormessage').html(response.error);
+                    }
+                }
+
+                function handleStateError(error) {
+                    console.log('Error: ', error);
+                }
+            }
+
+            sendMessageOnLoad();
+        }); --}}
+    </script>
 @endpush

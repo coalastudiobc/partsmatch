@@ -84,7 +84,8 @@
                                                 @if (auth()->user()->id === $user->id)
                                                 @else
                                                     <a href="{{ route('dealer.chat.inbox.view', ['user_id' => jsencode_userdata($user->id)]) }}"
-                                                        class="btn primary-btn">Send Message</a>
+                                                        class="btn primary-btn sendMessage"
+                                                        data-id="{{ jsencode_userdata($user->id) }}">Send Message</a>
                                                 @endif
                                             </div>
                                         </div>

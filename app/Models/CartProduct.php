@@ -12,12 +12,16 @@ class CartProduct extends Model
     protected $fillable = [
         'product_id', 'cart_id', 'product_price', 'quantity'
     ];
+    protected $appends = ['product_of'];
 
     public function product()
     {
         return $this->belongsTo(Product::class, 'product_id');
     }
-
+    public function getProductOfAttribute()
+    {
+        return optional($this->product)->user_id;
+    }
     // public function product()
     // {
     //     return $this->hasOne(Product::class,  'id', 'product_id');
