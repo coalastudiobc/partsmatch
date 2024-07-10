@@ -32,6 +32,7 @@ class AdminController extends Controller
     public function show()
     {
         $user = auth()->user();
+
         return view('admin.view', compact('user'));
     }
 
