@@ -24,6 +24,7 @@ class User extends Authenticatable
         'email',
         'password',
         'status',
+        'dealership_name',
         'user_details_id',
         'working_for',
         'profile_picture_file',
@@ -81,6 +82,10 @@ class User extends Authenticatable
     public function shippingAddress()
     {
         return $this->hasOne(ShippingAddress::class, 'user_id');
+    }
+    public function userShippoAdressId()
+    {
+        return $this->hasMany(UserAddresses::class);
     }
 
     public function scopeManagers($query)

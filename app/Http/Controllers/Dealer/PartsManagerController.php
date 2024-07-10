@@ -2,19 +2,29 @@
 
 namespace App\Http\Controllers\Dealer;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\PartsManagerRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Permission;
+use App\Http\Requests\PartsManagerRequest;
 
 class PartsManagerController extends Controller
 {
     public function index()
     {
         $request = request();
+        $role = 'Advance';
         $users = User::where('working_for', auth()->user()->id)->Search()->orderBy('created_at', 'DESC')->Paginate(5);
-        return view('dealer.parts_manager.index', compact('users'));
+        if (auth()->user()->permissions) {
+            foreach (auth()->user()->permissions as $key => $roles) {
+                if ($roles->name == 'role-view' && $key == 0)
+                    $role = 'Basic';
+            }
+        }
+
+        return view('dealer.parts_manager.index', compact('users', 'role'));
     }
     public function store(PartsManagerRequest $request)
     {
@@ -32,11 +42,12 @@ class PartsManagerController extends Controller
             $user['profile_picture_url'] = $image['url'];
             $user['profile_picture_file'] = $image['name'];
         }
-
         $userdetails = User::create($user);
         $userdetails->assignRole('Manager');
-        if ($request->role == "Basic") {
+        if ($request->permission_type == "Basic") {
             $userdetails->givePermissionTo('role-view');
+        } else {
+            $userdetails->syncPermissions(['role-edit', 'role-view', 'role-create', 'role-delete']);
         }
         return redirect()->back()->with(['status' => 'success', 'message' => "created successfully"]);
     }
@@ -83,11 +94,19 @@ class PartsManagerController extends Controller
     }
     public function getPartManagerDetail(User $user)
     {
+        $role = 'Advance';
+        if ($user->permissions) {
+            foreach ($user->permissions as $key => $roles) {
+                if ($roles->name == 'role-view' && $key == 0)
+                    $role = 'Basic';
+            }
+        }
+
         $data = [
             'name' => $user->name,
             'email' => $user->email,
             'phone' => $user->phone_number,
-            'role' => $user->role,
+            'role' => $role,
             'profile_pic_url' => $user->profile_picture_url,
         ];
         return response()->json(['data' => $data]);

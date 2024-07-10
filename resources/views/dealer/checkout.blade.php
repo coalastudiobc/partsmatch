@@ -6,13 +6,14 @@
                 <div class="row g-3">
                     <div class="col-xl-7 col-lg-12 col-md-12">
                         <div class="checkout-main-card cstm-card">
+                            <x-alert-component />
                             <h2>Delivery Address</h2>
                             <div class="delivery-form">
-                                <form id="product-card-details" action="{{ route('dealer.checkout.store') }}" method="post"
+                                <form id="product-card-details" action="{{ route('dealer.address.to') }}" method="post"
                                     enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
-                                        <div class="col-md-12">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="">Country</label>
                                                 {{-- <div class="form-field">
@@ -49,6 +50,7 @@
                                                             @foreach ($countries as $country)
                                                                 <li><a class="dropdown-item custom_dropdown_item"
                                                                         data-value="{{ $country->id }}"
+                                                                        data-iso_code="{{ $country->iso_code }}"
                                                                         data-text="{{ $country->name }}"
                                                                         href="javascript:void(0)">{{ $country->name }}</a>
                                                                 </li>
@@ -57,7 +59,7 @@
                                                         </ul>
                                                     </div>
                                                 </div>
-                                                <input type="hidden" name="country" value="{{ $country->id ?? '' }}"
+                                                <input type="hidden" name="country" value="{{ $country->iso_code ?? '' }}"
                                                     class="@error('country') is-invalid @enderror">
                                                 @error('country')
                                                     <span class="invalid-feedback" role="alert">
@@ -66,7 +68,48 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <input type="hidden" name="stripeCustomer_id" value="{{ $stripeCustomer->id }}">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="">Phone Number</label>
+                                                <input type="number" name="phone_number"
+                                                    value="{{ old('number', $deliveryAddress->phone_number ?? '') }}"
+                                                    class="form-control @error('phonenumber') is-invalid @enderror">
+                                                @error('phonenumber')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="">Address Type</label>
+                                                <div class="add-type-main">
+                                                    <label for="s-option">
+                                                        <p>Home</p>
+                                                        <input type="radio" name="addressType" id="s-option"
+                                                            style="display: none" value="Home"
+                                                            {{ $deliveryAddress->address_type ? ($deliveryAddress->address_type == 'Home' ? 'checked' : '') : '' }}>
+                                                    </label>
+                                                    <label for="v-option">
+                                                        <p>Office</p>
+                                                        <input type="radio" name="addressType" id="v-option"
+                                                            value="Office" style="display: none"
+                                                            {{ $deliveryAddress->address_type ? ($deliveryAddress->address_type == 'Office' ? 'checked' : '') : '' }}>
+                                                    </label>
+                                                    {{-- <div style="display: inline-block;">
+                                                        <input type="radio" id="s-option" name="addressType" value="Office">
+                                                        <label for="s-option" style="margin-left: 5px;">Office</label>
+                                                        <div class="check" style="display: inline-block;">
+                                                            <div class="inside"></div>
+                                                        </div>
+                                                    </div> --}}
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        {{-- <input type="hidden" name="stripeCustomer_id" value="{{ $stripeCustomer->id }}"> --}}
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="">First Name</label>
@@ -74,7 +117,7 @@
                                                     <input type="text"
                                                         class="form-control @error('first_name') is-invalid @enderror"
                                                         name="first_name"
-                                                        value="{{ old('first_name', auth()->user()->shippingAddress->name ?? '') }}"
+                                                        value="{{ old('first_name', $deliveryAddress->first_name ?? '') }}"
                                                         placeholder="First Name">
                                                     @error('first_name')
                                                         <span class="invalid-feedback" role="alert">
@@ -92,7 +135,7 @@
                                                     <input type="text"
                                                         class="form-control @error('last_name') is-invalid @enderror"
                                                         name="last_name"
-                                                        value="{{ old('last_name', auth()->user()->shippingAddress->last_name ?? '') }}"
+                                                        value="{{ old('last_name', $deliveryAddress->last_name ?? '') }}"
                                                         placeholder="Last Name">
                                                     @error('last_name')
                                                         <span class="invalid-feedback" role="alert">
@@ -107,11 +150,10 @@
                                                 <label for="">Address 1</label>
                                                 <div class="form-field">
                                                     <input type="text"
-                                                        class="form-control @error('shiping_address1') is-invalid @enderror"
-                                                        name="shiping_address1"
-                                                        value="{{ auth()->user()->shippingAddress->address1 ?? '' }}"
+                                                        class="form-control @error('street1') is-invalid @enderror"
+                                                        name="street1" value="{{ $deliveryAddress->address1 ?? '' }}"
                                                         placeholder="Address">
-                                                    @error('shiping_address1')
+                                                    @error('street1')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
@@ -127,11 +169,10 @@
                                                 <label for="">Address 2</label>
                                                 <div class="form-field">
                                                     <input type="text"
-                                                        class="form-control @error('shiping_address2') is-invalid @enderror"
-                                                        name="shiping_address2"
-                                                        value="{{ auth()->user()->shippingAddress->address2 ?? '' }}"
+                                                        class="form-control @error('street2') is-invalid @enderror"
+                                                        name="street2" value="{{ $deliveryAddress->address2 ?? '' }}"
                                                         placeholder="Address">
-                                                    @error('shiping_address2')
+                                                    @error('street2')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
@@ -260,11 +301,11 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="">PIN code</label>
+                                                <label for="">Pin code</label>
                                                 <div class="form-field">
                                                     <input type="text" name="pin_code"
                                                         class="form-control @error('pin_code') is-invalid @enderror"
-                                                        value="{{ auth()->user()->shippingAddress->post_code ?? '' }}"
+                                                        value="{{ DelveryAddress()->pin_code ?? '' }}"
                                                         placeholder="PIN code">
                                                     @error('pin_code')
                                                         <span class="invalid-feedback" role="alert">
@@ -273,6 +314,9 @@
                                                     @enderror
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <button type="submit" class="btn primary-btn full-btn">Submit</button>
                                         </div>
                                         {{-- <div class="col-md-12">
                                             <div class="form-group">
@@ -286,135 +330,61 @@
                                             </div>
                                         </div> --}}
                                     </div>
-                                    {{-- </form> --}}
-                            </div>
-                            <div class="payment-page">
-                                <h3>Payment</h3>
-                                <p>All transactions are secure and encrypted.</p>
-                                {{-- <form action=""> --}}
-                                {{-- <div class="card-selector">
-                                        <div class="type-accounts-radio">
-                                            <label class="radio-button-container">Credit card
-                                                <input type="radio" name="radio">
-                                                <span class="checkmark"></span>
-                                            </label>
-                                        </div>
-                                    </div> --}}
-                                <div class="card-detail-box">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="">Card Number</label>
-                                                <div class="form-field" id="cardNumberElement">
-                                                    <input type="text" class="form-control" placeholder="Card-number">
-                                                    <label for="card-number" class="stripe-error-messages"></label>
-
-                                                </div>
-                                                <div class="is-invalid" id="cardNumberError"></div>
-                                                {{-- <div class="form-field">
-                                                    <input type="text" class="form-control" placeholder="Card-number">
-
-                                                </div> --}}
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="">Expiration date</label>
-                                                <div class="form-field" id="cardExpiryElement">
-                                                    <input type="text" class="form-control" placeholder="MM / YY">
-                                                    <label for="card-expiry" class="stripe-error-messages"></label>
-                                                </div>
-                                                <div class="is-invalid" id="cardExpiryError"></div>
-
-                                                {{-- <div class="form-field">
-                                                    <input type="text" class="form-control" placeholder="MM / YY">
-
-                                                </div> --}}
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="">Security Code</label>
-                                                <div class="form-field" id="cardCVCElement">
-
-                                                    <input type="password" class="form-control" placeholder="****">
-
-                                                </div>
-                                                <div class="is-invalid" id="cardCVVError"></div>
-                                                {{-- <div class="form-field">
-                                                    <input type="password" class="form-control" placeholder="****">
-
-                                                </div> --}}
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="">Name On Card</label>
-                                                <div class="form-field">
-                                                    <input type="text" name="name" id="card-holder-name"
-                                                        class="form-control" placeholder="John Doe">
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {{-- <div class="col-md-12">
-                                                <div class="form-checkbox">
-                                                    <input type="checkbox" class="custm-check" id="form-check">
-                                                    <label for="form-check">Use shipping address as billing address</label>
-                                                </div>
-                                            </div> --}}
-                                    </div>
-                                </div>
-
-                                <input type="hidden" name="total_amount"
-                                    value="{{ $total_amount + $shippingCharge->value }}">
-                                <button type="submit" class="btn secondary-btn full-btn">Pay Now
-                                    {{ $total_amount + $shippingCharge->value }}</button>
                                 </form>
                             </div>
+
                         </div>
                     </div>
                     <div class="col-xl-5 col-lg-12 col-md-12">
                         <div class="order-summary cstm-card">
-                            <h2>order summary</h2>
+                            <h2>Products</h2>
                             <ul class="order-summary-list">
-                                @foreach ($carts as $cart)
+                                @foreach ($allProductsOfCart as $products)
                                     <li>
                                         <div class="summary-list-box">
                                             <div class="summary-img-txt">
                                                 <div class="summary-img-box">
-                                                    <img src="{{ asset('assets/images/part-img.png') }}" alt="">
+                                                    <img src="{{ asset('storage/' . $products->product->productImage[0]->file_url) }}"
+                                                        alt="">
                                                     {{-- <div class="order-sum-number">
-                                                        <span>2</span>
-                                                    </div> --}}
+                                                    <span>2</span>
+                                                </div> --}}
+
                                                 </div>
                                                 <div class="summary-txt-box">
-                                                    <h3>{{ $cart->cart_product->product->name }}</h3>
-                                                    <p>(Automobile)</p>
+                                                    <h3>{{ $products->product->name ?? 'Product Name' }}</h3>
+                                                    <p>{{ $products->product->category->name ?? 'Product Category Name' }}
+                                                    </p>
                                                 </div>
                                             </div>
-                                            <p>{{ $cart->amount }}</p>
+                                            <p>${{ isset($products->product) ? number_format($products->product->price * $products->quantity, 2, '.', ',') : '' }}
+                                            </p>
                                         </div>
                                     </li>
                                 @endforeach
 
-                                {{-- <li>
+                            </ul>
+                        </div>
+                        <div class="order-summary cstm-card">
+                            <h2>Order Summary</h2>
+                            <ul class="order-summary-list">
+                                <li>
                                     <div class="summary-list-box">
                                         <div class="summary-img-txt">
                                             <div class="summary-img-box">
-                                                <img src="images/collect1.png" alt="">
-                                                <div class="order-sum-number">
-                                                    <span>1</span>
-                                                </div>
+                                                <img src="{{ asset('assets/images/part-img.png') }}" alt="">
+                                                {{-- <div class="order-sum-number">
+                                                        <span>2</span>
+                                                    </div> --}}
                                             </div>
                                             <div class="summary-txt-box">
-                                                <h3>Car Engine 700219 Whitewall</h3>
-                                                <p>(Automobile)</p>
+                                                <h3>Grand Total</h3>
                                             </div>
                                         </div>
-                                        <p>$700</p>
+                                        <p>$ {{ isset($products->product) ? number_format($carts[0]->amount, 2, '.', ',') : 'grand Total amount' }}
+                                        </p>
                                     </div>
-                                </li> --}}
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -430,7 +400,7 @@
     <script>
         jQuery(document).ready(function() {
             jQuery('.custom_dropdown_item').on('click', function() {
-                var selectitem = jQuery(this).attr('data-value')
+                var selectitem = jQuery(this).attr('data-iso_code')
                 var selecttext = jQuery(this).attr('data-text')
                 jQuery('#selectedItem').text(selecttext)
                 jQuery(document).find('input[name="country"]').val(selectitem);
@@ -440,8 +410,8 @@
 
         jQuery(document).ready(function() {
 
+
             jQuery('.custom_dropdown_item').on('click', function() {
-                console.log('hererer');
                 var countryId = jQuery(this).attr('data-value')
                 // var selecttext = jQuery(this).attr('data-text')
 
@@ -457,12 +427,14 @@
         function handleCountryData(response) {
             let options = '<li> <a href="javascript:void(0)"> Select < /a></li>';
             jQuery('#state').html(options);
+            jQuery('.state').empty();
             jQuery('#city').html('<option value="">Select City</option>');
             response.data.forEach(state => {
                 // options += '<option value="' + state.id + '">' + state.name + '</option>';
                 $('.state').append(`<li><a class="dropdown-item state_dropdown_item select_state"
                                                                             data-value="${state.id}"
                                                                             data-text="${state.name}"
+                                                                            data-name="${state.name}"
                                                                             href="javascript:void(0)">${state.name}</a>
                                                                     </li>`)
             });
@@ -476,11 +448,13 @@
         // jQuery(document).ready(function() {
         jQuery(document).on('click', '.select_state', function() {
             // alert('lund');
-            var selectitem = jQuery(this).attr('data-value')
+            var selectitem = jQuery(this).attr('data-name')
             var selecttext = jQuery(this).attr('data-text')
+            jQuery('.city').empty();
             console.log('selecttext', selectitem, selecttext)
             jQuery('#selectedState').text(selecttext)
             jQuery(document).find('input[name="state"]').val(selectitem);
+            jQuery('#state-error').text('');
 
         })
         // });
@@ -506,6 +480,7 @@
                     $('.city').append(`<li><a class="dropdown-item city_dropdown_item select_city"
                                                                         data-value="${city.id}"
                                                                         data-text="${city.name}"
+                                                                        data-name="${city.name}"
                                                                         href="javascript:void(0)">${city.name}</a>
                                                                 </li>`)
                 });
@@ -515,11 +490,13 @@
 
         jQuery(document).on('click', '.select_city', function() {
             // alert('lund');
-            var selectitem = jQuery(this).attr('data-value')
+            var selectitem = jQuery(this).attr('data-name')
             var selecttext = jQuery(this).attr('data-text')
             console.log('selecttext', selectitem, selecttext)
             jQuery('#selectedCity').text(selecttext)
             jQuery(document).find('input[name="city"]').val(selectitem);
+            jQuery('#city-error').text('');
+
 
         })
         // })

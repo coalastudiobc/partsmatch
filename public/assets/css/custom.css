@@ -1618,7 +1618,7 @@ body:has(.page-content-wrapper) .custm-nav .container{
 }
 .cstm-bredcrum .bredcrum-list.active::after{
     display: none;
-} 
+}
 a.bredcrum-list.active {
     opacity: 0.7;
 }

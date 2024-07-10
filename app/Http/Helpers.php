@@ -1,16 +1,146 @@
 <?php
 
-use App\Models\AdminSetting;
 use App\Models\Cart;
-use App\Models\CartProduct;
-use App\Models\Category;
+use App\Models\Chat;
+use App\Models\User;
 use App\Models\CmsPage;
+use App\Models\Category;
+use App\Models\CartProduct;
+use App\Models\AdminSetting;
+use Laravel\Cashier\Cashier;
+use App\Models\UserAddresses;
 use App\Models\ShippingSetting;
+use App\Models\ShippmentCreation;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
-use Laravel\Cashier\Cashier;
 
+
+if (!function_exists('delveryAddress')) {
+    function DelveryAddress()
+    {
+        try {
+            $address = UserAddresses::where('id', auth()->user()->id)->where('type', 'Deliver')->first();
+            if ($address) {
+                return  $address;
+            }
+            return null;
+        } catch (\Exception $e) {
+            abort('403', $e->getMessage());
+        }
+    }
+}
+
+if (!function_exists('getUserByParcelId')) {
+    function getUserByParcelId($parcelId)
+    {
+        try {
+            $product = ShippmentCreation::where('parcel_id', $parcelId)->first();
+            if ($product) {
+                return  $product->product_of;
+            }
+            return null;
+        } catch (\Exception $e) {
+            abort('403', $e->getMessage());
+        }
+    }
+}
+if (!function_exists('getProductDetaiByParcelId')) {
+    function getProductDetaiByParcelId($parcelId)
+    {
+        try {
+            $product_id = ShippmentCreation::where('parcel_id', $parcelId)->first();
+            if ($product_id) {
+                return  $product_id->product;
+            }
+            return null;
+        } catch (\Exception $e) {
+            abort('403', $e->getMessage());
+        }
+    }
+}
+
+
+if (!function_exists('Auth')) {
+    function Auth($id = null)
+    {
+        try {
+            $id = auth()->user()->id;
+            $userId = User::where('id', $id)->first();
+            if ($userId) {
+                return $userId;
+            }
+            return null;
+        } catch (\Exception $e) {
+            abort('403');
+        }
+    }
+}
+
+
+if (!function_exists('getChatId')) {
+    function getChatId()
+    {
+        try {
+            $id = auth()->user()->id;
+            $chatId = Chat::where('sender_id', $id)
+                ->orWhere('reciever_id', $id)
+                ->orderBy('last_msg_time', 'DESC')
+                ->get();
+            if ($chatId) {
+                return $chatId;
+            }
+            return null;
+        } catch (\Exception $e) {
+            abort('403');
+        }
+    }
+}
+if (!function_exists('check_chatId')) {
+    function check_chatId($reciever_id = null)
+    {
+        try {
+            $chatId = Chat::where(function ($q) use ($reciever_id) {
+                $q->where([
+                    ['sender_id', '=', auth()->user()->id],
+                    ['reciever_id', '=', $reciever_id]
+                ])->orwhere([
+                    ['reciever_id', '=', auth()->user()->id],
+                    ['sender_id', '=', $reciever_id]
+                ]);
+            })->first();
+            if ($chatId) {
+                return false;
+            }
+            return true;
+        } catch (\Exception $e) {
+            abort('403');
+        }
+    }
+}
+
+if (!function_exists('getChat')) {
+    function getChat($reciever_id = null)
+    {
+        try {
+            $chatId = Chat::where(function ($q) use ($reciever_id) {
+                $q->where([
+                    ['sender_id', '=', auth()->user()->id],
+                    ['reciever_id', '=', $reciever_id]
+                ])->orwhere([
+                    ['reciever_id', '=', auth()->user()->id],
+                    ['sender_id', '=', $reciever_id]
+                ]);
+            })->first();
+            if ($chatId) {
+                return $chatId->chat_id;
+            }
+            return true;
+        } catch (\Exception $e) {
+            abort('403');
+        }
+    }
+}
 if (!function_exists('encrypt_userdata')) {
     function encrypt_userdata(string $data)
     {

@@ -100,6 +100,23 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
+                                                <label for="">Dealership Name*</label>
+                                                <div class="form-field">
+                                                    <input type="text" name="dealershipName"
+                                                        value="{{ old('dealership_name') }}"
+                                                        class="form-control @error('dealershipName') is-invalid @enderror"
+                                                        placeholder="DealerShip Name">
+
+                                                    @error('dealershipName')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
                                                 <label for="">Phone*</label>
                                                 <div class="form-field">
                                                     <input type="number" name="phone_number"

@@ -1,4 +1,5 @@
 @extends('layouts.front')
+@section('title', 'Dealer Profile')
 @section('content')
     <section class="banner-content-sec">
         <div class="container">
@@ -38,52 +39,57 @@
                                             </div>
                                             {{-- @dd($user) --}}
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="">Name</label>
                                                 <div class="form-field">
                                                     <input type="text" value="{{ $user->name }}" class="form-control"
-                                                        placeholder="">
+                                                        placeholder="" readonly>
 
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                        {{-- <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="">Email</label>
                                                 <div class="form-field">
                                                     <input type="email" value="{{ $user->email }}" class="form-control"
-                                                        placeholder="">
+                                                        placeholder="" readonly>
 
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-3">
+                                        </div> --}}
+                                        {{-- <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="">Phone Number</label>
                                                 <div class="form-field">
                                                     <input type="tel" value="{{ $user->phone_number }}"
-                                                        class="form-control" placeholder="">
+                                                        class="form-control" placeholder="" readonly>
 
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-3">
+                                        </div> --}}
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="">Industry</label>
                                                 <div class="form-field">
                                                     <input type="text" value="{{ $user->industry_type }}"
-                                                        class="form-control" placeholder="">
+                                                        class="form-control" placeholder="" readonly>
 
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div class="col-md-12">
+                                        {{-- <div class="col-md-12">
                                             <div class="dealer-profile-form-btn">
-                                                <a href="#" class="btn primary-btn">Send Message</a>
+                                                @if (auth()->user()->id === $user->id)
+                                                @else
+                                                    <a href="{{ route('dealer.chat.inbox.view', ['user_id' => jsencode_userdata($user->id)]) }}"
+                                                        class="btn primary-btn sendMessage"
+                                                        data-id="{{ jsencode_userdata($user->id) }}">Send Message</a>
+                                                @endif
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </div>
 
                                 </form>

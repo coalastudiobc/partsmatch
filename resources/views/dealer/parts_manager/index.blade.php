@@ -1,5 +1,5 @@
 @extends('layouts.dealer')
-@section('title', 'partsmanager')
+@section('title', 'Parts Manager')
 @section('heading', 'parts manager')
 @section('content')
     <div class="dashboard-right-box parts-manager-table-box">
@@ -13,10 +13,12 @@
                     <a href="#" class="btn secondary-btn filter-open-btn">Filter</a>
                 </div>
             </form>
-            {{-- @can('role-view') --}}
-            <a href="#" class="btn primary-btn" data-bs-toggle="modal" data-bs-target="#add-manager-model">
-                + Add New Manager
-            </a>
+            {{-- @can('role-view', $user) --}}
+            @if ($role == 'Advance')
+                <a href="#" class="btn primary-btn" data-bs-toggle="modal" data-bs-target="#add-manager-model">
+                    + Add New Manager
+                </a>
+            @endif
             {{-- @endcan --}}
 
         </div>
@@ -41,7 +43,7 @@
                             <p>Action</p>
                         </th>
                     </tr>
-                    @foreach ($users as $key => $user)
+                    @forelse ($users as $key => $user)
                         <tr>
                             <td>
                                 <div class="parts-mang-img-box" data-bs-toggle="modal" data-bs-target="#pro-detail-model">
@@ -78,7 +80,11 @@
                             </td>
 
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="5" style="text-align: center">No result found</td>
+                        </tr>
+                    @endforelse
                 </table>
             </div>
         </div>
@@ -145,21 +151,30 @@
                                                                 <button type="button" class="btn-close"
                                                                     data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div> --}}
-                <div class="modal-body">
-                    <div class="add-pro-form">
-                        <h2 id="modal_title">Add New Manager</h2>
-                        <form id="parts_manager" action="{{ route('dealer.partsmanager.store') }}" method="post"
-                            enctype="multipart/form-data">
-                            @csrf
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="upload-img">
-                                        <div class="file-upload-box">
-                                            <label for="file-upload">
-                                                <div class="profile-without-img">
-                                                    <img src="{{ asset('assets/images/user.png') }}" id="Userimage"
-                                                        alt="">
-                                                </div>
+                @if ($role == 'Advance')
+                    <div class="modal-body">
+                        <div class="add-pro-form">
+                            <h2 id="modal_title">Add New Manager grg</h2>
+                            <form id="parts_manager" action="{{ route('dealer.partsmanager.store') }}" method="post"
+                                enctype="multipart/form-data">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="upload-img">
+                                            <div class="file-upload-box ">
+                                                <label for="file-upload">
+                                                    <div class="profile-main-img">
+                                                        <div class="profile-without-img">
+                                                            <img src="{{ asset('assets/images/user.png') }}" id="Userimage"
+                                                                alt="">
+                                                        </div>
+                                                        <div class="upload-icon">
+                                                            <img src="{{ asset('assets/images/upload.png') }}"
+                                                                alt="">
+                                                            {{-- <img src="{{ asset('assets/images/upload.png') }}" alt=""> --}}
+                                                        </div>
+                                                    </div>
+                                                </label>
                                                 <input type="file" name="image" id="file-upload"
                                                     class="@error('image') is-invalid @enderror">
                                                 @error('image')
@@ -167,139 +182,134 @@
                                                         <strong>{{ $message }}</strong>
                                                     </span>
                                                 @enderror
-                                                <div class="upload-icon">
-                                                    <img src="{{ asset('assets/images/upload.png') }}" alt="">
-                                                    {{-- <img src="{{ asset('assets/images/upload.png') }}" alt=""> --}}
-                                                </div>
-                                            </label>
-                                        </div>
-                                        <h3>Upload profile picture*</h3>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Full Name*</label>
-                                        <div class="form-field">
-                                            <input type="text" name="name"
-                                                class="form-control @error('name') is-invalid @enderror"
-                                                placeholder="Full Name">
-                                            @error('name')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
+                                            </div>
+                                            <h3>Upload profile picture*</h3>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Email*</label>
-                                        <div class="form-field">
-                                            <input type="email" name="email"
-                                                class="form-control @error('email') is-invalid @enderror"
-                                                placeholder="Email">
-                                            @error('email')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Phone
-                                            Number*</label>
-                                        <div class="form-field">
-                                            <input type="text" name="phone_number"
-                                                class="form-control @error('phone_number') is-invalid @enderror"
-                                                placeholder="Phone Number">
-                                            @error('phone_number')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Role</label>
-                                        <input type="hidden" name="permission_type" value="Basic" id=""
-                                            class="role_dropdown @error('order_commission_type') is-invalid @enderror">
-                                        <div class="custm-dropdown">
-                                            <div class="dropdown">
-                                                <div class="dropdown-toggle " type="button" id="dropdownMenuButton1"
-                                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <div id="selectedcommission">
-                                                        Basic
-                                                    </div>
-                                                    <span class="custm-drop-icon">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                            height="23" viewBox="0 0 24 23" fill="none">
-                                                            <path d="M19 9.00006L14 14.0001L9 9.00006" stroke="#151515"
-                                                                stroke-width="1.8" stroke-linecap="round"
-                                                                stroke-linejoin="round" />
-                                                        </svg>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Full Name*</label>
+                                            <div class="form-field">
+                                                <input type="text" name="name"
+                                                    class="form-control @error('name') is-invalid @enderror"
+                                                    placeholder="Full Name">
+                                                @error('name')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
                                                     </span>
-                                                </div>
-                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-
-                                                    <li><a class="dropdown-item custom_dropdown_commission"
-                                                            data-value="Basic" data-text="Basic"
-                                                            href="javascript:void(0)">Basic</a>
-                                                    </li>
-                                                    <li><a class="dropdown-item custom_dropdown_commission"
-                                                            data-value="Advanced" data-text="Advanced"
-                                                            href="javascript:void(0)">Advanced</a>
-                                                    </li>
-
-                                                </ul>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Password*</label>
-                                        <div class="form-field">
-                                            <input type="password" id="manager_confirm_password" name="password"
-                                                class="form-control @error('password') is-invalid @enderror"
-                                                placeholder="Password">
-                                            @error('password')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Email*</label>
+                                            <div class="form-field">
+                                                <input type="email" name="email"
+                                                    class="form-control @error('email') is-invalid @enderror"
+                                                    placeholder="Email">
+                                                @error('email')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Confirm
-                                            Password</label>
-                                        <div class="form-field">
-                                            <input type="password" name="confirm_password"
-                                                class="form-control @error('confirm_password') is-invalid @enderror"
-                                                placeholder="Confirm Password">
-                                            @error('confirm_password')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Phone
+                                                Number*</label>
+                                            <div class="form-field">
+                                                <input type="text" name="phone_number"
+                                                    class="form-control @error('phone_number') is-invalid @enderror"
+                                                    placeholder="Phone Number">
+                                                @error('phone_number')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Role</label>
+                                            <input type="hidden" name="permission_type" value="Basic" id=""
+                                                class="role_dropdown @error('order_commission_type') is-invalid @enderror">
+                                            <div class="custm-dropdown">
+                                                <div class="dropdown">
+                                                    <div class="dropdown-toggle " type="button" id="dropdownMenuButton1"
+                                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <div id="selectedcommission">
+                                                            Basic
+                                                        </div>
+                                                        <span class="custm-drop-icon">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="23" viewBox="0 0 24 23" fill="none">
+                                                                <path d="M19 9.00006L14 14.0001L9 9.00006" stroke="#151515"
+                                                                    stroke-width="1.8" stroke-linecap="round"
+                                                                    stroke-linejoin="round" />
+                                                            </svg>
+                                                        </span>
+                                                    </div>
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 
-                                <div class="col-md-12">
-                                    <button type="submit" id="submit" class="btn secondary-btn full-btn">Submit
-                                        Details</button>
-                                </div>
+                                                        <li><a class="dropdown-item custom_dropdown_commission"
+                                                                data-value="Basic" data-text="Basic"
+                                                                href="javascript:void(0)">Basic</a>
+                                                        </li>
+                                                        <li><a class="dropdown-item custom_dropdown_commission"
+                                                                data-value="Advanced" data-text="Advanced"
+                                                                href="javascript:void(0)">Advanced</a>
+                                                        </li>
 
-                            </div>
-                        </form>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Password*</label>
+                                            <div class="form-field">
+                                                <input type="password" id="manager_confirm_password" name="password"
+                                                    class="form-control @error('password') is-invalid @enderror"
+                                                    placeholder="Password">
+                                                @error('password')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Confirm
+                                                Password</label>
+                                            <div class="form-field">
+                                                <input type="password" name="confirm_password"
+                                                    class="form-control @error('confirm_password') is-invalid @enderror"
+                                                    placeholder="Confirm Password">
+                                                @error('confirm_password')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <button type="submit" id="submit" class="btn secondary-btn full-btn">Submit
+                                            Details</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                </div>
+                @endif
             </div>
         </div>
     </div>
@@ -392,6 +402,16 @@
     </script>
     <script>
         $(document).ready(function() {
+            jQuery('.filter-open-btn').on('click', function(e) {
+                console.log('heo');
+                jQuery('.dashboard-left-box').addClass('open');
+            });
+            jQuery('.cross-filter').on('click', function(e) {
+                console.log('heo');
+                jQuery('.dashboard-left-box').removeClass('open');
+            });
+
+
             $("#file-upload").change(function() {
                 if (this.files && this.files[0]) {
                     var reader = new FileReader();

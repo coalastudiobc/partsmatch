@@ -244,6 +244,14 @@ return [
             'regex' => 'Only alphabets and in between space are allowed in Name',
 
         ],
+        'dealershipName' => [
+            'required' => 'Please enter the dealership Name',
+            'min' => 'dealership Name can be :min - :max characters',
+            'max' => 'dealership Name can be :min - :max characters',
+            'string' => 'Only alphabets and in between space are allowed in dealership Name ',
+            'regex' => 'Only alphabets and in between space are allowed in dealership Name',
+
+        ],
         'email' => [
             'required' => 'Please enter your email',
             'email' => 'This is not a valid email address',
@@ -322,7 +330,7 @@ return [
             'maxlength' => 'zipcode should be 6 digits.',
         ],
         'pin_code' => [
-            'required' => 'Please enter the zip code.',
+            'required' => 'Please enter the pin code.',
             'minlength' => 'pincode should be 6 digits.',
             'maxlength' => 'pincode should be 6 digits.',
         ],
@@ -512,5 +520,19 @@ return [
             'mimes' => 'Supported only JPEG, JPG, PNG image type'
         ],
 
-    ]
+    ],
+    'addresses' => [
+        'address1' => [
+            'required' => "Street address is required.",
+            'min' => "Street address must be at least 10 characters long.",
+            'max' => "Street address must be 35 characters or fewer."
+
+        ],
+        'address2' => [
+            'max' => "Address must be 35 characters or fewer."
+        ],
+        'description' => [
+            'max' => "Description must be 100 characters or fewer."
+        ],
+    ],
 ];

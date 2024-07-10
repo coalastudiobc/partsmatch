@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             CommissionSeeder::class,
             PermissionsSeeder::class,
             AdminSettingSeeder::class,
+            CarMakeSeeder::class,
         ]);
     }
 }

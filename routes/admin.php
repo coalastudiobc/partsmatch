@@ -94,6 +94,12 @@ Route::middleware(['auth', 'verified', 'admin'])->namespace('App\Http\Controller
     Route::name('products.')->group(function () {
         Route::get('list', 'ProductsController@index')->name('list');
     });
+    Route::name('brands.')->group(function () {
+        Route::get('/brand/list', 'BrandController@index')->name('listing');
+        Route::get('/add', 'BrandController@add')->name('add');
+        Route::post('/store/{id?}', 'BrandController@store')->name('store');
+        Route::get('/brands/edit/{id?}', 'BrandController@edit')->name('edit.make');
+    });
 
     Route::name('profile.')->group(function () {
         Route::get('/profile', 'ProfileController@profile')->name('view');

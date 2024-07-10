@@ -19,8 +19,8 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->text('additional_details')->nullable();
             $table->string('stocks_avaliable')->nullable();
-            $table->integer('price')->nullable();
-            $table->integer('shipping_price')->nullable();
+            $table->decimal('price', 10, 2)->nullable();
+            $table->string('part_number')->nullable();
             $table->text('other_specification')->nullable();
             $table->text('Specifications_and_dimensions')->nullable();
             $table->text('Shipping_info')->nullable();

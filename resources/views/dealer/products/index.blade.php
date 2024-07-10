@@ -1,9 +1,8 @@
 @extends('layouts.dealer')
-@section('title', 'products')
+@section('title', 'Products')
 @section('heading', 'Product Management')
 
 @section('content')
-
     <div class="dashboard-right-box">
         <x-alert-component />
         <div class="cstm-bredcrum">
@@ -45,26 +44,24 @@
                         <th>
                             <p>Status</p>
                         </th>
-                        <th>
+                        {{-- <th>
                             <p>Featured Status</p>
-                        </th>
+                        </th> --}}
                         <th>
                             <p>Action</p>
                         </th>
                     </tr>
                     {{-- @dd($products[3]->featuredProduct[]->id); --}}
-                    @foreach ($products as $key => $product)
+                    @forelse ($products as $key => $product)
                         <tr>
                             @foreach ($product->productImage as $a => $image)
                                 <td>
-                                    <div class="pro-img-box" data-bs-toggle="modal"
-                                        data-bs-target="#pro-detail-model{{ $key }}">
+                                    <div class="pro-img-box" data-bs-toggle="modal" data-bs-target="#pro-detail-model">
                                         <img src="{{ Storage::url($image->file_url) }}" alt="img">
                                     </div>
                                 </td>
                             @break
                         @endforeach
-
                         <td>
                             <p>{{ $product->name }}</p>
                         </td>
@@ -81,16 +78,16 @@
                             </div>
                         </td>
 
-                        <td>
+                        {{-- <td>
                             <div class="toggle-btn">
                                 <input type="checkbox" id="switch1{{ $key }}"
-                                    data-id="{{ isset($product->featuredProduct) ? $product->featuredProduct->id : '0' }} "
+                                    data-id=" @if (isset($product->featuredProduct->id)) {{ $product->featuredProduct->id }} @else 0 @endif"
                                     product-id="{{ $product->id }}" class="custom-switch-input feature-switch"
                                     @if (isset($product->featuredProduct) && $product->featuredProduct != null) checked="checked" @endif
                                     @if (!plan_validity()) disabled @endif><label
                                     for="switch1{{ $key }}">Toggle</label>
                             </div>
-                        </td>
+                        </td> --}}
                         <td>
                             <div class="action-btns">
                                 <a href="{{ route('dealer.products.edit', $product->id) }}"><i
@@ -131,7 +128,13 @@
                             </td>
 
                         </tr> --}}
-                @endforeach
+
+                    @empty
+                    <tr>
+                        <td colspan="6" style="text-align: center">No result found</td>
+                    </tr>
+                @endforelse
+                </tr>
 
             </table>
         </div>
@@ -145,10 +148,10 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <!-- <div class="modal-header">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             </div> -->
-            <div class="modal-body modal-custm-body">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 </div> -->
+            <div class="modal-body">
                 <div class="add-pro-form">
                     <h2>Add New Products</h2>
                     <form id="product" action="{{ route('dealer.products.store') }}" method="post"
@@ -157,7 +160,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">Product Name*</label>
+                                    <label for="">Product Name</label>
                                     <div class="form-field">
                                         <input type="text" name="name" class="form-control"
                                             placeholder="Product Name">
@@ -167,7 +170,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">Product Category*</label>
+                                    <label for="">Product Category</label>
                                     <div class="form-field">
                                         <select type="text" name="category" class="form-control category"
                                             placeholder="Product Category">
@@ -181,18 +184,33 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">Product SubCategory*</label>
+                                    <label for="">Product SubCategory</label>
                                     <div class="form-field subcategory">
                                         <select type="text" name="subcategory" class="form-control"
                                             placeholder="Product SubCategory" id="subcategory">
-                                            <option value="">Select the SubCategory</option>
+                                            <option value="">Select the category</option>
                                         </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Part Number</label>
+                                    <div class="form-field subcategory">
+                                        <input type="text" class="form-control" id="part_number" name="part_number"
+                                            value="{{ old('part_number', $product->part_number ?? ' ') }}"
+                                            placeholder="Part Number">
+                                        @error('part_number')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="">Product Description*</label>
+                                    <label for="">Product Description</label>
                                     <div class="form-field">
                                         <textarea name="description" class="form-control" id="" cols="30" rows="2"></textarea>
 
@@ -210,7 +228,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="">Add Product Images* (Up to 5)</label>
+                                    <label for="">Add Product Images (Up to 5)</label>
                                     <label class="img-upload-box">
                                         <p>Upload Images</p>
                                         <input type="file" name="images[]" id="upload-image" multiple
@@ -224,7 +242,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">Product Quantity*</label>
+                                    <label for="">Product Quantity</label>
                                     <div class="form-field">
                                         <input type="text" name="stocks_avaliable" class="form-control"
                                             placeholder="Product Quantity">
@@ -234,16 +252,16 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">Product Price*</label>
+                                    <label for="">Product Price</label>
                                     <div class="form-field">
                                         <input type="text" name="price" class="form-control"
-                                            placeholder="Product Price">
+                                            placeholder="$000">
 
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-md-12">
+                            {{-- <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="">Other specifications</label>
                                     <div class="form-field">
@@ -278,23 +296,111 @@
 
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="col-md-12">
+                            </div> --}}
+                            <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="">Shipping Price*</label>
+                                    <label for="length">Length:</label>
                                     <div class="form-field">
-                                        <input type="text" name="shipping_price" class="form-control"
-                                            placeholder="Shipping Price">
+                                        <input type="number" class="form-control" id="length" name="length"
+                                            required value="{{ old('length', $product->length ?? ' ') }}">
+                                        @error('length')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
 
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="width">Width:</label>
+                                    <div class="form-field">
+                                        <input type="number" class="form-control" id="width" name="width"
+                                            required value="{{ old('width', $product->width ?? '') }}">
+                                        @error('width')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="height">Height:</label>
+
+                                    <div class="form-field">
+                                        <input type="number" class="form-control" id="height" name="height"
+                                            required value="{{ old('height', $product->height ?? ' ') }}">
+                                        @error('height')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="weight">Weight:</label>
+                                    <div class="form-field">
+                                        <input type="number" class="form-control" id="weight" name="weight"
+                                            required value="{{ old('weight', $product->weight ?? ' ') }}">
+                                        @error('weight')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="distance_unit">Distance Unit:</label>
+                                    <div class="form-field">
+                                        <select id="distance_unit" class="form-control" name="distance_unit"
+                                            required>
+                                            <option value="cm">cm</option>
+                                            <option value="m">m</option>
+                                            <option value="in">in</option>
+                                            <option value="ft">ft</option>
+                                        </select>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="mass_unit">Mass Unit:</label>
+                                    <div class="form-field">
+                                        <select id="mass_unit" class="form-control" name="mass_unit" required>
+                                            <option value="lb">lb</option>
+                                            <option value="kg">kg</option>
+                                            <option value="oz">oz</option>
+                                            <option value="g">g</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            {{-- <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="">Shipping Price*</label>
+                                    <div class="form-field">
+                                        <input type="text" name="shipping_price" class="form-control"
+                                            placeholder="$000">
+
+                                    </div>
+                                </div>
+                            </div> --}}
                         </div>
                         <div class="custm-field-for-ymmm">
                             <div class="field-for-ymmm-box">
                                 <div class="form-group">
-                                    <label for="">Year*</label>
+                                    <label for="">Year</label>
                                     <div class="form-field">
                                         {{-- <select class="form-control api_call" name="car_years"
                                                                 id="car-years"></select> --}}
@@ -316,7 +422,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Make*</label>
+                                    <label for="">Brand</label>
                                     <div class="form-field">
                                         {{-- <select class="form-control api_call" name="car_model"
                                                                 id="car-makes"></select> --}}
@@ -355,7 +461,7 @@
                         </div>
                 </div>
                 <input type="hidden" name="compatable_with" class="form-control" id="compatableProducts"
-                                            placeholder="Product Name">
+                    placeholder="Product Name">
                 <div id="test1234" class="ymmm-box-preview d-none">
                     {{-- <div class="ymmm-data-outer">
                         <div class="ymmm-box-data">
@@ -426,73 +532,84 @@
         </div>
     </div>
 </div>
-{{-- @foreach ($products as $key => $product)
-    <div class="modal fade" id="pro-detail-model{{ $key }}" tabindex="-1" aria-labelledby="bulk-upload"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
 
-                <div class="modal-body">
-                    <div class="pro-detail-body">
-                        @foreach ($product->productImage as $a => $image)
-                            <img class="model-pro-img" src="{{ Storage::url($image->file_url) }}" alt="">
-                        @endforeach
-                        <div class="product-infography">
 
-                            <h2>{{ $product->name }}</h2>
-                            <span>{{ $product->subcategory_id }}</span>
-                            <p>{{ $product->description }} </p>
-                            <div class="product-quantity-box">
-                                <p>Quantity</p>
-
-                                <div class="left-input">
-                                    <input type="text" placeholder="{{ $product->stocks_avaliable }}">
-                                </div>
-                            </div>
-                            <div class="singlr-pro-detail model-more-info-box">
-                                <div class="product-name-detail">
-                                    <h3>{{ $product->name }}</h3>
-                                    <h3>{{ $product->price }}</h3>
-                                </div>
-                                <div class="more-info-box ">
-                                    <div class="accordion" id="accordionExample">
-
-                                        <div class="accordion-item">
-                                            <h2 class="accordion-header">
-                                                <button class="accordion-button collapsed" type="button"
-                                                    data-bs-toggle="collapse" data-bs-target="#additional-information"
-                                                    aria-expanded="false" aria-controls="collapseTwo">
-                                                    Additional Information
-                                                </button>
-                                            </h2>
-                                            <div id="additional-information" class="accordion-collapse collapse"
-                                                data-bs-parent="#accordionExample">
-                                                <div class="accordion-body">
-                                                    <p>{{ $product->additional_details }}</p>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-
+<div class="modal fade" id="pro-detail-model" tabindex="-1" aria-labelledby="bulk-upload" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <!-- <div class="modal-header">
+                                                                                                                                                                                                                                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                                                                                                                                                                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                                                                                                                                                                                                        </div> -->
+            <div class="modal-body">
+                <div class="pro-detail-body">
+                    <img class="model-pro-img" src="images/collect1.png" alt="">
+                    <div class="product-infography">
+                        <h2>R1 Concepts® – eLINE Series Plain Brake Rotors</h2>
+                        <span>( Product Category )</span>
+                        <p>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out
+                            print, graphic or web designs. </p>
+                        <div class="product-quantity-box">
+                            <p>Quantity</p>
+                            <div class="left-input">
+                                <input type="text" placeholder="3">
                             </div>
                         </div>
-                    </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
+                        <div class="singlr-pro-detail model-more-info-box">
+                            <div class="product-name-detail">
+                                <h3>Product Name</h3>
+                                <h3>$700</h3>
+                            </div>
+                            <div class="more-info-box ">
+                                <div class="accordion" id="accordionExample">
 
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#additional-information"
+                                                aria-expanded="false" aria-controls="collapseTwo">
+                                                Additional Information
+                                            </button>
+                                        </h2>
+                                        <div id="additional-information" class="accordion-collapse collapse"
+                                            data-bs-parent="#accordionExample">
+                                            <div class="accordion-body">
+                                                <p>Lorem ipsum, or lipsum as it is sometimes known, is dummy
+                                                    text used in laying out print, graphic or web designs.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <!-- <div class="modal-footer">
+                                                                                                                                                                                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                                                                                                                                                                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                                                                                                                                                                                                                        </div> -->
         </div>
     </div>
-@endforeach --}}
+</div>
+
 
 @endsection
 
 @push('scripts')
 @includeFirst(['validation.dealer.js_product'])
 <script type="text/javascript">
+    // $(document).ready({
+    //     function() {
+    //         var carquery = new CarQuery();
+    //         carquery.init();
+    //         carquery.initYearMakeModelTrim('car-years', 'car-makes', 'car-models', 'car-model-trims');
+    //     }
+    // });
     jQuery(document).on('change', ".category", function() {
         var id = $(this).val();
         if ($(this).val()) {
@@ -519,7 +636,6 @@
                     if (result.status == true) {
                         $(".feature-switch").addClass('checked', false);
                         location.reload();
-                        return toastr.error(result.message);
 
                     }
 
@@ -530,15 +646,11 @@
             var id = $(this).attr('product-id');
             $.ajax({
                 url: APP_URL + "/dealer/featured/products/create/" + id,
-                methode: 'POST',
                 success: function(result) {
                     if (result.status == true) {
                         location.reload();
-                        return toastr.success(result.message);
                     } else {
-
                         $(".feature-switch").addClass('checked', false);
-                        return toastr.error(result.message);
                     }
                 }
 
@@ -607,11 +719,11 @@
                 models.push(test);
             }
             jQuery('#compatableProducts').val(models);
-            var htmlText ="";
-            for(var i = 0;i<models.length;i++){
+            var htmlText = "";
+            for (var i = 0; i < models.length; i++) {
                 htmlText += `<div class="ymmm-data-outer">
                         <div class="ymmm-box-data">
-                            <p>`+models[i]+`</p>
+                            <p>` + models[i] + `</p>
                         </div>
                         <span class="ymmm-cross">×</span>
                     </div>`;
@@ -645,6 +757,10 @@
     // });
 
     $(function() {
+        // var carquery = new CarQuery();
+        // carquery.init();
+        // carquery.initYearMakeModelTrim('car-years', 'car-makes', 'car-models', 'car-model-trims');
+
         // Multiple images preview with JavaScript
         var previewImages = function(input, imgPreviewPlaceholder) {
             if (input.files) {
@@ -677,6 +793,7 @@
 
             $(this).parent('div').parent('div').remove();
         });
+
     });
 </script>
 @endpush

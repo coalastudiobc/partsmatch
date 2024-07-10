@@ -54,7 +54,7 @@
                                                 {{ $product->quantity ? ($product->product ? $product->quantity * $product->product->price : ' ') : ' ' }}
                                             </td>
                                             <td> <a data-product_id="{{ $product->id }}" href="javascript:void(0)"
-                                                    class="cartDelete"><i style="color: #E13F3F;"
+                                                    class="cartDelete delete"><i style="color: #E13F3F;"
                                                         class="fa-regular fa-trash-can"></i></a></td>
                                         </tr>
                                     @empty

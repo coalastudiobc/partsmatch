@@ -73,6 +73,21 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        <label for="">Part Number</label>
+                                        <div class="form-field subcategory">
+                                            <input type="text" class="form-control" id="part_number" name="part_number"
+                                                value="{{ old('part_number', $product->part_number ?? ' ') }}"
+                                                placeholder="Part Number">
+                                            @error('part_number')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
                                         <label for="">Product Description</label>
                                         <div class="form-field">
                                             <textarea name="description" class="form-control summernote @error('description') is-invalid @enderror">{{ $product->description ? $product->description : '' }}  </textarea>
@@ -97,7 +112,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                {{-- <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="">Other specifications</label>
                                         <div class="form-field">
@@ -152,15 +167,13 @@
                                             @enderror
                                         </div>
                                     </div>
-                                </div>
-                                {{-- @dd($product) --}}
+                                </div> --}}
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="">Add Product Images (Up to 5)</label>
                                         <label class="img-upload-box">
                                             <p>Upload Images</p>
-                                            <input type="file" name="images[]" id="upload-image" multiple
-                                                mixlength="5">
+                                            <input type="file" name="images[]" id="upload-image" multiple mixlength="5">
                                             <input type="hidden" name="total-img-preview" id="total-img-preview"
                                                 value={{ count($product->productImage) }}>
                                             <input type="hidden" name="image_id[]" value="imageid[]" id="get_image_id">
@@ -213,8 +226,96 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="length">Length:</label>
+                                        <div class="form-field">
+                                            <input type="number" class="form-control" id="length" name="length"
+                                                required value="{{ old('length', $product->parcelDetail->length) }}">
+                                            @error('length')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="width">Width:</label>
+                                        <div class="form-field">
+                                            <input type="number" class="form-control" id="width" name="width"
+                                                required value="{{ old('width', $product->parcelDetail->width) }}">
+                                            @error('width')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="height">Height:</label>
+                                        <div class="form-field">
+                                            <input type="number" class="form-control" id="height" name="height"
+                                                required value="{{ old('height', $product->parcelDetail->height) }}">
+                                            @error('height')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="weight">Weight:</label>
+                                        <div class="form-field">
+                                            <input type="number" class="form-control" id="weight" name="weight"
+                                                required value="{{ old('weight', $product->parcelDetail->weight) }}">
+                                            @error('weight')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="distance_unit">Distance Unit:</label>
+                                        <div class="form-field">
+                                            <select id="distance_unit" class="form-control" name="distance_unit"
+                                                required>
+                                                <option value="cm">cm</option>
+                                                <option value="m">m</option>
+                                                <option value="in">in</option>
+                                                <option value="ft">ft</option>
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="mass_unit">Mass Unit:</label>
+                                        <div class="form-field">
+                                            <select id="mass_unit" class="form-control" name="mass_unit" required>
+                                                <option value="lb">lb</option>
+                                                <option value="kg">kg</option>
+                                                <option value="oz">oz</option>
+                                                <option value="g">g</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {{-- <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="">Shipping Price</label>
                                         <div class="form-field">
@@ -228,78 +329,81 @@
                                             @enderror
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Year*</label>
-                                        <div class="form-field">
-                                            {{-- <select class="form-control api_call" name="car_years"
-                                                        id="car-years"></select> --}}
-                                            <select class="form-control" name="car_years" id="carYear">
-                                                <option>Select year</option>
-                                                @foreach ($years as $year)
-                                                    <option value="{{ $year }}"
-                                                        @if ($product->year == $year) Selected @endif>
-                                                        {{ $year }}
-                                                    </option>
-                                                @endforeach
+                                </div> --}}
+                                <div class="custm-field-for-ymmm">
+                                    <div class="field-for-ymmm-box">
+                                        <div class="form-group">
+                                            <label for="">Year</label>
+                                            <div class="form-field">
+                                                {{-- <select class="form-control api_call" name="car_years"
+                                                                        id="car-years"></select> --}}
+                                                <select class="form-control" name="car_years" id="carYear">
+                                                    <option id="selectYearDefault">Select year</option>
+                                                    @foreach ($years as $year)
+                                                        <option value="{{ $year }}">{{ $year }}</option>
+                                                    @endforeach
 
-                                            </select>
-                                            <span class="form-icon">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8"
-                                                    viewBox="0 0 14 8" fill="none">
-                                                    <path d="M13 1L7 7L1 1" stroke="#272643" stroke-width="2"
-                                                        stroke-miterlimit="10" stroke-linecap="round"
-                                                        stroke-linejoin="round"></path>
-                                                </svg>
-                                            </span>
+                                                </select>
+                                                <span class="form-icon">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8"
+                                                        viewBox="0 0 14 8" fill="none">
+                                                        <path d="M13 1L7 7L1 1" stroke="#272643" stroke-width="2"
+                                                            stroke-miterlimit="10" stroke-linecap="round"
+                                                            stroke-linejoin="round"></path>
+                                                    </svg>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="">Brand</label>
+                                            <div class="form-field">
+                                                {{-- <select class="form-control api_call" name="car_model"
+                                                                        id="car-makes"></select> --}}
+                                                <select class="form-control" name="car_model" id="carModel">
+                                                    <option>please select year first</option>
+                                                </select>
+                                                <span class="form-icon">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8"
+                                                        viewBox="0 0 14 8" fill="none">
+                                                        <path d="M13 1L7 7L1 1" stroke="#272643" stroke-width="2"
+                                                            stroke-miterlimit="10" stroke-linecap="round"
+                                                            stroke-linejoin="round"></path>
+                                                    </svg>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="">Model*</label>
+                                            <div class="form-field modelselect">
+                                                <div id="output"></div>
+                                                <select class="form-control car-model" id="carMake">
+                                                    <option>Select your make</option>
+                                                </select>
+                                                <span class="form-icon">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8"
+                                                        viewBox="0 0 14 8" fill="none">
+                                                        <path d="M13 1L7 7L1 1" stroke="#272643" stroke-width="2"
+                                                            stroke-miterlimit="10" stroke-linecap="round"
+                                                            stroke-linejoin="round"></path>
+                                                    </svg>
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
+                                    {{-- <i id="addValue" style="font-size: 20px; margin-top:50px;" class="fa-solid fa-circle-plus fa-fw"></i> --}}
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Model*</label>
-                                        <div class="form-field">
-                                            {{-- <select class="form-control api_call" name="car_model"
-                                                        id="car-makes"></select> --}}
-                                            <select class="form-control" name="car_model" id="carModel">
-                                                <option>{{ $product->model }}</option>
-
-                                            </select>
-                                            <span class="form-icon">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8"
-                                                    viewBox="0 0 14 8" fill="none">
-                                                    <path d="M13 1L7 7L1 1" stroke="#272643" stroke-width="2"
-                                                        stroke-miterlimit="10" stroke-linecap="round"
-                                                        stroke-linejoin="round"></path>
-                                                </svg>
-                                            </span>
-                                        </div>
-                                    </div>
+                            </div>
+                            <input type="hidden" name="compatable_with" class="form-control" id="compatableProducts"
+                                placeholder="Product Name">
+                            <div id="test1234" class="ymmm-box-preview d-none">
+                                {{-- <div class="ymmm-data-outer">
+                                <div class="ymmm-box-data">
+                                    <p>2023(Bentley)743</p>
                                 </div>
-
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Make*</label>
-                                        <div class="form-field">
-                                            {{-- <select class="form-control api_call" name="car_make"
-                                                        id="car-models"></select> --}}
-                                            <select class="form-control" name="car_make" id="carMake">
-                                                <option>{{ $product->brand }}</option>
-
-                                            </select>
-                                            <span class="form-icon">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8"
-                                                    viewBox="0 0 14 8" fill="none">
-                                                    <path d="M13 1L7 7L1 1" stroke="#272643" stroke-width="2"
-                                                        stroke-miterlimit="10" stroke-linecap="round"
-                                                        stroke-linejoin="round"></path>
-                                                </svg>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                {{-- <div class="col-md-6">
+                                <span class="ymmm-cross">×</span>
+                            </div> --}}
+                            </div>
+                            {{-- <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="">Image</label>
                                                 <div class="form-field">
@@ -314,6 +418,7 @@
                                             </div>
                                         </div> --}}
 
+                            <div class="row">
                                 <div class="col-md-6">
                                     <a href="{{ route('dealer.products.index') }}"
                                         class="btn secondary-btn full-btn mr-1">Back</a>
@@ -323,12 +428,13 @@
                                         type="submit">Submit</button>
                                 </div>
                             </div>
-                        </form>
-
                     </div>
+                    </form>
+
                 </div>
             </div>
         </div>
+    </div>
     </div>
     {{-- </section> --}}
     {{-- </div> --}}
@@ -357,6 +463,12 @@
     <script>
         $(function() {
             jQuery(document).ready(function() {
+                var models = [];
+                var selectedYear = "";
+                var selectedMake = "";
+                var selectedModel = "";
+                var selectedValue = "";
+                var htmlText = "";
                 jQuery(document).on('change', '#carYear', function() {
 
                     var year = jQuery(this).val();
@@ -368,6 +480,7 @@
                         if (response.success == true) {
                             console.log(response.model)
                             jQuery('#carModel').html(response.models)
+                            selectedYear = year;
                         } else {
                             jQuery('#errormessage').html(response.error);
                         }
@@ -390,6 +503,7 @@
                         if (response.success == true) {
                             console.log(response.model)
                             jQuery('#carMake').html(response.makes)
+                            selectedMake = model;
                         } else {
                             jQuery('#errormessage').html(response.error);
                         }
@@ -400,6 +514,60 @@
 
                     }
                 });
+
+                jQuery(document).on('change', '#carMake', function() {
+                    var model1 = jQuery(this).find('option:selected').attr('data-name');
+                    selectedModel = model1;
+                    var test = selectedYear + "(" + selectedMake + ")" + selectedModel;
+                    if (!models.includes(test)) {
+                        models.push(test);
+                    }
+                    console.log(models);
+                    jQuery('#compatableProducts').val(models);
+                    // var htmlText = "";
+                    for (var i = models.length - 1; i < models.length; i++) {
+                        htmlText += `<div class="ymmm-data-outer">
+            <div class="ymmm-box-data">
+                <p>` + models[i] + `</p>
+            </div>
+            <span class="ymmm-cross">×</span>
+        </div>`;
+                    }
+                    console.log(htmlText);
+                    jQuery('#test1234').html(htmlText)
+                    jQuery('#test1234').removeClass('d-none');
+                });
+                var oppositeStringArray = @json($oppositeString);
+                var oppositeStringArray = JSON.parse(oppositeStringArray);
+                for (var i = 0; i < oppositeStringArray.length; i++) {
+                    htmlText += `<div class="ymmm-data-outer">
+            <div class="ymmm-box-data">
+                <p>` + oppositeStringArray[i] + `</p>
+            </div>
+            <span class="ymmm-cross">×</span>
+        </div>`;
+                    models.push(oppositeStringArray[i]);
+                }
+                jQuery('#compatableProducts').val(models);
+
+                jQuery('#test1234').html(htmlText)
+                jQuery('#test1234').removeClass('d-none');
+
+                jQuery(document).on('click', '.ymmm-cross', function() {
+                    var data = jQuery(this).siblings('.ymmm-box-data').find('p').text();
+                    console.log('dat', data);
+                    var index = models.indexOf(data);
+                    console.log('index', index);
+
+                    if (index > -1) {
+                        models.splice(index, 1);
+                        console.log('models', models);
+                        jQuery('#compatableProducts').val(models);
+                    }
+                    jQuery(this).closest('.ymmm-data-outer').remove();
+                });
+                console.log('models outside', models);
+
             });
 
             // Multiple images preview with JavaScript

@@ -60,6 +60,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'dealershipName' => ['required', 'string', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'phone_number' => ['required', 'unique:users', 'max:10', 'min:10'],
             'address' => ['required'],
@@ -81,6 +82,7 @@ class RegisterController extends Controller
             $user = [
                 'name' => $data['name'],
                 'email' => $data['email'],
+                'dealership_name' => $data['dealershipName'],
                 'status' => 'INACTIVE',
                 'password' => Hash::make($data['password']),
                 'phone_number' => $data['phone_number'],

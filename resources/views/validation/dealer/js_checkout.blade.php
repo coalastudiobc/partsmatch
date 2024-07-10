@@ -13,6 +13,12 @@
                 maxlength: nameMaxLength,
                 regex: nameRegex
             },
+            phone_number: {
+                required: true,
+                digits: true,
+                minlength: 10,
+                maxlength: 10
+            },
             country: {
                 required: true
             },
@@ -31,7 +37,7 @@
             pin_code: {
                 required: true,
                 digits: true,
-                minlength: 6,
+                minlength: 2,
                 maxlength: 6,
             },
 
@@ -45,7 +51,12 @@
                 maxlength: `{{ __('customvalidation.user.name.max', ['min' => '${nameMinLength}', 'max' => '${nameMaxLength}']) }}`,
                 regex: `{{ __('customvalidation.user.name.regex', ['regex' => '${nameRegex}']) }}`,
             },
-
+            phone_number: {
+                required: `{{ __('customvalidation.user.phone_number.required') }}`,
+                digits: "only number allowed",
+                minlength: `{{ __('customvalidation.user.phone_number.minlength') }}`,
+                maxlength: `{{ __('customvalidation.user.phone_number.maxlength') }}`,
+            },
             shipping_address1: {
                 required: `{{ __('customvalidation.user.address.required') }}`,
             },
@@ -63,10 +74,10 @@
                 required: `{{ __('customvalidation.user.country.required') }}`,
             },
             state: {
-                required: `{{ __('customvalidation.user.country.required') }}`,
+                required: `{{ __('customvalidation.user.state.required') }}`,
             },
             city: {
-                required: `{{ __('customvalidation.user.country.required') }}`,
+                required: `{{ __('customvalidation.user.city.required') }}`,
             },
 
 

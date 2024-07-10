@@ -2,22 +2,23 @@
 
 namespace App\Http\Controllers\Dealer;
 
-use App\Http\Controllers\Controller;
-use App\Models\AdminSetting;
-use App\Models\Cart;
-use App\Models\Category;
-use App\Models\FeaturedProduct;
-use App\Models\Product;
-use App\Models\ProductCompatabilty;
-use App\Models\ProductImage;
-use App\Models\User;
 use Exception;
-use GrahamCampbell\ResultType\Success;
+use App\Models\Cart;
+use App\Models\User;
+use App\Models\Product;
+use App\Models\Category;
+use App\Models\AdminSetting;
+use App\Models\ProductImage;
 use Illuminate\Http\Request;
+use App\Models\FeaturedProduct;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Eloquent\Builder;
+use App\Models\ProductCompatabilty;
+use App\Models\ProductParcelDetail;
 use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
+use GrahamCampbell\ResultType\Success;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Builder;
 
 class ProductController extends Controller
 {
@@ -67,20 +68,22 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        // try {
+        // dd($request->toArray());
+        try {
             $product = [
                 'name' => $request->name,
                 'user_id' => auth()->user()->id,
                 'subcategory_id' => $request->subcategory,
                 'description' => $request->description,
+                'part_number' => $request->part_number,
                 'additional_details' => $request->additional_details,
                 'stocks_avaliable' => $request->stocks_avaliable,
                 'price' => $request->price,
-                'shipping_price' => $request->shipping_price,
-                'other_specification' => $request->other_specification,
-                'Specifications_and_dimensions' => $request->Specifications_and_dimensions,
-                'Shipping_info' => $request->Shipping_info,
-                'field_3' => $request->field_3,
+                // 'shipping_price' => $request->shipping_price,
+                // 'other_specification' => $request->other_specification,
+                // 'Specifications_and_dimensions' => $request->Specifications_and_dimensions,
+                // 'Shipping_info' => $request->Shipping_info,
+                // 'field_3' => $request->field_3,
                 // 'year' => $request->car_years,
                 // 'brand' => $request->car_model,
                 // 'model' => $request->car_make,
@@ -114,22 +117,31 @@ class ProductController extends Controller
 
             if ($request->has('compatable_with')) {
                 $compatables = explode(',', $request->compatable_with);
-                for ($i = 0 ;$i<count($compatables); $i++ ) {
+                for ($i = 0; $i < count($compatables); $i++) {
                     $item = $compatables[$i];
                     if (preg_match('/(\d{4})\((.*?)\)(.*)/', $item, $matches)) {
-                        $year = $matches[1]; 
-                        $make = $matches[2];  
+                        $year = $matches[1];
+                        $make = $matches[2];
                         $model = $matches[3];
-                        ProductCompatabilty::create(['year' => $year,'make' => $make , 'model'=>$model,'product_id'=>$product->id]);
+                        ProductCompatabilty::create(['year' => $year, 'make' => $make, 'model' => $model, 'product_id' => $product->id]);
                     }
                 }
             }
+            ProductParcelDetail::create([
+                'product_id' => $product->id,
+                'length' => $request->length,
+                'width' => $request->width,
+                'height' => $request->height,
+                'weight' => $request->weight,
+                'distance_unit' => $request->distance_unit,
+                'mass_unit' => $request->mass_unit,
+            ]);
             DB::commit();
-            return redirect()->back();
-        // } catch (\Exception $e) {
-        //     DB::rollBack();
-        //     return redirect()->back()->with('error', $e->getMessage());
-        // }
+            return redirect()->back()->with('message', 'Product added successfully');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     /**
@@ -167,11 +179,19 @@ class ProductController extends Controller
      */
     public function edit($product)
     {
-        $product = Product::with('category')->where('id', $product)->first();
+        $product = Product::with('category', 'productCompatible', 'parcelDetail')->where('id', $product)->first();
         $years = $this->sdk->years();
         $category = Category::where('id', $product->subcategory_id)->first();
         $images = ProductImage::where('product_id', $product->id)->get();
-        return view('dealer.products.edit', compact('years', 'product', 'category', 'images'));
+        $oppositeResults = [];
+        foreach ($product->productCompatible as $key => $value) {
+            $oppositeFormat = $value->year . '(' . $value->make . ')' . $value->model;
+            array_push($oppositeResults, $oppositeFormat);
+            // $oppositeResults[] = $oppositeFormat;
+        }
+        $oppositeString = implode(',', $oppositeResults);
+        $oppositeString = json_encode($oppositeResults);
+        return view('dealer.products.edit', compact('years', 'product', 'category', 'images', 'oppositeString'));
     }
 
     /**
@@ -179,6 +199,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
+        // dd($product);
         foreach ($request->image_id as $image) {
             $id = $image;
             $ids[] = explode(',', $id);
@@ -195,14 +216,14 @@ class ProductController extends Controller
                 'additional_details' => $request->additional_details,
                 'stocks_avaliable' => $request->stocks_avaliable,
                 'price' => $request->price,
-                'shipping_price' => $request->shipping_price,
-                'other_specification' => $request->other_specification,
-                'Specifications_and_dimensions' => $request->Specifications_and_dimensions,
-                'Shipping_info' => $request->Shipping_info,
-                'field_3' => $request->field_3,
-                'year' => $request->year,
-                'brand' => $request->brand,
-                'model' => $request->model,
+                // 'shipping_price' => $request->shipping_price,
+                // 'other_specification' => $request->other_specification,
+                // 'Specifications_and_dimensions' => $request->Specifications_and_dimensions,
+                // 'Shipping_info' => $request->Shipping_info,
+                // 'field_3' => $request->field_3,
+                // 'year' => $request->year,
+                // 'brand' => $request->brand,
+                // 'model' => $request->model,
                 'status' => '1',
             ];
 
@@ -237,10 +258,30 @@ class ProductController extends Controller
                 }
             }
             // dd($images, $request->file('images'));
-
-
+            if ($request->has('compatable_with')) {
+                $compatables = explode(',', $request->compatable_with);
+                ProductCompatabilty::where('product_id', $product->id)->delete();
+                for ($i = 0; $i < count($compatables); $i++) {
+                    $item = $compatables[$i];
+                    if (preg_match('/(\d{4})\((.*?)\)(.*)/', $item, $matches)) {
+                        $year = $matches[1];
+                        $make = $matches[2];
+                        $model = $matches[3];
+                        ProductCompatabilty::create(['year' => $year, 'make' => $make, 'model' => $model, 'product_id' => $product->id]);
+                    }
+                }
+            }
+            ProductParcelDetail::create([
+                'product_id' => $product->id,
+                'length' => $request->length,
+                'width' => $request->width,
+                'height' => $request->heigth,
+                'weight' => $request->weight,
+                'distance_unit' => $request->distance_unit,
+                'mass_unit' => $request->mass_unit,
+            ]);
             DB::commit();
-            return redirect()->back();
+            return redirect()->back()->with('message', 'Data updated successfully');
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->with('error', $e->getMessage());
@@ -329,7 +370,10 @@ class ProductController extends Controller
         $productImages = $product->productImage;
         $shippingCharge = AdminSetting::where('name', 'shipping_charge')->first();
         $allproducts = Product::with('productImage')->where('user_id', $userdetails->id)->inRandomOrder()->limit(6)->get();
-
+        if (auth()->user()) {
+            $cart =  Cart::with('cartProducts', 'cartProducts.product', 'cartProducts.product.productImage')->where('user_id', auth()->id())->first();
+            return view('dealer.products.product_details', compact('product', 'productImages', 'shippingCharge', 'userdetails', 'allproducts', 'cart'));
+        }
         return view('dealer.products.product_details', compact('product', 'productImages', 'shippingCharge', 'userdetails', 'allproducts'));
     }
 
