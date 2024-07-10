@@ -70,9 +70,10 @@
                                                     </button>
                                                     <ul class="dropdown-menu dropdown-menu-end">
                                                         <li><a class="dropdown-item"
-                                                                href="{{ route('admin.profile.view') }}">Profile</a></li>
+                                                                href="{{ route('admin.profile.view') }}"><i class="fa-solid fa-user"></i> Profile</a></li>
                                                         {{-- <li><a class="dropdown-item" href="#">Another action</a></li> --}}
                                                         <li><a class="dropdown-item" href="{{ route('logout') }}">
+                                                            <i class="fa-solid fa-right-from-bracket"></i>
                                                                 Logout
                                                             </a>
                                                         </li>

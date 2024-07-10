@@ -59,8 +59,11 @@
                                     </form>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" aria-current="page" href="{{ route('welcome') }}">
+                                    <a class="btn primary-btn dashboard-btn nav-link" aria-current="page" href="{{ route('welcome') }}">
                                         @if (auth()->user())
+                                            <span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24" width="15" height="15"><path d="M21,9h-5c-1.65,0-3,1.35-3,3s1.35,3,3,3h5c1.65,0,3-1.35,3-3s-1.35-3-3-3Zm0,5h-5c-1.1,0-2-.9-2-2s.9-2,2-2h5c1.1,0,2,.9,2,2s-.9,2-2,2Zm-5-8h5c1.65,0,3-1.35,3-3s-1.35-3-3-3h-5c-1.65,0-3,1.35-3,3s1.35,3,3,3Zm0-5h5c1.1,0,2,.9,2,2s-.9,2-2,2h-5c-1.1,0-2-.9-2-2s.9-2,2-2Zm5,17h-5c-1.65,0-3,1.35-3,3s1.35,3,3,3h5c1.65,0,3-1.35,3-3s-1.35-3-3-3Zm0,5h-5c-1.1,0-2-.9-2-2s.9-2,2-2h5c1.1,0,2,.9,2,2s-.9,2-2,2ZM7.5,13H3.5c-1.93,0-3.5,1.57-3.5,3.5v4c0,1.93,1.57,3.5,3.5,3.5H7.5c1.93,0,3.5-1.57,3.5-3.5v-4c0-1.93-1.57-3.5-3.5-3.5Zm2.5,7.5c0,1.38-1.12,2.5-2.5,2.5H3.5c-1.38,0-2.5-1.12-2.5-2.5v-4c0-1.38,1.12-2.5,2.5-2.5H7.5c1.38,0,2.5,1.12,2.5,2.5v4ZM7.5,0H3.5C1.57,0,0,1.57,0,3.5V7.5c0,1.93,1.57,3.5,3.5,3.5H7.5c1.93,0,3.5-1.57,3.5-3.5V3.5c0-1.93-1.57-3.5-3.5-3.5Zm2.5,7.5c0,1.38-1.12,2.5-2.5,2.5H3.5c-1.38,0-2.5-1.12-2.5-2.5V3.5c0-1.38,1.12-2.5,2.5-2.5H7.5c1.38,0,2.5,1.12,2.5,2.5V7.5Z"/></svg>
+                                            </span>
                                             Dashboard
                                         @else
                                             Home
@@ -118,15 +121,15 @@
                                                     </button>
                                                     <ul class="dropdown-menu dropdown-menu-end">
                                                         <li><a class="dropdown-item"
-                                                                href="{{ route('dealer.profile') }}">Profile</a>
+                                                                href="{{ route('dealer.profile') }}"><i class="fa-solid fa-user"></i> Profile</a>
                                                         </li>
                                                         <li><a class="dropdown-item"
-                                                                href="{{ route('dealer.subscription.plan') }}">Subscription
+                                                                href="{{ route('dealer.subscription.plan') }}"><i class="fa-solid fa-crown"></i> Subscription
                                                                 Plan</a>
                                                         </li>
                                                         {{-- <li><a class="dropdown-item" href="#">Another action</a></li> --}}
                                                         <li><a class="dropdown-item" href="{{ route('logout') }}">
-                                                                Logout
+                                                            <i class="fa-solid fa-right-from-bracket"></i> Logout
                                                             </a>
                                                         </li>
                                                     </ul>
