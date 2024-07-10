@@ -1,5 +1,5 @@
 @extends('layouts.dealer')
-@section('title', 'products')
+@section('title', 'Products')
 @section('heading', 'Product Management')
 
 @section('content')
@@ -33,9 +33,9 @@
                         <th>
                             <p>Status</p>
                         </th>
-                        <th>
+                        {{-- <th>
                             <p>Featured Status</p>
-                        </th>
+                        </th> --}}
                         <th>
                             <p>Action</p>
                         </th>
@@ -67,7 +67,7 @@
                             </div>
                         </td>
 
-                        <td>
+                        {{-- <td>
                             <div class="toggle-btn">
                                 <input type="checkbox" id="switch1{{ $key }}"
                                     data-id=" @if (isset($product->featuredProduct->id)) {{ $product->featuredProduct->id }} @else 0 @endif"
@@ -76,7 +76,7 @@
                                     @if (!plan_validity()) disabled @endif><label
                                     for="switch1{{ $key }}">Toggle</label>
                             </div>
-                        </td>
+                        </td> --}}
                         <td>
                             <div class="action-btns">
                                 <a href="{{ route('dealer.products.edit', $product->id) }}"><i
@@ -182,6 +182,21 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Part Number</label>
+                                    <div class="form-field subcategory">
+                                        <input type="text" class="form-control" id="part_number" name="part_number"
+                                            value="{{ old('part_number', $product->part_number ?? ' ') }}"
+                                            placeholder="Part Number">
+                                        @error('part_number')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="">Product Description</label>
@@ -235,7 +250,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-12">
+                            {{-- <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="">Other specifications</label>
                                     <div class="form-field">
@@ -270,7 +285,7 @@
 
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="length">Length:</label>
@@ -360,7 +375,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-12">
+                            {{-- <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="">Shipping Price*</label>
                                     <div class="form-field">
@@ -369,7 +384,7 @@
 
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="custm-field-for-ymmm">
                             <div class="field-for-ymmm-box">

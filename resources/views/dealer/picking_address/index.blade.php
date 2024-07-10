@@ -1,5 +1,5 @@
 @extends('layouts.dealer')
-@section('title', 'partsmanager')
+@section('title', 'Picking Address')
 @section('heading', 'Pickup Address')
 @section('content')
     <div class="dashboard-right-box parts-manager-table-box">

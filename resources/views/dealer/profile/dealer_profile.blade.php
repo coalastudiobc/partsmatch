@@ -1,4 +1,5 @@
 @extends('layouts.front')
+@section('title', 'Dealer Profile')
 @section('content')
     <section class="banner-content-sec">
         <div class="container">
@@ -38,7 +39,7 @@
                                             </div>
                                             {{-- @dd($user) --}}
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="">Name</label>
                                                 <div class="form-field">
@@ -48,7 +49,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                        {{-- <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="">Email</label>
                                                 <div class="form-field">
@@ -57,8 +58,8 @@
 
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-3">
+                                        </div> --}}
+                                        {{-- <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="">Phone Number</label>
                                                 <div class="form-field">
@@ -67,8 +68,8 @@
 
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-3">
+                                        </div> --}}
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="">Industry</label>
                                                 <div class="form-field">
@@ -79,7 +80,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-12">
+                                        {{-- <div class="col-md-12">
                                             <div class="dealer-profile-form-btn">
                                                 @if (auth()->user()->id === $user->id)
                                                 @else
@@ -88,7 +89,7 @@
                                                         data-id="{{ jsencode_userdata($user->id) }}">Send Message</a>
                                                 @endif
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </div>
 
                                 </form>

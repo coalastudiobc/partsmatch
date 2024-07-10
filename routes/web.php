@@ -3,11 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\dealer\CheckoutController;
-use App\Http\Controllers\Dealer\DealerController;
 use App\Http\Controllers\Dealer\ProductController;
-use App\Http\Controllers\Dealer\ProfileController;
-use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -23,10 +19,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    if (Auth::check())
-        return redirect()->route('redirect-to-dashboard');
-    else
-        return redirect()->route('welcome.index');
+    // if (Auth::check())
+    //     return redirect()->route('redirect-to-dashboard');
+    // else
+    return redirect()->route('welcome.index');
 })->name('welcome');
 
 Route::match(['get', 'post'], 'welcome/{subcategory?}/{category?}', [HomeController::class, 'index'])->name('welcome.index');

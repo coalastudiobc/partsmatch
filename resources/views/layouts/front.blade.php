@@ -58,15 +58,22 @@
                                         </div>
                                     </form>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" aria-current="page" href="{{ route('welcome') }}">
-                                        @if (auth()->user())
+                                @auth
+                                    <li class="nav-item">
+                                        <a class="nav-link" aria-current="page"
+                                            href="{{ route('redirect-to-dashboard') }}">
                                             Dashboard
-                                        @else
+                                        </a>
+                                    </li>
+                                @endauth
+                                @guest
+                                    <li class="nav-item">
+                                        <a class="nav-link" aria-current="page" href="{{ route('welcome') }}">
+
                                             Home
-                                        @endif
-                                    </a>
-                                </li>
+                                        </a>
+                                    </li>
+                                @endguest
                                 {{-- <li class="nav-item">
                                     <a class="nav-link" aria-current="page"
                                         href="{{ route('view', ['slug' => 'about-us']) }}">About Us</a>

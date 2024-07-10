@@ -21,7 +21,7 @@
         </div>
 
 
-        <div class="product-detail-table user-list-table min-width-1200">
+        <div class="product-detail-table user-list-table ">
             <div class="table-responsive">
                 <table class="table">
                     <tr>

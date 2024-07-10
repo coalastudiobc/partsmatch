@@ -12,6 +12,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\ChangePasswordRequest;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Permission\Traits\HasRoles;
 
 class HomeController extends Controller
 {
@@ -83,14 +85,14 @@ class HomeController extends Controller
     public function redirectToDashboard()
     {
         if (Auth::user()->hasRole("Administrator")) {
-
             return redirect()->route('admin.category.index');
         } else if (Auth::user()->hasRole("Dealer")) {
             return redirect()->route('dealer.products.index');
         } else if (Auth::user()->hasRole("Manager")) {
-            return redirect()->route('dealer.dashboard');
+            return redirect()->route('dealer.products.index');
         } else {
-            return "ROLE NOT ASSIGNED";
+            auth()->logout();
+            return redirect()->back()->with('error', 'There is some issue for this account. Please contact to administrator.');
         }
     }
 

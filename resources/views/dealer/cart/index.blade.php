@@ -1,7 +1,9 @@
 @extends('layouts.front')
+@section('title', 'Cart Products')
 @section('content')
     <section class="page-content-sec">
         <div class="container" id="cartContainer">
+            <x-alert-component />
             @include('components.cart')
         </div>
     </section>

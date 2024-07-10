@@ -50,6 +50,7 @@
                         <div class="custm-nav-menu login-nav">
                             @auth
                                 <ul class="navbar-nav">
+                                    <li> <a href="{{ route('welcome.index') }}" class="btn primary-btn">shop</a></li>
                                     <li>
                                         <div class="nav-profile">
                                             <div class="nav-profile-img">

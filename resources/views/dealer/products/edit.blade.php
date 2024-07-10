@@ -73,6 +73,21 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        <label for="">Part Number</label>
+                                        <div class="form-field subcategory">
+                                            <input type="text" class="form-control" id="part_number" name="part_number"
+                                                value="{{ old('part_number', $product->part_number ?? ' ') }}"
+                                                placeholder="Part Number">
+                                            @error('part_number')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
                                         <label for="">Product Description</label>
                                         <div class="form-field">
                                             <textarea name="description" class="form-control summernote @error('description') is-invalid @enderror">{{ $product->description ? $product->description : '' }}  </textarea>
@@ -97,7 +112,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                {{-- <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="">Other specifications</label>
                                         <div class="form-field">
@@ -152,15 +167,13 @@
                                             @enderror
                                         </div>
                                     </div>
-                                </div>
-                                {{-- @dd($product) --}}
+                                </div> --}}
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="">Add Product Images (Up to 5)</label>
                                         <label class="img-upload-box">
                                             <p>Upload Images</p>
-                                            <input type="file" name="images[]" id="upload-image" multiple
-                                                mixlength="5">
+                                            <input type="file" name="images[]" id="upload-image" multiple mixlength="5">
                                             <input type="hidden" name="total-img-preview" id="total-img-preview"
                                                 value={{ count($product->productImage) }}>
                                             <input type="hidden" name="image_id[]" value="imageid[]" id="get_image_id">
@@ -302,7 +315,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-6">
+                                {{-- <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="">Shipping Price</label>
                                         <div class="form-field">
@@ -316,7 +329,7 @@
                                             @enderror
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="custm-field-for-ymmm">
                                     <div class="field-for-ymmm-box">
                                         <div class="form-group">
@@ -405,13 +418,15 @@
                                             </div>
                                         </div> --}}
 
-                            <div class="col-md-6">
-                                <a href="{{ route('dealer.products.index') }}"
-                                    class="btn secondary-btn full-btn mr-1">Back</a>
-                            </div>
-                            <div class="col-md-6">
-                                <button class="btn primary-btn full-btn mr-1" id="submit"
-                                    type="submit">Submit</button>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <a href="{{ route('dealer.products.index') }}"
+                                        class="btn secondary-btn full-btn mr-1">Back</a>
+                                </div>
+                                <div class="col-md-6">
+                                    <button class="btn primary-btn full-btn mr-1" id="submit"
+                                        type="submit">Submit</button>
+                                </div>
                             </div>
                     </div>
                     </form>

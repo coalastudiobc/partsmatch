@@ -102,7 +102,8 @@
                                             <div class="form-group">
                                                 <label for="">Dealership Name*</label>
                                                 <div class="form-field">
-                                                    <input type="text" name="dealershipName" value="{{ old('zipcode') }}"
+                                                    <input type="text" name="dealershipName"
+                                                        value="{{ old('dealership_name') }}"
                                                         class="form-control @error('dealershipName') is-invalid @enderror"
                                                         placeholder="DealerShip Name">
 

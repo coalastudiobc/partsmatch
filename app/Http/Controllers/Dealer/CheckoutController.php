@@ -165,6 +165,9 @@ class CheckoutController extends Controller
 
             return view('dealer.checkout', compact('countries', 'intent', 'total_amount', 'country', 'state', 'city', 'data', 'stripeCustomer', 'carts', 'shippingCharge'));
         }
+        // if (is_null($deliveryAddress)) {
+        //     return redirect()->back()->with('error', 'seller does not set picking address yet. please try again later');
+        // }
         return view('dealer.checkout', compact('countries', 'intent', 'total_amount', 'stripeCustomer', 'carts', 'shippingCharge', 'allProductsOfCart', 'deliveryAddress'));
     }
     public function store(CheckoutRequest $request)

@@ -1,5 +1,6 @@
 @extends('layouts.dealer')
-@section('heading', 'order')
+@section('title', 'My Orders')
+@section('heading', 'Order')
 
 @section('content')
 

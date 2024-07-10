@@ -75,14 +75,15 @@ class ProductController extends Controller
                 'user_id' => auth()->user()->id,
                 'subcategory_id' => $request->subcategory,
                 'description' => $request->description,
+                'part_number' => $request->part_number,
                 'additional_details' => $request->additional_details,
                 'stocks_avaliable' => $request->stocks_avaliable,
                 'price' => $request->price,
-                'shipping_price' => $request->shipping_price,
-                'other_specification' => $request->other_specification,
-                'Specifications_and_dimensions' => $request->Specifications_and_dimensions,
-                'Shipping_info' => $request->Shipping_info,
-                'field_3' => $request->field_3,
+                // 'shipping_price' => $request->shipping_price,
+                // 'other_specification' => $request->other_specification,
+                // 'Specifications_and_dimensions' => $request->Specifications_and_dimensions,
+                // 'Shipping_info' => $request->Shipping_info,
+                // 'field_3' => $request->field_3,
                 // 'year' => $request->car_years,
                 // 'brand' => $request->car_model,
                 // 'model' => $request->car_make,
@@ -215,14 +216,14 @@ class ProductController extends Controller
                 'additional_details' => $request->additional_details,
                 'stocks_avaliable' => $request->stocks_avaliable,
                 'price' => $request->price,
-                'shipping_price' => $request->shipping_price,
-                'other_specification' => $request->other_specification,
-                'Specifications_and_dimensions' => $request->Specifications_and_dimensions,
-                'Shipping_info' => $request->Shipping_info,
-                'field_3' => $request->field_3,
-                'year' => $request->year,
-                'brand' => $request->brand,
-                'model' => $request->model,
+                // 'shipping_price' => $request->shipping_price,
+                // 'other_specification' => $request->other_specification,
+                // 'Specifications_and_dimensions' => $request->Specifications_and_dimensions,
+                // 'Shipping_info' => $request->Shipping_info,
+                // 'field_3' => $request->field_3,
+                // 'year' => $request->year,
+                // 'brand' => $request->brand,
+                // 'model' => $request->model,
                 'status' => '1',
             ];
 
@@ -369,7 +370,10 @@ class ProductController extends Controller
         $productImages = $product->productImage;
         $shippingCharge = AdminSetting::where('name', 'shipping_charge')->first();
         $allproducts = Product::with('productImage')->where('user_id', $userdetails->id)->inRandomOrder()->limit(6)->get();
-
+        if (auth()->user()) {
+            $cart =  Cart::with('cartProducts', 'cartProducts.product', 'cartProducts.product.productImage')->where('user_id', auth()->id())->first();
+            return view('dealer.products.product_details', compact('product', 'productImages', 'shippingCharge', 'userdetails', 'allproducts', 'cart'));
+        }
         return view('dealer.products.product_details', compact('product', 'productImages', 'shippingCharge', 'userdetails', 'allproducts'));
     }
 

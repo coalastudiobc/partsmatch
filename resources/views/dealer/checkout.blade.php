@@ -72,7 +72,7 @@
                                             <div class="form-group">
                                                 <label for="">Phone Number</label>
                                                 <input type="number" name="phone_number"
-                                                    value="{{ old('number', $deliveryAddress->phone_number) }}"
+                                                    value="{{ old('number', $deliveryAddress->phone_number ?? '') }}"
                                                     class="form-control @error('phonenumber') is-invalid @enderror">
                                                 @error('phonenumber')
                                                     <span class="invalid-feedback" role="alert">
@@ -89,13 +89,13 @@
                                                         <p>Home</p>
                                                         <input type="radio" name="addressType" id="s-option"
                                                             style="display: none" value="Home"
-                                                            {{ $deliveryAddress->address_type == 'Home' ? 'checked' : '' }}>
+                                                            {{ $deliveryAddress->address_type ? ($deliveryAddress->address_type == 'Home' ? 'checked' : '') : '' }}>
                                                     </label>
                                                     <label for="v-option">
                                                         <p>Office</p>
                                                         <input type="radio" name="addressType" id="v-option"
                                                             value="Office" style="display: none"
-                                                            {{ $deliveryAddress->address_type == 'Office' ? 'checked' : '' }}>
+                                                            {{ $deliveryAddress->address_type ? ($deliveryAddress->address_type == 'Office' ? 'checked' : '') : '' }}>
                                                     </label>
                                                     {{-- <div style="display: inline-block;">
                                                         <input type="radio" id="s-option" name="addressType" value="Office">
@@ -409,7 +409,7 @@
         });
 
         jQuery(document).ready(function() {
-            
+
 
             jQuery('.custom_dropdown_item').on('click', function() {
                 var countryId = jQuery(this).attr('data-value')

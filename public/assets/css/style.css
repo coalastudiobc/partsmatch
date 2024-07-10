@@ -782,7 +782,8 @@ header {
 
 .add-cart-btn {
     padding: 8px;
-    border-radius: 50%;
+    /* border-radius: 50%; */
+    border-radius: 8px;
 }
 
 .add-cart-btn:hover svg {
@@ -1749,7 +1750,7 @@ span.sidebar-cross-icon i {
     gap: 10px;
 }
 .ymmm-box-data {
-   
+
 }
 .ymmm-data-outer{
     width: fit-content;

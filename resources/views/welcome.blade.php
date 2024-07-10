@@ -1,5 +1,5 @@
 @extends('layouts.front')
-@section('title', 'welcome')
+@section('title', 'Partsmatch')
 @section('content')
     <section class="hero-section">
         <div class="container">

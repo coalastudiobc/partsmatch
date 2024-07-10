@@ -73,7 +73,6 @@ class CategoryController extends Controller
             ], 200);
         } catch (\Exception $e) {
             DB::rollback();
-
             return response()->json([
                 'success'    =>  false,
                 'msg'      =>  $e->getMessage()
