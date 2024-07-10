@@ -1,4 +1,5 @@
 @extends('layouts.front')
+@section('title', 'Products')
 @section('heading', 'Results found')
 @section('content')
     <section class="banner-content-sec">

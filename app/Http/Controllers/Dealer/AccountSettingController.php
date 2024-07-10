@@ -24,6 +24,7 @@ class AccountSettingController extends Controller
             'phone_number' => $request->phone_number,
             'industry_type' => $request->industry_type,
             'address' => $request->address,
+            'dealership_name' => $request->dealershipName,
             'zipcode' => $request->zipcode,
         ];
         if ($request->has('image')) {

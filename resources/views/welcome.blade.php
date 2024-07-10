@@ -1,5 +1,5 @@
 @extends('layouts.front')
-@section('title', 'welcome')
+@section('title', 'Partsmatch')
 @section('content')
     <section class="hero-section">
         <div class="container">
@@ -508,7 +508,7 @@
                     console.log('hererererer')
                     // location.reload();
                     jQuery(".cart-icon").html(response.cart_icon);
-                    return toastr.success(response.msg);
+                    return toastr.success(response.message);
                 } else {
                     jQuery('#errormessage').html(response.error);
                 }
