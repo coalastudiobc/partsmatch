@@ -9,7 +9,7 @@
             <form action="">
                 <div class="pro-search-box">
                     <input type="text" class="form-control" name="filter_by_name" placeholder="Search User By Name">
-                    <button type="submit" class="btn primary-btn">Search</button>
+                    <button type="submit" class="btn primary-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
                     <a href="#" class="btn secondary-btn filter-open-btn">Filter</a>
                 </div>
             </form>

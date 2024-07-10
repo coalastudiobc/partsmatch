@@ -14,7 +14,7 @@
                 <div class="pro-search-box">
                     <input type="text" name="filter_by_name" value="{{ old('filter_by_name', request()->filter_by_name) }}"
                         class="form-control" placeholder="Search Dealer By Name">
-                    <button type="submit" class="btn primary-btn">Search</button>
+                    <button type="submit" class="btn primary-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
             </form>
 

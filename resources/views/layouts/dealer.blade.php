@@ -26,7 +26,7 @@
 
     @includeFirst(['validation'])
     <script>
-        const APP_URL = "{{ url('') }}";
+        const APP_URL = "{{ url('') }}"; 
     </script>
 </head>
 
@@ -99,7 +99,6 @@
     <main>
         <section class="page-content-sec">
 
-            <div class="container">
 
                 <div class="page-content-wrapper">
                     <div class="dc-content-wrapper">
@@ -109,7 +108,7 @@
 
                 </div>
 
-            </div>
+
         </section>
     </main>
     @include('layouts.include.footer')

@@ -5,7 +5,7 @@
         <div class="serach-and-filter-box">
             <div class="pro-search-box">
                 <input type="text" class="form-control" name="filter_by_name" placeholder="Search Product By Name">
-                <a href="#" class="btn primary-btn">Search</a>
+                <a href="#" class="btn primary-btn"><i class="fa-solid fa-magnifying-glass"></i></a>
             </div>
             <div class="pro-filter">
                 <p>Filter:</p>
@@ -120,7 +120,10 @@
                                 </td>
                             </tr>
                         @else
-                            <p class="empty-data">Did not found any order</p>
+                            <div class="empty-data">
+                                <img src="{{ asset('assets/images/no-product.svg') }}  " alt="" width="300">
+                                    <p class="text-center mt-1">Did not found any order</p>
+                            </div>
                             {{-- @empty
                                 @endforelse --}}
                         @endif

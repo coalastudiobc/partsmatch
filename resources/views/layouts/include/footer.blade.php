@@ -11,9 +11,9 @@
                                 <p class="ls-footer-title">Lorem ipsum, or lipsum as it is sometimes known, is dummy
                                     text
                                     used in laying out print, graphic or web designs.</p>
-                                <div class="footer-btn">
+                                <!-- <div class="footer-btn">
                                     <a href="#" class="btn primary-btn">View More</a>
-                                </div>
+                                </div> -->
 
                             </div>
                         </div>

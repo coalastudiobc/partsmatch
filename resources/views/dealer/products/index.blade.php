@@ -6,6 +6,11 @@
 
     <div class="dashboard-right-box">
         <x-alert-component />
+        <div class="cstm-bredcrum">
+            <a href="#" class="bredcrum-list">Home</a>
+            <a href="#" class="bredcrum-list">Product</a>
+            <a href="#" class="bredcrum-list active">Table</a>
+        </div>
         <div class="sidebar-filter">
             <a href="#" id="sidebar-btn" class="btn secondary-btn sidebar-filter-btn">
                 <i class="fa-solid fa-filter"></i>
@@ -17,11 +22,11 @@
                 <div class="pro-search-box">
                     <input type="text" name="filter_by_name" class="form-control" value=""
                         placeholder="Search Product By Name">
-                    <button type="submit" class="btn primary-btn">Search</button>
+                    <button type="submit" class="btn primary-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
             </form>
             <a href="javascript:void(0)" class="btn primary-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                + Add New Product
+                <img src="{{ asset('assets/images/add-round-icon.svg') }}" alt=""> Add
             </a>
         </div>
         <div class="product-detail-table product-list-table pro-manage-table">

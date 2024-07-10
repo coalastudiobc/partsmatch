@@ -8,7 +8,7 @@
             {{-- <form action="">
                 <div class="pro-search-box">
                     <input type="text" name="filter_by_name" class="form-control" placeholder="Search Product By Name">
-                    <button type="submit" class="btn primary-btn">Search</button>
+                    <button type="submit" class="btn primary-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
             </form> --}}
             {{-- <div class="pro-filter">
@@ -19,7 +19,6 @@
         </div>
         <div class="product-detail-table product-list-table">
             <div class="table-responsive">
-                <div class="test">
                     <table class="table">
                         <tr>
                             <th>OrderId</th>
@@ -114,11 +113,13 @@
                                 </td>
                             </tr>
                         @empty
-                            <p class="empty-data">Did not found any order</p>
+                            <div class="empty-data">
+                            <img src="{{ asset('assets/images/no-product.svg') }}  " alt="" width="300">
+                                <p class="text-center mt-1">Did not found any order</p>
+                            </div>
                         @endforelse
 
                     </table>
-                </div>
             </div>
         </div>
         <div class="pagination-wrapper">
