@@ -107,7 +107,7 @@
                                     @foreach ($allproducts as $product)
                                         {{-- @dd($product) --}}
                                         <div class="collection-box cstm-card">
-                                            <a href="{{ route('dealer.products.details', $product->id) }}">
+                                            <a href="{{ route('Dealer.products.details', $product->id) }}">
                                                 <div class="collection-img">
                                                     <img src="{{ Storage::url($product->productImage[0]->file_url) }}"
                                                         alt="">

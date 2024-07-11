@@ -1,8 +1,8 @@
 @forelse ($products as $product)
     @if ($product->status == 1)
         <div class="collection-box">
-            <a href="{{ route('dealer.products.details', $product->id) }}">
-
+            <a
+                href="{{ route(auth()->id() ? auth()->user()->getRoleNames()->first() : 'Dealer' . '.products.details', $product->id) }}">
                 <div class="collection-img">
                     @if (isset($product->productImage[0]))
                         <img src="{{ Storage::url($product->productImage[0]->file_url) }}" alt="">
@@ -12,8 +12,8 @@
 
                 </div>
             </a>
-            <a href="{{ route('dealer.products.details', $product->id) }}">
-
+            <a
+                href="{{ route(auth()->id() ? auth()->user()->getRoleNames()->first() : 'Dealer' . '.products.details', $product->id) }}">
                 <p>{{ $product->name }}</p>
             </a>
             <div class="price-and-cart">
@@ -80,5 +80,8 @@
         </div>
     @endif
 @empty
-    <div> No products avaliable at the moment</div>
+    <div class="collection-box">
+        <img src="{{ asset('assets/images/no-product.svg') }}" alt="" width="300">
+        <p class="text-center mt-1"> <b>No products avaliable at the moment</b></p>
+    </div>
 @endforelse

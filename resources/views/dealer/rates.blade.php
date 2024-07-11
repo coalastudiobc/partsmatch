@@ -30,7 +30,7 @@
                     @endforeach
 
                     {{-- Display shipment rates --}}
-                    <form action="{{ route('dealer.checkout.rates') }}" method="POST">
+                    <form action="{{ route('Dealer.checkout.rates') }}" method="POST">
                         @csrf
                         @if ($shipment->rates_list)
                             @foreach ($shipment->rates_list as $rates)

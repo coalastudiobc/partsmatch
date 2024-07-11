@@ -75,17 +75,17 @@
                                     <input type="checkbox" id="switch{{ $key }}" class="custom-switch-input"
                                         @if ($user->status == 'ACTIVE') checked="checked" @endif
                                         onchange="toggleStatus(this, 'User', '{{ $user->id }}');"
-                                        url="{{ route('dealer.status') }}"><label
+                                        url="{{ route('Dealer.status') }}"><label
                                         for="switch{{ $key }}">Toggle</label>
                                 </div>
                             </td>
                             <td>
                                 <div class="action-btns">
-                                    <a href="{{ route('dealer.partsmanager.edit', [$user->id]) }}"><i
+                                    <a href="{{ route('Dealer.partsmanager.edit', [$user->id]) }}"><i
                                             class="fa-solid fa-pen-to-square" style="color: #3EBE62;"
                                             title="edit"></i></a>
                                     <a class="delete"
-                                        href="{{ route('dealer.partsmanager.delete', ['user' => $user->id]) }}"><i
+                                        href="{{ route('Dealer.partsmanager.delete', ['user' => $user->id]) }}"><i
                                             class="fa-regular fa-trash-can " style="color: #E13F3F;" title="delete"></i></a>
                                 </div>
                             </td>
@@ -167,7 +167,7 @@
                     <div class="modal-body">
                         <div class="add-pro-form">
                             <h2 id="modal_title">Add New Manager grg</h2>
-                            <form id="parts_manager" action="{{ route('dealer.partsmanager.store') }}" method="post"
+                            <form id="parts_manager" action="{{ route('Dealer.partsmanager.store') }}" method="post"
                                 enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">

@@ -19,7 +19,7 @@ class PackageValidity
         if (plan_validity()) {
             return $next($request);
         } else {
-            return redirect()->route('dealer.subscription.plan');
+            return redirect()->route('Dealer.subscription.plan');
         }
     }
 }

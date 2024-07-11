@@ -1487,7 +1487,7 @@ span.doller-symbol-txt.symbol {
 }
 
 .table-responsive::-webkit-scrollbar:horizontal {
-    
+
     height: 4px;
 }
 
@@ -1575,3 +1575,4 @@ button.btn-close {
 .brand-table table tr th:last-child{
     width: unset !important;
 }
+

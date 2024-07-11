@@ -5,7 +5,7 @@
     <div class="dashboard-right-box parts-manager-table-box">
         <x-alert-component />
         <div class="delivery-form">
-            <form id="From_address" action="{{ route('dealer.address.from') }}" method="post" enctype="multipart/form-data">
+            <form id="From_address" action="{{ route('Dealer.address.from') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-md-4">

@@ -175,7 +175,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <a href="{{ route('dealer.partsmanager.index') }}"
+                                            <a href="{{ route(auth()->user()->getRoleNames()->first() . '.partsmanager.index') }}"
                                                 class="btn secondary-btn full-btn mr-1">Back</a>
                                         </div>
                                         <div class="col-md-6">

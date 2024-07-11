@@ -43,8 +43,8 @@
                             {{-- <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#flush-collapseOne1" aria-expanded="false"
                                 aria-controls="flush-collapseOne"> --}}
-                            <a href="{{ route('dealer.products.index') }}"
-                                class="analyics-tabs-btns @if (Route::is('dealer.products.*')) active @endif ">
+                            <a href="{{ route(auth()->user()->getRoleNames()->first() . '.products.index') }}"
+                                class="analyics-tabs-btns @if (Route::is('Dealer.products.*')) active @endif ">
                                 <div class="analyics-tabs-name">
                                     <span>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17"
@@ -72,8 +72,8 @@
                                 {{-- <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#flush-collapseOne1" aria-expanded="false"
                                 aria-controls="flush-collapseOne"> --}}
-                                <a href="{{ route('dealer.partsmanager.index') }}"
-                                    class="analyics-tabs-btns @if (Route::is('dealer.partsmanager.*')) active @endif ">
+                                <a href="{{ route('Dealer.partsmanager.index') }}"
+                                    class="analyics-tabs-btns @if (Route::is('Dealer.partsmanager.*')) active @endif ">
                                     <div class="analyics-tabs-name">
                                         <span>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17"
@@ -94,15 +94,12 @@
                     </div>
                 </li>
             @endif
-            <li class="analyics-tabs-list">
+            {{-- <li class="analyics-tabs-list">
                 <div class="accordion accordion-flush" id="accordionFlushExample">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="flush-headingOne">
-                            {{-- <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#flush-collapseOne1" aria-expanded="false"
-                                aria-controls="flush-collapseOne"> --}}
-                            <a href="{{ route('dealer.address.view') }}"
-                                class="analyics-tabs-btns @if (Route::is('dealer.address.*')) active @endif ">
+                            <a href="{{ route('Dealer.address.view') }}"
+                                class="analyics-tabs-btns @if (Route::is('Dealer.address.*')) active @endif ">
                                 <div class="analyics-tabs-name">
                                     <span>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17"
@@ -117,11 +114,10 @@
                                     <h4>Picking Address</h4>
                                 </div>
                             </a>
-                            {{-- </button> --}}
                         </h2>
                     </div>
                 </div>
-            </li>
+            </li> --}}
             <li class="analyics-tabs-list">
                 <div class="accordion accordion-flush" id="accordionFlushExample">
                     <div class="accordion-item">
@@ -129,8 +125,8 @@
                             {{-- <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#flush-collapseOne1" aria-expanded="false"
                                 aria-controls="flush-collapseOne"> --}}
-                            <a href="{{ route('dealer.myorder.orderlist') }}"
-                                class="analyics-tabs-btns @if (Route::is('dealer.myorder.orderlist')) active @endif ">
+                            <a href="{{ route('Dealer.myorder.orderlist') }}"
+                                class="analyics-tabs-btns @if (Route::is('Dealer.myorder.orderlist')) active @endif ">
                                 <div class="analyics-tabs-name">
                                     <span>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17"
@@ -157,8 +153,8 @@
                             {{-- <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#flush-collapseOne1" aria-expanded="false"
                                 aria-controls="flush-collapseOne"> --}}
-                            <a href="{{ route('dealer.order.orderlist') }}"
-                                class="analyics-tabs-btns @if (Route::is('dealer.order.orderlist')) active @endif ">
+                            <a href="{{ route('Dealer.order.orderlist') }}"
+                                class="analyics-tabs-btns @if (Route::is('Dealer.order.orderlist')) active @endif ">
                                 <div class="analyics-tabs-name">
                                     <span>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17"

@@ -36,7 +36,7 @@
                                                 <div class="accordion-body">
                                                     <div class="interior-category-content">
                                                         <ul>
-                                                            <li><a href="{{ route('dealer.products.interior', ['category' => $subcategory->id]) }}"
+                                                            <li><a href="{{ route(auth()->user()->getRoleNames()->first() . '.products.interior', ['category' => $subcategory->id]) }}"
                                                                     class="categories-item">{{ $subcategory->name }}</a>
                                                             </li>
                                                             {{-- <li><a href="#" class="categories-item">Motor Oil</a></li>
@@ -62,7 +62,7 @@
                                     {{-- @dd($product->productImage[0]->file_url) --}}
                                     <div class="col-md-6 col-lg-4 col-xl-4">
                                         <div class="accessories-parts-box">
-                                            <a href="{{ route('dealer.products.details', ['product' => $product->id]) }}">
+                                            <a href="{{ route('Dealer.products.details', ['product' => $product->id]) }}">
                                                 <div class="more-product-cards cstm-card">
                                                     <div class="product-cards-img">
                                                         <img src="{{ Storage::url($product->productImage[0]->file_url) }}"
@@ -123,7 +123,7 @@
                                                         </div>
                                                         <div class="dealer-img-txt">
                                                             <a
-                                                                href="{{ route('dealer.view.profile', $product->user->id) }}">
+                                                                href="{{ route('Dealer.view.profile', $product->user->id) }}">
                                                                 <u>
                                                                     <h5>{{ $product->user->name ?? ' ' }}</h5>
                                                                 </u>

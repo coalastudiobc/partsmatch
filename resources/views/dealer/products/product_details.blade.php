@@ -21,9 +21,9 @@
                                     <div class="cstm-bredcrum ms-4">
                                         {{-- @dd($product->category->parent) --}}
                                         <a href="{{ route('welcome.index') }}" class="bredcrum-list">Home</a>
-                                        <a href="{{ route('dealer.products.interior', ['category' => $product->category->parent->id]) }}"
+                                        <a href="{{ route(auth()->id() ? auth()->user()->getRoleNames()->first() : 'Dealer' . '.products.interior', ['category' => $product->category->parent->id]) }}"
                                             class="bredcrum-list">{{ $product->category->parent->name }}</a>
-                                        <a href="{{ route('dealer.products.interior', ['category' => $product->category->parent->id]) }}"
+                                        <a href="{{ route(auth()->id() ? auth()->user()->getRoleNames()->first() : 'Dealer' . '.products.interior', ['category' => $product->category->parent->id]) }}"
                                             class="bredcrum-list">{{ $product->category->name ?? '' }}</a>
                                         <a href="#" class="bredcrum-list active">{{ $product->name }}</a>
                                     </div>
@@ -79,7 +79,7 @@
                                         </h2>
                                         <span>{{ $product->category->name }}</span><br>
                                         <span>See more products by: </span> <a
-                                            href="{{ route('dealer.view.profile', $userdetails->id) }}">
+                                            href="{{ route('Dealer.view.profile', $userdetails->id) }}">
                                             <u
                                                 style="color: #0d6efd">{{ $userdetails->dealership_name ?? 'Dealership Name' }}</u></a>
                                         <h2>${{ $product->price }}</h2>
@@ -167,8 +167,8 @@
                                                         </svg>
                                                     </button>
                                                 @else
-                                                    <a href="{{ route('dealer.cart.cart.index') }}"
-                                                        class="btn secondary-btn full-btn ">Buy Now</a>
+                                                    <a href="{{ route('Dealer.cart.cart.index') }}"
+                                                        class="btn secondary-btn full-btn ">Checkout</a>
                                                 @endif
                                             @endif
                                         @endauth
@@ -360,7 +360,8 @@
                 <div class="dealer-product-category">
                     <div class="dealer-category-box">
                         @foreach ($allproducts as $product)
-                            <a href="{{ route('dealer.products.details', $product->id) }}">
+                            <a
+                                href="{{ route(auth()->id() ? auth()->user()->getRoleNames()->first() : 'Dealer' . '.products.details', $product->id) }}">
                                 <div class="collection-box cstm-card ">
                                     <div class="collection-img">
                                         <img src="{{ Storage::url($product->productImage[0]->file_url) }}"

@@ -73,7 +73,7 @@
                                 <input type="checkbox" id="switch100{{ $key }}" class="custom-switch-input"
                                     @if ($product->status == '1') checked="checked" @endif
                                     onchange="toggleStatus(this, 'Product', '{{ $product->id }}');"
-                                    url="{{ route('dealer.products.status') }}"><label
+                                    url="{{ route('Dealer.products.status') }}"><label
                                     for="switch100{{ $key }}">Toggle</label>
                             </div>
                         </td>
@@ -90,9 +90,11 @@
                         </td> --}}
                         <td>
                             <div class="action-btns">
-                                <a href="{{ route('dealer.products.edit', $product->id) }}"><i
+                                <a
+                                    href="{{ route(auth()->user()->getRoleNames()->first() . '.products.edit', $product->id) }}"><i
                                         class="fa-solid fa-pen-to-square" style="color: #3EBE62;"></i></a>
-                                <a href="{{ route('dealer.products.delete', $product->id) }}"><i
+                                <a
+                                    href="{{ route(auth()->user()->getRoleNames()->first() . '.products.delete', $product->id) }}"><i
                                         class="fa-regular fa-trash-can" style="color: #E13F3F;"></i></a>
                             </div>
                         </td>
@@ -155,7 +157,7 @@
             <div class="modal-body">
                 <div class="add-pro-form">
                     <h2>Add New Products</h2>
-                    <form id="product" action="{{ route('dealer.products.store') }}" method="post"
+                    <form id="product" action="{{ route('Dealer.products.store') }}" method="post"
                         enctype="multipart/form-data">
                         @csrf
                         <div class="row">

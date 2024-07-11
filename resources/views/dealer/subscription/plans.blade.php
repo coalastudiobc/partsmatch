@@ -55,7 +55,7 @@
                 <div class="payment-page">
                     <h3>Payment</h3>
                     <p>All transactions are secure and encrypted.</p>
-                    <form id="card-details" action="{{ route('dealer.subscription.plan.purchase') }}"
+                    <form id="card-details" action="{{ route('Dealer.subscription.plan.purchase') }}"
                         enctype="multipart/form-data" method="post">
                         @csrf
                         <input type="hidden" name="plan_id" value="">

@@ -75,13 +75,15 @@
                                                     </button>
                                                     <ul class="dropdown-menu dropdown-menu-end">
                                                         <li><a class="dropdown-item"
-                                                                href="{{ route('dealer.profile') }}"><i class="fa-solid fa-user"></i> Profile</a></li>
+                                                                href="{{ route('Dealer.profile') }}"><i
+                                                                    class="fa-solid fa-user"></i> Profile</a></li>
                                                         <li><a class="dropdown-item"
-                                                                href="{{ route('dealer.subscription.plan') }}"><i class="fa-solid fa-crown"></i> Subscription
+                                                                href="{{ route('Dealer.subscription.plan') }}"><i
+                                                                    class="fa-solid fa-crown"></i> Subscription
                                                                 Plan</a>
                                                         </li>
                                                         <li><a class="dropdown-item" href="{{ route('logout') }}">
-                                                            <i class="fa-solid fa-right-from-bracket"></i> Logout
+                                                                <i class="fa-solid fa-right-from-bracket"></i> Logout
                                                             </a>
                                                         </li>
                                                     </ul>

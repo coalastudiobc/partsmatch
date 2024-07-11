@@ -16,23 +16,22 @@ use App\Http\Controllers\Dealer\AccountSettingController;
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
-    Route::get('/products/status', [App\Http\Controllers\HomeController::class, 'togglestatus'])->name('dealer.products.status');
+    Route::get('/products/status', [App\Http\Controllers\HomeController::class, 'togglestatus'])->name('Dealer.products.status');
 
     // cms page
     Route::get('view/{slug}', [CmsManagementController::class, 'cms'])->name('view');
 });
-Route::name('dealer.products.')->group(function () {
+Route::name('Dealer.products.')->group(function () {
     Route::get('/products/interior/{subcategory}', [ProductController::class, 'interior'])->name('interior.page');
     Route::get('/products/interior', [ProductController::class, 'show'])->name('interior');
-
     Route::get('/products/details/{product}', [ProductController::class, 'details'])->name('details');
 });
-Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer')->name('dealer.')->group(function () {
+Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer')->name('Dealer.')->group(function () {
     Route::get('/dashboard', [DealerController::class, 'dashboard'])->name('dashboard');
     Route::get('/profile', [AccountSettingController::class, 'profile'])->name('profile');
     Route::post('profile/update', [AccountSettingController::class, 'update'])->name('profile.update');
     Route::post('change-password', [AccountSettingController::class, 'updatePassword'])->name('changepassword');
-    Route::match(['GET', "POST"], 'dealers/status', [DealerController::class, 'toggleStatus'])->name('status');
+    Route::match(['GET', "POST"], 'Dealers/status', [DealerController::class, 'toggleStatus'])->name('status');
 
     Route::get('state/{country}', [CheckoutController::class, 'state'])->name('state');
     Route::get('cities/{state}', [CheckoutController::class, 'cities'])->name('cities');

@@ -113,7 +113,7 @@
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
-                                                    
+
                                                 </div>
                                             </div>
                                         </div>
@@ -121,7 +121,7 @@
                                             <div class="form-group">
                                                 <label for="">Industry</label>
                                                 <div class="form-field">
-                                                 
+
                                                     <select name="industry_type" id="industury"
                                                         value="{{ old('industury', $user->industry_type ?? $user->industry_type) }}"
                                                         disabled
@@ -182,7 +182,7 @@
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
-                                                   
+
                                                 </div>
                                             </div>
                                         </div>
@@ -247,7 +247,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div class="add-pro-form">
                     <h2>Change Password</h2>
-                    <form id="changePassword" action="{{ route('dealer.changepassword') }}" method='post'>
+                    <form id="changePassword" action="{{ route('Dealer.changepassword') }}" method='post'>
                         @csrf
                         <div class="row">
                             <div class="col-md-12">
