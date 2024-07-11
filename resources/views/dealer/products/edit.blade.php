@@ -20,7 +20,7 @@
                     @endif
                     <div class="card-body">
                         <form id="product"
-                            action="{{ route(auth()->check() ? auth()->user()->getRoleNames()->first() . '.products.details' : 'dealer.products.details', $product->id) }}"
+                            action="{{ route(auth()->check() ? auth()->user()->getRoleNames()->first() . '.products.details' : 'Dealer.products.details', $product->id) }}"
                             enctype="multipart/form-data" method="post">
                             @csrf
                             <div class="row">
