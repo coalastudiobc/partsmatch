@@ -36,8 +36,7 @@
                                                 <div class="accordion-body">
                                                     <div class="interior-category-content">
                                                         <ul>
-                                                            <li><a href="{{ route(auth()->user()->getRoleNames()->first() . '.products.interior', ['category' => $subcategory->id]) }}"
-                                                                    class="categories-item">{{ $subcategory->name }}</a>
+                                                            <li><a href="{{ route(auth()->check() ? auth()->user()->getRoleNames()->first() . '.products.interior', ['category' => $subcategory->id]) }}" class="categories-item">{{ $subcategory->name }}</a>
                                                             </li>
                                                             {{-- <li><a href="#" class="categories-item">Motor Oil</a></li>
                                                         <li><a href="#" class="categories-item">Motor Oil</a></li>
