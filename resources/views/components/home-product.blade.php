@@ -2,7 +2,7 @@
     @if ($product->status == 1)
         <div class="collection-box">
             <a
-                href="{{ route(auth()->id() ? auth()->user()->getRoleNames()->first() : 'Dealer' . '.products.details', $product->id) }}">
+                href="{{ route(auth()->check() ? auth()->user()->getRoleNames()->first() . '.products.details' : 'Dealer.products.details', $product->id) }}">
                 <div class="collection-img">
                     @if (isset($product->productImage[0]))
                         <img src="{{ Storage::url($product->productImage[0]->file_url) }}" alt="">
@@ -13,7 +13,7 @@
                 </div>
             </a>
             <a
-                href="{{ route(auth()->id() ? auth()->user()->getRoleNames()->first() : 'Dealer' . '.products.details', $product->id) }}">
+                href="{{ route(auth()->check() ? auth()->user()->getRoleNames()->first() . '.products.details' : 'Dealer.products.details', $product->id) }}">
                 <p>{{ $product->name }}</p>
             </a>
             <div class="price-and-cart">

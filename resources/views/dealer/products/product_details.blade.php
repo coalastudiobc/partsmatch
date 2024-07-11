@@ -21,9 +21,10 @@
                                     <div class="cstm-bredcrum ms-4">
                                         {{-- @dd($product->category->parent) --}}
                                         <a href="{{ route('welcome.index') }}" class="bredcrum-list">Home</a>
-                                        <a href="{{ route(auth()->id() ? auth()->user()->getRoleNames()->first() : 'Dealer' . '.products.interior', ['category' => $product->category->parent->id]) }}"
+
+                                        <a href="{{ route(auth()->check() ? auth()->user()->getRoleNames()->first() . '.products.interior' : 'Dealer.products.interior', ['category' => $product->category->parent->id]) }}"
                                             class="bredcrum-list">{{ $product->category->parent->name }}</a>
-                                        <a href="{{ route(auth()->id() ? auth()->user()->getRoleNames()->first() : 'Dealer' . '.products.interior', ['category' => $product->category->parent->id]) }}"
+                                        <a href="{{ route(auth()->check() ? auth()->user()->getRoleNames()->first() . '.products.interior' : 'Dealer.products.interior', ['category' => $product->category->parent->id]) }}"
                                             class="bredcrum-list">{{ $product->category->name ?? '' }}</a>
                                         <a href="#" class="bredcrum-list active">{{ $product->name }}</a>
                                     </div>
@@ -361,7 +362,7 @@
                     <div class="dealer-category-box">
                         @foreach ($allproducts as $product)
                             <a
-                                href="{{ route(auth()->id() ? auth()->user()->getRoleNames()->first() : 'Dealer' . '.products.details', $product->id) }}">
+                                href="{{ route(auth()->check() ? auth()->user()->getRoleNames()->first() . '.products.details' : 'Dealer.products.details', $product->id) }}">
                                 <div class="collection-box cstm-card ">
                                     <div class="collection-img">
                                         <img src="{{ Storage::url($product->productImage[0]->file_url) }}"
