@@ -19,9 +19,12 @@
                                         <p></p>
                                     </a>
                                     <div class="cstm-bredcrum ms-4">
-                                        <a href="#" class="bredcrum-list">Home</a>
-                                        <a href="#" class="bredcrum-list">product</a>
-                                        <a href="#" class="bredcrum-list">{{ $product->category->name ?? '' }}</a>
+                                        {{-- @dd($product->category->parent) --}}
+                                        <a href="{{ route('welcome.index') }}" class="bredcrum-list">Home</a>
+                                        <a href="{{ route('dealer.products.interior', ['category' => $product->category->parent->id]) }}"
+                                            class="bredcrum-list">{{ $product->category->parent->name }}</a>
+                                        <a href="{{ route('dealer.products.interior', ['category' => $product->category->parent->id]) }}"
+                                            class="bredcrum-list">{{ $product->category->name ?? '' }}</a>
                                         <a href="#" class="bredcrum-list active">{{ $product->name }}</a>
                                     </div>
                                 </div>

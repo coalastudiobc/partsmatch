@@ -372,7 +372,6 @@ class ProductController extends Controller
         $allproducts = Product::with('productImage')->where('user_id', $userdetails->id)->inRandomOrder()->limit(6)->get();
         if (auth()->user()) {
             $cart =  Cart::with('cartProducts', 'cartProducts.product', 'cartProducts.product.productImage')->where('user_id', auth()->id())->first();
-            // dd($cart);
             return view('dealer.products.product_details', compact('product', 'productImages', 'shippingCharge', 'userdetails', 'allproducts', 'cart'));
         }
         return view('dealer.products.product_details', compact('product', 'productImages', 'shippingCharge', 'userdetails', 'allproducts'));

@@ -130,9 +130,10 @@
                         </tr> --}}
 
                     @empty
-                    <tr>
-                        <td colspan="6" style="text-align: center">No result found</td>
-                    </tr>
+                        <div class="empty-data">
+                            <img src="{{ asset('assets/images/no-product.svg') }}  " alt="" width="300">
+                            <p class="text-center mt-1">Did not found any order</p>
+                        </div>
                 @endforelse
                 </tr>
 
@@ -197,7 +198,8 @@
                                 <div class="form-group">
                                     <label for="">Part Number</label>
                                     <div class="form-field subcategory">
-                                        <input type="text" class="form-control" id="part_number" name="part_number"
+                                        <input type="text" class="form-control" id="part_number"
+                                            name="part_number"
                                             value="{{ old('part_number', $product->part_number ?? ' ') }}"
                                             placeholder="Part Number">
                                         @error('part_number')

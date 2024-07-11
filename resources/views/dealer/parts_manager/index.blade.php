@@ -6,8 +6,8 @@
         <x-alert-component />
         <div class="cstm-bredcrum">
             <a href="#" class="bredcrum-list">Home</a>
-            <a href="#" class="bredcrum-list">Product</a>
-            <a href="#" class="bredcrum-list active">Table</a>
+            <a href="#" class="bredcrum-list">Parts match</a>
+            <a href="#" class="bredcrum-list active">Listing</a>
         </div>
         <div class="serach-and-filter-box">
             {{-- <h3>All Managers</h3> --}}
@@ -20,9 +20,15 @@
             </form>
             {{-- @can('role-view', $user) --}}
             @if ($role == 'Advance')
-                <a href="#" class="btn primary-btn" data-bs-toggle="modal" data-bs-target="#add-manager-model">
+                {{-- <a href="#" class="btn primary-btn" data-bs-toggle="modal" data-bs-target="#add-manager-model">
                     + Add New Manager
-                </a>
+                </a> --}}
+                <div class="serach-and-filter-box">
+                    <a href="javascript:void(0)" class="btn primary-btn" data-bs-toggle="modal"
+                        data-bs-target="#add-manager-model">
+                        <img src="{{ asset('assets/images/add-round-icon.svg') }}" alt=""> Add
+                    </a>
+                </div>
             @endif
             {{-- @endcan --}}
 
@@ -86,9 +92,10 @@
 
                         </tr>
                     @empty
-                        <tr>
-                            <td colspan="5" style="text-align: center">No result found</td>
-                        </tr>
+                        <div class="empty-data">
+                            <img src="{{ asset('assets/images/no-product.svg') }}  " alt="" width="300">
+                            <p class="text-center mt-1">Did not found any order</p>
+                        </div>
                     @endforelse
                 </table>
             </div>
