@@ -6,7 +6,7 @@
                     <div class="row">
                         <div class="col-lg-7">
                             <div class="footer-logo-box">
-                                <h6><a href="#">PartsMatch</a></h6>
+                                <h6><a href="#" class="footer-name">PartsMatch</a></h6>
                                 <h2 class="footer-title">Buy or sell <br>spare parts from this Platform</h2>
                                 <p class="ls-footer-title">Lorem ipsum, or lipsum as it is sometimes known, is dummy
                                     text

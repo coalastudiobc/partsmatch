@@ -1,4 +1,4 @@
-<div class="page-content-wrapper">
+<div class="page-content-wrapper cart-page-wrapper">
     <div class="row g-3">
         <div class="col-xl-8 col-lg-12 col-md-12">
             <div class="cart-table-wrapper">

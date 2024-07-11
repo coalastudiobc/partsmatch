@@ -205,9 +205,9 @@ p {
 }
 
 header {
-    position: sticky;
-    top: 0;
-    z-index: 999;
+    /* box-shadow: 0px 4px 30px 1px rgba(0, 0, 0, 0.09); */
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
 }
 
 ul {
@@ -301,12 +301,11 @@ header {
 }
 
 .navbar {
-    padding-top: 22px;
-    padding-bottom: 22px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     background-color: var(--white);
     width: 100%;
 }
-
 .navbar-collapse {
     justify-content: end;
 }
@@ -1488,7 +1487,8 @@ span.doller-symbol-txt.symbol {
 }
 
 .table-responsive::-webkit-scrollbar:horizontal {
-    width: 2px;
+    
+    height: 4px;
 }
 
 .sidebar-filter {
