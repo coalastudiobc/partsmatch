@@ -1787,3 +1787,7 @@ span.ymmm-cross {
     display: none;
 }
 
+.header-logo img{
+    width: 100%;
+    max-width: 192px;
+}

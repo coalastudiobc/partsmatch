@@ -6,7 +6,7 @@
             <div class="login-wrapper">
                 <div class="login-box">
                     <div class="logo-box">
-                        <img src="{{ asset('assets/images/header-logo.png') }}" alt="">
+                        <img src="{{ asset('assets/images/header-logo.svg') }}" alt="">
                     </div>
                     <x-alert-component />
 

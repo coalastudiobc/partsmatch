@@ -1575,3 +1575,7 @@ button.btn-close {
 .brand-table table tr th:last-child{
     width: unset !important;
 }
+.header-logo img{
+    width: 100%;
+    max-width: 192px;
+}
