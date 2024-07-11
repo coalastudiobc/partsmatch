@@ -66,7 +66,15 @@
                                     <div class="col-md-6 col-lg-4 col-xl-4">
                                         <div class="accessories-parts-box">
                                             <a
-                                                href="{{ route(auth()->check() ? auth()->user()->getRoleNames()->first() . '.products.details' : 'Dealer.products.details', $product->id) }}">
+                                            href="{{ 
+    route(
+        auth()->check() && auth()->user()->hasRole('Administrator') ? 
+            'admin.products.details' : 
+            (auth()->check() ? auth()->user()->getRoleNames()->first() . '.products.details' : 'Dealer.products.details'), 
+        ['product' => $product->id]
+    ) 
+}}">
+
                                                 <div class="more-product-cards cstm-card">
                                                     <div class="product-cards-img">
                                                         <img src="{{ Storage::url($product->productImage[0]->file_url) }}"

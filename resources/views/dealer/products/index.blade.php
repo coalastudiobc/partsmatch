@@ -95,7 +95,7 @@
                                         class="fa-solid fa-pen-to-square" style="color: #3EBE62;"></i></a>
                                 <a
                                     href="{{ route(auth()->user()->getRoleNames()->first() . '.products.delete', $product->id) }}"><i
-                                        class="fa-regular fa-trash-can" style="color: #E13F3F;"></i></a>
+                                        class="fa-regular fa-trash-can delete" style="color: #E13F3F;"></i></a>
                             </div>
                         </td>
                         {{-- @foreach ($products as $key => $product) --}}
