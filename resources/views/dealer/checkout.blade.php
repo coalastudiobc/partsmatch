@@ -89,13 +89,13 @@
                                                         <p>Home</p>
                                                         <input type="radio" name="addressType" id="s-option"
                                                             style="display: none" value="Home"
-                                                            {{ $deliveryAddress->address_type ? ($deliveryAddress->address_type == 'Home' ? 'checked' : '') : '' }}>
+                                                            {{ $deliveryAddress ? ($deliveryAddress->address_type == 'Home' ? 'checked' : '') : '' }}>
                                                     </label>
                                                     <label for="v-option">
                                                         <p>Office</p>
                                                         <input type="radio" name="addressType" id="v-option"
                                                             value="Office" style="display: none"
-                                                            {{ $deliveryAddress->address_type ? ($deliveryAddress->address_type == 'Office' ? 'checked' : '') : '' }}>
+                                                            {{ $deliveryAddress ? ($deliveryAddress->address_type == 'Office' ? 'checked' : '') : '' }}>
                                                     </label>
                                                     {{-- <div style="display: inline-block;">
                                                         <input type="radio" id="s-option" name="addressType" value="Office">

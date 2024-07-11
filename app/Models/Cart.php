@@ -22,4 +22,8 @@ class Cart extends Model
     {
         return $this->hasMany(CartProduct::class, 'cart_id', 'id');
     }
+    public function category()
+    {
+        return $this->hasOne(Category::class, 'subcategory_id', 'id');
+    }
 }

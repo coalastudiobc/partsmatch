@@ -4,6 +4,11 @@
 @section('content')
     <div class="dashboard-right-box parts-manager-table-box">
         <x-alert-component />
+        <div class="cstm-bredcrum">
+            <a href="#" class="bredcrum-list">Home</a>
+            <a href="#" class="bredcrum-list">Product</a>
+            <a href="#" class="bredcrum-list active">Table</a>
+        </div>
         <div class="serach-and-filter-box">
             {{-- <h3>All Managers</h3> --}}
             <form action="">

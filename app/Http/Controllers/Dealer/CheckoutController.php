@@ -251,6 +251,7 @@ class CheckoutController extends Controller
     public function to_address(Request $request)
     {
         try {
+            return redirect()->back()->with(['error' => 'some internal issues. Please try again later']);
             $response_in_array =  $this->address($request);
             $to_address = '';
             if ($response_in_array->object_state == "VALID") {

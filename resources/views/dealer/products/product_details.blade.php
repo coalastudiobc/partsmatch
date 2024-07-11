@@ -16,8 +16,14 @@
                                         </a>
                                     </div>
                                     <a href="{{ route('welcome.index') }}">
-                                        <p>Back</p>
+                                        <p></p>
                                     </a>
+                                    <div class="cstm-bredcrum ms-4">
+                                        <a href="#" class="bredcrum-list">Home</a>
+                                        <a href="#" class="bredcrum-list">product</a>
+                                        <a href="#" class="bredcrum-list">{{ $product->category->name ?? '' }}</a>
+                                        <a href="#" class="bredcrum-list active">{{ $product->name }}</a>
+                                    </div>
                                 </div>
                                 <div class="single-pro-slide">
                                     <div class="slick-product">
