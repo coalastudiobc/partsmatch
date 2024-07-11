@@ -222,7 +222,8 @@
                         @if ($loop->iteration > 8)
                         @break
                     @endif
-                    <a href="{{ route('dealer.products.interior', ['category' => $category->id]) }}">
+                    <a
+                        href="{{ route(auth()->check() ? auth()->user()->getRoleNames()->first() . '.products.interior' : 'Dealer.products.interior', ['category' => $category->id]) }}">
                         <div class="categories-box">
                             <img src="{{ asset('assets/images/categorie1.png') }}" alt="">
                             <p>{{ $category->name }}</p>
@@ -267,10 +268,9 @@
                 <div>
                     <div class="slick-tab ">
                         @foreach ($collections as $collection)
-                            {{-- @dump($collection, $products) --}}
                             <a href="javascript:void(0)"
-                                data-url="{{ route('dealer.products.interior', ['category' => $collection->id]) }}"
-                                data-id = "{{ $collection->id }}"
+                                data-url="{{ route(auth()->check() ? auth()->user()->getRoleNames()->first() . '.products.interior' : 'Dealer.products.interior', ['category' => $category->id]) }}"
+                                {{-- data-url="{{ route('auth()->user->getRoleNames().products.interior', ['category' => $collection->id]) }}" --}} data-id = "{{ $collection->id }}"
                                 class="tab-inner-box collectionSubcategory {{ $loop->first ? 'active' : '' }} ">
                                 {{ $collection->name }}
                             </a>
@@ -279,7 +279,7 @@
 
                 </div>
                 @if (isset($collections[0]))
-                    <a href="{{ route('dealer.products.interior', ['category' => $collections[0]->id]) }}"
+                    <a href="{{ route(auth()->check() ? auth()->user()->getRoleNames()->first() . '.products.interior' : 'Dealer.products.interior', ['category' => $category->id]) }}"
                         class="btn secondary-btn view-btn" id="collectioViewAll">
                         View All
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"
@@ -317,7 +317,7 @@
                         @foreach ($subcategories as $subcategory)
                             <li class="nav-item {{ $loop->first ? 'active' : '' }}" role="presentation">
                                 <button
-                                    data-url="{{ route('dealer.products.interior', ['category' => $subcategory->id]) }}"
+                                    data-url="{{ route(auth()->check() ? auth()->user()->getRoleNames()->first() . '.products.interior' : 'Dealer.products.interior', ['category' => $category->id]) }}"
                                     data-id = "{{ $subcategory->id }}"
                                     class="nav-link navButton productsubcategory {{ $loop->first ? 'active' : '' }}"
                                     type="button">{{ $subcategory->name }}</button>
@@ -327,7 +327,7 @@
 
                         <li class="nav-item" role="presentation">
                             @if (isset($collections[0]))
-                                <a href="{{ route('dealer.products.interior', ['category' => $subcategories[0]->id]) }}"
+                                <a href="{{ route(auth()->check() ? auth()->user()->getRoleNames()->first() . '.products.interior' : 'Dealer.products.interior', ['category' => $category->id]) }}"
                                     class="nav-link" id="subcategoryViewAll">
                                     View All
                                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12"

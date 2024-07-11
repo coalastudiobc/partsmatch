@@ -54,7 +54,8 @@
                                         <div class="pro-search-box">
                                             <input type="text" name="globalquery" class="form-control" value=""
                                                 placeholder="Search...">
-                                            <button type="submit" class="btn primary-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                            <button type="submit" class="btn primary-btn"><i
+                                                    class="fa-solid fa-magnifying-glass"></i></button>
                                         </div>
                                     </form>
                                 </li>
@@ -82,18 +83,18 @@
                                     <a class="nav-link" aria-current="page"
                                         href="{{ route('view', ['slug' => 'about-us']) }}">About Us</a>
                                 </li> --}}
-                                @auth
+                                {{-- @auth
 
                                     <li class="nav-item">
                                         <a class="nav-link" aria-current="page"
                                             href="{{ route('welcome.index') }}">Home</a>
-                                    </li>
-                                    {{-- <li class="nav-item">
+                                    </li> --}}
+                                {{-- <li class="nav-item">
                                         <a class="nav-link" aria-current="page"
                                             href="{{ route('dealer.chat.view') }}">chat</a>
                                     </li> --}}
 
-                                @endauth
+                                {{-- @endauth --}}
                             </ul>
                             @guest
                                 <ul class="navbar-nav">
@@ -130,15 +131,17 @@
                                                     </button>
                                                     <ul class="dropdown-menu dropdown-menu-end">
                                                         <li><a class="dropdown-item"
-                                                                href="{{ route('dealer.profile') }}"><i class="fa-solid fa-user"></i> Profile</a>
+                                                                href="{{ route('Dealer.profile') }}"><i
+                                                                    class="fa-solid fa-user"></i> Profile</a>
                                                         </li>
                                                         <li><a class="dropdown-item"
-                                                                href="{{ route('dealer.subscription.plan') }}"><i class="fa-solid fa-crown"></i> Subscription
+                                                                href="{{ route('Dealer.subscription.plan') }}"><i
+                                                                    class="fa-solid fa-crown"></i> Subscription
                                                                 Plan</a>
                                                         </li>
                                                         {{-- <li><a class="dropdown-item" href="#">Another action</a></li> --}}
                                                         <li><a class="dropdown-item" href="{{ route('logout') }}">
-                                                            <i class="fa-solid fa-right-from-bracket"></i> Logout
+                                                                <i class="fa-solid fa-right-from-bracket"></i> Logout
                                                             </a>
                                                         </li>
                                                     </ul>

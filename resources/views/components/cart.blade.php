@@ -129,7 +129,8 @@
 
             </div>
             <div class="cart-checkout">
-                <a href="{{ route('dealer.checkout.create') }}" class="btn secondary-btn view-btn">
+                <a href="{{ route(auth()->user()->getRoleNames()->first() . '.checkout.create') }}"
+                    class="btn secondary-btn view-btn">
                     Checkout
                 </a>
             </div>

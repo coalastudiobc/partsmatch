@@ -46,7 +46,6 @@ class ProductController extends Controller
     }
     public function index()
     {
-
         $years = $this->sdk->years();
 
         $products = Product::with('productImage', 'featuredProduct')->where('user_id', auth()->user()->id)->orderBy('id', 'DESC')->Search()->Paginate(5);

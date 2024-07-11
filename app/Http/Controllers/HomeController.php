@@ -87,9 +87,9 @@ class HomeController extends Controller
         if (Auth::user()->hasRole("Administrator")) {
             return redirect()->route('admin.category.index');
         } else if (Auth::user()->hasRole("Dealer")) {
-            return redirect()->route('dealer.products.index');
+            return redirect()->route('Dealer.products.index');
         } else if (Auth::user()->hasRole("Manager")) {
-            return redirect()->route('dealer.products.index');
+            return redirect()->route('Manager.products.index');
         } else {
             auth()->logout();
             return redirect()->back()->with('error', 'There is some issue for this account. Please contact to administrator.');

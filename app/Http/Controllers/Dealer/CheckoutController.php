@@ -191,7 +191,7 @@ class CheckoutController extends Controller
                 'metadata' => [
                     'cart_id' => jsencode_userdata($cart->id), // Add your custom order ID as metadata
                 ],
-                'return_url' => route('dealer.myorder.orderlist')
+                'return_url' => route('Dealer.myorder.orderlist')
             ]);
 
 
@@ -230,7 +230,7 @@ class CheckoutController extends Controller
             ];
             ShippingAddress::create($shiping_address);
             DB::commit();
-            return redirect()->route('dealer.myorder.orderlist');
+            return redirect()->route('Dealer.myorder.orderlist');
         } catch (Exception $e) {
             DB::rollback();
             return redirect()->back()->with('error', $e->getMessage());
@@ -251,6 +251,7 @@ class CheckoutController extends Controller
     public function to_address(Request $request)
     {
         try {
+            return redirect()->back()->with(['error' => 'some internal issues. Please try again later']);
             $response_in_array =  $this->address($request);
             $to_address = '';
             if ($response_in_array->object_state == "VALID") {

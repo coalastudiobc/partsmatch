@@ -26,7 +26,7 @@
                         <x-alert-component />
                         <div class="cstm-card account-detail-card">
                             <div class="accounts-form">
-                                <form id="account_setting" action="{{ route('dealer.profile.update') }}"
+                                <form id="account_setting" action="{{ route('Dealer.profile.update') }}"
                                     enctype="multipart/form-data" method="post">
                                     @csrf
                                     <div class="row">
@@ -418,7 +418,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div class="add-pro-form">
                     <h2>Change Password</h2>
-                    <form id="changePassword" action="{{ route('dealer.changepassword') }}" method='post'>
+                    <form id="changePassword" action="{{ route('Dealer.changepassword') }}" method='post'>
                         @csrf
                         <div class="row">
                             <div class="col-md-12">

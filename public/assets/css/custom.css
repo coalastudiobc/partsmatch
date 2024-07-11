@@ -220,7 +220,7 @@
 .product-infography h2 {
     font-size: 20px;
     text-transform: capitalize;
-    margin-bottom: 10px;
+    margin-bottom: 16px;
 }
 
 .product-infography span {
@@ -406,7 +406,7 @@
 .pro-dealer-info {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: start;
 }
 
 .pro-dealer-img-box {
@@ -1639,7 +1639,7 @@ a.btn.primary-btn.dashboard-btn.nav-link {
 
 .delivery-form .form-group .form-control{
     min-height: 47px;
-} 
+}
 .add-type-main {
     width: 100%;
     background-color: #fff;
@@ -1682,3 +1682,24 @@ a.btn.primary-btn.dashboard-btn.nav-link {
 }
 
 
+.section-padding{
+    padding: 40px 0px;
+}
+.pro-dealer-box > a {
+    width: 100%;
+}
+
+.product-cards-img {
+    max-width: 160px;
+    height: 160px;
+    margin: 0 auto 70px;
+}
+
+.empty-category {
+    max-width: 430px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}

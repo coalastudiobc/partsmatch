@@ -420,7 +420,7 @@
 
                             <div class="row">
                                 <div class="col-md-6">
-                                    <a href="{{ route('dealer.products.index') }}"
+                                    <a href="{{ route(auth()->user()->getRoleNames()->first() . '.products.index') }}"
                                         class="btn secondary-btn full-btn mr-1">Back</a>
                                 </div>
                                 <div class="col-md-6">

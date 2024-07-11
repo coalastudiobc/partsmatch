@@ -28,7 +28,7 @@ class SubscriptionController extends Controller
             $subscription = $user->newSubscription($plan->stripe_id, $plan->stripe_price)->create($request->token);
             // auth()->user()->notify(new SubscriptionPurchased());
 
-            return redirect()->route('dealer.subscription.plan')->with(['status' => 'success', 'message' => 'Subscription purchased successfully']);
+            return redirect()->route('Dealer.subscription.plan')->with(['status' => 'success', 'message' => 'Subscription purchased successfully']);
         } catch (Exception $e) {
 
             return redirect()->back()->with(['status' => 'error', 'message' => $e->getMessage()]);

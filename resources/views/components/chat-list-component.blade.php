@@ -29,7 +29,7 @@
             } @endphp
             <li class=" li-list {{ isset($chat_id) && $chat_id == $chat->chat_id ? 'active' : '' }}"
                 chatId="{{ isset($chat_id) && $chat_id == $chat->chat_id ? $chat_id : $chat->chat_id }}"
-                receiverId="{{ $user->id }}" get_chat_url="{{ route('dealer.chat.messages') }}">
+                receiverId="{{ $user->id }}" get_chat_url="{{ route('Dealer.chat.messages') }}">
 
                 <a class="chat-open-box">
                     <div class="chat-profile">

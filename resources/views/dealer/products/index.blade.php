@@ -73,7 +73,7 @@
                                 <input type="checkbox" id="switch100{{ $key }}" class="custom-switch-input"
                                     @if ($product->status == '1') checked="checked" @endif
                                     onchange="toggleStatus(this, 'Product', '{{ $product->id }}');"
-                                    url="{{ route('dealer.products.status') }}"><label
+                                    url="{{ route('Dealer.products.status') }}"><label
                                     for="switch100{{ $key }}">Toggle</label>
                             </div>
                         </td>
@@ -90,9 +90,11 @@
                         </td> --}}
                         <td>
                             <div class="action-btns">
-                                <a href="{{ route('dealer.products.edit', $product->id) }}"><i
+                                <a
+                                    href="{{ route(auth()->user()->getRoleNames()->first() . '.products.edit', $product->id) }}"><i
                                         class="fa-solid fa-pen-to-square" style="color: #3EBE62;"></i></a>
-                                <a href="{{ route('dealer.products.delete', $product->id) }}"><i
+                                <a
+                                    href="{{ route(auth()->user()->getRoleNames()->first() . '.products.delete', $product->id) }}"><i
                                         class="fa-regular fa-trash-can" style="color: #E13F3F;"></i></a>
                             </div>
                         </td>
@@ -130,9 +132,10 @@
                         </tr> --}}
 
                     @empty
-                    <tr>
-                        <td colspan="6" style="text-align: center">No result found</td>
-                    </tr>
+                        <div class="empty-data">
+                            <img src="{{ asset('assets/images/no-product.svg') }}  " alt="" width="300">
+                            <p class="text-center mt-1">Did not found any order</p>
+                        </div>
                 @endforelse
                 </tr>
 
@@ -154,7 +157,7 @@
             <div class="modal-body">
                 <div class="add-pro-form">
                     <h2>Add New Products</h2>
-                    <form id="product" action="{{ route('dealer.products.store') }}" method="post"
+                    <form id="product" action="{{ route('Dealer.products.store') }}" method="post"
                         enctype="multipart/form-data">
                         @csrf
                         <div class="row">
@@ -197,7 +200,8 @@
                                 <div class="form-group">
                                     <label for="">Part Number</label>
                                     <div class="form-field subcategory">
-                                        <input type="text" class="form-control" id="part_number" name="part_number"
+                                        <input type="text" class="form-control" id="part_number"
+                                            name="part_number"
                                             value="{{ old('part_number', $product->part_number ?? ' ') }}"
                                             placeholder="Part Number">
                                         @error('part_number')

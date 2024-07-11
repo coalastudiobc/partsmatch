@@ -1,6 +1,7 @@
 {{-- @if (count(auth()->user()->cart) != 0) --}}
 <li class="nav-item">
-    <a class="nav-link" aria-current="page" href="{{ route('dealer.cart.cart.index') }}">
+    <a class="nav-link" aria-current="page"
+        href="{{ route(auth()->user()->getRoleNames()->first() . '.cart.cart.index') }}">
         <div class="nav-msg-icon">
             <p class="carttotal">
                 {{ authCartProducts() ? count(authCartProducts()) : '0' }}

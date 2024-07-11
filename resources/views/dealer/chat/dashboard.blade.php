@@ -56,10 +56,10 @@
         };
         var senderId = {{ $authUser->id }}
         var userImage = "{{ asset('assets/images/chat-pro1.png') }}";
-        var get_user_names = "{{ route('dealer.chat.getuser.names.sa') }}";
-        var last_msg_update_url = "{{ route('dealer.chat.lastchat.update') }}";
-        var get_chat_url = "{{ route('dealer.chat.messages') }}";
-        var chat_image_store_url = "{{ route('dealer.chat.chat.image') }}";
+        var get_user_names = "{{ route('Dealer.chat.getuser.names.sa') }}";
+        var last_msg_update_url = "{{ route('Dealer.chat.lastchat.update') }}";
+        var get_chat_url = "{{ route('Dealer.chat.messages') }}";
+        var chat_image_store_url = "{{ route('Dealer.chat.chat.image') }}";
     </script>
     <script defer src="{{ asset('assets/js/chat.js') }}"></script>
     {{-- <script>

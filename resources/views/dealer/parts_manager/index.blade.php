@@ -4,6 +4,11 @@
 @section('content')
     <div class="dashboard-right-box parts-manager-table-box">
         <x-alert-component />
+        <div class="cstm-bredcrum">
+            <a href="#" class="bredcrum-list">Home</a>
+            <a href="#" class="bredcrum-list">Parts match</a>
+            <a href="#" class="bredcrum-list active">Listing</a>
+        </div>
         <div class="serach-and-filter-box">
             {{-- <h3>All Managers</h3> --}}
             <form action="">
@@ -15,9 +20,15 @@
             </form>
             {{-- @can('role-view', $user) --}}
             @if ($role == 'Advance')
-                <a href="#" class="btn primary-btn" data-bs-toggle="modal" data-bs-target="#add-manager-model">
+                {{-- <a href="#" class="btn primary-btn" data-bs-toggle="modal" data-bs-target="#add-manager-model">
                     + Add New Manager
-                </a>
+                </a> --}}
+                <div class="serach-and-filter-box">
+                    <a href="javascript:void(0)" class="btn primary-btn" data-bs-toggle="modal"
+                        data-bs-target="#add-manager-model">
+                        <img src="{{ asset('assets/images/add-round-icon.svg') }}" alt=""> Add
+                    </a>
+                </div>
             @endif
             {{-- @endcan --}}
 
@@ -64,26 +75,27 @@
                                     <input type="checkbox" id="switch{{ $key }}" class="custom-switch-input"
                                         @if ($user->status == 'ACTIVE') checked="checked" @endif
                                         onchange="toggleStatus(this, 'User', '{{ $user->id }}');"
-                                        url="{{ route('dealer.status') }}"><label
+                                        url="{{ route('Dealer.status') }}"><label
                                         for="switch{{ $key }}">Toggle</label>
                                 </div>
                             </td>
                             <td>
                                 <div class="action-btns">
-                                    <a href="{{ route('dealer.partsmanager.edit', [$user->id]) }}"><i
+                                    <a href="{{ route('Dealer.partsmanager.edit', [$user->id]) }}"><i
                                             class="fa-solid fa-pen-to-square" style="color: #3EBE62;"
                                             title="edit"></i></a>
                                     <a class="delete"
-                                        href="{{ route('dealer.partsmanager.delete', ['user' => $user->id]) }}"><i
+                                        href="{{ route('Dealer.partsmanager.delete', ['user' => $user->id]) }}"><i
                                             class="fa-regular fa-trash-can " style="color: #E13F3F;" title="delete"></i></a>
                                 </div>
                             </td>
 
                         </tr>
                     @empty
-                        <tr>
-                            <td colspan="5" style="text-align: center">No result found</td>
-                        </tr>
+                        <div class="empty-data">
+                            <img src="{{ asset('assets/images/no-product.svg') }}  " alt="" width="300">
+                            <p class="text-center mt-1">Did not found any order</p>
+                        </div>
                     @endforelse
                 </table>
             </div>
@@ -155,7 +167,7 @@
                     <div class="modal-body">
                         <div class="add-pro-form">
                             <h2 id="modal_title">Add New Manager grg</h2>
-                            <form id="parts_manager" action="{{ route('dealer.partsmanager.store') }}" method="post"
+                            <form id="parts_manager" action="{{ route('Dealer.partsmanager.store') }}" method="post"
                                 enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
