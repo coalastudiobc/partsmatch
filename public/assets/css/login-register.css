@@ -379,3 +379,8 @@
 .form-field:has(.input-icon) input {
     padding-right: 50px;
 }
+
+.logo-box img{
+    width: 100%;
+    max-width: 192px;
+}

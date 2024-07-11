@@ -609,11 +609,10 @@ header {
 }
 
 .collection-box {
-
     border: 0.893px solid #DDD;
     max-width: 300px;
     width: 100%;
-    padding: 40px 10px;
+    padding: 20px 10px 20px 10px;
     display: flex;
     flex-direction: column;
     /* align-items: center; */
@@ -656,6 +655,8 @@ header {
     color: #5C5C5C;
     margin: 0;
     margin-bottom: 13px;
+    padding-top: 10px;
+    border-top: 1px solid #dddd;
 }
 
 .slick-tab {
