@@ -1,7 +1,7 @@
 @foreach ($products as $product)
     <div class="more-product-cards">
         <a
-            href="{{ route(auth()->id() ? auth()->user()->getRoleNames()->first() . 'products.details' : 'Dealer.products.details', $product->id) }}">
+            href="{{ route(auth()->id() ? auth()->user()->getRoleNames()->first() . '.products.details' : 'Dealer.products.details', $product->id) }}">
             <div class="product-cards-img">
                 @if (isset($product->productImage[0]))
                     <img src="{{ Storage::url($product->productImage[0]->file_url) }}" alt="">

@@ -18,9 +18,9 @@
                             </ul>
                         </div>
                     @endif
-
                     <div class="card-body">
-                        <form id="product" action="{{ route('dealer.products.update', $product->id) }}"
+                        <form id="product"
+                            action="{{ route(auth()->check() ? auth()->user()->getRoleNames()->first() . '.products.update' : 'Dealer.products.update', $product->id) }}"
                             enctype="multipart/form-data" method="post">
                             @csrf
                             <div class="row">

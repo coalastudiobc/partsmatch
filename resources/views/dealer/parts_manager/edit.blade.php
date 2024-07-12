@@ -11,9 +11,9 @@
                         <div class="card">
                             <div class='ajax-response'></div>
                             <x-alert-component />
-
+                            
                             <div class="card-body">
-                                <form id="parts_manager" action="{{ route('dealer.partsmanager.update', [$user->id]) }}"
+                                <form id="parts_manager" action="{{ route(auth()->check() ? auth()->user()->getRoleNames()->first() . '.partsmanager.update':'Dealer.partsmanager.update, [$user->id]) }}"
                                     enctype="multipart/form-data" method="post">
                                     @csrf
                                     <div class="row">
@@ -22,8 +22,7 @@
                                                 <label for="file-upload">
                                                     <div class="profile-main-img">
                                                         <div class="profile-without-img">
-                                                            <img src=" @if ($user->profile_picture_url) {{ Storage::url($user->profile_picture_url) }}  @else {{ asset('assets/images/user.png') }} @endif "
-                                                                id="Userimage" alt="">
+                                                        <img src="{{ $user->profile_picture_url ? Storage::url($user->profile_picture_url) : asset('assets/images/user.png') }}" id="Userimage" alt="">
                                                         </div>
 
                                                         <div class="upload-icon">

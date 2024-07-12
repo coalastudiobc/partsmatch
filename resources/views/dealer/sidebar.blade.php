@@ -64,8 +64,8 @@
                     </div>
                 </div>
             </li>
-            @if (auth()->user()->hasRole('Dealer') || auth()->user()->permissions[0]->name !== 'role-view')
-                <li class="analyics-tabs-list">
+            @if (auth()->user()->hasRole('Dealer') || (isset(auth()->user()->permissions[0]) && auth()->user()->permissions[0]->name !== 'role-view'))
+            <li class="analyics-tabs-list">
                     <div class="accordion accordion-flush" id="accordionFlushExample">
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="flush-headingOne">

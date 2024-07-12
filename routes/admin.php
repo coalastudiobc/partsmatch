@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Admin\OrderController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Dealer\ProductController;
+
 // use QrCode;
 
 /*
@@ -14,6 +16,19 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+Route::name('admin.products.')->group(function () {
+    Route::get('/products/interior/{subcategory}', [ProductController::class, 'interior'])->name('interior.page');
+    Route::get('/products/interior', [ProductController::class, 'show'])->name('interior');
+    Route::get('/products/details/{product}', [ProductController::class, 'details'])->name('details');
+});
+Route::name('admin.cart.')->group(function () {
+    Route::get('cart/index', [CartController::class, 'index'])->name('cart.index');
+    Route::post('add/to/cart/{product_id}', [CartController::class, 'addToCart'])->name('cart');
+    Route::get('delete/to/cart/{product}', [CartController::class, 'removeFromCart'])->name('remove');
+    Route::post('update/to/cart/{product}', [CartController::class, 'updateToCart'])->name('update');
+});
 
 Route::match(['GET', "POST"], 'cms/status', 'App\Http\Controllers\HomeController@toggleStatus')->name('cms.status');
 Route::match(['GET', "POST"], 'product/status', 'App\Http\Controllers\HomeController@toggleStatus')->name('product.status');
