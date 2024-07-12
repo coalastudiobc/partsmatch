@@ -34,31 +34,37 @@
     <header>
         <div class="custm-nav">
             <div class="container">
-                <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                <nav class="navbar  bg-body-tertiary">
                     <a class="navbar-brand" href="{{ route('welcome') }}">
                         <div class="header-logo">
                             <img src="{{ asset('assets/images/header-logo.png') }}  " alt="">
                         </div>
                     </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    {{-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                         <span class="navbar-toggler-icon"></span>
                         <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse ms-auto" id="navbarNav">
+                    </button> --}}
+                    <div>
+                        <ul>
+                            <li>
+                                <form action="{{ route('search') }}" method="GET">
+                                    <div class="pro-search-box">
+                                        <input type="text" name="globalquery" class="form-control" value=""
+                                            placeholder="Search...">
+                                        <button type="submit" class="btn primary-btn"><i
+                                                class="fa-solid fa-magnifying-glass"></i></button>
+                                    </div>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="" id="navbarNav">
+
                         <div class="custm-nav-menu login-nav">
                             <ul class="navbar-nav">
-                                <li>
-                                    <form action="{{ route('search') }}" method="GET">
-                                        <div class="pro-search-box">
-                                            <input type="text" name="globalquery" class="form-control" value=""
-                                                placeholder="Search...">
-                                            <button type="submit" class="btn primary-btn"><i
-                                                    class="fa-solid fa-magnifying-glass"></i></button>
-                                        </div>
-                                    </form>
-                                </li>
+
                                 @auth
                                     <li class="nav-item">
                                         <a class="nav-link" aria-current="page"

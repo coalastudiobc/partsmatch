@@ -41,7 +41,8 @@
                                 </div>
                                 <div class="col-md-7">
                                     <div class="hero-img">
-                                        <img src="images/hero-banner-img.png" alt="">
+                                        {{-- <img src="images/hero-banner-img.png" alt=""> --}}
+                                        <img src="{{ asset('assets/images/hero-banner-img.png') }}" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -79,7 +80,9 @@
                                 </div>
                                 <div class="col-md-7">
                                     <div class="hero-img">
-                                        <img src="images/hero-banner-img.png" alt="">
+                                        {{-- <img src="images/hero-banner-img.png" alt=""> --}}
+                                        <img src="{{ asset('assets/images/hero-banner-img.png') }}" alt="">
+
                                     </div>
                                 </div>
                             </div>
@@ -117,7 +120,9 @@
                                 </div>
                                 <div class="col-md-7">
                                     <div class="hero-img">
-                                        <img src="images/hero-banner-img.png" alt="">
+                                        {{-- <img src="images/hero-banner-img.png" alt=""> --}}
+                                        <img src="{{ asset('assets/images/hero-banner-img.png') }}" alt="">
+
                                     </div>
                                 </div>
                             </div>
@@ -155,7 +160,9 @@
                                 </div>
                                 <div class="col-md-7">
                                     <div class="hero-img">
-                                        <img src="images/hero-banner-img.png" alt="">
+                                        {{-- <img src="images/hero-banner-img.png" alt=""> --}}
+                                        <img src="{{ asset('assets/images/hero-banner-img.png') }}" alt="">
+
                                     </div>
                                 </div>
                             </div>
@@ -193,7 +200,9 @@
                                 </div>
                                 <div class="col-md-7">
                                     <div class="hero-img">
-                                        <img src="images/hero-banner-img.png" alt="">
+                                        {{-- <img src="images/hero-banner-img.png" alt=""> --}}
+                                        <img src="{{ asset('assets/images/hero-banner-img.png') }}" alt="">
+
                                     </div>
                                 </div>
                             </div>

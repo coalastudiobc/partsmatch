@@ -4,39 +4,41 @@
 @section('content')
     <div class="dashboard-right-box parts-manager-table-box">
         <x-alert-component />
-        <div class="cstm-bredcrum">
-            <a href="#" class="bredcrum-list">Home</a>
-            <a href="#" class="bredcrum-list">Parts match</a>
-            <a href="#" class="bredcrum-list active">Listing</a>
-        </div>
-        <div class="serach-and-filter-box">
-            {{-- <h3>All Managers</h3> --}}
-            <form action="">
-                <div class="pro-search-box">
-                    <input type="text" class="form-control" name="filter_by_name" placeholder="Search User By Name">
-                    <button type="submit" class="btn primary-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    <a href="#" class="btn secondary-btn filter-open-btn">Filter</a>
-                </div>
-            </form>
-            {{-- @can('role-view', $user) --}}
-            @if ($role == 'Advance')
-                {{-- <a href="#" class="btn primary-btn" data-bs-toggle="modal" data-bs-target="#add-manager-model">
-                    + Add New Manager
-                </a> --}}
-                <div class="serach-and-filter-box">
-                    <a href="javascript:void(0)" class="btn primary-btn" data-bs-toggle="modal"
-                        data-bs-target="#add-manager-model">
-                        <img src="{{ asset('assets/images/add-round-icon.svg') }}" alt=""> Add
-                    </a>
-                </div>
-            @endif
-            {{-- @endcan --}}
+        <div class="bredcrum-plus-filter">
+            <div class="cstm-bredcrum">
+                <a href="#" class="bredcrum-list">Home</a>
+                <a href="#" class="bredcrum-list">Parts match</a>
+                <a href="#" class="bredcrum-list active">Listing</a>
+            </div>
+            <div class="serach-and-filter-box">
+                {{-- <h3>All Managers</h3> --}}
+                <form action="">
+                    <div class="pro-search-box">
+                        <input type="text" class="form-control" name="filter_by_name" placeholder="Search User By Name">
+                        <button type="submit" class="btn primary-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        <a href="#" class="btn secondary-btn filter-open-btn">Filter</a>
+                    </div>
+                </form>
+                {{-- @can('role-view', $user) --}}
+                @if ($role == 'Advance')
+                    {{-- <a href="#" class="btn primary-btn" data-bs-toggle="modal" data-bs-target="#add-manager-model">
+                        + Add New Manager
+                    </a> --}}
+                    <div class="serach-and-filter-box">
+                        <a href="javascript:void(0)" class="btn primary-btn" data-bs-toggle="modal"
+                            data-bs-target="#add-manager-model">
+                            <img src="{{ asset('assets/images/add-round-icon.svg') }}" alt=""> Add
+                        </a>
+                    </div>
+                @endif
+                {{-- @endcan --}}
 
+            </div>
         </div>
 
         <div class="product-detail-table product-list-table pro-manage-table">
             <div class="table-responsive">
-                <table class="table">
+                <table class="table ">
                     <tr>
                         <th>
                             <p>Image</p>

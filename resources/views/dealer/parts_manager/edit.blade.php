@@ -4,14 +4,14 @@
 
 @section('content')
     <div class="main-content">
-        <section class="section">
+        <section class="section ">
             <div class="section-body">
                 <div class="row">
                     <div class="col-12 col-md-12 col-lg-12">
                         <div class="card">
                             <div class='ajax-response'></div>
                             <x-alert-component />
-                            
+
                             <div class="card-body">
                                 <form id="parts_manager" action="{{ route(auth()->check() ? auth()->user()->getRoleNames()->first() . '.partsmanager.update':'Dealer.partsmanager.update, [$user->id]) }}"
                                     enctype="multipart/form-data" method="post">

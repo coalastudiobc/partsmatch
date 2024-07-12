@@ -10,7 +10,7 @@
             </div>
         </div>
     </section>
-    <section class="page-content-sec">
+    <section class="page-content-sec section-padding">
         <div class="container">
             <div class="page-content-wrapper">
                 <div class="dealer-profile-box">

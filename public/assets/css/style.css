@@ -322,6 +322,7 @@ header {
 .navbar-nav {
     align-items: center;
     gap: 20px;
+    flex-direction: row;
 }
 
 .custm-nav-menu {
@@ -609,15 +610,15 @@ header {
 }
 
 .collection-box {
-
-    border: 0.893px solid #DDD;
+    /* border: 0.893px solid #DDD; */
     max-width: 300px;
     width: 100%;
-    padding: 40px 10px;
+    padding: 20px 20px;
     display: flex;
     flex-direction: column;
     /* align-items: center; */
     cursor: pointer;
+    box-shadow: 1px 1px 9px 3px #ddd;
 }
 
 .collection-boxes {
@@ -628,14 +629,15 @@ header {
 }
 
 .collection-img {
-    max-width: 168px;
-    height: 213px;
+    max-width: 260px;
+    height: 310px;
     padding-bottom: 20px;
     overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 0 auto;
+    width: 100%;
 }
 
 .collection-box h4 {
@@ -644,18 +646,20 @@ header {
 
 .collection-img img {
     width: 100%;
-    object-fit: contain;
+    object-fit: cover;
     height: 100%;
 }
 
 .collection-box p {
     font-size: 16px;
     text-transform: capitalize;
-    text-align: center;
-    line-height: 1;
+    text-align: left;
+    line-height: 1.2;
     color: #5C5C5C;
     margin: 0;
     margin-bottom: 13px;
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
 }
 
 .slick-tab {
@@ -681,10 +685,13 @@ header {
     justify-content: center;
     border-radius: 5px;
     background-color: #F6F6F6;
+    gap: 10px;
+    padding: 10px;
 }
 
 .tab-inner-box {
-    padding: 16px 18px;
+    padding: 11px 18px;
+    text-transform: capitalize;
 }
 
 .slick-tab-btn {
@@ -754,7 +761,7 @@ header {
 .more-product-cards img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
 }
 
 .price-and-cart {
@@ -793,6 +800,13 @@ header {
 
 .product-deails>p {
     font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    text-transform: capitalize;
+}
+.product-deails {
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
 }
 
 .more-product-boxes {
@@ -1459,6 +1473,7 @@ button.btn-close {
     margin: 20px 0 0;
     border-radius: 10px;
     padding: 10px;
+    box-shadow: 1px 1px 10px 4px #ddd;
 }
 .empty-data {
     position: absolute;
@@ -1786,4 +1801,7 @@ span.ymmm-cross {
 .banner-content-sec {
     display: none;
 }
-
+.brands-btn .view-btn {
+    font-size: 14px;
+    padding: 10px 18px;
+}

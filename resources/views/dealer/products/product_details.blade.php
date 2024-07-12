@@ -1,34 +1,35 @@
 @extends('layouts.front')
 @section('title', 'Product Details')
 @section('content')
-    <section class="single-product-sec">
+    <section class="single-product-sec py-3">
         <div class="container">
             <div class="single-product-wrapper">
 
                 <div class="songle-product-main">
+                    <div class="back-page-btn">
+                        <div class="back-round-icon">
+                            <a href="{{ route('welcome.index') }}">
+                                <i class="fa-solid fa-angle-left"></i>
+                            </a>
+                        </div>
+                        <a href="{{ route('welcome.index') }}">
+                            <p></p>
+                        </a>
+                        <div class="cstm-bredcrum ms-4">
+                            {{-- @dd($product->category->parent) --}}
+                            <a href="{{ route('welcome.index') }}" class="bredcrum-list">Home</a>
+                            <a href="{{ route(auth()->check() && auth()->user()->hasRole('Administrator') ? 'admin.products.interior' : (auth()->check() ? auth()->user()->getRoleNames()->first() . '.products.interior' : 'Dealer.products.interior'), ['category' => $product->category->parent->id]) }}"
+                                class="bredcrum-list">{{ $product->category->parent->name }}</a>
+                                 <a href="{{ route(auth()->check() && auth()->user()->hasRole('Administrator') ? 'admin.products.interior' : (auth()->check() ? auth()->user()->getRoleNames()->first() . '.products.interior' : 'Dealer.products.interior'), ['category' => $product->category->parent->id]) }}"
+
+                                class="bredcrum-list">{{ $product->category->name ?? '' }}</a>
+                            <a href="#" class="bredcrum-list active">{{ $product->name }}</a>
+                        </div>
+                    </div>
                     <div class="row ">
-                        <div class="col-xl-4 col-lg-12 col-md-12">
+                        <div class="col-xl-5 col-lg-12 col-md-12">
                             <div class="sticky-box">
-                                <div class="back-page-btn">
-                                    <div class="back-round-icon">
-                                        <a href="{{ route('welcome.index') }}">
-                                            <i class="fa-solid fa-angle-left"></i>
-                                        </a>
-                                    </div>
-                                    <a href="{{ route('welcome.index') }}">
-                                        <p></p>
-                                    </a>
-                                    <div class="cstm-bredcrum ms-4">
-                                        {{-- @dd($product->category->parent) --}}
-                                        <a href="{{ route('welcome.index') }}" class="bredcrum-list">Home</a>
-                                        <a href="{{ route(auth()->check() && auth()->user()->hasRole('Administrator') ? 'admin.products.interior' : (auth()->check() ? auth()->user()->getRoleNames()->first() . '.products.interior' : 'Dealer.products.interior'), ['category' => $product->category->parent->id]) }}"
-                                            class="bredcrum-list">{{ $product->category->parent->name }}</a>
-                                             <a href="{{ route(auth()->check() && auth()->user()->hasRole('Administrator') ? 'admin.products.interior' : (auth()->check() ? auth()->user()->getRoleNames()->first() . '.products.interior' : 'Dealer.products.interior'), ['category' => $product->category->parent->id]) }}"
-                                        
-                                            class="bredcrum-list">{{ $product->category->name ?? '' }}</a>
-                                        <a href="#" class="bredcrum-list active">{{ $product->name }}</a>
-                                    </div>
-                                </div>
+
                                 <div class="single-pro-slide">
                                     <div class="slick-product">
                                         <!-- Inside the containing div, add one div for each slide -->
@@ -69,9 +70,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-5 col-lg-12 col-md-12">
+                        <div class="col-xl-4 col-lg-12 col-md-12">
                             <div class="sticky-box">
-                                <div class="single-img-info mt-5">
+                                <div class="single-img-info ">
                                     <div class="product-infography">
                                         {{-- <h2>R1 Concepts® – eLINE Series Plain Brake Rotors</h2> --}}
                                         <h2>{{ $product->name }}® – Model-{{ $product->brand ?? 'Ford' }}
@@ -349,7 +350,7 @@
                 </div>
             </div>
     </section>
-    <section class="related-pro-sec">
+    <section class="related-pro-sec py-3">
         <div class="container">
             <div class="related-pro-wrapper">
                 <div class="dealer-product-header">
@@ -362,13 +363,13 @@
                     <div class="dealer-category-box">
                         @foreach ($allproducts as $product)
                             <a
-                            href="{{ 
+                            href="{{
     route(
-        auth()->check() && auth()->user()->hasRole('Administrator') ? 
-            'admin.products.details' : 
-            (auth()->check() ? auth()->user()->getRoleNames()->first() . '.products.details' : 'Dealer.products.details'), 
+        auth()->check() && auth()->user()->hasRole('Administrator') ?
+            'admin.products.details' :
+            (auth()->check() ? auth()->user()->getRoleNames()->first() . '.products.details' : 'Dealer.products.details'),
         ['product' => $product->id]
-    ) 
+    )
 }}">
 
                                 <div class="collection-box cstm-card ">
