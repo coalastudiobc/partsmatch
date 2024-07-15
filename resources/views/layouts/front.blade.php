@@ -37,7 +37,7 @@
                 <nav class="navbar  bg-body-tertiary">
                     <a class="navbar-brand" href="{{ route('welcome') }}">
                         <div class="header-logo">
-                            <img src="{{ asset('assets/images/header-logo.png') }}  " alt="">
+                            <img src="{{ asset('assets/images/header-logo.svg') }}  " alt="">
                         </div>
                     </a>
                     {{-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
