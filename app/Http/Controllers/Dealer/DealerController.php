@@ -14,11 +14,11 @@ class DealerController extends Controller
         return view('dealer.dashboard');
     }
 
-    public function dealerProfile(User $user)
+    public function dealerProfile(Product $product)
     {
-        $allproducts = Product::with('productImage')->where('user_id', $user->id)->limit(5)->get();
-
-        return view('dealer.profile.dealer_profile', compact('user', 'allproducts'));
+        $user = $product->user;
+        $allproducts = Product::with('productImage', 'category')->where('user_id', $product->user->id)->limit(5)->get();
+        return view('dealer.profile.dealer_profile', compact('user', 'allproducts', 'product'));
     }
     public function toggleStatus(Request $request)
     {

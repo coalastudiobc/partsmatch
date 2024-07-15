@@ -6,6 +6,7 @@ jQuery(document).ready(function () {
         e.preventDefault();
         jQuery('body').addClass('modal-open');
         let url = jQuery(this).attr('href');
+        console.log(url,jQuery(this));
         swal({
             title: 'Are You Sure?',
             text: 'You want to delete',

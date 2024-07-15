@@ -3,147 +3,134 @@
 @section('heading', 'Product Management')
 
 @section('content')
-    <div class="dashboard-right-box">
-        <x-alert-component />
-        <div class="bredcrum-plus-filter">
-            <div class="cstm-bredcrum">
-                <a href="#" class="bredcrum-list">Home</a>
-                <a href="#" class="bredcrum-list">Product</a>
-                <a href="#" class="bredcrum-list active">Table</a>
-            </div>
-            <div class="serach-and-filter-box">
-                <form action="">
-                    <div class="pro-search-box">
-                        <input type="text" name="filter_by_name" class="form-control" value=""
-                            placeholder="Search Product By Name">
-                        <button type="submit" class="btn primary-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    </div>
-                </form>
-                <a href="javascript:void(0)" class="btn primary-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    <img src="{{ asset('assets/images/add-round-icon.svg') }}" alt=""> ADD
-                </a>
-            </div>
+<div class="dashboard-right-box">
+    <x-alert-component />
+    <div class="bredcrum-plus-filter">
+        <div class="cstm-bredcrum">
+            <a href="#" class="bredcrum-list">Home</a>
+            <a href="#" class="bredcrum-list">Product</a>
+            <a href="#" class="bredcrum-list active">Table</a>
         </div>
-        <div class="product-detail-table product-list-table pro-manage-table">
-            <div class="table-responsive">
-                <table class="table ">
-                    <tr>
-                        <th>
-                            <p>Image</p>
-                        </th>
-                        <th>
-                            <p>Product Name</p>
-                        </th>
-                        <th>
-                            <p>Price</p>
-                        </th>
-                        <th>
-                            <p>Status</p>
-                        </th>
-                        {{-- <th>
+        <div class="serach-and-filter-box">
+            <form action="">
+                <div class="pro-search-box">
+                    <input type="text" name="filter_by_name" class="form-control" value="" placeholder="Search Product By Name">
+                    <button type="submit" class="btn primary-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+            </form>
+            <a href="javascript:void(0)" class="btn primary-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <img src="{{ asset('assets/images/add-round-icon.svg') }}" alt=""> ADD
+            </a>
+        </div>
+    </div>
+    <div class="product-detail-table product-list-table pro-manage-table">
+        <div class="table-responsive">
+            <table class="table ">
+                <tr>
+                    <th>
+                        <p>Image</p>
+                    </th>
+                    <th>
+                        <p>Product Name</p>
+                    </th>
+                    <th>
+                        <p>Price</p>
+                    </th>
+                    <th>
+                        <p>Status</p>
+                    </th>
+                    {{-- <th>
                             <p>Featured Status</p>
                         </th> --}}
-                        <th>
-                            <p>Action</p>
-                        </th>
-                    </tr>
-                    {{-- @dd($products[3]->featuredProduct[]->id); --}}
-                    @forelse ($products as $key => $product)
-                        <tr>
-                            @foreach ($product->productImage as $a => $image)
-                                <td>
-                                    <div class="pro-img-box" data-bs-toggle="modal" data-bs-target="#pro-detail-model">
-                                        <img src="{{ Storage::url($image->file_url) }}" alt="img">
-                                    </div>
-                                </td>
-                            @break
-                        @endforeach
-                        <td>
-                            <p>{{ $product->name }}</p>
-                        </td>
-                        <td>
-                            <p>{{ $product->price }}</p>
-                        </td>
-                        <td>
-                            <div class="toggle-btn">
-                                <input type="checkbox" id="switch100{{ $key }}" class="custom-switch-input"
-                                    @if ($product->status == '1') checked="checked" @endif
-                                    onchange="toggleStatus(this, 'Product', '{{ $product->id }}');"
-                                    url="{{ route('Dealer.products.status') }}"><label
-                                    for="switch100{{ $key }}">Toggle</label>
-                            </div>
-                        </td>
+                    <th>
+                        <p>Action</p>
+                    </th>
+                </tr>
+                {{-- @dd($products[3]->featuredProduct[]->id); --}}
+                @forelse ($products as $key => $product)
+                <tr>
+                    @foreach ($product->productImage as $a => $image)
+                    <td>
+                        <div class="pro-img-box" data-bs-toggle="modal" data-bs-target="#pro-detail-model">
+                            <img src="{{ Storage::url($image->file_url) }}" alt="img">
+                        </div>
+                    </td>
+                    @break
+                    @endforeach
+                    <td>
+                        <p>{{ $product->name }}</p>
+                    </td>
+                    <td>
+                        <p>{{ $product->price }}</p>
+                    </td>
+                    <td>
+                        <div class="toggle-btn">
+                            <input type="checkbox" id="switch100{{ $key }}" class="custom-switch-input" @if ($product->status == '1') checked="checked" @endif
+                            onchange="toggleStatus(this, 'Product', '{{ $product->id }}');"
+                            url="{{ route('Dealer.products.status') }}"><label for="switch100{{ $key }}">Toggle</label>
+                        </div>
+                    </td>
 
-                        {{-- <td>
+                    {{-- <td>
                             <div class="toggle-btn">
                                 <input type="checkbox" id="switch1{{ $key }}"
-                                    data-id=" @if (isset($product->featuredProduct->id)) {{ $product->featuredProduct->id }} @else 0 @endif"
-                                    product-id="{{ $product->id }}" class="custom-switch-input feature-switch"
-                                    @if (isset($product->featuredProduct) && $product->featuredProduct != null) checked="checked" @endif
-                                    @if (!plan_validity()) disabled @endif><label
-                                    for="switch1{{ $key }}">Toggle</label>
-                            </div>
-                        </td> --}}
-                        <td>
-                            <div class="action-btns">
-                                <a
-                                    href="{{ route(auth()->user()->getRoleNames()->first() . '.products.edit', $product->id) }}"><i
-                                        class="fa-solid fa-pen-to-square" style="color: #3EBE62;"></i></a>
-                                <a
-                                    href="{{ route(auth()->user()->getRoleNames()->first() . '.products.delete', $product->id) }}"><i
-                                        class="fa-regular fa-trash-can delete" style="color: #E13F3F;"></i></a>
-                            </div>
-                        </td>
-                        {{-- @foreach ($products as $key => $product) --}}
-                        {{-- <tr>
+                    data-id=" @if (isset($product->featuredProduct->id)) {{ $product->featuredProduct->id }} @else 0 @endif"
+                    product-id="{{ $product->id }}" class="custom-switch-input feature-switch"
+                    @if (isset($product->featuredProduct) && $product->featuredProduct != null) checked="checked" @endif
+                    @if (!plan_validity()) disabled @endif><label for="switch1{{ $key }}">Toggle</label>
+        </div>
+        </td> --}}
+        <td>
+            <div class="action-btns">
+                <a href="{{ route(auth()->user()->getRoleNames()->first() . '.products.edit', $product->id) }}"><i class="fa-solid fa-pen-to-square" style="color: #3EBE62;"></i></a>
+                <a href="{{ route(auth()->user()->getRoleNames()->first() . '.products.delete', $product->id) }}" class="delete"><i class="fa-regular fa-trash-can " style="color: #E13F3F;"></i></a>
+            </div>
+        </td>
+        {{-- @foreach ($products as $key => $product) --}}
+        {{-- <tr>
                             <td>
                                 <div class="pro-img-box" data-bs-toggle="modal" data-bs-target="#pro-detail-model">
                                     <img src="{{ Storage::url($product->productImage["$key"]->file_url) }}" alt="img">
-                                </div>
-                            </td>
-                            <td>
-                                <p>{{ $product->name }}</p>
-                            </td>
-                            <td>
-                                <p>{{ $product->price }}</p>
-                            </td>
-                            <td>
-                                <div class="toggle-btn">
-                                    <input type="checkbox" id="switch100{{ $key }}" class="custom-switch-input"
-                                        @if ($product->status == '1') checked="checked" @endif
-                                        onchange="toggleStatus(this, 'Product', '{{ $product->id }}');"
-                                        url="{{ route('dealer.products.status') }}"><label
-                                        for="switch100{{ $key }}">Toggle</label>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="action-btns">
-                                    <a href="{{ route('dealer.products.edit', $product->id) }}"><i
-                                            class="fa-solid fa-pen-to-square" style="color: #3EBE62;"></i></a>
-                                    <a href="{{ route('dealer.products.delete', $product->id) }}"><i
-                                            class="fa-regular fa-trash-can" style="color: #E13F3F;"></i></a>
-                                </div>
-                            </td>
-
-                        </tr> --}}
-
-                    @empty
-                        <div class="empty-data">
-                            <img src="{{ asset('assets/images/no-product.svg') }}  " alt="" width="300">
-                            <p class="text-center mt-1">Did not found any order</p>
-                        </div>
-                @endforelse
-                </tr>
-
-            </table>
-        </div>
     </div>
-    {!! $products->links('dealer.pagination') !!}
+    </td>
+    <td>
+        <p>{{ $product->name }}</p>
+    </td>
+    <td>
+        <p>{{ $product->price }}</p>
+    </td>
+    <td>
+        <div class="toggle-btn">
+            <input type="checkbox" id="switch100{{ $key }}" class="custom-switch-input" @if ($product->status == '1') checked="checked" @endif
+            onchange="toggleStatus(this, 'Product', '{{ $product->id }}');"
+            url="{{ route('dealer.products.status') }}"><label for="switch100{{ $key }}">Toggle</label>
+        </div>
+    </td>
+    <td>
+        <div class="action-btns">
+            <a href="{{ route('dealer.products.edit', $product->id) }}"><i class="fa-solid fa-pen-to-square" style="color: #3EBE62;"></i></a>
+            <a href="{{ route('dealer.products.delete', $product->id) }}"><i class="fa-regular fa-trash-can" style="color: #E13F3F;"></i></a>
+        </div>
+    </td>
+
+    </tr> --}}
+
+    @empty
+    <div class="empty-data">
+        <img src="{{ asset('assets/images/no-product.svg') }}  " alt="" width="300">
+        <p class="text-center mt-1">Did not found any order</p>
+    </div>
+    @endforelse
+    </tr>
+
+    </table>
+</div>
+</div>
+{!! $products->links('dealer.pagination') !!}
 </div>
 @endsection
 @section('modals')
-<div class="modal fade add-new-pro-modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+<div class="modal fade add-new-pro-modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <!-- <div class="modal-header">
@@ -153,16 +140,14 @@
             <div class="modal-body">
                 <div class="add-pro-form">
                     <h2>Add New Products</h2>
-                    <form id="product" action="{{ route('Dealer.products.store') }}" method="post"
-                        enctype="multipart/form-data">
+                    <form id="product" action="{{ route('Dealer.products.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">Product Name</label>
                                     <div class="form-field">
-                                        <input type="text" name="name" class="form-control"
-                                            placeholder="Product Name">
+                                        <input type="text" name="name" class="form-control" placeholder="Product Name">
 
                                     </div>
                                 </div>
@@ -171,11 +156,10 @@
                                 <div class="form-group">
                                     <label for="">Product Category</label>
                                     <div class="form-field">
-                                        <select type="text" name="category" class="form-control category"
-                                            placeholder="Product Category">
+                                        <select type="text" name="category" class="form-control category" placeholder="Product Category">
                                             <option value="">Select the category</option>
                                             @foreach (get_category() as $category)
-                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -185,8 +169,7 @@
                                 <div class="form-group">
                                     <label for="">Product SubCategory</label>
                                     <div class="form-field subcategory">
-                                        <select type="text" name="subcategory" class="form-control"
-                                            placeholder="Product SubCategory" id="subcategory">
+                                        <select type="text" name="subcategory" class="form-control" placeholder="Product SubCategory" id="subcategory">
                                             <option value="">Select the category</option>
                                         </select>
                                     </div>
@@ -196,14 +179,11 @@
                                 <div class="form-group">
                                     <label for="">Part Number</label>
                                     <div class="form-field subcategory">
-                                        <input type="text" class="form-control" id="part_number"
-                                            name="part_number"
-                                            value="{{ old('part_number', $product->part_number ?? ' ') }}"
-                                            placeholder="Part Number">
+                                        <input type="text" class="form-control" id="part_number" name="part_number" value="{{ old('part_number', $product->part_number ?? ' ') }}" placeholder="Part Number">
                                         @error('part_number')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                         @enderror
                                     </div>
                                 </div>
@@ -231,8 +211,7 @@
                                     <label for="">Add Product Images (Up to 5)</label>
                                     <label class="img-upload-box">
                                         <p>Upload Images</p>
-                                        <input type="file" name="images[]" id="upload-image" multiple
-                                            minlength="5" upload-image-count="0">
+                                        <input type="file" name="images[]" id="upload-image" multiple minlength="5" upload-image-count="0">
 
                                     </label>
                                     <div class="upload-img-preview">
@@ -244,8 +223,7 @@
                                 <div class="form-group">
                                     <label for="">Product Quantity</label>
                                     <div class="form-field">
-                                        <input type="text" name="stocks_avaliable" class="form-control"
-                                            placeholder="Product Quantity">
+                                        <input type="text" name="stocks_avaliable" class="form-control" placeholder="Product Quantity">
 
                                     </div>
                                 </div>
@@ -254,8 +232,7 @@
                                 <div class="form-group">
                                     <label for="">Product Price</label>
                                     <div class="form-field">
-                                        <input type="text" name="price" class="form-control"
-                                            placeholder="$000">
+                                        <input type="text" name="price" class="form-control" placeholder="$000">
 
                                     </div>
                                 </div>
@@ -301,12 +278,11 @@
                                 <div class="form-group">
                                     <label for="length">Length:</label>
                                     <div class="form-field">
-                                        <input type="number" class="form-control" id="length" name="length"
-                                            required value="{{ old('length', $product->length ?? ' ') }}">
+                                        <input type="number" class="form-control" id="length" name="length" required value="{{ old('length', $product->length ?? ' ') }}">
                                         @error('length')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                         @enderror
 
                                     </div>
@@ -316,12 +292,11 @@
                                 <div class="form-group">
                                     <label for="width">Width:</label>
                                     <div class="form-field">
-                                        <input type="number" class="form-control" id="width" name="width"
-                                            required value="{{ old('width', $product->width ?? '') }}">
+                                        <input type="number" class="form-control" id="width" name="width" required value="{{ old('width', $product->width ?? '') }}">
                                         @error('width')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                         @enderror
 
                                     </div>
@@ -332,12 +307,11 @@
                                     <label for="height">Height:</label>
 
                                     <div class="form-field">
-                                        <input type="number" class="form-control" id="height" name="height"
-                                            required value="{{ old('height', $product->height ?? ' ') }}">
+                                        <input type="number" class="form-control" id="height" name="height" required value="{{ old('height', $product->height ?? ' ') }}">
                                         @error('height')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                         @enderror
 
                                     </div>
@@ -347,12 +321,11 @@
                                 <div class="form-group">
                                     <label for="weight">Weight:</label>
                                     <div class="form-field">
-                                        <input type="number" class="form-control" id="weight" name="weight"
-                                            required value="{{ old('weight', $product->weight ?? ' ') }}">
+                                        <input type="number" class="form-control" id="weight" name="weight" required value="{{ old('weight', $product->weight ?? ' ') }}">
                                         @error('weight')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                         @enderror
                                     </div>
                                 </div>
@@ -361,8 +334,7 @@
                                 <div class="form-group">
                                     <label for="distance_unit">Distance Unit:</label>
                                     <div class="form-field">
-                                        <select id="distance_unit" class="form-control" name="distance_unit"
-                                            required>
+                                        <select id="distance_unit" class="form-control" name="distance_unit" required>
                                             <option value="cm">cm</option>
                                             <option value="m">m</option>
                                             <option value="in">in</option>
@@ -407,16 +379,13 @@
                                         <select class="form-control" name="car_years" id="carYear">
                                             <option id="selectYearDefault">Select year</option>
                                             @foreach ($years as $year)
-                                                <option value="{{ $year }}">{{ $year }}</option>
+                                            <option value="{{ $year }}">{{ $year }}</option>
                                             @endforeach
 
                                         </select>
                                         <span class="form-icon">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8"
-                                                viewBox="0 0 14 8" fill="none">
-                                                <path d="M13 1L7 7L1 1" stroke="#272643" stroke-width="2"
-                                                    stroke-miterlimit="10" stroke-linecap="round"
-                                                    stroke-linejoin="round"></path>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none">
+                                                <path d="M13 1L7 7L1 1" stroke="#272643" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
                                             </svg>
                                         </span>
                                     </div>
@@ -430,11 +399,8 @@
                                             <option>please select year first</option>
                                         </select>
                                         <span class="form-icon">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8"
-                                                viewBox="0 0 14 8" fill="none">
-                                                <path d="M13 1L7 7L1 1" stroke="#272643" stroke-width="2"
-                                                    stroke-miterlimit="10" stroke-linecap="round"
-                                                    stroke-linejoin="round"></path>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none">
+                                                <path d="M13 1L7 7L1 1" stroke="#272643" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
                                             </svg>
                                         </span>
                                     </div>
@@ -447,11 +413,8 @@
                                             <option>Select your make</option>
                                         </select>
                                         <span class="form-icon">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8"
-                                                viewBox="0 0 14 8" fill="none">
-                                                <path d="M13 1L7 7L1 1" stroke="#272643" stroke-width="2"
-                                                    stroke-miterlimit="10" stroke-linecap="round"
-                                                    stroke-linejoin="round"></path>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none">
+                                                <path d="M13 1L7 7L1 1" stroke="#272643" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
                                             </svg>
                                         </span>
                                     </div>
@@ -460,8 +423,7 @@
                             {{-- <i id="addValue" style="font-size: 20px; margin-top:50px;" class="fa-solid fa-circle-plus fa-fw"></i> --}}
                         </div>
                 </div>
-                <input type="hidden" name="compatable_with" class="form-control" id="compatableProducts"
-                    placeholder="Product Name">
+                <input type="hidden" name="compatable_with" class="form-control" id="compatableProducts" placeholder="Product Name">
                 <div id="test1234" class="ymmm-box-preview d-none">
                     {{-- <div class="ymmm-data-outer">
                         <div class="ymmm-box-data">
@@ -472,8 +434,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <a href="#" class="btn secondary-btn full-btn" data-bs-toggle="modal"
-                            data-bs-target="#bulk-upload">Bulk Upload</a>
+                        <a href="#" class="btn secondary-btn full-btn" data-bs-toggle="modal" data-bs-target="#bulk-upload">Bulk Upload</a>
                     </div>
                     <div class="col-md-6">
                         <button type="submit" id="submit" class="btn primary-btn full-btn">submit</button>
@@ -565,14 +526,11 @@
 
                                     <div class="accordion-item">
                                         <h2 class="accordion-header">
-                                            <button class="accordion-button collapsed" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#additional-information"
-                                                aria-expanded="false" aria-controls="collapseTwo">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#additional-information" aria-expanded="false" aria-controls="collapseTwo">
                                                 Additional Information
                                             </button>
                                         </h2>
-                                        <div id="additional-information" class="accordion-collapse collapse"
-                                            data-bs-parent="#accordionExample">
+                                        <div id="additional-information" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                                             <div class="accordion-body">
                                                 <p>Lorem ipsum, or lipsum as it is sometimes known, is dummy
                                                     text used in laying out print, graphic or web designs.
@@ -743,18 +701,17 @@
     });
 
 
-    // jQuery(document).ready(function() {
-    //     jQuery('.car-model').select2(); // Initialize select2 plugin
-    //     jQuery('#submit').click(function(e) {
-    //         var no_image = $('#upload-image').attr('upload-image-count');
-    //         if (parseInt(no_image) < 5) {
-    //             e.preventDefault();
-    //             return toastr.error("Please enter atleast 5 images");
-    //         }
-    //         // var formData = new FormData($('form#product').get(0));
-    //         $('#product').valid()
-    //     });
-    // });
+    jQuery(document).ready(function() {
+        jQuery('#submit').click(function(e) {
+            var no_image = $('#upload-image').attr('upload-image-count');
+            if (parseInt(no_image) < 5) {
+                e.preventDefault();
+                return toastr.error("Please enter atleast 5 images");
+            }
+            // var formData = new FormData($('form#product').get(0));
+            $('#product').valid()
+        });
+    });
 
     $(function() {
         // var carquery = new CarQuery();

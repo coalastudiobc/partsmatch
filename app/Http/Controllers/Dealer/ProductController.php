@@ -292,19 +292,23 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        // Cart::where('product_id', $product->id)->first();
-        $featureproduct = FeaturedProduct::where('product_id', $product->id)->first();
-        $images = ProductImage::where('product_id', $product->id)->get();
+        try {
+            // Cart::where('product_id', $product->id)->first();
+            $featureproduct = FeaturedProduct::where('product_id', $product->id)->first();
+            $images = ProductImage::where('product_id', $product->id)->get();
 
-        if ($featureproduct) {
-            $featureproduct->delete();
+            if ($featureproduct) {
+                $featureproduct->delete();
+            }
+            foreach ($images as $image) {
+                Storage::disk('public')->delete('products/images', $image->file_url);
+                $image->delete();
+            }
+            $product->delete();
+            return redirect()->back()->with(['message' => "successfully deleted"]);
+        } catch (Exception $e) {
+            return redirect()->back()->with(['error' => $e->getMessage()]);
         }
-        foreach ($images as $image) {
-            Storage::disk('public')->delete('products/images', $image->file_url);
-            $image->delete();
-        }
-        $product->delete();
-        return redirect()->back()->with(['message' => "successfully deleted"]);
     }
 
     public function featuredproductcreate(Product $product)

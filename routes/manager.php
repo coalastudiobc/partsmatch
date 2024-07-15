@@ -5,6 +5,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Dealer\ProductController;
 use App\Http\Controllers\Dealer\CheckoutController;
+use App\Http\Controllers\Dealer\DealerController;
 use App\Http\Controllers\Admin\CmsManagementController;
 
 /*
@@ -47,6 +48,10 @@ Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer'
             Route::get('/model/{year}', [ProductController::class, 'model'])->name('model');
             Route::get('/make/{model}', [ProductController::class, 'make'])->name('make');
         });
+
+        // product dealer profile
+        Route::get('/product/dealer/profile/view/{product}', [DealerController::class, 'dealerProfile'])->name('view.profile');
+
         Route::name('cart.')->group(function () {
             Route::get('cart/index', [CartController::class, 'index'])->name('cart.index');
             Route::post('add/to/cart/{product_id}', [CartController::class, 'addToCart'])->name('cart');

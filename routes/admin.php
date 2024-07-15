@@ -3,6 +3,10 @@
 use App\Http\Controllers\Admin\OrderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dealer\ProductController;
+use App\Http\Controllers\Dealer\DealerController;
+use App\Http\Controllers\CartController;
+
+
 
 // use QrCode;
 
@@ -47,6 +51,9 @@ Route::middleware(['auth', 'verified', 'admin'])->namespace('App\Http\Controller
     Route::get('shipping/add', 'AdminController@shippingAdd')->name('shipping.add');
     Route::get('shipping/delete/{shipping_id}', 'AdminController@shippingDestroy')->name('shipping.delete');
     Route::match(["GET", "POST"], "featured/product", 'AdminController@featured_list')->name('featured.product');
+
+    //view product dealer profile
+    Route::get('/product/dealer/profile/view/{product}', [DealerController::class, 'dealerProfile'])->name('view.profile');
 
 
     // Stripe settings
