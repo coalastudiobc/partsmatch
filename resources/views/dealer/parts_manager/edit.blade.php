@@ -13,7 +13,7 @@
                         <x-alert-component />
 
                         <div class="card-body">
-                            <form id="parts_manager" action="{{ route(auth()->check() ? auth()->user()->getRoleNames()->first() . '.partsmanager.update':'Dealer.partsmanager.update, $user->id) }}" enctype="multipart/form-data" method="post">
+                            <form id="parts_manager" action="{{ route(auth()->check() ? auth()->user()->getRoleNames()->first() . '.partsmanager.update':'Dealer.partsmanager.update', ['user' => $user->id]) }}" enctype="multipart/form-data" method="post">
                                 @csrf
                                 <div class="row">
                                     <div class="upload-img">
@@ -21,15 +21,15 @@
                                             <label for="file-upload">
                                                 <div class="profile-main-img">
                                                     <div class="profile-without-img">
-                                                        <img src="{{ $user->profile_picture_url ? Storage::url($user->profile_picture_url) : asset('assets/images/user.png') }}" id="Userimage" alt="User Image">
+                                                        <img src="{{ $user->profile_picture_url ? Storage::url($user->profile_picture_url) : asset(`assets/images/user.png`) }}" id="Userimage" alt="User Image">
                                                     </div>
                                                     <div class="upload-icon">
-                                                        <img src="{{ asset('assets/images/upload.png') }}" alt="">
+                                                        <img src="{{ asset(`assets/images/upload.png`) }}" alt="">
                                                     </div>
                                                 </div>
                                             </label>
-                                            <input type="file" name="image" id="file-upload" class="@error('image') is-invalid @enderror">
-                                            @error('image')
+                                            <input type="file" name="image" id="file-upload" class="@error(`image`) is-invalid @enderror">
+                                            @error(`image`)
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>

@@ -145,7 +145,7 @@
 
                                                     </div>
                                                     <div class="dealer-img-txt">
-                                                        <a href="{{ route('Dealer.view.profile', $product->user->id) }}">
+                                                        <a href="{{ route('Dealer.view.profile', $product->id) }}">
                                                             <u>
                                                                 <h5>{{ $product->user->name ?? ' ' }}</h5>
                                                             </u>
