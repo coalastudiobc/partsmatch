@@ -8,7 +8,7 @@
     <div class="dashboard-right-box">
         <x-alert-component />
 
-        <div class="card-header-form padding">
+        <div class="card-header-form padding d-flex justify-content-end">
             {{-- <h2>Categories</h2> --}}
             <a class="btn primary-btn btn-lg float-end" href="{{ route('admin.category.add') }}">Add
                 Category</a>

@@ -31,7 +31,123 @@
                                         </div>
 
                                     </div>
-                                    <div class="col-md-3">
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="dealer-pro-personal-info">
+                                            <ul>
+                                                <li>
+                                                    <h4>Name</h4>
+                                                    <p>{{ $user->name ? $user->name : 'N/A' }}</p>
+                                                </li>
+                                                <li>
+                                                    <h4>Email</h4>
+                                                    <p>{{ $user->email ? $user->email : 'N/A' }}</p>
+                                                </li>
+                                                <li>
+                                                    <h4>Phone Number</h4>
+                                                    <p>{{ $user->phone_number ? $user->phone_number : 'N/A' }}</p>
+                                                </li>
+                                                <li>
+                                                    <h4>Industry</h4>
+                                                    <p>{{ $user->industry_type ? $user->industry_type : 'N/A' }}</p>
+                                                </li>
+                                                <li>
+                                                    <h4>Address</h4>
+                                                    <p>{{ $user->address ? $user->address : 'N/A' }}</p>
+                                                </li>
+                                                <li>
+                                                    <h4>Zipcode</h4>
+                                                    <p>{{ $user->zipcode ? $user->zipcode : 'N/A' }}</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="dealer-pro-commission-info">
+                                            <ul>
+                                                <li>
+                                                    <h4>Commission</h4>
+                                                    <p>
+                                                        @if (isset($user->ComissionDetails->commision_value))
+                                                            {{ $user->ComissionDetails->commision_value }}{{ $user->ComissionDetails->commision_type == 'Percentage' ? '%' : '$' }}
+                                                        @else
+                                                            N/A
+                                                        @endif
+                                                    </p>
+                                                </li>
+                                                <li>
+                                                    <h4>Commission Action</h4>
+                                                    <div class="d-flex gap-3 align-items-center">
+                                                        <p>50% </p>
+                                                        <a class="btn primary-btn" href="{{ route('admin.commission', ['dealer_id' => jsencode_userdata($user->id)]) }}">
+                                                            @if (isset($user->ComissionDetails->commision_value))
+                                                                edit
+                                                            @else
+                                                                add
+                                                            @endif
+                                                        </a>
+                                                    </div>
+                                                </li>
+                                                <!-- <li>
+                                                    <h4>Commission Action</h4>
+                                                    <p>
+                                                        <a class="btn primary-btn" href="{{ route('admin.commission', ['dealer_id' => jsencode_userdata($user->id)]) }}">
+                                                            @if (isset($user->ComissionDetails->commision_value))
+                                                                edit
+                                                            @else
+                                                                add
+                                                            @endif
+                                                        </a>
+                                                    </p>
+                                                </li> -->
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-12">
+                                        <div class="dealer-last-five-product">
+                                            <h3>Recent Products</h3>
+                                            <div class="product-detail-table">
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <tr>
+                                                            <th>Name</th>
+                                                            <th>Stocks</th>
+                                                            <th>Price</th>
+                                                            <th>action</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>vejbjk</td>
+                                                            <td>2</td>
+                                                            <td>500</td>
+                                                            <td><a href="#" class="btn primary-btn small-btn"><i class="fa-solid fa-eye"></i></a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>vejbjk</td>
+                                                            <td>2</td>
+                                                            <td>500</td>
+                                                            <td><a href="#" class="btn primary-btn small-btn"><i class="fa-solid fa-eye"></i></a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>vejbjk</td>
+                                                            <td>2</td>
+                                                            <td>500</td>
+                                                            <td><a href="#" class="btn primary-btn small-btn"><i class="fa-solid fa-eye"></i></a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>vejbjk</td>
+                                                            <td>2</td>
+                                                            <td>500</td>
+                                                            <td><a href="#" class="btn primary-btn small-btn"><i class="fa-solid fa-eye"></i></a></td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="">Name</label>
                                             <div class="form-field">
@@ -114,7 +230,7 @@
                                                 </a>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
 
                                     <div class="col-md-12">
                                         <div class="dealer-profile-form-btn">

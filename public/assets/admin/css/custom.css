@@ -558,10 +558,10 @@
 }
 
 .pagination-box {
-    max-width: 53px;
+    max-width: 40px;
     border: 1px solid var(--heading-color);
     width: 100%;
-    padding: 14px 0px;
+    padding: 7px 0px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -618,7 +618,9 @@
     padding: 0px 0px;
     background: #F6F6F6;
     height: calc(100vh - 66px);
-    overflow: auto;
+    overflow-y: auto;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 .user-list-table table tr th:last-child,

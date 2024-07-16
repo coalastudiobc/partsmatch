@@ -4,16 +4,16 @@
 
 @section('content')
     <div class="main-content">
-        <section class="section">
+        <section class="section edit-cms">
             <div class="section-body">
-                <div class="row">
-                    <div class="col-6 col-md-6 col-lg-12">
-                        <div class="card">
+            <div class="card">
                             <div class='ajax-response'></div>
                             <x-alert-component />
 
                             <div class="card-body">
-                                <form id="cms" action="{{ route('admin.cms.update', [$page->id]) }}"
+                                <div class="dealer-profile-form-box">
+                                    <div class="dealer-profile-detail-form">
+                                    <form id="cms" action="{{ route('admin.cms.update', [$page->id]) }}"
                                     enctype="multipart/form-data" method="post">
                                     @csrf
                                     <div class="row">
@@ -190,10 +190,11 @@
                                     </div>
                                 </form>
 
+                                    </div>
+                            </div>
+
                             </div>
                         </div>
-                    </div>
-                </div>
             </div>
         </section>
     </div>
