@@ -7,9 +7,6 @@
     <x-alert-component />
     <div class="bredcrum-plus-filter">
         <div class="cstm-bredcrum">
-            <a href="#" class="bredcrum-list">Home</a>
-            <a href="#" class="bredcrum-list">Product</a>
-            <a href="#" class="bredcrum-list active">Table</a>
         </div>
         <div class="serach-and-filter-box">
             <form action="">
@@ -18,6 +15,9 @@
                     <button type="submit" class="btn primary-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
             </form>
+            <a href="javascript:void(0)" class="btn primary-btn" data-bs-toggle="modal" data-bs-target="#bulk-upload">
+                <img src="{{ asset('assets/images/add-round-icon.svg') }}" alt=""> Bulk upload
+            </a>
             <a href="javascript:void(0)" class="btn primary-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <img src="{{ asset('assets/images/add-round-icon.svg') }}" alt=""> ADD
             </a>
@@ -433,9 +433,9 @@
                     </div> --}}
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
+                    {{-- <div class="col-md-6">
                         <a href="#" class="btn secondary-btn full-btn" data-bs-toggle="modal" data-bs-target="#bulk-upload">Bulk Upload</a>
-                    </div>
+                    </div> --}}
                     <div class="col-md-6">
                         <button type="submit" id="submit" class="btn primary-btn full-btn">submit</button>
                     </div>
@@ -471,7 +471,7 @@
             <div class="modal-body">
                 <div class="add-pro-form">
                     <h2>Bulk Upload</h2>
-                    <form action="">
+                    <form action="{{route('product.bulk.upload')}}">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -484,7 +484,7 @@
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <a href="#" class="btn secondary-btn full-btn">submit</a>
+                                <button type="submit" class="btn secondary-btn full-btn">submit</button>
                             </div>
                         </div>
                     </form>

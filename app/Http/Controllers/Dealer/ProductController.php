@@ -62,6 +62,11 @@ class ProductController extends Controller
         //
     }
 
+    public function bulkUpload()
+    {
+        //
+    }
+
     /**
      * Store a newly created resource in storage.
      */
