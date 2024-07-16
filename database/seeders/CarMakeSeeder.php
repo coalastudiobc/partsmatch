@@ -50,7 +50,7 @@ class CarMakeSeeder extends Seeder
                     // $data[$index++] = $make->name;
                     $rowData = [
                         'makes' => $make->name,
-                        'image_url' => asset('assets/images/car-logo6.png'),
+                        'image_url' => null,
                         'image_name' => 'car-logo6',
                     ];
 

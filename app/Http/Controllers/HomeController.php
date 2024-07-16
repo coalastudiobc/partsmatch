@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\ChangePasswordRequest;
+use App\Models\CarBrandMake;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -37,9 +38,17 @@ class HomeController extends Controller
     public function index($subcategory_id = null)
     {
         $category = Category::where('status', '1')->get();
-        $collections = Category::with('products.cartProduct')->where('parent_id', '!=', null)->where('status', '1')->inRandomOrder()->get();
-        $subcategories = Category::with('products')->where('parent_id', '!=', null)->where('status', '1')->inRandomOrder()->get();
-        return view('welcome', compact('category', 'subcategories', 'collections', "subcategory_id"));
+        $collections = Category::with('products.cartProduct')->where('parent_id', '!=', null)->where('status', '1')->inRandomOrder()->take(10)->get();
+        $subcategories = Category::with('products')->has('products')->Where('parent_id', '!=', null)->where('status', '1')->inRandomOrder()->take(6)->get();
+        $brands=CarBrandMake::inRandomOrder()->take(7)->get();
+        return view('welcome', compact('category', 'subcategories', 'collections', "subcategory_id","brands"));
+    }
+
+    public function brands()
+    {
+        $brands=CarBrandMake::all();
+
+        return view('brands', compact("brands"));
     }
     public function categoryCard()
     {
@@ -128,5 +137,14 @@ class HomeController extends Controller
         } catch (\Exception $e) {
             return response()->json(['status' => 'error', 'message' => $e->getMessage()], 400);
         }
+    }
+
+
+    public function allProducts()
+    {
+
+        $products = Product::all();
+        $categories =  Category::with('children')->has('children')->orWhereNull('parent_id')->get();
+        return view('public_shop', compact("categories","products"));
     }
 }

@@ -34,6 +34,8 @@ Route::get('redirect-to-dashboard', [HomeController::class, 'redirectToDashboard
 Route::get('verify-email/{user}/{token}', [RegisterController::class, 'verifyEmail'])->name('verify-email');
 
 Route::get('/search', [ProductController::class, 'search'])->name('search');
+Route::get('brands', [HomeController::class, 'brands'])->name('brands');
+Route::get('products', [HomeController::class, 'allProducts'])->name('products');
 
 
 Auth::routes();

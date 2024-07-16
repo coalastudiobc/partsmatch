@@ -50,7 +50,13 @@
                         <div class="custm-nav-menu login-nav">
                             @auth
                                 <ul class="navbar-nav">
-                                    <li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" aria-current="page"
+                                            href="{{ route('welcome.index') }}">
+                                            shop
+                                        </a>
+                                    </li>
+                                    {{-- <li>
                                         <a href="{{ route('welcome.index') }}" class="btn primary-btn" title="shop">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17"
                                                 viewBox="0 0 17 17" fill="#272643">
@@ -61,7 +67,7 @@
                                                 </g>
                                             </svg>
                                         </a>
-                                    </li>
+                                    </li> --}}
                                     <li>
                                         <div class="nav-profile">
                                             <div class="nav-profile-img">

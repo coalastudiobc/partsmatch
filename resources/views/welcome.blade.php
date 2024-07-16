@@ -241,7 +241,7 @@
         </div>
         <div class="collection-main">
             <div class="collect-tab-btns">
-                <a href="#" class="btn primary-btn filter-btn">
+                {{-- <a href="#" class="btn primary-btn filter-btn">
                     Filter
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
                         <g clip-path="url(#clip0_162_3174)">
@@ -253,7 +253,7 @@
                             </clipPath>
                         </defs>
                     </svg>
-                </a>
+                </a> --}}
 
                 <div>
                     <div class="slick-tab ">
@@ -337,10 +337,10 @@
     <div class="container">
         <div class="shop-by-brands-wrapper">
             <div class="brands-header">
-                <h3>shops by brands</h3>
+                <h3>shop by brands</h3>
             </div>
             <div class="brands-btn">
-                <a href="#" class="btn secondary-btn view-btn">
+                <a href="{{route('brands')}}" class="btn secondary-btn view-btn">
                     View All
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <g clip-path="url(#clip0_110_878)">
@@ -356,19 +356,21 @@
             </div>
 
             <div class="sp-brands">
-                <div class="brands-image">
+                @foreach($brands as $brand)
+                <!-- <div class="brands-image">
                     <img src="{{ asset('assets/images/car-logo1.png') }}" alt="" class="">
                     <div class="brands-image-content">
                         <h6>Mercedes Benz</h6>
                     </div>
-                </div>
+                </div> -->
                 <div class="brands-image">
-                    <img src="{{ asset('assets/images/car-logo2.png') }}" alt="" class="">
+                    <img src="{{ $brand->image_url ? $brand->image_url : asset('assets/images/car-logo2.png') }}" alt="" class="">
                     <div class="brands-image-content">
-                        <h6>BMW</h6>
+                        <h6>{{$brand->makes}}</h6>
                     </div>
                 </div>
-                <div class="brands-image">
+                @endforeach
+                <!-- <div class="brands-image">
                     <img src="{{ asset('assets/images/car-logo3.png') }}" alt="" class="">
                     <div class="brands-image-content">
                         <h6>Infinity</h6>
@@ -398,7 +400,6 @@
                         <h6>Ford</h6>
                     </div>
                 </div>
-                <!--  -->
                 <div class="brands-image">
                     <img src="{{ asset('assets/images/car-logo2.png') }}" alt="" class="">
                     <div class="brands-image-content">
@@ -440,7 +441,7 @@
                     <div class="brands-image-content">
                         <h6>Audi</h6>
                     </div>
-                </div>
+                </div> -->
 
 
             </div>
