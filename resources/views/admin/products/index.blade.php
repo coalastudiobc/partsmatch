@@ -5,12 +5,14 @@
 @section('content')
 
     <div class="dashboard-right-box">
-        <form action="">
-            <div class="pro-search-box">
-                <input type="text" name="filter_by_name" class="form-control" placeholder="Search Product By Name">
-                <button type="submit" class="btn primary-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
-            </div>
-        </form>
+        <div class="serach-and-filter-box justify-content-end">
+            <form action="">
+                <div class="pro-search-box">
+                    <input type="text" name="filter_by_name" class="form-control" placeholder="Search Product By Name">
+                    <button type="submit" class="btn primary-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+            </form>
+        </div>
 
         <div class="product-detail-table product-list-table">
             <div class="table-responsive">
