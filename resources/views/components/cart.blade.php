@@ -20,10 +20,21 @@
                                     @forelse ($cart->cartProducts as $product)
                                         <tr>
                                             <td>
-                                                <div class="cart-product-image">
-                                                    <img src="{{ isset($product->product->productImage[0]) ? Storage::url($product->product->productImage[0]->file_url) : '' }}"
-                                                        alt="">
-                                                </div>
+                                                <a
+                                                    href="{{ route(
+                                                        auth()->check() && auth()->user()->hasRole('Administrator')
+                                                            ? 'admin.products.details'
+                                                            : (auth()->check()
+                                                                ? auth()->user()->getRoleNames()->first() . '.products.details'
+                                                                : 'Dealer.products.details'),
+                                                        $product->product->id,
+                                                    ) }}">
+                                                    <div class="cart-product-image">
+
+                                                        <img src="{{ isset($product->product->productImage[0]) ? Storage::url($product->product->productImage[0]->file_url) : '' }}"
+                                                            alt="">
+                                                    </div>
+                                                </a>
                                             </td>
                                             <td>{{ $product->product ? $product->product->name : '' }}</td>
                                             <td>{{ $product->product ? $product->product->price : '' }} </td>
@@ -49,7 +60,6 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            {{-- @dd($product->quantity, $product->product->price); --}}
                                             <td class="total">
                                                 {{ $product->quantity ? ($product->product ? $product->quantity * $product->product->price : ' ') : ' ' }}
                                             </td>
@@ -63,27 +73,6 @@
                                 @else
                                     <p class="empty-data">No product in the cart</p>
                                 @endif
-                                {{-- <tr>
-                                            <td>
-                                                <div class="cart-product-image">
-                                                    <img src="./images/product4.png" alt="">
-                                                </div>
-                                            </td>
-                                            <td>Car Engine</td>
-                                            <td>$700</td>
-                                            <td>
-                                                <div class="product-quantity-box">
-                                                    <div class="quantity-btn quantity-brd">
-                                                        <a href="#">-</a>
-                                                        <input type="text" placeholder="1">
-                                                        <a href="#">+</a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>$700</td>
-                                            <td> <a href="#"><i style="color: #E13F3F;"
-                                                        class="fa-regular fa-trash-can"></i></a></td>
-                                        </tr> --}}
                             </tbody>
                         </table>
                     </div>
@@ -128,12 +117,20 @@
                 </div>
 
             </div>
-            <div class="cart-checkout">
-                <a href="{{ route(auth()->user()->getRoleNames()->first() . '.checkout.create') }}"
-                    class="btn secondary-btn view-btn">
-                    Checkout
-                </a>
-            </div>
+            @if ($cart->cartProducts->isNotEmpty())
+                <div class="cart-checkout">
+                    <a href="{{ route(auth()->user()->getRoleNames()->first() . '.checkout.create') }}"
+                        class="btn secondary-btn view-btn">
+                        Checkout
+                    </a>
+                </div>
+            @else
+                <div class="cart-checkout">
+                    <a href="#" class="btn secondary-btn view-btn">
+                        Checkout
+                    </a>
+                </div>
+            @endif
 
         </div>
     </div>

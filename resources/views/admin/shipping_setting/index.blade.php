@@ -25,9 +25,14 @@
                             <p>Type</p>
                         </th>
                         <th>
-                            <p>value</p>
+                            <p>Value</p>
                         </th>
-
+                        <th>
+                            <p>Shipment Title</p>
+                        </th>
+                        <th>
+                            <p>Country</p>
+                        </th>
                         <th>
                             <p>Action</p>
                         </th>
@@ -48,6 +53,12 @@
                             </td>
                             <td>
                                 <p>{{ $shipping->value ?? '' }}</p>
+                            </td>
+                            <td>
+                                <p>{{ $shipping->name ?? '' }}</p>
+                            </td>
+                            <td>
+                                <p>{{ $shipping->country ?? '' }}</p>
                             </td>
                             <td>
                                 <div class="action-btns">

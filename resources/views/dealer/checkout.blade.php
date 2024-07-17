@@ -337,6 +337,33 @@
                     </div>
                     <div class="col-xl-5 col-lg-12 col-md-12">
                         <div class="order-summary cstm-card">
+                            <h2>Shippings</h2>
+
+                            <ul class="order-summary-list">
+                                @if ($TotalShippings)
+                                    @foreach ($TotalShippings as $shipping)
+                                        <li>
+                                            <div class="summary-list-box">
+                                                <div class="summary-img-txt">
+                                                    <div class="summary-img-box">
+                                                        <img src="{{ $shipping ?? asset('assets/images/user.png') }}"
+                                                            alt="Provider Image">
+                                                        <div class="order-sum-number">
+                                                            <input type="radio" name="shipmentRates[]"
+                                                                value="{{ $shipping->value }}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="summary-txt-box">
+                                                        <h3>{{ $shipping->name }}</h3>
+                                                        <p>5</p>
+                                                    </div>
+                                                </div>
+                                                <p>${{ $shipping->value }}</p>
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                @endif
+                            </ul>
                             <h2>Products</h2>
                             <ul class="order-summary-list">
                                 @foreach ($allProductsOfCart as $products)
