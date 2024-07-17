@@ -1816,3 +1816,19 @@ span.ymmm-cross {
 
     margin-top: 2%;
 }
+.category-sublist li{
+    margin-bottom: 0px;
+    font-size:14px;
+}
+
+.category-list  a.active {
+    font-weight: 600;
+}
+
+
+
+
+
+
+
+

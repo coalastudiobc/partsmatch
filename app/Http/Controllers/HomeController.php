@@ -140,10 +140,10 @@ class HomeController extends Controller
     }
 
 
-    public function allProducts()
+    public function allProducts(Request $request)
     {
-
-        $products = Product::all();
+// dd($request);
+        $products = Product::with('productImage', 'featuredProduct')->category()->get();
         $categories =  Category::with('children')->has('children')->orWhereNull('parent_id')->get();
         return view('public_shop', compact("categories","products"));
     }

@@ -35,7 +35,7 @@ Route::get('verify-email/{user}/{token}', [RegisterController::class, 'verifyEma
 
 Route::get('/search', [ProductController::class, 'search'])->name('search');
 Route::get('brands', [HomeController::class, 'brands'])->name('brands');
-Route::get('products', [HomeController::class, 'allProducts'])->name('products');
+Route::match(['get', 'post'],'products', [HomeController::class, 'allProducts'])->name('products');
 
 
 Auth::routes();
