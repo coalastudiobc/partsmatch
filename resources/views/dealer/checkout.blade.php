@@ -337,9 +337,36 @@
                     </div>
                     <div class="col-xl-5 col-lg-12 col-md-12">
                         <div class="order-summary cstm-card">
-                            <h2>Products</h2>
+                            <h2>Order Summary</h2>
+                            <div class="shipping-list">
+                                <h3>Shipping</h3>
+                                <ul>
+                                    <li>
+                                        <input type="radio"  id="shipping1" name="shipp">
+                                        <label for="shipping1">
+                                            <div class="shipping-details">
+                                                <h3>Express</h3>
+                                                <p>Delivered on same day.</p>
+                                            </div>
+                                            <p>$20</p>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <input type="radio"  id="shipping2" name="shipp">
+                                        <label for="shipping2">
+                                            <div class="shipping-details">
+                                                <h3>Standard</h3>
+                                                <p>Delivered on 2 days</p>
+                                            </div>
+                                            <p>$5</p>
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
                             <ul class="order-summary-list">
+                                <h3>Products</h3>
                                 @foreach ($allProductsOfCart as $products)
+
                                     <li>
                                         <div class="summary-list-box">
                                             <div class="summary-img-txt">
@@ -366,17 +393,17 @@
                             </ul>
                         </div>
                         <div class="order-summary cstm-card">
-                            <h2>Order Summary</h2>
+                            <h2>Grand Total</h2>
                             <ul class="order-summary-list">
                                 <li>
                                     <div class="summary-list-box">
                                         <div class="summary-img-txt">
-                                            <div class="summary-img-box">
+                                            <!-- <div class="summary-img-box">
                                                 <img src="{{ asset('assets/images/part-img.png') }}" alt="">
                                                 {{-- <div class="order-sum-number">
                                                         <span>2</span>
                                                     </div> --}}
-                                            </div>
+                                            </div> -->
                                             <div class="summary-txt-box">
                                                 <h3>Grand Total</h3>
                                             </div>
