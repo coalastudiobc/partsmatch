@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="main-content">
-        <section class="section">
+        <section class="section shipping-add-sec">
             <div class="section-body">
                 <div class="row">
                     <div class="col-6 col-md-6 col-lg-12">
@@ -136,17 +136,17 @@
                                                             @isset($data) {{ $data->type   == 'fixed' ? 'fixed' : 'Percentage' }}@endisset
 
 
-                                                        </div>
-                                                        <span class="custm-drop-icon">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                height="23" viewBox="0 0 24 23" fill="none">
-                                                                <path d="M19 9.00006L14 14.0001L9 9.00006" stroke="#151515"
-                                                                    stroke-width="1.8" stroke-linecap="round"
-                                                                    stroke-linejoin="round" />
-                                                            </svg>
-                                                        </span>
-                                                    </div>
-                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                                    </div>
+                                                                    <span class="custm-drop-icon">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                            height="23" viewBox="0 0 24 23" fill="none">
+                                                                            <path d="M19 9.00006L14 14.0001L9 9.00006" stroke="#151515"
+                                                                                stroke-width="1.8" stroke-linecap="round"
+                                                                                stroke-linejoin="round" />
+                                                                        </svg>
+                                                                    </span>
+                                                                </div>
+                                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 
                                                         <li><a class="dropdown-item custom_dropdown_commission"
                                                              @isset($data)   @if ($data->type == 'Percentage') selected @endif @endisset
@@ -176,34 +176,35 @@
                                                 class="form-control @error('shipping_charge') is-invalid @enderror two-decimals"
                                                 value="@isset($data){{ $data->value }}@endisset">
 
-                                            @error('shipping_charge')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                            <div class="input-icon-custm tooltip-open">
-                                                <span>
-                                                    <i class="fa-solid fa-question"></i>
-                                                </span>
-                                                <div class="tooltip">
-                                                    <p>Average shipping charge for every consignment.</p>
-                                                </div>
-                                            </div>
-                                        </div>
+                                                        @error('shipping_charge')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                        <div class="input-icon-custm tooltip-open">
+                                                            <span>
+                                                                <i class="fa-solid fa-question"></i>
+                                                            </span>
+                                                            <div class="tooltip">
+                                                                <p>Average shipping charge for every consignment.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
-                                        <div class="col-md-6">
-                                            <a class="btn secondary-btn full-btn mr-1"
-                                                href="{{ route('admin.shipping.view') }}">Back</a>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <button class="btn primary-btn full-btn mr-1" id="submit"
-                                                type="submit">Submit</button>
+                                                    <div class="col-md-6">
+                                                        <a class="btn secondary-btn full-btn mr-1"
+                                                            href="{{ route('admin.shipping.view') }}">Back</a>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <button class="btn primary-btn full-btn mr-1" id="submit"
+                                                            type="submit">Submit</button>
+                                                    </div>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
-                                </form>
+                                </div>
                             </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>

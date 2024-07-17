@@ -11,7 +11,7 @@
             <a href="#" class="bredcrum-list active">Listing</a>
         </div>
         <div class="serach-and-filter-box">
-            {{-- <h3>All Managers</h3> --}}
+
             <form action="">
                 <div class="pro-search-box">
                     <input type="text" class="form-control" name="filter_by_name" placeholder="Search User By Name">
