@@ -316,7 +316,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-12">
-                                            <button type="submit" class="btn primary-btn full-btn">Submit</button>
+                                            <button type="submit" class="btn primary-btn" style="float: right;">Submit</button>
                                         </div>
                                         {{-- <div class="col-md-12">
                                             <div class="form-group">
@@ -346,7 +346,6 @@
                                         <label for="shipping1">
                                             <div class="shipping-details">
                                                 <h3>Express</h3>
-                                                <p>Delivered on same day.</p>
                                             </div>
                                             <p>$20</p>
                                         </label>
@@ -356,7 +355,6 @@
                                         <label for="shipping2">
                                             <div class="shipping-details">
                                                 <h3>Standard</h3>
-                                                <p>Delivered on 2 days</p>
                                             </div>
                                             <p>$5</p>
                                         </label>
@@ -380,7 +378,7 @@
                                                 </div>
                                                 <div class="summary-txt-box">
                                                     <h3>{{ $products->product->name ?? 'Product Name' }}</h3>
-                                                    <p>{{ $products->product->category->name ?? 'Product Category Name' }}
+                                                    <!-- <p>{{ $products->product->category->name ?? 'Product Category Name' }} -->
                                                     </p>
                                                 </div>
                                             </div>
@@ -391,10 +389,41 @@
                                 @endforeach
 
                             </ul>
-                        </div>
-                        <div class="order-summary cstm-card">
-                            <h2>Grand Total</h2>
-                            <ul class="order-summary-list">
+                            <ul class="order-total-list">
+                                <li>
+                                    <div class="summary-list-box">
+                                        <div class="summary-img-txt">
+                                            <!-- <div class="summary-img-box">
+                                                <img src="{{ asset('assets/images/part-img.png') }}" alt="">
+                                                {{-- <div class="order-sum-number">
+                                                        <span>2</span>
+                                                    </div> --}}
+                                            </div> -->
+                                            <div class="summary-txt-box">
+                                                <h3>Total</h3>
+                                            </div>
+                                        </div>
+                                        <p>696
+                                        </p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="summary-list-box">
+                                        <div class="summary-img-txt">
+                                            <!-- <div class="summary-img-box">
+                                                <img src="{{ asset('assets/images/part-img.png') }}" alt="">
+                                                {{-- <div class="order-sum-number">
+                                                        <span>2</span>
+                                                    </div> --}}
+                                            </div> -->
+                                            <div class="summary-txt-box">
+                                                <h3>Shipping Charge</h3>
+                                            </div>
+                                        </div>
+                                        <p>$ 20
+                                        </p>
+                                    </div>
+                                </li>
                                 <li>
                                     <div class="summary-list-box">
                                         <div class="summary-img-txt">
@@ -412,8 +441,10 @@
                                         </p>
                                     </div>
                                 </li>
+
                             </ul>
                         </div>
+                        
                     </div>
                 </div>
             </div>

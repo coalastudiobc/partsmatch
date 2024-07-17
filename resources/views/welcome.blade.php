@@ -210,24 +210,28 @@
 <section class="top-categories-sec">
     <div class="container">
         <div class="top-categories-wrapper">
-            <h2 class="sec-heading">Top Categories</h2>
-            <div class="categories-boxes">
-                @foreach ($category as $key => $category)
-                @if ($loop->iteration > 8)
-                @break
-                @endif
-                <a href="{{ route(auth()->check() && auth()->user()->hasRole('Administrator') ? 'admin.products.interior' : (auth()->check() ? auth()->user()->getRoleNames()->first() . '.products.interior' : 'Dealer.products.interior'), ['category' => $category->id]) }}">
-                    <div class="categories-box">
-                        <img src="{{ asset('assets/images/categorie1.png') }}" alt="">
-                        <p>{{ $category->name }}</p>
+            <!-- <h2 class="sec-heading">Top Categories</h2> -->
+            <div class="categories-boxes-main">
+                <div class="categories-boxes-outer">
+                    <div class="categories-boxes">
+                        @foreach ($category as $key => $category)
+                        @if ($loop->iteration > 8)
+                        @break
+                        @endif
+                        <a href="{{ route(auth()->check() && auth()->user()->hasRole('Administrator') ? 'admin.products.interior' : (auth()->check() ? auth()->user()->getRoleNames()->first() . '.products.interior' : 'Dealer.products.interior'), ['category' => $category->id]) }}">
+                            <div class="categories-box">
+                                <img src="{{ asset('assets/images/categorie1.svg') }}" alt="">
+                                <p>{{ $category->name }}</p>
+                            </div>
+                        </a>
+                        @endforeach
                     </div>
-                </a>
-                @endforeach
+                </div>
             </div>
             @if ($category->count() > 8)
-            <a href="{{ route('categories') }}" class="btn secondary-btn view-btn">
+            <!-- <a href="{{ route('categories') }}" class="btn secondary-btn view-btn">
                 View All
-            </a>
+            </a> -->
             @endif
         </div>
     </div>
