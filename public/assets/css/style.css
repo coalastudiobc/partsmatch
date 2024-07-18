@@ -143,7 +143,7 @@ h6 {
 }
 
 h1 {
-    font-size: 80px;
+    font-size: 70px;
 }
 
 h2 {
@@ -361,7 +361,7 @@ header {
 
 /* ------------------ hero section --------------- */
 .hero-section {
-    padding: 50px 0px 71px;
+    padding: 30px 0px 30px;
 }
 
 .hero-wrapper {
@@ -393,7 +393,7 @@ header {
 }
 
 .slick-slider {
-    margin-bottom: 30px;
+    /* margin-bottom: 30px; */
     padding: 0px 90px;
 }
 
@@ -411,10 +411,13 @@ header {
 .hero-txt h4 {
     color: #484848;
     font-size: 30px;
-    line-height: 52.4px;
-    margin-bottom: 8px;
+    line-height: 34.4px;
+    margin-bottom: 0px;
 }
-
+.hero-img {
+    max-width: 500px;
+    margin: 0 auto;
+}
 .hero-txt h1 {
     color: var(--heading-color);
     margin-bottom: 20px;
@@ -425,7 +428,7 @@ header {
     font-size: 18px;
     font-weight: 400;
     max-width: 500px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
 .primary-btn {
@@ -521,8 +524,12 @@ header {
 
 /* ------------------------ top-categories-sec ---------------------*/
 .top-categories-sec {
-    padding: 100px 0px 50px;
+    padding: 20px 0px 20px;
+}
+.categories-boxes-main {
+    padding: 20px;
     background-color: #F6F6F6;
+    border-radius: 15px;
 }
 
 .categories-boxes {
@@ -531,8 +538,27 @@ header {
     justify-content: center;
     gap: 18px;
     align-items: center;
-    margin: 30px 0px;
+    /* margin: 30px 0px; */
+    min-width: 1530px;
+
 }
+.categories-boxes-outer {
+    overflow: auto;
+    padding-bottom: 10px;
+}
+.categories-boxes-outer::-webkit-scrollbar:horizontal {
+    height: 4px;
+}
+.categories-box.active, .categories-box:hover {
+    background-color: #272643;
+}
+.categories-box.active p, .categories-box:hover p {
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff;
+}
+
+
 
 .categories-box {
     max-width: 174px;
@@ -546,6 +572,7 @@ header {
     min-height: 140px;
     justify-content: space-between;
     border-radius: 4.466px;
+    transition: all 0.5s ease;
 }
 
 .categories-box p {
@@ -1824,6 +1851,17 @@ span.ymmm-cross {
 .category-list  a.active {
     font-weight: 600;
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 

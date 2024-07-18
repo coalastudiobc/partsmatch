@@ -316,7 +316,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-12">
-                                            <button type="submit" class="btn primary-btn full-btn">Submit</button>
+                                            <button type="submit" class="btn primary-btn" style="float: right;">Submit</button>
                                         </div>
                                         {{-- <div class="col-md-12">
                                             <div class="form-group">
@@ -337,9 +337,34 @@
                     </div>
                     <div class="col-xl-5 col-lg-12 col-md-12">
                         <div class="order-summary cstm-card">
-                            <h2>Products</h2>
+                            <h2>Order Summary</h2>
+                            <div class="shipping-list">
+                                <h3>Shipping</h3>
+                                <ul>
+                                    <li>
+                                        <input type="radio"  id="shipping1" name="shipp">
+                                        <label for="shipping1">
+                                            <div class="shipping-details">
+                                                <h3>Express</h3>
+                                            </div>
+                                            <p>$20</p>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <input type="radio"  id="shipping2" name="shipp">
+                                        <label for="shipping2">
+                                            <div class="shipping-details">
+                                                <h3>Standard</h3>
+                                            </div>
+                                            <p>$5</p>
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
                             <ul class="order-summary-list">
+                                <h3>Products</h3>
                                 @foreach ($allProductsOfCart as $products)
+
                                     <li>
                                         <div class="summary-list-box">
                                             <div class="summary-img-txt">
@@ -353,7 +378,7 @@
                                                 </div>
                                                 <div class="summary-txt-box">
                                                     <h3>{{ $products->product->name ?? 'Product Name' }}</h3>
-                                                    <p>{{ $products->product->category->name ?? 'Product Category Name' }}
+                                                    <!-- <p>{{ $products->product->category->name ?? 'Product Category Name' }} -->
                                                     </p>
                                                 </div>
                                             </div>
@@ -364,19 +389,50 @@
                                 @endforeach
 
                             </ul>
-                        </div>
-                        <div class="order-summary cstm-card">
-                            <h2>Order Summary</h2>
-                            <ul class="order-summary-list">
+                            <ul class="order-total-list">
                                 <li>
                                     <div class="summary-list-box">
                                         <div class="summary-img-txt">
-                                            <div class="summary-img-box">
+                                            <!-- <div class="summary-img-box">
                                                 <img src="{{ asset('assets/images/part-img.png') }}" alt="">
                                                 {{-- <div class="order-sum-number">
                                                         <span>2</span>
                                                     </div> --}}
+                                            </div> -->
+                                            <div class="summary-txt-box">
+                                                <h3>Total</h3>
                                             </div>
+                                        </div>
+                                        <p>696
+                                        </p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="summary-list-box">
+                                        <div class="summary-img-txt">
+                                            <!-- <div class="summary-img-box">
+                                                <img src="{{ asset('assets/images/part-img.png') }}" alt="">
+                                                {{-- <div class="order-sum-number">
+                                                        <span>2</span>
+                                                    </div> --}}
+                                            </div> -->
+                                            <div class="summary-txt-box">
+                                                <h3>Shipping Charge</h3>
+                                            </div>
+                                        </div>
+                                        <p>$ 20
+                                        </p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="summary-list-box">
+                                        <div class="summary-img-txt">
+                                            <!-- <div class="summary-img-box">
+                                                <img src="{{ asset('assets/images/part-img.png') }}" alt="">
+                                                {{-- <div class="order-sum-number">
+                                                        <span>2</span>
+                                                    </div> --}}
+                                            </div> -->
                                             <div class="summary-txt-box">
                                                 <h3>Grand Total</h3>
                                             </div>
@@ -385,8 +441,10 @@
                                         </p>
                                     </div>
                                 </li>
+
                             </ul>
                         </div>
+                        
                     </div>
                 </div>
             </div>
