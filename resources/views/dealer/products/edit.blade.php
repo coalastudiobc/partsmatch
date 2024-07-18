@@ -4,9 +4,7 @@
     {{-- <div class="main-content">
         <section class="section"> --}}
     <div class="section-body">
-        <div class="row">
-            <div class="col-12 col-md-12 col-lg-12">
-                <div class="card">
+    <div class="card">
                     <div class='ajax-response'></div>
                     <x-alert-component />
                     @if ($errors->any())
@@ -432,8 +430,6 @@
                     </form>
 
                 </div>
-            </div>
-        </div>
     </div>
     </div>
     {{-- </section> --}}
