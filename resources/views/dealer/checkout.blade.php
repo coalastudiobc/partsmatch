@@ -13,20 +13,79 @@
                                     enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="">First Name</label>
+                                                <div class="form-field">
+                                                    <input type="text"
+                                                        class="form-control @error('first_name') is-invalid @enderror"
+                                                        name="first_name"
+                                                        value="{{ old('first_name', $deliveryAddress->first_name ?? '') }}"
+                                                        placeholder="First Name">
+                                                    @error('first_name')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="">Last Name</label>
+                                                <div class="form-field">
+                                                    <input type="text"
+                                                        class="form-control @error('last_name') is-invalid @enderror"
+                                                        name="last_name"
+                                                        value="{{ old('last_name', $deliveryAddress->last_name ?? '') }}"
+                                                        placeholder="Last Name">
+                                                    @error('last_name')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="">Street No. & Name</label>
+                                                <div class="form-field">
+                                                    <input type="text"
+                                                        class="form-control @error('street1') is-invalid @enderror"
+                                                        name="street1" value="{{ $deliveryAddress->address1 ?? '' }}"
+                                                        placeholder="Address">
+                                                    @error('street1')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            {{-- <div class="add-adress">
+                                                <a href="javascript:void(0)">+ Add Apartment , Suite, etc.</a>
+                                            </div> --}}
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="">Address 2</label>
+                                                <div class="form-field">
+                                                    <input type="text"
+                                                        class="form-control @error('street2') is-invalid @enderror"
+                                                        name="street2" value="{{ $deliveryAddress->address2 ?? '' }}"
+                                                        placeholder="Address">
+                                                    @error('street2')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="">Country</label>
-                                                {{-- <div class="form-field">
-                                                    <!-- <input type="text" class="form-control" placeholder="Select industry"> -->
-                                                    <select name="cars" id="industury" class="form-control">
-                                                        <option value="volvo">Volvo</option>
-                                                        <option value="saab">Saab</option>
-                                                        <option value="opel">Opel</option>
-                                                        <option value="audi">Audi</option>
-                                                    </select>
-                                                </div> --}}
-
-
                                                 <div class="custm-dropdown">
                                                     <div class="dropdown">
                                                         <div class="dropdown-toggle " type="button"
@@ -109,98 +168,13 @@
                                         </div>
 
 
-                                        {{-- <input type="hidden" name="stripeCustomer_id" value="{{ $stripeCustomer->id }}"> --}}
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="">First Name</label>
-                                                <div class="form-field">
-                                                    <input type="text"
-                                                        class="form-control @error('first_name') is-invalid @enderror"
-                                                        name="first_name"
-                                                        value="{{ old('first_name', $deliveryAddress->first_name ?? '') }}"
-                                                        placeholder="First Name">
-                                                    @error('first_name')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="">Last Name</label>
-                                                <div class="form-field">
-                                                    <input type="text"
-                                                        class="form-control @error('last_name') is-invalid @enderror"
-                                                        name="last_name"
-                                                        value="{{ old('last_name', $deliveryAddress->last_name ?? '') }}"
-                                                        placeholder="Last Name">
-                                                    @error('last_name')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="">Address 1</label>
-                                                <div class="form-field">
-                                                    <input type="text"
-                                                        class="form-control @error('street1') is-invalid @enderror"
-                                                        name="street1" value="{{ $deliveryAddress->address1 ?? '' }}"
-                                                        placeholder="Address">
-                                                    @error('street1')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            {{-- <div class="add-adress">
-                                                <a href="javascript:void(0)">+ Add Apartment , Suite, etc.</a>
-                                            </div> --}}
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="">Address 2</label>
-                                                <div class="form-field">
-                                                    <input type="text"
-                                                        class="form-control @error('street2') is-invalid @enderror"
-                                                        name="street2" value="{{ $deliveryAddress->address2 ?? '' }}"
-                                                        placeholder="Address">
-                                                    @error('street2')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {{-- <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="">City</label>
-                                                <div class="form-field">
-                                                    <input type="text" class="form-control" placeholder="City">
 
-                                                </div>
-                                            </div>
-                                        </div> --}}
+
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="">State</label>
                                                 <div class="form-field">
-                                                    <!-- <input type="text" class="form-control" placeholder="Select industry"> -->
-                                                    {{-- <select name="cars" id="industury" class="form-control">
-                                                        <option value="volvo">Volvo</option>
-                                                        <option value="saab">Saab</option>
-                                                        <option value="opel">Opel</option>
-                                                        <option value="audi">Audi</option>
-                                                    </select> --}}
-
                                                     <div class="custm-dropdown">
                                                         <div class="dropdown">
                                                             <div class="dropdown-toggle " type="button"
@@ -248,14 +222,6 @@
                                             <div class="form-group">
                                                 <label for="">City</label>
                                                 <div class="form-field">
-                                                    <!-- <input type="text" class="form-control" placeholder="Select industry"> -->
-                                                    {{-- <select name="cars" id="industury" class="form-control">
-                                                        <option value="volvo">Volvo</option>
-                                                        <option value="saab">Saab</option>
-                                                        <option value="opel">Opel</option>
-                                                        <option value="audi">Audi</option>
-                                                    </select> --}}
-
                                                     <div class="custm-dropdown">
                                                         <div class="dropdown">
                                                             <div class="dropdown-toggle " type="button"
@@ -315,9 +281,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
-                                            <button type="submit" class="btn primary-btn" style="float: right;">Submit</button>
-                                        </div>
+                                        {{-- <div class="col-md-12">
+                                            <button type="submit" class="btn primary-btn full-btn">Submit</button>
+                                        </div> --}}
                                         {{-- <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="">Shipping method</label>
@@ -330,7 +296,7 @@
                                             </div>
                                         </div> --}}
                                     </div>
-                                </form>
+
                             </div>
 
                         </div>
@@ -339,42 +305,24 @@
                         <div class="order-summary cstm-card">
                             <h2>Order Summary</h2>
                             <div class="shipping-list">
+                                <input type="hidden" id="selected_shipping" name="shipping_Method" value="">
                                 <h3>Shipping</h3>
-                                <ul>
-                                    <li>
-                                        <input type="radio"  id="shipping1" name="shipp">
-                                        <label for="shipping1">
-                                            <div class="shipping-details">
-                                                <h3>Express</h3>
-                                            </div>
-                                            <p>$20</p>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <input type="radio"  id="shipping2" name="shipp">
-                                        <label for="shipping2">
-                                            <div class="shipping-details">
-                                                <h3>Standard</h3>
-                                            </div>
-                                            <p>$5</p>
-                                        </label>
-                                    </li>
+                                <ul class="shipping_carts">
+                                    <p>Please select country first. It vary country to country</p>
                                 </ul>
                             </div>
                             <ul class="order-summary-list">
                                 <h3>Products</h3>
                                 @foreach ($allProductsOfCart as $products)
-
                                     <li>
                                         <div class="summary-list-box">
                                             <div class="summary-img-txt">
                                                 <div class="summary-img-box">
                                                     <img src="{{ asset('storage/' . $products->product->productImage[0]->file_url) }}"
                                                         alt="">
-                                                    {{-- <div class="order-sum-number">
-                                                    <span>2</span>
-                                                </div> --}}
-
+                                                    <div class="order-sum-number">
+                                                        <span>{{ $products->quantity }}</span>
+                                                    </div>
                                                 </div>
                                                 <div class="summary-txt-box">
                                                     <h3>{{ $products->product->name ?? 'Product Name' }}</h3>
@@ -382,69 +330,61 @@
                                                     </p>
                                                 </div>
                                             </div>
+
                                             <p>${{ isset($products->product) ? number_format($products->product->price * $products->quantity, 2, '.', ',') : '' }}
                                             </p>
                                         </div>
                                     </li>
                                 @endforeach
 
+
                             </ul>
                             <ul class="order-total-list">
                                 <li>
                                     <div class="summary-list-box">
                                         <div class="summary-img-txt">
-                                            <!-- <div class="summary-img-box">
-                                                <img src="{{ asset('assets/images/part-img.png') }}" alt="">
-                                                {{-- <div class="order-sum-number">
-                                                        <span>2</span>
-                                                    </div> --}}
-                                            </div> -->
                                             <div class="summary-txt-box">
                                                 <h3>Total</h3>
                                             </div>
                                         </div>
-                                        <p>696
+                                        <p class="total_charge">
+                                            ${{ isset($products->product) ? number_format($carts[0]->amount, 2, '.', ',') : 'Total amount' }}
                                         </p>
                                     </div>
                                 </li>
                                 <li>
                                     <div class="summary-list-box">
                                         <div class="summary-img-txt">
-                                            <!-- <div class="summary-img-box">
-                                                <img src="{{ asset('assets/images/part-img.png') }}" alt="">
-                                                {{-- <div class="order-sum-number">
-                                                        <span>2</span>
-                                                    </div> --}}
-                                            </div> -->
                                             <div class="summary-txt-box">
                                                 <h3>Shipping Charge</h3>
                                             </div>
                                         </div>
-                                        <p>$ 20
-                                        </p>
+                                        <p class="shipping_charge_price">$</p>
                                     </div>
                                 </li>
                                 <li>
                                     <div class="summary-list-box">
                                         <div class="summary-img-txt">
-                                            <!-- <div class="summary-img-box">
-                                                <img src="{{ asset('assets/images/part-img.png') }}" alt="">
-                                                {{-- <div class="order-sum-number">
-                                                        <span>2</span>
-                                                    </div> --}}
-                                            </div> -->
                                             <div class="summary-txt-box">
                                                 <h3>Grand Total</h3>
                                             </div>
                                         </div>
-                                        <p>$ {{ isset($products->product) ? number_format($carts[0]->amount, 2, '.', ',') : 'grand Total amount' }}
+                                        <p class="grandTotal"
+                                            data-amount="{{ isset($products->product) ? number_format($carts[0]->amount, 2, '.', ',') : 'grand Total amount' }}">
+                                            $
+                                            {{ isset($products->product) ? number_format($carts[0]->amount, 2, '.', ',') : 'grand Total amount' }}
                                         </p>
+                                        <input type="hidden" id="grandTotal" name="grandTotal" value="">
                                     </div>
                                 </li>
 
                             </ul>
                         </div>
-                        
+                        <div class="col-md-12">
+                            <button type="submit" class="btn primary-btn full-btn">Place Order</button>
+                        </div>
+                        </form>
+
                     </div>
                 </div>
             </div>
@@ -463,12 +403,65 @@
                 jQuery('#selectedItem').text(selecttext)
                 jQuery(document).find('input[name="country"]').val(selectitem);
 
+                let url = APP_URL + '/dealer/shipping/methods/' + selectitem;
+                const result = ajaxCall(url, 'get');
+                result.then(handleShippingData).catch(handleShippingError)
             })
         });
 
+        function handleShippingData(response) {
+            jQuery('.shipping_carts').empty();
+
+            jQuery.each(response.data, function(index, item) {
+                jQuery('.shipping_carts').append(`
+            <li>
+                <input
+                    type="radio"
+                    id="ship_method${index}"
+                    name="shippingMethod"
+                    data-id="${item.id}"
+                    value="${item.value}"
+                    ${index === 0 ? 'checked' : ''}>
+                <label for="ship_method${index}">
+                    <div class="shipping-details">
+                        <h3>${item.name}</h3>
+                    </div>
+                    <p>$${item.value}</p>
+                </label>
+            </li>`);
+            });
+            // Call this function to set the initial grand total
+            updateGrandTotal();
+        }
+
+        function handleShippingError(error) {
+            console.error('Shipping data error:', error);
+        }
+
+        function updateGrandTotal() {
+            var baseAmount = parseFloat($('.grandTotal').data('amount').replace(/,/g, ''));
+            var selected_shipment = $('input[name=shippingMethod]').data('id');
+            var shippingCost = parseFloat($('input[name="shippingMethod"]:checked').val()) || 0;
+            var grandTotal = baseAmount + shippingCost;
+            jQuery('.shipping_charge_price').text('$' + shippingCost);
+            jQuery('.grandTotal').text(formatCurrency(grandTotal));
+            jQuery('#selected_shipping').val(selected_shipment);
+            jQuery('#grandTotal').val(grandTotal);
+        }
+
+        function formatCurrency(amount) {
+            return `$${amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}`;
+        }
+
         jQuery(document).ready(function() {
+            jQuery(document).on('change', 'input[name="shippingMethod"]', function() {
+                var currentSelectedShip = jQuery(this).data('id');
+                updateGrandTotal();
+                jQuery('#ship_method').val(currentSelectedShip);
+            });
+        });
 
-
+        jQuery(document).ready(function() {
             jQuery('.custom_dropdown_item').on('click', function() {
                 var countryId = jQuery(this).attr('data-value')
                 // var selecttext = jQuery(this).attr('data-text')
@@ -505,11 +498,9 @@
 
         // jQuery(document).ready(function() {
         jQuery(document).on('click', '.select_state', function() {
-            // alert('lund');
             var selectitem = jQuery(this).attr('data-name')
             var selecttext = jQuery(this).attr('data-text')
             jQuery('.city').empty();
-            console.log('selecttext', selectitem, selecttext)
             jQuery('#selectedState').text(selecttext)
             jQuery(document).find('input[name="state"]').val(selectitem);
             jQuery('#state-error').text('');
@@ -550,7 +541,6 @@
             // alert('lund');
             var selectitem = jQuery(this).attr('data-name')
             var selecttext = jQuery(this).attr('data-text')
-            console.log('selecttext', selectitem, selecttext)
             jQuery('#selectedCity').text(selecttext)
             jQuery(document).find('input[name="city"]').val(selectitem);
             jQuery('#city-error').text('');
@@ -559,78 +549,5 @@
         })
         // })
         // })
-    </script>
-
-    {{-- purchase product --}}
-    <script src="https://js.stripe.com/v3/"></script>
-    <script>
-        const stripe = Stripe('{{ env('STRIPE_KEY') }}')
-        const client_secret = "{{ $intent->client_secret }}"
-        const elements = stripe.elements()
-
-
-        var cardNumberElement = elements.create('cardNumber');
-        cardNumberElement.mount('#cardNumberElement');
-        var cardExpiryElement = elements.create('cardExpiry');
-        cardExpiryElement.mount('#cardExpiryElement');
-        var cardCvcElement = elements.create('cardCvc');
-        cardCvcElement.mount('#cardCVCElement');
-
-
-        cardNumberElement.on('change', function(event) {
-            if (event.error) {
-                jQuery('#cardNumberError').text(event.error.message);
-            } else {
-                jQuery('#cardNumberError').text('');
-            }
-        });
-        cardExpiryElement.on('change', function(event) {
-            if (event.error) {
-                jQuery('#cardExpiryError').text(event.error.message);
-            } else {
-                jQuery('#cardExpiryError').text('');
-            }
-        });
-        cardCvcElement.on('change', function(event) {
-            if (event.error) {
-                jQuery('#cardCVVError').text(event.error.message);
-            } else {
-                jQuery('#cardCVVError').text('');
-            }
-        });
-
-
-        const form = document.getElementById('product-card-details')
-        const cardBtn = document.getElementById('payNow')
-        const cardHolderName = document.getElementById('card-holder-name')
-
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault()
-
-
-            const {
-                setupIntent,
-                error
-            } = await stripe.confirmCardSetup(
-                client_secret, {
-                    payment_method: {
-                        card: cardNumberElement,
-                        billing_details: {
-                            name: cardHolderName.value
-                        }
-                    }
-                }
-            )
-            if (error) {
-                // cardBtn.disable = false
-            } else {
-                let token = document.createElement('input')
-                token.setAttribute('type', 'hidden')
-                token.setAttribute('name', 'token')
-                token.setAttribute('value', setupIntent.payment_method)
-                form.appendChild(token)
-                form.submit();
-            }
-        })
     </script>
 @endpush

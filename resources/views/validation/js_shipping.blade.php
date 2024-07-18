@@ -2,6 +2,14 @@
     jQuery(document).ready(function() {
         jQuery("#shipping").validate({
             rules: {
+                shipment_title: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 50,
+                },
+                country: {
+                    required: true,
+                },
                 range_from: {
                     required: true,
                     number: true, // Use 'number' instead of 'decimal'
@@ -20,6 +28,14 @@
                 }
             },
             messages: {
+                shipment_title: {
+                    required: "The shipment title is required.",
+                    min: "The shipment title must be at least 3 min characters.",
+                    max: "The shipment title may not be greater than 50 max characters.",
+                },
+                country: {
+                    required: "Please select a country.",
+                },
                 range_from: {
                     required: "Please enter the value of Range From.",
                     number: "Only numbers!",

@@ -20,10 +20,21 @@
                                     @forelse ($cart->cartProducts as $product)
                                         <tr>
                                             <td>
-                                                <div class="cart-product-image">
-                                                    <img src="{{ isset($product->product->productImage[0]) ? Storage::url($product->product->productImage[0]->file_url) : '' }}"
-                                                        alt="">
-                                                </div>
+                                                <a
+                                                    href="{{ route(
+                                                        auth()->check() && auth()->user()->hasRole('Administrator')
+                                                            ? 'admin.products.details'
+                                                            : (auth()->check()
+                                                                ? auth()->user()->getRoleNames()->first() . '.products.details'
+                                                                : 'Dealer.products.details'),
+                                                        $product->product->id,
+                                                    ) }}">
+                                                    <div class="cart-product-image">
+
+                                                        <img src="{{ isset($product->product->productImage[0]) ? Storage::url($product->product->productImage[0]->file_url) : '' }}"
+                                                            alt="">
+                                                    </div>
+                                                </a>
                                             </td>
                                             <td>{{ $product->product ? $product->product->name : '' }}</td>
                                             <td>{{ $product->product ? $product->product->price : '' }} </td>
@@ -49,7 +60,6 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            {{-- @dd($product->quantity, $product->product->price); --}}
                                             <td class="total">
                                                 {{ $product->quantity ? ($product->product ? $product->quantity * $product->product->price : ' ') : ' ' }}
                                             </td>
@@ -63,27 +73,6 @@
                                 @else
                                     <p class="empty-data">No product in the cart</p>
                                 @endif
-                                {{-- <tr>
-                                            <td>
-                                                <div class="cart-product-image">
-                                                    <img src="./images/product4.png" alt="">
-                                                </div>
-                                            </td>
-                                            <td>Car Engine</td>
-                                            <td>$700</td>
-                                            <td>
-                                                <div class="product-quantity-box">
-                                                    <div class="quantity-btn quantity-brd">
-                                                        <a href="#">-</a>
-                                                        <input type="text" placeholder="1">
-                                                        <a href="#">+</a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>$700</td>
-                                            <td> <a href="#"><i style="color: #E13F3F;"
-                                                        class="fa-regular fa-trash-can"></i></a></td>
-                                        </tr> --}}
                             </tbody>
                         </table>
                     </div>
@@ -96,11 +85,11 @@
                 <div class="cart-box-header">
                     <h3>Cart Totals</h3>
                 </div>
-                <div class="cart-box-content">
+                {{-- <div class="cart-box-content">
                     <div class="cart-wrapper">
                         <p class="cart-txt">SubTotal</p>
                         <p class="price-txt">
-                            {{ isset($cart->amount) ? number_format($cart->amount, 2, '.', ',') : '' }}</p>
+                            {{ isset($cart) ? number_format($cart->amount, 2, '.', ',') : '' }}</p>
                     </div>
                     <div class="cart-wrapper">
                         <p class="cart-txt">Shipping</p>
@@ -127,13 +116,68 @@
                     </div>
                 </div>
 
-            </div>
-            <div class="cart-checkout">
-                <a href="{{ route(auth()->user()->getRoleNames()->first() . '.checkout.create') }}"
-                    class="btn secondary-btn view-btn">
-                    Checkout
-                </a>
-            </div>
+            </div> --}}
+                <div class="cart-box-content">
+                    <div class="cart-wrapper">
+                        <p class="cart-txt">SubTotal</p>
+                        <p class="price-txt">
+                            @if (isset($cart) && $cart->amount)
+                                {{ number_format($cart->amount, 2, '.', ',') }}
+                            @else
+                                {{ '0.00' }}
+                            @endif
+                        </p>
+                    </div>
+                    <div class="cart-wrapper">
+                        <p class="cart-txt">Shipping</p>
+                        <p class="price-txt">
+                            @php
+                                $shiping_value = 0;
+                                if (isset($cart) && $cart->amount) {
+                                    foreach ($shippingCharges as $charge) {
+                                        if (
+                                            $cart->amount >= $charge->range_from &&
+                                            $cart->amount <= $charge->range_to
+                                        ) {
+                                            if ($charge->type == 'fixed') {
+                                                $shiping_value = $charge->value;
+                                            } else {
+                                                $shiping_value = $cart->amount * ($charge->value / 100);
+                                            }
+                                        }
+                                    }
+                                }
+                            @endphp
+                            {{ number_format($shiping_value, 2, '.', ',') }}
+                        </p>
+                    </div>
+                    <div class="sub-total-wrapper">
+                        <h3>Payable Total</h3>
+                        <h3>
+                            @if (isset($cart) && $cart->amount)
+                                {{ number_format($cart->amount + $shiping_value, 2, '.', ',') }}
+                            @else
+                                {{ '0.00' }}
+                            @endif
+                        </h3>
+                    </div>
+                </div>
+                @isset($cart)
+                    @if ($cart->cartProducts->isNotEmpty())
+                        <div class="cart-checkout">
+                            <a href="{{ route(auth()->user()->getRoleNames()->first() . '.checkout.create') }}"
+                                class="btn secondary-btn view-btn">
+                                Checkout
+                            </a>
+                        </div>
+                    @else
+                        <div class="cart-checkout">
+                            <a href="#" class="btn secondary-btn view-btn">
+                                Checkout
+                            </a>
+                        </div>
+                    @endif
+                @endisset
 
+            </div>
         </div>
-    </div>
