@@ -90,7 +90,7 @@
                                 </div>
                             </div> --}}
                         </div>
-                        <form id="filters" method="POST">
+                        <form id="filters" method="POST" action="">
                         @csrf
                         <div class="interior-filter-box">
                             <h4>Makes</h4>
