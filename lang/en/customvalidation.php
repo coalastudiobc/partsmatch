@@ -535,4 +535,9 @@ return [
             'max' => "Description must be 100 characters or fewer."
         ],
     ],
+    'checkout' => [
+        'shippingMethod' => [
+            'required' => "Please confirm shipping method.",
+        ],
+    ],
 ];

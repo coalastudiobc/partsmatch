@@ -20,49 +20,52 @@
         </div>
         <div class="product-detail-table product-list-table">
             <div class="table-responsive">
-                    <table class="table">
+                <table class="table">
+                    <tr>
+                        <th>OrderId</th>
+                        <th>Total product</th>
+                        <th>Total price</th>
+                        <th>Quantity</th>
+                        <th>Shipment Price</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+
+                    @forelse ($orders as $key => $order)
                         <tr>
-                            <th>OrderId</th>
-                            <th>Total product</th>
-                            <th>Total price</th>
-                            <th>Quantity</th>
-                            <th>Date</th>
-                            <th>Status</th>
-                        </tr>
+                            <td>
+                                <div class="pro-list-name">
+                                    {{-- <input type="checkbox" class="custm-check" class="custm-check"> --}}
+                                    <h4>{{ $order->id }}</h4>
+                                </div>
+                            </td>
+                            <td>
+                                <p>{{ count($order->orderItem) }}</p>
+                            </td>
+                            <td>
+                                <p>${{ $order->total_amount }}</p>
+                            </td>
 
-                        @forelse ($orders as $key => $order)
-                            <tr>
-                                <td>
-                                    <div class="pro-list-name">
-                                        {{-- <input type="checkbox" class="custm-check" class="custm-check"> --}}
-                                        <h4>{{ $order->id }}</h4>
-                                    </div>
-                                </td>
-                                <td>
-                                    <p>{{ count($order->orderItem) }}</p>
-                                </td>
-                                <td>
-                                    <p>{{ $order->total_amount }}</p>
-                                </td>
+                            <td>
+                                <p>{{ $order->orderItem[0]->quantity }}</p>
+                            </td>
+                            <td>
+                                <p>${{ $order->shipment_price }}</p>
+                            </td>
+                            <td>
+                                <p>{{ date('d-m-Y', strtotime($order->created_at)) }}</p>
+                            </td>
 
-                                <td>
-                                    {{-- <p>{{ $order->orderItem->quantity }}</p> --}}
+                            <td>
+                                <div class="pro-status">
 
-                                </td>
-                                <td>
-                                    <p>{{ date('d-m-Y', strtotime($order->created_at)) }}</p>
-                                </td>
+                                    <div class="dropdown">
 
-                                <td>
-                                    <div class="pro-status">
-
-                                        <div class="dropdown">
-
-                                            <div class="badge complete-badge" id="dropdownMenuButton1"
-                                                data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="fa-solid fa-check"></i> Complete
-                                            </div>
-                                            {{-- <ul class="dropdown-menu"
+                                        <div class="badge complete-badge" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                                            aria-expanded="false">
+                                            <i class="fa-solid fa-check"></i> Complete
+                                        </div>
+                                        {{-- <ul class="dropdown-menu"
                                                                 aria-labelledby="dropdownMenuButton1">
                                                                 <li><a class="dropdown-item" href="#"><i
                                                                             class="fa-solid fa-check"></i> Confirmed</a>
@@ -109,18 +112,18 @@
                                                                     </a>
                                                                 </li>
                                                             </ul> --}}
-                                        </div>
                                     </div>
-                                </td>
-                            </tr>
-                        @empty
-                            <div class="empty-data">
+                                </div>
+                            </td>
+                        </tr>
+                    @empty
+                        <div class="empty-data">
                             <img src="{{ asset('assets/images/no-product.svg') }}  " alt="" width="300">
-                                <p class="text-center mt-1">Did not found any order</p>
-                            </div>
-                        @endforelse
+                            <p class="text-center mt-1">Did not found any order</p>
+                        </div>
+                    @endforelse
 
-                    </table>
+                </table>
             </div>
         </div>
         <div class="pagination-wrapper">

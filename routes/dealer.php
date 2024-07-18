@@ -99,6 +99,7 @@ Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer'
     });
     Route::name('address.')->group(function () {
         Route::get('product/picking/address', [ShippoController::class, 'view'])->name('view');
+        Route::get('shipping/methods/{country}', [CheckoutController::class, 'getShippingMethods'])->name('shipping.methods');
         Route::post('product/from/address', [ShippoController::class, 'from_address'])->name('from');
         Route::post('product/shipping/toaddress', [CheckoutController::class, 'to_address'])->name('to');
     });

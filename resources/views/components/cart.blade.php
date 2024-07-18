@@ -85,11 +85,11 @@
                 <div class="cart-box-header">
                     <h3>Cart Totals</h3>
                 </div>
-                <div class="cart-box-content">
+                {{-- <div class="cart-box-content">
                     <div class="cart-wrapper">
                         <p class="cart-txt">SubTotal</p>
                         <p class="price-txt">
-                            {{ isset($cart->amount) ? number_format($cart->amount, 2, '.', ',') : '' }}</p>
+                            {{ isset($cart) ? number_format($cart->amount, 2, '.', ',') : '' }}</p>
                     </div>
                     <div class="cart-wrapper">
                         <p class="cart-txt">Shipping</p>
@@ -116,21 +116,68 @@
                     </div>
                 </div>
 
-            </div>
-            @if ($cart->cartProducts->isNotEmpty())
-                <div class="cart-checkout">
-                    <a href="{{ route(auth()->user()->getRoleNames()->first() . '.checkout.create') }}"
-                        class="btn secondary-btn view-btn">
-                        Checkout
-                    </a>
+            </div> --}}
+                <div class="cart-box-content">
+                    <div class="cart-wrapper">
+                        <p class="cart-txt">SubTotal</p>
+                        <p class="price-txt">
+                            @if (isset($cart) && $cart->amount)
+                                {{ number_format($cart->amount, 2, '.', ',') }}
+                            @else
+                                {{ '0.00' }}
+                            @endif
+                        </p>
+                    </div>
+                    <div class="cart-wrapper">
+                        <p class="cart-txt">Shipping</p>
+                        <p class="price-txt">
+                            @php
+                                $shiping_value = 0;
+                                if (isset($cart) && $cart->amount) {
+                                    foreach ($shippingCharges as $charge) {
+                                        if (
+                                            $cart->amount >= $charge->range_from &&
+                                            $cart->amount <= $charge->range_to
+                                        ) {
+                                            if ($charge->type == 'fixed') {
+                                                $shiping_value = $charge->value;
+                                            } else {
+                                                $shiping_value = $cart->amount * ($charge->value / 100);
+                                            }
+                                        }
+                                    }
+                                }
+                            @endphp
+                            {{ number_format($shiping_value, 2, '.', ',') }}
+                        </p>
+                    </div>
+                    <div class="sub-total-wrapper">
+                        <h3>Payable Total</h3>
+                        <h3>
+                            @if (isset($cart) && $cart->amount)
+                                {{ number_format($cart->amount + $shiping_value, 2, '.', ',') }}
+                            @else
+                                {{ '0.00' }}
+                            @endif
+                        </h3>
+                    </div>
                 </div>
-            @else
-                <div class="cart-checkout">
-                    <a href="#" class="btn secondary-btn view-btn">
-                        Checkout
-                    </a>
-                </div>
-            @endif
+                @isset($cart)
+                    @if ($cart->cartProducts->isNotEmpty())
+                        <div class="cart-checkout">
+                            <a href="{{ route(auth()->user()->getRoleNames()->first() . '.checkout.create') }}"
+                                class="btn secondary-btn view-btn">
+                                Checkout
+                            </a>
+                        </div>
+                    @else
+                        <div class="cart-checkout">
+                            <a href="#" class="btn secondary-btn view-btn">
+                                Checkout
+                            </a>
+                        </div>
+                    @endif
+                @endisset
 
+            </div>
         </div>
-    </div>

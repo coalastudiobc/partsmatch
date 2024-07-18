@@ -211,6 +211,8 @@ class AdminController extends Controller
                     'range_to' => $request->range_to,
                     'type' => 'fixed',
                     'value' => $request->shipping_charge,
+                    'name' => $request->shipment_title,
+                    'country' => $request->country,
                 ];
                 $id = jsdecode_userdata($shipping_id);
                 $editrow =  ShippingSetting::where('id', $id)->first();

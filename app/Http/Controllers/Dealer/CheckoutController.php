@@ -103,7 +103,21 @@ class CheckoutController extends Controller
         $allProductsOfCart = CartProduct::where('cart_id', $carts[0]->id)->get();
         return view('dealer.payment', compact('total_amount', 'allProductsOfCart', 'selectedRateAmounts', 'products', 'totalShipping'));
     }
-
+    public function getShippingMethods(string $country)
+    {
+        try {
+            ($country == 'CA') ? $country = 'Canada' : $country = 'United States';
+            $total_amount = Cart::where('user_id', auth()->user()->id)->sum('amount');
+            $integerAmount = (int) $total_amount;  // Convert to integer
+            $TotalShippings = ShippingSetting::where('range_to', '>=', $integerAmount)->where('range_from', '<=', $integerAmount)->where('country', $country)->orderBy('value', 'desc')->get();
+            if ($TotalShippings->isEmpty()) {
+                throw new \Exception('No shipping settings found for the specified country.');
+            }
+            return response()->json(['title' => 'Success', 'data' => $TotalShippings, 'message' => 'TotalShippings retrieved successfully']);
+        } catch (\Exception $e) {
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+        }
+    }
 
     public function shippingRates(Request $request)
     {
@@ -142,30 +156,36 @@ class CheckoutController extends Controller
     }
     public function create()
     {
-        $countries = Country::get();
-        $total_amount = Cart::where('user_id', auth()->user()->id)->sum('amount');
-        $shippingCharge = AdminSetting::where('name', 'shipping_charge')->first();
+        try {
+            // $countries = Country::where('name', ['canada', 'united states'])->get();
+            $countries = Country::whereIn('name', ['Canada', 'United States'])->get();
+            $total_amount = Cart::where('user_id', auth()->user()->id)->sum('amount');
+            $shippingCharge = AdminSetting::where('name', 'shipping_charge')->first();
 
-        $user = auth()->user();
-        $stripeCustomer = $user->createOrGetStripeCustomer();
-        $intent = $user->createSetupIntent();
-        $data = $user->shippingAddress;
-        $carts = Cart::with('cart_product', 'cart_product.product')->where('user_id', $user->id)->get();
-        $allProductsOfCart = CartProduct::where('cart_id', $carts[0]->id)->get();
-        $deliveryAddress = UserAddresses::where('user_id', auth()->user()->id)->where('type', 'Deliver')->first();
-        if (!is_null($data)) {
+            $user = auth()->user();
 
-            $country = Country::where('id', $data->country_id)->first();
-            $state = State::where('id', $data->state_id)->first();
-            $city = City::where('id', $data->city_id)->first();
+            $data = $user->shippingAddress;
+            $carts = Cart::with('cart_product', 'cart_product.product')->where('user_id', $user->id)->get();
+            $allProductsOfCart = CartProduct::where('cart_id', $carts[0]->id)->get();
+            $deliveryAddress = UserAddresses::where('user_id', auth()->user()->id)->where('type', 'Deliver')->first();
+            if (!is_null($data)) {
 
-            return view('dealer.checkout', compact('countries', 'intent', 'total_amount', 'country', 'state', 'city', 'data', 'stripeCustomer', 'carts', 'shippingCharge'));
+                $country = Country::where('id', $data->country_id)->first();
+                $state = State::where('id', $data->state_id)->first();
+                $city = City::where('id', $data->city_id)->first();
+
+                return view('dealer.checkout', compact('countries', 'total_amount', 'country', 'state', 'city', 'data', 'carts', 'shippingCharge'));
+            }
+            // if (is_null($deliveryAddress)) {
+            //     return redirect()->back()->with('error', 'seller does not set picking address yet. please try again later');
+            // }
+            $integerAmount = (int) $total_amount;  // Convert to integer
+
+            $TotalShippings = ShippingSetting::where('range_to', '>=', $integerAmount)->where('range_from', '<=', $integerAmount)->orderBy('value', 'desc')->get();
+            return view('dealer.checkout', compact('countries', 'total_amount', 'carts', 'shippingCharge', 'allProductsOfCart', 'deliveryAddress', 'TotalShippings'));
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
         }
-        // if (is_null($deliveryAddress)) {
-        //     return redirect()->back()->with('error', 'seller does not set picking address yet. please try again later');
-        // }
-        $TotalShippings = ShippingSetting::all();
-        return view('dealer.checkout', compact('countries', 'intent', 'total_amount', 'stripeCustomer', 'carts', 'shippingCharge', 'allProductsOfCart', 'deliveryAddress', 'TotalShippings'));
     }
     public function store(CheckoutRequest $request)
     {
@@ -239,27 +259,33 @@ class CheckoutController extends Controller
         $user = auth()->user();
         $data = $user->shippingAddress;
         // $orders = Order::with('orderItem')->where('user_id', auth()->id())->orderByDesc('id')->paginate(10);
-        $orders =  Order::with('orderItem')->where('user_id', auth()->id())->paginate(10);
+        $orders =  Order::with('orderItem')->where('user_id', auth()->id())->paginate(__('pagination.pagination_nuber'));
 
-        // dd($order);
+        // dd($orders);
         return view('dealer.myorder.order_list', compact('orders'));
     }
     public function to_address(Request $request)
     {
         try {
-            dd($request->toArray());
-            $responseInArray = $this->address($request);
-            if ($responseInArray->object_state !== 'VALID') {
-                throw new \Exception('Error in Api ' . $responseInArray->messages->text);
-            }
 
-            $toAddress = $responseInArray->object_id;
-            $addressType = 'Deliver';
-            $this->storeAddress($request, $addressType, $toAddress);
-            $cart = Cart::with('cart_product.product')->where('user_id', auth()->user()->id)->firstOrFail();  // Fetch only the first cart or fail if none found
-            $allProductsOfCart = $cart->cart_product;
+            // dd($request->toArray());
+            // $responseInArray = $this->address($request);
+            // if ($responseInArray->object_state !== 'VALID') {
+            //     throw new \Exception('Error in Api ' . $responseInArray->messages->text);
+            // }
 
-            return view('dealer.payment', compact('allProductsOfCart'));
+            // $toAddress = $responseInArray->object_id;
+            // $addressType = 'Deliver';
+            // $this->storeAddress($request, $addressType, $toAddress);
+
+            $stripeCustomer = auth()->user()->createOrGetStripeCustomer();
+            $intent = auth()->user()->createSetupIntent();
+            $carts = Cart::with('cart_product', 'cart_product.product')->where('user_id', auth()->user()->id)->get();
+            $allProductsOfCart = CartProduct::where('cart_id', $carts[0]->id)->get();
+            // dd($allProductsOfCart);
+            $grandTotal = $request->grandTotal;
+            $selectedShipping = ShippingSetting::find($request->shipping_Method);
+            return view('dealer.payment', compact('allProductsOfCart', 'grandTotal', 'selectedShipping', 'stripeCustomer', 'intent'));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }

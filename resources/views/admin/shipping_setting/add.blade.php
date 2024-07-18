@@ -41,7 +41,7 @@
                                             <div class="form-group">
                                                 <label for="range_from">Country</label>
                                                 <input type="hidden" name="country"
-                                                    value="@isset($data) {{ $data->country == 'canada' ? 'canada' : 'united states' }}@endisset"
+                                                    value="@isset($data) {{ $data->country == 'Canada' ? 'Canada' : 'United States' }}@endisset"
                                                     id=""
                                                     class=" @error('country') is-invalid @enderror checktype">
                                                 <div class="custm-dropdown">
@@ -51,7 +51,7 @@
                                                             aria-expanded="false">
                                                             <div id="selectedCountry">
                                                                 @isset($data)
-                                                                    {{ $data->type == 'canada' ? 'canada' : 'united states' }}
+                                                                    {{ $data->type == 'Canada' ? 'Canada' : 'United States' }}
                                                                 @endisset
 
 
@@ -68,13 +68,13 @@
                                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 
                                                             <li><a class="dropdown-item custom_dropdown_country"
-                                                                    @isset($data)   @if ($data->type == 'united states') selected @endif @endisset
-                                                                    data-value="united states" data-text="united states"
-                                                                    href="javascript:void(0)">United states</a>
+                                                                    @isset($data)   @if ($data->type == 'United States') selected @endif @endisset
+                                                                    data-value="United States" data-text="United States"
+                                                                    href="javascript:void(0)">United States</a>
                                                             </li>
                                                             <li><a class="dropdown-item custom_dropdown_country"
-                                                                    @isset($data)    @if ($data->type == 'canada') selected @endif @endisset
-                                                                    data-value="canada" data-text="canada"
+                                                                    @isset($data)    @if ($data->type == 'Canada') selected @endif @endisset
+                                                                    data-value="Canada" data-text="Canada"
                                                                     href="javascript:void(0)">Canada</a>
                                                             </li>
 
@@ -176,38 +176,38 @@
                                                 class="form-control @error('shipping_charge') is-invalid @enderror two-decimals"
                                                 value="@isset($data){{ $data->value }}@endisset">
 
-                                                        @error('shipping_charge')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
-                                                        @enderror
-                                                        <div class="input-icon-custm tooltip-open">
-                                                            <span>
-                                                                <i class="fa-solid fa-question"></i>
-                                                            </span>
-                                                            <div class="tooltip">
-                                                                <p>Average shipping charge for every consignment.</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-6">
-                                                        <a class="btn secondary-btn full-btn mr-1"
-                                                            href="{{ route('admin.shipping.view') }}">Back</a>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <button class="btn primary-btn full-btn mr-1" id="submit"
-                                                            type="submit">Submit</button>
-                                                    </div>
+                                            @error('shipping_charge')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                            <div class="input-icon-custm tooltip-open">
+                                                <span>
+                                                    <i class="fa-solid fa-question"></i>
+                                                </span>
+                                                <div class="tooltip">
+                                                    <p>Average shipping charge for every consignment.</p>
                                                 </div>
-                                            </form>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <a class="btn secondary-btn full-btn mr-1"
+                                                href="{{ route('admin.shipping.view') }}">Back</a>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <button class="btn primary-btn full-btn mr-1" id="submit"
+                                                type="submit">Submit</button>
                                         </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </section>
+    </div>
+    </section>
     </div>
 @endsection
 @push('scripts')

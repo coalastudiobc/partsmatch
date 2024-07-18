@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Dealer\ProductController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Dealer\ProductController;
+use App\Http\Controllers\Dealer\OrderPaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,7 +38,9 @@ Route::get('/search', [ProductController::class, 'search'])->name('search');
 
 
 Auth::routes();
-
+Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers')->group(function () {
+    Route::post('/order/payment', [OrderPaymentController::class, 'index'])->name('order.payment');
+});
 
 Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers')->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
