@@ -1851,8 +1851,12 @@ span.ymmm-cross {
 .category-list  a.active {
     font-weight: 600;
 }
-
-
+.cat-count span {
+    color: var(--heading-color);
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
 
 
 
