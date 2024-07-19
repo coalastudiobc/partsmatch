@@ -38,6 +38,7 @@
 </head>
 
 <body>
+
     <header>
         <div class="custm-nav">
             <div class="container">
@@ -70,10 +71,11 @@
                                                     </button>
                                                     <ul class="dropdown-menu dropdown-menu-end">
                                                         <li><a class="dropdown-item"
-                                                                href="{{ route('admin.profile.view') }}"><i class="fa-solid fa-user"></i> Profile</a></li>
+                                                                href="{{ route('admin.profile.view') }}"><i
+                                                                    class="fa-solid fa-user"></i> Profile</a></li>
                                                         {{-- <li><a class="dropdown-item" href="#">Another action</a></li> --}}
                                                         <li><a class="dropdown-item" href="{{ route('logout') }}">
-                                                            <i class="fa-solid fa-right-from-bracket"></i>
+                                                                <i class="fa-solid fa-right-from-bracket"></i>
                                                                 Logout
                                                             </a>
                                                         </li>
@@ -103,13 +105,30 @@
     </section>
     <main>
         <section class="page-content-sec">
-                <div class="page-content-wrapper">
-                    <div class="dc-content-wrapper">
-                        @include('admin.sidebar')
-                        @yield('content')
+            <div class="page-content-wrapper">
+                <div class="dc-content-wrapper">
+                    @include('admin.sidebar')
+                    @yield('content')
+                    <div id="fullPageLoader" class="page-loader d-none">
+                        <div class="sk-circle">
+                            <div class="sk-circle1 sk-child"></div>
+                            <div class="sk-circle2 sk-child"></div>
+                            <div class="sk-circle3 sk-child"></div>
+                            <div class="sk-circle4 sk-child"></div>
+                            <div class="sk-circle5 sk-child"></div>
+                            <div class="sk-circle6 sk-child"></div>
+                            <div class="sk-circle7 sk-child"></div>
+                            <div class="sk-circle8 sk-child"></div>
+                            <div class="sk-circle9 sk-child"></div>
+                            <div class="sk-circle10 sk-child"></div>
+                            <div class="sk-circle11 sk-child"></div>
+                            <div class="sk-circle12 sk-child"></div>
+                        </div>
                     </div>
-
                 </div>
+            </div>
+
+            </div>
         </section>
     </main>
 

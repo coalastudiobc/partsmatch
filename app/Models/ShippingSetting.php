@@ -10,6 +10,8 @@ class ShippingSetting extends Model
     use HasFactory;
     protected $fillable = [
         'value',
+        'country',
+        'name',
         'range_to',
         'range_from',
         'type',

@@ -166,13 +166,16 @@ class AdminController extends Controller
 
     public function shipping(ShippingRequest $request)
     {
+        // $validated = $request->validated();
         if ($request->method() == "POST") {
             try {
                 $data = [
                     'range_from' => $request->range_from,
                     'range_to' => $request->range_to,
-                    'type' => $request->shipping_charge_type,
+                    'type' => 'fixed',
                     'value' => $request->shipping_charge,
+                    'name' => $request->shipment_title,
+                    'country' => $request->country,
                 ];
                 // $has_range_from = ShippingSetting::whereBetween('range_from', [$request->range_from, $request->range_to])->get();
                 // if ($has_range_from->toArray()) {
@@ -190,12 +193,11 @@ class AdminController extends Controller
                 session()->flash('message', 'Data updated successfully');
                 return redirect()->route('admin.shipping.view');
             } catch (\Throwable $e) {
-                session()->flash('status', 'error');
-                session()->flash('message', $e->getMessage());
+                session()->flash('error', $e->getMessage());
                 return redirect()->back();
             }
         } else {
-            $shipping_details = ShippingSetting::orderBy('created_at', 'DESC')->paginate(5);
+            $shipping_details = ShippingSetting::orderBy('created_at', 'DESC')->paginate(__('pagination.pagination_nuber'));
         }
 
         return view('admin.shipping_setting.index', compact('shipping_details'));
@@ -207,15 +209,17 @@ class AdminController extends Controller
                 $data = [
                     'range_from' => $request->range_from,
                     'range_to' => $request->range_to,
-                    'type' => $request->shipping_charge_type,
+                    'type' => 'fixed',
                     'value' => $request->shipping_charge,
+                    'name' => $request->shipment_title,
+                    'country' => $request->country,
                 ];
                 $id = jsdecode_userdata($shipping_id);
                 $editrow =  ShippingSetting::where('id', $id)->first();
                 $editrow->update($data);
                 session()->flash('status', 'success');
                 session()->flash('message', 'Data updated successfully');
-                return redirect()->route('admin.shipping');
+                return redirect()->route('admin.shipping.view');
             } catch (\Throwable $e) {
                 session()->flash('status', 'error');
                 session()->flash('message', $e->getMessage());

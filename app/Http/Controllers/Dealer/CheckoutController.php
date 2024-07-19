@@ -3,13 +3,10 @@
 namespace App\Http\Controllers\Dealer;
 
 use Exception;
-use Stripe\Stripe;
 use App\Models\Cart;
 use App\Models\City;
-use App\Models\User;
 use App\Models\Order;
 use App\Models\State;
-use GuzzleHttp\Client;
 use App\Models\Country;
 use App\Models\OrderItem;
 use Stripe\PaymentIntent;
@@ -19,14 +16,13 @@ use App\Models\AdminSetting;
 use Illuminate\Http\Request;
 use App\Models\UserAddresses;
 use App\Models\ShippingAddress;
+use App\Models\ShippingSetting;
 use App\Models\ShippmentCreation;
 use Illuminate\Support\Facades\DB;
-use App\Models\ProductParcelDetail;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CheckoutRequest;
 use App\Models\ShippoPurchasedLabel;
+use App\Http\Requests\CheckoutRequest;
 use GuzzleHttp\Psr7\Request as GuzzleRequest;
-use PhpParser\Node\Stmt\TryCatch;
 
 class CheckoutController extends Controller
 {
@@ -107,7 +103,21 @@ class CheckoutController extends Controller
         $allProductsOfCart = CartProduct::where('cart_id', $carts[0]->id)->get();
         return view('dealer.payment', compact('total_amount', 'allProductsOfCart', 'selectedRateAmounts', 'products', 'totalShipping'));
     }
-
+    public function getShippingMethods(string $country)
+    {
+        try {
+            ($country == 'CA') ? $country = 'Canada' : $country = 'United States';
+            $total_amount = Cart::where('user_id', auth()->user()->id)->sum('amount');
+            $integerAmount = (int) $total_amount;  // Convert to integer
+            $TotalShippings = ShippingSetting::where('range_to', '>=', $integerAmount)->where('range_from', '<=', $integerAmount)->where('country', $country)->orderBy('value', 'desc')->get();
+            if ($TotalShippings->isEmpty()) {
+                throw new \Exception('No shipping settings found for the specified country.');
+            }
+            return response()->json(['title' => 'Success', 'data' => $TotalShippings, 'message' => 'TotalShippings retrieved successfully']);
+        } catch (\Exception $e) {
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+        }
+    }
 
     public function shippingRates(Request $request)
     {
@@ -146,29 +156,36 @@ class CheckoutController extends Controller
     }
     public function create()
     {
-        $countries = Country::get();
-        $total_amount = Cart::where('user_id', auth()->user()->id)->sum('amount');
-        $shippingCharge = AdminSetting::where('name', 'shipping_charge')->first();
+        try {
+            // $countries = Country::where('name', ['canada', 'united states'])->get();
+            $countries = Country::whereIn('name', ['Canada', 'United States'])->get();
+            $total_amount = Cart::where('user_id', auth()->user()->id)->sum('amount');
+            $shippingCharge = AdminSetting::where('name', 'shipping_charge')->first();
 
-        $user = auth()->user();
-        $stripeCustomer = $user->createOrGetStripeCustomer();
-        $intent = $user->createSetupIntent();
-        $data = $user->shippingAddress;
-        $carts = Cart::with('cart_product', 'cart_product.product')->where('user_id', $user->id)->get();
-        $allProductsOfCart = CartProduct::where('cart_id', $carts[0]->id)->get();
-        $deliveryAddress = UserAddresses::where('user_id', auth()->user()->id)->where('type', 'Deliver')->first();
-        if (!is_null($data)) {
+            $user = auth()->user();
 
-            $country = Country::where('id', $data->country_id)->first();
-            $state = State::where('id', $data->state_id)->first();
-            $city = City::where('id', $data->city_id)->first();
+            $data = $user->shippingAddress;
+            $carts = Cart::with('cart_product', 'cart_product.product')->where('user_id', $user->id)->get();
+            $allProductsOfCart = CartProduct::where('cart_id', $carts[0]->id)->get();
+            $deliveryAddress = UserAddresses::where('user_id', auth()->user()->id)->where('type', 'Deliver')->first();
+            if (!is_null($data)) {
 
-            return view('dealer.checkout', compact('countries', 'intent', 'total_amount', 'country', 'state', 'city', 'data', 'stripeCustomer', 'carts', 'shippingCharge'));
+                $country = Country::where('id', $data->country_id)->first();
+                $state = State::where('id', $data->state_id)->first();
+                $city = City::where('id', $data->city_id)->first();
+
+                return view('dealer.checkout', compact('countries', 'total_amount', 'country', 'state', 'city', 'data', 'carts', 'shippingCharge'));
+            }
+            // if (is_null($deliveryAddress)) {
+            //     return redirect()->back()->with('error', 'seller does not set picking address yet. please try again later');
+            // }
+            $integerAmount = (int) $total_amount;  // Convert to integer
+
+            $TotalShippings = ShippingSetting::where('range_to', '>=', $integerAmount)->where('range_from', '<=', $integerAmount)->orderBy('value', 'desc')->get();
+            return view('dealer.checkout', compact('countries', 'total_amount', 'carts', 'shippingCharge', 'allProductsOfCart', 'deliveryAddress', 'TotalShippings'));
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
         }
-        // if (is_null($deliveryAddress)) {
-        //     return redirect()->back()->with('error', 'seller does not set picking address yet. please try again later');
-        // }
-        return view('dealer.checkout', compact('countries', 'intent', 'total_amount', 'stripeCustomer', 'carts', 'shippingCharge', 'allProductsOfCart', 'deliveryAddress'));
     }
     public function store(CheckoutRequest $request)
     {
@@ -242,150 +259,177 @@ class CheckoutController extends Controller
         $user = auth()->user();
         $data = $user->shippingAddress;
         // $orders = Order::with('orderItem')->where('user_id', auth()->id())->orderByDesc('id')->paginate(10);
-        $orders =  Order::with('orderItem')->where('user_id', auth()->id())->paginate(10);
+        $orders =  Order::with('orderItem')->where('user_id', auth()->id())->paginate(__('pagination.pagination_nuber'));
 
-        // dd($order);
+        // dd($orders);
         return view('dealer.myorder.order_list', compact('orders'));
     }
-
     public function to_address(Request $request)
     {
         try {
-            return redirect()->back()->with(['error' => 'some internal issues. Please try again later']);
-            $response_in_array =  $this->address($request);
-            $to_address = '';
-            if ($response_in_array->object_state == "VALID") {
-                $to_address = $response_in_array->object_id;
-                $addresstype = 'Deliver';
-                $this->storeAddress($request, $addresstype, $to_address);
-                $carts = Cart::with('cart_product', 'cart_product.product')->where('user_id', auth()->user()->id)->get();
-                $allProductsOfCart = CartProduct::where('cart_id', $carts[0]->id)->get();
-                $parcelsIdInArray = [];
-                $rateResults = [];
-                $lastUserId = null;
 
-                // $parcelsIdInOfDifferentUsers = 0;
-                // $storeLastProductOfUser = 0;
-                // foreach ($allProductsOfCart as $products) {
-                //     if ($products->first) {
-                //         $storeLastProductOfUser = $products->product_of;
-                //     }
-                //     $parcelDetails =  ProductParcelDetail::where('product_id', $products->product_id)->first();
-                //     if ($storeLastProductOfUser == $products->product_of) {
-                //         $parcelsIdInArray[] = $this->createParcel($parcelDetails);
-                //         // $rateResults[$products->product_id] = $this->createShipment($to_address, $parcelsIdInArray);
-                //     } else {
-                //         $parcelsIdInOfDifferentUsers = $this->createParcel($parcelDetails);
-                //         $rateResults[$products->product_id] = $this->createShipment($to_address, $parcelsIdInOfDifferentUsers);
-                //     }
-                //     $storeLastProductOfUser = $products->product_of;
-                //     if ($products->last && !is_null($parcelsIdInArray)) {
-                //         dd($parcelsIdInArray);
-                //         $rateResults[$products->product_id] = $this->createShipment($to_address, $parcelsIdInArray);
-                //     }
-                // }
+            // dd($request->toArray());
+            // $responseInArray = $this->address($request);
+            // if ($responseInArray->object_state !== 'VALID') {
+            //     throw new \Exception('Error in Api ' . $responseInArray->messages->text);
+            // }
 
-                // foreach ($allProductsOfCart as $products) {
-                //     if ($lastUserId !== $products->product_of) {
-                //         if (!empty($parcelsIdInArray)) {
-                //             $rateResults[$lastUserId] = $this->createShipment($to_address, $parcelsIdInArray, $lastUserId);
-                //             $parcelsIdInArray = [];
-                //         }
-                //         $lastUserId = $products->product_of; // Update lastUserId to current user ID
-                //     }
-                //     $parcelDetails = ProductParcelDetail::where('product_id', $products->product_id)->first();
-                //     $quantity = $products->quantity ?? 1; // Assume 1 if quantity is not defined
-                //     for ($i = 0; $i < $quantity; $i++) {
-                //         $parcelsIdInArray[] = $this->createParcel($parcelDetails, $products->product_id);
-                //     }
-                //     if ($products->last && !empty($parcelsIdInArray)) {
-                //         $rateResults[$lastUserId] = $this->createShipment($to_address, $parcelsIdInArray, $lastUserId);
-                //     }
-                // }
-                // if (!empty($parcelsIdInArray)) {
-                //     $rateResults[$lastUserId] = $this->createShipment($to_address, $parcelsIdInArray, $lastUserId);
-                // }
+            // $toAddress = $responseInArray->object_id;
+            // $addressType = 'Deliver';
+            // $this->storeAddress($request, $addressType, $toAddress);
 
-
-                // foreach ($allProductsOfCart as $key => $products) {
-                //     if ($lastUserId !== $products->product_of) {
-                //         if (!empty($parcelsIdInArray)) {
-                //             if (array_key_exists($lastUserId, $rateResults)) {
-                //                 $rateResults[$lastUserId][] = $this->createShipment($to_address, $parcelsIdInArray, $lastUserId);
-                //             } else {
-                //                 $rateResults[$lastUserId] = [$this->createShipment($to_address, $parcelsIdInArray, $lastUserId)];
-                //             }
-                //             $parcelsIdInArray = []; // Reset parcels array
-                //         }
-                //         $lastUserId = $products->product_of;
-                //     }
-
-                //     $parcelDetails = ProductParcelDetail::where('product_id', $products->product_id)->first();
-                //     $quantity = $products->quantity ?? 1; // Assume 1 if quantity is not defined
-
-                //     for ($i = 0; $i < $quantity; $i++) {
-                //         $parcelsIdInArray[] = $this->createParcel($parcelDetails, $products->product_id);
-                //     }
-                //     if ($key === count($allProductsOfCart) - 1 || $allProductsOfCart[$key + 1]->product_of !== $lastUserId) {
-                //         if (array_key_exists($lastUserId, $rateResults)) {
-                //             $rateResults[$lastUserId][] = $this->createShipment($to_address, $parcelsIdInArray, $lastUserId);
-                //         } else {
-                //             $rateResults[$lastUserId] = [$this->createShipment($to_address, $parcelsIdInArray, $lastUserId)];
-                //         }
-                //         $parcelsIdInArray = [];
-                //     }
-                // }
-
-                $usersProducts = [];
-
-                // Step 1: Group products by user ID
-                foreach ($allProductsOfCart as $products) {
-                    $userId = $products->product_of;
-
-                    // Initialize an array for the user if not already initialized
-                    if (!isset($usersProducts[$userId])) {
-                        $usersProducts[$userId] = [
-                            'parcels' => [], // Array to store parcel IDs for the user
-                            'lastUserId' => null, // Last user ID processed
-                        ];
-                    }
-
-                    // Fetch parcel details for the product
-                    $parcelDetails = ProductParcelDetail::where('product_id', $products->product_id)->first();
-                    $quantity = $products->quantity ?? 1; // Assume 1 if quantity is not defined
-
-                    // Create parcels for each product
-                    for ($i = 0; $i < $quantity; $i++) {
-                        $usersProducts[$userId]['parcels'][] = $this->createParcel($parcelDetails, $products->product_id);
-                    }
-
-                    // Update lastUserId for the user
-                    $usersProducts[$userId]['lastUserId'] = $userId;
-                }
-
-                // Step 2: Create shipments for each user
-                $rateResults = [];
-                foreach ($usersProducts as $userId => $userData) {
-                    $parcelsIdInArray = $userData['parcels'];
-                    $lastUserId = $userData['lastUserId'];
-
-                    // Create shipment for the user
-                    $rateResults[$userId] = $this->createShipment($to_address, $parcelsIdInArray, $lastUserId);
-                }
-
-                // dd($rateResults);
-
-                return view('dealer.rates', compact('rateResults'));
-                dd($parcelsIdInArray, $rateResults);
-            }
-            $error_code = $response_in_array->messages[0]->code;
-            // $error_type = $response_in_array->messages[0]->type;
-            $error_text = $response_in_array->messages[0]->text;
-            return redirect()->back()->with(['shippo' => 'error', 'code' => $error_code, 'text' => $error_text]);
+            $stripeCustomer = auth()->user()->createOrGetStripeCustomer();
+            $intent = auth()->user()->createSetupIntent();
+            $carts = Cart::with('cart_product', 'cart_product.product')->where('user_id', auth()->user()->id)->get();
+            $allProductsOfCart = CartProduct::where('cart_id', $carts[0]->id)->get();
+            // dd($allProductsOfCart);
+            $grandTotal = $request->grandTotal;
+            $selectedShipping = ShippingSetting::find($request->shipping_Method);
+            return view('dealer.payment', compact('allProductsOfCart', 'grandTotal', 'selectedShipping', 'stripeCustomer', 'intent'));
         } catch (\Exception $e) {
-            return redirect()->back()->with(['error' => $e->getMessage()]);
+            return redirect()->back()->with('error', $e->getMessage());
         }
     }
+
+
+    // public function to_address(Request $request)
+    // {
+    //     try {
+    //         return redirect()->back()->with(['error' => 'some internal issues. Please try again later']);
+    //         $response_in_array =  $this->address($request);
+    //         $to_address = '';
+    //         if ($response_in_array->object_state == "VALID") {
+    //             $to_address = $response_in_array->object_id;
+    //             $addresstype = 'Deliver';
+    //             $this->storeAddress($request, $addresstype, $to_address);
+    //             $carts = Cart::with('cart_product', 'cart_product.product')->where('user_id', auth()->user()->id)->get();
+    //             $allProductsOfCart = CartProduct::where('cart_id', $carts[0]->id)->get();
+    //             $parcelsIdInArray = [];
+    //             $rateResults = [];
+    //             $lastUserId = null;
+
+    //             // $parcelsIdInOfDifferentUsers = 0;
+    //             // $storeLastProductOfUser = 0;
+    //             // foreach ($allProductsOfCart as $products) {
+    //             //     if ($products->first) {
+    //             //         $storeLastProductOfUser = $products->product_of;
+    //             //     }
+    //             //     $parcelDetails =  ProductParcelDetail::where('product_id', $products->product_id)->first();
+    //             //     if ($storeLastProductOfUser == $products->product_of) {
+    //             //         $parcelsIdInArray[] = $this->createParcel($parcelDetails);
+    //             //         // $rateResults[$products->product_id] = $this->createShipment($to_address, $parcelsIdInArray);
+    //             //     } else {
+    //             //         $parcelsIdInOfDifferentUsers = $this->createParcel($parcelDetails);
+    //             //         $rateResults[$products->product_id] = $this->createShipment($to_address, $parcelsIdInOfDifferentUsers);
+    //             //     }
+    //             //     $storeLastProductOfUser = $products->product_of;
+    //             //     if ($products->last && !is_null($parcelsIdInArray)) {
+    //             //         dd($parcelsIdInArray);
+    //             //         $rateResults[$products->product_id] = $this->createShipment($to_address, $parcelsIdInArray);
+    //             //     }
+    //             // }
+
+    //             // foreach ($allProductsOfCart as $products) {
+    //             //     if ($lastUserId !== $products->product_of) {
+    //             //         if (!empty($parcelsIdInArray)) {
+    //             //             $rateResults[$lastUserId] = $this->createShipment($to_address, $parcelsIdInArray, $lastUserId);
+    //             //             $parcelsIdInArray = [];
+    //             //         }
+    //             //         $lastUserId = $products->product_of; // Update lastUserId to current user ID
+    //             //     }
+    //             //     $parcelDetails = ProductParcelDetail::where('product_id', $products->product_id)->first();
+    //             //     $quantity = $products->quantity ?? 1; // Assume 1 if quantity is not defined
+    //             //     for ($i = 0; $i < $quantity; $i++) {
+    //             //         $parcelsIdInArray[] = $this->createParcel($parcelDetails, $products->product_id);
+    //             //     }
+    //             //     if ($products->last && !empty($parcelsIdInArray)) {
+    //             //         $rateResults[$lastUserId] = $this->createShipment($to_address, $parcelsIdInArray, $lastUserId);
+    //             //     }
+    //             // }
+    //             // if (!empty($parcelsIdInArray)) {
+    //             //     $rateResults[$lastUserId] = $this->createShipment($to_address, $parcelsIdInArray, $lastUserId);
+    //             // }
+
+
+    //             // foreach ($allProductsOfCart as $key => $products) {
+    //             //     if ($lastUserId !== $products->product_of) {
+    //             //         if (!empty($parcelsIdInArray)) {
+    //             //             if (array_key_exists($lastUserId, $rateResults)) {
+    //             //                 $rateResults[$lastUserId][] = $this->createShipment($to_address, $parcelsIdInArray, $lastUserId);
+    //             //             } else {
+    //             //                 $rateResults[$lastUserId] = [$this->createShipment($to_address, $parcelsIdInArray, $lastUserId)];
+    //             //             }
+    //             //             $parcelsIdInArray = []; // Reset parcels array
+    //             //         }
+    //             //         $lastUserId = $products->product_of;
+    //             //     }
+
+    //             //     $parcelDetails = ProductParcelDetail::where('product_id', $products->product_id)->first();
+    //             //     $quantity = $products->quantity ?? 1; // Assume 1 if quantity is not defined
+
+    //             //     for ($i = 0; $i < $quantity; $i++) {
+    //             //         $parcelsIdInArray[] = $this->createParcel($parcelDetails, $products->product_id);
+    //             //     }
+    //             //     if ($key === count($allProductsOfCart) - 1 || $allProductsOfCart[$key + 1]->product_of !== $lastUserId) {
+    //             //         if (array_key_exists($lastUserId, $rateResults)) {
+    //             //             $rateResults[$lastUserId][] = $this->createShipment($to_address, $parcelsIdInArray, $lastUserId);
+    //             //         } else {
+    //             //             $rateResults[$lastUserId] = [$this->createShipment($to_address, $parcelsIdInArray, $lastUserId)];
+    //             //         }
+    //             //         $parcelsIdInArray = [];
+    //             //     }
+    //             // }
+
+    //             $usersProducts = [];
+
+    //             // Step 1: Group products by user ID
+    //             foreach ($allProductsOfCart as $products) {
+    //                 $userId = $products->product_of;
+
+    //                 // Initialize an array for the user if not already initialized
+    //                 if (!isset($usersProducts[$userId])) {
+    //                     $usersProducts[$userId] = [
+    //                         'parcels' => [], // Array to store parcel IDs for the user
+    //                         'lastUserId' => null, // Last user ID processed
+    //                     ];
+    //                 }
+
+    //                 // Fetch parcel details for the product
+    //                 $parcelDetails = ProductParcelDetail::where('product_id', $products->product_id)->first();
+    //                 $quantity = $products->quantity ?? 1; // Assume 1 if quantity is not defined
+
+    //                 // Create parcels for each product
+    //                 for ($i = 0; $i < $quantity; $i++) {
+    //                     $usersProducts[$userId]['parcels'][] = $this->createParcel($parcelDetails, $products->product_id);
+    //                 }
+
+    //                 // Update lastUserId for the user
+    //                 $usersProducts[$userId]['lastUserId'] = $userId;
+    //             }
+
+    //             // Step 2: Create shipments for each user
+    //             $rateResults = [];
+    //             foreach ($usersProducts as $userId => $userData) {
+    //                 $parcelsIdInArray = $userData['parcels'];
+    //                 $lastUserId = $userData['lastUserId'];
+
+    //                 // Create shipment for the user
+    //                 $rateResults[$userId] = $this->createShipment($to_address, $parcelsIdInArray, $lastUserId);
+    //             }
+
+    //             // dd($rateResults);
+
+    //             return view('dealer.rates', compact('rateResults'));
+    //             dd($parcelsIdInArray, $rateResults);
+    //         }
+    //         $error_code = $response_in_array->messages[0]->code;
+    //         // $error_type = $response_in_array->messages[0]->type;
+    //         $error_text = $response_in_array->messages[0]->text;
+    //         return redirect()->back()->with(['shippo' => 'error', 'code' => $error_code, 'text' => $error_text]);
+    //     } catch (\Exception $e) {
+    //         return redirect()->back()->with(['error' => $e->getMessage()]);
+    //     }
+    // }
 
     public function createShipment($to_address, $parcelsIdInArray, $lastUserId)
     {

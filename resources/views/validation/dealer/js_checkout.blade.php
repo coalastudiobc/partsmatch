@@ -1,5 +1,11 @@
 <script>
     $(document).ready(function() {
+
+
+        $.validator.addMethod("is_checked", function(value, element, params) {
+            return $(params).is(":checked"); // Custom method to validate if any radio button is checked
+        }, "Please select an option.");
+
         const rules = {
             first_name: {
                 required: true,
@@ -40,9 +46,9 @@
                 minlength: 2,
                 maxlength: 6,
             },
-
-
-
+            shippingMethod: {
+                is_checked: 'input[name="shippingMethod"]',
+            },
         }
         const messages = {
             name: {
@@ -79,9 +85,15 @@
             city: {
                 required: `{{ __('customvalidation.user.city.required') }}`,
             },
-
-
+            shippingMethod: {
+                is_checked: `{{ __('customvalidation.checkout.shippingMethod.required') }}`,
+            },
         };
         handleValidation('product-card-details', rules, messages, true);
+        jQuery("#place-order").on("click", function(e) {
+            if (($('#product-card-details').valid())) {
+                jQuery('#fullPageLoader').removeClass('d-none');
+            }
+        });
     });
 </script>

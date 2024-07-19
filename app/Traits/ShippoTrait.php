@@ -32,6 +32,7 @@ trait ShippoTrait
             "zip" => $request->pin_code,
             "country" => $request->country,
             "phone" => $request->phone_number,
+            "email" => auth()->user()->email,
             "metadata" => $request->description,
             'is_residential' => $is_residential,
             "validate" => true,
@@ -51,7 +52,7 @@ trait ShippoTrait
             $response_in_array = json_decode($res);
             return $response_in_array;
         } catch (\Exception $e) {
-            throw new \Exception('address error: ' . $e->getMessage());
+            throw new \Exception('Address error: ' . $e->getMessage());
         }
     }
     public function createTransaction($body)

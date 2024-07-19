@@ -6,63 +6,138 @@
     <div class="main-content">
         <section class="section shipping-add-sec">
             <div class="section-body">
-                <div class="card">
-                                <div class='ajax-response'></div>
-                                <x-alert-component />
-                                {{-- <div class="card-header">
-                                    <h4>Commision</h4>
-                                </div> --}}
-                                <div class="card-body">
-                                    <div class="dealer-profile-form-box">
-                                        <div class="dealer-profile-detail-form">
-                                            <form id="shipping" action=" @isset($data) {{ route('admin.shipping.edit',['shipping_id'=>jsencode_userdata($data->id)]) }}  @else {{ route('admin.shipping.view') }} @endisset " enctype="multipart/form-data"
-                                                method="post">
-                                                @csrf
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="range_from">Range From</label>
-                                                            <div class="form-field">
-                                                                <input class="form-control" type="number" id="range_from" name="range_from" placeholder="range_from"
-                                                                value="@isset($data){{ $data->range_from }}@endisset" >
+                <div class="row">
+                    <div class="col-6 col-md-6 col-lg-12">
+                        <div class="card">
+                            <div class='ajax-response'></div>
+                            <x-alert-component />
+                            {{-- <div class="card-header">
+                                <h4>Commision</h4>
+                            </div> --}}
+                            <div class="card-body">
+
+                                <form id="shipping"
+                                    action=" @isset($data) {{ route('admin.shipping.edit', ['shipping_id' => jsencode_userdata($data->id)]) }}  @else {{ route('admin.shipping.view') }} @endisset "
+                                    enctype="multipart/form-data" method="post">
+                                    @csrf
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="shipment_title">Shipment Title<span
+                                                        class="required-field">*</span></label>
+                                                <div class="form-field">
+                                                    <input type="text" id="shipment_title" name="shipment_title"
+                                                        placeholder="e.g: Express Delivery (2 Days)"
+                                                        value="@isset($data){{ $data->name }}@endisset"
+                                                        class="form-control @error('shipment_title') is-invalid @enderror daf">
+                                                    @error('shipment_title')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="range_from">Country<span class="required-field">*</span></label>
+                                                <input type="hidden" name="country"
+                                                    value="@isset($data) {{ $data->country == 'Canada' ? 'Canada' : 'United States' }}@endisset"
+                                                    id=""
+                                                    class=" @error('country') is-invalid @enderror checktype">
+                                                <div class="custm-dropdown">
+                                                    <div class="dropdown checktype">
+                                                        <div class="dropdown-toggle " type="button"
+                                                            id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                                                            aria-expanded="false">
+                                                            <div id="selectedCountry">
+                                                                @isset($data)
+                                                                    {{ $data->type == 'Canada' ? 'Canada' : 'United States' }}
+                                                                @endisset
+
+
                                                             </div>
+                                                            <span class="custm-drop-icon">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                    height="23" viewBox="0 0 24 23" fill="none">
+                                                                    <path d="M19 9.00006L14 14.0001L9 9.00006"
+                                                                        stroke="#151515" stroke-width="1.8"
+                                                                        stroke-linecap="round" stroke-linejoin="round" />
+                                                                </svg>
+                                                            </span>
                                                         </div>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+
+                                                            <li><a class="dropdown-item custom_dropdown_country"
+                                                                    @isset($data)   @if ($data->type == 'United States') selected @endif @endisset
+                                                                    data-value="United States" data-text="United States"
+                                                                    href="javascript:void(0)">United States</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item custom_dropdown_country"
+                                                                    @isset($data)    @if ($data->type == 'Canada') selected @endif @endisset
+                                                                    data-value="Canada" data-text="Canada"
+                                                                    href="javascript:void(0)">Canada</a>
+                                                            </li>
+
+                                                        </ul>
                                                     </div>
+                                                </div>
+                                                @error('country')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="range_from">Range From<span
+                                                        class="required-field">*</span></label>
+                                                <div class="form-field">
+                                                    <input type="number" id="range_from" name="range_from"
+                                                        placeholder="e.g:  $1"
+                                                        class="form-control @error('range_from') is-invalid @enderror "
+                                                        value="@isset($data){{ $data->range_from ?? '' }}@endisset"
+                                                        title="Shipping price range in dollars">
+                                                    @error('range_from')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        </div>
 
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="range_to">Range To</label>
-                                                            <div class="form-field">
-                                                                <input class="form-control" type="number" name="range_to" placeholder="range_to"
-                                                                    value="@isset($data){{ $data->range_to }}@endisset" >
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="range_to">Range To<span class="required-field">*</span></label>
+                                                <div class="form-field">
+                                                    <input type="number" name="range_to"
+                                                        class="form-control @error('range_to') is-invalid @enderror sdfa"
+                                                        value="@isset($data){{ $data->range_to ?? '' }}@endisset"
+                                                        placeholder="e.g:  $450"
+                                                        title="Shipping price range limit in dollars">
+                                                    @error('range_to')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        </div>
 
-                                                    <div class="form-group">
-
-                                                        <label>Shipping Charge Type</label>
-                                                        {{-- <select id="checktype" name="shipping_charge_type"
-                                                            class="form-control @error('shipping_charge_type') is-invalid @enderror">
-                                                            <option value="Percentage"
-                                                                @if ($data->'shpping_charge_type') == 'Percentage') selected @endif>
-                                                                Percentage
-                                                            </option>
-                                                            <option value="Fixed" @if ($data->$id->type == 'Fixed') selected @endif>
-                                                                Fixed
-                                                            </option>
-                                                        </select> --}}
-
-                                                        <input type="hidden" name="shipping_charge_type"
-                                                            value="@isset($data) {{ $data->type   == 'fixed' ? 'fixed' : 'Percentage' }}@endisset"
-                                                            id=""
-                                                            class="@error('shipping_charge_type') is-invalid @enderror checktype">
-                                                        <div class="custm-dropdown">
-                                                            <div class="dropdown checktype">
-                                                                <div class="dropdown-toggle form-control" type="button" id="dropdownMenuButton1"
-                                                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                                                    <div id="selectedcommission">
-                                                                        @isset($data) {{ $data->type   == 'fixed' ? 'fixed' : 'Percentage' }}@endisset
+                                        {{-- <div class="form-group">
+                                            <label>Shipping Charge Type</label>
+                                            <input type="hidden" name="shipping_charge_type"
+                                                value="@isset($data) {{ $data->type   == 'fixed' ? 'fixed' : 'Percentage' }}@endisset"
+                                                id=""
+                                                class="@error('shipping_charge_type') is-invalid @enderror checktype">
+                                            <div class="custm-dropdown">
+                                                <div class="dropdown checktype">
+                                                    <div class="dropdown-toggle " type="button" id="dropdownMenuButton1"
+                                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <div id="selectedcommission">
+                                                            @isset($data) {{ $data->type   == 'fixed' ? 'fixed' : 'Percentage' }}@endisset
 
 
                                                                     </div>
@@ -77,73 +152,66 @@
                                                                 </div>
                                                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 
-                                                                    <li><a class="dropdown-item custom_dropdown_commission"
-                                                                        @isset($data)   @if($data->type == 'Percentage') selected @endif @endisset
-                                                                            data-value="Percentage" data-text="Percentage"
-                                                                            href="javascript:void(0)">Percentage</a>
-                                                                    </li>
-                                                                    <li><a class="dropdown-item custom_dropdown_commission"
-                                                                        @isset($data)    @if ($data->type == 'Fixed') selected @endif @endisset
-                                                                            data-value="Fixed" data-text="Fixed"
-                                                                            href="javascript:void(0)">Fixed</a>
-                                                                    </li>
+                                                        <li><a class="dropdown-item custom_dropdown_commission"
+                                                             @isset($data)   @if ($data->type == 'Percentage') selected @endif @endisset
+                                                                data-value="Percentage" data-text="Percentage"
+                                                                href="javascript:void(0)">Percentage</a>
+                                                        </li>
+                                                        <li><a class="dropdown-item custom_dropdown_commission"
+                                                            @isset($data)    @if ($data->type == 'Fixed') selected @endif @endisset
+                                                                data-value="Fixed" data-text="Fixed"
+                                                                href="javascript:void(0)">Fixed</a>
+                                                        </li>
 
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                        @error('shipping_charge_type')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
-                                                        @enderror
-                                                        {{-- <div class="input-icon-custm tooltip-open">
-                                                            <span>
-                                                                <i class="fa-solid fa-question"></i>
-                                                            </span>
-                                                            <div class="tooltip">
-                                                                <p>ghfvjvhm</p>
-                                                            </div>
-                                                        </div> --}}
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Shipping Charge<span class="required-field">*</span></label>
-                                                        <div class="symbol"></div>
-                                                        <input type="number" id="checkcommission" name="shipping_charge"
-                                                            class="form-control @error('shipping_charge') is-invalid @enderror two-decimals"
-                                                            value="@isset($data){{ $data->value }}@endisset">
-
-                                                        @error('shipping_charge')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
-                                                        @enderror
-                                                        <div class="input-icon-custm tooltip-open">
-                                                            <span>
-                                                                <i class="fa-solid fa-question"></i>
-                                                            </span>
-                                                            <div class="tooltip">
-                                                                <p>Average shipping charge for every consignment.</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-6">
-                                                        <a class="btn secondary-btn full-btn mr-1"
-                                                            href="{{ route('admin.shipping.view') }}">Back</a>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <button class="btn primary-btn full-btn mr-1" id="submit"
-                                                            type="submit">Submit</button>
-                                                    </div>
+                                                    </ul>
                                                 </div>
-                                            </form>
+                                            </div>
+                                            @error('shipping_charge_type')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+
+                                        </div> --}}
+                                        <div class="form-group">
+                                            <label>Shipping Charge<span class="required-field">*</span></label>
+                                            <div class="symbol"></div>
+                                            <input type="number" id="checkcommission" name="shipping_charge"
+                                                class="form-control @error('shipping_charge') is-invalid @enderror two-decimals"
+                                                value="@isset($data){{ $data->value }}@endisset">
+
+                                            @error('shipping_charge')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                            <div class="input-icon-custm tooltip-open">
+                                                <span>
+                                                    <i class="fa-solid fa-question"></i>
+                                                </span>
+                                                <div class="tooltip">
+                                                    <p>Average shipping charge for every consignment.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <a class="btn secondary-btn full-btn mr-1"
+                                                href="{{ route('admin.shipping.view') }}">Back</a>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <button class="btn primary-btn full-btn mr-1" id="submit"
+                                                type="submit">Submit</button>
                                         </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </section>
+    </div>
+    </section>
     </div>
 @endsection
 @push('scripts')
@@ -198,12 +266,20 @@
 
             // change value
 
-            jQuery('.custom_dropdown_commission').on('click', function() {
+            // jQuery('.custom_dropdown_commission').on('click', function() {
+            //     var selectitem = jQuery(this).attr('data-value')
+            //     var selecttext = jQuery(this).attr('data-text')
+            //     console.log(selectitem, selecttext)
+            //     jQuery('#selectedcommission').text(selecttext)
+            //     jQuery(document).find('input[name="shipping_charge_type"]').val(selectitem);
+
+            // });
+            jQuery('.custom_dropdown_country').on('click', function() {
                 var selectitem = jQuery(this).attr('data-value')
                 var selecttext = jQuery(this).attr('data-text')
                 console.log(selectitem, selecttext)
-                jQuery('#selectedcommission').text(selecttext)
-                jQuery(document).find('input[name="shipping_charge_type"]').val(selectitem);
+                jQuery('#selectedCountry').text(selecttext)
+                jQuery(document).find('input[name="country"]').val(selectitem);
 
             });
 
