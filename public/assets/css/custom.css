@@ -621,7 +621,7 @@
     overflow: auto;
 }
 
-.dashboard-right-box h2 {
+.dashboard-right-box > h2 {
     font-size: 25px;
     font-weight: 700;
     padding-bottom: 15px;

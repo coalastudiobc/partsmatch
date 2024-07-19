@@ -61,10 +61,11 @@
 
                                     <div class="dropdown">
 
-                                        <div class="badge complete-badge" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                                        {{-- <div class="badge complete-badge" id="dropdownMenuButton1" data-bs-toggle="dropdown"
                                             aria-expanded="false">
                                             <i class="fa-solid fa-check"></i> Complete
-                                        </div>
+                                        </div> --}}
+                                        <a href="#" class="btn primary-btn"><i class="fa-solid fa-eye"></i> view</a>
                                         {{-- <ul class="dropdown-menu"
                                                                 aria-labelledby="dropdownMenuButton1">
                                                                 <li><a class="dropdown-item" href="#"><i

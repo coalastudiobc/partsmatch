@@ -16,4 +16,7 @@ class OrderController extends Controller
         // dd($order);
         return view('dealer.order.order_list', compact('order'));
     }
+    public function testing(){
+        return view('dealer.order.products');
+    }
 }

@@ -130,7 +130,7 @@
 </div>
 @endsection
 @section('modals')
-<div class="modal fade add-new-pro-modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade add-new-pro-modal" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <!-- <div class="modal-header">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               </div> -->
@@ -433,8 +433,10 @@
                     {{-- <div class="col-md-6">
                         <a href="#" class="btn secondary-btn full-btn" data-bs-toggle="modal" data-bs-target="#bulk-upload">Bulk Upload</a>
                     </div> --}}
-                    <div class="col-md-6">
-                        <button type="submit" id="submit" class="btn primary-btn full-btn">submit</button>
+                    <div class="col-md-12">
+                        <div class="d-flex aign-items-center justify-content-end">
+                            <button type="submit" id="submit" class="btn primary-btn md-btn">submit</button>
+                        </div>
                     </div>
                 </div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -463,13 +465,13 @@
 
 
 
-<div class="modal fade" id="bulk-upload" tabindex="-1" aria-labelledby="bulk-upload" aria-hidden="true">
+<div class="modal fade" id="bulk-upload" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="bulk-upload" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-body">
                 <div class="add-pro-form">
                     <h2>Bulk Upload</h2>
-                    <form action="{{route('product.bulk.upload')}}">
+                    <form action="">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -487,6 +489,7 @@
                         </div>
                     </form>
                 </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
         </div>
     </div>
