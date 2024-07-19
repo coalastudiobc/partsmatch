@@ -2010,8 +2010,56 @@ span.ymmm-cross {
     grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
     column-gap: 20px;
 }
+.package-main > h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    line-height: 22px;
+}
 
-
+.package-main > p {
+    font-size: 14px;
+    line-height: 16px;
+    margin-bottom: 20px;
+}
+.dimention-parameter {
+    position: absolute;
+    top: 13px;
+    left: 5px;
+    background-color: var(--primary-color);
+    padding: 2px 2px;
+    height: 19px;
+    width: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.custm-dimention input {
+    text-align: right;
+    padding-left: 25px;
+}
+.custm-dimention select{
+    min-width: 116px;
+}
+.custm-dimention .form-group{
+    margin: 0;
+}
+.form-group.checkbox-field {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.form-group.checkbox-field .formfield {
+    width: fit-content;
+}
+.form-group.checkbox-field  label{
+    margin: 0;
+}
+.form-group.checkbox-field .formfield input{
+    background-color: var(--secondary-color);
+    accent-color: var(--secondary-color);
+    width: 20px;
+    height: 20px;
+}
 
 
 
