@@ -23,7 +23,7 @@ class OrderPaymentController extends Controller
         try {
             DB::beginTransaction();
 
-            \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+            \Stripe\Stripe::setApiKey(config('services.Stripe.stripe_secret'));
             $user =  auth()->user();
 
             $cart = Cart::where('user_id', auth()->user()->id)->first();

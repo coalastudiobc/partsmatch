@@ -2083,9 +2083,23 @@ span.ymmm-cross {
 
 
 
+/* sumit's tigdam */
 
-
-
+.custm-check {
+    order: 1;
+}
+.custm-check:has(.selected-entry) {
+    order: 0;
+}
+.interior-filter-inner {
+    display: flex;
+    flex-direction: column;
+    max-height: 148px;
+    overflow: hidden;
+}
+.interior-filter-inner.full-data-view {
+    max-height: 100% !important;
+}
 
 
 

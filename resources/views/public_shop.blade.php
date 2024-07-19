@@ -94,16 +94,44 @@
                             @csrf
                             <div class="interior-filter-box">
                                 <h4>Makes</h4>
-                                <div class="interior-filter-inner">
+                                <div id="brandContainer" class="interior-filter-inner">
                                     @foreach ($brands as $key => $brand )
-                                        <div class="custm-check @if($key > 5) d-none @endif">
-                                            <input type="checkbox" id="{{'brand'.$key}}" name="brand[]" value="2">
+                                        <div class="custm-check make ">
+                                            <input type="checkbox" id="{{'brand'.$key}}" name="brand[]" @if(request()->has('brand') && count(request()->brand) && in_array($brand->makes , request()->brand)) class="selected-entry" checked @endif  value="{{$brand->makes}}">
                                             <label for="{{'brand'.$key}}">{{$brand->makes}}</label>
                                         </div>
                                     @endforeach
                                 </div>
-                            <div class="cat-count"><span class="see-more-less">See More</span></div>
+                                <div class="cat-count"><span class="see-more-less-make">See More</span></div>
                             </div>
+                            
+                            <div class="interior-filter-box">
+                                <h4>years</h4>
+                                <div id="yearContainer" class="interior-filter-inner">
+                                    @foreach ($years as $key => $year )
+                                        <div class="custm-check year">
+                                            <input type="checkbox" id="{{'year'.$key}}" name="year[]" @if(request()->has('year') && count(request()->year) && in_array($year , request()->year)) class="selected-entry" checked @endif value="{{$year}}">
+                                            <label for="{{'year'.$key}}">{{$year}}</label>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <div class="cat-count"><span class="see-more-less-year">See More</span></div>
+                            </div>
+
+                            <div class="interior-filter-box">
+                                <h4>models</h4>
+                                <div id="modelContainer" class="interior-filter-inner">
+                                    @foreach ($models as $key => $model )
+                                        <div class="custm-check model">
+                                            <input type="checkbox" id="{{'model'.$key}}" name="model[]" @if(request()->has('model') && count(request()->model) && in_array($model->value, request()->model)) class="selected-entry" checked @endif value="{{$model->value}}">
+                                            <label for="{{'model'.$key}}">{{$model->value}}</label>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <div class="cat-count"><span class="see-more-less-model">See More</span></div>
+                            </div>
+
+
                             <button type="submit">test</button>
                                 <div class="custom-wrapper"> 
                         
@@ -145,6 +173,8 @@
                                     </div> 
                                 </div> 
                         </form>
+
+
                     </div>
                 </div>
                 
@@ -337,15 +367,28 @@
             }
         });
 
-        $('.see-more-less').on('click', function() {
-            console.log( $('.custm-check.d-none'));
+        $('.see-more-less-make').on('click', function() {
+            $('#brandContainer').toggleClass('full-data-view');
             if($(this).html() == "See More"){
-                $('.custm-check.d-none').addClass('open');
-                $('.custm-check.d-none').removeClass('d-none');
                 $(this).html('See less');
             } else{
-                $('.custm-check.open').addClass('d-none');
-                $('.custm-check.open').removeClass('open');
+                $(this).html('See More');
+            }
+            
+        });
+        $('.see-more-less-year').on('click', function() {
+            $('#yearContainer').toggleClass('full-data-view');
+            if($(this).html() == "See More"){
+                $(this).html('See less');
+            } else{
+                $(this).html('See More');
+            }
+        });
+        $('.see-more-less-model').on('click', function() {
+            $('#modelContainer').toggleClass('full-data-view');
+            if($(this).html() == "See More"){
+                $(this).html('See less');
+            } else{
                 $(this).html('See More');
             }
         });
