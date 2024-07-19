@@ -2055,8 +2055,28 @@ span.ymmm-cross {
     cursor: pointer;
 }
 
+.stripe-error{
+    color: #dc3545;
+}
+.errors{
+    color: #dc3545;
+}
+.StripeElement {
+    border-radius: 5px;
+    border: 1.81px solid #E8E8E8;
+    padding: 12px 17px;
+    font-size: 14px;
+    color: var(--text-color);
+  }
+
+  .StripeElement--invalid {
+    border: 1px solid dc3545;
+  }
 
 
+.pagination-wrapper {
+    margin-top: 20px;
+}
 
 
 
