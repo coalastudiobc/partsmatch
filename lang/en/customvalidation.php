@@ -540,4 +540,12 @@ return [
             'required' => "Please confirm shipping method.",
         ],
     ],
+    'payment' => [
+        'cardholdername' => [
+            'required' => __('Please enter the card holder name'),
+            'min' => __('Card holder name can be min 2 characters'),
+            'max' => __('Card holder name can be max 50 max characters'),
+            'regex' => __('Only characters and in between space are allowed'),
+        ],
+    ],
 ];

@@ -166,7 +166,7 @@
                     @if ($cart->cartProducts->isNotEmpty())
                         <div class="cart-checkout">
                             <a href="{{ route(auth()->user()->getRoleNames()->first() . '.checkout.create') }}"
-                                class="btn secondary-btn view-btn">
+                                class="btn secondary-btn view-btn " id="checkout-btn">
                                 Checkout
                             </a>
                         </div>

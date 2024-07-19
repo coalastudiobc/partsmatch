@@ -166,11 +166,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
-
-
-
-
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="">State</label>
@@ -381,7 +376,7 @@
                             </ul>
                         </div>
                         <div class="col-md-12">
-                            <button type="submit" class="btn primary-btn full-btn">Place Order</button>
+                            <button type="submit" id="place-order" class="btn primary-btn full-btn">Place Order</button>
                         </div>
                         </form>
 
@@ -402,6 +397,8 @@
                 var selecttext = jQuery(this).attr('data-text')
                 jQuery('#selectedItem').text(selecttext)
                 jQuery(document).find('input[name="country"]').val(selectitem);
+
+                jQuery('#state').html('<option value="">Select State</option>');
 
                 let url = APP_URL + '/dealer/shipping/methods/' + selectitem;
                 const result = ajaxCall(url, 'get');
@@ -496,58 +493,50 @@
             console.log('error', error)
         }
 
-        // jQuery(document).ready(function() {
-        jQuery(document).on('click', '.select_state', function() {
-            var selectitem = jQuery(this).attr('data-name')
-            var selecttext = jQuery(this).attr('data-text')
-            jQuery('.city').empty();
-            jQuery('#selectedState').text(selecttext)
-            jQuery(document).find('input[name="state"]').val(selectitem);
-            jQuery('#state-error').text('');
+        jQuery(document).ready(function() {
+            jQuery(document).on('click', '.select_state', function() {
+                var selectitem = jQuery(this).attr('data-name')
+                var selecttext = jQuery(this).attr('data-text')
+                jQuery('.city').empty();
+                jQuery('#selectedState').text(selecttext)
+                jQuery(document).find('input[name="state"]').val(selectitem);
+                jQuery('#state-error').text('');
 
-        })
-        // });
+            })
+            jQuery(document).on('click', '.state_dropdown_item', function() {
+                var stateId = jQuery(this).attr('data-value')
+                var selecttext = jQuery(this).attr('data-text')
+                let url = APP_URL + '/dealer/cities/' + stateId;
+                if (jQuery.isNumeric(stateId) && stateId > 0) {
+                    const result = ajaxCall(url, 'get');
+                    result.then(handleCountryData).catch(handleCountryError)
+                }
 
-        // jQuery(document).ready(function() {
-        jQuery(document).on('click', '.state_dropdown_item', function() {
-            // alert('Please select');
-            var stateId = jQuery(this).attr('data-value')
-            var selecttext = jQuery(this).attr('data-text')
-            let url = APP_URL + '/dealer/cities/' + stateId;
-            if (jQuery.isNumeric(stateId) && stateId > 0) {
-                const result = ajaxCall(url, 'get');
-                result.then(handleCountryData).catch(handleCountryError)
-            }
-
-
-            function handleCountryData(response) {
-                let options = '<li> <a href="javascript:void(0)"> Select < /a></li>';
-                // jQuery('#state').html(options);
-                jQuery('#city').html(options);
-                response.data.forEach(city => {
-                    // options += '<option value="' + state.id + '">' + state.name + '</option>';
-                    $('.city').append(`<li><a class="dropdown-item city_dropdown_item select_city"
+                function handleCountryData(response) {
+                    let options = '<li> <a href="javascript:void(0)"> Select < /a></li>';
+                    jQuery('#city').html(options);
+                    response.data.forEach(city => {
+                        // options += '<option value="' + state.id + '">' + state.name + '</option>';
+                        $('.city').append(`<li><a class="dropdown-item city_dropdown_item select_city"
                                                                         data-value="${city.id}"
                                                                         data-text="${city.name}"
                                                                         data-name="${city.name}"
                                                                         href="javascript:void(0)">${city.name}</a>
                                                                 </li>`)
-                });
-                jQuery('#city').html(options);
-            }
-        })
+                    });
+                    jQuery('#city').html(options);
+                }
+            })
 
-        jQuery(document).on('click', '.select_city', function() {
-            // alert('lund');
-            var selectitem = jQuery(this).attr('data-name')
-            var selecttext = jQuery(this).attr('data-text')
-            jQuery('#selectedCity').text(selecttext)
-            jQuery(document).find('input[name="city"]').val(selectitem);
-            jQuery('#city-error').text('');
+            jQuery(document).on('click', '.select_city', function() {
+                var selectitem = jQuery(this).attr('data-name')
+                var selecttext = jQuery(this).attr('data-text')
+                jQuery('#selectedCity').text(selecttext)
+                jQuery(document).find('input[name="city"]').val(selectitem);
+                jQuery('#city-error').text('');
+            })
 
-
-        })
-        // })
-        // })
+           
+        });
     </script>
 @endpush

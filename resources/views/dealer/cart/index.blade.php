@@ -119,6 +119,12 @@
 
                 }
             });
+
+            jQuery('#checkout-btn').on('click', function(e) {
+                // e.preventDefault();
+                jQuery('#fullPageLoader').removeClass('d-none');
+                console.log('hlo');
+            })
         });
     </script>
 @endpush

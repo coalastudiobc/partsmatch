@@ -90,5 +90,10 @@
             },
         };
         handleValidation('product-card-details', rules, messages, true);
+        jQuery("#place-order").on("click", function(e) {
+            if (($('#product-card-details').valid())) {
+                jQuery('#fullPageLoader').removeClass('d-none');
+            }
+        });
     });
 </script>

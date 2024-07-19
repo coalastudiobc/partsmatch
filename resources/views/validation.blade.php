@@ -1,6 +1,5 @@
 <script>
-
-    const usernameRegex = {{ config('validation.username_regex') }}; 
+    const usernameRegex = {{ config('validation.username_regex') }};
 
     //media
     const mediaSize = {{ config('validation.js_media_size') }};
@@ -15,20 +14,20 @@
     //email
     const emailRegex = {{ config('validation.email_regex') }};
 
-     //password
+    //password
     const passwordRegex = {{ config('validation.password_regex') }};
     const passwordMinLength = parseInt(`${passwordRegex}`.match(/(?<={)\d+/)[0]);
     const passwordMaxLength = parseInt(`${passwordRegex}`.match(/\d+(?=})/)[0]);
 
-     //profile
-    const profilePicMimes ="{{  config('validation.js_profile_pic_mimes') }}";
+    //profile
+    const profilePicMimes = "{{ config('validation.js_profile_pic_mimes') }}";
     const profilePicSize = "{{ config('validation.js_profile_pic_size_user') }}";
 
     //certificate
-    const certificateMimes= "{{ config('validation.js_certificate_mimes') }}";
+    const certificateMimes = "{{ config('validation.js_certificate_mimes') }}";
     const certificateSize = "{{ config('validation.js_certificate_size') }}";
 
-     //name
+    //name
     const packageRegex = {{ config('validation.package_regex') }};
     const packageMinLength = parseInt(`${packageRegex}`.match(/(?<={)\d+/)[0]);
     const packageMaxLength = parseInt(`${packageRegex}`.match(/\d+(?=})/)[0]);
@@ -40,8 +39,7 @@
     const routingMaxLength = {{ config('validation.routing_maxlength') }};
 
     const descriptionMaxLength = {{ config('validation.descriptionMaxLength') }};
-    
+
     const pdfExtension = "{{ config('validation.pdf_extension') }}";
     const pdfMaxSize = {{ config('validation.pdf_max_size') }};
-
 </script>

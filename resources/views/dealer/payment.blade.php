@@ -1,85 +1,68 @@
 @extends('layouts.front')
 @section('content')
-    <section class="page-content-sec">
+    <section class="page-content-sec section-padding">
         <div class="container">
             <div class="page-content-wrapper">
                 <div class="row g-3">
-                    <div class="col-xl-7 col-lg-12 col-md-12 payment-page">
-                        <h3>Payment</h3>
-                        <p>All transactions are secure and encrypted.</p>
-                        <form id="paymentform" action="{{ route('order.payment') }}" method="POST">
-                            @csrf
-                            <div class="card-detail-box">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="">Card Number</label>
-                                            <div class="form-field" id="cardNumberElement">
-                                                <input type="text" class="form-control" placeholder="Card-number">
-                                                <label for="card-number" class="stripe-error-messages"></label>
-
+                    <div class="col-xl-8 col-lg-12 col-md-12 payment-page">
+                       <div class="order-summary cstm-card">
+                            <h3>Payment</h3>
+                            <p>All transactions are secure and encrypted.</p>
+                            <form id="paymentform" action="{{ route('order.payment') }}" method="POST">
+                                @csrf
+                                <div class="">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="">Card Number</label>
+                                                <div class="form-field" id="cardNumberElement">
+                                                    <input type="text" class="form-control" placeholder="Card-number">
+                                                    <label for="card-number" class="stripe-error-messages"></label>
+                                                </div>
+                                                <div class="is-invalid stripe-error" id="cardNumberError"></div>
                                             </div>
-                                            <div class="is-invalid stripe-error" id="cardNumberError"></div>
-                                            {{-- <div class="form-field">
-                        <input type="text" class="form-control" placeholder="Card-number">
-
-                    </div> --}}
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="">Card Expiration Date</label>
-                                            <div class="form-field" id="cardExpiryElement">
-                                                <input type="text" class="form-control" placeholder="MM / YY">
-                                                <label for="card-expiry" class="stripe-error-messages"></label>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="">Card Expiration Date</label>
+                                                <div class="form-field" id="cardExpiryElement">
+                                                    <input type="text" class="form-control" placeholder="MM / YY">
+                                                    <label for="card-expiry" class="stripe-error-messages"></label>
+                                                </div>
+                                                <div class="is-invalid stripe-error" id="cardExpiryError"></div>
                                             </div>
-                                            <div class="is-invalid stripe-error" id="cardExpiryError"></div>
-
-                                            {{-- <div class="form-field">
-                        <input type="text" class="form-control" placeholder="MM / YY">
-
-                    </div> --}}
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="">Card Security Code</label>
-                                            <div class="form-field" id="cardCVCElement" class="form-control">
-                                                <input type="password" class="form-control" placeholder="****">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="">Card Security Code</label>
+                                                <div class="form-field" id="cardCVCElement" class="form-control">
+                                                    <input type="password" class="form-control" placeholder="****">
+                                                </div>
+                                                <div class="is-invalid stripe-error" id="cardCVVError"></div>
+                                                <input type="hidden" name="stripeCustomer_id"
+                                                    value="{{ $stripeCustomer->id }}">
                                             </div>
-                                            <div class="is-invalid stripe-error" id="cardCVVError"></div>
-                                            {{-- <div class="form-field">
-                        <input type="password" class="form-control" placeholder="****">
-
-                    </div> --}}
-                                            <input type="hidden" name="stripeCustomer_id"
-                                                value="{{ $stripeCustomer->id }}">
                                         </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="">Name On Card</label>
-                                            <div class="form-field">
-                                                <input type="text" name="name" id="card-holder-name"
-                                                    class="form-control" placeholder="John Doe">
-
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="">Card Holder Name</label>
+                                                <div class="form-field">
+                                                    <input type="text" name="cardname" id="cardName" class="form-control"
+                                                        placeholder="John Doe">
+                                                    <label class="cardName-error" for="card-name" id="cardname"></label>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    {{-- <div class="col-md-12">
-                    <div class="form-checkbox">
-                        <input type="checkbox" class="custm-check" id="form-check">
-                        <label for="form-check">Use shipping address as billing address</label>
-                    </div>
-                </div> --}}
                                 </div>
-                            </div>
-                            <input type="hidden" value="{{ $grandTotal }}" id="total_payment">
-                            <button type="submit" id="payNow" class="btn secondary-btn full-btn">Pay Now
-                                {{ isset($grandTotal) ? number_format($grandTotal, 2, '.', ',') : '' }}</button>
+                                <input type="hidden" value="{{ $grandTotal }}" id="total_payment">
+                                <button type="submit" id="payNow" class="btn secondary-btn full-btn">Pay Now
+                                    ${{ isset($grandTotal) ? number_format($grandTotal, 2, '.', ',') : '' }}</button>
+                            </form>
+                       </div>
 
                     </div>
-                    <div class="col-xl-5 col-lg-12 col-md-12">
+                    <div class="col-xl-4 col-lg-12 col-md-12">
                         <div class="order-summary cstm-card">
                             <h2>Order Summary</h2>
                             <div class="shipping-list">
@@ -121,7 +104,6 @@
                                         </div>
                                     </li>
                                 @endforeach
-
                             </ul>
                         </div>
                         <div class="order-summary cstm-card">
@@ -147,6 +129,7 @@
             </div>
         </div>
     </section>
+    @includeFirst(['validation'])
 @endsection
 @push('scripts')
     {{-- purchase product --}}
@@ -154,6 +137,7 @@
     <script>
         const stripe = Stripe('{{ env('STRIPE_KEY') }}')
         const client_secret = "{{ $intent->client_secret }}"
+        const cardButton = document.getElementById('payNow');
         const elements = stripe.elements()
 
         var style = {
@@ -197,14 +181,6 @@
         });
         cardCvcElement.mount('#cardCVCElement');
 
-        // var cardNumberElement = elements.create('cardNumber');
-        // cardNumberElement.mount('#cardNumberElement');
-        // var cardExpiryElement = elements.create('cardExpiry');
-        // cardExpiryElement.mount('#cardExpiryElement');
-        // var cardCvcElement = elements.create('cardCvc');
-        // cardCvcElement.mount('#cardCVCElement');
-
-
         cardNumberElement.on('change', function(event) {
             if (event.error) {
                 jQuery('#cardNumberError').text(event.error.message);
@@ -230,12 +206,16 @@
 
         const form = document.getElementById('paymentform')
         const cardBtn = document.getElementById('payNow')
-        const cardHolderName = document.getElementById('card-holder-name')
+        const cardHolderName = document.getElementById('cardName')
         const totalPayment = document.getElementById('total_payment').value;
 
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault()
+            if (!validateTitle()) {
+                cardBtn.disabled = false;
+                return; // Stop further processing if validation fails
+            }
             const {
                 setupIntent,
                 error
@@ -250,20 +230,62 @@
                 }
             )
             if (error) {
-                // cardBtn.disable = false
+                cardBtn.disable = false
             } else {
-                let token = document.createElement('input')
-                token.setAttribute('type', 'hidden')
-                token.setAttribute('name', 'token')
-                token.setAttribute('value', setupIntent.payment_method)
-                form.appendChild(token)
-                let paymentElement = document.createElement('input')
-                paymentElement.setAttribute('type', 'hidden')
-                paymentElement.setAttribute('name', 'total_payment')
-                paymentElement.setAttribute('value', totalPayment)
-                form.appendChild(paymentElement)
-                form.submit();
+                cardButton.disabled = true;
+                cardButton.innerHTML =
+                    '<div class="d-flex align-items-center"><span class="spinner-grow spinner-grow-sm mr-2" role="status" aria-hidden="true"></span><p class="mb-0">  Paying...</p></div>'
+                jQuery('#cardError').removeClass('is-invalid');
+                jQuery('#cardError').html('');
+                stripeTokenHandler(setupIntent);
             }
         })
+
+        function stripeTokenHandler(setupIntent) {
+            let token = document.createElement('input')
+            token.setAttribute('type', 'hidden')
+            token.setAttribute('name', 'token')
+            token.setAttribute('value', setupIntent.payment_method)
+            form.appendChild(token)
+            let paymentElement = document.createElement('input')
+            paymentElement.setAttribute('type', 'hidden')
+            paymentElement.setAttribute('name', 'total_payment')
+            paymentElement.setAttribute('value', totalPayment)
+            form.appendChild(paymentElement)
+            form.submit();
+            jQuery('.page-loader').removeClass('d-none'); //for loader
+        }
+
+        function validateTitle() {
+            var form = $("#paymentform");
+            form.validate({
+                rules: {
+                    cardname: {
+                        required: true,
+                        minlength: nameMinLength,
+                        maxlength: nameMaxLength,
+                        regex: nameRegex,
+                    },
+                },
+                messages: {
+                    cardname: {
+                        required: `{{ __('customvalidation.payment.cardholdername.required') }}`,
+                        regex: `{{ __('customvalidation.payment.cardholdername.regex') }}`,
+                        minlength: `{{ __('customvalidation.payment.cardholdername.min') }}`,
+                        maxlength: `{{ __('customvalidation.payment.cardholdername.max') }}`,
+                    },
+                },
+                errorClass: "errors",
+                success: function(label, element) {
+                    $('#title').removeClass('errors');
+                },
+            });
+            if (form.valid() === true) {
+                console.log('hlo');
+                return true;
+            } else {
+                return false;
+            }
+        }
     </script>
 @endpush
