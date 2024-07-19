@@ -1,0 +1,35 @@
+<?php
+
+namespace App\Console\Commands;
+
+use App\Models\AllModel;
+use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
+
+class DeleteDuplicateModels extends Command
+{
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'distnict:models';
+
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Command description';
+
+    /**
+     * Execute the console command.
+     */
+    public function handle()
+    {
+        $idsToKeep = AllModel::select(DB::raw('MIN(id) as id'))
+        ->groupBy('value')
+        ->pluck('id')
+        ->toArray();
+    }
+}
