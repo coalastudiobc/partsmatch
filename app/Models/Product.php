@@ -63,4 +63,13 @@ class Product extends Model
             $q->where('status', $request->filter_by_status);
         });
     }
+
+    public function scopeCategory($query)
+    {
+        $request = request();
+        $query->when(!empty($request->category), function ($q) use ($request) {
+            $category = Category::where('id',$request->category)->first();
+            $q->whereIn('subcategory_id', $category->categories);
+        });
+    }
 }

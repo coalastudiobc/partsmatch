@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Dealer\OrderController;
 use App\Http\Controllers\Dealer\ProductController;
 use App\Http\Controllers\Dealer\OrderPaymentController;
 
@@ -35,6 +36,9 @@ Route::get('redirect-to-dashboard', [HomeController::class, 'redirectToDashboard
 Route::get('verify-email/{user}/{token}', [RegisterController::class, 'verifyEmail'])->name('verify-email');
 
 Route::get('/search', [ProductController::class, 'search'])->name('search');
+Route::get('brands', [HomeController::class, 'brands'])->name('brands');
+Route::get('/sumit', [OrderController::class, 'testing']);
+Route::match(['get', 'post'],'products', [HomeController::class, 'allProducts'])->name('products');
 
 
 Auth::routes();

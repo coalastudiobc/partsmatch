@@ -7,9 +7,6 @@
     <x-alert-component />
     <div class="bredcrum-plus-filter">
         <div class="cstm-bredcrum">
-            <a href="#" class="bredcrum-list">Home</a>
-            <a href="#" class="bredcrum-list">Product</a>
-            <a href="#" class="bredcrum-list active">Table</a>
         </div>
         <div class="serach-and-filter-box">
             <form action="">
@@ -18,6 +15,9 @@
                     <button type="submit" class="btn primary-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
             </form>
+            <a href="javascript:void(0)" class="btn primary-btn" data-bs-toggle="modal" data-bs-target="#bulk-upload">
+                <img src="{{ asset('assets/images/add-round-icon.svg') }}" alt=""> Bulk upload
+            </a>
             <a href="javascript:void(0)" class="btn primary-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <img src="{{ asset('assets/images/add-round-icon.svg') }}" alt=""> ADD
             </a>
@@ -130,13 +130,10 @@
 </div>
 @endsection
 @section('modals')
-<div class="modal fade add-new-pro-modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade add-new-pro-modal" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <!-- <div class="modal-header">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 </div> -->
+            <!-- <div class="modal-header">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               </div> -->
             <div class="modal-body">
                 <div class="add-pro-form">
                     <h2>Add New Products</h2>
@@ -433,13 +430,16 @@
                     </div> --}}
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
+                    {{-- <div class="col-md-6">
                         <a href="#" class="btn secondary-btn full-btn" data-bs-toggle="modal" data-bs-target="#bulk-upload">Bulk Upload</a>
-                    </div>
-                    <div class="col-md-6">
-                        <button type="submit" id="submit" class="btn primary-btn full-btn">submit</button>
+                    </div> --}}
+                    <div class="col-md-12">
+                        <div class="d-flex aign-items-center justify-content-end">
+                            <button type="submit" id="submit" class="btn primary-btn md-btn">submit</button>
+                        </div>
                     </div>
                 </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
 
@@ -465,7 +465,7 @@
 
 
 
-<div class="modal fade" id="bulk-upload" tabindex="-1" aria-labelledby="bulk-upload" aria-hidden="true">
+<div class="modal fade" id="bulk-upload" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="bulk-upload" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-body">
@@ -484,11 +484,12 @@
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <a href="#" class="btn secondary-btn full-btn">submit</a>
+                                <button type="submit" class="btn secondary-btn full-btn">submit</button>
                             </div>
                         </div>
                     </form>
                 </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
         </div>
     </div>

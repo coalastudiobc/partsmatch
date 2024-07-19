@@ -54,4 +54,21 @@ class Category extends Model
     {
         return $this->hasMany(Product::class, 'subcategory_id', 'id')->limit(5);
     }
+
+    public function getCategoriesAttribute()
+    {
+        $categories = $this->getAllChildrenIds($this);
+        $categories[] = $this->id; // Always append itself
+        return $categories;
+    }
+
+    private function getAllChildrenIds($category)
+    {
+        $childrenIds = [];
+        foreach ($category->children as $child) {
+            $childrenIds[] = $child->id;
+            $childrenIds = array_merge($childrenIds, $this->getAllChildrenIds($child));
+        }
+        return $childrenIds;
+    }
 }

@@ -9,9 +9,9 @@ class CarBrandMake extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'makes',
         'image_url',
         'image_name',
-        'makes',
     ];
     public function scopeSearch($query)
     {

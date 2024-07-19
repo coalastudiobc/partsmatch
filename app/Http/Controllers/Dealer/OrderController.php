@@ -16,4 +16,7 @@ class OrderController extends Controller
         // dd($orders);
         return view('dealer.order.order_list', compact('orders'))->with(['status' => 'success', 'message' => 'Order Placed Successfully']);
     }
+    public function testing(){
+        return view('dealer.order.products');
+    }
 }

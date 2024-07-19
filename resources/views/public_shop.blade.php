@@ -20,61 +20,67 @@
                         <h3>Filter</h3>
                         <a href="#">Clear All</a>
                     </div>
-                    <!-- <div class="interior-category-tabs">
-                        <div class="accordion" id="accordionExample">
-                            @foreach (get_category() as $key => $category)
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="headingOne">
-                                    <button class="accordion-button collapsed @if ($parent == $category->id) show @endif" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne{{ $key }}" aria-expanded="true" aria-controls="collapseOne">
-                                        {{ $category->name }}
+                    <div class="interior-filter-body">
+                        <div class="interior-filter-box">
+
+                            <div class="accordion" id="accordionExample">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button p-0 mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                        <h4>Categories</h4>
                                     </button>
-
-
-                                </h2>
-                                @foreach (get_subcategory($category->id) as $subcategory)
-                                <div id="collapseOne{{ $key }}" class="accordion-collapse collapse @if ($parent == $category->id) show @endif" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
-                                        <div class="interior-category-content">
-                                            <ul>
-                                                <li><a href="{{ route(
-                                                        auth()->check() && auth()->user()->hasRole('Administrator') 
-                                                            ? 'admin.products.interior' 
-                                                            : (auth()->check() ? auth()->user()->getRoleNames()->first() . '.products.interior' : 'Dealer.products.interior'), 
-                                                        ['category' => $subcategory->id]
-                                                    ) }}" class="categories-item @if ($active_id == $subcategory->id) active @endif">{{ $subcategory->name }}</a>
-                                                </li>
-                                                {{-- <li><a href="#" class="categories-item">Motor Oil</a></li>
-                                                            <li><a href="#" class="categories-item">Motor Oil</a></li>
-                                                            <li><a href="#" class="categories-item">Motor Oil</a></li>
-                                                            <li><a href="#" class="categories-item">Motor Oil</a></li> --}}
-                                            </ul>
-
+                                    </h2>
+                                    <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body p-0">
+                                            <div class="category-list">
+                                                <ul class="ps-3 mb-2 ">
+                                                    @foreach ($categories as $category )
+                                                   <li>
+                                                       <div>
+                                                                <p>
+                                                            <a href="{{route('products',['category'=>$category->id])}}" class="@if($category->id == request()->get('category'))active @endif">
+                                                                    {{$category->name}}
+                                                            </a>
+                                                                </p>
+                                                            <ul  class="ps-3 category-sublist">
+                                                                @foreach($category->children as $subCategory)
+                                                                    <li>
+                                                                        <a href="{{route('products',['category'=>$subCategory->id])}}" class="@if($subCategory->id == request()->get('category'))active @endif">
+                                                                            {{$subCategory->name}}
+                                                                        </a>
+                                                                    </li> 
+                                                                @endforeach
+                                                            </ul>
+                                                       </div>
+                                                   </li> 
+                                                    @endforeach
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                @endforeach
                             </div>
-                            @endforeach
-                        </div>
-                    </div> -->
-                    <div class="interior-filter-body">
-                        <div class="interior-filter-box">
+
+{{-- 
                             <h4>Categories</h4>
                             <div class="interior-filter-inner">
                                 <div class="accordion" id="accordionExample">
                                     @foreach ($categories as $category )
                                     <div class="accordion-item">
-                                        
-                                        <h2 class="accordion-header" id="{{'heading'.$category->id}}">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                            cars
-                                        </button>
-                                        </h2>
-                                        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="{{'heading'.$category->id}}" data-bs-parent="#accordionExample">
+                                            <h2 class="accordion-header" id="{{'heading'.$category->id}}">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="{{'#collapse'.$category->id}}" aria-expanded="false" aria-controls="{{'collapse'.$category->id}}">
+                                        <a href="{{route('products',['category'=>$category->id])}}">
+                                                    {{$category->name}}
+                                        </a>
+                                                </button>
+                                            </h2>
+                                        <div id="{{'collapse'.$category->id}}" class="accordion-collapse collapse" aria-labelledby="{{'#heading'.$category->id}}" data-bs-parent="#accordionExample">
                                             <div class="accordion-body">
                                             @foreach($category->children as $subCategory)
-                                                @dump($subCategory)
-                                                <p>fbrb</p>
+                                        <a href="{{route('products',['category'=>$subCategory->id])}}">
+
+                                                <p>{{$subCategory->name}}</p>
+                                                </a>
                                             @endforeach
                                             </div>
                                         </div>
@@ -82,25 +88,29 @@
                                     @endforeach
                                     
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
+                        <form id="filters" method="POST" action="">
+                        @csrf
                         <div class="interior-filter-box">
-                            <h4>Brand</h4>
+                            <h4>Makes</h4>
                             <div class="interior-filter-inner">
                                 <div class="custm-check">
-                                    <input type="checkbox" id="brand1" name="brand">
+                                    <input type="checkbox" id="brand1" name="brand[]" value="2">
                                     <label for="brand1">BMW</label>
                                 </div>
                                 <div class="custm-check">
-                                    <input type="checkbox" id="brand2" name="brand">
+                                    <input type="checkbox" id="brand2" name="brand[]" value="4">
                                     <label for="brand2">BMW</label>
                                 </div>
                                 <div class="custm-check">
-                                    <input type="checkbox" id="brand3" name="brand">
+                                    <input type="checkbox" id="brand3" name="brand[]" value="3">
                                     <label for="brand3">BMW</label>
                                 </div>
                             </div>
                         </div>
+                        <button type="submit">test</button>
+                        </form>
                         <div class="interior-filter-box">
                             <h4>Price</h4>
                             <div class="interior-filter-inner">
