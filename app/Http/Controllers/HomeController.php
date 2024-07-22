@@ -41,7 +41,7 @@ class HomeController extends Controller
     public function index($subcategory_id = null)
     {
         $category = Category::where('status', '1')->get();
-        $collections = Category::with('products.cartProduct')->where('parent_id', '!=', null)->where('status', '1')->inRandomOrder()->take(10)->get();
+        $collections = Category::with('products.cartProduct')->has('products')->where('parent_id', '!=', null)->where('status', '1')->inRandomOrder()->take(10)->get();
         $subcategories = Category::with('products')->has('products')->Where('parent_id', '!=', null)->where('status', '1')->inRandomOrder()->take(6)->get();
         $brands=CarBrandMake::inRandomOrder()->take(7)->get();
         return view('welcome', compact('category', 'subcategories', 'collections', "subcategory_id","brands"));
@@ -141,11 +141,8 @@ class HomeController extends Controller
             return response()->json(['status' => 'error', 'message' => $e->getMessage()], 400);
         }
     }
-
-
     public function allProducts(Request $request)
     {
-        // dd($request->all());
         $brands = CarBrandMake::distinct('makes')->get();
 
         $sdk = \CarApiSdk\CarApi::build([
@@ -167,7 +164,6 @@ class HomeController extends Controller
         $years = $sdk->years();
         $models = AllModel::all();
         $products = Product::with('productImage', 'featuredProduct','productCompatible')->category()->compatiblity()->get();
-        // dd($products);
         $categories =  Category::with('children')->has('children')->orWhereNull('parent_id')->get();
         return view('public_shop', compact("categories","products","brands","years","models"));
     }
