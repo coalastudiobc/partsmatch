@@ -67,7 +67,9 @@
                                         </div>
                                     </td> --}}
                                     <td>
-                                        <a class="btn primary-btn" href="#">Create Shipment</a>
+                                        <a class="btn primary-btn"
+                                            href="{{ route('Dealer.order.create.shippment', $order->id) }}">Pending
+                                            FullFillment</a>
                                     </td>
                                     {{-- <td>
                                         <div class="pro-status">

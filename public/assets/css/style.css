@@ -1496,8 +1496,9 @@ button.btn-close {
 }
 
 .outer-box {
-    /* min-height: 300px !important; */
-    overflow: auto !important;
+    max-height: 300px !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
 }
 
 
