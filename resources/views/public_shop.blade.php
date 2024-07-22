@@ -141,13 +141,13 @@
                                                 <input type="number" 
                                                 name="min_value"
                                                     class="min-input" 
-                                                    value="0"> 
+                                                    value="{{old('min_value',0)}}"> 
                                             </div> 
                                             <div class="price-field"> 
                                                 <input type="number" 
                                                 name="max_value"
                                                     class="max-input" 
-                                                    value="10000"> 
+                                                    value="{{old('max_value',10000)}}"> 
                                             </div> 
                                         </div> 
                                         <div class="slider-container"> 
@@ -162,13 +162,13 @@
                                             class="min-range" 
                                             min="0" 
                                             max="10000" 
-                                            value="0" 
+                                            value="{{old('min_value',0)}}" 
                                             step="1"> 
                                         <input type="range" 
                                             class="max-range" 
                                             min="0" 
                                             max="10000" 
-                                            value="10000" 
+                                            value="{{old('max_value',10000)}}" 
                                             step="1"> 
                                     </div> 
                                 </div> 
@@ -251,7 +251,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="pro-dealer-box">
+                                                {{-- <div class="pro-dealer-box">
                                                     <h4>Dealer</h4>
                                                     <div class="pro-dealer-info">
 
@@ -269,14 +269,8 @@
                                                                 <h5>{{ $product->user->name ?? ' ' }}</h5>
                                                             </u>
                                                         </a>
-                                                        {{-- <p>{{ $product->user->email ?? ' ' }}</p> --}}
                                                     </div>
-
-                                                        {{-- <a @if (auth()->user()) href="{{ route('dealer.view.profile', $product->user->id) }}" @else href="javascript:void(0)" @endif
-                                                        class="btn secondary-btn small-btn">View
-                                                        Profile
-                                                    </a> --}}
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </a>
                                     </div>
@@ -392,103 +386,128 @@
                 $(this).html('See More');
             }
         });
+
+
     });
 </script>
 <script>
-// Script.js 
-const rangevalue = 
-	document.querySelector(".slider-container .price-slider"); 
-const rangeInputvalue = 
-	document.querySelectorAll(".range-input input"); 
+        // Function to delay form submission
+        function delayFormSubmission(formId, delay) {
+            const form = document.getElementById(formId);
+            
+            if (!form) {
+                console.error(`Form with id ${formId} not found.`);
+                return;
+            }
 
-// Set the price gap 
-let priceGap = 500; 
+            let timeout;
 
-// Adding event listners to price input elements 
-const priceInputvalue = 
-	document.querySelectorAll(".price-input input"); 
-for (let i = 0; i < priceInputvalue.length; i++) { 
-	priceInputvalue[i].addEventListener("input", e => { 
+            form.addEventListener('change', () => {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => {
+                    form.submit();
+                }, delay);
+            });
+        }
 
-		// Parse min and max values of the range input 
-		let minp = parseInt(priceInputvalue[0].value); 
-		let maxp = parseInt(priceInputvalue[1].value); 
-		let diff = maxp - minp 
+        // Call the function with the form id and delay time in milliseconds (2000ms = 2 seconds)
+        delayFormSubmission('filters', 100);
+    </script>
+<script>
+    // Script.js 
+    const rangevalue = 
+        document.querySelector(".slider-container .price-slider"); 
+    const rangeInputvalue = 
+        document.querySelectorAll(".range-input input"); 
 
-		if (minp < 0) { 
-			alert("minimum price cannot be less than 0"); 
-			priceInputvalue[0].value = 0; 
-			minp = 0; 
-		} 
+    // Set the price gap 
+    let priceGap = 500; 
 
-		// Validate the input values 
-		if (maxp > 10000) { 
-			alert("maximum price cannot be greater than 10000"); 
-			priceInputvalue[1].value = 10000; 
-			maxp = 10000; 
-		} 
+    // Adding event listners to price input elements 
+    const priceInputvalue = 
+        document.querySelectorAll(".price-input input"); 
+    for (let i = 0; i < priceInputvalue.length; i++) { 
+        priceInputvalue[i].addEventListener("input", e => { 
 
-		if (minp > maxp - priceGap) { 
-			priceInputvalue[0].value = maxp - priceGap; 
-			minp = maxp - priceGap; 
+            // Parse min and max values of the range input 
+            let minp = parseInt(priceInputvalue[0].value); 
+            let maxp = parseInt(priceInputvalue[1].value); 
+            let diff = maxp - minp 
 
-			if (minp < 0) { 
-				priceInputvalue[0].value = 0; 
-				minp = 0; 
-			} 
-		} 
+            if (minp < 0) { 
+                alert("minimum price cannot be less than 0"); 
+                priceInputvalue[0].value = 0; 
+                minp = 0; 
+            } 
 
-		// Check if the price gap is met 
-		// and max price is within the range 
-		if (diff >= priceGap && maxp <= rangeInputvalue[1].max) { 
-			if (e.target.className === "min-input") { 
-				rangeInputvalue[0].value = minp; 
-				let value1 = rangeInputvalue[0].max; 
-				rangevalue.style.left = `${(minp / value1) * 100}%`; 
-			} 
-			else { 
-				rangeInputvalue[1].value = maxp; 
-				let value2 = rangeInputvalue[1].max; 
-				rangevalue.style.right = 
-					`${100 - (maxp / value2) * 100}%`; 
-			} 
-		} 
-	}); 
+            // Validate the input values 
+            if (maxp > 10000) { 
+                alert("maximum price cannot be greater than 10000"); 
+                priceInputvalue[1].value = 10000; 
+                maxp = 10000; 
+            } 
 
-	// Add event listeners to range input elements 
-	for (let i = 0; i < rangeInputvalue.length; i++) { 
-		rangeInputvalue[i].addEventListener("input", e => { 
-			let minVal = 
-				parseInt(rangeInputvalue[0].value); 
-			let maxVal = 
-				parseInt(rangeInputvalue[1].value); 
+            if (minp > maxp - priceGap) { 
+                priceInputvalue[0].value = maxp - priceGap; 
+                minp = maxp - priceGap; 
 
-			let diff = maxVal - minVal 
-			
-			// Check if the price gap is exceeded 
-			if (diff < priceGap) { 
-			
-				// Check if the input is the min range input 
-				if (e.target.className === "min-range") { 
-					rangeInputvalue[0].value = maxVal - priceGap; 
-				} 
-				else { 
-					rangeInputvalue[1].value = minVal + priceGap; 
-				} 
-			} 
-			else { 
-			
-				// Update price inputs and range progress 
-				priceInputvalue[0].value = minVal; 
-				priceInputvalue[1].value = maxVal; 
-				rangevalue.style.left = 
-					`${(minVal / rangeInputvalue[0].max) * 100}%`; 
-				rangevalue.style.right = 
-					`${100 - (maxVal / rangeInputvalue[1].max) * 100}%`; 
-			} 
-		}); 
-	} 
-}
+                if (minp < 0) { 
+                    priceInputvalue[0].value = 0; 
+                    minp = 0; 
+                } 
+            } 
+
+            // Check if the price gap is met 
+            // and max price is within the range 
+            if (diff >= priceGap && maxp <= rangeInputvalue[1].max) { 
+                if (e.target.className === "min-input") { 
+                    rangeInputvalue[0].value = minp; 
+                    let value1 = rangeInputvalue[0].max; 
+                    rangevalue.style.left = `${(minp / value1) * 100}%`; 
+                } 
+                else { 
+                    rangeInputvalue[1].value = maxp; 
+                    let value2 = rangeInputvalue[1].max; 
+                    rangevalue.style.right = 
+                        `${100 - (maxp / value2) * 100}%`; 
+                } 
+            } 
+        }); 
+
+        // Add event listeners to range input elements 
+        for (let i = 0; i < rangeInputvalue.length; i++) { 
+            rangeInputvalue[i].addEventListener("input", e => { 
+                let minVal = 
+                    parseInt(rangeInputvalue[0].value); 
+                let maxVal = 
+                    parseInt(rangeInputvalue[1].value); 
+
+                let diff = maxVal - minVal 
+                
+                // Check if the price gap is exceeded 
+                if (diff < priceGap) { 
+                
+                    // Check if the input is the min range input 
+                    if (e.target.className === "min-range") { 
+                        rangeInputvalue[0].value = maxVal - priceGap; 
+                    } 
+                    else { 
+                        rangeInputvalue[1].value = minVal + priceGap; 
+                    } 
+                } 
+                else { 
+                
+                    // Update price inputs and range progress 
+                    priceInputvalue[0].value = minVal; 
+                    priceInputvalue[1].value = maxVal; 
+                    rangevalue.style.left = 
+                        `${(minVal / rangeInputvalue[0].max) * 100}%`; 
+                    rangevalue.style.right = 
+                        `${100 - (maxVal / rangeInputvalue[1].max) * 100}%`; 
+                } 
+            }); 
+        } 
+    }
 
 </script>
 @endpush
