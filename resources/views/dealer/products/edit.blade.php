@@ -3,10 +3,8 @@
 @section('content')
     {{-- <div class="main-content">
         <section class="section"> --}}
-    <div class="section-body">
-        <div class="row">
-            <div class="col-12 col-md-12 col-lg-12">
-                <div class="card">
+<div class="section-body edit-product-sec">
+    <div class="card">
                     <div class='ajax-response'></div>
                     <x-alert-component />
                     @if ($errors->any())
@@ -171,14 +169,14 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="">Add Product Images (Up to 5)</label>
-                                        <label class="img-upload-box">
+                                        <!-- <label class="img-upload-box">
                                             <p>Upload Images</p>
                                             <input type="file" name="images[]" id="upload-image" multiple mixlength="5">
                                             <input type="hidden" name="total-img-preview" id="total-img-preview"
                                                 value={{ count($product->productImage) }}>
                                             <input type="hidden" name="image_id[]" value="imageid[]" id="get_image_id">
 
-                                        </label>
+                                        </label> -->
 
                                         <div class="pre-upload-img-preview">
                                             @foreach ($product->productImage as $image)
@@ -191,6 +189,17 @@
                                                     </div>
                                                 </div>
                                             @endforeach
+                                            <label class="img-upload-box">
+                                                <div class="img-upload-box-inner">
+                                                    <i class="fa-solid fa-plus"></i>
+                                                    <p>Upload Images</p>
+                                                </div>
+                                                <input type="file" name="images[]" id="upload-image" multiple mixlength="5">
+                                                <input type="hidden" name="total-img-preview" id="total-img-preview"
+                                                    value={{ count($product->productImage) }}>
+                                                <input type="hidden" name="image_id[]" value="imageid[]" id="get_image_id">
+
+                                        </label>
 
                                         </div>
                                         <div class="upload-img-preview"></div>
@@ -419,21 +428,21 @@
                                         </div> --}}
 
                             <div class="row">
-                                <div class="col-md-6">
-                                    <a href="{{ route(auth()->user()->getRoleNames()->first() . '.products.index') }}"
-                                        class="btn secondary-btn full-btn mr-1">Back</a>
-                                </div>
-                                <div class="col-md-6">
-                                    <button class="btn primary-btn full-btn mr-1" id="submit"
-                                        type="submit">Submit</button>
-                                </div>
+                                    <div class="col-md-6">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="d-flex align-items-center gap-2 justify-content-end">
+                                            <a href="{{ route(auth()->user()->getRoleNames()->first() . '.products.index') }}"
+                                                class="btn secondary-btn md-btn mr-1">Back</a>
+                                            <button class="btn primary-btn md-btn mr-1" id="submit"
+                                                type="submit">Submit</button>
+                                        </div>
+                                    </div>
                             </div>
                     </div>
                     </form>
 
                 </div>
-            </div>
-        </div>
     </div>
     </div>
     {{-- </section> --}}
