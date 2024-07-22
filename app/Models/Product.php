@@ -72,4 +72,22 @@ class Product extends Model
             $q->whereIn('subcategory_id', $category->categories);
         });
     }
+
+    public function scopeCompatiblity($query)
+    {
+        $request = request();
+        $query->when(($request->has('year') && count($request->year)) , function ($q) use ($request) {
+            $q->whereHas('productCompatible', function ($query) use ($request) {
+                $query->OrwhereIn('year', $request->year);
+            });
+        })->when(($request->has('brand') && count($request->brand)) , function ($q) use ($request) {
+            $q->whereHas('productCompatible', function ($query) use ($request) {
+                $query->OrwhereIn('make', $request->brand);
+            });
+        })->when(($request->has('model') && count($request->model)) , function ($q) use ($request) {
+            $q->whereHas('productCompatible', function ($query) use ($request) {
+                $query->OrwhereIn('model', $request->model);
+            });
+        });
+    }
 }

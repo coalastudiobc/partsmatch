@@ -652,6 +652,7 @@ header {
     /* align-items: center; */
     cursor: pointer;
     box-shadow: 1px 1px 9px 3px #ddd;
+    background-color: #fff;
 }
 
 .collection-boxes {
@@ -659,6 +660,8 @@ header {
     gap: 20px;
     flex-wrap: wrap;
     justify-content: center;
+    background-color: #f6f6f6;
+    padding: 10px;
 }
 
 .collection-img {
@@ -2208,11 +2211,55 @@ span.ymmm-cross {
     grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
     column-gap: 20px;
 }
+.package-main > h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    line-height: 22px;
+}
 
-
-
-.pagination-wrapper {
-    margin-top: 20px;
+.package-main > p {
+    font-size: 14px;
+    line-height: 16px;
+    margin-bottom: 20px;
+}
+.dimention-parameter {
+    position: absolute;
+    top: 13px;
+    left: 5px;
+    background-color: var(--primary-color);
+    padding: 2px 2px;
+    height: 19px;
+    width: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.custm-dimention input {
+    text-align: right;
+    padding-left: 25px;
+}
+.custm-dimention select{
+    min-width: 116px;
+}
+.custm-dimention .form-group{
+    margin: 0;
+}
+.form-group.checkbox-field {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.form-group.checkbox-field .formfield {
+    width: fit-content;
+}
+.form-group.checkbox-field  label{
+    margin: 0;
+}
+.form-group.checkbox-field .formfield input{
+    background-color: var(--secondary-color);
+    accent-color: var(--secondary-color);
+    width: 20px;
+    height: 20px;
 }
 
 
@@ -2223,13 +2270,23 @@ span.ymmm-cross {
 
 
 
+/* sumit's tigdam */
 
-
-
-
-
-
-
+.custm-check {
+    order: 1;
+}
+.custm-check:has(.selected-entry) {
+    order: 0;
+}
+.interior-filter-inner {
+    display: flex;
+    flex-direction: column;
+    max-height: 148px;
+    overflow: hidden;
+}
+.interior-filter-inner.full-data-view {
+    max-height: 100% !important;
+}
 
 
 

@@ -12,8 +12,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\ChangePasswordRequest;
+use App\Models\AllModel;
 use App\Models\CarBrandMake;
+use Exception;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Log;
 use Spatie\Permission\Traits\HasRoles;
 
 class HomeController extends Controller
@@ -38,7 +41,7 @@ class HomeController extends Controller
     public function index($subcategory_id = null)
     {
         $category = Category::where('status', '1')->get();
-        $collections = Category::with('products.cartProduct')->where('parent_id', '!=', null)->where('status', '1')->inRandomOrder()->take(10)->get();
+        $collections = Category::with('products.cartProduct')->has('products')->where('parent_id', '!=', null)->where('status', '1')->inRandomOrder()->take(10)->get();
         $subcategories = Category::with('products')->has('products')->Where('parent_id', '!=', null)->where('status', '1')->inRandomOrder()->take(6)->get();
         $brands=CarBrandMake::inRandomOrder()->take(7)->get();
         return view('welcome', compact('category', 'subcategories', 'collections', "subcategory_id","brands"));
@@ -138,13 +141,30 @@ class HomeController extends Controller
             return response()->json(['status' => 'error', 'message' => $e->getMessage()], 400);
         }
     }
-
-
     public function allProducts(Request $request)
     {
-        dd($request->has('brand'),$request);
-        $products = Product::with('productImage', 'featuredProduct')->category()->get();
+        $brands = CarBrandMake::distinct('makes')->get();
+
+        $sdk = \CarApiSdk\CarApi::build([
+            'token' => env('CAR_API_TOKEN'),
+            'secret' => env('CAR_API_SECRET'),
+        ]);
+        $filePath = storage_path('app/text.txt');
+        $jwt = file_exists($filePath) ? file_get_contents($filePath) : null;
+
+        if (empty($jwt) || $sdk->loadJwt($jwt)->isJwtExpired()) {
+            try {
+                $jwt = $sdk->authenticate();
+                file_put_contents($filePath, $jwt);
+            } catch (Exception $e) {
+                Log::channel('daily')->error($e->getMessage());
+                return ;
+            }
+        }
+        $years = $sdk->years();
+        $models = AllModel::all();
+        $products = Product::with('productImage', 'featuredProduct','productCompatible')->category()->compatiblity()->get();
         $categories =  Category::with('children')->has('children')->orWhereNull('parent_id')->get();
-        return view('public_shop', compact("categories","products"));
+        return view('public_shop', compact("categories","products","brands","years","models"));
     }
 }

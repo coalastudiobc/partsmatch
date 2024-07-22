@@ -128,7 +128,15 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-6">
+                                    <div class="form-group checkbox-field">
+                                        <div class="formfield">
+                                            <input type="checkbox" class="" id="checkbox3">
+                                        </div>
+                                        <label for="checkbox3">This is a residential address</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
                                     <div class="d-flex align-items-center gap-2 justify-content-end">
                                         {{-- <a href="#" class="btn secondary-btn md-btn mr-1 cancel-address">Back</a> --}}
                                         <button class="btn primary-btn md-btn mr-1" id="submit" type="submit">Submit</button>
@@ -206,40 +214,92 @@
       <div class="modal-content">
         <div class="modal-body">
             <div class="package-main">
-                <h3>Package</h3>
+                <h3>Package Dimentions</h3>
                 <p>Rates are calculated based on package dimensions and weight. It's recommended to enter the correct weight and dimensions. If not, you may receive adjustment charges.</p>
-                <div class="custm-dimention">
-                    <div class="from-group">
-                        <div class="fromfield">
-                            <input type="text" name="" id="" class="form-control">
+                <div class="custm-dimention-box">
+                    <p>Dimention</p>
+                    <div class="custm-dimention mb-3">
+                    
+                        <div class="form-group">
+                            <div class="formfield">
+                                <input type="text" name="" id="" class="form-control" placeholder="length">
+                                <span class="dimention-parameter">
+                                    L
+                                </span>
+                            </div>
                         </div>
-
-                    </div>
-                    <p>X</p>
-                    <div class="from-group">
-                        <div class="fromfield">
-                            <input type="text" name="" id="" class="form-control">
+                        <p>X</p>
+                        <div class="form-group">
+                            <div class="formfield">
+                                <input type="text" name="" id="" class="form-control" placeholder="width">
+                                <span class="dimention-parameter">
+                                    W
+                                </span>
+                            </div>
                         </div>
-                            
-                    </div>
-                    <p>X</p>
-                    <div class="from-group">
-                        <div class="fromfield">
-                            <input type="text" name="" id="" class="form-control">
+                        <p>X</p>
+                        <div class="form-group">
+                            <div class="formfield">
+                                <input type="text" name="" id="" class="form-control" placeholder="height">
+                                <span class="dimention-parameter">
+                                    H
+                                </span>
+                            </div>
                         </div>
-                            
-                    </div>
-                    <p>X</p>
-                    <div class="from-group">
-                        <div class="fromfield">
-                            <select name="" id="" class="form-control">
-                                <option value="">cm</option>
-                                <option value="">in</option>
-                                <option value="">mm</option>
-                            </select>
+                        <p>X</p>
+                        <div class="form-group">
+                            <div class="formfield">
+                                <select name="" id="" class="form-control">
+                                    <option value="">in</option>
+                                    <option value="">mm</option>
+                                    <option value="">cm</option>
+                                </select>
+                                <span class="custm-drop-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="23" viewBox="0 0 24 23" fill="none">
+                                        <path d="M19 9.00006L14 14.0001L9 9.00006" stroke="#151515" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </span>
+                            </div>
+                                
                         </div>
-                            
                     </div>
+                </div>
+                <div class="custm-dimention-box">
+                    <p>Package Weight</p>
+                    <div class="custm-dimention mb-3">
+                    
+                        <div class="form-group">
+                            <div class="formfield">
+                                <input type="text" name="" id="" class="form-control" placeholder="weight">
+                                
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="formfield">
+                                <select name="" id="" class="form-control">
+                                    <option value="">g</option>
+                                    <option value="">kg</option>
+                                    <option value="">oz</option>
+                                </select>
+                                <span class="custm-drop-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="23" viewBox="0 0 24 23" fill="none">
+                                        <path d="M19 9.00006L14 14.0001L9 9.00006" stroke="#151515" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </span>
+                            </div>
+                                
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group checkbox-field">
+                    <div class="formfield">
+                        <input type="checkbox" class="" id="checkbox3">
+                    </div>
+                    <label for="checkbox3">Create a return label</label>
+                </div>
+                <div class="d-flex align-items-center gap-2 justify-content-end">
+                    {{-- <a href="#" class="btn secondary-btn md-btn mr-1">Back</a> --}}
+                    <button class="btn primary-btn sm-btn mr-1" id="submit" type="submit">Submit</button>
                 </div>
             </div>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

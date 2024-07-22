@@ -330,32 +330,31 @@
                                 </div>
                             </div>
 
-                        </div>
-                    </div>
-                </div>
+    </div>
+    </div>
+    </div>
+    </div>
+</section>
+<section class="related-pro-sec py-3">
+    <div class="container">
+        <div class="related-pro-wrapper">
+            <div class="dealer-product-header">
+                <h3>Product</h3>
+                {{-- <a href="#" class="btn secondary-btn view-btn">
+                    View all Products
+                </a> --}}
             </div>
-    </section>
-    <section class="related-pro-sec py-3">
-        <div class="container">
-            <div class="related-pro-wrapper">
-                <div class="dealer-product-header">
-                    <h3>Product</h3>
-                    <a href="#" class="btn secondary-btn view-btn">
-                        View all Products
-                    </a>
-                </div>
-                <div class="dealer-product-category">
-                    <div class="dealer-category-box">
-                        @foreach ($allproducts as $product)
-                            <a
-                                href="{{ route(
-                                    auth()->check() && auth()->user()->hasRole('Administrator')
-                                        ? 'admin.products.details'
-                                        : (auth()->check()
-                                            ? auth()->user()->getRoleNames()->first() . '.products.details'
-                                            : 'Dealer.products.details'),
-                                    ['product' => $product->id],
-                                ) }}">
+            <div class="dealer-product-category">
+                <div class="dealer-category-box">
+                    @foreach ($allproducts as $product)
+                    <a href="{{
+    route(
+        auth()->check() && auth()->user()->hasRole('Administrator') ?
+            'admin.products.details' :
+            (auth()->check() ? auth()->user()->getRoleNames()->first() . '.products.details' : 'Dealer.products.details'),
+        ['product' => $product->id]
+    )
+}}">
 
                                 <div class="collection-box cstm-card ">
                                     <div class="collection-img">

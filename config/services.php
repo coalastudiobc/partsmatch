@@ -40,6 +40,9 @@ return [
         'messagingSenderId' => env('messagingSenderId'),
         'appId' => env('appId'),
     ],
-
+    'Stripe' => [
+        'stripe_key' => env('STRIPE_KEY'),
+        'stripe_secret' => env('STRIPE_SECRET'),
+    ],
 
 ];

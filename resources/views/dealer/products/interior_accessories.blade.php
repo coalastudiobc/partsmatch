@@ -57,7 +57,7 @@
                             @endforeach
                         </div>
                     </div> -->
-                    <div class="interior-filter-body">
+                    {{-- <div class="interior-filter-body">
                         <div class="interior-filter-box">
                             <h4>Categories</h4>
                             <div class="interior-filter-inner">
@@ -83,7 +83,7 @@
                                     
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="interior-filter-box">
                             <h4>Brand</h4>
                             <div class="interior-filter-inner">
