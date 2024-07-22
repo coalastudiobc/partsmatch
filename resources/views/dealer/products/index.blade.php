@@ -471,7 +471,7 @@
             <div class="modal-body">
                 <div class="add-pro-form">
                     <h2>Bulk Upload</h2>
-                    <form action="">
+                    <form action="{{route('Dealer.products.bulk.upload')}}">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">

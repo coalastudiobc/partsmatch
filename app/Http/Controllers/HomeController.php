@@ -12,8 +12,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\ChangePasswordRequest;
+use App\Models\AllModel;
 use App\Models\CarBrandMake;
+use Exception;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Log;
 use Spatie\Permission\Traits\HasRoles;
 
 class HomeController extends Controller
@@ -142,9 +145,30 @@ class HomeController extends Controller
 
     public function allProducts(Request $request)
     {
-        dd($request->has('brand'),$request);
-        $products = Product::with('productImage', 'featuredProduct')->category()->get();
+        // dd($request->all());
+        $brands = CarBrandMake::distinct('makes')->get();
+
+        $sdk = \CarApiSdk\CarApi::build([
+            'token' => env('CAR_API_TOKEN'),
+            'secret' => env('CAR_API_SECRET'),
+        ]);
+        $filePath = storage_path('app/text.txt');
+        $jwt = file_exists($filePath) ? file_get_contents($filePath) : null;
+
+        if (empty($jwt) || $sdk->loadJwt($jwt)->isJwtExpired()) {
+            try {
+                $jwt = $sdk->authenticate();
+                file_put_contents($filePath, $jwt);
+            } catch (Exception $e) {
+                Log::channel('daily')->error($e->getMessage());
+                return ;
+            }
+        }
+        $years = $sdk->years();
+        $models = AllModel::all();
+        $products = Product::with('productImage', 'featuredProduct','productCompatible')->category()->compatiblity()->get();
+        // dd($products);
         $categories =  Category::with('children')->has('children')->orWhereNull('parent_id')->get();
-        return view('public_shop', compact("categories","products"));
+        return view('public_shop', compact("categories","products","brands","years","models"));
     }
 }

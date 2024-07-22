@@ -64,6 +64,10 @@ class ProductController extends Controller
 
     public function bulkUpload()
     {
+        //this is for temporary , still pending to work on it
+        $years = $this->sdk->years();
+        $products = Product::with('productImage', 'featuredProduct')->where('user_id', auth()->user()->id)->orderBy('id', 'DESC')->Search()->Paginate(5);
+        return view('dealer.products.index', compact('years', 'products'))->with('message', 'Still working on it');
     }
 
     /**

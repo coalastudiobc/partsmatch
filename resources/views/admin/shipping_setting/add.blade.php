@@ -23,11 +23,12 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="shipment_title">Shipment Title</label>
+                                                <label for="shipment_title">Shipment Title<span
+                                                        class="required-field">*</span></label>
                                                 <div class="form-field">
                                                     <input type="text" id="shipment_title" name="shipment_title"
-                                                        placeholder="Shipment Title"
-                                                        value="@isset($data){{ $data->name }}@endisset "
+                                                        placeholder="e.g: Express Delivery (2 Days)"
+                                                        value="@isset($data){{ $data->name }}@endisset"
                                                         class="form-control @error('shipment_title') is-invalid @enderror daf">
                                                     @error('shipment_title')
                                                         <span class="invalid-feedback" role="alert">
@@ -39,7 +40,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="range_from">Country</label>
+                                                <label for="range_from">Country<span class="required-field">*</span></label>
                                                 <input type="hidden" name="country"
                                                     value="@isset($data) {{ $data->country == 'Canada' ? 'Canada' : 'United States' }}@endisset"
                                                     id=""
@@ -90,12 +91,14 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="range_from">Range From</label>
+                                                <label for="range_from">Range From<span
+                                                        class="required-field">*</span></label>
                                                 <div class="form-field">
                                                     <input type="number" id="range_from" name="range_from"
-                                                        placeholder="range_from"
+                                                        placeholder="e.g:  $1"
                                                         class="form-control @error('range_from') is-invalid @enderror "
-                                                        value="@isset($data){{ $data->range_from ?? '' }}@endisset">
+                                                        value="@isset($data){{ $data->range_from ?? '' }}@endisset"
+                                                        title="Shipping price range in dollars">
                                                     @error('range_from')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
@@ -107,12 +110,13 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="range_to">Range To</label>
+                                                <label for="range_to">Range To<span class="required-field">*</span></label>
                                                 <div class="form-field">
                                                     <input type="number" name="range_to"
                                                         class="form-control @error('range_to') is-invalid @enderror sdfa"
                                                         value="@isset($data){{ $data->range_to ?? '' }}@endisset"
-                                                        placeholder="range_to">
+                                                        placeholder="e.g:  $450"
+                                                        title="Shipping price range limit in dollars">
                                                     @error('range_to')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
