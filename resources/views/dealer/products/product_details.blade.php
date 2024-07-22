@@ -303,9 +303,9 @@
         <div class="related-pro-wrapper">
             <div class="dealer-product-header">
                 <h3>Product</h3>
-                <a href="#" class="btn secondary-btn view-btn">
+                {{-- <a href="#" class="btn secondary-btn view-btn">
                     View all Products
-                </a>
+                </a> --}}
             </div>
             <div class="dealer-product-category">
                 <div class="dealer-category-box">
