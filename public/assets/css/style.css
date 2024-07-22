@@ -2285,6 +2285,9 @@ span.ymmm-cross {
 }
 
 
-
+.brand-height-fix{
+    max-height:400px;
+    overflow: hidden;
+}
 
 
