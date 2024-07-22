@@ -51,8 +51,7 @@
                             @auth
                                 <ul class="navbar-nav">
                                     <li class="nav-item">
-                                        <a class="nav-link" aria-current="page"
-                                            href="{{ route('welcome.index') }}">
+                                        <a class="nav-link" aria-current="page" href="{{ route('welcome.index') }}">
                                             shop
                                         </a>
                                     </li>
@@ -128,7 +127,22 @@
 
             </div>
 
-
+            <div id="fullPageLoader" class="page-loader d-none">
+                <div class="sk-circle">
+                    <div class="sk-circle1 sk-child"></div>
+                    <div class="sk-circle2 sk-child"></div>
+                    <div class="sk-circle3 sk-child"></div>
+                    <div class="sk-circle4 sk-child"></div>
+                    <div class="sk-circle5 sk-child"></div>
+                    <div class="sk-circle6 sk-child"></div>
+                    <div class="sk-circle7 sk-child"></div>
+                    <div class="sk-circle8 sk-child"></div>
+                    <div class="sk-circle9 sk-child"></div>
+                    <div class="sk-circle10 sk-child"></div>
+                    <div class="sk-circle11 sk-child"></div>
+                    <div class="sk-circle12 sk-child"></div>
+                </div>
+            </div>
         </section>
     </main>
     @include('layouts.include.footer')
@@ -157,6 +171,7 @@
     <script src="{{ asset('assets/js/toaster.min.js') }}"></script>
     <script src="{{ asset('assets/js/sweetalert.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
+    <script src="{{ asset('assets/js/additional_method.js') }}"></script>
     <script src="{{ asset('assets/js/common.js') }}?ver={{ now() }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>

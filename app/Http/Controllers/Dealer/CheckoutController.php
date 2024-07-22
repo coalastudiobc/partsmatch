@@ -292,144 +292,144 @@ class CheckoutController extends Controller
     }
 
 
-    // public function to_address(Request $request)
-    // {
-    //     try {
-    //         return redirect()->back()->with(['error' => 'some internal issues. Please try again later']);
-    //         $response_in_array =  $this->address($request);
-    //         $to_address = '';
-    //         if ($response_in_array->object_state == "VALID") {
-    //             $to_address = $response_in_array->object_id;
-    //             $addresstype = 'Deliver';
-    //             $this->storeAddress($request, $addresstype, $to_address);
-    //             $carts = Cart::with('cart_product', 'cart_product.product')->where('user_id', auth()->user()->id)->get();
-    //             $allProductsOfCart = CartProduct::where('cart_id', $carts[0]->id)->get();
-    //             $parcelsIdInArray = [];
-    //             $rateResults = [];
-    //             $lastUserId = null;
+    public function to_adddress(Request $request)
+    {
+        try {
+            return redirect()->back()->with(['error' => 'some internal issues. Please try again later']);
+            $response_in_array =  $this->address($request);
+            $to_address = '';
+            if ($response_in_array->object_state == "VALID") {
+                $to_address = $response_in_array->object_id;
+                $addresstype = 'Deliver';
+                $this->storeAddress($request, $addresstype, $to_address);
+                $carts = Cart::with('cart_product', 'cart_product.product')->where('user_id', auth()->user()->id)->get();
+                $allProductsOfCart = CartProduct::where('cart_id', $carts[0]->id)->get();
+                $parcelsIdInArray = [];
+                $rateResults = [];
+                $lastUserId = null;
 
-    //             // $parcelsIdInOfDifferentUsers = 0;
-    //             // $storeLastProductOfUser = 0;
-    //             // foreach ($allProductsOfCart as $products) {
-    //             //     if ($products->first) {
-    //             //         $storeLastProductOfUser = $products->product_of;
-    //             //     }
-    //             //     $parcelDetails =  ProductParcelDetail::where('product_id', $products->product_id)->first();
-    //             //     if ($storeLastProductOfUser == $products->product_of) {
-    //             //         $parcelsIdInArray[] = $this->createParcel($parcelDetails);
-    //             //         // $rateResults[$products->product_id] = $this->createShipment($to_address, $parcelsIdInArray);
-    //             //     } else {
-    //             //         $parcelsIdInOfDifferentUsers = $this->createParcel($parcelDetails);
-    //             //         $rateResults[$products->product_id] = $this->createShipment($to_address, $parcelsIdInOfDifferentUsers);
-    //             //     }
-    //             //     $storeLastProductOfUser = $products->product_of;
-    //             //     if ($products->last && !is_null($parcelsIdInArray)) {
-    //             //         dd($parcelsIdInArray);
-    //             //         $rateResults[$products->product_id] = $this->createShipment($to_address, $parcelsIdInArray);
-    //             //     }
-    //             // }
+                // $parcelsIdInOfDifferentUsers = 0;
+                // $storeLastProductOfUser = 0;
+                // foreach ($allProductsOfCart as $products) {
+                //     if ($products->first) {
+                //         $storeLastProductOfUser = $products->product_of;
+                //     }
+                //     $parcelDetails =  ProductParcelDetail::where('product_id', $products->product_id)->first();
+                //     if ($storeLastProductOfUser == $products->product_of) {
+                //         $parcelsIdInArray[] = $this->createParcel($parcelDetails);
+                //         // $rateResults[$products->product_id] = $this->createShipment($to_address, $parcelsIdInArray);
+                //     } else {
+                //         $parcelsIdInOfDifferentUsers = $this->createParcel($parcelDetails);
+                //         $rateResults[$products->product_id] = $this->createShipment($to_address, $parcelsIdInOfDifferentUsers);
+                //     }
+                //     $storeLastProductOfUser = $products->product_of;
+                //     if ($products->last && !is_null($parcelsIdInArray)) {
+                //         dd($parcelsIdInArray);
+                //         $rateResults[$products->product_id] = $this->createShipment($to_address, $parcelsIdInArray);
+                //     }
+                // }
 
-    //             // foreach ($allProductsOfCart as $products) {
-    //             //     if ($lastUserId !== $products->product_of) {
-    //             //         if (!empty($parcelsIdInArray)) {
-    //             //             $rateResults[$lastUserId] = $this->createShipment($to_address, $parcelsIdInArray, $lastUserId);
-    //             //             $parcelsIdInArray = [];
-    //             //         }
-    //             //         $lastUserId = $products->product_of; // Update lastUserId to current user ID
-    //             //     }
-    //             //     $parcelDetails = ProductParcelDetail::where('product_id', $products->product_id)->first();
-    //             //     $quantity = $products->quantity ?? 1; // Assume 1 if quantity is not defined
-    //             //     for ($i = 0; $i < $quantity; $i++) {
-    //             //         $parcelsIdInArray[] = $this->createParcel($parcelDetails, $products->product_id);
-    //             //     }
-    //             //     if ($products->last && !empty($parcelsIdInArray)) {
-    //             //         $rateResults[$lastUserId] = $this->createShipment($to_address, $parcelsIdInArray, $lastUserId);
-    //             //     }
-    //             // }
-    //             // if (!empty($parcelsIdInArray)) {
-    //             //     $rateResults[$lastUserId] = $this->createShipment($to_address, $parcelsIdInArray, $lastUserId);
-    //             // }
+                // foreach ($allProductsOfCart as $products) {
+                //     if ($lastUserId !== $products->product_of) {
+                //         if (!empty($parcelsIdInArray)) {
+                //             $rateResults[$lastUserId] = $this->createShipment($to_address, $parcelsIdInArray, $lastUserId);
+                //             $parcelsIdInArray = [];
+                //         }
+                //         $lastUserId = $products->product_of; // Update lastUserId to current user ID
+                //     }
+                //     $parcelDetails = ProductParcelDetail::where('product_id', $products->product_id)->first();
+                //     $quantity = $products->quantity ?? 1; // Assume 1 if quantity is not defined
+                //     for ($i = 0; $i < $quantity; $i++) {
+                //         $parcelsIdInArray[] = $this->createParcel($parcelDetails, $products->product_id);
+                //     }
+                //     if ($products->last && !empty($parcelsIdInArray)) {
+                //         $rateResults[$lastUserId] = $this->createShipment($to_address, $parcelsIdInArray, $lastUserId);
+                //     }
+                // }
+                // if (!empty($parcelsIdInArray)) {
+                //     $rateResults[$lastUserId] = $this->createShipment($to_address, $parcelsIdInArray, $lastUserId);
+                // }
 
 
-    //             // foreach ($allProductsOfCart as $key => $products) {
-    //             //     if ($lastUserId !== $products->product_of) {
-    //             //         if (!empty($parcelsIdInArray)) {
-    //             //             if (array_key_exists($lastUserId, $rateResults)) {
-    //             //                 $rateResults[$lastUserId][] = $this->createShipment($to_address, $parcelsIdInArray, $lastUserId);
-    //             //             } else {
-    //             //                 $rateResults[$lastUserId] = [$this->createShipment($to_address, $parcelsIdInArray, $lastUserId)];
-    //             //             }
-    //             //             $parcelsIdInArray = []; // Reset parcels array
-    //             //         }
-    //             //         $lastUserId = $products->product_of;
-    //             //     }
+                // foreach ($allProductsOfCart as $key => $products) {
+                //     if ($lastUserId !== $products->product_of) {
+                //         if (!empty($parcelsIdInArray)) {
+                //             if (array_key_exists($lastUserId, $rateResults)) {
+                //                 $rateResults[$lastUserId][] = $this->createShipment($to_address, $parcelsIdInArray, $lastUserId);
+                //             } else {
+                //                 $rateResults[$lastUserId] = [$this->createShipment($to_address, $parcelsIdInArray, $lastUserId)];
+                //             }
+                //             $parcelsIdInArray = []; // Reset parcels array
+                //         }
+                //         $lastUserId = $products->product_of;
+                //     }
 
-    //             //     $parcelDetails = ProductParcelDetail::where('product_id', $products->product_id)->first();
-    //             //     $quantity = $products->quantity ?? 1; // Assume 1 if quantity is not defined
+                //     $parcelDetails = ProductParcelDetail::where('product_id', $products->product_id)->first();
+                //     $quantity = $products->quantity ?? 1; // Assume 1 if quantity is not defined
 
-    //             //     for ($i = 0; $i < $quantity; $i++) {
-    //             //         $parcelsIdInArray[] = $this->createParcel($parcelDetails, $products->product_id);
-    //             //     }
-    //             //     if ($key === count($allProductsOfCart) - 1 || $allProductsOfCart[$key + 1]->product_of !== $lastUserId) {
-    //             //         if (array_key_exists($lastUserId, $rateResults)) {
-    //             //             $rateResults[$lastUserId][] = $this->createShipment($to_address, $parcelsIdInArray, $lastUserId);
-    //             //         } else {
-    //             //             $rateResults[$lastUserId] = [$this->createShipment($to_address, $parcelsIdInArray, $lastUserId)];
-    //             //         }
-    //             //         $parcelsIdInArray = [];
-    //             //     }
-    //             // }
+                //     for ($i = 0; $i < $quantity; $i++) {
+                //         $parcelsIdInArray[] = $this->createParcel($parcelDetails, $products->product_id);
+                //     }
+                //     if ($key === count($allProductsOfCart) - 1 || $allProductsOfCart[$key + 1]->product_of !== $lastUserId) {
+                //         if (array_key_exists($lastUserId, $rateResults)) {
+                //             $rateResults[$lastUserId][] = $this->createShipment($to_address, $parcelsIdInArray, $lastUserId);
+                //         } else {
+                //             $rateResults[$lastUserId] = [$this->createShipment($to_address, $parcelsIdInArray, $lastUserId)];
+                //         }
+                //         $parcelsIdInArray = [];
+                //     }
+                // }
 
-    //             $usersProducts = [];
+                $usersProducts = [];
 
-    //             // Step 1: Group products by user ID
-    //             foreach ($allProductsOfCart as $products) {
-    //                 $userId = $products->product_of;
+                // Step 1: Group products by user ID
+                foreach ($allProductsOfCart as $products) {
+                    $userId = $products->product_of;
 
-    //                 // Initialize an array for the user if not already initialized
-    //                 if (!isset($usersProducts[$userId])) {
-    //                     $usersProducts[$userId] = [
-    //                         'parcels' => [], // Array to store parcel IDs for the user
-    //                         'lastUserId' => null, // Last user ID processed
-    //                     ];
-    //                 }
+                    // Initialize an array for the user if not already initialized
+                    if (!isset($usersProducts[$userId])) {
+                        $usersProducts[$userId] = [
+                            'parcels' => [], // Array to store parcel IDs for the user
+                            'lastUserId' => null, // Last user ID processed
+                        ];
+                    }
 
-    //                 // Fetch parcel details for the product
-    //                 $parcelDetails = ProductParcelDetail::where('product_id', $products->product_id)->first();
-    //                 $quantity = $products->quantity ?? 1; // Assume 1 if quantity is not defined
+                    // Fetch parcel details for the product
+                    $parcelDetails = ProductParcelDetail::where('product_id', $products->product_id)->first();
+                    $quantity = $products->quantity ?? 1; // Assume 1 if quantity is not defined
 
-    //                 // Create parcels for each product
-    //                 for ($i = 0; $i < $quantity; $i++) {
-    //                     $usersProducts[$userId]['parcels'][] = $this->createParcel($parcelDetails, $products->product_id);
-    //                 }
+                    // Create parcels for each product
+                    for ($i = 0; $i < $quantity; $i++) {
+                        $usersProducts[$userId]['parcels'][] = $this->createParcel($parcelDetails, $products->product_id);
+                    }
 
-    //                 // Update lastUserId for the user
-    //                 $usersProducts[$userId]['lastUserId'] = $userId;
-    //             }
+                    // Update lastUserId for the user
+                    $usersProducts[$userId]['lastUserId'] = $userId;
+                }
 
-    //             // Step 2: Create shipments for each user
-    //             $rateResults = [];
-    //             foreach ($usersProducts as $userId => $userData) {
-    //                 $parcelsIdInArray = $userData['parcels'];
-    //                 $lastUserId = $userData['lastUserId'];
+                // Step 2: Create shipments for each user
+                $rateResults = [];
+                foreach ($usersProducts as $userId => $userData) {
+                    $parcelsIdInArray = $userData['parcels'];
+                    $lastUserId = $userData['lastUserId'];
 
-    //                 // Create shipment for the user
-    //                 $rateResults[$userId] = $this->createShipment($to_address, $parcelsIdInArray, $lastUserId);
-    //             }
+                    // Create shipment for the user
+                    $rateResults[$userId] = $this->createShipment($to_address, $parcelsIdInArray, $lastUserId);
+                }
 
-    //             // dd($rateResults);
+                // dd($rateResults);
 
-    //             return view('dealer.rates', compact('rateResults'));
-    //             dd($parcelsIdInArray, $rateResults);
-    //         }
-    //         $error_code = $response_in_array->messages[0]->code;
-    //         // $error_type = $response_in_array->messages[0]->type;
-    //         $error_text = $response_in_array->messages[0]->text;
-    //         return redirect()->back()->with(['shippo' => 'error', 'code' => $error_code, 'text' => $error_text]);
-    //     } catch (\Exception $e) {
-    //         return redirect()->back()->with(['error' => $e->getMessage()]);
-    //     }
-    // }
+                return view('dealer.rates', compact('rateResults'));
+                dd($parcelsIdInArray, $rateResults);
+            }
+            $error_code = $response_in_array->messages[0]->code;
+            // $error_type = $response_in_array->messages[0]->type;
+            $error_text = $response_in_array->messages[0]->text;
+            return redirect()->back()->with(['shippo' => 'error', 'code' => $error_code, 'text' => $error_text]);
+        } catch (\Exception $e) {
+            return redirect()->back()->with(['error' => $e->getMessage()]);
+        }
+    }
 
     public function createShipment($to_address, $parcelsIdInArray, $lastUserId)
     {

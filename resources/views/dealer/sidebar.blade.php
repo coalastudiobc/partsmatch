@@ -64,8 +64,9 @@
                     </div>
                 </div>
             </li>
-            @if (auth()->user()->hasRole('Dealer') || (isset(auth()->user()->permissions[0]) && auth()->user()->permissions[0]->name !== 'role-view'))
-            <li class="analyics-tabs-list">
+            @if (auth()->user()->hasRole('Dealer') ||
+                    (isset(auth()->user()->permissions[0]) && auth()->user()->permissions[0]->name !== 'role-view'))
+                <li class="analyics-tabs-list">
                     <div class="accordion accordion-flush" id="accordionFlushExample">
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="flush-headingOne">
@@ -154,7 +155,7 @@
                                 data-bs-target="#flush-collapseOne1" aria-expanded="false"
                                 aria-controls="flush-collapseOne"> --}}
                             <a href="{{ route('Dealer.order.orderlist') }}"
-                                class="analyics-tabs-btns @if (Route::is('Dealer.order.orderlist')) active @endif ">
+                                class="analyics-tabs-btns @if (Route::is('Dealer.order.*')) active @endif ">
                                 <div class="analyics-tabs-name">
                                     <span>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17"

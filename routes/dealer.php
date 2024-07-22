@@ -60,6 +60,8 @@ Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer'
 
     Route::name('order.')->group(function () {
         Route::get('order/management', [OrderController::class, 'order'])->name('orderlist');
+        Route::get('create/shippment/{orderid}', [OrderController::class, 'pickAddressOfShippment'])->name('create.shippment');
+        Route::get('create/parcels/{order}', [OrderController::class, 'productParcels'])->name('product.parcels');
     });
     // cart
     Route::name('cart.')->group(function () {
@@ -102,6 +104,8 @@ Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer'
         Route::get('product/picking/address', [ShippoController::class, 'view'])->name('view');
         Route::get('shipping/methods/{country}', [CheckoutController::class, 'getShippingMethods'])->name('shipping.methods');
         Route::post('product/from/address', [ShippoController::class, 'from_address'])->name('from');
+        Route::post('product/picking/address', [OrderController::class, 'picking_address'])->name('picking');
+        Route::get('picking/address/delete/{address}', [OrderController::class, 'addressDelete'])->name('delete');
         Route::post('product/shipping/toaddress', [CheckoutController::class, 'to_address'])->name('to');
     });
 });

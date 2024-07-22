@@ -652,6 +652,7 @@ header {
     /* align-items: center; */
     cursor: pointer;
     box-shadow: 1px 1px 9px 3px #ddd;
+    background-color: #fff;
 }
 
 .collection-boxes {
@@ -659,6 +660,8 @@ header {
     gap: 20px;
     flex-wrap: wrap;
     justify-content: center;
+    background-color: #f6f6f6;
+    padding: 10px;
 }
 
 .collection-img {
@@ -1496,8 +1499,9 @@ button.btn-close {
 }
 
 .outer-box {
-    /* min-height: 300px !important; */
-    overflow: auto !important;
+    max-height: 300px !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
 }
 
 

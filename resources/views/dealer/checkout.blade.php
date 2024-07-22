@@ -528,15 +528,8 @@
                 }
             })
 
-            jQuery(document).on('click', '.select_city', function() {
-                var selectitem = jQuery(this).attr('data-name')
-                var selecttext = jQuery(this).attr('data-text')
-                jQuery('#selectedCity').text(selecttext)
-                jQuery(document).find('input[name="city"]').val(selectitem);
-                jQuery('#city-error').text('');
-            })
 
-           
+
         });
     </script>
 @endpush
