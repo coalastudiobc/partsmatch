@@ -230,23 +230,28 @@
                 <div class="categories-boxes-main">
                     <div class="categories-boxes-outer">
                         <div class="categories-boxes">
+                            
+                            <div class="categories-loop-boxes-outer">
+                                <div class="categories-loop-boxes">
+                                    @foreach ($category as $key => $category)
+                                    @if ($loop->iteration > 7)
+                                    @break
+                                    @endif
+                                    <a href="{{ route('products', ['category' => $category->id]) }}">
+                                        <div class="categories-box">
+                                            <img src="{{ asset('assets/images/categorie1.svg') }}" alt="">
+                                            <p>{{ $category->name }}</p>
+                                        </div>
+                                    </a>
+                                    @endforeach
+                                </div>
+                            </div>
                             <a href="{{ route('products') }}">
                                 <div class="categories-box">
                                     <img src="{{ asset('assets/images/categorie1.svg') }}" alt="">
                                     <p>View All</p>
                                 </div>
                             </a>
-                            @foreach ($category as $key => $category)
-                            @if ($loop->iteration > 7)
-                            @break
-                            @endif
-                            <a href="{{ route('products', ['category' => $category->id]) }}">
-                                <div class="categories-box">
-                                    <img src="{{ asset('assets/images/categorie1.svg') }}" alt="">
-                                    <p>{{ $category->name }}</p>
-                                </div>
-                            </a>
-                            @endforeach
                         </div>
                     </div>
                 </div>

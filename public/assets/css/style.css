@@ -535,18 +535,17 @@ header {
 
 .categories-boxes {
     display: flex;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     justify-content: center;
     gap: 18px;
-    align-items: center;
+    align-items: flex-start;
     /* margin: 30px 0px; */
-    min-width: 1530px;
-
+    /* min-width: 1530px; */
 }
-.categories-boxes-outer {
+/* .categories-boxes-outer {
     overflow: auto;
     padding-bottom: 10px;
-}
+} */
 .categories-boxes-outer::-webkit-scrollbar:horizontal {
     height: 4px;
 }
@@ -563,6 +562,7 @@ header {
 
 .categories-box {
     max-width: 174px;
+    min-width: 174px;
     background-color: #fff;
     width: 100%;
     padding: 27px 10px 29px;
@@ -2285,6 +2285,19 @@ span.ymmm-cross {
 }
 .interior-filter-inner.full-data-view {
     max-height: 100% !important;
+}
+.categories-loop-boxes {
+    display: flex;
+    gap: 20px;
+    /* overflow-x: scroll; */
+    flex-wrap: nowrap;
+}
+.categories-loop-boxes-outer {
+    overflow: hidden;
+    /* min-width: 1540px; */
+}
+.categories-loop-boxes-outer::-webkit-scrollbar:horizontal {
+    height: 4px;
 }
 
 
