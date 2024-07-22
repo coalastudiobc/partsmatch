@@ -660,6 +660,8 @@ header {
     gap: 20px;
     flex-wrap: wrap;
     justify-content: center;
+    background-color: #f6f6f6;
+    padding: 10px;
 }
 
 .collection-img {
