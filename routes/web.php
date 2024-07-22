@@ -21,9 +21,9 @@ use App\Http\Controllers\Dealer\OrderPaymentController;
 */
 
 Route::get('/', function () {
-    // if (Auth::check())
-    //     return redirect()->route('redirect-to-dashboard');
-    // else
+    if (Auth::check())
+        return redirect()->route('redirect-to-dashboard');
+    else
     return redirect()->route('welcome.index');
 })->name('welcome');
 

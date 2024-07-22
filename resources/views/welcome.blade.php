@@ -347,7 +347,7 @@
                 </div>
             </div>
 
-            <div class="sp-brands brand-height-fix">
+            <div id="brandContainer" class="sp-brands brand-height-fix">
                 @foreach($brands as $brand)
                 <div class="brands-image brand-container">
                     <img src="{{ $brand->image_url ? $brand->image_url : asset('assets/images/car-logo2.png') }}" alt="" class="">
@@ -459,10 +459,10 @@
         });
 
         $('.see-more-less-brands').on('click', function() {
-            $('#brandContainer').toggleClass('full-data-view');
+            $('#brandContainer').toggleClass('brand-height-fix');
             if($(this).attr('data-action') == "see_more"){
                 $(this).attr('data-action',"see_less");
-                $(this).html('See less');
+                $(this).html(' See less ');
             } else{
                 $(this).attr('data-action',"see_more");
                 $(this).html('See more');

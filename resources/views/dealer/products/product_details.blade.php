@@ -148,7 +148,7 @@
                                 </svg>
                             </button>
                             @else
-                            <a href="{{ route('Dealer.cart.cart.index') }}" class="btn secondary-btn full-btn ">Checkout</a>
+                            <a href="{{ route('Dealer.cart.cart.index') }}" class="btn secondary-btn full-btn ">Go to Cart</a>
                             @endif
                             @endif
                             @endauth
