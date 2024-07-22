@@ -2,75 +2,68 @@
 
 namespace Database\Seeders;
 
-use App\Models\CarMake;
 use CarApiSdk\CarApi;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\CarBrandMake;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
-class carMakeSeeder extends Seeder
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+class CarMakeSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    protected $sdk;
-    
-    public function run(): void
+    public $sdk;
+    public function __construct()
     {
-        dd('here');
-        $this->initializeSdk();
-        $this->authenticateSdk();
-        $this->processData();
-    }
-    protected function initializeSdk()
-    {
-        $this->sdk = CarApi::build([
-            'token' => env('CAR_API_TOKEN'),
-            'secret' => env('CAR_API_SECRET'),
+        $this->sdk = \CarApiSdk\CarApi::build([
+            'token' => "1e9f178a-f016-4aa9-b582-99934fc52ff9",
+            'secret' => "37e149448eeae0e28026dcdbaea8d8c7",
         ]);
-    }
-
-    protected function authenticateSdk()
-    {
-        $filePath = storage_path('app/text.txt');
-        $jwt = file_exists($filePath) ? file_get_contents($filePath) : null;
-
-        if (empty($jwt) || $this->sdk->loadJwt($jwt)->isJwtExpired()) {
+        $filePath = storage::path('text.txt');
+        $jwt = file_get_contents($filePath);
+        if (empty($jwt) || $this->sdk->loadJwt($jwt)->isJwtExpired() !== false) {
             try {
                 $jwt = $this->sdk->authenticate();
                 file_put_contents($filePath, $jwt);
             } catch (\CarApiSdk\CarApiException $e) {
-                Log::channel('daily')->error("SDK Authentication Error: " . $e->getMessage());
-                return;
+                // handle errors here
+                Log::channel('daily')->info("error:" . $e->getMessage());
             }
         }
     }
-    protected function processData()
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
     {
-        $array = [];
+        $data = [];
         $years = $this->sdk->years();
-        foreach ($years as $yearkey => $value) {
-            $models = $this->sdk->makes(['query' => ['year' => $value]]);
-            $modeldata = $models->data;
+        $processedMakes = [];
+        $realData = [];
+        $index = 1;
 
-            foreach ($modeldata as $value) {
-                // $array[['year_id' => $yearkey, 'make_id' => $value->id, 'make_value' => $value->name]];
-                array_push($array, ['year_id' => $yearkey + 1, 'make_id' => $value->id, 'value' => $value->name]);
+        foreach ($years as $year) {
+            $makes = $this->sdk->makes(['query' => ['year' => $year]]);
+
+            foreach ($makes->data as $make) {
+                if (!in_array($make->name, $processedMakes)) {
+                    // $data[$index++] = $make->name;
+                    $rowData = [
+                        'makes' => $make->name,
+                        'image_url' => null,
+                        'image_name' => 'car-logo6',
+                    ];
+
+                    // Add to $realData array
+                    $realData[] = $rowData;
+
+                    // Mark the make as processed
+                    $processedMakes[] = $make->name;
+                    $processedMakes[] = $make->name;
+                }
             }
         }
-        @dd($array);
-        $this->insertDataMake($array);
-    }
-    protected function insertDataMake($array)
-    {
-        DB::beginTransaction();
-        try {
-            CarMake::insert($array);
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollback();
-            Log::channel('daily')->error("Database Insertion Error: " . $e->getMessage());
-        }
+       
+        CarBrandMake::insert($realData);
     }
 }
