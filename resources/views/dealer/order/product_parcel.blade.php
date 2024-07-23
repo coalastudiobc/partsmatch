@@ -12,7 +12,8 @@
                     <h3>Create New Full Fillment</h3>
                     <p>Step 2 of 2</p>
                 </div>
-                <a href="" class="btn primary-btn disabled-shippmentPayment">Payment</a>
+                <a href="{{ route('Dealer.order.shippment.rates') }}"
+                    class="btn primary-btn payment-btn disabled-shippmentPayment">Payment</a>
             </div>
             <div class="table-responsive">
                 <table class="table">
@@ -52,12 +53,21 @@
                                 <td>
                                     <div class="pro-status">
                                         <div class="dropdown" title="Add dimension of package">
-                                            <a href="#" class="btn primary-btn harvinder"
-                                                data-productName={{ $item->product->name }}
+                                            @php
+                                                $flag = IspackageParcel($item->id, $item->product->id) ? 1 : 0;
+                                            @endphp
+                                            <a href="#" class="btn primary-btn harvinder" id="{{ $item->id }}"
+                                                data-productName="{{ $item->product->name }}"
                                                 data-productId="{{ $item->id }}" data-bs-toggle="modal"
-                                                data-bs-target="#Package-modal"><img
-                                                    src="{{ asset('assets/images/add-round-icon.svg') }}" alt="">
-                                                Add Dimension</a>
+                                                data-bs-target="#Package-modal" data-flag="{{ $flag }}">
+                                                @if ($flag)
+                                                    Edit
+                                                @else
+                                                    <img src="{{ asset('assets/images/add-round-icon.svg') }}"
+                                                        alt="">
+                                                    Add Dimension
+                                                @endif
+                                            </a>
                                         </div>
                                     </div>
                                 </td>
@@ -71,8 +81,7 @@
     </div>
 
 
-    <!-- Modal -->
-    <!-- Modal -->
+    <!--package dimensions Modal -->
     <div class="modal fade Package-modal" id="Package-modal" data-bs-backdrop="static" data-bs-keyboard="false"
         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">

@@ -28,7 +28,7 @@ class ShippoController extends Controller
     public function from_address(ShippingAddressRequest $request)
     {
         try {
-            // dd($request->toArray());
+            dd($request->toArray());
             $shippoResponse = $this->address($request);
             if ($shippoResponse->object_state == "VALID") {
                 $shippo_address_id = $shippoResponse->object_id;

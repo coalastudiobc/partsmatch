@@ -13,45 +13,44 @@
                         <h3>Create New Full Fillment</h3>
                         <p>Step 1 of 2</p>
                     </div>
-                    <a href="{{ route('Dealer.order.product.parcels', $orderid->id) }}"
-                        class="btn primary-btn nextbtn">Next:Order
-                        Details</a>
+                    <form id="selectedAddressForm" action="{{ route('Dealer.order.product.parcels', $orderid->id) }}"
+                        method="post">
+                        @csrf
+                        <button type="submit" class="btn primary-btn nextbtn">Next:Order Details</button>
                 </div>
                 <div class="right-btn-box">
                     <a href="#" class="btn primary-btn add-address-btn"><img
                             src="{{ asset('assets/images/add-round-icon.svg') }}" alt=""> Add </a>
                 </div>
-                <form id="selectedAddressForm" action="{{ route('Dealer.address.from') }}" method="post">
-                    @csrf
-                    @isset($previousAddresses)
-                        <div class="row g-3">
-                            @forelse ($previousAddresses as $key=> $address)
-                                <div class="col-md-6">
-                                    <div class="adress-info-inner">
-                                        <div class="address-haeding-edit">
-                                            <h3>Adress {{ $key }}</h3>
-                                            <a href="{{ route(auth()->user()->getRoleNames()->first() . '.address.delete', ['address' => $address->id]) }}"
-                                                class="delete"><i class="fa-regular fa-trash-can "
-                                                    style="color: #E13F3F;"></i></a>
 
-                                        </div>
-                                        <label for="adress">
-                                            <input type="radio" name="selectadress" id="adress"
-                                                @if ($loop->first) checked @endif value="{{ $address->id }}">
-                                            <div class="adress-info-text">
-                                                <h2>{{ $address->first_name }} {{ $address->last_name }}</h2>
-                                                <p>{{ $address->address1 }}, {{ $address->city }}, {{ $address->state }},
-                                                    {{ $address->pin_code }},
-                                                    {{ $address->country }}</p>
-                                                <p>{{ $address->phone_number }}</p>
-                                            </div>
-                                        </label>
+                @isset($previousAddresses)
+                    <div class="row g-3">
+                        @forelse ($previousAddresses as $key=> $address)
+                            <div class="col-md-6">
+                                <div class="adress-info-inner">
+                                    <div class="address-haeding-edit">
+                                        <h3>Adress {{ $key }}</h3>
+                                        <a href="{{ route(auth()->user()->getRoleNames()->first() . '.address.delete', ['address' => $address->id]) }}"
+                                            class="delete"><i class="fa-regular fa-trash-can " style="color: #E13F3F;"></i></a>
+
                                     </div>
+                                    <label for="adress">
+                                        <input type="radio" name="selectadress" id="adress"
+                                            @if ($loop->first) checked @endif value="{{ $address->id }}">
+                                        <div class="adress-info-text">
+                                            <h2>{{ $address->first_name }} {{ $address->last_name }}</h2>
+                                            <p>{{ $address->address1 }}, {{ $address->city }}, {{ $address->state }},
+                                                {{ $address->pin_code }},
+                                                {{ $address->country }}</p>
+                                            <p>{{ $address->phone_number }}</p>
+                                        </div>
+                                    </label>
                                 </div>
-                            @empty
-                            @endforelse
-                        </div>
-                    @endisset
+                            </div>
+                        @empty
+                        @endforelse
+                    </div>
+                @endisset
                 </form>
                 {{--  <div class="col-md-6">
                         <div class="adress-info-inner add-addres-box">

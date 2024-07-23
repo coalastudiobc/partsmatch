@@ -12,6 +12,8 @@ use Illuminate\Http\Request;
 use App\Models\UserAddresses;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ShippingAddressRequest;
+use App\Models\OrderParcels;
+use App\Models\ShippmentCreation;
 
 class OrderController extends Controller
 {
@@ -32,8 +34,9 @@ class OrderController extends Controller
         $countries = Country::whereIn('name', ['Canada', 'United States'])->get();
         return view('dealer.order.pick_address', compact('countries', 'previousAddresses', 'orderid'));
     }
-    public function productParcels(Order $order)
+    public function productParcels(Request $request, Order $order)
     {
+        // dd('here', $request->toArray());
         $orderProducts = OrderItem::where('order_id', $order->id)->get();
         return view('dealer.order.product_parcel', compact('orderProducts'));
     }
@@ -71,8 +74,21 @@ class OrderController extends Controller
     }
     public function productDimension(Request $request, OrderItem $product)
     {
-        // dd('here', $product, $request->toArray());
-        $testing =  $this->createParcel($request);
-        dd($testing);
+        try {
+            $parcel_id =  $this->createParcel($request);
+            OrderParcels::updateOrCreate(
+                ['orderItem_id' => $product->id, 'product_id' => $product->product_id],
+                ['parcel_id' => $parcel_id]
+            );
+            $data = ['status' => true,  'message' => 'Product dimensions data saved successfully.'];
+            return response()->json($data);
+        } catch (\Throwable $th) {
+            $data = ['status' => false,  'message' => $th->getMessage()];
+            return response()->json($data);
+        }
+    }
+    public function createShippment()
+    {
+        return view('dealer.order.payment');
     }
 }

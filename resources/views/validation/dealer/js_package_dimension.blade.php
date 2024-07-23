@@ -4,7 +4,6 @@
             return $('#checkbox3').is(':checked');
         }, 'You must accept the terms.');
 
-        // Initialize form validation
         $("#packageDimension").validate({
             rules: {
                 length: {
@@ -111,24 +110,51 @@
                 //         alert(error.message || 'An error occurred while submitting the form.');
                 //     });
 
-                var test = jQuery('.harvinder').attr('data-productId');
-                let url = APP_URL + '/dealer/parcel/dimension/' + test;
+                let url = APP_URL + '/dealer/parcel/dimension/' + order_item_id;
                 const result = ajaxCall(url, 'post', formData, true);
-                result.then(handleCountryData).catch(handleCountryError)
+                $("#fullPageLoader").removeClass('d-none');
+                result.then(handleParcelSuccessResponse).catch(handleParcelErrorResponse)
 
-                function handleCountryData(response) {
+                function handleParcelSuccessResponse(response) {
                     console.log(response);
+                    $("#fullPageLoader").addClass('d-none');
+                    if (jQuery('.harvinder').hasClass('addingDim')) {
+                        var productOrderItemId = jQuery('.harvinder').attr('data-productId');
+                        jQuery('.addingDim').text('Edit');
+                    }
+                    $('#Package-modal').modal('toggle')
+                    toastr.success(response.message);
+                    $('#Package-modal').on('hidden.bs.modal', function() {
+                        $(this).find('form').trigger('reset');
+                    })
+                    var flag = jQuery('.harvinder').data('flag');
+                    if (flag) {
+                        if (jQuery('.payment-btn').hasClass('disabled-shippmentPayment')) {
+                            jQuery('.payment-btn').removeClass('disabled-shippmentPayment')
+                        }
+                        console.log(flag);
+                    }
                 }
 
-                function handleCountryError(error) {
+                function handleParcelErrorResponse(error) {
                     console.log('error', error)
                 }
             }
         });
+        var order_item_id = 0;
         jQuery('.harvinder').on('click', function(e) {
-            var test = jQuery(this).attr('data-productName');
-            jQuery('.productName').text(test);
-            console.log(test);
+            var productName = jQuery(this).attr('data-productName');
+            jQuery(this).addClass('addingDim');
+            order_item_id = jQuery(this).attr('data-productId');
+            jQuery('.productName').text(productName);
+            console.log(productName);
         });
+        var flag = jQuery('.harvinder').data('flag');
+        if (flag) {
+            if (jQuery('.payment-btn').hasClass('disabled-shippmentPayment')) {
+                jQuery('.payment-btn').removeClass('disabled-shippmentPayment')
+            }
+            console.log(flag);
+        }
     });
 </script>
