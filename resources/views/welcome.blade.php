@@ -398,7 +398,8 @@
             function handleStateData(response) {
                 if (response.success == true) {
                     if(response.product_id){
-                        $('#restrictMultiple').
+                        $('#alreadyAddedOwner').attr('href',response.dealer_url)
+                        $('#deleteAndAdd').attr('href',response.product_url)
                         $('#restrictMultiple').modal('show');
                     }
                     jQuery('.addtocart').empty().append('<span>Added</span>');

@@ -7,10 +7,10 @@
                     <form action="">
                         <div class="row">
                             <div class="col-md-6">
-                                <a  class="btn secondary-btn full-btn">delete</a>
+                                <a id="deleteAndAdd" class="btn secondary-btn full-btn">delete</a>
                             </div>
                             <div class="col-md-6">
-                                <a href="{{route('Dealer.view.public',['dealer' => 7])}}" class="btn secondary-btn full-btn">view profile</a>
+                                <a id="alreadyAddedOwner" class="btn secondary-btn full-btn">view profile</a>
                             </div>
                         </div>
                     </form>
