@@ -562,7 +562,7 @@ header {
 
 .categories-box {
     max-width: 174px;
-    min-width: 174px;
+    /* min-width: 174px; */
     background-color: #fff;
     width: 100%;
     padding: 27px 10px 29px;
@@ -2288,10 +2288,11 @@ span.ymmm-cross {
     max-height: 100% !important;
 }
 .categories-loop-boxes {
-    display: flex;
+    display: grid;
     gap: 20px;
     /* overflow-x: scroll; */
     flex-wrap: nowrap;
+    grid-template-columns: repeat(7, 1fr);
 }
 .categories-loop-boxes-outer {
     overflow: hidden;
@@ -2300,12 +2301,52 @@ span.ymmm-cross {
 .categories-loop-boxes-outer::-webkit-scrollbar:horizontal {
     height: 4px;
 }
-
-
 .brand-height-fix{
     max-height:400px;
     overflow: hidden;
 }
+.categories-loop-boxes {
+    padding: 0 !important;
+}
+.categories-loop-boxes .slick-track {
+    display: flex;
+    gap: 20px;
+}
+.see-more-less-brands {
+    min-width: 100px;
+}
+.form-control.filter-serach {
+    border: 0;
+    border-bottom: 1px solid #eee;
+    padding: 0;
+    /* background-color: aquamarine; */
+    min-height: 38px;
+    padding-left: 30px;
+    border-radius: 0;
+}
+span.filter-serach-icon {
+    position: absolute;
+    top: 6px;
+    left: 5px;
+}
+.form-control.filter-serach:focus{
+    border-color: var(--primary-color);
+}
+.formfield:has(.filter-serach:focus) span i{
+    color: var(--primary-color);
+}
+.interior-filter-box .accordion-body{
+    padding: 1rem 0rem;
+}
+
+
+
+
+
+
+
+
+
 
 
 /* =================== 23/07/24======================= */
