@@ -2433,7 +2433,7 @@ span.filter-serach-icon {
     font-weight: 500;
     line-height: 24px;
 }
-.shipper-rates-list li a.active {
+.shipper-rates-list li a.active, .shipper-rates-list li a:hover {
     border-color: #bae8e8;
     background-color: #7bfbfc14;
 }
@@ -2442,6 +2442,21 @@ span.filter-serach-icon {
 }
 .shipper-rates-list li + li{
     margin-top: 15px;
+}
+.shipment-id-box .shipment-address-header > h3 {
+    font-size: 18px;
+}
+.shipment-id-box .shipment-address-header > p{
+    font-size: 16px;
+}
+.shipment-id-box .shipment-address-header{
+    padding: 10px 0px;
+    border-bottom: 1px solid #eee;
+}
+.shipper-rates-list {
+    /* max-width: 200px; */
+    max-height: 200px;
+    overflow: auto;
 }
 
 
