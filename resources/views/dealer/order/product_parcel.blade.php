@@ -12,7 +12,7 @@
                     <h3>Create New Full Fillment</h3>
                     <p>Step 2 of 2</p>
                 </div>
-                <a href="" class="btn primary-btn disabled-shippmentPayment">Payment</a>
+                <a href="{{route('Dealer.order.shipment.payment')}}" class="btn primary-btn disabled-shippmentPayment">Payment</a>
             </div>
             <div class="table-responsive">
                 <table class="table">
