@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Dealer;
 use toastr;
 use App\Models\Order;
 use App\Models\Country;
+use App\Models\Product;
+use App\Models\OrderItem;
 use App\Traits\ShippoTrait;
+use Illuminate\Http\Request;
 use App\Models\UserAddresses;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ShippingAddressRequest;
-use App\Models\OrderItem;
 
 class OrderController extends Controller
 {
@@ -66,5 +68,11 @@ class OrderController extends Controller
             $data = ['status' => false,  'message' => $e->getMessage()];
             return response()->json($data);
         }
+    }
+    public function productDimension(Request $request, OrderItem $product)
+    {
+        // dd('here', $product, $request->toArray());
+        $testing =  $this->createParcel($request);
+        dd($testing);
     }
 }

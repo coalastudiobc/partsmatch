@@ -180,4 +180,39 @@ trait ShippoTrait
             throw new \Exception('storeAddress error: ' . $e->getMessage());
         }
     }
+    public function createParcel($parcelDetails)
+    {
+        try {
+            $body = [
+                "length" => $parcelDetails->length,
+                "width" => $parcelDetails->width,
+                "height" => $parcelDetails->height,
+                "distance_unit" => $parcelDetails->distance_unit,
+                "weight" => $parcelDetails->weight,
+                "mass_unit" => $parcelDetails->mass_unit,
+            ];
+
+            $guzzleRequest = new GuzzleRequest(
+                'POST',
+                'parcels/', // endpoint path relative to base_uri
+                $this->headerApi(),
+                json_encode($body)
+            );
+            $promise = $this->Client()->sendAsync($guzzleRequest)->then(function ($response) {
+                return $response->getBody()->getContents();
+            });
+            $res = $promise->wait();
+            $response_in_array = json_decode($res);
+            if ($response_in_array->object_state == "VALID") {
+                return  $response_in_array->object_id;
+            }
+            $error_code = $response_in_array->messages[0]->code;
+            // $error_type = $response_in_array->messages[0]->type;
+            $error_text = $response_in_array->messages[0]->text;
+            // return redirect()->back()->with(['shippo' => 'error', 'code' => $error_code, 'text' => $error_text]);
+            throw new \Exception($error_code . ':' . $error_text);
+        } catch (\Exception $e) {
+            throw new \Exception('parcelError: ' . $e->getMessage());
+        }
+    }
 }
