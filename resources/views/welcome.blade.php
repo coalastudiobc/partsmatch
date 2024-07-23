@@ -368,6 +368,9 @@
     </div>
 </section>
 @endsection
+@section('modals')
+@include('modals.restrict_multiple')
+@endsection
 @include('layouts.include.footer')
 @push('scripts')
 <script>
@@ -394,12 +397,13 @@
 
             function handleStateData(response) {
                 if (response.success == true) {
-                    console.log('hererererer')
-                    // location.reload();
+                    if(response.product_id){
+                        $('#restrictMultiple').
+                        $('#restrictMultiple').modal('show');
+                    }
                     jQuery('.addtocart').empty().append('<span>Added</span>');
                     jQuery()
-                    console.log(response.cart_icon);
-                    // jQuery(".cart-icon").html(response.cart_icon);
+                    jQuery(".cart-icon").html(response.cart_icon);
                     return toastr.success(response.message);
                 } else {
                     jQuery('#errormessage').html(response.error);

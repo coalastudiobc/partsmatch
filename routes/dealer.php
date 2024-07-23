@@ -36,6 +36,7 @@ Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer'
     Route::get('state/{country}', [CheckoutController::class, 'state'])->name('state');
     Route::get('cities/{state}', [CheckoutController::class, 'cities'])->name('cities');
     Route::get('product/dealer/profile/view/{product}', [DealerController::class, 'dealerProfile'])->name('view.profile');
+    Route::get('profile/view/{dealer}', [DealerController::class, 'dealerPublicProfile'])->name('view.public');
     // products
     Route::name('products.')->group(function () {
         Route::get('/products/create', [ProductController::class, 'create'])->name('create');

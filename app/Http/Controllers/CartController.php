@@ -27,9 +27,10 @@ class CartController extends Controller
     public function addToCart(Request $request, $product_id)
     {
         try {
+            
+            $cart = Cart::where('user_id', auth()->id())->first();
             $product = Product::where('id', $product_id)->first();
 
-            $cart = Cart::where('user_id', auth()->id())->first();
             if (!$cart) {
                 $cart = [
                     'user_id' => auth()->user()->id,
@@ -40,7 +41,14 @@ class CartController extends Controller
             }
             $message = "Product already in Cart.";
 
+            $dealerCheck = CartProduct::where('cart_id', $cart->id)->first();
+            if($dealerCheck){
+                if($dealerCheck->product_of != $product->user_id){
+                    return response()->json(['success' => true, 'product_id' => $product->id, 'url' => route('Dealer.view.public',['dealer' => $dealerCheck->product_of ])]);
+                }
+            }
             $alreadyProduct =  CartProduct::where('product_id', $product->id)->where('cart_id', $cart->id)->first();
+
             if (!$alreadyProduct) {
                 $cart_product = [
                     'product_id' => $product->id,

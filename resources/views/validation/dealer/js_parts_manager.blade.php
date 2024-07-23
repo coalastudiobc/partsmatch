@@ -1,8 +1,5 @@
 <script>
     jQuery(document).ready(function() {
-        console.log("hwrerere");
-        $("#submit").attr('disabled', false);
-
         const rules = {
             name: {
                 required: true,
@@ -77,6 +74,7 @@
         $("#parts_manager").on("submit", function(e) {
             e.preventDefault();
             if ($('#parts_manager').valid()) {
+                $(document).find('#parts_manager').submit();
                 $("#parts_manager").find('button').attr('disabled', true);
             }
         });
