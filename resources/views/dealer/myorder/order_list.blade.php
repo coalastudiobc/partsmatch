@@ -149,173 +149,63 @@
                     </div>
                     <div class="col-md-6">
                         <div class="checkout-main-card cstm-card">
-                            <div class="shipment-address-box">
-                                <div class="shipment-address-header">
-                                    <h3>Shipment-id</h3>
-                                    <p>25615646511</p>
+                            <div class="shipment-id-box">
+                                <div class="shipment-address-box">
+                                    <div class="shipment-address-header">
+                                        <h3>Shipment-id</h3>
+                                        <p>25615646511</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="checkout-main-card cstm-card">
-                            <h2>Delivery Address</h2>
-                            <div class="delivery-form">
-                            <form id="product-card-details" action="http://127.0.0.1:8000/dealer/product/shipping/toaddress" method="post" enctype="multipart/form-data" novalidate="novalidate">
-                                <input type="hidden" name="_token" value="O8wQz23jTBmI1n2N0KNyGS9lI3lkMYh6KrMwobzh" autocomplete="off">                                    <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="">First Name</label>
-                                            <div class="form-field">
-                                                <input type="text" class="form-control " name="first_name" value="" placeholder="First Name">
-                                                
+                            <div class="order-summary">
+                                <h3>Payment</h3>
+                                <p>All transactions are secure and encrypted.</p>
+                                <form id="paymentform" action="https://partsmatch.shinedezign.pro/order/payment" method="POST">
+                                    <input type="hidden" name="_token" value="NJviTFksKs2EtJwiFdnUN96XbgL1jY9YSTKOmSVr" autocomplete="off">                            <div class="">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="">Card Number</label>
+                                                    <div class="form-field StripeElement StripeElement--empty" id="cardNumberElement"><div class="__PrivateStripeElement" style="margin: 0px !important; padding: 0px !important; border: none !important; display: block !important; background: transparent !important; position: relative !important; opacity: 1 !important;"><iframe name="__privateStripeFrame9243" frameborder="0" allowtransparency="true" scrolling="no" role="presentation" allow="payment *" src="https://js.stripe.com/v3/elements-inner-card-278b3c1324ac8e4875b02219aeb49beb.html#wait=false&amp;mids[guid]=NA&amp;mids[muid]=NA&amp;mids[sid]=NA&amp;showIcon=true&amp;style[base][iconColor]=%23666EE8&amp;style[base][color]=%2331325F&amp;style[base][lineHeight]=40px&amp;style[base][fontWeight]=300&amp;style[base][fontFamily]=Helvetica+Neue&amp;style[base][fontSize]=15px&amp;style[base][::placeholder][color]=%23CFD7E0&amp;style[base][iconStyle]=solid&amp;style[invalid][color]=%23fa755a&amp;style[invalid][fontSize]=20px&amp;placeholder=1234+1234+1234+1234&amp;rtl=false&amp;componentName=cardNumber&amp;keyMode=test&amp;apiKey=pk_test_51OY4tODf0V4fyp7XatEJtPShzSbTKQg5NAJNBYCyQDbMoER6uY8jA5n9lHdZb7zfo0lkwvrVbUKMTDT2SDf3j5za00xv5bH699&amp;referrer=https%3A%2F%2Fpartsmatch.shinedezign.pro%2Fdealer%2Fproduct%2Fshipping%2Ftoaddress&amp;controllerId=__privateStripeController9241" title="Secure card number input frame" style="border: 0px !important; margin: 0px !important; padding: 0px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; user-select: none !important; transform: translate(0px) !important; color-scheme: light only !important; height: 40px;"></iframe><input class="__PrivateStripeElement-input" aria-hidden="true" aria-label=" " autocomplete="false" maxlength="1" style="border: none !important; display: block !important; position: absolute !important; height: 1px !important; top: -1px !important; left: 0px !important; padding: 0px !important; margin: 0px !important; width: 100% !important; opacity: 0 !important; background: transparent !important; pointer-events: none !important; font-size: 16px !important;"></div></div>
+                                                    <div class="is-invalid stripe-error" id="cardNumberError"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="">Card Expiration Date</label>
+                                                    <div class="form-field StripeElement StripeElement--empty" id="cardExpiryElement"><div class="__PrivateStripeElement" style="margin: 0px !important; padding: 0px !important; border: none !important; display: block !important; background: transparent !important; position: relative !important; opacity: 1 !important;"><iframe name="__privateStripeFrame9244" frameborder="0" allowtransparency="true" scrolling="no" role="presentation" allow="payment *" src="https://js.stripe.com/v3/elements-inner-card-278b3c1324ac8e4875b02219aeb49beb.html#wait=false&amp;mids[guid]=NA&amp;mids[muid]=NA&amp;mids[sid]=NA&amp;style[base][iconColor]=%23666EE8&amp;style[base][color]=%2331325F&amp;style[base][lineHeight]=40px&amp;style[base][fontWeight]=300&amp;style[base][fontFamily]=Helvetica+Neue&amp;style[base][fontSize]=15px&amp;style[base][::placeholder][color]=%23CFD7E0&amp;style[base][iconStyle]=solid&amp;style[invalid][color]=%23fa755a&amp;style[invalid][fontSize]=20px&amp;rtl=false&amp;componentName=cardExpiry&amp;keyMode=test&amp;apiKey=pk_test_51OY4tODf0V4fyp7XatEJtPShzSbTKQg5NAJNBYCyQDbMoER6uY8jA5n9lHdZb7zfo0lkwvrVbUKMTDT2SDf3j5za00xv5bH699&amp;referrer=https%3A%2F%2Fpartsmatch.shinedezign.pro%2Fdealer%2Fproduct%2Fshipping%2Ftoaddress&amp;controllerId=__privateStripeController9241" title="Secure expiration date input frame" style="border: 0px !important; margin: 0px !important; padding: 0px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; user-select: none !important; transform: translate(0px) !important; color-scheme: light only !important; height: 40px;"></iframe><input class="__PrivateStripeElement-input" aria-hidden="true" aria-label=" " autocomplete="false" maxlength="1" style="border: none !important; display: block !important; position: absolute !important; height: 1px !important; top: -1px !important; left: 0px !important; padding: 0px !important; margin: 0px !important; width: 100% !important; opacity: 0 !important; background: transparent !important; pointer-events: none !important; font-size: 16px !important;"></div></div>
+                                                    <div class="is-invalid stripe-error" id="cardExpiryError"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="">Card Security Code</label>
+                                                    <div class="form-field StripeElement StripeElement--empty" id="cardCVCElement"><div class="__PrivateStripeElement" style="margin: 0px !important; padding: 0px !important; border: none !important; display: block !important; background: transparent !important; position: relative !important; opacity: 1 !important;"><iframe name="__privateStripeFrame9245" frameborder="0" allowtransparency="true" scrolling="no" role="presentation" allow="payment *" src="https://js.stripe.com/v3/elements-inner-card-278b3c1324ac8e4875b02219aeb49beb.html#wait=false&amp;mids[guid]=NA&amp;mids[muid]=NA&amp;mids[sid]=NA&amp;showIcon=true&amp;style[base][iconColor]=%23666EE8&amp;style[base][color]=%2331325F&amp;style[base][lineHeight]=40px&amp;style[base][fontWeight]=300&amp;style[base][fontFamily]=Helvetica+Neue&amp;style[base][fontSize]=15px&amp;style[base][::placeholder][color]=%23CFD7E0&amp;style[base][iconStyle]=solid&amp;style[invalid][color]=%23fa755a&amp;style[invalid][fontSize]=20px&amp;placeholder=123&amp;rtl=false&amp;componentName=cardCvc&amp;keyMode=test&amp;apiKey=pk_test_51OY4tODf0V4fyp7XatEJtPShzSbTKQg5NAJNBYCyQDbMoER6uY8jA5n9lHdZb7zfo0lkwvrVbUKMTDT2SDf3j5za00xv5bH699&amp;referrer=https%3A%2F%2Fpartsmatch.shinedezign.pro%2Fdealer%2Fproduct%2Fshipping%2Ftoaddress&amp;controllerId=__privateStripeController9241" title="Secure CVC input frame" style="border: 0px !important; margin: 0px !important; padding: 0px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; user-select: none !important; transform: translate(0px) !important; color-scheme: light only !important; height: 40px;"></iframe><input class="__PrivateStripeElement-input" aria-hidden="true" aria-label=" " autocomplete="false" maxlength="1" style="border: none !important; display: block !important; position: absolute !important; height: 1px !important; top: -1px !important; left: 0px !important; padding: 0px !important; margin: 0px !important; width: 100% !important; opacity: 0 !important; background: transparent !important; pointer-events: none !important; font-size: 16px !important;"></div></div>
+                                                    <div class="is-invalid stripe-error" id="cardCVVError"></div>
+                                                    <input type="hidden" name="stripeCustomer_id" value="cus_QSGwUPKOpaiszH">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="">Card Holder Name</label>
+                                                    <div class="form-field">
+                                                        <input type="text" name="cardname" id="cardName" class="form-control" placeholder="John Doe">
+                                                        <label class="cardName-error" for="card-name" id="cardname"></label>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="">Last Name</label>
-                                            <div class="form-field">
-                                                <input type="text" class="form-control " name="last_name" value="" placeholder="Last Name">
-                                                                                                </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="">Street No. &amp; Name</label>
-                                            <div class="form-field">
-                                                <input type="text" class="form-control " name="street1" value="" placeholder="Address">
-                                                                                                </div>
-                                        </div>
-                                        
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="">Address 2</label>
-                                            <div class="form-field">
-                                                <input type="text" class="form-control " name="street2" value="" placeholder="Address">
-                                                                                                </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="">Country</label>
-                                            <div class="custm-dropdown">
-                                                <div class="dropdown">
-                                                    <div class="dropdown-toggle " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                                        <div id="selectedItem">
-                                                            Select
-    
-                                                        </div>
-                                                        <span class="custm-drop-icon">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="23" viewBox="0 0 24 23" fill="none">
-                                                                <path d="M19 9.00006L14 14.0001L9 9.00006" stroke="#151515" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                            </svg>
-                                                        </span>
-                                                    </div>
-                                                    <ul class="dropdown-menu outer-box" id="country" aria-labelledby="dropdownMenuButton1">
-                                                                                                                        <li><a class="dropdown-item custom_dropdown_item" data-value="38" data-iso_code="CA" data-text="canada" href="javascript:void(0)">canada</a>
-                                                            </li>
-                                                                                                                        <li><a class="dropdown-item custom_dropdown_item" data-value="231" data-iso_code="US" data-text="united states" href="javascript:void(0)">united states</a>
-                                                            </li>
-                                                        
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <input type="hidden" name="country" value="US" class="">
-                                                                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="">Phone Number</label>
-                                            <input type="number" name="phone_number" value="" class="form-control ">
-                                                                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="">Address Type</label>
-                                            <div class="add-type-main">
-                                                <label for="s-option">
-                                                    <p>Home</p>
-                                                    <input type="radio" name="addressType" id="s-option" style="display: none" value="Home">
-                                                </label>
-                                                <label for="v-option">
-                                                    <p>Office</p>
-                                                    <input type="radio" name="addressType" id="v-option" value="Office" style="display: none">
-                                                </label>
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="">State</label>
-                                            <div class="form-field">
-                                                <div class="custm-dropdown">
-                                                    <div class="dropdown">
-                                                        <div class="dropdown-toggle " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                                            <div id="selectedState">
-                                                                select
-    
-                                                            </div>
-                                                            <span class="custm-drop-icon">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="23" viewBox="0 0 24 23" fill="none">
-                                                                    <path d="M19 9.00006L14 14.0001L9 9.00006" stroke="#151515" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                                </svg>
-                                                            </span>
-                                                        </div>
-                                                        <ul class="dropdown-menu outer-box state" aria-labelledby="dropdownMenuButton1">
-                                                            
-    
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <input type="hidden" name="state" value="" class="">
-                                                                                                </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="">City</label>
-                                            <div class="form-field">
-                                                <div class="custm-dropdown">
-                                                    <div class="dropdown">
-                                                        <div class="dropdown-toggle " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                                            <div id="selectedCity">
-                                                                Select
-    
-                                                            </div>
-                                                            <span class="custm-drop-icon">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="23" viewBox="0 0 24 23" fill="none">
-                                                                    <path d="M19 9.00006L14 14.0001L9 9.00006" stroke="#151515" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                                </svg>
-                                                            </span>
-                                                        </div>
-                                                        <ul class="dropdown-menu outer-box city" aria-labelledby="dropdownMenuButton1">
-                                                            
-    
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <input type="hidden" name="city" value="" class="">
-                                                                                                </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="">Pin code</label>
-                                            <div class="form-field">
-                                                <input type="text" name="pin_code" class="form-control " value="" placeholder="PIN code">
-                                                                                                </div>
-                                        </div>
-                                    </div>
-                                    
-                                    
-                                </div>
-    
-                            </form></div>
-    
+                                    <input type="hidden" value="2390" id="total_payment">
+                                    <button type="submit" id="payNow" class="btn secondary-btn full-btn">Pay Now
+                                        $2,390.00</button>
+                                </form>
                             </div>
+                        </div>
                     </div>
                     <div class="col-md-6">
                         <div class="checkout-main-card cstm-card shippment-rates-card">

@@ -66,6 +66,14 @@
                                     <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                         <div class="accordion-body p-0">
                                             <div class="category-list">
+                                                <div class="form-group">
+                                                    <div class="formfield">
+                                                        <input type="text" class="form-control filter-serach" placeholder="Search">
+                                                        <span class="filter-serach-icon">
+                                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
                                                 <ul class="ps-3 mb-2 ">
                                                     @foreach ($categories as $category )
                                                    <li>
@@ -108,6 +116,14 @@
                                       <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample1">
                                         <div class="accordion-body">
                                             <div id="brandContainer" class="interior-filter-inner">
+                                                <div class="form-group">
+                                                    <div class="formfield">
+                                                        <input type="text" class="form-control filter-serach" placeholder="Search">
+                                                        <span class="filter-serach-icon">
+                                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
                                                 @foreach ($brands as $key => $brand )
                                                     <div class="custm-check make ">
                                                         <input type="checkbox" id="{{'brand'.$key}}" name="brand[]" @if(request()->has('brand') && count(request()->brand) && in_array($brand->makes , request()->brand)) class="selected-entry" checked @endif  value="{{$brand->makes}}">
@@ -134,6 +150,14 @@
                                       <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample2">
                                         <div class="accordion-body">
                                             <div id="yearContainer" class="interior-filter-inner">
+                                                <div class="form-group">
+                                                    <div class="formfield">
+                                                        <input type="text" class="form-control filter-serach" placeholder="Search">
+                                                        <span class="filter-serach-icon">
+                                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
                                                 @foreach ($years as $key => $year )
                                                     <div class="custm-check year">
                                                         <input type="checkbox" id="{{'year'.$key}}" name="year[]" @if(request()->has('year') && count(request()->year) && in_array($year , request()->year)) class="selected-entry" checked @endif value="{{$year}}">
