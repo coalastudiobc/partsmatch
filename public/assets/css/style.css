@@ -608,7 +608,8 @@ header {
     align-items: center;
     margin: 10px 0px 20px;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
+    justify-items: center;
 }
 .collect-tab-btns > .brands-btn a{
     background-color: var(--primary-color);
