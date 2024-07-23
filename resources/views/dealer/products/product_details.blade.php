@@ -17,9 +17,9 @@
                         </a>
                         <div class="cstm-bredcrum ms-4">
                             <a href="{{ route('welcome.index') }}" class="bredcrum-list">Home</a>
-                            <a href="{{ route(auth()->check() && auth()->user()->hasRole('Administrator') ? 'admin.products.interior' : (auth()->check() ? auth()->user()->getRoleNames()->first() . '.products.interior' : 'Dealer.products.interior'), ['category' => $product->category->parent->id]) }}"
+                            <a href="{{ route('products', ['category' => $product->category->parent->id]) }}"
                                 class="bredcrum-list">{{ $product->category->parent->name }}</a>
-                            <a href="{{ route(auth()->check() && auth()->user()->hasRole('Administrator') ? 'admin.products.interior' : (auth()->check() ? auth()->user()->getRoleNames()->first() . '.products.interior' : 'Dealer.products.interior'), ['category' => $product->category->parent->id]) }}"
+                            <a href="{{ route('products', ['category' => $product->subcategory_id]) }}"
                                 class="bredcrum-list">{{ $product->category->name ?? '' }}</a>
                             <a href="#" class="bredcrum-list active">{{ $product->name }}</a>
                         </div>
