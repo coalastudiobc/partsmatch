@@ -2288,7 +2288,9 @@ span.ymmm-cross {
     max-height: 100% !important;
 }
 
-
+.disabled-shippmentPayment {
+    opacity: 0.5;
+}
 
 
 
