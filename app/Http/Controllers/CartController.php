@@ -90,7 +90,7 @@ class CartController extends Controller
             $cart_icon = view('components.cart-icon', compact('user'))->render();
             return response()->json(['success' => true, 'cart_icon' => $cart_icon, 'message' => $message]);
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', $e->getMessage());
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
         }
     }
 
