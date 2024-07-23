@@ -38,17 +38,23 @@ class CartController extends Controller
                 ];
                 $cart = Cart::create($cart);
             }
-            $cart_product = [
-                'product_id' => $product->id,
-                'cart_id' => $cart->id,
-                'quantity' => 1,
-                'product_price' => $product->price,
-            ];
-            CartProduct::create($cart_product);
+            $message = "Product already in Cart.";
 
+            $alreadyProduct =  CartProduct::where('product_id', $product->id)->where('cart_id', $cart->id)->first();
+            if (!$alreadyProduct) {
+                $cart_product = [
+                    'product_id' => $product->id,
+                    'cart_id' => $cart->id,
+                    'quantity' => 1,
+                    'product_price' => $product->price,
+                ];
+
+                CartProduct::create($cart_product);
+                $message = "Cart added successfully";
+            }
             $user =  User::with('cart', 'cart.cartProducts')->where('id', auth()->user()->id)->first();
             $cart_icon = view('components.cart-icon', compact('user'))->render();
-            return response()->json(['success' => true, 'cart_icon' => $cart_icon, 'message' => "Cart added successfully"]);
+            return response()->json(['success' => true, 'cart_icon' => $cart_icon, 'message' => $message]);
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }

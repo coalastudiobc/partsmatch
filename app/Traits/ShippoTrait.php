@@ -50,6 +50,7 @@ trait ShippoTrait
             });
             $res = $promise->wait();
             $response_in_array = json_decode($res);
+
             return $response_in_array;
         } catch (\Exception $e) {
             throw new \Exception('Address error: ' . $e->getMessage());
@@ -155,17 +156,16 @@ trait ShippoTrait
     public function storeAddress($request, $addresstype, $shippo_address_id)
     {
         try {
-            $checkExistenceOfuserData = UserAddresses::where('user_id', auth()->user()->id)->where('type', $addresstype)->get();
-            if ($checkExistenceOfuserData->count()) {
-                UserAddresses::where('user_id', auth()->user()->id)->where('type', $addresstype)->delete();
-            }
-
+            // $checkExistenceOfuserData = UserAddresses::where('user_id', auth()->user()->id)->where('type', $addresstype)->get();
+            // if ($checkExistenceOfuserData->count()) {
+            //     UserAddresses::where('user_id', auth()->user()->id)->where('type', $addresstype)->delete();
+            // }
             UserAddresses::create([
                 'shippo_address_id' => $shippo_address_id,
                 'user_id' => auth()->user()->id,
                 'country' => $request->country,
                 'phone_number' =>   $request->phone_number,
-                'address_type' =>  $request->addressType,
+                'address_type' =>  'Office',
                 'first_name' =>  $request->first_name,
                 'last_name' => $request->last_name,
                 'type' => $addresstype,

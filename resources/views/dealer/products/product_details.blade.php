@@ -1,86 +1,96 @@
 @extends('layouts.front')
 @section('title', 'Product Details')
 @section('content')
-<section class="single-product-sec py-3">
-    <div class="container">
-        <div class="single-product-wrapper">
+    <section class="single-product-sec py-3">
+        <div class="container">
+            <div class="single-product-wrapper">
 
-            <div class="songle-product-main">
-                <div class="back-page-btn">
-                    <div class="back-round-icon">
+                <div class="songle-product-main">
+                    <div class="back-page-btn">
+                        <div class="back-round-icon">
+                            <a href="{{ route('welcome.index') }}">
+                                <i class="fa-solid fa-angle-left"></i>
+                            </a>
+                        </div>
                         <a href="{{ route('welcome.index') }}">
-                            <i class="fa-solid fa-angle-left"></i>
+                            <p></p>
                         </a>
+                        <div class="cstm-bredcrum ms-4">
+                            <a href="{{ route('welcome.index') }}" class="bredcrum-list">Home</a>
+                            <a href="{{ route(auth()->check() && auth()->user()->hasRole('Administrator') ? 'admin.products.interior' : (auth()->check() ? auth()->user()->getRoleNames()->first() . '.products.interior' : 'Dealer.products.interior'), ['category' => $product->category->parent->id]) }}"
+                                class="bredcrum-list">{{ $product->category->parent->name }}</a>
+                            <a href="{{ route(auth()->check() && auth()->user()->hasRole('Administrator') ? 'admin.products.interior' : (auth()->check() ? auth()->user()->getRoleNames()->first() . '.products.interior' : 'Dealer.products.interior'), ['category' => $product->category->parent->id]) }}"
+                                class="bredcrum-list">{{ $product->category->name ?? '' }}</a>
+                            <a href="#" class="bredcrum-list active">{{ $product->name }}</a>
+                        </div>
                     </div>
-                    <a href="{{ route('welcome.index') }}">
-                        <p></p>
-                    </a>
-                    <div class="cstm-bredcrum ms-4">
-                        <a href="{{ route('welcome.index') }}" class="bredcrum-list">Home</a>
-                        <a href="{{ route(auth()->check() && auth()->user()->hasRole('Administrator') ? 'admin.products.interior' : (auth()->check() ? auth()->user()->getRoleNames()->first() . '.products.interior' : 'Dealer.products.interior'), ['category' => $product->category->parent->id]) }}" class="bredcrum-list">{{ $product->category->parent->name }}</a>
-                        <a href="{{ route(auth()->check() && auth()->user()->hasRole('Administrator') ? 'admin.products.interior' : (auth()->check() ? auth()->user()->getRoleNames()->first() . '.products.interior' : 'Dealer.products.interior'), ['category' => $product->category->parent->id]) }}" class="bredcrum-list">{{ $product->category->name ?? '' }}</a>
-                        <a href="#" class="bredcrum-list active">{{ $product->name }}</a>
-                    </div>
-                </div>
-                <div class="row ">
-                    <div class="col-xl-5 col-lg-12 col-md-12">
-                        <div class="sticky-box">
+                    <div class="row ">
+                        <div class="col-xl-5 col-lg-12 col-md-12">
+                            <div class="sticky-box">
 
-                            <div class="single-pro-slide">
-                                <div class="slick-product">
-                                    <!-- Inside the containing div, add one div for each slide -->
+                                <div class="single-pro-slide">
+                                    <div class="slick-product">
+                                        <!-- Inside the containing div, add one div for each slide -->
 
-                                    @foreach ($productImages as $image)
-                                    <div>
-                                        <div class="parts-image-box">
-                                            <img src="{{ Storage::url($image->file_url) }}" alt="">
-                                        </div>
+                                        @foreach ($productImages as $image)
+                                            <div>
+                                                <div class="parts-image-box">
+                                                    <img src="{{ Storage::url($image->file_url) }}" alt="">
+                                                </div>
+                                            </div>
+                                        @endforeach
+
                                     </div>
-                                    @endforeach
-
-                                </div>
-                                {{-- <div class="next-btn-parts">
+                                    {{-- <div class="next-btn-parts">
                                     <i class="fa-solid fa-angle-right"></i>
                                 </div>
                                 <div class="prev-btn-parts">
                                     <i class="fa-solid fa-angle-left"></i>
                                 </div> --}}
-                            </div>
+                                </div>
 
-                            <div class="multi-img-slick-wrapper">
-                                <div class="pro-multi-img multi-img-slick">
-                                    @foreach ($productImages as $image)
-                                    <div class="parts-slider-box">
-                                        <div class="multi-img-box">
-                                            <img src="{{ Storage::url($image->file_url) }}" alt="img">
-                                        </div>
+                                <div class="multi-img-slick-wrapper">
+                                    <div class="pro-multi-img multi-img-slick">
+                                        @foreach ($productImages as $image)
+                                            <div class="parts-slider-box">
+                                                <div class="multi-img-box">
+                                                    <img src="{{ Storage::url($image->file_url) }}" alt="img">
+                                                </div>
+                                            </div>
+                                        @endforeach
                                     </div>
-                                    @endforeach
-                                </div>
-                                <div class="prev-btn-multi">
-                                    <i class="fa-solid fa-angle-left"></i>
-                                </div>
-                                <div class="next-btn-multi">
-                                    <i class="fa-solid fa-angle-right"></i>
+                                    <div class="prev-btn-multi">
+                                        <i class="fa-solid fa-angle-left"></i>
+                                    </div>
+                                    <div class="next-btn-multi">
+                                        <i class="fa-solid fa-angle-right"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-12 col-md-12">
-                        <div class="sticky-box">
-                            <div class="single-img-info ">
-                                <div class="product-infography">
-                                    {{-- <h2>R1 Concepts® – eLINE Series Plain Brake Rotors</h2> --}}
-                                    <h2>{{ $product->name }}® – Model-{{ $product->brand ?? 'Ford' }}
-                                        series-{{ $product->model ?? 'endeavor' }}
-                                        Year-{{ $product->year ?? '2016' }}
-                                    </h2>
-                                    <span>{{ $product->category->name }}</span><br>
-                                    <span>See more products by: </span> <a href="{{ route(
-    auth()->check() && auth()->user()->hasRole('Administrator') ? 'admin.view.profile' : (auth()->check() ? auth()->user()->getRoleNames()->first() . '.view.profile' : 'Dealer.view.profile'), ['product' => $product->id]) }}">
-                                        <u style="color: #0d6efd">{{ $userdetails->dealership_name ?? 'Dealership Name' }}</u></a>
-                                    <h2>${{ $product->price }}</h2>
-                                    {{-- @auth
+                        <div class="col-xl-4 col-lg-12 col-md-12">
+                            <div class="sticky-box">
+                                <div class="single-img-info ">
+                                    <div class="product-infography">
+                                        {{-- <h2>R1 Concepts® – eLINE Series Plain Brake Rotors</h2> --}}
+                                        <h2>{{ $product->name }}® – Model-{{ $product->brand ?? 'Ford' }}
+                                            series-{{ $product->model ?? 'endeavor' }}
+                                            Year-{{ $product->year ?? '2016' }}
+                                        </h2>
+                                        <span>{{ $product->category->name }}</span><br>
+                                        <span>See more products by: </span> <a
+                                            href="{{ route(
+                                                auth()->check() && auth()->user()->hasRole('Administrator')
+                                                    ? 'admin.view.profile'
+                                                    : (auth()->check()
+                                                        ? auth()->user()->getRoleNames()->first() . '.view.profile'
+                                                        : 'Dealer.view.profile'),
+                                                ['product' => $product->id],
+                                            ) }}">
+                                            <u
+                                                style="color: #0d6efd">{{ $userdetails->dealership_name ?? 'Dealership Name' }}</u></a>
+                                        <h2>${{ $product->price }}</h2>
+                                        {{-- @auth
                                             @if (isset($cart->cartProducts))
                                                 <div class="product-quantity-box">
                                                     <p><b>Quantity</b></p>
@@ -115,7 +125,7 @@
                                 </div>
                             </div>
                             <p>{{ $product->description }}</p> --}}
-                            {{-- <div class="product-quantity-box">
+                                        {{-- <div class="product-quantity-box">
                                         <p>Quantity</p>
                                         <div class="quantity-btn">
                                             <a href="#">-</a>
@@ -148,7 +158,7 @@
                                 </svg>
                             </button>
                             @else
-                            <a href="{{ route('Dealer.cart.cart.index') }}" class="btn secondary-btn full-btn ">Checkout</a>
+                            <a href="{{ route('Dealer.cart.cart.index') }}" class="btn secondary-btn full-btn ">Go to Cart</a>
                             @endif
                             @endif
                             @endauth
@@ -189,22 +199,27 @@
                                             </div>
                                         </div>
 
-                                    </div>
-                                    <div class="accordion" id="accordionExample">
-                                        <div class="accordion-item">
-                                            <h2 class="accordion-header">
-                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#additional-information1" aria-expanded="false" aria-controls="collapseTwosumit">
-                                                    Additional Information
-                                                </button>
-                                            </h2>
-                                            <div id="additional-information1" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                                                <div class="accordion-body">
-                                                    <p>{{ $product->additional_details }} </p>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {{-- <div class="accordion" id="accordionExample">
+                                                <div class="accordion" id="accordionExample">
+                                                    <div class="accordion-item">
+                                                        <h2 class="accordion-header">
+                                                            <button class="accordion-button collapsed" type="button"
+                                                                data-bs-toggle="collapse"
+                                                                data-bs-target="#additional-information1"
+                                                                aria-expanded="false" aria-controls="collapseTwosumit">
+                                                                Additional Information
+                                                            </button>
+                                                        </h2>
+                                                        <div id="additional-information1"
+                                                            class="accordion-collapse collapse"
+                                                            data-bs-parent="#accordionExample">
+                                                            <div class="accordion-body">
+                                                                <p>{{ $product->additional_details }} </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {{-- <div class="accordion" id="accordionExample">
                                                     <div class="accordion-item">
                                                         <h2 class="accordion-header">
                                                             <button class="accordion-button collapsed" type="button"
@@ -238,17 +253,17 @@
                     </div>
 
                 </div> --}}
-            </div>
-            {{-- <div class="shipping-charge">
+                                            </div>
+                                            {{-- <div class="shipping-charge">
                                                 <h3>Shipping Charges</h3>
                                                 <h5>${{ $shippingCharge->value ?? 'shippingCharge->value' }}</h5>
         </div> --}}
-        <div class="product-total">
-            <h3>Total</h3>
-            <h5>${{ $product->price ? $product->price : 'Total product price' }}</h5>
-        </div>
-    </div>
-    {{-- @if (auth()->user())
+                                            <div class="product-total">
+                                                <h3>Total</h3>
+                                                <h5>${{ $product->price ? $product->price : 'Total product price' }}</h5>
+                                            </div>
+                                        </div>
+                                        {{-- @if (auth()->user())
                                             @if ($product->user_id !== auth()->user()->id)
                                                 @if (!in_array($product->id, authCartProducts()))
                                                     <button product-id="{{ $product->id }}"
@@ -270,7 +285,7 @@
     @endif
     @endif
     @endif --}}
-    {{-- <div class="pro-dealer-box">
+                                        {{-- <div class="pro-dealer-box">
                                         <h4>Dealer</h4>
                                         <div class="pro-dealer-info">
                                             <div class="pro-dealer-img-box">
@@ -289,9 +304,9 @@
     </div>
     </div> --}}
 
-    </div>
-    </div>
-    </div>
+                                    </div>
+                                </div>
+                            </div>
 
     </div>
     </div>
@@ -319,16 +334,17 @@
     )
 }}">
 
-                        <div class="collection-box cstm-card ">
-                            <div class="collection-img">
-                                <img src="{{ Storage::url($product->productImage[0]->file_url) }}" alt="">
-                            </div>
-                            <p>R1 Concepts® – eLINE Series Plain Brake Rotors</p>
-                            <h4>${{ $product->price }}</h4>
-                        </div>
-                    </a>
-                    @endforeach
-                    {{-- <div class="collection-box cstm-card">
+                                <div class="collection-box cstm-card ">
+                                    <div class="collection-img">
+                                        <img src="{{ Storage::url($product->productImage[0]->file_url) }}"
+                                            alt="">
+                                    </div>
+                                    <p>R1 Concepts® – eLINE Series Plain Brake Rotors</p>
+                                    <h4>${{ $product->price }}</h4>
+                                </div>
+                            </a>
+                        @endforeach
+                        {{-- <div class="collection-box cstm-card">
                             <div class="collection-img">
                                 <img src="{{ asset('assets/images/collect1.png') }}" alt="">
                 </div>
@@ -356,67 +372,74 @@
                 <p>R1 Concepts® – eLINE Series Plain Brake Rotors</p>
                 <h4>$180.00</h4>
             </div> --}}
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    </div>
-    </div>
-</section>
+    </section>
 @endsection
 @push('scripts')
-<script>
-    $('.slick-product').slick({
-        infinite: true,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: false,
-        asNavFor: '.multi-img-slick',
-        dots: false,
-        prevArrow: $('.prev-btn-parts'),
-        nextArrow: $('.next-btn-parts'),
-    });
-    $('.multi-img-slick').slick({
-        infinite: true,
-        slidesToShow: 4,
-        slidesToScroll: 1,
-        arrows: true,
-        dots: false,
-        asNavFor: '.slick-product',
-        prevArrow: $('.prev-btn-multi'),
-        nextArrow: $('.next-btn-multi'),
-        focusOnSelect: true,
-    });
-    $('a[data-slide]').click(function(e) {
-        e.preventDefault();
-        var slideno = $(this).data('slide');
-        $('.multi-img-slick').slick('slickGoTo', slideno - 1);
-    });
-</script>
-<script>
-    $(document).ready(function() {
-        $('.addtocart').on('click', function() {
-            var product_id = $(this).attr('product-id')
-            url = APP_URL + '/dealer/add/to/cart/' + product_id
-            var quantity = jQuery('.quantityvalue').val();
-            var formData = new FormData()
-            formData.append('quantity', quantity)
-            var response = ajaxCall(url, 'post', null, false);
-            response.then(handleStateData).catch(handleStateError)
-
-            function handleStateData(response) {
-                if (response.success == true) {
-                    console.log('hererererer')
-                    window.location.replace(APP_URL + '/' + 'dealer/cart/index')
-                    // return toastr.success(response.msg);
-                } else {
-                    jQuery('#errormessage').html(response.error);
-                }
-            }
-
-            function handleStateError(error) {
-                console.log('error', error)
-
-            }
+    <script>
+        $('.slick-product').slick({
+            infinite: true,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false,
+            asNavFor: '.multi-img-slick',
+            dots: false,
+            prevArrow: $('.prev-btn-parts'),
+            nextArrow: $('.next-btn-parts'),
         });
-    });
-</script>
+        $('.multi-img-slick').slick({
+            infinite: true,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            arrows: true,
+            dots: false,
+            asNavFor: '.slick-product',
+            prevArrow: $('.prev-btn-multi'),
+            nextArrow: $('.next-btn-multi'),
+            focusOnSelect: true,
+        });
+        $('a[data-slide]').click(function(e) {
+            e.preventDefault();
+            var slideno = $(this).data('slide');
+            $('.multi-img-slick').slick('slickGoTo', slideno - 1);
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('.addtocart').on('click', function(e) {
+                var product_id = $(this).attr('product-id')
+                url = APP_URL + '/dealer/add/to/cart/' + product_id
+                var quantity = jQuery('.quantityvalue').val();
+                var formData = new FormData()
+                formData.append('quantity', quantity)
+                var response = ajaxCall(url, 'post', null, false);
+                response.then(handleStateData).catch(handleStateError)
+
+                function handleStateData(response) {
+                    if (response.success == true) {
+                        console.log('hererererer');
+                        jQuery('#fullPageLoader').removeClass('d-none');
+                        window.location.replace(APP_URL + '/' + 'dealer/cart/index')
+                        // return toastr.success(response.msg);
+                    } else {
+                        jQuery('#errormessage').html(response.error);
+                    }
+                }
+
+                function handleStateError(error) {
+                    console.log('error', error)
+
+                }
+            });
+            jQuery('.checkout').on('click', function(e) {
+                jQuery('#fullPageLoader').removeClass('d-none');
+                setTimeout(() => {
+                    jQuery('#fullPageLoader').addClass('d-none');
+                }, 3000);
+            })
+        });
+    </script>
 @endpush
