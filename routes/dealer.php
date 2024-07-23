@@ -63,6 +63,8 @@ Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer'
         Route::get('order/management', [OrderController::class, 'order'])->name('orderlist');
         Route::get('create/shippment/{orderid}', [OrderController::class, 'pickAddressOfShippment'])->name('create.shippment');
         Route::get('create/parcels/{order}', [OrderController::class, 'productParcels'])->name('product.parcels');
+        Route::post('parcel/dimension/{product}', [OrderController::class, 'productDimension'])->name('product.parcels.dimensions');
+        Route::get('sumit/testing', [OrderController::class, 'hlo'])->name('shipment.payment');
     });
     // cart
     Route::name('cart.')->group(function () {
@@ -75,7 +77,6 @@ Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer'
         Route::get('checkout/create', [CheckoutController::class, 'create'])->name('create');
         Route::post('checkout/store', [CheckoutController::class, 'store'])->name('store');
         Route::post('checkout/shiping/rates', [CheckoutController::class, 'getPaymentPage'])->name('rates');
-        // Route::get('/sachin/testing', [CheckoutController::class, 'testing']);
     });
 
     // subscription

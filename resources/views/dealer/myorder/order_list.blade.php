@@ -127,6 +127,305 @@
                 </table>
             </div>
         </div>
+        <div class="shipper-page-main-outer">
+            <div class="shipper-page-main">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="checkout-main-card cstm-card">
+                            <div class="shipment-address-box">
+                                <div class="shipment-address-header">
+                                    <h3>Recipient</h3>
+                                    <a href="#">Edit Resipient</a>
+                                </div>
+                                <h4>Walters Cooley LLC</h4>
+                                <p>9201 Circuit of the Americas Blvd, Del Valle, TX  78617, United States</p>
+                                <div class="shipment-address-mail-phone">
+                                    <a href="#">cyhujequ@mailinator.com</a>
+                                    <a href="#">0015877742066</a>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="checkout-main-card cstm-card">
+                            <div class="shipment-address-box">
+                                <div class="shipment-address-header">
+                                    <h3>Shipment-id</h3>
+                                    <p>25615646511</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="checkout-main-card cstm-card">
+                            <h2>Delivery Address</h2>
+                            <div class="delivery-form">
+                            <form id="product-card-details" action="http://127.0.0.1:8000/dealer/product/shipping/toaddress" method="post" enctype="multipart/form-data" novalidate="novalidate">
+                                <input type="hidden" name="_token" value="O8wQz23jTBmI1n2N0KNyGS9lI3lkMYh6KrMwobzh" autocomplete="off">                                    <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">First Name</label>
+                                            <div class="form-field">
+                                                <input type="text" class="form-control " name="first_name" value="" placeholder="First Name">
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Last Name</label>
+                                            <div class="form-field">
+                                                <input type="text" class="form-control " name="last_name" value="" placeholder="Last Name">
+                                                                                                </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="">Street No. &amp; Name</label>
+                                            <div class="form-field">
+                                                <input type="text" class="form-control " name="street1" value="" placeholder="Address">
+                                                                                                </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="">Address 2</label>
+                                            <div class="form-field">
+                                                <input type="text" class="form-control " name="street2" value="" placeholder="Address">
+                                                                                                </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="">Country</label>
+                                            <div class="custm-dropdown">
+                                                <div class="dropdown">
+                                                    <div class="dropdown-toggle " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <div id="selectedItem">
+                                                            Select
+    
+                                                        </div>
+                                                        <span class="custm-drop-icon">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="23" viewBox="0 0 24 23" fill="none">
+                                                                <path d="M19 9.00006L14 14.0001L9 9.00006" stroke="#151515" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                            </svg>
+                                                        </span>
+                                                    </div>
+                                                    <ul class="dropdown-menu outer-box" id="country" aria-labelledby="dropdownMenuButton1">
+                                                                                                                        <li><a class="dropdown-item custom_dropdown_item" data-value="38" data-iso_code="CA" data-text="canada" href="javascript:void(0)">canada</a>
+                                                            </li>
+                                                                                                                        <li><a class="dropdown-item custom_dropdown_item" data-value="231" data-iso_code="US" data-text="united states" href="javascript:void(0)">united states</a>
+                                                            </li>
+                                                        
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="country" value="US" class="">
+                                                                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="">Phone Number</label>
+                                            <input type="number" name="phone_number" value="" class="form-control ">
+                                                                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="">Address Type</label>
+                                            <div class="add-type-main">
+                                                <label for="s-option">
+                                                    <p>Home</p>
+                                                    <input type="radio" name="addressType" id="s-option" style="display: none" value="Home">
+                                                </label>
+                                                <label for="v-option">
+                                                    <p>Office</p>
+                                                    <input type="radio" name="addressType" id="v-option" value="Office" style="display: none">
+                                                </label>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="">State</label>
+                                            <div class="form-field">
+                                                <div class="custm-dropdown">
+                                                    <div class="dropdown">
+                                                        <div class="dropdown-toggle " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                            <div id="selectedState">
+                                                                select
+    
+                                                            </div>
+                                                            <span class="custm-drop-icon">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="23" viewBox="0 0 24 23" fill="none">
+                                                                    <path d="M19 9.00006L14 14.0001L9 9.00006" stroke="#151515" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                                </svg>
+                                                            </span>
+                                                        </div>
+                                                        <ul class="dropdown-menu outer-box state" aria-labelledby="dropdownMenuButton1">
+                                                            
+    
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" name="state" value="" class="">
+                                                                                                </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="">City</label>
+                                            <div class="form-field">
+                                                <div class="custm-dropdown">
+                                                    <div class="dropdown">
+                                                        <div class="dropdown-toggle " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                            <div id="selectedCity">
+                                                                Select
+    
+                                                            </div>
+                                                            <span class="custm-drop-icon">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="23" viewBox="0 0 24 23" fill="none">
+                                                                    <path d="M19 9.00006L14 14.0001L9 9.00006" stroke="#151515" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                                </svg>
+                                                            </span>
+                                                        </div>
+                                                        <ul class="dropdown-menu outer-box city" aria-labelledby="dropdownMenuButton1">
+                                                            
+    
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" name="city" value="" class="">
+                                                                                                </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="">Pin code</label>
+                                            <div class="form-field">
+                                                <input type="text" name="pin_code" class="form-control " value="" placeholder="PIN code">
+                                                                                                </div>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                </div>
+    
+                            </form></div>
+    
+                            </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="checkout-main-card cstm-card shippment-rates-card">
+                            <h3>Rates</h3>
+                            <p>Transit times may be estimated.</p>
+                            <div class="form-group">
+                                <label for="">Shipment Date</label>
+                                <div class="formfield">
+                                    <input type="text" placeholder="07/23/2024" class="form-control">
+                                </div>
+                            </div>
+                            <div class="shipper-rates">
+                                <h4>Fastest</h4>
+                                <ul class="shipper-rates-list">
+                                    <li>
+                                        <a href="#" class="active">
+                                            <div class="shipper-rates-left">
+                                                <div class="shipper-rates-img">
+                                                    
+                                                </div>
+                                                <h3>UPS Next Day Air® Early</h3>
+                                            </div>
+                                            <div class="shipper-rates-prize">
+                                                <h4>$8.25</h4>
+                                                <p>2 days</p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="shipper-rates">
+                                <h4>MORE RATES</h4>
+                                <ul class="shipper-rates-list">
+                                    <li>
+                                        <a href="#" class="">
+                                            <div class="shipper-rates-left">
+                                                <div class="shipper-rates-img">
+                                                    
+                                                </div>
+                                                <h3>UPS Next Day Air® Early</h3>
+                                            </div>
+                                            <div class="shipper-rates-prize">
+                                                <h4>$8.25</h4>
+                                                <p>2 days</p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="">
+                                            <div class="shipper-rates-left">
+                                                <div class="shipper-rates-img">
+                                                    
+                                                </div>
+                                                <h3>UPS Next Day Air® Early</h3>
+                                            </div>
+                                            <div class="shipper-rates-prize">
+                                                <h4>$8.25</h4>
+                                                <p>2 days</p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="">
+                                            <div class="shipper-rates-left">
+                                                <div class="shipper-rates-img">
+                                                    
+                                                </div>
+                                                <h3>UPS Next Day Air® Early</h3>
+                                            </div>
+                                            <div class="shipper-rates-prize">
+                                                <h4>$8.25</h4>
+                                                <p>2 days</p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="">
+                                            <div class="shipper-rates-left">
+                                                <div class="shipper-rates-img">
+                                                    
+                                                </div>
+                                                <h3>UPS Next Day Air® Early</h3>
+                                            </div>
+                                            <div class="shipper-rates-prize">
+                                                <h4>$8.25</h4>
+                                                <p>2 days</p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="">
+                                            <div class="shipper-rates-left">
+                                                <div class="shipper-rates-img">
+                                                    
+                                                </div>
+                                                <h3>UPS Next Day Air® Early</h3>
+                                            </div>
+                                            <div class="shipper-rates-prize">
+                                                <h4>$8.25</h4>
+                                                <p>2 days</p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="pagination-wrapper">
             {{-- <div class="pagination-boxes"> --}}
 
