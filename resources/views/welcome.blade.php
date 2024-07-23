@@ -426,35 +426,7 @@
     });
 
     $(document).ready(function() {
-        $(document).on('click', '.addtocart', function() {
-            console.log('hrerererer');
-            var product_id = $(this).attr('product-id')
-            url = APP_URL + '/dealer/add/to/cart/' + product_id
-            console.log(url);
-            var response = ajaxCall(url, 'post', null, false);
-            response.then(handleStateData).catch(handleStateError)
-
-            function handleStateData(response) {
-                if (response.success == true) {
-                    if(response.product_id){
-                        $('#alreadyAddedOwner').attr('href',response.dealer_url)
-                        $('#deleteAndAdd').attr('href',response.product_url)
-                        $('#restrictMultiple').modal('show');
-                    }
-                    jQuery('.addtocart').empty().append('<span>Added</span>');
-                    jQuery()
-                    jQuery(".cart-icon").html(response.cart_icon);
-                    return toastr.success(response.message);
-                } else {
-                    jQuery('#errormessage').html(response.error);
-                }
-            }
-
-            function handleStateError(error) {
-                console.log('error', error)
-
-            }
-        });
+        
 
         $('.collectionSubcategory').on('click', function() {
             element = jQuery(this);
