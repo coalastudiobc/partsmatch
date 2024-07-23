@@ -536,6 +536,9 @@
                 jQuery(document).find('input[name="city"]').val(selectitem);
                 jQuery('#city_name-error').text('');
             });
-        })
+
+
+
+        });
     </script>
 @endpush

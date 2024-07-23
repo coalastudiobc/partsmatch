@@ -41,15 +41,20 @@ class HomeController extends Controller
     public function index($subcategory_id = null)
     {
         $category = Category::where('status', '1')->get();
-        $collections = Category::with('products.cartProduct')->has('products')->where('parent_id', '!=', null)->where('status', '1')->inRandomOrder()->take(10)->get();
+        $collections = Category::with('products.cartProduct')->has('products.cartProduct')->where('parent_id', '!=', null)->where('status', '1')->inRandomOrder()->take(10)->get();
         $subcategories = Category::with('products')->has('products')->Where('parent_id', '!=', null)->where('status', '1')->inRandomOrder()->take(6)->get();
-        $brands=CarBrandMake::inRandomOrder()->take(7)->get();
-        return view('welcome', compact('category', 'subcategories', 'collections', "subcategory_id","brands"));
+        $brands = CarBrandMake::inRandomOrder()->get();
+        if (Auth::user()) {
+            if (Auth::user()->hasRole("Administrator")){
+                return redirect()->route('admin.category.index');
+            }
+        }
+        return view('welcome', compact('category', 'subcategories', 'collections', "subcategory_id", "brands"));
     }
 
     public function brands()
     {
-        $brands=CarBrandMake::all();
+        $brands = CarBrandMake::all();
 
         return view('brands', compact("brands"));
     }
@@ -158,13 +163,13 @@ class HomeController extends Controller
                 file_put_contents($filePath, $jwt);
             } catch (Exception $e) {
                 Log::channel('daily')->error($e->getMessage());
-                return ;
+                return;
             }
         }
         $years = $sdk->years();
         $models = AllModel::all();
-        $products = Product::with('productImage', 'featuredProduct','productCompatible')->category()->compatiblity()->get();
+        $products = Product::with('productImage', 'featuredProduct', 'productCompatible')->category()->compatiblity()->paginate('12');
         $categories =  Category::with('children')->has('children')->orWhereNull('parent_id')->get();
-        return view('public_shop', compact("categories","products","brands","years","models"));
+        return view('public_shop', compact("categories", "products", "brands", "years", "models"));
     }
 }

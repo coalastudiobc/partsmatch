@@ -230,23 +230,28 @@
                 <div class="categories-boxes-main">
                     <div class="categories-boxes-outer">
                         <div class="categories-boxes">
+                            
+                            <div class="categories-loop-boxes-outer">
+                                <div class="categories-loop-boxes">
+                                    @foreach ($category as $key => $category)
+                                    @if ($loop->iteration > 7)
+                                    @break
+                                    @endif
+                                    <a href="{{ route('products', ['category' => $category->id]) }}">
+                                        <div class="categories-box">
+                                            <img src="{{ asset('assets/images/categorie1.svg') }}" alt="">
+                                            <p>{{ $category->name }}</p>
+                                        </div>
+                                    </a>
+                                    @endforeach
+                                </div>
+                            </div>
                             <a href="{{ route('products') }}">
                                 <div class="categories-box">
                                     <img src="{{ asset('assets/images/categorie1.svg') }}" alt="">
                                     <p>View All</p>
                                 </div>
                             </a>
-                            @foreach ($category as $key => $category)
-                            @if ($loop->iteration > 7)
-                            @break
-                            @endif
-                            <a href="{{ route('products', ['category' => $category->id]) }}">
-                                <div class="categories-box">
-                                    <img src="{{ asset('assets/images/categorie1.svg') }}" alt="">
-                                    <p>{{ $category->name }}</p>
-                                </div>
-                            </a>
-                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -343,111 +348,19 @@
                 <div></div>
                 <h3>shop by brands</h3>
                 <div class="brands-btn">
-                    <a href="{{route('brands')}}" class="btn secondary-btn view-btn">
-                        View All
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                            <g clip-path="url(#clip0_110_878)">
-                                <path d="M19.8678 9.67956L15.3225 5.13417C15.1592 4.94351 14.8722 4.92128 14.6816 5.0846C14.4909 5.24788 14.4687 5.53483 14.632 5.72549C14.6472 5.74326 14.6638 5.75986 14.6816 5.77506L18.4497 9.54773H0.454523C0.203512 9.54773 0 9.75124 0 10.0023C0 10.2533 0.203512 10.4568 0.454523 10.4568H18.4497L14.6816 14.2249C14.4909 14.3882 14.4687 14.6751 14.632 14.8658C14.7953 15.0565 15.0822 15.0787 15.2729 14.9154C15.2907 14.9001 15.3073 14.8836 15.3225 14.8658L19.8679 10.3204C20.0441 10.1432 20.0441 9.85686 19.8678 9.67956Z" fill="#272643"></path>
-                            </g>
-                            <defs>
-                                <clipPath id="clip0_110_878">
-                                    <rect width="20" height="20" fill="white"></rect>
-                                </clipPath>
-                            </defs>
-                        </svg>
-                    </a>
+                    <a href="javascript:void(0)" class="btn secondary-btn view-btn see-more-less-brands" data-action="see_more">See more</a>
                 </div>
             </div>
 
-            <div class="sp-brands">
+            <div id="brandContainer" class="sp-brands brand-height-fix">
                 @foreach($brands as $brand)
-                <!-- <div class="brands-image">
-                    <img src="{{ asset('assets/images/car-logo1.png') }}" alt="" class="">
-                    <div class="brands-image-content">
-                        <h6>Mercedes Benz</h6>
-                    </div>
-                </div> -->
-                <div class="brands-image">
+                <div class="brands-image brand-container">
                     <img src="{{ $brand->image_url ? $brand->image_url : asset('assets/images/car-logo2.png') }}" alt="" class="">
                     <div class="brands-image-content">
                         <h6>{{$brand->makes}}</h6>
                     </div>
                 </div>
                 @endforeach
-                <!-- <div class="brands-image">
-                    <img src="{{ asset('assets/images/car-logo3.png') }}" alt="" class="">
-                    <div class="brands-image-content">
-                        <h6>Infinity</h6>
-                    </div>
-                </div>
-                <div class="brands-image">
-                    <img src="{{ asset('assets/images/car-logo4.png') }}" alt="" class="">
-                    <div class="brands-image-content">
-                        <h6>Audi</h6>
-                    </div>
-                </div>
-                <div class="brands-image">
-                    <img src="{{ asset('assets/images/car-logo5.png') }}" alt="" class="">
-                    <div class="brands-image-content">
-                        <h6>Hondaz</h6>
-                    </div>
-                </div>
-                <div class="brands-image">
-                    <img src="{{ asset('assets/images/car-logo6.png') }}" alt="" class="">
-                    <div class="brands-image-content">
-                        <h6>Volkswagen</h6>
-                    </div>
-                </div>
-                <div class="brands-image">
-                    <img src="{{ asset('assets/images/car-logo1.png') }}" alt="" class="">
-                    <div class="brands-image-content">
-                        <h6>Ford</h6>
-                    </div>
-                </div>
-                <div class="brands-image">
-                    <img src="{{ asset('assets/images/car-logo2.png') }}" alt="" class="">
-                    <div class="brands-image-content">
-                        <h6>Mercedes Benz</h6>
-                    </div>
-                </div>
-                <div class="brands-image">
-                    <img src="{{ asset('assets/images/car-logo3.png') }}" alt="" class="">
-                    <div class="brands-image-content">
-                        <h6>BMW</h6>
-                    </div>
-                </div>
-                <div class="brands-image">
-                    <img src="{{ asset('assets/images/car-logo4.png') }}" alt="" class="">
-                    <div class="brands-image-content">
-                        <h6>Infinity</h6>
-                    </div>
-                </div>
-                <div class="brands-image">
-                    <img src="{{ asset('assets/images/car-logo5.png') }}" alt="" class="">
-                    <div class="brands-image-content">
-                        <h6>Audi</h6>
-                    </div>
-                </div>
-                <div class="brands-image">
-                    <img src="{{ asset('assets/images/car-logo6.png') }}" alt="" class="">
-                    <div class="brands-image-content">
-                        <h6>Honda</h6>
-                    </div>
-                </div>
-                <div class="brands-image">
-                    <img src="{{ asset('assets/images/car-logo1.png') }}" alt="" class="">
-                    <div class="brands-image-content">
-                        <h6>BMW</h6>
-                    </div>
-                </div>
-                <div class="brands-image">
-                    <img src="{{ asset('assets/images/car-logo2.png') }}" alt="" class="">
-                    <div class="brands-image-content">
-                        <h6>Audi</h6>
-                    </div>
-                </div> -->
-
-
             </div>
 
         </div>
@@ -468,7 +381,46 @@
         prevArrow: $('.prev-btn'),
         nextArrow: $('.next-btn'),
     });
+    $('.categories-loop-boxes').slick({
+        infinite: true,
+        slidesToShow: 6,
+        slidesToScroll: 1,
+        arrows: true,
+        dots: false,
+        prevArrow: $('.prev-loop-btn'),
+        nextArrow: $('.next-loop-btn'),
+        responsive: [
+          {
+            breakpoint: 1200,
+            settings: {
+              slidesToShow: 5,
+              slidesToScroll: 2,
+            }
+          },
+          {
+            breakpoint: 1024,
+            settings: {
+              slidesToShow: 4,
+              slidesToScroll: 2,
+            }
+          },
+          {
+            breakpoint: 767,
+            settings: {
+              slidesToShow: 2,
+              slidesToScroll: 1,
+            }
+          },
+          {
+            breakpoint: 425,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1,
+            }
+          }
 
+        ]
+    });
 
     $(document).ready(function() {
         $(document).on('click', '.addtocart', function() {
@@ -548,6 +500,18 @@
                 console.log('error', error)
 
             }
+        });
+
+        $('.see-more-less-brands').on('click', function() {
+            $('#brandContainer').toggleClass('brand-height-fix');
+            if($(this).attr('data-action') == "see_more"){
+                $(this).attr('data-action',"see_less");
+                $(this).html(' See less ');
+            } else{
+                $(this).attr('data-action',"see_more");
+                $(this).html('See more');
+            }
+            
         });
 
 

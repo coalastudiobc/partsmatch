@@ -1,5 +1,5 @@
 @extends('layouts.front')
-@section('title', 'Interior Accessories')
+@section('title', 'Products')
 @section('heading', 'Interior Accessories')
 @section('content')
 <section class="banner-content-sec">
@@ -18,29 +18,62 @@
                 <div class="interior-content-left">
                     <div class="interior-filter-head">
                         <h3>Filter</h3>
-                        <a href="#">Clear All</a>
+                        <a href="{{route('products')}}">Clear All</a>
                     </div>
-                    <div class="interior-filter-box filter-preview">
-                        <div class="filter-selected-data">
-                            <div class="filter-selected-box">
-                                <a href="#">✕</a>
-                                <p>ergerb</p>
+                    @if((request()->has('brand') && count(request()->brand)) || (request()->has('year') && count(request()->year)) || (request()->has('model') && count(request()->model)) )
+                        <div class="interior-filter-box filter-preview">
+                            <div class="filter-selected-data">
+                                @if(request()->has('brand') && count(request()->brand))
+                                    @forelse(request()->brand as $brand)
+                                            <div class="filter-selected-box">
+                                                <a href="javascript:void(0)" data-action="brand" class="delete-filter">✕</a>
+                                                <p>{{$brand}}</p>
+                                            </div>
+                                    @empty
+                                    @endforelse
+                                @endif
+                                @if(request()->has('year') && count(request()->year))
+                                    @forelse(request()->year as $year)
+                                            <div class="filter-selected-box">
+                                                <a href="javascript:void(0)" data-action="year" class="delete-filter">✕</a>
+                                                <p>{{$year}}</p>
+                                            </div>
+                                    @empty
+                                    @endforelse
+                                @endif
+                                @if(request()->has('model') && count(request()->model))
+                                    @forelse(request()->model as $model)
+                                            <div class="filter-selected-box">
+                                                <a href="javascript:void(0)" data-action="model" class="delete-filter">✕</a>
+                                                <p>{{$model}}</p>
+                                            </div>
+                                    @empty
+                                    @endforelse
+                                @endif
                             </div>
                         </div>
-                    </div>
+                    @endif
                     <div class="interior-filter-body">
                         <div class="interior-filter-box">
 
                             <div class="accordion" id="accordionExample">
                                 <div class="accordion-item">
-                                    <h2 class="accordion-header" id="headingTwo">
-                                    <button class="accordion-button p-0 mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                    <h2 class="accordion-header" id="headingOne">
+                                    <button class="accordion-button p-0 mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                         <h4>Categories</h4>
                                     </button>
                                     </h2>
-                                    <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                         <div class="accordion-body p-0">
                                             <div class="category-list">
+                                                <div class="form-group">
+                                                    <div class="formfield">
+                                                        <input type="text" class="form-control filter-serach" placeholder="Search">
+                                                        <span class="filter-serach-icon">
+                                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
                                                 <ul class="ps-3 mb-2 ">
                                                     @foreach ($categories as $category )
                                                    <li>
@@ -73,16 +106,24 @@
                             @csrf
                             <div class="interior-filter-box">
 
-                                <div class="accordion" id="accordionExample">
+                                <div class="accordion" id="accordionExample1">
                                     <div class="accordion-item">
-                                      <h2 class="accordion-header" id="headingThree">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                      <h2 class="accordion-header" id="headingTwo">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                             <h4>Makes</h4>
                                         </button>
                                       </h2>
-                                      <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                      <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample1">
                                         <div class="accordion-body">
                                             <div id="brandContainer" class="interior-filter-inner">
+                                                <div class="form-group">
+                                                    <div class="formfield">
+                                                        <input type="text" class="form-control filter-serach" placeholder="Search">
+                                                        <span class="filter-serach-icon">
+                                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
                                                 @foreach ($brands as $key => $brand )
                                                     <div class="custm-check make ">
                                                         <input type="checkbox" id="{{'brand'.$key}}" name="brand[]" @if(request()->has('brand') && count(request()->brand) && in_array($brand->makes , request()->brand)) class="selected-entry" checked @endif  value="{{$brand->makes}}">
@@ -95,32 +136,28 @@
                                       </div>
                                     </div>
                                   </div>
-
-
-                                {{-- <h4>Makes</h4>
-                                <div id="brandContainer" class="interior-filter-inner">
-                                    @foreach ($brands as $key => $brand )
-                                        <div class="custm-check make ">
-                                            <input type="checkbox" id="{{'brand'.$key}}" name="brand[]" @if(request()->has('brand') && count(request()->brand) && in_array($brand->makes , request()->brand)) class="selected-entry" checked @endif  value="{{$brand->makes}}">
-                                            <label for="{{'brand'.$key}}">{{$brand->makes}}</label>
-                                        </div>
-                                    @endforeach
-                                </div>
-                                <div class="cat-count"><span class="see-more-less-make">See More</span></div> --}}
                             </div>
                             
                             <div class="interior-filter-box">
 
-                                <div class="accordion" id="accordionExample">
+                                <div class="accordion" id="accordionExample2">
                                     <div class="accordion-item">
                                       <h2 class="accordion-header" id="headingThree">
                                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                                             <h4>years</h4>
                                         </button>
                                       </h2>
-                                      <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                      <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample2">
                                         <div class="accordion-body">
                                             <div id="yearContainer" class="interior-filter-inner">
+                                                <div class="form-group">
+                                                    <div class="formfield">
+                                                        <input type="text" class="form-control filter-serach" placeholder="Search">
+                                                        <span class="filter-serach-icon">
+                                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
                                                 @foreach ($years as $key => $year )
                                                     <div class="custm-check year">
                                                         <input type="checkbox" id="{{'year'.$key}}" name="year[]" @if(request()->has('year') && count(request()->year) && in_array($year , request()->year)) class="selected-entry" checked @endif value="{{$year}}">
@@ -148,14 +185,14 @@
 
                             <div class="interior-filter-box">
 
-                                <div class="accordion" id="accordionExample">
+                                <div class="accordion" id="accordionExample3">
                                     <div class="accordion-item">
-                                      <h2 class="accordion-header" id="headingThree">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                      <h2 class="accordion-header" id="headingFour">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                                             <h4>models</h4>
                                         </button>
                                       </h2>
-                                      <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                      <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample3">
                                         <div class="accordion-body">
                                             @foreach ($models as $key => $model )
                                                 <div class="custm-check model">
@@ -193,13 +230,28 @@
                                                     <input type="number" 
                                                     name="min_value"
                                                         class="min-input" 
-                                                        value="{{old('min_value',0)}}"> 
+                                                        value="0"> 
                                                 </div> 
                                                 <div class="price-field right"> 
                                                     <input type="number" 
                                                     name="max_value"
                                                         class="max-input" 
-                                                        value="{{old('max_value',10000)}}"> 
+                                                        value="10000"> 
+                                                </div> 
+                                            </div> 
+
+                                            <div class="test d-none"> 
+                                                <div class="test-field left"> 
+                                                    <input type="number" id="selectedMinValue"
+                                                    name="min_value1"
+                                                        class="min-input-1" 
+                                                        value="0"> 
+                                                </div> 
+                                                <div class="test-field right"> 
+                                                    <input type="number" id="selectedMaxValue"
+                                                    name="max_value1"
+                                                        class="max-input-1" 
+                                                        value="10000"> 
                                                 </div> 
                                             </div> 
                                             <div class="slider-container"> 
@@ -214,13 +266,13 @@
                                                 class="min-range" 
                                                 min="0" 
                                                 max="10000" 
-                                                value="{{old('min_value',0)}}" 
+                                                value="0" 
                                                 step="1"> 
                                             <input type="range" 
                                                 class="max-range" 
                                                 min="0" 
                                                 max="10000" 
-                                                value="{{old('max_value',10000)}}" 
+                                                value="10000" 
                                                 step="1"> 
                                         </div> 
                                     </div>    
@@ -232,7 +284,7 @@
                     <div class="interior-content-right-outer">
                         <div class="interior-content-right" id="interiorComponent">
                             {{-- <h2 class="interior-content-heading">Mirrors</h2> --}}
-                            <h3>Categories by: Cars</h3>
+                            <h3>Result : </h3>
                             <div class="accessories-parts">
                                 <div class="row g-4">
                                     {{-- @dd($product->productImage[0]->file_url) --}}
@@ -341,16 +393,8 @@
                         </div>
                     </div>
                 </div>
-                
-                {{-- @empty
-                
-                @endforelse --}}
             </div>
         </div>
-        {{-- <div class="empty-data">
-                                <img src="{{ asset('assets/images/no-product.svg') }} " alt="" width="300">
-        <p class="text-center mt-1">Did not found any order</p>
-    </div> --}}
     </div>
     {{-- @include('components.interior-component') --}}
     <div class="pagination-wrapper">
@@ -387,6 +431,29 @@
 </section>
 @endsection
 @push('scripts')
+
+
+<script>
+    function delayFormSubmission(formId, delay) {
+        const form = document.getElementById(formId);
+        
+        if (!form) {
+            console.error(`Form with id ${formId} not found.`);
+            return;
+        }
+
+        let timeout;
+
+        form.addEventListener('change', () => {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => {
+                form.submit();
+            }, delay);
+        });
+    }
+
+    delayFormSubmission('filters', 100);
+</script>
 <script>
     $(document).ready(function() {
         $('.addtocart').on('click', function() {
@@ -440,66 +507,37 @@
             }
         });
 
+        $('.delete-filter').on('click', function() {
+            var filter = $(this).siblings('p').html();
+            filter = $("label:contains('"+filter+"')").attr('for')
+            $("#"+filter).prop('checked',false);
+            $('#filters').submit();
+        });
+
 
     });
 </script>
-{{-- <script>
-        // Function to delay form submission
-        function delayFormSubmission(formId, delay) {
-            const form = document.getElementById(formId);
-            
-            if (!form) {
-                console.error(`Form with id ${formId} not found.`);
-                return;
-            }
 
-            let timeout;
-
-            form.addEventListener('change', () => {
-                clearTimeout(timeout);
-                timeout = setTimeout(() => {
-                    form.submit();
-                }, delay);
-            });
-        }
-
-        // Call the function with the form id and delay time in milliseconds (2000ms = 2 seconds)
-        delayFormSubmission('filters', 100);
-    </script> --}}
 <script>
-    // Script.js 
-    const rangevalue = 
-        document.querySelector(".slider-container .price-slider"); 
-    const rangeInputvalue = 
-        document.querySelectorAll(".range-input input"); 
-
-    // Set the price gap 
+    const rangevalue = document.querySelector(".slider-container .price-slider"); 
+    const rangeInputvalue = document.querySelectorAll(".range-input input"); 
     let priceGap = 500; 
-
-    // Adding event listners to price input elements 
-    const priceInputvalue = 
-        document.querySelectorAll(".price-input input"); 
+    const priceInputvalue = document.querySelectorAll(".price-input input"); 
     for (let i = 0; i < priceInputvalue.length; i++) { 
         priceInputvalue[i].addEventListener("input", e => { 
-
-            // Parse min and max values of the range input 
             let minp = parseInt(priceInputvalue[0].value); 
             let maxp = parseInt(priceInputvalue[1].value); 
             let diff = maxp - minp 
-
             if (minp < 0) { 
                 alert("minimum price cannot be less than 0"); 
                 priceInputvalue[0].value = 0; 
                 minp = 0; 
             } 
-
-            // Validate the input values 
             if (maxp > 10000) { 
                 alert("maximum price cannot be greater than 10000"); 
                 priceInputvalue[1].value = 10000; 
                 maxp = 10000; 
             } 
-
             if (minp > maxp - priceGap) { 
                 priceInputvalue[0].value = maxp - priceGap; 
                 minp = maxp - priceGap; 
@@ -509,9 +547,6 @@
                     minp = 0; 
                 } 
             } 
-
-            // Check if the price gap is met 
-            // and max price is within the range 
             if (diff >= priceGap && maxp <= rangeInputvalue[1].max) { 
                 if (e.target.className === "min-input") { 
                     rangeInputvalue[0].value = minp; 
@@ -526,8 +561,6 @@
                 } 
             } 
         }); 
-
-        // Add event listeners to range input elements 
         for (let i = 0; i < rangeInputvalue.length; i++) { 
             rangeInputvalue[i].addEventListener("input", e => { 
                 let minVal = 
@@ -536,11 +569,7 @@
                     parseInt(rangeInputvalue[1].value); 
 
                 let diff = maxVal - minVal 
-                
-                // Check if the price gap is exceeded 
                 if (diff < priceGap) { 
-                
-                    // Check if the input is the min range input 
                     if (e.target.className === "min-range") { 
                         rangeInputvalue[0].value = maxVal - priceGap; 
                     } 
@@ -549,10 +578,10 @@
                     } 
                 } 
                 else { 
-                
-                    // Update price inputs and range progress 
                     priceInputvalue[0].value = minVal; 
                     priceInputvalue[1].value = maxVal; 
+                    $('#selectedMinValue').val(minVal);
+                    $('#selectedMaxValue').val(maxVal);
                     rangevalue.style.left = 
                         `${(minVal / rangeInputvalue[0].max) * 100}%`; 
                     rangevalue.style.right = 

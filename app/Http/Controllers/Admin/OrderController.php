@@ -13,5 +13,7 @@ class OrderController extends Controller
         $orders =  OrderItem::with('product', 'order')->orderByDesc('id')->paginate(10);
         return view('admin.order.index', compact('orders'));
     }
-   
+   public function hlo(){
+    return view('dealer.order.payment');
+   }
 }

@@ -535,18 +535,17 @@ header {
 
 .categories-boxes {
     display: flex;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     justify-content: center;
     gap: 18px;
-    align-items: center;
+    align-items: flex-start;
     /* margin: 30px 0px; */
-    min-width: 1530px;
-
+    /* min-width: 1530px; */
 }
-.categories-boxes-outer {
+/* .categories-boxes-outer {
     overflow: auto;
     padding-bottom: 10px;
-}
+} */
 .categories-boxes-outer::-webkit-scrollbar:horizontal {
     height: 4px;
 }
@@ -563,6 +562,7 @@ header {
 
 .categories-box {
     max-width: 174px;
+    /* min-width: 174px; */
     background-color: #fff;
     width: 100%;
     padding: 27px 10px 29px;
@@ -2287,10 +2287,193 @@ span.ymmm-cross {
 .interior-filter-inner.full-data-view {
     max-height: 100% !important;
 }
-
-.disabled-shippmentPayment {
-    opacity: 0.5;
+.categories-loop-boxes {
+    display: grid;
+    gap: 20px;
+    /* overflow-x: scroll; */
+    flex-wrap: nowrap;
+    grid-template-columns: repeat(7, 1fr);
 }
+.categories-loop-boxes-outer {
+    overflow: hidden;
+    /* min-width: 1540px; */
+}
+.categories-loop-boxes-outer::-webkit-scrollbar:horizontal {
+    height: 4px;
+}
+.brand-height-fix{
+    max-height:400px;
+    overflow: hidden;
+}
+.categories-loop-boxes {
+    padding: 0 !important;
+}
+.categories-loop-boxes .slick-track {
+    display: flex;
+    gap: 20px;
+}
+.see-more-less-brands {
+    min-width: 100px;
+}
+.form-control.filter-serach {
+    border: 0;
+    border-bottom: 1px solid #eee;
+    padding: 0;
+    /* background-color: aquamarine; */
+    min-height: 38px;
+    padding-left: 30px;
+    border-radius: 0;
+}
+span.filter-serach-icon {
+    position: absolute;
+    top: 6px;
+    left: 5px;
+}
+.form-control.filter-serach:focus{
+    border-color: var(--primary-color);
+}
+.formfield:has(.filter-serach:focus) span i{
+    color: var(--primary-color);
+}
+.interior-filter-box .accordion-body{
+    padding: 1rem 0rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* =================== 23/07/24======================= */
+
+
+.shipment-order-details {
+    max-width: 1024px;
+    margin: 0 auto;
+}
+.shipment-address-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 8px;
+}
+.shipment-address-header h3{
+    font-size: 14px;
+    line-height: 24px;
+}
+.shipment-address-header a{
+    font-size: 14px;
+    line-height: 24px;
+    color: var(--secondary-color);
+    text-decoration: underline !important;
+}
+.shipment-address-box h4 {
+    font-size: 14px;
+    line-height: 24px;
+}
+.shipment-address-box p {
+    font-size: 12px;
+    line-height: 20px;
+}
+.shipper-page-main-outer {
+    position: relative;
+    background-color: #fff;
+    margin: 20px 0 0;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 1px 1px 10px 4px #ddd;
+}
+.shipper-page-main {
+    max-width: 1024px;
+    margin: 0 auto;
+}
+.shipper-page-main .checkout-main-card.cstm-card {
+    background-color: #fff;
+    /* margin: 20px 0 0; */
+    border-radius: 10px;
+    padding: 10px 20px;
+    box-shadow: 1px 1px 10px 4px #ddd;
+    height: 100%;
+}
+.shippment-rates-card > h3 {
+    font-size: 16px;
+    line-height: 24px;
+    /* margin-bottom: 15px; */
+}
+.shippment-rates-card > p{
+    font-size: 14px;
+    line-height: 24px;
+    margin-bottom: 10px;
+}
+.shipper-rates > h4 {
+    font-size: 14px;
+    line-height: 16px;
+    margin-bottom: 10px;
+}
+.shipper-rates-list li a {
+    border: 1px solid #eee;
+    width: 100%;
+    padding: 16px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.shipper-rates-prize > p, .shipper-rates-prize > h4 {
+    font-size: 16px;
+    line-height: 24px;
+}
+.shipper-rates-left > h3 {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+}
+.shipper-rates-list li a.active, .shipper-rates-list li a:hover {
+    border-color: #bae8e8;
+    background-color: #7bfbfc14;
+}
+.shipper-rates {
+    margin-bottom: 10px;
+}
+.shipper-rates-list li + li{
+    margin-top: 15px;
+}
+.shipment-id-box .shipment-address-header > h3 {
+    font-size: 18px;
+}
+.shipment-id-box .shipment-address-header > p{
+    font-size: 16px;
+}
+.shipment-id-box .shipment-address-header{
+    padding: 10px 0px;
+    border-bottom: 1px solid #eee;
+}
+.shipper-rates-list {
+    /* max-width: 200px; */
+    max-height: 200px;
+    overflow: auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
