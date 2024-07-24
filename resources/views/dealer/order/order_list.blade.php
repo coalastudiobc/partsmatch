@@ -29,6 +29,9 @@
                             <th>
                                 <p>Date</p>
                             </th>
+                            <th>
+                                <p>Order Id</p>
+                            </th>
 
                             <th>
                                 <p>Shippment Price</p>
@@ -54,6 +57,9 @@
                                         <p>{{ date('d-m-Y', strtotime($order->created_at)) }}</p>
                                     </td>
                                     <td>
+                                        <p>{{ $order->id }}</p>
+                                    </td>
+                                    <td>
                                         <p>${{ $order->shipment_price }}</p>
                                     </td>
 
@@ -67,9 +73,14 @@
                                         </div>
                                     </td> --}}
                                     <td>
-                                        <a class="btn primary-btn"
-                                            href="{{ route('Dealer.order.create.shippment', $order->id) }}">Pending
-                                            FullFillment</a>
+                                        @if (isFullFilledShippment($order->id))
+                                            <a class="btn primary-btn" href="#">
+                                                FullFilled</a>
+                                        @else
+                                            <a class="btn primary-btn"
+                                                href="{{ route('Dealer.order.create.shippment', $order->id) }}">Pending
+                                                FullFillment</a>
+                                        @endif
                                     </td>
                                     {{-- <td>
                                         <div class="pro-status">

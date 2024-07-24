@@ -3,7 +3,7 @@
 @section('heading', 'Order Management')
 @section('content')
     <div class="dashboard-right-box">
-        <div class="shipper-page-main-outer">
+        <div class="">
             <div class="shipper-page-main">
                 <div class="row g-3">
                     <div class="col-md-6">
@@ -13,9 +13,9 @@
                                     <h3>Pick up Address</h3>
                                     {{-- <a href="#">Edit Resipient</a> --}}
                                 </div>
-                                <h4>{{ $pickupAddress->first_name . ' ' . $pickupAddress->last_name }}</h4>
-                                <p>{{ $pickupAddress->address1 . ' ' . $pickupAddress->city . ',' . $pickupAddress->state . ',' . $pickupAddress->pin_code . ',' . $pickupAddress->country }}
-                                </p>
+                                <p>{{ $pickupAddress->first_name . ' ' . $pickupAddress->last_name }}</p>
+                                <h4>{{ $pickupAddress->address1 . ' ' . $pickupAddress->city . ',' . $pickupAddress->state . ',' . $pickupAddress->pin_code . ',' . $pickupAddress->country }}
+                                </h4>
                                 <div class="shipment-address-mail-phone">
                                     <a href="#">cyhujequ@mailinator.com</a>
                                     <a href="#">{{ $pickupAddress->phone_number }}</a>
@@ -25,12 +25,17 @@
                     </div>
                     <div class="col-md-6">
                         <div class="checkout-main-card cstm-card">
-                            <div class="shipment-id-box">
-                                <div class="shipment-address-box">
-                                    <div class="shipment-address-header">
-                                        <h3>Shipment-id</h3>
-                                        <p>{{ $response_in_array->object_id }}</p>
-                                    </div>
+                            <div class="shipment-address-box">
+                                <div class="shipment-address-header">
+                                    <h3>Reciever Address</h3>
+                                    {{-- <a href="#">Edit Resipient</a> --}}
+                                </div>
+                                <p>{{ $reciever_address->name . ' ' . $reciever_address->last_name }}</p>
+                                <h4>{{ $reciever_address->address1 . ' ' . $reciever_address->city . ',' . $reciever_address->state . ',' . $reciever_address->pin_code . ',' . $reciever_address->country }}
+                                </h4>
+                                <div class="shipment-address-mail-phone">
+                                    <a href="#">cyhujequ@mailinator.com</a>
+                                    <a href="#">{{ $reciever_address->phone_number }}</a>
                                 </div>
                             </div>
                         </div>
@@ -40,104 +45,100 @@
                             <div class="order-summary">
                                 <h3>Payment</h3>
                                 <p>All transactions are secure and encrypted.</p>
-                                {{-- <form id="shippmentPaymentForm" action="{{ route('Dealer.order.payment') }}" method="POST"> --}}
-                                @csrf
-                                <div class="">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="">Card Number</label>
-                                                <div class="form-field" id="cardNumberElement">
-                                                    <input type="text" class="form-control" placeholder="Card-number">
-                                                    <label for="card-number" class="stripe-error-messages"></label>
+                                <form id="shippmentPaymentForm" action="{{ route('Dealer.order.shippment.payment') }}"
+                                    method="POST">
+                                    @csrf
+                                    <div class="">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="">Card Number</label>
+                                                    <div class="form-field" id="cardNumberElement">
+                                                        <input type="text" class="form-control"
+                                                            placeholder="Card-number">
+                                                        <label for="card-number" class="stripe-error-messages"></label>
+                                                    </div>
+                                                    <div class="is-invalid stripe-error" id="cardNumberError"></div>
                                                 </div>
-                                                <div class="is-invalid stripe-error" id="cardNumberError"></div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="">Card Expiration Date</label>
-                                                <div class="form-field" id="cardExpiryElement">
-                                                    <input type="text" class="form-control" placeholder="MM / YY">
-                                                    <label for="card-expiry" class="stripe-error-messages"></label>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="">Card Expiration Date</label>
+                                                    <div class="form-field" id="cardExpiryElement">
+                                                        <input type="text" class="form-control" placeholder="MM / YY">
+                                                        <label for="card-expiry" class="stripe-error-messages"></label>
+                                                    </div>
+                                                    <div class="is-invalid stripe-error" id="cardExpiryError"></div>
                                                 </div>
-                                                <div class="is-invalid stripe-error" id="cardExpiryError"></div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="">Card Security Code</label>
-                                                <div class="form-field" id="cardCVCElement" class="form-control">
-                                                    <input type="password" class="form-control" placeholder="****">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="">Card Security Code</label>
+                                                    <div class="form-field" id="cardCVCElement" class="form-control">
+                                                        <input type="password" class="form-control" placeholder="****">
+                                                    </div>
+                                                    <div class="is-invalid stripe-error" id="cardCVVError"></div>
+                                                    <input type="hidden" name="stripeCustomer_id"
+                                                        value="{{ $stripeCustomer->id }}">
                                                 </div>
-                                                <div class="is-invalid stripe-error" id="cardCVVError"></div>
-                                                <input type="hidden" name="stripeCustomer_id"
-                                                    value="{{ $stripeCustomer->id }}">
                                             </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="">Card Holder Name</label>
-                                                <div class="form-field">
-                                                    <input type="text" name="cardname" id="cardName"
-                                                        class="form-control" placeholder="John Doe">
-                                                    <label class="cardName-error" for="card-name" id="cardname"></label>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="">Card Holder Name</label>
+                                                    <div class="form-field">
+                                                        <input type="text" name="cardname" id="cardName"
+                                                            class="form-control" placeholder="John Doe">
+                                                        <label class="cardName-error" for="card-name"
+                                                            id="cardname"></label>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <button type="submit" id="payNow" class="btn secondary-btn full-btn">Pay Now
-                                    $2,390.00</button>
+                                    <button type="submit" id="payNow" class="btn secondary-btn full-btn">Pay
+                                        Now</button>
                                 </form>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="checkout-main-card cstm-card shippment-rates-card">
-                            <h3>Rates</h3>
-                            <p>Transit times may be estimated.</p>
-                            <div class="form-group">
-                                <label for="">Shipment Date</label>
-                                <div class="formfield">
-                                    <input type="text" placeholder="07/23/2024" class="form-control">
+                            <div class="shipment-id-box">
+                                <div class="shipment-address-box">
+                                    <div class="shipment-address-header">
+                                        <div class="shipment-data-name">
+                                            <h3 class="mb-2">Shipment-id</h3>
+                                            <h3>Shipment Date</h3>
+                                        </div>
+                                        <div class="shipment-data-field">
+                                            <!-- Shipment-id -->
+                                            <p class="mb-2">{{ $response_in_array->object_id }}</p>
+                                            <!-- Shipment Date -->
+                                            <p>07/23/2024</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
 
                             <div class="shipper-rates">
-                                <ul class="shipper-rates-list">
-                                    <li>
-                                        <a href="#" class="">
-                                            <div class="shipper-rates-left">
-                                                <div class="shipper-rates-img">
-                                                    <!-- Add an image if needed -->
-                                                </div>
-                                                <h3>No Rates available right now.</h3>
-                                            </div>
-                                            <div class="shipper-rates-prize">
-                                                <!-- You can add any message or leave empty -->
-                                            </div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div class="shipper-rates">
-                                <h4>MORE RATES</h4>
+                                <h4>RATES</h4>
                                 <ul class="shipper-rates-list">
                                     @isset($response_in_array->rates_list)
                                         @forelse ($response_in_array->rates_list as $rates)
                                             <li>
-                                                <a href="#" class="">
+                                                <a href="#" class="shippment-rate ">
                                                     <div class="shipper-rates-left">
                                                         <div class="shipper-rates-img">
                                                             <!-- Add an image if needed -->
+                                                            <img src="{{ $rates->provider_image_75 }}" alt="">
                                                         </div>
                                                         <h3>{{ $rates->servicelevel_token }}</h3>
                                                     </div>
                                                     <div class="shipper-rates-prize">
-                                                        <h4>${{ $rates->amount }}</h4>
+                                                        <h4 class="rate_amount" data-rateId={{ $rates->object_id }}
+                                                            data-amount={{ $rates->amount }}>
+                                                            ${{ $rates->amount }}</h4>
                                                         <p>{{ $rates->days }} days</p>
                                                     </div>
                                                 </a>
@@ -173,6 +174,24 @@
     </div>
 @endsection
 @push('scripts')
+    <script>
+        jQuery(document).ready(function(e) {
+            var selected_rate_id = 0;
+            jQuery('.shippment-rate').on('click', function(event) {
+                console.log('jshdfjk');
+                jQuery('.shippment-rate').removeClass('active'); // Remove 'active' from all
+                jQuery(this).addClass('active');
+                if (jQuery(this).hasClass('active')) {
+                    var amount = jQuery(this).find('.shipper-rates-prize .rate_amount').attr('data-amount');
+                    window.selected_rate_id = jQuery(this).find('.shipper-rates-prize .rate_amount').attr(
+                        'data-rateId');
+                    jQuery('#payNow').text('Pay Now ' + amount);
+                    console.log('Amount of active element:', amount, selected_rate_id);
+                }
+                // $(this).toggleClass('active');
+            });
+        });
+    </script>
     <script src="https://js.stripe.com/v3/"></script>
     <script>
         const stripe = Stripe('{{ env('STRIPE_KEY') }}')
@@ -247,9 +266,6 @@
         const form = document.getElementById('shippmentPaymentForm')
         const cardBtn = document.getElementById('payNow')
         const cardHolderName = document.getElementById('cardName')
-        const totalPayment = document.getElementById('total_payment').value;
-        const shipmethodId = document.getElementById('ship_method').value;
-
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault()
@@ -290,14 +306,9 @@
             form.appendChild(token)
             let paymentElement = document.createElement('input')
             paymentElement.setAttribute('type', 'hidden')
-            paymentElement.setAttribute('name', 'total_payment')
-            paymentElement.setAttribute('value', totalPayment)
+            paymentElement.setAttribute('name', 'rate_id')
+            paymentElement.setAttribute('value', selected_rate_id)
             form.appendChild(paymentElement)
-            let shippmentMethod = document.createElement('input')
-            shippmentMethod.setAttribute('type', 'hidden')
-            shippmentMethod.setAttribute('name', 'shipping_Method')
-            shippmentMethod.setAttribute('value', shipmethodId)
-            form.appendChild(shippmentMethod)
             form.submit();
             jQuery('.page-loader').removeClass('d-none'); //for loader
         }
@@ -328,6 +339,10 @@
             });
             if (form.valid() === true) {
                 console.log('hlo');
+                if ($('.shippment-rate.active').length === 0) {
+                    toastr.error("Please select at least one shipping rate.");
+                    return false;
+                }
                 return true;
             } else {
                 return false;

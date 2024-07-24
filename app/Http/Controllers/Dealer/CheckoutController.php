@@ -165,18 +165,19 @@ class CheckoutController extends Controller
 
             $user = auth()->user();
 
-            $data = $user->shippingAddress;
+            // $data = $user->shippingAddress;
             $carts = Cart::with('cart_product', 'cart_product.product')->where('user_id', $user->id)->get();
             $allProductsOfCart = CartProduct::where('cart_id', $carts[0]->id)->get();
             $deliveryAddress = UserAddresses::where('user_id', auth()->user()->id)->where('type', 'Deliver')->first();
-            if (!is_null($data)) {
+            // dd($deliveryAddress);
+            // if (!is_null($data)) {
 
-                $country = Country::where('id', $data->country_id)->first();
-                $state = State::where('id', $data->state_id)->first();
-                $city = City::where('id', $data->city_id)->first();
+            //     $country = Country::where('id', $data->country_id)->first();
+            //     $state = State::where('id', $data->state_id)->first();
+            //     $city = City::where('id', $data->city_id)->first();
 
-                return view('dealer.checkout', compact('countries', 'total_amount', 'country', 'state', 'city', 'data', 'carts', 'shippingCharge'));
-            }
+            //     return view('dealer.checkout', compact('countries', 'total_amount', 'country', 'state', 'city', 'data', 'carts', 'shippingCharge'));
+            // }
             // if (is_null($deliveryAddress)) {
             //     return redirect()->back()->with('error', 'seller does not set picking address yet. please try again later');
             // }
@@ -273,18 +274,23 @@ class CheckoutController extends Controller
             $responseInArray = $this->address($request);
             // dd($responseInArray);
             if ($responseInArray->object_state !== 'VALID') {
-                
+
                 throw new \Exception('Error in Api ' . $responseInArray->messages[0]->text);
             }
             $shippingAddress = [
                 'user_id' => auth()->user()->id,
                 'order_id' => $request->shipping_Method, //which shipping choose which is created by admin
                 'address1' => $request->street1,
-                'address2' => $request->street2,
+                'address2' => $request->street2 ?? null,
+                'address_type' => $request->addressType,
+                'phone_number' => $request->phone_number,
                 'post_code' => $request->pin_code,
                 'name' => $request->first_name,
                 'last_name' => $request->last_name,
-
+                'country' => $request->country,
+                'state' => $request->state,
+                'city' => $request->city,
+                'email' => auth()->user()->email,
             ];
             // $checkexistenceOfaddress = UserAddresses::where('user_id', auth()->user()->id)->where('type', 'Deliver')->first();
             // $flag = 1;
@@ -305,8 +311,8 @@ class CheckoutController extends Controller
 
 
 
-            // $for_address = ShippingAddress::create($shippingAddress);
-
+            $current_shipping_address = ShippingAddress::create($shippingAddress);
+            session()->put('shipping_address_row_id', $current_shipping_address->id);
 
             BuyerAddress::create([
                 'user_id' => auth()->user()->id,

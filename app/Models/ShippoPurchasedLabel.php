@@ -12,6 +12,7 @@ class ShippoPurchasedLabel extends Model
         'rate_id',
         'shippment_id',
         'amount',
+        'order_id',
         'currency',
         'rate_provider',
         'service_level_token',

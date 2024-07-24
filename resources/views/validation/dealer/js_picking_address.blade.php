@@ -127,8 +127,11 @@
                     success: function(response) {
                         // Handle the response from the server
                         if (response.status === true) {
+                            $(function() {
+                                $('#pickadress-modal').modal('toggle');
+                            });
                             $(".add-address-box").removeClass('open');
-                            window.location.reload;
+                            location.reload();
                             toastr.success(response.message);
 
                         } else {
