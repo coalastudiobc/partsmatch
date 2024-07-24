@@ -27,9 +27,10 @@ class CartController extends Controller
     public function addToCart(Request $request, $product_id)
     {
         try {
+            
+            $cart = Cart::where('user_id', auth()->id())->first();
             $product = Product::where('id', $product_id)->first();
 
-            $cart = Cart::where('user_id', auth()->id())->first();
             if (!$cart) {
                 $cart = [
                     'user_id' => auth()->user()->id,
@@ -40,7 +41,14 @@ class CartController extends Controller
             }
             $message = "Product already in Cart.";
 
+            $dealerCheck = CartProduct::where('cart_id', $cart->id)->first();
+            if($dealerCheck){
+                if($dealerCheck->product_of != $product->user_id){
+                    return response()->json(['success' => true, 'product_id' => $product->id, 'dealer_url' => route('Dealer.view.public',['dealer' => $dealerCheck->product_of ]),'product_url' => route('Dealer.cart.delete.add',['product_id' => $product->id ])]);
+                }
+            }
             $alreadyProduct =  CartProduct::where('product_id', $product->id)->where('cart_id', $cart->id)->first();
+
             if (!$alreadyProduct) {
                 $cart_product = [
                     'product_id' => $product->id,
@@ -59,6 +67,34 @@ class CartController extends Controller
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
+
+    public function deleteAndAddToCart(Request $request, $product_id)
+    {
+        try {
+            
+            $cart = Cart::where('user_id', auth()->id())->first();
+            $product = Product::where('id', $product_id)->first();
+
+            $delete = CartProduct::where('cart_id', $cart->id)->delete();
+            if($delete){
+                $cart_product = [
+                    'product_id' => $product->id,
+                    'cart_id' => $cart->id,
+                    'quantity' => 1,
+                    'product_price' => $product->price,
+                ];
+                CartProduct::create($cart_product);
+                $message = "Cart added successfully";
+            }
+            $user =  User::with('cart', 'cart.cartProducts')->where('id', auth()->user()->id)->first();
+            $cart_icon = view('components.cart-icon', compact('user'))->render();
+            return response()->json(['success' => true, 'cart_icon' => $cart_icon, 'message' => $message]);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
+
+
 
     public function removeFromCart(CartProduct $product)
     {

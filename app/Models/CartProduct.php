@@ -18,9 +18,14 @@ class CartProduct extends Model
     {
         return $this->belongsTo(Product::class, 'product_id');
     }
+    public function prod()
+    {
+        return $this->hasOne(Product::class,'id','product_id');
+    }
+    
     public function getProductOfAttribute()
     {
-        return optional($this->product)->user_id;
+        return optional($this->prod)->user_id;
     }
     // public function product()
     // {

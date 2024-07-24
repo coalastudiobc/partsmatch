@@ -37,7 +37,7 @@
                             <td>
                                 <div class="pro-list-name">
                                     {{-- <input type="checkbox" class="custm-check" class="custm-check"> --}}
-                                    <h4>{{ $order->product->name }}</h4>
+                                    <h4>{{ $order->product ? $order->product->name : "" }}</h4>
                                 </div>
                             </td>
                             <td>

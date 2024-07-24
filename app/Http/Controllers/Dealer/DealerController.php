@@ -20,6 +20,13 @@ class DealerController extends Controller
         $allproducts = Product::with('productImage', 'category')->where('user_id', $product->user->id)->limit(5)->get();
         return view('dealer.profile.dealer_profile', compact('user', 'allproducts', 'product'));
     }
+    public function dealerPublicProfile(User $dealer)
+    {
+        $user = $dealer;
+        $allproducts = Product::with('productImage', 'category')->where('user_id', $dealer->id)->get();
+        return view('dealer.profile.dealer_public_profile', compact('user', 'allproducts'));
+    }
+
     public function toggleStatus(Request $request)
     {
         $id = $request->id;

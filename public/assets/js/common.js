@@ -47,6 +47,58 @@ jQuery(document).ready(function () {
     /* Center no record message */
     if ($("td.no-record-found").length)
         $("td.no-record-found").attr("colspan", $("td.no-record-found").closest("table").find("tr:first-child th").length)
+
+    $(document).on('click', '.addtocart', function() {
+        var element = $(this);
+        var product_id = $(this).attr('product-id')
+        url = APP_URL + '/dealer/add/to/cart/' + product_id
+        var response = ajaxCall(url, 'post', null, false);
+        response.then(handleStateData).catch(handleStateError)
+
+        function handleStateData(response) {
+            if (response.success == true) {
+                if(response.product_id){
+                    $('#alreadyAddedOwner').attr('href',response.dealer_url)
+                    $('#deleteAndAdd').attr('data-url',response.product_url)
+                    $('#restrictMultiple').modal('show');
+                    return ;
+
+                }
+                element.empty().append('<span>Added</span>');
+                jQuery(".cart-icon").html(response.cart_icon);
+                return toastr.success(response.message);
+            } else {
+                jQuery('#errormessage').html(response.error);
+            }
+        }
+
+        function handleStateError(error) {
+            console.log('error', error)
+
+        }
+    });
+    $(document).on('click', '#deleteAndAdd', function() {
+        var url = $(this).attr('data-url');
+        if(url){
+            var response = ajaxCall(url, 'post', null, false);
+            response.then(handleStateData).catch(handleStateError)
+        }
+
+        function handleStateData(response) {
+            if (response.success == true) {
+                $(this).empty().append('<span>Added</span>');
+                jQuery(".cart-icon").html(response.cart_icon);
+                return toastr.success(response.message);
+            } else {
+                jQuery('#errormessage').html(response.error);
+            }
+        }
+
+        function handleStateError(error) {
+            console.log('error', error)
+
+        }
+    });
 });
 
 

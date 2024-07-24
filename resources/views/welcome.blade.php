@@ -368,6 +368,9 @@
     </div>
 </section>
 @endsection
+@section('modals')
+@include('modals.restrict_multiple')
+@endsection
 @include('layouts.include.footer')
 @push('scripts')
 <script>
@@ -423,33 +426,7 @@
     });
 
     $(document).ready(function() {
-        $(document).on('click', '.addtocart', function() {
-            console.log('hrerererer');
-            var product_id = $(this).attr('product-id')
-            url = APP_URL + '/dealer/add/to/cart/' + product_id
-            console.log(url);
-            var response = ajaxCall(url, 'post', null, false);
-            response.then(handleStateData).catch(handleStateError)
-
-            function handleStateData(response) {
-                if (response.success == true) {
-                    console.log('hererererer')
-                    // location.reload();
-                    jQuery('.addtocart').empty().append('<span>Added</span>');
-                    jQuery()
-                    console.log(response.cart_icon);
-                    // jQuery(".cart-icon").html(response.cart_icon);
-                    return toastr.success(response.message);
-                } else {
-                    jQuery('#errormessage').html(response.error);
-                }
-            }
-
-            function handleStateError(error) {
-                console.log('error', error)
-
-            }
-        });
+        
 
         $('.collectionSubcategory').on('click', function() {
             element = jQuery(this);

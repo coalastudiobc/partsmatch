@@ -291,12 +291,14 @@
                                     @forelse ($products as $product)
                                     <div class="col-md-6 col-lg-4 col-xl-3">
                                         <div class="accessories-parts-box">
-                                            <a href="{{ route(auth()->check() && auth()->user()->hasRole('Administrator') ? 'admin.products.details' : (auth()->check() ? auth()->user()->getRoleNames()->first() . '.products.details' : 'Dealer.products.details'), ['product' => $product->id]) }}">
     
                                                 <div class="more-product-cards cstm-card">
+                                            <a href="{{ route(auth()->check() && auth()->user()->hasRole('Administrator') ? 'admin.products.details' : (auth()->check() ? auth()->user()->getRoleNames()->first() . '.products.details' : 'Dealer.products.details'), ['product' => $product->id]) }}">
                                                     <div class="product-cards-img">
                                                         <img src="{{ Storage::url($product->productImage[0]->file_url) }}" alt="">
                                                     </div>
+                                            </a>
+
                                                     <div class="product-deails">
                                                         <p>{{ $product->name }}® – Model-{{ $product->brand ?? 'Ford' }}
                                                             series-{{ $product->model ?? 'endeavor' }}
@@ -375,7 +377,6 @@
                                                         </div>
                                                     </div> --}}
                                                 </div>
-                                            </a>
                                         </div>
                                     </div>
                                     @empty
@@ -429,6 +430,9 @@
   
 
 </section>
+@endsection
+@section('modals')
+@include('modals.restrict_multiple')
 @endsection
 @push('scripts')
 

@@ -185,6 +185,7 @@
             </div>
         </div>
         {{-- end loader --}}
+        @yield('modals')
     </main>
     @yield('footer')
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
