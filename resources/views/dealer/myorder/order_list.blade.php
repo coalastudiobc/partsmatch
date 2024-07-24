@@ -4,69 +4,69 @@
 
 @section('content')
 
-    <div class="dashboard-right-box">
-        <div class="serach-and-filter-box">
-            {{-- <form action="">
+<div class="dashboard-right-box">
+    <div class="serach-and-filter-box">
+        {{-- <form action="">
                 <div class="pro-search-box">
                     <input type="text" name="filter_by_name" class="form-control" placeholder="Search Product By Name">
                     <button type="submit" class="btn primary-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
             </form> --}}
-            {{-- <div class="pro-filter">
+        {{-- <div class="pro-filter">
                 <p>Filter:</p>
                 <a href="#" class="btn primary-btn outline-btn"><img src="images/calender-icon.png"
                         alt="">Select Date</a>
             </div> --}}
-        </div>
-        <div class="product-detail-table product-list-table">
-            <div class="table-responsive">
-                <table class="table">
-                    <tr>
-                        <th>OrderId</th>
-                        <th>Total product</th>
-                        <th>Total price</th>
-                        <th>Quantity</th>
-                        <th>Shipment Price</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                    </tr>
+    </div>
+    <div class="product-detail-table product-list-table">
+        <div class="table-responsive">
+            <table class="table">
+                <tr>
+                    <th>OrderId</th>
+                    <th>Total product</th>
+                    <th>Total price</th>
+                    <th>Quantity</th>
+                    <th>Shipment Price</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                </tr>
 
-                    @forelse ($orders as $key => $order)
-                        <tr>
-                            <td>
-                                <div class="pro-list-name">
-                                    {{-- <input type="checkbox" class="custm-check" class="custm-check"> --}}
-                                    <h4>{{ $order->id }}</h4>
-                                </div>
-                            </td>
-                            <td>
-                                <p>{{ count($order->orderItem) }}</p>
-                            </td>
-                            <td>
-                                <p>${{ $order->total_amount }}</p>
-                            </td>
+                @forelse ($orders as $key => $order)
+                <tr>
+                    <td>
+                        <div class="pro-list-name">
+                            {{-- <input type="checkbox" class="custm-check" class="custm-check"> --}}
+                            <h4>{{ $order->id }}</h4>
+                        </div>
+                    </td>
+                    <td>
+                        <p>{{ count($order->orderItem) }}</p>
+                    </td>
+                    <td>
+                        <p>${{ $order->total_amount }}</p>
+                    </td>
 
-                            <td>
-                                <p>{{ $order->orderItem[0]->quantity }}</p>
-                            </td>
-                            <td>
-                                <p>${{ $order->shipment_price }}</p>
-                            </td>
-                            <td>
-                                <p>{{ date('d-m-Y', strtotime($order->created_at)) }}</p>
-                            </td>
+                    <td>
+                        <p>{{ $order->orderItem[0]->quantity }}</p>
+                    </td>
+                    <td>
+                        <p>${{ $order->shipment_price }}</p>
+                    </td>
+                    <td>
+                        <p>{{ date('d-m-Y', strtotime($order->created_at)) }}</p>
+                    </td>
 
-                            <td>
-                                <div class="pro-status">
+                    <td>
+                        <div class="pro-status">
 
-                                    <div class="dropdown">
+                            <div class="dropdown">
 
-                                        {{-- <div class="badge complete-badge" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                                {{-- <div class="badge complete-badge" id="dropdownMenuButton1" data-bs-toggle="dropdown"
                                             aria-expanded="false">
                                             <i class="fa-solid fa-check"></i> Complete
                                         </div> --}}
-                                        <a href="#" class="btn primary-btn"><i class="fa-solid fa-eye"></i> view</a>
-                                        {{-- <ul class="dropdown-menu"
+                                <a href="#" class="btn primary-btn"><i class="fa-solid fa-eye"></i> view</a>
+                                {{-- <ul class="dropdown-menu"
                                                                 aria-labelledby="dropdownMenuButton1">
                                                                 <li><a class="dropdown-item" href="#"><i
                                                                             class="fa-solid fa-check"></i> Confirmed</a>
@@ -113,218 +113,30 @@
                                                                     </a>
                                                                 </li>
                                                             </ul> --}}
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    @empty
-                        <div class="empty-data">
-                            <img src="{{ asset('assets/images/no-product.svg') }}  " alt="" width="300">
-                            <p class="text-center mt-1">Did not found any order</p>
-                        </div>
-                    @endforelse
-
-                </table>
-            </div>
-        </div>
-        <div class="shipper-page-main-outer">
-            <div class="shipper-page-main">
-                <div class="row g-3">
-                    <div class="col-md-6">
-                        <div class="checkout-main-card cstm-card">
-                            <div class="shipment-address-box">
-                                <div class="shipment-address-header">
-                                    <h3>Recipient</h3>
-                                    <a href="#">Edit Resipient</a>
-                                </div>
-                                <h4>Walters Cooley LLC</h4>
-                                <p>9201 Circuit of the Americas Blvd, Del Valle, TX  78617, United States</p>
-                                <div class="shipment-address-mail-phone">
-                                    <a href="#">cyhujequ@mailinator.com</a>
-                                    <a href="#">0015877742066</a>
-                                </div>
-                                
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="checkout-main-card cstm-card">
-                            <div class="shipment-id-box">
-                                <div class="shipment-address-box">
-                                    <div class="shipment-address-header">
-                                        <h3>Shipment-id</h3>
-                                        <p>25615646511</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="checkout-main-card cstm-card">
-                            <div class="order-summary">
-                                <h3>Payment</h3>
-                                <p>All transactions are secure and encrypted.</p>
-                                <form id="paymentform" action="https://partsmatch.shinedezign.pro/order/payment" method="POST">
-                                    <input type="hidden" name="_token" value="NJviTFksKs2EtJwiFdnUN96XbgL1jY9YSTKOmSVr" autocomplete="off">                            <div class="">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label for="">Card Number</label>
-                                                    <div class="form-field StripeElement StripeElement--empty" id="cardNumberElement"><div class="__PrivateStripeElement" style="margin: 0px !important; padding: 0px !important; border: none !important; display: block !important; background: transparent !important; position: relative !important; opacity: 1 !important;"><iframe name="__privateStripeFrame9243" frameborder="0" allowtransparency="true" scrolling="no" role="presentation" allow="payment *" src="https://js.stripe.com/v3/elements-inner-card-278b3c1324ac8e4875b02219aeb49beb.html#wait=false&amp;mids[guid]=NA&amp;mids[muid]=NA&amp;mids[sid]=NA&amp;showIcon=true&amp;style[base][iconColor]=%23666EE8&amp;style[base][color]=%2331325F&amp;style[base][lineHeight]=40px&amp;style[base][fontWeight]=300&amp;style[base][fontFamily]=Helvetica+Neue&amp;style[base][fontSize]=15px&amp;style[base][::placeholder][color]=%23CFD7E0&amp;style[base][iconStyle]=solid&amp;style[invalid][color]=%23fa755a&amp;style[invalid][fontSize]=20px&amp;placeholder=1234+1234+1234+1234&amp;rtl=false&amp;componentName=cardNumber&amp;keyMode=test&amp;apiKey=pk_test_51OY4tODf0V4fyp7XatEJtPShzSbTKQg5NAJNBYCyQDbMoER6uY8jA5n9lHdZb7zfo0lkwvrVbUKMTDT2SDf3j5za00xv5bH699&amp;referrer=https%3A%2F%2Fpartsmatch.shinedezign.pro%2Fdealer%2Fproduct%2Fshipping%2Ftoaddress&amp;controllerId=__privateStripeController9241" title="Secure card number input frame" style="border: 0px !important; margin: 0px !important; padding: 0px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; user-select: none !important; transform: translate(0px) !important; color-scheme: light only !important; height: 40px;"></iframe><input class="__PrivateStripeElement-input" aria-hidden="true" aria-label=" " autocomplete="false" maxlength="1" style="border: none !important; display: block !important; position: absolute !important; height: 1px !important; top: -1px !important; left: 0px !important; padding: 0px !important; margin: 0px !important; width: 100% !important; opacity: 0 !important; background: transparent !important; pointer-events: none !important; font-size: 16px !important;"></div></div>
-                                                    <div class="is-invalid stripe-error" id="cardNumberError"></div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="">Card Expiration Date</label>
-                                                    <div class="form-field StripeElement StripeElement--empty" id="cardExpiryElement"><div class="__PrivateStripeElement" style="margin: 0px !important; padding: 0px !important; border: none !important; display: block !important; background: transparent !important; position: relative !important; opacity: 1 !important;"><iframe name="__privateStripeFrame9244" frameborder="0" allowtransparency="true" scrolling="no" role="presentation" allow="payment *" src="https://js.stripe.com/v3/elements-inner-card-278b3c1324ac8e4875b02219aeb49beb.html#wait=false&amp;mids[guid]=NA&amp;mids[muid]=NA&amp;mids[sid]=NA&amp;style[base][iconColor]=%23666EE8&amp;style[base][color]=%2331325F&amp;style[base][lineHeight]=40px&amp;style[base][fontWeight]=300&amp;style[base][fontFamily]=Helvetica+Neue&amp;style[base][fontSize]=15px&amp;style[base][::placeholder][color]=%23CFD7E0&amp;style[base][iconStyle]=solid&amp;style[invalid][color]=%23fa755a&amp;style[invalid][fontSize]=20px&amp;rtl=false&amp;componentName=cardExpiry&amp;keyMode=test&amp;apiKey=pk_test_51OY4tODf0V4fyp7XatEJtPShzSbTKQg5NAJNBYCyQDbMoER6uY8jA5n9lHdZb7zfo0lkwvrVbUKMTDT2SDf3j5za00xv5bH699&amp;referrer=https%3A%2F%2Fpartsmatch.shinedezign.pro%2Fdealer%2Fproduct%2Fshipping%2Ftoaddress&amp;controllerId=__privateStripeController9241" title="Secure expiration date input frame" style="border: 0px !important; margin: 0px !important; padding: 0px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; user-select: none !important; transform: translate(0px) !important; color-scheme: light only !important; height: 40px;"></iframe><input class="__PrivateStripeElement-input" aria-hidden="true" aria-label=" " autocomplete="false" maxlength="1" style="border: none !important; display: block !important; position: absolute !important; height: 1px !important; top: -1px !important; left: 0px !important; padding: 0px !important; margin: 0px !important; width: 100% !important; opacity: 0 !important; background: transparent !important; pointer-events: none !important; font-size: 16px !important;"></div></div>
-                                                    <div class="is-invalid stripe-error" id="cardExpiryError"></div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="">Card Security Code</label>
-                                                    <div class="form-field StripeElement StripeElement--empty" id="cardCVCElement"><div class="__PrivateStripeElement" style="margin: 0px !important; padding: 0px !important; border: none !important; display: block !important; background: transparent !important; position: relative !important; opacity: 1 !important;"><iframe name="__privateStripeFrame9245" frameborder="0" allowtransparency="true" scrolling="no" role="presentation" allow="payment *" src="https://js.stripe.com/v3/elements-inner-card-278b3c1324ac8e4875b02219aeb49beb.html#wait=false&amp;mids[guid]=NA&amp;mids[muid]=NA&amp;mids[sid]=NA&amp;showIcon=true&amp;style[base][iconColor]=%23666EE8&amp;style[base][color]=%2331325F&amp;style[base][lineHeight]=40px&amp;style[base][fontWeight]=300&amp;style[base][fontFamily]=Helvetica+Neue&amp;style[base][fontSize]=15px&amp;style[base][::placeholder][color]=%23CFD7E0&amp;style[base][iconStyle]=solid&amp;style[invalid][color]=%23fa755a&amp;style[invalid][fontSize]=20px&amp;placeholder=123&amp;rtl=false&amp;componentName=cardCvc&amp;keyMode=test&amp;apiKey=pk_test_51OY4tODf0V4fyp7XatEJtPShzSbTKQg5NAJNBYCyQDbMoER6uY8jA5n9lHdZb7zfo0lkwvrVbUKMTDT2SDf3j5za00xv5bH699&amp;referrer=https%3A%2F%2Fpartsmatch.shinedezign.pro%2Fdealer%2Fproduct%2Fshipping%2Ftoaddress&amp;controllerId=__privateStripeController9241" title="Secure CVC input frame" style="border: 0px !important; margin: 0px !important; padding: 0px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; user-select: none !important; transform: translate(0px) !important; color-scheme: light only !important; height: 40px;"></iframe><input class="__PrivateStripeElement-input" aria-hidden="true" aria-label=" " autocomplete="false" maxlength="1" style="border: none !important; display: block !important; position: absolute !important; height: 1px !important; top: -1px !important; left: 0px !important; padding: 0px !important; margin: 0px !important; width: 100% !important; opacity: 0 !important; background: transparent !important; pointer-events: none !important; font-size: 16px !important;"></div></div>
-                                                    <div class="is-invalid stripe-error" id="cardCVVError"></div>
-                                                    <input type="hidden" name="stripeCustomer_id" value="cus_QSGwUPKOpaiszH">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label for="">Card Holder Name</label>
-                                                    <div class="form-field">
-                                                        <input type="text" name="cardname" id="cardName" class="form-control" placeholder="John Doe">
-                                                        <label class="cardName-error" for="card-name" id="cardname"></label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <input type="hidden" value="2390" id="total_payment">
-                                    <button type="submit" id="payNow" class="btn secondary-btn full-btn">Pay Now
-                                        $2,390.00</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="checkout-main-card cstm-card shippment-rates-card">
-                            <h3>Rates</h3>
-                            <p>Transit times may be estimated.</p>
-                            <div class="form-group">
-                                <label for="">Shipment Date</label>
-                                <div class="formfield">
-                                    <input type="text" placeholder="07/23/2024" class="form-control">
-                                </div>
-                            </div>
-                            <div class="shipper-rates">
-                                <h4>Fastest</h4>
-                                <ul class="shipper-rates-list">
-                                    <li>
-                                        <a href="#" class="active">
-                                            <div class="shipper-rates-left">
-                                                <div class="shipper-rates-img">
-                                                    
-                                                </div>
-                                                <h3>UPS Next Day Air® Early</h3>
-                                            </div>
-                                            <div class="shipper-rates-prize">
-                                                <h4>$8.25</h4>
-                                                <p>2 days</p>
-                                            </div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="shipper-rates">
-                                <h4>MORE RATES</h4>
-                                <ul class="shipper-rates-list">
-                                    <li>
-                                        <a href="#" class="">
-                                            <div class="shipper-rates-left">
-                                                <div class="shipper-rates-img">
-                                                    
-                                                </div>
-                                                <h3>UPS Next Day Air® Early</h3>
-                                            </div>
-                                            <div class="shipper-rates-prize">
-                                                <h4>$8.25</h4>
-                                                <p>2 days</p>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="">
-                                            <div class="shipper-rates-left">
-                                                <div class="shipper-rates-img">
-                                                    
-                                                </div>
-                                                <h3>UPS Next Day Air® Early</h3>
-                                            </div>
-                                            <div class="shipper-rates-prize">
-                                                <h4>$8.25</h4>
-                                                <p>2 days</p>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="">
-                                            <div class="shipper-rates-left">
-                                                <div class="shipper-rates-img">
-                                                    
-                                                </div>
-                                                <h3>UPS Next Day Air® Early</h3>
-                                            </div>
-                                            <div class="shipper-rates-prize">
-                                                <h4>$8.25</h4>
-                                                <p>2 days</p>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="">
-                                            <div class="shipper-rates-left">
-                                                <div class="shipper-rates-img">
-                                                    
-                                                </div>
-                                                <h3>UPS Next Day Air® Early</h3>
-                                            </div>
-                                            <div class="shipper-rates-prize">
-                                                <h4>$8.25</h4>
-                                                <p>2 days</p>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="">
-                                            <div class="shipper-rates-left">
-                                                <div class="shipper-rates-img">
-                                                    
-                                                </div>
-                                                <h3>UPS Next Day Air® Early</h3>
-                                            </div>
-                                            <div class="shipper-rates-prize">
-                                                <h4>$8.25</h4>
-                                                <p>2 days</p>
-                                            </div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                    </td>
+                </tr>
+                @empty
+                <div class="empty-data">
+                    <img src="{{ asset('assets/images/no-product.svg') }}  " alt="" width="300">
+                    <p class="text-center mt-1">Did not found any order</p>
                 </div>
-            </div>
-        </div>
-        <div class="pagination-wrapper">
-            {{-- <div class="pagination-boxes"> --}}
+                @endforelse
 
-            {!! $orders->links('dealer.pagination') !!}
+            </table>
         </div>
     </div>
-    {{-- </div>
+
+    <div class="pagination-wrapper">
+        {{-- <div class="pagination-boxes"> --}}
+
+        {!! $orders->links('dealer.pagination') !!}
+    </div>
+</div>
+{{-- </div>
 
             </div>
         </div> --}}
-    {{-- </section> --}}
+{{-- </section> --}}
 @endsection
