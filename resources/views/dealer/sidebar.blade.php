@@ -75,7 +75,7 @@
                                 </g>
                             </svg>
                         </span>
-                        <h4>Parts Manager</h4>
+                        <h4>Parts manager</h4>
                     </div>
                 </a>
                 {{-- </button> --}}
@@ -121,7 +121,7 @@ class="analyics-tabs-btns @if (Route::is('Dealer.address.*')) active @endif ">
                                 </g>
                             </svg>
                         </span>
-                        <h4>My Order</h4>
+                        <h4>My orders</h4>
                     </div>
                 </a>
                 {{-- </button> --}}
@@ -145,7 +145,7 @@ class="analyics-tabs-btns @if (Route::is('Dealer.address.*')) active @endif ">
                                 </g>
                             </svg>
                         </span>
-                        <h4>Order Management</h4>
+                        <h4>Order management</h4>
                     </div>
                 </a>
                 {{-- </button> --}}
@@ -153,7 +153,7 @@ class="analyics-tabs-btns @if (Route::is('Dealer.address.*')) active @endif ">
         </div>
     </div>
 </li>
-<li class="analyics-tabs-list">
+<!-- <li class="analyics-tabs-list">
     <div class="accordion accordion-flush" id="accordionFlushExample">
         <div class="accordion-item">
             <h2 class="accordion-header" id="flush-headingOne">
@@ -176,7 +176,7 @@ class="analyics-tabs-btns @if (Route::is('Dealer.address.*')) active @endif ">
             </h2>
         </div>
     </div>
-</li>
+</li> -->
 </ul>
 </div>
 </div>

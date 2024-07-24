@@ -80,7 +80,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">Email ID*</label>
+                                                <label for="">Email*</label>
                                                 <div class="form-field">
                                                     <input type="email" name="email"
                                                         value="{{ old('email', $user->email ?? $user->email) }}"
@@ -137,7 +137,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="">Industry*</label>
-                                                <div class="form-field">
+                                                <div class="form-field custm-invalid-field">
                                                     <!-- <input type="text" class="form-control" placeholder="Select industry"> -->
                                                     {{-- <select name="industry_type" id="industury"
                                                         value="{{ old('industury', $user->industry_type ?? $user->industry_type) }}"
@@ -227,12 +227,12 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">Dealership Name</label>
+                                                <label for="">Dealership name</label>
                                                 <div class="form-field">
                                                     <input type="text" name="dealershipName" disabled
                                                         class="form-control @error('dealershipName') is-invalid @enderror disabled-inputs"
                                                         value="{{ old('dealershipName', $user->dealership_name ?? $user->name) }}"
-                                                        placeholder="dealership Name">
+                                                        placeholder="Dealership name">
                                                     @error('dealershipName')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
@@ -254,12 +254,12 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">zipcode</label>
+                                                <label for="">Zip code</label>
                                                 <div class="form-field">
                                                     <input type="text" name="zipcode" disabled
                                                         class="form-control @error('zipcode') is-invalid @enderror disabled-inputs"
                                                         value="{{ old('zipcode', $user->zipcode ?? $user->zipcode) }}"
-                                                        placeholder="zip code">
+                                                        placeholder="Zip code">
                                                     @error('zipcode')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
@@ -282,7 +282,7 @@
                                         <div class="col-md-12">
                                             <div class="accounts-btns">
                                                 <button type="submit" disabled
-                                                    class="btn secondary-btn disabled-inputs">Save Changes</button>
+                                                    class="btn secondary-btn disabled-inputs">Save changes</button>
                                                 <a href="#" disabled
                                                     class="btn primary-btn disabled-inputs">Cancel</a>
                                             </div>
@@ -291,7 +291,7 @@
                                             <div class="change-pass-box">
                                                 <a href="#" class="btn primary-btn" data-bs-toggle="modal"
                                                     data-bs-target="#change-pass-model">Change
-                                                    Password</a>
+                                                    password</a>
                                             </div>
                                         </div>
                                     </div>

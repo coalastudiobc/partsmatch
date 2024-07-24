@@ -204,13 +204,13 @@
                                         <div class="price-input-container"> 
                                             <div class="price-input"> 
                                                 <div class="price-field left"> 
-                                                    <input type="number" 
+                                                    <input type="number" disabled
                                                     name="min_value"
                                                         class="min-input" 
                                                         value="0"> 
                                                 </div> 
                                                 <div class="price-field right"> 
-                                                    <input type="number" 
+                                                    <input type="number" disabled
                                                     name="max_value"
                                                         class="max-input" 
                                                         value="10000"> 
@@ -261,7 +261,7 @@
                     <div class="interior-content-right-outer">
                         <div class="interior-content-right" id="interiorComponent">
                             {{-- <h2 class="interior-content-heading">Mirrors</h2> --}}
-                            <h3>Result : </h3>
+                            <!-- <h3>Result : </h3>  -->
                             <div class="accessories-parts">
                                 <div class="row g-4">
                                     {{-- @dd($product->productImage[0]->file_url) --}}
@@ -280,7 +280,7 @@
                                                         <p>{{ $product->name }}</p>
                                                         <div class="price-and-cart">
                                                             <div class="discount-price">
-                                                                <span>{{ $product->price * 1.5 }}</span>
+                                                                <!-- <span>{{ $product->price * 1.5 }}</span> -->
                                                                 <p>{{ $product->price }}</p>
                                                             </div>
     

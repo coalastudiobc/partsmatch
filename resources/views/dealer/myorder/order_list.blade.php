@@ -65,7 +65,7 @@
                                             aria-expanded="false">
                                             <i class="fa-solid fa-check"></i> Complete
                                         </div> --}}
-                                <a href="{{route('Dealer.myorder.view.products',['order'=>$order->id])}}" class="btn primary-btn"><i class="fa-solid fa-eye"></i>view</a>
+                                <a href="{{route('Dealer.myorder.view.products',['order'=>$order->id])}}" class="btn primary-btn"><i class="fa-solid fa-eye"></i>View</a>
                                 {{-- <ul class="dropdown-menu"
                                                                 aria-labelledby="dropdownMenuButton1">
                                                                 <li><a class="dropdown-item" href="#"><i

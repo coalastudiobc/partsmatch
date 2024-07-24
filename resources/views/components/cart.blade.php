@@ -26,11 +26,11 @@
                                                             : (auth()->check()
                                                                 ? auth()->user()->getRoleNames()->first() . '.products.details'
                                                                 : 'Dealer.products.details'),
-                                                        $product->id,
+                                                        $product->product_id,
                                                     ) }}">
                                             <div class="cart-product-image">
 
-                                                <img src="{{ isset($product->product->productImage[0]) ? Storage::url($product->product->productImage[0]->file_url) : asset('assets/images/gear-logo.svg') }}" alt="">
+                                                <img src="{{ isset($product->product->productImage[0]) ? ($product->product->productImage[0])?( Storage::url($product->product->productImage[0]->file_url)) : asset('assets/images/gear-logo.svg') :'' }}" alt="">
                                             </div>
                                         </a>
                                     </td>
@@ -140,7 +140,7 @@
             <h3>Payable Total</h3>
             <h3>
                 @if (isset($cart) && $cart->amount)
-                {{ number_format($cart->amount + $shiping_value, 2, '.', ',') }}
+                {{ number_format($cart->amount , 2, '.', ',') }}
                 @else
                 {{ '0.00' }}
                 @endif

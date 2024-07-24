@@ -106,11 +106,11 @@
                                             </div>
 
                                             <div class="col-md-6">
-                                                <a class="btn secondary-btn full-btn mr-1"
-                                                    href="{{ route('admin.commission') }}">Back</a>
+                                                <!-- <a class="btn secondary-btn full-btn mr-1"
+                                                    href="{{ route('admin.commission') }}">Back</a> -->
                                             </div>
                                             <div class="col-md-6">
-                                                <button class="btn primary-btn full-btn mr-1" id="submit"
+                                                <button class="btn primary-btn float-end" id="submit"
                                                     type="submit">Submit</button>
                                             </div>
                                         </div>

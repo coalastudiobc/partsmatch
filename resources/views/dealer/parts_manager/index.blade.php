@@ -4,17 +4,17 @@
 @section('content')
 <div class="dashboard-right-box parts-manager-table-box">
     <x-alert-component />
-    <div class="bredcrum-plus-filter">
-        <div class="cstm-bredcrum">
+    <div class="bredcrum-plus-filter justify-content-end">
+        <!-- <div class="cstm-bredcrum">
             <a href="#" class="bredcrum-list">Home</a>
             <a href="#" class="bredcrum-list">Parts match</a>
             <a href="#" class="bredcrum-list active">Listing</a>
-        </div>
+        </div> -->
         <div class="serach-and-filter-box">
 
             <form action="">
                 <div class="pro-search-box">
-                    <input type="text" class="form-control" name="filter_by_name" placeholder="Search User By Name">
+                    <input type="text" class="form-control" name="filter_by_name" placeholder="Search">
                     <button type="submit" class="btn primary-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
                     <a href="#" class="btn secondary-btn filter-open-btn">Filter</a>
                 </div>
@@ -124,11 +124,10 @@
 <div class="modal fade" id="add-manager-model" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
+            
             @if ($role == 'Advance')
             <div class="modal-body">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div class="add-pro-form">
                     <h2 id="modal_title">Add New Manager</h2>
                     <form id="parts_manager" action="{{ route('Dealer.partsmanager.store') }}" method="post" enctype="multipart/form-data">

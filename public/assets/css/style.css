@@ -2709,5 +2709,12 @@ span.filter-serach-icon {
     max-height: 40px;
     object-fit: cover;
 }
+.interior-filter-box .form-group:has(input[type='text']){
+    display: none;
+}
+.custm-invalid-field label#industry-error {
+    position: absolute;
+    top: 47px;
+}
 
 /* 24-07-24 make-group css */

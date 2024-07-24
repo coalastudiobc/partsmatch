@@ -21,7 +21,7 @@
 
                 </div>
             </div>
-            <div class="cstm-table-box make-group">
+            <div class="cstm-table-box make-group" id="outerBox">
                 <div class="custm-table-head">
                     <div class="custm-table-head-box">
                         <p></p>
@@ -40,9 +40,6 @@
                     </div>
                     <div class="custm-table-head-box">
                         <p>Total Price</p>
-                    </div>
-                    <div class="custm-table-head-box">
-                        <p>product Uploaded at</p>
                     </div>
                     <div class="custm-table-head-box">
                         <p>Action</p>
@@ -69,9 +66,6 @@
                             <p>${{ $item->quantity * $item->product_price }}</p>
                         </div>
                         <div class="custm-table-head-box">
-                            <p>{{ $item->product ? $item->product->created_at->format('d/m/y') :"" }}</p>
-                        </div>
-                        <div class="custm-table-head-box">
                             <div class="pro-status">
                                             <div class="dropdown" title="Add dimension of package">
                                                 @php
@@ -95,7 +89,7 @@
                     </div>
                 @empty
                 @endforelse
-                    <div class="grouped-data">
+                    {{-- <div class="grouped-data">
                         <div class="custm-table-body">
                             <div class="custm-table-head-box">
                                 <input type="checkbox" >
@@ -184,7 +178,7 @@
                                 </div>
                             </div>
                         </div>  
-                    </div>
+                    </div> --}}
             </div>
 
 
@@ -383,16 +377,33 @@
             $(".available-to-add-input").removeClass('d-none');
             $('#makeGroup').addClass('d-none');
             $('#createGroup').removeClass('d-none');
+            $('#cancel').removeClass('d-none');
 
         });
+
         $('#createGroup').on('click', function() {
-            $(".available-to-add-input").removeClass('d-none');
-            $('#makeGroup').html('create');
+            if($('input.available-to-add-input:checked').length > 0){
+                var data ="";
+                $('input.available-to-add-input:checked').each(function(index, item) {
+                    data = data+ $($(item).attr('data-add')).prop('outerHTML');
+                    $($(item).attr('data-add')).remove();
+                });
+                data = '<div class="grouped-data">'+ data + '</div>';
+                $('#outerBox').append(data);
+                $('#makeGroup').removeClass('d-none');
+                $('#cancel').addClass('d-none');
+                $('#createGroup').addClass('d-none');
+            }else{
+                alert('select any data entry')
+            }
+                    });
 
-        });
         $('#cancel').on('click', function() {
             $(".available-to-add-input").addClass('d-none');
-            $('#makeGroup').html('create');
+            $('#makeGroup').removeClass('d-none');
+            $('#cancel').addClass('d-none');
+            $('#createGroup').addClass('d-none');
+
 
         });
     </script>

@@ -196,7 +196,7 @@ class ProductController extends Controller
                 FeaturedProduct::create($featured_product);
             }
 
-            if (count($request->file('images')) > 0) {
+            if ($request->has('images') && count($request->file('images')) > 0) {
                 foreach ($request->file('images') as $file) {
                     $image = store_image($file, 'products/images');
                     if ($image != null) {
@@ -207,9 +207,9 @@ class ProductController extends Controller
                         ];
                     }
                 }
+                ProductImage::insert($productimage);
             }
 
-            ProductImage::insert($productimage);
 
             if ($request->has('compatable_with')) {
                 $compatables = explode(',', $request->compatable_with);
@@ -223,15 +223,15 @@ class ProductController extends Controller
                     }
                 }
             }
-            ProductParcelDetail::create([
-                'product_id' => $product->id,
-                'length' => $request->length,
-                'width' => $request->width,
-                'height' => $request->height,
-                'weight' => $request->weight,
-                'distance_unit' => $request->distance_unit,
-                'mass_unit' => $request->mass_unit,
-            ]);
+            // ProductParcelDetail::create([
+            //     'product_id' => $product->id,
+            //     'length' => $request->length,
+            //     'width' => $request->width,
+            //     'height' => $request->height,
+            //     'weight' => $request->weight,
+            //     'distance_unit' => $request->distance_unit,
+            //     'mass_unit' => $request->mass_unit,
+            // ]);
             DB::commit();
             return redirect()->back()->with('message', 'Product added successfully');
         } catch (\Exception $e) {
