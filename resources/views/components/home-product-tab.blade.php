@@ -13,7 +13,7 @@
                 @if (isset($product->productImage[0]))
                     <img src="{{ Storage::url($product->productImage[0]->file_url) }}" alt="">
                 @else
-                    <img src="{{ asset('assests/images/product2.png') }}" alt="">
+                    <img src="{{ asset('assets/images/product2.png') }}" alt="">
                 @endif
             </div>
         </a>

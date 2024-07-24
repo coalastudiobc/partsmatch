@@ -30,7 +30,7 @@
                                                     ) }}">
                                             <div class="cart-product-image">
 
-                                                <img src="{{ isset($product->product->productImage[0]) ? ($product->product->productImage[0])?( Storage::url($product->product->productImage[0]->file_url)) : asset('assets/images/gear-logo.svg') :'' }}" alt="">
+                                                <img src="{{ isset($product->product->productImage[0]) ? ($product->product->productImage[0])?( Storage::url($product->product->productImage[0]->file_url)) : asset('assets/images/gear-logo.svg') : asset('assets/images/gear-logo.svg') }}" alt="">
                                             </div>
                                         </a>
                                     </td>

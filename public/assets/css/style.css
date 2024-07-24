@@ -2646,7 +2646,7 @@ span.filter-serach-icon {
 
 .cstm-table-box.make-group .custm-table-body,
 .cstm-table-box.make-group .custm-table-head {
-    grid-template-columns: repeat(8, 1fr);
+    grid-template-columns: repeat(7, 1fr);
 }
 
 .cstm-table-box .custm-table-body .custm-table-head-box:first-child,
@@ -2715,6 +2715,9 @@ span.filter-serach-icon {
 .custm-invalid-field label#industry-error {
     position: absolute;
     top: 47px;
+}
+.custm-table-head .custm-table-head-box p{
+    color: #727272;
 }
 
 /* 24-07-24 make-group css */

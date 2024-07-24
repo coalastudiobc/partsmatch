@@ -27,10 +27,10 @@
                         <p></p>
                     </div>
                     <div class="custm-table-head-box">
-                        <p>OrderId</p>
+                        <p>Order ID</p>
                     </div>
                     <div class="custm-table-head-box">
-                        <p>Total product</p>
+                        <p>Product name</p>
                     </div>
                     <div class="custm-table-head-box">
                         <p>Quantity</p>
@@ -39,7 +39,7 @@
                         <p>Price</p>
                     </div>
                     <div class="custm-table-head-box">
-                        <p>Total Price</p>
+                        <p>Total price</p>
                     </div>
                     <div class="custm-table-head-box">
                         <p>Action</p>

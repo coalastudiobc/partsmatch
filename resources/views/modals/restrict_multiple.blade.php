@@ -3,14 +3,11 @@
         <div class="modal-content">
             <div class="modal-body">
                 <div class="add-pro-form">
-                    <h2>You have previously added products from diffrent dealer kindly delete those or add products from same dealer</h2>
+                    <h3>You have previously added products from diffrent dealer kindly delete those or add products from same dealer</h3> <br>
                     <form action="">
                         <div class="row">
-                            <div class="col-md-6">
-                                <button id="deleteAndAdd" class="btn secondary-btn full-btn">delete</button>
-                            </div>
-                            <div class="col-md-6">
-                                <a id="alreadyAddedOwner" class="btn secondary-btn full-btn">view profile</a>
+                            <div class="col-md-12">
+                                <button id="deleteAndAdd" class="btn secondary-btn md-btn float-end mb-2">Replace</button>
                             </div>
                         </div>
                     </form>

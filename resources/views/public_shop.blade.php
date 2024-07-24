@@ -434,30 +434,6 @@
 </script>
 <script>
     $(document).ready(function() {
-        $('.addtocart').on('click', function() {
-            console.log('hrerererer');
-            var product_id = $(this).attr('product-id')
-            url = APP_URL + '/dealer/add/to/cart/' + product_id
-            console.log(url);
-            var response = ajaxCall(url, 'post', null, false);
-            response.then(handleStateData).catch(handleStateError)
-
-            function handleStateData(response) {
-                if (response.success == true) {
-                    console.log('hererererer')
-                    jQuery('.cart-icon').html(response.cart_icon)
-                    window.location.replace(APP_URL + '/' + 'dealer/cart/index')
-                    // return toastr.success(response.msg);
-                } else {
-                    jQuery('#errormessage').html(response.error);
-                }
-            }
-
-            function handleStateError(error) {
-                console.log('error', error)
-
-            }
-        });
 
         $('.see-more-less-make').on('click', function() {
             $('#brandContainer').toggleClass('full-data-view');
