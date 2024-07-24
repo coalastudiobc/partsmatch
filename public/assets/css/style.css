@@ -1866,7 +1866,7 @@ html {
 .page-content-sec .cart-product-image {
     max-width: 44px;
     height: 44px;
-    width: auto;
+    width: 44px;
 }
 
 .page-content-sec .cart-product-image img {

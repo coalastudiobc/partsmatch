@@ -77,6 +77,7 @@
                                             series-{{ $product->model ?? 'endeavor' }}
                                             Year-{{ $product->year ?? '2016' }}
                                         </h2>
+                                        <h2 class="product-disc-prize">${{ $product->price }}</h2>
                                         <span>{{ $product->category->name }}</span><br>
                                         <span>See more products by: </span> <a
                                             href="{{ route(
@@ -88,8 +89,7 @@
                                                 ['product' => $product->id],
                                             ) }}">
                                             <u
-                                                style="color: #0d6efd">{{ $userdetails->dealership_name ?? 'Dealership Name' }}</u></a>
-                                        <h2>${{ $product->price }}</h2>
+                                                style="color: #272643">{{ $userdetails->dealership_name ?? 'Dealership Name' }}</u></a>
                                         {{-- @auth
                                             @if (isset($cart->cartProducts))
                                                 <div class="product-quantity-box">

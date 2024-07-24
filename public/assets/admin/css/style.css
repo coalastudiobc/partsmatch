@@ -1576,8 +1576,8 @@ button.btn-close {
     width: unset !important;
 }
 .header-logo img{
-    width: 100%;
-    max-width: 192px;
+    /* width: 100%; */
+    width: 192px;
 }
 .pro-search-box {
 	position: relative;
