@@ -71,18 +71,55 @@ class ProductController extends Controller
 
         return Storage::download($filePath);
     }
+    public function downloadModifiedCSV()
+    {
+        $filePath = 'sample.csv';
+
+        if (!Storage::exists($filePath)) {
+            abort(404);
+        }
+        $csvData = array_map('str_getcsv', file(Storage::path($filePath)));
+        $allowedCategories = Category::with('parent')->has('parent')->pluck('name')->toArray();
+        $csvData[0][] = 'allowed_categories';
+        $columnCount = count($csvData[0]);
+        foreach ($csvData as $index => &$row) {
+            while (count($row) < $columnCount - 1) {
+                $row[] = '';
+            }
+
+            if ($index > 0) { 
+                $row[] = $allowedCategories[$index - 1] ?? '';
+            } else {
+                $row[] = 'please delete this column as well as allowed_categories'; 
+            }
+
+        }
+        $headers = [
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename="modified_sample.csv"',
+        ];
+
+        return response()->streamDownload(function() use ($csvData) {
+            $output = fopen('php://output', 'w');
+            foreach ($csvData as $row) {
+                fputcsv($output, $row);
+            }
+            fclose($output);
+        }, 'modified_sample.csv', $headers);
+    }
+
+
     public function bulkUpload(Request $request)
     {
         try{
             $request->validate([
-                'csv_file' => 'required|file|mimes:csv,xlsx',
+                'csv_file' => 'required|file|mimes:csv',
             ]);
             
             $path = $request->file('csv_file')->getRealPath();
             $data = array_map('str_getcsv', file($path));
             $header = array_shift($data);
             foreach ($data as $row) {
-                dd($row,$header);
                 $row = array_combine($header, $row);
                 $subcategory = Category::with('parent')->has('parent')->where('name',$row['category'])->first();
                 if(!$subcategory){
@@ -471,10 +508,9 @@ class ProductController extends Controller
         if (is_null($request->globalquery)) {
             return redirect()->back();
         }
-        // Define initial query
+
         $productsQuery = Product::query();
 
-        // Apply global search for products
         $productsQuery->when(!empty($request->globalquery), function ($query) use ($request) {
             $query->where(function ($query) use ($request) {
                 $query->where('name', 'like', '%' . $request->globalquery . '%')
@@ -485,28 +521,13 @@ class ProductController extends Controller
             });
         });
 
-        // Apply status filter if 'active' keyword is provided
         $productsQuery->when(!empty($request->globalquery) && $request->globalquery == 'active', function ($query) {
             $query->where('status', '1');
         });
-        // Retrieve products
+
         $products = $productsQuery->paginate(5)
             ->appends($request->globalquery);
-
-        // // Retrieve categories for the products
-        // $categories = Category::with('children', 'parent')->get();
-
-        // // Extract parent category ID
-        // $parentCategoryId = null;
-        // if ($request->has('category')) {
-        //     $category = $categories->firstWhere('id', $request->category);
-        //     if ($category && $category->parent) {
-        //         $parentCategoryId = $category->parent->id;
-        //     }
-        // }
-
-        // Retrieve products
-
-        return view('dealer.products.search_products', compact('products'));
+        return redirect()->route('products',['search_parameter'=>$request->globalquery]);
     }
+
 }

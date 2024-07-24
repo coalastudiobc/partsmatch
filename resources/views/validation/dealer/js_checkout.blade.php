@@ -34,17 +34,19 @@
             city: {
                 required: true
             },
-            shiping_address1: {
-                required: true
-            },
-            shiping_address2: {
-                required: true
-            },
             pin_code: {
                 required: true,
                 digits: true,
                 minlength: 2,
                 maxlength: 6,
+            },
+            street1: {
+                required: true,
+                minlength: 10,
+                maxlength: 35,
+            },
+            street2: {
+                maxlength: 100,
             },
             shippingMethod: {
                 is_checked: 'input[name="shippingMethod"]',
@@ -63,13 +65,6 @@
                 minlength: `{{ __('customvalidation.user.phone_number.minlength') }}`,
                 maxlength: `{{ __('customvalidation.user.phone_number.maxlength') }}`,
             },
-            shipping_address1: {
-                required: `{{ __('customvalidation.user.address.required') }}`,
-            },
-
-            shipping_address2: {
-                required: `{{ __('customvalidation.user.address.required') }}`,
-            },
             pin_code: {
                 required: `{{ __('customvalidation.user.pin_code.required') }}`,
                 // digits: 'only number allowed',
@@ -87,6 +82,14 @@
             },
             shippingMethod: {
                 is_checked: `{{ __('customvalidation.checkout.shippingMethod.required') }}`,
+            },
+            street1: {
+                required: `{{ __('customvalidation.addresses.address1.required') }}`,
+                minlength: `{{ __('customvalidation.addresses.address1.min') }}`,
+                maxlength: `{{ __('customvalidation.addresses.address1.max') }}`,
+            },
+            description: {
+                maxlength: `{{ __('customvalidation.addresses.description.max') }}`
             },
         };
         handleValidation('product-card-details', rules, messages, true);

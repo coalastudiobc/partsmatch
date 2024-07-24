@@ -271,14 +271,19 @@
                 <div class="collect-tab-btns">
                     <div>
                         <div class="slick-tab ">
+                            
+                            <div class="collect-tab-slider-main">
+                                <div class="collect-tab-slider">
+                                    @foreach ($collections as $collection)
+                                        <a href="javascript:void(0)"
+                                            data-url="{{ route('products', ['category' => $collection->id]) }}" data-id="{{ $collection->id }}"
+                                            class="tab-inner-box collectionSubcategory {{ $loop->first ? 'active' : '' }} ">
+                                            {{ $collection->name }}
+                                        </a>
+                                    @endforeach
+                                </div>
+                            </div>
                             <a href="{{route('products')}}" class="tab-inner-box" > View All </a>
-                            @foreach ($collections as $collection)
-                                <a href="javascript:void(0)"
-                                    data-url="{{ route('products', ['category' => $collection->id]) }}" data-id="{{ $collection->id }}"
-                                    class="tab-inner-box collectionSubcategory {{ $loop->first ? 'active' : '' }} ">
-                                    {{ $collection->name }}
-                                </a>
-                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -424,6 +429,46 @@
 
         ]
     });
+    // $('.collect-tab-slider').slick({
+    //     infinite: true,
+    //     slidesToShow: 8,
+    //     slidesToScroll: 1,
+    //     arrows: true,
+    //     dots: false,
+    //     prevArrow: $('.prev-loop-btn'),
+    //     nextArrow: $('.next-loop-btn'),
+    //     responsive: [
+    //       {
+    //         breakpoint: 1200,
+    //         settings: {
+    //           slidesToShow: 5,
+    //           slidesToScroll: 2,
+    //         }
+    //       },
+    //       {
+    //         breakpoint: 1024,
+    //         settings: {
+    //           slidesToShow: 4,
+    //           slidesToScroll: 2,
+    //         }
+    //       },
+    //       {
+    //         breakpoint: 767,
+    //         settings: {
+    //           slidesToShow: 2,
+    //           slidesToScroll: 1,
+    //         }
+    //       },
+    //       {
+    //         breakpoint: 425,
+    //         settings: {
+    //           slidesToShow: 1,
+    //           slidesToScroll: 1,
+    //         }
+    //       }
+
+    //     ]
+    // });
 
     $(document).ready(function() {
         

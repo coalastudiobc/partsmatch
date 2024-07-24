@@ -21,9 +21,9 @@ use App\Http\Controllers\Dealer\OrderPaymentController;
 */
 
 Route::get('/', function () {
-    if (Auth::check())
-        return redirect()->route('redirect-to-dashboard');
-    else
+    // if (Auth::check())
+    //     return redirect()->route('redirect-to-dashboard');
+    // else
     return redirect()->route('welcome.index');
 })->name('welcome');
 
@@ -38,7 +38,7 @@ Route::get('verify-email/{user}/{token}', [RegisterController::class, 'verifyEma
 Route::get('/search', [ProductController::class, 'search'])->name('search');
 Route::get('brands', [HomeController::class, 'brands'])->name('brands');
 Route::get('/sumit', [OrderController::class, 'testing']);
-Route::match(['get', 'post'],'products', [HomeController::class, 'allProducts'])->name('products');
+Route::match(['get', 'post'], 'products', [HomeController::class, 'allProducts'])->name('products');
 
 
 Auth::routes();

@@ -84,15 +84,15 @@
                                                 ['product' => $product->id],
                                             ) }}">
                                             <u
-                                                style="color: #0d6efd">{{ $userdetails->dealership_name ?? 'Dealership Name' }}</u></a>
-                                        <h2>${{ $product->price }}</h2>
+                                                style="color:#272643">{{ $userdetails->dealership_name ?? 'Dealership Name' }}</u></a>
+                                        <h2  class="product-prize-head">${{ $product->price }}</h2>
                                       
 
                             @auth
                             @if ($product->user_id !== auth()->user()->id)
                             @if (!in_array($product->id, authCartProducts()))
                             <button product-id="{{ $product->id }}" class="btn secondary-btn full-btn addtocart">Add to
-                                Cart
+                                Cart 
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 20 19" fill="none">
                                     <g clip-path="url(#clip0_162_2238)">
                                         <path d="M6.61281 12.2833H6.61368C6.6144 12.2833 6.61512 12.2832 6.61585 12.2832H16.708C16.9565 12.2832 17.1749 12.1184 17.2432 11.8795L19.4697 4.08652C19.5177 3.91852 19.4841 3.7379 19.379 3.59845C19.2738 3.459 19.1092 3.37695 18.9346 3.37695H5.32905L4.93114 1.58628C4.87446 1.33159 4.64862 1.15039 4.38769 1.15039H1.04785C0.740394 1.15039 0.491211 1.39957 0.491211 1.70703C0.491211 2.01449 0.740394 2.26367 1.04785 2.26367H3.94122C4.01167 2.58099 5.8454 10.8329 5.95092 11.3076C5.35935 11.5648 4.94433 12.1546 4.94433 12.8398C4.94433 13.7606 5.69348 14.5098 6.61425 14.5098H16.708C17.0155 14.5098 17.2646 14.2606 17.2646 13.9531C17.2646 13.6457 17.0155 13.3965 16.708 13.3965H6.61425C6.30738 13.3965 6.05761 13.1467 6.05761 12.8398C6.05761 12.5334 6.30651 12.2841 6.61281 12.2833ZM18.1966 4.49023L16.2881 11.1699H7.06073L5.57635 4.49023H18.1966Z" fill="white" />
@@ -129,10 +129,10 @@
                             </a>
                             @endguest
                             <div class="singlr-pro-detail">
-                                <div class="product-name-detail">
+                                <!-- <div class="product-name-detail">
                                     <h3>Product Name : {{ ucfirst($product->name) }}</h3>
                                     <h3>${{ $product->price }}</h3>
-                                </div>
+                                </div> -->
                                 <div class="more-info-box">
                                     <div class="accordion" id="accordionExample">
                                         <div class="accordion-item">
@@ -171,10 +171,10 @@
                                                 
                                             </div>
                                             
-                                            <div class="product-total">
+                                            <!-- <div class="product-total">
                                                 <h3>Total</h3>
                                                 <h5>${{ $product->price ? $product->price : 'Total product price' }}</h5>
-                                            </div>
+                                            </div> -->
                                         </div>
 
                                     </div>

@@ -4,21 +4,21 @@
         $("#From_address").validate({
             rules: {
                 country: {
-                    required: true, // Ensure the country field is filled
+                    required: true,
                     minlength: 1,
                 },
                 state: {
-                    required: true, // Ensure the state field is filled
+                    required: true,
                     minlength: 1,
                 },
                 city: {
-                    required: true, // Ensure the city field is filled
+                    required: true, 
                     minlength: 1,
                 },
                 pin_code: {
-                    required: true, // Ensure the pin code field is filled
-                    minlength: 5, // Example: PIN code is at least 5 characters long
-                    maxlength: 10, // Example: PIN code is at most 10 characters long
+                    required: true, 
+                    minlength: 5, 
+                    maxlength: 10, 
                 },
                 first_name: {
                     required: true,

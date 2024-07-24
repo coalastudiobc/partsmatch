@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\ShippoPurchasedLabel;
 use App\Http\Requests\CheckoutRequest;
+use App\Models\Product;
 use GuzzleHttp\Psr7\Request as GuzzleRequest;
 
 class CheckoutController extends Controller
@@ -104,11 +105,20 @@ class CheckoutController extends Controller
         $allProductsOfCart = CartProduct::where('cart_id', $carts[0]->id)->get();
         return view('dealer.payment', compact('total_amount', 'allProductsOfCart', 'selectedRateAmounts', 'products', 'totalShipping'));
     }
+
+    public function orderProductView(Order $order)
+    {
+        $orderItem = OrderItem::where('order_id', $order->id)->get();
+        return view('dealer.myorder.view_products', compact('orderItem'));
+    }
+
+
     public function getShippingMethods(string $country)
     {
         try {
             ($country == 'CA') ? $country = 'Canada' : $country = 'United States';
             $total_amount = Cart::where('user_id', auth()->user()->id)->sum('amount');
+
             $integerAmount = (int) $total_amount;  // Convert to integer
             $TotalShippings = ShippingSetting::where('range_to', '>=', $integerAmount)->where('range_from', '<=', $integerAmount)->where('country', $country)->orderBy('value', 'desc')->get();
             if ($TotalShippings->isEmpty()) {
@@ -282,7 +292,7 @@ class CheckoutController extends Controller
                 'order_id' => $request->shipping_Method, //which shipping choose which is created by admin
                 'address1' => $request->street1,
                 'address2' => $request->street2 ?? null,
-                'address_type' => $request->addressType,
+                'address_type' => $request->addressType ?? 'Office',
                 'phone_number' => $request->phone_number,
                 'post_code' => $request->pin_code,
                 'name' => $request->first_name,

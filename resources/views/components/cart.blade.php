@@ -113,7 +113,7 @@
                 @endif
             </p>
         </div>
-        <div class="cart-wrapper">
+        <!-- <div class="cart-wrapper">
             <p class="cart-txt">Shipping</p>
             <p class="price-txt">
                 @php
@@ -135,7 +135,7 @@
                     @endphp
                     {{ number_format($shiping_value, 2, '.', ',') }}
             </p>
-        </div>
+        </div> -->
         <div class="sub-total-wrapper">
             <h3>Payable Total</h3>
             <h3>

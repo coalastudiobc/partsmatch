@@ -90,4 +90,18 @@ class Product extends Model
             });
         });
     }
+
+    public function scopeGlobal($query)
+    {
+        $request = request();
+        $query->when(!empty($request->search_parameter), function ($query) use ($request) {
+            $query->where(function ($query) use ($request) {
+                $query->where('name', 'like', '%' . $request->search_parameter . '%')
+                    ->orWhere('price', 'like', '%' . $request->search_parameter . '%')
+                    ->orWhere('year', 'like', '%' . $request->search_parameter . '%')
+                    ->orWhere('brand', 'like', '%' . $request->search_parameter . '%')
+                    ->orWhere('model', 'like', '%' . $request->search_parameter . '%');
+            });
+        });
+    }
 }

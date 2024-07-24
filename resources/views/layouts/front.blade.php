@@ -52,7 +52,7 @@
                             <li>
                                 <form action="{{ route('search') }}" method="GET">
                                     <div class="pro-search-box">
-                                        <input type="text" name="globalquery" class="form-control" value=""
+                                        <input type="text" name="globalquery" class="form-control" value="{{request()->has('search_parameter') ? request()->search_parameter : ''}}"
                                             placeholder="Search...">
                                         <button type="submit" class="btn primary-btn"><i
                                                 class="fa-solid fa-magnifying-glass"></i></button>

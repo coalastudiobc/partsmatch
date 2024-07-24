@@ -28,7 +28,7 @@
                     <th>Quantity</th>
                     <th>Shipment Price</th>
                     <th>Date</th>
-                    <th>Status</th>
+                    <th>Action</th>
                 </tr>
 
                 @forelse ($orders as $key => $order)
@@ -65,7 +65,7 @@
                                             aria-expanded="false">
                                             <i class="fa-solid fa-check"></i> Complete
                                         </div> --}}
-                                <a href="#" class="btn primary-btn"><i class="fa-solid fa-eye"></i> view</a>
+                                <a href="{{route('Dealer.myorder.view.products',['order'=>$order->id])}}" class="btn primary-btn"><i class="fa-solid fa-eye"></i>view</a>
                                 {{-- <ul class="dropdown-menu"
                                                                 aria-labelledby="dropdownMenuButton1">
                                                                 <li><a class="dropdown-item" href="#"><i
@@ -124,12 +124,12 @@
                 </div>
                 @endforelse
 
-                </table>
-            </div>
+            </table>
         </div>
+    </div>
 
-        <div class="pagination-wrapper">
-            {{-- <div class="pagination-boxes"> --}}
+    <div class="pagination-wrapper">
+        {{-- <div class="pagination-boxes"> --}}
 
         {!! $orders->links('dealer.pagination') !!}
     </div>

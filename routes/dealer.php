@@ -27,7 +27,8 @@ Route::name('Dealer.products.')->group(function () {
     Route::get('/products/details/{product}', [ProductController::class, 'details'])->name('details');
 });
 Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer')->name('Dealer.')->group(function () {
-    Route::get('/download-csv', [ProductController::class, 'downloadCSV'])->name('download.sample');
+    // Route::get('/download-csv', [ProductController::class, 'downloadCSV'])->name('download.sample');
+    Route::get('/download-csv', [ProductController::class, 'downloadModifiedCSV'])->name('download.sample');
     Route::get('/dashboard', [DealerController::class, 'dashboard'])->name('dashboard');
     Route::get('/profile', [AccountSettingController::class, 'profile'])->name('profile');
     Route::post('profile/update', [AccountSettingController::class, 'update'])->name('profile.update');
@@ -58,6 +59,7 @@ Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer'
     //order
     Route::name('myorder.')->group(function () {
         Route::get('order', [CheckoutController::class, 'order'])->name('orderlist');
+        Route::get('order/view/{order}', [CheckoutController::class, 'orderProductView'])->name('view.products');
     });
 
     Route::name('order.')->group(function () {

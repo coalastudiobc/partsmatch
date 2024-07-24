@@ -18,7 +18,7 @@
     font-weight: 500;
 }
 
-@font-face {
+@font-face { 
     font-family: "DM-Sans";
     src: url('../fonts/DMSans-Medium.ttf');
     font-weight: 400;
@@ -232,14 +232,14 @@
 }
 
 .product-infography span {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
     color: #727272;
     margin-bottom: 5px;
     display: inline-block;
 }
 
-.product-infography p {
+.product-infography > p {
     font-size: 14px;
     font-weight: 400;
     color: #727272;
@@ -1926,9 +1926,16 @@ ul.order-total-list {
     flex-wrap: wrap;
     align-items: center;
 }
-
-
-
+.product-prize-head {
+    font-size: 39px !important;
+    font-weight: 400;
+}
+.more-info-box .accordion-body p{
+    font-size: 16px;
+}
+.more-info-box .accordion-header button{
+    font-size:16px;
+}
 
 
 
