@@ -65,7 +65,7 @@ Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer'
         Route::post('create/parcels/{order}', [OrderController::class, 'productParcels'])->name('product.parcels');
         Route::post('parcel/dimension/{product}', [OrderController::class, 'productDimension'])->name('product.parcels.dimensions');
         Route::get('parcel/shippment/create', [OrderController::class, 'createShippment'])->name('shippment.rates');
-        Route::get('parcel/shippment/payment', [OrderController::class, 'shippmentPayment'])->name('payment');
+        Route::post('parcel/shippment/payment', [OrderController::class, 'shippmentPayment'])->name('shippment.payment');
     });
     // cart
     Route::name('cart.')->group(function () {

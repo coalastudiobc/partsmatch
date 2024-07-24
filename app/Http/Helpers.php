@@ -12,10 +12,26 @@ use Laravel\Cashier\Cashier;
 use App\Models\UserAddresses;
 use App\Models\ShippingSetting;
 use App\Models\ShippmentCreation;
+use App\Models\ShippoPurchasedLabel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
 
+
+if (!function_exists('isFullFilledShippment')) {
+    function isFullFilledShippment($order_id)
+    {
+        try {
+            $isalready = ShippoPurchasedLabel::where('order_id', $order_id)->first();
+            if ($isalready) {
+                return  $isalready;
+            }
+            return false;
+        } catch (\Exception $e) {
+            abort('403', $e->getMessage());
+        }
+    }
+}
 
 if (!function_exists('IspackageParcel')) {
     function IspackageParcel($orderItem_id, $product_id)

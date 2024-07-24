@@ -50,10 +50,11 @@ class OrderPaymentController extends Controller
 
             BuyerAddress::where('selected_method_id', $request->shipping_Method)
                 ->update(['order_id' => $order->id]);
-
-            // if (isset(auth()->user()->shippingAddress)) {
-            //     $shippingAdress =   ShippingAddress::where('user_id', auth()->user())->update('order_id', $request->shipping_Method);
-            // }
+            $shipping_add_row_id = session()->get('shipping_address_row_id');
+            if ($shipping_add_row_id) {
+                ShippingAddress::where('id', $shipping_add_row_id)->update(['order_id' => $order->id]);
+                session()->forget('shipping_address_row_id');
+            }
             DB::commit();
             toastr()->success('Order placed successfully.');
             return redirect()->route('Dealer.myorder.orderlist');

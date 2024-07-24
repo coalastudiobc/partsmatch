@@ -2389,7 +2389,7 @@ span.filter-serach-icon {
     box-shadow: 1px 1px 10px 4px #ddd;
 }
 .shipper-page-main {
-    max-width: 1024px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 .shipper-page-main .checkout-main-card.cstm-card {
@@ -2434,8 +2434,8 @@ span.filter-serach-icon {
     line-height: 24px;
 }
 .shipper-rates-list li a.active, .shipper-rates-list li a:hover {
-    border-color: #bae8e8;
-    background-color: #7bfbfc14;
+    border-color: #272643;
+    background-color: #bae8e88a;
 }
 .shipper-rates {
     margin-bottom: 10px;
@@ -2455,16 +2455,53 @@ span.filter-serach-icon {
 }
 .shipper-rates-list {
     /* max-width: 200px; */
-    max-height: 200px;
+    max-height: 283px;
     overflow: auto;
 }
 
+#pickadress-modal .modal-dialog {
+    max-width: 1200px;
+    margin: 1.75rem auto;
+}
+.pick-address-head{
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 15px;
+    line-height: 1.2;
+}
+#pickadress-modal form .form-group .custm-dropdown .dropdown-toggle{
+    min-height: 47px;
+}
+.shipper-rates-left {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.shipper-rates-img {
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    min-width: 40px;
+}
+.shipper-rates-img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 
-
-
-
-
-
+}
+.dhipment-date-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.shipment-address-header div > p{
+    text-align: right;
+}
+.shipment-data-name > h3{
+    font-size: 18px;
+}
+.shipment-data-field > p{
+    font-size: 16px;
+}
 
 
 
