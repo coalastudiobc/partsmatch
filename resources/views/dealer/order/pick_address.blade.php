@@ -307,6 +307,7 @@
     @includeFirst(['validation.dealer.js_picking_address'])
 
     <script>
+            $(".add-address-box").addClass('open');
         jQuery('.nextbtn').on('click', function(e) {
             if (!jQuery('input[name="selectadress"]').is(':checked')) {
                 e.preventDefault();

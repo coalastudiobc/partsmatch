@@ -35,7 +35,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <p>{{ $item->product->name }}</p>
+                                    <p>{{$item->product ?  $item->product->name :"" }}</p>
                                 </td>
 
                                 <td>
@@ -48,7 +48,7 @@
                                     <p>${{ $item->quantity * $item->product_price }}</p>
                                 </td>
                                 <td>
-                                    <p>{{ $item->product->created_at->format('d/m/y') }}</p>
+                                    <p>{{ $item->product ? $item->product->created_at->format('d/m/y') :"" }}</p>
                                 </td>
                                 <td>
                                     <div class="pro-status">

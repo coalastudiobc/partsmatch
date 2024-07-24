@@ -44,7 +44,7 @@ class OrderController extends Controller
         // dd('here', $request->toArray());
         session()->put('selectedPickAddressId', $request->selectadress);
         session()->put('selectedOrderId', $order->id);
-        $orderProducts = OrderItem::where('order_id', $order->id)->get();
+        $orderProducts = OrderItem::with('product')->where('order_id', $order->id)->get();
         return view('dealer.order.product_parcel', compact('orderProducts'));
     }
     public function addressDelete(UserAddresses $address)

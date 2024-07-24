@@ -440,8 +440,8 @@
         }
 
         function updateGrandTotal() {
-            var baseAmount = parseFloat($('.grandTotal').data('amount').replace(/,/g, ''));
-            var selected_shipment = $('input[name=shippingMethod]').data('id');
+            var baseAmount = parseFloat($('.grandTotal').attr('data-amount').replace(/,/g, ''));
+            var selected_shipment = $('input[name=shippingMethod]').attr('data-id');
             var shippingCost = parseFloat($('input[name="shippingMethod"]:checked').val()) || 0;
             var grandTotal = baseAmount + shippingCost;
             jQuery('.shipping_charge_price').text('$' + shippingCost);
@@ -456,7 +456,7 @@
 
         jQuery(document).ready(function() {
             jQuery(document).on('change', 'input[name="shippingMethod"]', function() {
-                var currentSelectedShip = jQuery(this).data('id');
+                var currentSelectedShip = jQuery(this).attr('data-id');
                 updateGrandTotal();
                 jQuery('#ship_method').val(currentSelectedShip);
             });

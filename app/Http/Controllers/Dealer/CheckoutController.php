@@ -271,8 +271,10 @@ class CheckoutController extends Controller
             // dd($request->toArray());
 
             $responseInArray = $this->address($request);
+            // dd($responseInArray);
             if ($responseInArray->object_state !== 'VALID') {
-                throw new \Exception('Error in Api ' . $responseInArray->messages->text);
+                
+                throw new \Exception('Error in Api ' . $responseInArray->messages[0]->text);
             }
             $shippingAddress = [
                 'user_id' => auth()->user()->id,

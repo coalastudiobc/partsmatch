@@ -81,7 +81,7 @@
                                                 <li>
                                                     <h4>Commission Action</h4>
                                                     <div class="d-flex gap-3 align-items-center">
-                                                        <p>50% </p>
+                                                        {{-- <p>50% </p> --}}
                                                         <a class="btn primary-btn" href="{{ route('admin.commission', ['dealer_id' => jsencode_userdata($user->id)]) }}">
                                                             @if (isset($user->ComissionDetails->commision_value))
                                                                 edit

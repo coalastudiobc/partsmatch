@@ -61,12 +61,12 @@ jQuery(document).ready(function () {
                     $('#alreadyAddedOwner').attr('href',response.dealer_url)
                     $('#deleteAndAdd').attr('data-url',response.product_url)
                     $('#restrictMultiple').modal('show');
-                    return ;
+                }else{
 
+                    element.empty().append('<span>Added</span>');
+                    jQuery(".cart-icon").html(response.cart_icon);
+                    return toastr.success(response.message);
                 }
-                element.empty().append('<span>Added</span>');
-                jQuery(".cart-icon").html(response.cart_icon);
-                return toastr.success(response.message);
             } else {
                 jQuery('#errormessage').html(response.error);
             }

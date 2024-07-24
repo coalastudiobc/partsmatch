@@ -8,11 +8,11 @@
                 <input type="text" class="form-control" name="filter_by_name" placeholder="Search Product By Name">
                 <a href="#" class="btn primary-btn"><i class="fa-solid fa-magnifying-glass"></i></a>
             </div>
-            <div class="pro-filter">
+            {{-- <div class="pro-filter">
                 <p>Filter:</p>
                 <a href="#" class="btn primary-btn outline-btn"><img
                         src="{{ asset('assets/images/calender-icon.png') }}" alt="">Select Date</a>
-            </div>
+            </div> --}}
         </div>
         <div class="product-detail-table product-list-table">
             <x-alert-component />
