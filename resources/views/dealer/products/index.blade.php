@@ -49,14 +49,13 @@
                 {{-- @dd($products[3]->featuredProduct[]->id); --}}
                 @forelse ($products as $key => $product)
                 <tr>
-                    @foreach ($product->productImage as $a => $image)
                     <td>
                         <div class="pro-img-box" data-bs-toggle="modal" data-bs-target="#pro-detail-model">
-                            <img src="{{ Storage::url($image->file_url) }}" alt="img">
+                            <img src="{{$product->productImage && count($product->productImage) ?  Storage::url($product->productImage[0]->file_url) : asset('assets/images/car-logo1.png') }}" alt="img">
                         </div>
                     </td>
-                    @break
-                    @endforeach
+
+                    
                     <td>
                         <p>{{ $product->name }}</p>
                     </td>
@@ -271,7 +270,7 @@
                                     </div>
                                 </div>
                             </div> --}}
-                            <div class="col-md-3">
+                            {{-- <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="length">Length:</label>
                                     <div class="form-field">
@@ -354,7 +353,7 @@
                                         </select>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             {{-- <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="">Shipping Price*</label>
@@ -471,7 +470,8 @@
             <div class="modal-body">
                 <div class="add-pro-form">
                     <h2>Bulk Upload</h2>
-                    <form action="{{route('Dealer.products.bulk.upload')}}">
+                    <form action="{{route('Dealer.products.bulk.upload')}}" method="post" enctype="multipart/form-data">
+                    @csrf
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -479,11 +479,14 @@
                                     <label class="img-upload-box">
                                         <img src="images/upload-img.png" alt="">
                                         <p>Upload Images</p>
-                                        <input type="file">
+                                        <input type="file" name=csv_file>
                                     </label>
                                 </div>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-6">
+                                <a href="{{route('Dealer.download.sample')}}" class="btn secondary-btn full-btn">Get sample csv</a>
+                            </div>
+                            <div class="col-md-6">
                                 <button type="submit" class="btn secondary-btn full-btn">submit</button>
                             </div>
                         </div>

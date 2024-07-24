@@ -61,13 +61,65 @@ class ProductController extends Controller
     {
         //
     }
-
-    public function bulkUpload()
+    public function downloadCSV()
     {
-        //this is for temporary , still pending to work on it
-        $years = $this->sdk->years();
-        $products = Product::with('productImage', 'featuredProduct')->where('user_id', auth()->user()->id)->orderBy('id', 'DESC')->Search()->Paginate(5);
-        return view('dealer.products.index', compact('years', 'products'))->with('message', 'Still working on it');
+        $filePath = 'sample.csv';
+
+        if (!Storage::exists($filePath)) {
+            abort(404);
+        }
+
+        return Storage::download($filePath);
+    }
+    public function bulkUpload(Request $request)
+    {
+        try{
+            $request->validate([
+                'csv_file' => 'required|file|mimes:csv,xlsx',
+            ]);
+            
+            $path = $request->file('csv_file')->getRealPath();
+            $data = array_map('str_getcsv', file($path));
+            $header = array_shift($data);
+            foreach ($data as $row) {
+                dd($row,$header);
+                $row = array_combine($header, $row);
+                $subcategory = Category::with('parent')->has('parent')->where('name',$row['category'])->first();
+                if(!$subcategory){
+                    $subcategory = Category::where('name','others')->first();
+                }
+                $product = [
+                    'name' => $row['name'],
+                    'user_id' => auth()->user()->id,
+                    'subcategory_id' => $subcategory->id,
+                    'description' => $row['description'],
+                    'part_number' => $row['part_number'],
+                    'additional_details' => $row['additional_details'],
+                    'stocks_avaliable' => $row['quantity'],
+                    'price' => $row['price'],
+                    'status' => '1',
+                ];
+                DB::beginTransaction();
+                $product = Product::create($product);
+                if ($row['year(Make)Model']) {
+                    $compatables = explode(',', $row['year(Make)Model']);
+                    for ($i = 0; $i < count($compatables); $i++) {
+                        $item = $compatables[$i];
+                        if (preg_match('/(\d{4})\((.*?)\)(.*)/', $item, $matches)) {
+                            $year = $matches[1];
+                            $make = $matches[2];
+                            $model = $matches[3];
+                            ProductCompatabilty::create(['year' => $year, 'make' => $make, 'model' => $model, 'product_id' => $product->id]);
+                        }
+                    }
+                }
+                DB::commit();
+            }
+            return redirect()->back()->with('message', 'Product added successfully');
+        }catch(Exception $e){
+            DB::rollBack();
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     /**

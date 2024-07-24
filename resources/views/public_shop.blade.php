@@ -170,17 +170,6 @@
                                       </div>
                                     </div>
                                 </div>
-
-                                {{-- <h4>years</h4>
-                                <div id="yearContainer" class="interior-filter-inner">
-                                    @foreach ($years as $key => $year )
-                                        <div class="custm-check year">
-                                            <input type="checkbox" id="{{'year'.$key}}" name="year[]" @if(request()->has('year') && count(request()->year) && in_array($year , request()->year)) class="selected-entry" checked @endif value="{{$year}}">
-                                            <label for="{{'year'.$key}}">{{$year}}</label>
-                                        </div>
-                                    @endforeach
-                                </div>
-                                <div class="cat-count"><span class="see-more-less-year">See More</span></div> --}}
                             </div>
 
                             <div class="interior-filter-box">
@@ -189,38 +178,26 @@
                                     <div class="accordion-item">
                                       <h2 class="accordion-header" id="headingFour">
                                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                            <h4>models</h4>
+                                            <h4>Models</h4>
                                         </button>
                                       </h2>
                                       <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample3">
                                         <div class="accordion-body">
-                                            @foreach ($models as $key => $model )
-                                                <div class="custm-check model">
-                                                    <input type="checkbox" id="{{'model'.$key}}" name="model[]" @if(request()->has('model') && count(request()->model) && in_array($model->value, request()->model)) class="selected-entry" checked @endif value="{{$model->value}}">
-                                                    <label for="{{'model'.$key}}">{{$model->value}}</label>
-                                                </div>
-                                            @endforeach
+                                            <div id="modelContainer" class="interior-filter-inner">
+                                                @foreach ($models as $key => $model )
+                                                    <div class="custm-check model">
+                                                        <input type="checkbox" id="{{'model'.$key}}" name="model[]" @if(request()->has('model') && count(request()->model) && in_array($model->value, request()->model)) class="selected-entry" checked @endif value="{{$model->value}}">
+                                                        <label for="{{'model'.$key}}">{{$model->value}}</label>
+                                                    </div>
+                                                @endforeach
                                             </div>
+                                        </div>
                                         <div class="cat-count"><span class="see-more-less-model">See More</span></div>
                                      </div>
                                       </div>
                                     </div>
                                 </div>
-
-                                {{-- <h4>models</h4>
-                                <div id="modelContainer" class="interior-filter-inner">
-                                    @foreach ($models as $key => $model )
-                                        <div class="custm-check model">
-                                            <input type="checkbox" id="{{'model'.$key}}" name="model[]" @if(request()->has('model') && count(request()->model) && in_array($model->value, request()->model)) class="selected-entry" checked @endif value="{{$model->value}}">
-                                            <label for="{{'model'.$key}}">{{$model->value}}</label>
-                                        </div>
-                                    @endforeach
-                                </div>
-                                <div class="cat-count"><span class="see-more-less-model">See More</span></div> --}}
                             </div>
-
-
-                            {{-- <button type="submit">test</button> --}}
                                 <div class="interior-filter-box">
                                     <h4>Price</h4>
                                     <div class="custom-wrapper"> 
@@ -300,10 +277,7 @@
                                             </a>
 
                                                     <div class="product-deails">
-                                                        <p>{{ $product->name }}® – Model-{{ $product->brand ?? 'Ford' }}
-                                                            series-{{ $product->model ?? 'endeavor' }}
-                                                            Year-{{ $product->year ?? '2016' }}
-                                                        </p>
+                                                        <p>{{ $product->name }}</p>
                                                         <div class="price-and-cart">
                                                             <div class="discount-price">
                                                                 <span>{{ $product->price * 1.5 }}</span>
