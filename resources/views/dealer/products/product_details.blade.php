@@ -32,13 +32,19 @@
                                     <div class="slick-product">
                                         <!-- Inside the containing div, add one div for each slide -->
 
-                                        @foreach ($productImages as $image)
+                                        @forelse ($productImages as $image)
                                             <div>
                                                 <div class="parts-image-box">
-                                                    <img src="{{ Storage::url($image->file_url) }}" alt="">
+                                                    <img src="{{$image->file_url ?  Storage::url($image->file_url) : asset('assets/images/gear-logo.svg') }}" alt="">
                                                 </div>
                                             </div>
-                                        @endforeach
+                                        @empty
+                                            <div>
+                                                <div class="parts-image-box">
+                                                    <img src="{{asset('assets/images/gear-logo.svg') }}" alt="">
+                                                </div>
+                                            </div>
+                                        @endforelse
 
                                     </div>
                                     {{-- <div class="next-btn-parts">
@@ -209,7 +215,7 @@
 
                                 <div class="collection-box cstm-card ">
                                     <div class="collection-img">
-                                        <img src="{{ Storage::url($product->productImage[0]->file_url) }}"
+                                        <img src="{{$product->productImage && count($product->productImage) ? Storage::url($product->productImage[0]->file_url) : asset('assets/images/gear-logo.svg') }}"
                                             alt="">
                                     </div>
                                     <p>{{$product->name}}</p>
@@ -244,7 +250,7 @@
             asNavFor: '.slick-product',
             prevArrow: $('.prev-btn-multi'),
             nextArrow: $('.next-btn-multi'),
-            focusOnSelect: true,
+            // focusOnSelect: true,
         });
         $('a[data-slide]').click(function(e) {
             e.preventDefault();
@@ -252,6 +258,7 @@
             $('.multi-img-slick').slick('slickGoTo', slideno - 1);
         });
     </script>
+
     <script>
         $(document).ready(function() {
             $('.addtocart').on('click', function(e) {

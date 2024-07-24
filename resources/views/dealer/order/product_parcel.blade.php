@@ -14,8 +14,8 @@
                 </div>
                 <div class="d-flex gap-3 align-items-cneter">
                     <a href="javascript:void(0)" id="makeGroup" class="btn secondary-btn">Make Group</a>
-                    <a href="javascript:void(0)" id="createGroup" class="btn secondary-btn">Create Group</a>
-                    <a href="javascript:void(0)" id="cancel" class="btn secondary-btn">Cancel</a>
+                    <a href="javascript:void(0)" id="createGroup" class="btn secondary-btn d-none">Create Group</a>
+                    <a href="javascript:void(0)" id="cancel" class="btn secondary-btn d-none">Cancel</a>
                     <a href="{{ route('Dealer.order.shippment.rates') }}"
                     class="btn primary-btn payment-btn disabled-shippmentPayment">Payment</a>
 
@@ -382,11 +382,16 @@
         $('#makeGroup').on('click', function() {
             $(".available-to-add-input").removeClass('d-none');
             $('#makeGroup').addClass('d-none');
-            $('#CreateGroup').removeClass('d-none');
+            $('#createGroup').removeClass('d-none');
 
         });
         $('#createGroup').on('click', function() {
             $(".available-to-add-input").removeClass('d-none');
+            $('#makeGroup').html('create');
+
+        });
+        $('#cancel').on('click', function() {
+            $(".available-to-add-input").addClass('d-none');
             $('#makeGroup').html('create');
 
         });

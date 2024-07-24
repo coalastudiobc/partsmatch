@@ -19,7 +19,7 @@
                 <img src="{{ asset('assets/images/add-round-icon.svg') }}" alt=""> Bulk upload
             </a>
             <a href="javascript:void(0)" class="btn primary-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                <img src="{{ asset('assets/images/add-round-icon.svg') }}" alt=""> ADD
+                <img src="{{ asset('assets/images/add-round-icon.svg') }}" alt=""> Add
             </a>
         </div>
     </div>

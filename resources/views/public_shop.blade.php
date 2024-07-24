@@ -272,7 +272,7 @@
                                                 <div class="more-product-cards cstm-card">
                                             <a href="{{ route(auth()->check() && auth()->user()->hasRole('Administrator') ? 'admin.products.details' : (auth()->check() ? auth()->user()->getRoleNames()->first() . '.products.details' : 'Dealer.products.details'), ['product' => $product->id]) }}">
                                                     <div class="product-cards-img">
-                                                        <img src="{{ Storage::url($product->productImage[0]->file_url) }}" alt="">
+                                                        <img src="{{ $product->productImage && count($product->productImage) ? Storage::url($product->productImage[0]->file_url) : asset('assets/images/gear-logo.svg') }}" alt="">
                                                     </div>
                                             </a>
 

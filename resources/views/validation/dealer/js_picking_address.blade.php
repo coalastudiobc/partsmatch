@@ -5,6 +5,7 @@
             rules: {
                 country: {
                     required: true,
+                    
                     minlength: 1,
                 },
                 state: {

@@ -338,10 +338,10 @@
 <script>
     jQuery(document).ready(function() {
         jQuery('.custom_dropdown_item').on('click', function() {
-            var selectitem = jQuery(this).attr('data-iso_code')
+            var selectitem = jQuery(this).attr('data-name')
             var selecttext = jQuery(this).attr('data-text')
             jQuery('#selectedItem').text(selecttext)
-            jQuery(document).find('input[name="country"]').val(selectitem);
+            jQuery(document).find('input[name="country"]').val(selecttext);
 
             jQuery('#state').html('<option value="">Select State</option>');
 
@@ -488,7 +488,7 @@
             var selectitem = jQuery(this).attr('data-value');
             var selecttext = jQuery(this).attr('data-text');
             jQuery('#selectedItem').text(selecttext);
-            jQuery('input[name="country"]').val(selectitem);
+            jQuery('input[name="country"]').val(selecttext);
             jQuery('#country_code').val(jQuery(this).attr('data-iso_code'));
             jQuery('#state_iso').val('');
             jQuery('#city_name').val('');
