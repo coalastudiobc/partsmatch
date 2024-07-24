@@ -9,11 +9,12 @@ use App\Models\OrderItem;
 use Stripe\PaymentIntent;
 use App\Models\CartProduct;
 use App\Models\AdminSetting;
+use App\Models\BuyerAddress;
 use Illuminate\Http\Request;
 use App\Models\ShippingAddress;
+use App\Models\ShippingSetting;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Models\ShippingSetting;
 
 class OrderPaymentController extends Controller
 {
@@ -24,7 +25,6 @@ class OrderPaymentController extends Controller
             DB::beginTransaction();
 
             \Stripe\Stripe::setApiKey(config('services.Stripe.stripe_secret'));
-            $user =  auth()->user();
 
             $cart = Cart::where('user_id', auth()->user()->id)->first();
             $cartItems = CartProduct::with('product')->where('cart_id', $cart->id)->get();
@@ -48,16 +48,17 @@ class OrderPaymentController extends Controller
             CartProduct::where('cart_id', $cart->id)->delete();
             $cart->delete();
 
-            if (isset(auth()->user()->shippingAddress)) {
-                $shippingAdress =   ShippingAddress::where('id', auth()->user()->shippingAddress->id)->first();
-                $shippingAdress->delete();
-            }
-            // ShippingAddress::create($shiping_address);
+            BuyerAddress::where('selected_method_id', $request->shipping_Method)
+                ->update(['order_id' => $order->id]);
+
+            // if (isset(auth()->user()->shippingAddress)) {
+            //     $shippingAdress =   ShippingAddress::where('user_id', auth()->user())->update('order_id', $request->shipping_Method);
+            // }
             DB::commit();
+            toastr()->success('Order placed successfully.');
             return redirect()->route('Dealer.myorder.orderlist');
         } catch (Exception $e) {
             DB::rollback();
-            dd($e->getMessage());
             return redirect()->back()->with('error', $e->getMessage());
         }
     }

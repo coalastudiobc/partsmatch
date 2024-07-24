@@ -13,6 +13,7 @@ use Stripe\PaymentIntent;
 use App\Models\CartProduct;
 use App\Traits\ShippoTrait;
 use App\Models\AdminSetting;
+use App\Models\BuyerAddress;
 use Illuminate\Http\Request;
 use App\Models\UserAddresses;
 use App\Models\ShippingAddress;
@@ -267,17 +268,50 @@ class CheckoutController extends Controller
     public function to_address(Request $request)
     {
         try {
-
             // dd($request->toArray());
-            // $responseInArray = $this->address($request);
-            // if ($responseInArray->object_state !== 'VALID') {
-            //     throw new \Exception('Error in Api ' . $responseInArray->messages->text);
+
+            $responseInArray = $this->address($request);
+            if ($responseInArray->object_state !== 'VALID') {
+                throw new \Exception('Error in Api ' . $responseInArray->messages->text);
+            }
+            $shippingAddress = [
+                'user_id' => auth()->user()->id,
+                'order_id' => $request->shipping_Method, //which shipping choose which is created by admin
+                'address1' => $request->street1,
+                'address2' => $request->street2,
+                'post_code' => $request->pin_code,
+                'name' => $request->first_name,
+                'last_name' => $request->last_name,
+
+            ];
+            // $checkexistenceOfaddress = UserAddresses::where('user_id', auth()->user()->id)->where('type', 'Deliver')->first();
+            // $flag = 1;
+            // if ($flag || $checkexistenceOfaddress) {
+            //     if ($checkexistenceOfaddress) {
+            //         UserAddresses::where('user_id', auth()->user()->id)->where('type', 'Deliver')->delete();
+            //         $toAddress = $responseInArray->object_id;
+            //         $addressType = 'Deliver';
+            //         $this->storeAddress($request, $addressType, $toAddress);
+            //     }
+            //     $flag = 0;
             // }
 
-            // $toAddress = $responseInArray->object_id;
-            // $addressType = 'Deliver';
-            // $this->storeAddress($request, $addressType, $toAddress);
 
+
+
+            // 'shipping_address_table_id' => $for_address->id,
+
+
+
+            // $for_address = ShippingAddress::create($shippingAddress);
+
+
+            BuyerAddress::create([
+                'user_id' => auth()->user()->id,
+                'shippo_address_id' => $responseInArray->object_id,
+                'selected_method_id' => $request->shipping_Method,
+            ]);
+            $toAddress = $responseInArray->object_id;
             $stripeCustomer = auth()->user()->createOrGetStripeCustomer();
             $intent = auth()->user()->createSetupIntent();
             $carts = Cart::with('cart_product', 'cart_product.product')->where('user_id', auth()->user()->id)->get();

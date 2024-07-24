@@ -215,4 +215,8 @@ trait ShippoTrait
             throw new \Exception('parcelError: ' . $e->getMessage());
         }
     }
+    function getCurrentTimeFormatted()
+    {
+        return date('Y-m-d\TH:i');  //time format in "YYYY-MM-DDTHH:MM"
+    }
 }

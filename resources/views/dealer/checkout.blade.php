@@ -15,7 +15,8 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">First Name</label>
+                                                <label for="">First Name<span
+                                                        class="required-field">*</span></label>
                                                 <div class="form-field">
                                                     <input type="text"
                                                         class="form-control @error('first_name') is-invalid @enderror"
@@ -33,7 +34,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">Last Name</label>
+                                                <label for="">Last Name<span class="required-field">*</span></label>
                                                 <div class="form-field">
                                                     <input type="text"
                                                         class="form-control @error('last_name') is-invalid @enderror"
@@ -50,7 +51,8 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="">Street No. & Name</label>
+                                                <label for="">Street No. & Name<span
+                                                        class="required-field">*</span></label>
                                                 <div class="form-field">
                                                     <input type="text"
                                                         class="form-control @error('street1') is-invalid @enderror"
@@ -85,7 +87,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="">Country</label>
+                                                <label for="">Country<span class="required-field">*</span></label>
                                                 <div class="custm-dropdown">
                                                     <div class="dropdown">
                                                         <div class="dropdown-toggle " type="button"
@@ -129,7 +131,8 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="">Phone Number</label>
+                                                <label for="">Phone Number<span
+                                                        class="required-field">*</span></label>
                                                 <input type="number" name="phone_number"
                                                     value="{{ old('number', $deliveryAddress->phone_number ?? '') }}"
                                                     class="form-control @error('phonenumber') is-invalid @enderror">
@@ -168,7 +171,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="">State</label>
+                                                <label for="">State<span class="required-field">*</span></label>
                                                 <div class="form-field">
                                                     <div class="custm-dropdown">
                                                         <div class="dropdown">
@@ -176,7 +179,7 @@
                                                                 id="dropdownMenuButton1" data-bs-toggle="dropdown"
                                                                 aria-expanded="false">
                                                                 <div id="selectedState">
-                                                                    {{ $state->name ?? 'select' }}
+                                                                    {{ $state->name ?? 'Select' }}
 
                                                                 </div>
                                                                 <span class="custm-drop-icon">
@@ -215,7 +218,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="">City</label>
+                                                <label for="">City<span class="required-field">*</span></label>
                                                 <div class="form-field">
                                                     <div class="custm-dropdown">
                                                         <div class="dropdown">
@@ -262,7 +265,8 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="">Pin code</label>
+                                                <label for="">Pin code<span
+                                                        class="required-field">*</span></label>
                                                 <div class="form-field">
                                                     <input type="text" name="pin_code"
                                                         class="form-control @error('pin_code') is-invalid @enderror"
