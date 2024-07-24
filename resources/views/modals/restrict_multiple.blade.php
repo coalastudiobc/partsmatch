@@ -7,7 +7,7 @@
                     <form action="">
                         <div class="row">
                             <div class="col-md-6">
-                                <a id="deleteAndAdd" class="btn secondary-btn full-btn">delete</a>
+                                <a id="deleteAndAdd" class="btn primary-btn full-btn">delete</a>
                             </div>
                             <div class="col-md-6">
                                 <a id="alreadyAddedOwner" class="btn secondary-btn full-btn">view profile</a>
