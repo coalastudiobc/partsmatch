@@ -18,7 +18,7 @@
     font-weight: 500;
 }
 
-@font-face {
+@font-face { 
     font-family: "DM-Sans";
     src: url('../fonts/DMSans-Medium.ttf');
     font-weight: 400;
@@ -234,6 +234,8 @@
 
 .product-infography span {
     font-size: 16px;
+    font-weight: 500;
+    font-size: 16px;
     font-weight: 400;
     color: #727272;
     /* margin-bottom: 5px; */
@@ -241,7 +243,7 @@
     line-height: 24px;
 }
 
-.product-infography p {
+.product-infography > p {
     font-size: 14px;
     font-weight: 400;
     color: #727272;
@@ -298,7 +300,7 @@
     /* padding: 30px 15px; */
     background-color: #fff;
     border-radius: 5px;
-    margin: 35px 0px 24px;
+    margin: 20px 0px 24px;
 }
 
 .product-name-detail {
@@ -349,6 +351,8 @@
 .more-info-box .accordion-button::after {
     transform: rotate(0deg);
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23212529'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e") !important;
+    position: absolute;
+    right: 0;
 }
 
 .more-info-box {
@@ -654,9 +658,9 @@
     padding: 8px 40px 8px 22px;
 }
 
-.product-detail-table table tr th p {
+.product-detail-table table tr th p, .product-detail-table table tr th  {
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 600;
     color: var(--gray-color);
 }
 
@@ -831,6 +835,8 @@
 
 .dashboard-right-box table tr td p {
     font-size: 16px;
+    font-weight:600;
+    color: #272643;
 }
 
 .product-list-table table tr th:last-child {
@@ -956,7 +962,7 @@
 
 .singlr-pro-detail .accordion-item {
     background-color: #F6F6F6;
-    padding: 10px;
+    padding: 20px 10px;
     margin-bottom: 5px;
 }
 
@@ -1928,14 +1934,19 @@ ul.order-total-list {
     flex-wrap: wrap;
     align-items: center;
 }
-.product-disc-prize{
-    font-size: 39px;
+/* .product-prize-head {
+    font-size: 39px !important;
     font-weight: 400;
-    line-height: 1;
+} */
+.more-info-box .accordion-body p{
+    font-size: 16px;
 }
-
-
-
+.more-info-box .accordion-header button{
+    font-size:20px;
+}
+.product-prize-head {
+    margin: 10px 0px 20px !important;
+}
 
 
 

@@ -15,6 +15,6 @@ return [
 
     'previous' => '&laquo; Previous',
     'next' => 'Next &raquo;',
-    'pagination_nuber' => '10',
+    'pagination_nuber' => '7',
 
 ];

@@ -27,6 +27,8 @@ Route::name('Dealer.products.')->group(function () {
     Route::get('/products/details/{product}', [ProductController::class, 'details'])->name('details');
 });
 Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer')->name('Dealer.')->group(function () {
+    // Route::get('/download-csv', [ProductController::class, 'downloadCSV'])->name('download.sample');
+    Route::get('/download-csv', [ProductController::class, 'downloadModifiedCSV'])->name('download.sample');
     Route::get('/dashboard', [DealerController::class, 'dashboard'])->name('dashboard');
     Route::get('/profile', [AccountSettingController::class, 'profile'])->name('profile');
     Route::post('profile/update', [AccountSettingController::class, 'update'])->name('profile.update');
@@ -40,7 +42,7 @@ Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer'
     // products
     Route::name('products.')->group(function () {
         Route::get('/products/create', [ProductController::class, 'create'])->name('create');
-        Route::get('/products/bulk/upload', [ProductController::class, 'bulkUpload'])->name('bulk.upload');
+        Route::post('/products/bulk/upload', [ProductController::class, 'bulkUpload'])->name('bulk.upload');
         Route::get('/products', [ProductController::class, 'index'])->name('index');
         Route::post('/products/store', [ProductController::class, 'store'])->name('store');
         Route::get('/products/edit/{product}', [ProductController::class, 'edit'])->name('edit');
@@ -57,14 +59,16 @@ Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer'
     //order
     Route::name('myorder.')->group(function () {
         Route::get('order', [CheckoutController::class, 'order'])->name('orderlist');
+        Route::get('order/view/{order}', [CheckoutController::class, 'orderProductView'])->name('view.products');
     });
 
     Route::name('order.')->group(function () {
         Route::get('order/management', [OrderController::class, 'order'])->name('orderlist');
         Route::get('create/shippment/{orderid}', [OrderController::class, 'pickAddressOfShippment'])->name('create.shippment');
-        Route::get('create/parcels/{order}', [OrderController::class, 'productParcels'])->name('product.parcels');
+        Route::post('create/parcels/{order}', [OrderController::class, 'productParcels'])->name('product.parcels');
         Route::post('parcel/dimension/{product}', [OrderController::class, 'productDimension'])->name('product.parcels.dimensions');
-        Route::get('sumit/testing', [OrderController::class, 'hlo'])->name('shipment.payment');
+        Route::get('parcel/shippment/create', [OrderController::class, 'createShippment'])->name('shippment.rates');
+        Route::post('parcel/shippment/payment', [OrderController::class, 'shippmentPayment'])->name('shippment.payment');
     });
     // cart
     Route::name('cart.')->group(function () {

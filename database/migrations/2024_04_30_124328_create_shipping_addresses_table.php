@@ -13,15 +13,18 @@ return new class extends Migration
     {
         Schema::create('shipping_addresses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('order_id')->constrained('orders');
-            $table->foreignId('country_id');
-            $table->foreignId('state_id');
-            $table->foreignId('city_id');
+            $table->string('user_id')->nullable();
+            $table->string('order_id')->nullable();
+            $table->string('country')->nullable();
+            $table->string('state')->nullable();
+            $table->string('city')->nullable();
+            $table->string('address_type')->nullable();
             $table->string('address1')->nullable();
             $table->string('address2')->nullable();
             $table->integer('post_code')->nullable();
             $table->string('name')->nullable();
+            $table->string('phone_number')->nullable();
+            $table->string('email')->nullable();
             $table->string('last_name')->nullable();
             $table->timestamps();
         });

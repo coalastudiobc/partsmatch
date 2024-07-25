@@ -4,69 +4,69 @@
 
 @section('content')
 
-    <div class="dashboard-right-box">
-        <div class="serach-and-filter-box">
-            {{-- <form action="">
+<div class="dashboard-right-box">
+    <div class="serach-and-filter-box">
+        {{-- <form action="">
                 <div class="pro-search-box">
                     <input type="text" name="filter_by_name" class="form-control" placeholder="Search Product By Name">
                     <button type="submit" class="btn primary-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
             </form> --}}
-            {{-- <div class="pro-filter">
+        {{-- <div class="pro-filter">
                 <p>Filter:</p>
                 <a href="#" class="btn primary-btn outline-btn"><img src="images/calender-icon.png"
                         alt="">Select Date</a>
             </div> --}}
-        </div>
-        <div class="product-detail-table product-list-table">
-            <div class="table-responsive">
-                <table class="table">
-                    <tr>
-                        <th>OrderId</th>
-                        <th>Total product</th>
-                        <th>Total price</th>
-                        <th>Quantity</th>
-                        <th>Shipment Price</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                    </tr>
+    </div>
+    <div class="product-detail-table product-list-table">
+        <div class="table-responsive">
+            <table class="table">
+                <tr>
+                    <th>OrderId</th>
+                    <th>Total product</th>
+                    <th>Total price</th>
+                    <th>Quantity</th>
+                    <th>Shipment Price</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </tr>
 
-                    @forelse ($orders as $key => $order)
-                        <tr>
-                            <td>
-                                <div class="pro-list-name">
-                                    {{-- <input type="checkbox" class="custm-check" class="custm-check"> --}}
-                                    <h4>{{ $order->id }}</h4>
-                                </div>
-                            </td>
-                            <td>
-                                <p>{{ count($order->orderItem) }}</p>
-                            </td>
-                            <td>
-                                <p>${{ $order->total_amount }}</p>
-                            </td>
+                @forelse ($orders as $key => $order)
+                <tr>
+                    <td>
+                        <div class="pro-list-name">
+                            {{-- <input type="checkbox" class="custm-check" class="custm-check"> --}}
+                            <h4>{{ $order->id }}</h4>
+                        </div>
+                    </td>
+                    <td>
+                        <p>{{ count($order->orderItem) }}</p>
+                    </td>
+                    <td>
+                        <p>${{ $order->total_amount }}</p>
+                    </td>
 
-                            <td>
-                                <p>{{ $order->orderItem[0]->quantity }}</p>
-                            </td>
-                            <td>
-                                <p>${{ $order->shipment_price }}</p>
-                            </td>
-                            <td>
-                                <p>{{ date('d-m-Y', strtotime($order->created_at)) }}</p>
-                            </td>
+                    <td>
+                        <p>{{ $order->orderItem[0]->quantity }}</p>
+                    </td>
+                    <td>
+                        <p>${{ $order->shipment_price }}</p>
+                    </td>
+                    <td>
+                        <p>{{ date('d-m-Y', strtotime($order->created_at)) }}</p>
+                    </td>
 
-                            <td>
-                                <div class="pro-status">
+                    <td>
+                        <div class="pro-status">
 
-                                    <div class="dropdown">
+                            <div class="dropdown">
 
-                                        {{-- <div class="badge complete-badge" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                                {{-- <div class="badge complete-badge" id="dropdownMenuButton1" data-bs-toggle="dropdown"
                                             aria-expanded="false">
                                             <i class="fa-solid fa-check"></i> Complete
                                         </div> --}}
-                                        <a href="#" class="btn primary-btn"><i class="fa-solid fa-eye"></i> view</a>
-                                        {{-- <ul class="dropdown-menu"
+                                <a href="{{route('Dealer.myorder.view.products',['order'=>$order->id])}}" class="btn primary-btn"><i class="fa-solid fa-eye"></i>View</a>
+                                {{-- <ul class="dropdown-menu"
                                                                 aria-labelledby="dropdownMenuButton1">
                                                                 <li><a class="dropdown-item" href="#"><i
                                                                             class="fa-solid fa-check"></i> Confirmed</a>
@@ -113,16 +113,16 @@
                                                                     </a>
                                                                 </li>
                                                             </ul> --}}
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    @empty
-                        <div class="empty-data">
-                            <img src="{{ asset('assets/images/no-product.svg') }}  " alt="" width="300">
-                            <p class="text-center mt-1">Did not found any order</p>
+                            </div>
                         </div>
-                    @endforelse
+                    </td>
+                </tr>
+                @empty
+                <div class="empty-data">
+                    <img src="{{ asset('assets/images/no-product.svg') }}  " alt="" width="300">
+                    <p class="text-center mt-1">Did not found any order</p>
+                </div>
+                @endforelse
 
                 </table>
             </div>
@@ -452,12 +452,12 @@
         <div class="pagination-wrapper">
             {{-- <div class="pagination-boxes"> --}}
 
-            {!! $orders->links('dealer.pagination') !!}
-        </div>
+        {!! $orders->links('dealer.pagination') !!}
     </div>
-    {{-- </div>
+</div>
+{{-- </div>
 
             </div>
         </div> --}}
-    {{-- </section> --}}
+{{-- </section> --}}
 @endsection

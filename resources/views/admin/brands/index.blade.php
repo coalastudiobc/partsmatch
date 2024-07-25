@@ -26,7 +26,7 @@
                             <p>Name</p>
                         </th>
                         <th>
-                            <p>image</p>
+                            <p>Image</p>
                         </th>
                         <th>
                             <p>Action</p>

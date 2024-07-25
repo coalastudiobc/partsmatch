@@ -1,3 +1,8 @@
+@if ($errors->has('csv_file'))
+    <div class="alert alert-danger">
+        {{ $errors->first('csv_file') }}
+    </div>
+@endif
 {{-- @if (session()->has('status'))
     <div>
         <div class="alert alert-{{ $status == 'error' ? 'danger' : 'success' }} alert-dismissible fade show"

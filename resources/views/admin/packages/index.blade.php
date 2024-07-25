@@ -7,11 +7,11 @@
     <div class="dashboard-right-box">
         <x-alert-component />
 
-        <div class="card-header-form padding">
+        <div class="card-header-form padding justify-content-end">
             {{-- <h2>Subscription Plans</h2> --}}
             {{-- <x-search-form :dateField="false" /> --}}
             <a class="btn   primary-btn" href="{{ route('admin.packages.add') }}">Add
-                Subscription Plan</a>
+                subscription plan</a>
         </div>
         <div class="product-detail-table">
             <div class="table-responsive">

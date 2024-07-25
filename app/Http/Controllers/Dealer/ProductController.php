@@ -61,13 +61,102 @@ class ProductController extends Controller
     {
         //
     }
-
-    public function bulkUpload()
+    public function downloadCSV()
     {
-        //this is for temporary , still pending to work on it
-        $years = $this->sdk->years();
-        $products = Product::with('productImage', 'featuredProduct')->where('user_id', auth()->user()->id)->orderBy('id', 'DESC')->Search()->Paginate(5);
-        return view('dealer.products.index', compact('years', 'products'))->with('message', 'Still working on it');
+        $filePath = 'sample.csv';
+
+        if (!Storage::exists($filePath)) {
+            abort(404);
+        }
+
+        return Storage::download($filePath);
+    }
+    public function downloadModifiedCSV()
+    {
+        $filePath = 'sample.csv';
+
+        if (!Storage::exists($filePath)) {
+            abort(404);
+        }
+        $csvData = array_map('str_getcsv', file(Storage::path($filePath)));
+        $allowedCategories = Category::with('parent')->has('parent')->pluck('name')->toArray();
+        $csvData[0][] = 'allowed_categories';
+        $columnCount = count($csvData[0]);
+        foreach ($csvData as $index => &$row) {
+            while (count($row) < $columnCount - 1) {
+                $row[] = '';
+            }
+
+            if ($index > 0) { 
+                $row[] = $allowedCategories[$index - 1] ?? '';
+            } else {
+                $row[] = 'please delete this column as well as allowed_categories'; 
+            }
+
+        }
+        $headers = [
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename="modified_sample.csv"',
+        ];
+
+        return response()->streamDownload(function() use ($csvData) {
+            $output = fopen('php://output', 'w');
+            foreach ($csvData as $row) {
+                fputcsv($output, $row);
+            }
+            fclose($output);
+        }, 'modified_sample.csv', $headers);
+    }
+
+
+    public function bulkUpload(Request $request)
+    {
+        try{
+            $request->validate([
+                'csv_file' => 'required|file|mimes:csv',
+            ]);
+            
+            $path = $request->file('csv_file')->getRealPath();
+            $data = array_map('str_getcsv', file($path));
+            $header = array_shift($data);
+            foreach ($data as $row) {
+                $row = array_combine($header, $row);
+                $subcategory = Category::with('parent')->has('parent')->where('name',$row['category'])->first();
+                if(!$subcategory){
+                    $subcategory = Category::where('name','others')->first();
+                }
+                $product = [
+                    'name' => $row['name'],
+                    'user_id' => auth()->user()->id,
+                    'subcategory_id' => $subcategory->id,
+                    'description' => $row['description'],
+                    'part_number' => $row['part_number'],
+                    'additional_details' => $row['additional_details'],
+                    'stocks_avaliable' => $row['quantity'],
+                    'price' => $row['price'],
+                    'status' => '1',
+                ];
+                DB::beginTransaction();
+                $product = Product::create($product);
+                if ($row['year(Make)Model']) {
+                    $compatables = explode(',', $row['year(Make)Model']);
+                    for ($i = 0; $i < count($compatables); $i++) {
+                        $item = $compatables[$i];
+                        if (preg_match('/(\d{4})\((.*?)\)(.*)/', $item, $matches)) {
+                            $year = $matches[1];
+                            $make = $matches[2];
+                            $model = $matches[3];
+                            ProductCompatabilty::create(['year' => $year, 'make' => $make, 'model' => $model, 'product_id' => $product->id]);
+                        }
+                    }
+                }
+                DB::commit();
+            }
+            return redirect()->back()->with('message', 'Product added successfully');
+        }catch(Exception $e){
+            DB::rollBack();
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     /**
@@ -107,7 +196,7 @@ class ProductController extends Controller
                 FeaturedProduct::create($featured_product);
             }
 
-            if (count($request->file('images')) > 0) {
+            if ($request->has('images') && count($request->file('images')) > 0) {
                 foreach ($request->file('images') as $file) {
                     $image = store_image($file, 'products/images');
                     if ($image != null) {
@@ -118,9 +207,9 @@ class ProductController extends Controller
                         ];
                     }
                 }
+                ProductImage::insert($productimage);
             }
 
-            ProductImage::insert($productimage);
 
             if ($request->has('compatable_with')) {
                 $compatables = explode(',', $request->compatable_with);
@@ -134,15 +223,15 @@ class ProductController extends Controller
                     }
                 }
             }
-            ProductParcelDetail::create([
-                'product_id' => $product->id,
-                'length' => $request->length,
-                'width' => $request->width,
-                'height' => $request->height,
-                'weight' => $request->weight,
-                'distance_unit' => $request->distance_unit,
-                'mass_unit' => $request->mass_unit,
-            ]);
+            // ProductParcelDetail::create([
+            //     'product_id' => $product->id,
+            //     'length' => $request->length,
+            //     'width' => $request->width,
+            //     'height' => $request->height,
+            //     'weight' => $request->weight,
+            //     'distance_unit' => $request->distance_unit,
+            //     'mass_unit' => $request->mass_unit,
+            // ]);
             DB::commit();
             return redirect()->back()->with('message', 'Product added successfully');
         } catch (\Exception $e) {
@@ -419,10 +508,9 @@ class ProductController extends Controller
         if (is_null($request->globalquery)) {
             return redirect()->back();
         }
-        // Define initial query
+
         $productsQuery = Product::query();
 
-        // Apply global search for products
         $productsQuery->when(!empty($request->globalquery), function ($query) use ($request) {
             $query->where(function ($query) use ($request) {
                 $query->where('name', 'like', '%' . $request->globalquery . '%')
@@ -433,28 +521,13 @@ class ProductController extends Controller
             });
         });
 
-        // Apply status filter if 'active' keyword is provided
         $productsQuery->when(!empty($request->globalquery) && $request->globalquery == 'active', function ($query) {
             $query->where('status', '1');
         });
-        // Retrieve products
+
         $products = $productsQuery->paginate(5)
             ->appends($request->globalquery);
-
-        // // Retrieve categories for the products
-        // $categories = Category::with('children', 'parent')->get();
-
-        // // Extract parent category ID
-        // $parentCategoryId = null;
-        // if ($request->has('category')) {
-        //     $category = $categories->firstWhere('id', $request->category);
-        //     if ($category && $category->parent) {
-        //         $parentCategoryId = $category->parent->id;
-        //     }
-        // }
-
-        // Retrieve products
-
-        return view('dealer.products.search_products', compact('products'));
+        return redirect()->route('products',['search_parameter'=>$request->globalquery]);
     }
+
 }

@@ -23,9 +23,12 @@
             },
             stocks_avaliable: {
                 required: true,
+                number: true,
             },
             price: {
                 required: true,
+                number: true,
+                regex: /^\d+(\.\d{1,2})?$/,
             },
             shipping_price: {
                 required: true,
@@ -51,9 +54,13 @@
             },
             stocks_avaliable: {
                 required: `{{ __('customvalidation.product.stocks_avaliable.required') }}`,
+                number: `{{ __('customvalidation.product.stocks_avaliable.number') }}`,
             },
             price: {
                 required: `{{ __('customvalidation.product.price.required') }}`,
+                number: `{{ __('customvalidation.product.price.number') }}`,
+                regex: `{{ __('customvalidation.product.price.regex') }}`, // Add this message in your validation messages
+    
             },
             shipping_price: {
                 required: `{{ __('customvalidation.product.shipping_price.required') }}`,

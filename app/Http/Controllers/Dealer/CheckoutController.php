@@ -13,6 +13,7 @@ use Stripe\PaymentIntent;
 use App\Models\CartProduct;
 use App\Traits\ShippoTrait;
 use App\Models\AdminSetting;
+use App\Models\BuyerAddress;
 use Illuminate\Http\Request;
 use App\Models\UserAddresses;
 use App\Models\ShippingAddress;
@@ -22,6 +23,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\ShippoPurchasedLabel;
 use App\Http\Requests\CheckoutRequest;
+use App\Models\Product;
 use GuzzleHttp\Psr7\Request as GuzzleRequest;
 
 class CheckoutController extends Controller
@@ -103,11 +105,20 @@ class CheckoutController extends Controller
         $allProductsOfCart = CartProduct::where('cart_id', $carts[0]->id)->get();
         return view('dealer.payment', compact('total_amount', 'allProductsOfCart', 'selectedRateAmounts', 'products', 'totalShipping'));
     }
+
+    public function orderProductView(Order $order)
+    {
+        $orderItem = OrderItem::where('order_id', $order->id)->get();
+        return view('dealer.myorder.view_products', compact('orderItem'));
+    }
+
+
     public function getShippingMethods(string $country)
     {
         try {
             ($country == 'CA') ? $country = 'Canada' : $country = 'United States';
             $total_amount = Cart::where('user_id', auth()->user()->id)->sum('amount');
+
             $integerAmount = (int) $total_amount;  // Convert to integer
             $TotalShippings = ShippingSetting::where('range_to', '>=', $integerAmount)->where('range_from', '<=', $integerAmount)->where('country', $country)->orderBy('value', 'desc')->get();
             if ($TotalShippings->isEmpty()) {
@@ -164,18 +175,19 @@ class CheckoutController extends Controller
 
             $user = auth()->user();
 
-            $data = $user->shippingAddress;
+            // $data = $user->shippingAddress;
             $carts = Cart::with('cart_product', 'cart_product.product')->where('user_id', $user->id)->get();
             $allProductsOfCart = CartProduct::where('cart_id', $carts[0]->id)->get();
             $deliveryAddress = UserAddresses::where('user_id', auth()->user()->id)->where('type', 'Deliver')->first();
-            if (!is_null($data)) {
+            // dd($deliveryAddress);
+            // if (!is_null($data)) {
 
-                $country = Country::where('id', $data->country_id)->first();
-                $state = State::where('id', $data->state_id)->first();
-                $city = City::where('id', $data->city_id)->first();
+            //     $country = Country::where('id', $data->country_id)->first();
+            //     $state = State::where('id', $data->state_id)->first();
+            //     $city = City::where('id', $data->city_id)->first();
 
-                return view('dealer.checkout', compact('countries', 'total_amount', 'country', 'state', 'city', 'data', 'carts', 'shippingCharge'));
-            }
+            //     return view('dealer.checkout', compact('countries', 'total_amount', 'country', 'state', 'city', 'data', 'carts', 'shippingCharge'));
+            // }
             // if (is_null($deliveryAddress)) {
             //     return redirect()->back()->with('error', 'seller does not set picking address yet. please try again later');
             // }
@@ -267,17 +279,57 @@ class CheckoutController extends Controller
     public function to_address(Request $request)
     {
         try {
-
             // dd($request->toArray());
-            // $responseInArray = $this->address($request);
-            // if ($responseInArray->object_state !== 'VALID') {
-            //     throw new \Exception('Error in Api ' . $responseInArray->messages->text);
+
+            $responseInArray = $this->address($request);
+            // dd($responseInArray);
+            if ($responseInArray->object_state !== 'VALID') {
+
+                throw new \Exception('Error in Api ' . $responseInArray->messages[0]->text);
+            }
+            $shippingAddress = [
+                'user_id' => auth()->user()->id,
+                'order_id' => $request->shipping_Method, //which shipping choose which is created by admin
+                'address1' => $request->street1,
+                'address2' => $request->street2 ?? null,
+                'address_type' => $request->addressType ?? 'Office',
+                'phone_number' => $request->phone_number,
+                'post_code' => $request->pin_code,
+                'name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'country' => $request->country,
+                'state' => $request->state,
+                'city' => $request->city,
+                'email' => auth()->user()->email,
+            ];
+            // $checkexistenceOfaddress = UserAddresses::where('user_id', auth()->user()->id)->where('type', 'Deliver')->first();
+            // $flag = 1;
+            // if ($flag || $checkexistenceOfaddress) {
+            //     if ($checkexistenceOfaddress) {
+            //         UserAddresses::where('user_id', auth()->user()->id)->where('type', 'Deliver')->delete();
+            //         $toAddress = $responseInArray->object_id;
+            //         $addressType = 'Deliver';
+            //         $this->storeAddress($request, $addressType, $toAddress);
+            //     }
+            //     $flag = 0;
             // }
 
-            // $toAddress = $responseInArray->object_id;
-            // $addressType = 'Deliver';
-            // $this->storeAddress($request, $addressType, $toAddress);
 
+
+
+            // 'shipping_address_table_id' => $for_address->id,
+
+
+
+            $current_shipping_address = ShippingAddress::create($shippingAddress);
+            session()->put('shipping_address_row_id', $current_shipping_address->id);
+
+            BuyerAddress::create([
+                'user_id' => auth()->user()->id,
+                'shippo_address_id' => $responseInArray->object_id,
+                'selected_method_id' => $request->shipping_Method,
+            ]);
+            $toAddress = $responseInArray->object_id;
             $stripeCustomer = auth()->user()->createOrGetStripeCustomer();
             $intent = auth()->user()->createSetupIntent();
             $carts = Cart::with('cart_product', 'cart_product.product')->where('user_id', auth()->user()->id)->get();

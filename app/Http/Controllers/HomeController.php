@@ -45,7 +45,7 @@ class HomeController extends Controller
         $subcategories = Category::with('products')->has('products')->Where('parent_id', '!=', null)->where('status', '1')->inRandomOrder()->take(6)->get();
         $brands = CarBrandMake::inRandomOrder()->get();
         if (Auth::user()) {
-            if (Auth::user()->hasRole("Administrator")){
+            if (Auth::user()->hasRole("Administrator")) {
                 return redirect()->route('admin.category.index');
             }
         }
@@ -168,7 +168,7 @@ class HomeController extends Controller
         }
         $years = $sdk->years();
         $models = AllModel::all();
-        $products = Product::with('productImage', 'featuredProduct', 'productCompatible')->category()->compatiblity()->paginate('12');
+        $products = Product::with('productImage', 'featuredProduct', 'productCompatible')->global()->category()->compatiblity()->paginate('12');
         $categories =  Category::with('children')->has('children')->orWhereNull('parent_id')->get();
         return view('public_shop', compact("categories", "products", "brands", "years", "models"));
     }

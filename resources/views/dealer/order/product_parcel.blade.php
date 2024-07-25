@@ -12,10 +12,178 @@
                     <h3>Create New Full Fillment</h3>
                     <p>Step 2 of 2</p>
                 </div>
-                <a href="{{route('Dealer.order.shipment.payment')}}" class="btn primary-btn disabled-shippmentPayment">Payment</a>
+                <div class="d-flex gap-3 align-items-cneter">
+                    <a href="javascript:void(0)" id="makeGroup" class="btn secondary-btn">Make Group</a>
+                    <a href="javascript:void(0)" id="createGroup" class="btn secondary-btn d-none">Create Group</a>
+                    <a href="javascript:void(0)" id="cancel" class="btn secondary-btn d-none">Cancel</a>
+                    <a href="{{ route('Dealer.order.shippment.rates') }}"
+                    class="btn primary-btn payment-btn disabled-shippmentPayment">Payment</a>
+
+                </div>
             </div>
+            <div class="cstm-table-box make-group" id="outerBox">
+                <div class="custm-table-head">
+                    <div class="custm-table-head-box">
+                        <p></p>
+                    </div>
+                    <div class="custm-table-head-box">
+                        <p>Order ID</p>
+                    </div>
+                    <div class="custm-table-head-box">
+                        <p>Product name</p>
+                    </div>
+                    <div class="custm-table-head-box">
+                        <p>Quantity</p>
+                    </div>
+                    <div class="custm-table-head-box">
+                        <p>Price</p>
+                    </div>
+                    <div class="custm-table-head-box">
+                        <p>Total price</p>
+                    </div>
+                    <div class="custm-table-head-box">
+                        <p>Action</p>
+                    </div>
+                </div>
+                @forelse ($orderProducts as $item)
+                    <div class="custm-table-body" id="{{'outer'.$item->id}}">
+                        <div class="custm-table-head-box ">
+                            <input type="checkbox" class="available-to-add-input d-none" data-add="{{'#outer'.$item->id}}" data-product_id="{{$item->id}}">
+                        </div>
+                        <div class="custm-table-head-box">
+                            <p>{{ $item->order_id }}</p>
+                        </div>
+                        <div class="custm-table-head-box">
+                            <p>{{$item->product ?  $item->product->name :"" }}</p>
+                        </div>
+                        <div class="custm-table-head-box">
+                            <p>{{ $item->quantity }}</p>
+                        </div>
+                        <div class="custm-table-head-box">
+                            <p>${{ $item->product_price }}</p>
+                        </div>
+                        <div class="custm-table-head-box">
+                            <p>${{ $item->quantity * $item->product_price }}</p>
+                        </div>
+                        <div class="custm-table-head-box">
+                            <div class="pro-status">
+                                            <div class="dropdown" title="Add dimension of package">
+                                                @php
+                                                    $flag = IspackageParcel($item->id, $item->product->id) ? 1 : 0;
+                                                @endphp
+                                                <a href="#" class="btn primary-btn harvinder" style="font-size: 14px;padding: 12px 7px;" id="{{ $item->id }}"
+                                                    data-productName="{{ $item->product->name }}"
+                                                    data-productId="{{ $item->id }}" data-bs-toggle="modal"
+                                                    data-bs-target="#Package-modal" data-flag="{{ $flag }}">
+                                                    @if ($flag)
+                                                        Edit
+                                                    @else
+                                                        <img src="{{ asset('assets/images/add-round-icon.svg') }}"
+                                                            alt="">
+                                                        Add Dimension
+                                                    @endif
+                                                </a>
+                                            </div>             
+                            </div>
+                        </div>
+                    </div>
+                @empty
+                @endforelse
+                    {{-- <div class="grouped-data">
+                        <div class="custm-table-body">
+                            <div class="custm-table-head-box">
+                                <input type="checkbox" >
+                            </div>
+                            <div class="custm-table-head-box">
+                                <p>{{ $item->order_id }}</p>
+                            </div>
+                            <div class="custm-table-head-box">
+                                <p>{{$item->product ?  $item->product->name :"" }}</p>
+                            </div>
+                            <div class="custm-table-head-box">
+                                <p>{{ $item->quantity }}</p>
+                            </div>
+                            <div class="custm-table-head-box">
+                                <p>${{ $item->product_price }}</p>
+                            </div>
+                            <div class="custm-table-head-box">
+                                <p>${{ $item->quantity * $item->product_price }}</p>
+                            </div>
+                            <div class="custm-table-head-box">
+                                <p>{{ $item->product ? $item->product->created_at->format('d/m/y') :"" }}</p>
+                            </div>
+                            <div class="custm-table-head-box">
+                                <div class="pro-status">
+                                                <div class="dropdown" title="Add dimension of package">
+                                                    @php
+                                                        $flag = IspackageParcel($item->id, $item->product->id) ? 1 : 0;
+                                                    @endphp
+                                                    <a href="#" class="btn primary-btn harvinder" style="font-size: 14px;padding: 12px 7px;" id="{{ $item->id }}"
+                                                        data-productName="{{ $item->product->name }}"
+                                                        data-productId="{{ $item->id }}" data-bs-toggle="modal"
+                                                        data-bs-target="#Package-modal" data-flag="{{ $flag }}">
+                                                        @if ($flag)
+                                                            Edit
+                                                        @else
+                                                            <img src="{{ asset('assets/images/add-round-icon.svg') }}"
+                                                                alt="">
+                                                            Add Dimension
+                                                        @endif
+                                                    </a>
+                                                </div>             
+                                </div>
+                            </div>
+                        </div> 
+                        <div class="custm-table-body">
+                            <div class="custm-table-head-box">
+                                <input type="checkbox" >
+                            </div>
+                            <div class="custm-table-head-box">
+                                <p>{{ $item->order_id }}</p>
+                            </div>
+                            <div class="custm-table-head-box">
+                                <p>{{$item->product ?  $item->product->name :"" }}</p>
+                            </div>
+                            <div class="custm-table-head-box">
+                                <p>{{ $item->quantity }}</p>
+                            </div>
+                            <div class="custm-table-head-box">
+                                <p>${{ $item->product_price }}</p>
+                            </div>
+                            <div class="custm-table-head-box">
+                                <p>${{ $item->quantity * $item->product_price }}</p>
+                            </div>
+                            <div class="custm-table-head-box">
+                                <p>{{ $item->product ? $item->product->created_at->format('d/m/y') :"" }}</p>
+                            </div>
+                            <div class="custm-table-head-box">
+                                <div class="pro-status">
+                                                <div class="dropdown" title="Add dimension of package">
+                                                    @php
+                                                        $flag = IspackageParcel($item->id, $item->product->id) ? 1 : 0;
+                                                    @endphp
+                                                    <a href="#" class="btn primary-btn harvinder" style="font-size: 14px;padding: 12px 7px;" id="{{ $item->id }}"
+                                                        data-productName="{{ $item->product->name }}"
+                                                        data-productId="{{ $item->id }}" data-bs-toggle="modal"
+                                                        data-bs-target="#Package-modal" data-flag="{{ $flag }}">
+                                                        @if ($flag)
+                                                            Edit
+                                                        @else
+                                                            <img src="{{ asset('assets/images/add-round-icon.svg') }}"
+                                                                alt="">
+                                                            Add Dimension
+                                                        @endif
+                                                    </a>
+                                                </div>             
+                                </div>
+                            </div>
+                        </div>  
+                    </div> --}}
+            </div>
+
+
             <div class="table-responsive">
-                <table class="table">
+                <!-- <table class="table">
                     <tbody>
                         <tr>
                             <th>OrderId</th>
@@ -34,7 +202,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <p>{{ $item->product->name }}</p>
+                                    <p>{{$item->product ?  $item->product->name :"" }}</p>
                                 </td>
 
                                 <td>
@@ -47,17 +215,26 @@
                                     <p>${{ $item->quantity * $item->product_price }}</p>
                                 </td>
                                 <td>
-                                    <p>{{ $item->product->created_at->format('d/m/y') }}</p>
+                                    <p>{{ $item->product ? $item->product->created_at->format('d/m/y') :"" }}</p>
                                 </td>
                                 <td>
                                     <div class="pro-status">
                                         <div class="dropdown" title="Add dimension of package">
-                                            <a href="#" class="btn primary-btn harvinder"
-                                                data-productName={{ $item->product->name }}
+                                            @php
+                                                $flag = IspackageParcel($item->id, $item->product->id) ? 1 : 0;
+                                            @endphp
+                                            <a href="#" class="btn primary-btn harvinder" id="{{ $item->id }}"
+                                                data-productName="{{ $item->product->name }}"
                                                 data-productId="{{ $item->id }}" data-bs-toggle="modal"
-                                                data-bs-target="#Package-modal"><img
-                                                    src="{{ asset('assets/images/add-round-icon.svg') }}" alt="">
-                                                Add Dimension</a>
+                                                data-bs-target="#Package-modal" data-flag="{{ $flag }}">
+                                                @if ($flag)
+                                                    Edit
+                                                @else
+                                                    <img src="{{ asset('assets/images/add-round-icon.svg') }}"
+                                                        alt="">
+                                                    Add Dimension
+                                                @endif
+                                            </a>
                                         </div>
                                     </div>
                                 </td>
@@ -65,14 +242,13 @@
                         @empty
                         @endforelse
                     </tbody>
-                </table>
+                </table> -->
             </div>
         </div>
     </div>
 
 
-    <!-- Modal -->
-    <!-- Modal -->
+    <!--package dimensions Modal -->
     <div class="modal fade Package-modal" id="Package-modal" data-bs-backdrop="static" data-bs-keyboard="false"
         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -194,6 +370,41 @@
     <script>
         $('.back-btn').on('click', function() {
             $("#fullPageLoader").removeClass('d-none');
+        });
+
+
+        $('#makeGroup').on('click', function() {
+            $(".available-to-add-input").removeClass('d-none');
+            $('#makeGroup').addClass('d-none');
+            $('#createGroup').removeClass('d-none');
+            $('#cancel').removeClass('d-none');
+
+        });
+
+        $('#createGroup').on('click', function() {
+            if($('input.available-to-add-input:checked').length > 0){
+                var data ="";
+                $('input.available-to-add-input:checked').each(function(index, item) {
+                    data = data+ $($(item).attr('data-add')).prop('outerHTML');
+                    $($(item).attr('data-add')).remove();
+                });
+                data = '<div class="grouped-data">'+ data + '</div>';
+                $('#outerBox').append(data);
+                $('#makeGroup').removeClass('d-none');
+                $('#cancel').addClass('d-none');
+                $('#createGroup').addClass('d-none');
+            }else{
+                alert('select any data entry')
+            }
+                    });
+
+        $('#cancel').on('click', function() {
+            $(".available-to-add-input").addClass('d-none');
+            $('#makeGroup').removeClass('d-none');
+            $('#cancel').addClass('d-none');
+            $('#createGroup').addClass('d-none');
+
+
         });
     </script>
 @endpush

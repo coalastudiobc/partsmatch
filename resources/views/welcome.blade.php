@@ -271,14 +271,19 @@
                 <div class="collect-tab-btns">
                     <div>
                         <div class="slick-tab ">
+                            
+                            <div class="collect-tab-slider-main">
+                                <div class="collect-tab-slider">
+                                    @foreach ($collections as $collection)
+                                        <a href="javascript:void(0)"
+                                            data-url="{{ route('products', ['category' => $collection->id]) }}" data-id="{{ $collection->id }}"
+                                            class="tab-inner-box collectionSubcategory {{ $loop->first ? 'active' : '' }} ">
+                                            {{ $collection->name }}
+                                        </a>
+                                    @endforeach
+                                </div>
+                            </div>
                             <a href="{{route('products')}}" class="tab-inner-box" > View All </a>
-                            @foreach ($collections as $collection)
-                                <a href="javascript:void(0)"
-                                    data-url="{{ route('products', ['category' => $collection->id]) }}" data-id="{{ $collection->id }}"
-                                    class="tab-inner-box collectionSubcategory {{ $loop->first ? 'active' : '' }} ">
-                                    {{ $collection->name }}
-                                </a>
-                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -424,37 +429,49 @@
 
         ]
     });
+    // $('.collect-tab-slider').slick({
+    //     infinite: true,
+    //     slidesToShow: 8,
+    //     slidesToScroll: 1,
+    //     arrows: true,
+    //     dots: false,
+    //     prevArrow: $('.prev-loop-btn'),
+    //     nextArrow: $('.next-loop-btn'),
+    //     responsive: [
+    //       {
+    //         breakpoint: 1200,
+    //         settings: {
+    //           slidesToShow: 5,
+    //           slidesToScroll: 2,
+    //         }
+    //       },
+    //       {
+    //         breakpoint: 1024,
+    //         settings: {
+    //           slidesToShow: 4,
+    //           slidesToScroll: 2,
+    //         }
+    //       },
+    //       {
+    //         breakpoint: 767,
+    //         settings: {
+    //           slidesToShow: 2,
+    //           slidesToScroll: 1,
+    //         }
+    //       },
+    //       {
+    //         breakpoint: 425,
+    //         settings: {
+    //           slidesToShow: 1,
+    //           slidesToScroll: 1,
+    //         }
+    //       }
+
+    //     ]
+    // });
 
     $(document).ready(function() {
-        $(document).on('click', '.addtocart', function() {
-            console.log('hrerererer');
-            var product_id = $(this).attr('product-id')
-            url = APP_URL + '/dealer/add/to/cart/' + product_id
-            console.log(url);
-            var response = ajaxCall(url, 'post', null, false);
-            response.then(handleStateData).catch(handleStateError)
-
-            function handleStateData(response) {
-                if (response.success == true) {
-                    if(response.product_id){
-                        $('#alreadyAddedOwner').attr('href',response.dealer_url)
-                        $('#deleteAndAdd').attr('href',response.product_url)
-                        $('#restrictMultiple').modal('show');
-                    }
-                    jQuery('.addtocart').empty().append('<span>Added</span>');
-                    jQuery()
-                    jQuery(".cart-icon").html(response.cart_icon);
-                    return toastr.success(response.message);
-                } else {
-                    jQuery('#errormessage').html(response.error);
-                }
-            }
-
-            function handleStateError(error) {
-                console.log('error', error)
-
-            }
-        });
+        
 
         $('.collectionSubcategory').on('click', function() {
             element = jQuery(this);

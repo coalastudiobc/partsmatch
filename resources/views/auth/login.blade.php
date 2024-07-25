@@ -11,7 +11,7 @@
                     <x-alert-component/>
                     <div class="login-txt">
                         <h2>Login Here</h2>
-                        <p>It is a long established fact that a reader will be distracted by</p>
+                        <!-- <p>It is a long established fact that a reader will be distracted by</p> -->
                     </div>
                     <div class="login-form">
                         <form id="login" method="POST" action="{{ route('login') }}">
@@ -45,7 +45,7 @@
                                 <div class="form-field">
                                     <input id="password" type="password"
                                         class="form-control @error('password') is-invalid @enderror" name="password"
-                                        autocomplete="current-password" placeholder="Enter your password">
+                                        autocomplete="current-password" placeholder="Enter password">
                                     {{-- <span class="input-icon toggle-password">
                                         <i style="color: #9f9f9f;" class="fas fa-eye"></i>
                                     </span> --}}

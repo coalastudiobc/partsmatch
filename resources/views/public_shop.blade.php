@@ -170,17 +170,6 @@
                                       </div>
                                     </div>
                                 </div>
-
-                                {{-- <h4>years</h4>
-                                <div id="yearContainer" class="interior-filter-inner">
-                                    @foreach ($years as $key => $year )
-                                        <div class="custm-check year">
-                                            <input type="checkbox" id="{{'year'.$key}}" name="year[]" @if(request()->has('year') && count(request()->year) && in_array($year , request()->year)) class="selected-entry" checked @endif value="{{$year}}">
-                                            <label for="{{'year'.$key}}">{{$year}}</label>
-                                        </div>
-                                    @endforeach
-                                </div>
-                                <div class="cat-count"><span class="see-more-less-year">See More</span></div> --}}
                             </div>
 
                             <div class="interior-filter-box">
@@ -189,51 +178,39 @@
                                     <div class="accordion-item">
                                       <h2 class="accordion-header" id="headingFour">
                                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                            <h4>models</h4>
+                                            <h4>Models</h4>
                                         </button>
                                       </h2>
                                       <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample3">
                                         <div class="accordion-body">
-                                            @foreach ($models as $key => $model )
-                                                <div class="custm-check model">
-                                                    <input type="checkbox" id="{{'model'.$key}}" name="model[]" @if(request()->has('model') && count(request()->model) && in_array($model->value, request()->model)) class="selected-entry" checked @endif value="{{$model->value}}">
-                                                    <label for="{{'model'.$key}}">{{$model->value}}</label>
-                                                </div>
-                                            @endforeach
+                                            <div id="modelContainer" class="interior-filter-inner">
+                                                @foreach ($models as $key => $model )
+                                                    <div class="custm-check model">
+                                                        <input type="checkbox" id="{{'model'.$key}}" name="model[]" @if(request()->has('model') && count(request()->model) && in_array($model->value, request()->model)) class="selected-entry" checked @endif value="{{$model->value}}">
+                                                        <label for="{{'model'.$key}}">{{$model->value}}</label>
+                                                    </div>
+                                                @endforeach
                                             </div>
+                                        </div>
                                         <div class="cat-count"><span class="see-more-less-model">See More</span></div>
                                      </div>
                                       </div>
                                     </div>
                                 </div>
-
-                                {{-- <h4>models</h4>
-                                <div id="modelContainer" class="interior-filter-inner">
-                                    @foreach ($models as $key => $model )
-                                        <div class="custm-check model">
-                                            <input type="checkbox" id="{{'model'.$key}}" name="model[]" @if(request()->has('model') && count(request()->model) && in_array($model->value, request()->model)) class="selected-entry" checked @endif value="{{$model->value}}">
-                                            <label for="{{'model'.$key}}">{{$model->value}}</label>
-                                        </div>
-                                    @endforeach
-                                </div>
-                                <div class="cat-count"><span class="see-more-less-model">See More</span></div> --}}
                             </div>
-
-
-                            {{-- <button type="submit">test</button> --}}
                                 <div class="interior-filter-box">
                                     <h4>Price</h4>
                                     <div class="custom-wrapper"> 
                                         <div class="price-input-container"> 
                                             <div class="price-input"> 
                                                 <div class="price-field left"> 
-                                                    <input type="number" 
+                                                    <input type="number" disabled
                                                     name="min_value"
                                                         class="min-input" 
                                                         value="0"> 
                                                 </div> 
                                                 <div class="price-field right"> 
-                                                    <input type="number" 
+                                                    <input type="number" disabled
                                                     name="max_value"
                                                         class="max-input" 
                                                         value="10000"> 
@@ -284,27 +261,26 @@
                     <div class="interior-content-right-outer">
                         <div class="interior-content-right" id="interiorComponent">
                             {{-- <h2 class="interior-content-heading">Mirrors</h2> --}}
-                            <h3>Result : </h3>
+                            <!-- <h3>Result : </h3>  -->
                             <div class="accessories-parts">
                                 <div class="row g-4">
                                     {{-- @dd($product->productImage[0]->file_url) --}}
                                     @forelse ($products as $product)
                                     <div class="col-md-6 col-lg-4 col-xl-3">
                                         <div class="accessories-parts-box">
-                                            <a href="{{ route(auth()->check() && auth()->user()->hasRole('Administrator') ? 'admin.products.details' : (auth()->check() ? auth()->user()->getRoleNames()->first() . '.products.details' : 'Dealer.products.details'), ['product' => $product->id]) }}">
     
                                                 <div class="more-product-cards cstm-card">
+                                            <a href="{{ route(auth()->check() && auth()->user()->hasRole('Administrator') ? 'admin.products.details' : (auth()->check() ? auth()->user()->getRoleNames()->first() . '.products.details' : 'Dealer.products.details'), ['product' => $product->id]) }}">
                                                     <div class="product-cards-img">
-                                                        <img src="{{ Storage::url($product->productImage[0]->file_url) }}" alt="">
+                                                        <img src="{{ $product->productImage && count($product->productImage) ? Storage::url($product->productImage[0]->file_url) : asset('assets/images/gear-logo.svg') }}" alt="">
                                                     </div>
+                                            </a>
+
                                                     <div class="product-deails">
-                                                        <p>{{ $product->name }}® – Model-{{ $product->brand ?? 'Ford' }}
-                                                            series-{{ $product->model ?? 'endeavor' }}
-                                                            Year-{{ $product->year ?? '2016' }}
-                                                        </p>
+                                                        <p>{{ $product->name }}</p>
                                                         <div class="price-and-cart">
                                                             <div class="discount-price">
-                                                                <span>{{ $product->price * 1.5 }}</span>
+                                                                <!-- <span>{{ $product->price * 1.5 }}</span> -->
                                                                 <p>{{ $product->price }}</p>
                                                             </div>
     
@@ -375,7 +351,6 @@
                                                         </div>
                                                     </div> --}}
                                                 </div>
-                                            </a>
                                         </div>
                                     </div>
                                     @empty
@@ -430,6 +405,9 @@
 
 </section>
 @endsection
+@section('modals')
+@include('modals.restrict_multiple')
+@endsection
 @push('scripts')
 
 
@@ -456,30 +434,6 @@
 </script>
 <script>
     $(document).ready(function() {
-        $('.addtocart').on('click', function() {
-            console.log('hrerererer');
-            var product_id = $(this).attr('product-id')
-            url = APP_URL + '/dealer/add/to/cart/' + product_id
-            console.log(url);
-            var response = ajaxCall(url, 'post', null, false);
-            response.then(handleStateData).catch(handleStateError)
-
-            function handleStateData(response) {
-                if (response.success == true) {
-                    console.log('hererererer')
-                    jQuery('.cart-icon').html(response.cart_icon)
-                    window.location.replace(APP_URL + '/' + 'dealer/cart/index')
-                    // return toastr.success(response.msg);
-                } else {
-                    jQuery('#errormessage').html(response.error);
-                }
-            }
-
-            function handleStateError(error) {
-                console.log('error', error)
-
-            }
-        });
 
         $('.see-more-less-make').on('click', function() {
             $('#brandContainer').toggleClass('full-data-view');

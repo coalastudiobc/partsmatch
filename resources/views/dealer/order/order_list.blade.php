@@ -3,16 +3,16 @@
 @section('heading', 'Order Management')
 @section('content')
     <div class="dashboard-right-box">
-        <div class="serach-and-filter-box">
+        <div class="serach-and-filter-box justify-content-end">
             <div class="pro-search-box">
-                <input type="text" class="form-control" name="filter_by_name" placeholder="Search Product By Name">
+                <input type="text" class="form-control" name="filter_by_name" placeholder="Search">
                 <a href="#" class="btn primary-btn"><i class="fa-solid fa-magnifying-glass"></i></a>
             </div>
-            <div class="pro-filter">
+            {{-- <div class="pro-filter">
                 <p>Filter:</p>
                 <a href="#" class="btn primary-btn outline-btn"><img
                         src="{{ asset('assets/images/calender-icon.png') }}" alt="">Select Date</a>
-            </div>
+            </div> --}}
         </div>
         <div class="product-detail-table product-list-table">
             <x-alert-component />
@@ -21,17 +21,20 @@
                     <table class="table">
                         <tr>
                             <th>
-                                <p>Total product</p>
+                                <p>Total products</p>
                             </th>
                             <th>
-                                <p>Ammont</p>
+                                <p>Amount</p>
                             </th>
                             <th>
                                 <p>Date</p>
                             </th>
+                            <th>
+                                <p>Order ID</p>
+                            </th>
 
                             <th>
-                                <p>Shippment Price</p>
+                                <p>Shipment price</p>
                             </th>
                             <th>
                                 <p>Action</p>
@@ -54,6 +57,9 @@
                                         <p>{{ date('d-m-Y', strtotime($order->created_at)) }}</p>
                                     </td>
                                     <td>
+                                        <p>{{ $order->id }}</p>
+                                    </td>
+                                    <td>
                                         <p>${{ $order->shipment_price }}</p>
                                     </td>
 
@@ -67,9 +73,14 @@
                                         </div>
                                     </td> --}}
                                     <td>
-                                        <a class="btn primary-btn"
-                                            href="{{ route('Dealer.order.create.shippment', $order->id) }}">Pending
-                                            FullFillment</a>
+                                        @if (isFullFilledShippment($order->id))
+                                            <a class="btn primary-btn" href="#">
+                                                Fulfilled</a>
+                                        @else
+                                            <a class="btn primary-btn"
+                                                href="{{ route('Dealer.order.create.shippment', $order->id) }}">Pending
+                                                fulfillment</a>
+                                        @endif
                                     </td>
                                     {{-- <td>
                                         <div class="pro-status">

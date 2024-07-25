@@ -16,8 +16,8 @@
             <div class="dealer-profile-box">
                 <div class="cstm-bredcrum ms-4">
                     <a href="{{ route('welcome.index') }}" class="bredcrum-list">Home</a>
-                    <a href="{{ route(auth()->check() && auth()->user()->hasRole('Administrator') ? 'admin.products.interior' : (auth()->check() ? auth()->user()->getRoleNames()->first() . '.products.interior' : 'Dealer.products.interior'), ['category' => $product->category->parent->id]) }}" class="bredcrum-list">{{ $product->category->parent->name ?? 'category'}}</a>
-                    <a href="{{ route(auth()->check() && auth()->user()->hasRole('Administrator') ? 'admin.products.interior' : (auth()->check() ? auth()->user()->getRoleNames()->first() . '.products.interior' : 'Dealer.products.interior'), ['category' => $product->category->parent->id]) }}" class="bredcrum-list">{{ $product->category->name ?? 'sub Category' }}</a>
+                    <a href="{{ route('products', ['category' => $product->category->parent->id]) }}" class="bredcrum-list">{{ $product->category->parent->name ?? 'category'}}</a>
+                    <a href="{{ route('products', ['category' => $product->subcategory_id]) }}" class="bredcrum-list">{{ $product->category->name ?? 'sub Category' }}</a>
                     <a href="{{ route(auth()->check() && auth()->user()->hasRole('Administrator') ? 'admin.products.details' : (auth()->check() ? auth()->user()->getRoleNames()->first() . '.products.details' : 'Dealer.products.details'), $product->id) }}" class="bredcrum-list">{{ $product->name ?? 'product name' }}</a>
                     <a href="#" class="bredcrum-list active">{{ $user->name }}</a>
                 </div>
@@ -30,14 +30,13 @@
                                         <div class="dealer-profile-upload-box">
                                             <div class="upload-img">
                                                 <div class="file-upload-box">
-                                                    <label for="file-upload">
+                                                    <label for="file-upload" style="cursor:auto;">
                                                         <div class="profile-without-img">
                                                             <img src="{{ Storage::url($user->profile_picture_url) }} " alt="img">
                                                             {{-- <div class="upload-icon">
                                                                     <i class="fa-sharp fa-solid fa-pen"></i>
                                                                 </div> --}}
                                                         </div>
-                                                        <input type="file" id="file-upload">
                                                     </label>
                                                 </div>
                                             </div>
@@ -47,7 +46,7 @@
                                         <div class="form-group">
                                             <label for="">Name</label>
                                             <div class="form-field">
-                                                <input type="text" value="{{ $user->name }}" class="form-control" placeholder="" readonly>
+                                                <input type="text" value="{{ $user->name }}" class="form-control" placeholder="" disabled readonly>
 
                                             </div>
                                         </div>
@@ -56,7 +55,7 @@
                                             <div class="form-group">
                                                 <label for="">Email</label>
                                                 <div class="form-field">
-                                                    <input type="email" value="{{ $user->email }}" class="form-control"
+                                                    <input type="email" value="{{ $user->email }}" disabled class="form-control"
                                     placeholder="" readonly>
 
                                 </div>
@@ -76,7 +75,7 @@
             <div class="form-group">
                 <label for="">Industry</label>
                 <div class="form-field">
-                    <input type="text" value="{{ $user->industry_type }}" class="form-control" placeholder="" readonly>
+                    <input type="text" value="{{ $user->industry_type }}" class="form-control" placeholder="" disabled readonly>
 
                 </div>
             </div>
@@ -101,7 +100,7 @@
         <div class="dealer-product-header">
             <h3>Product</h3>
             <a href="#" class="btn secondary-btn view-btn">
-                View all Products
+                View all products
             </a>
         </div>
         <div class="dealer-product-category">
@@ -114,7 +113,7 @@
                             <img src="{{ Storage::url($product->productImage[0]->file_url) }}" alt="">
                         </div>
                     </a>
-                    <p>R1 Concepts® – eLINE Series Plain Brake Rotors</p>
+                    <p>{{$product->name}}</p>
                     <div class="price-and-cart">
                         <h4>${{ $product->price }}</h4>
                         @if ($product->user_id != auth()->user()->id)
@@ -149,7 +148,7 @@
 @endsection
 
 @push('scripts')
-<script>
+{{-- <script>
     $(document).ready(function() {
         $('.addtocart').on('click', function() {
             console.log('hrerererer');
@@ -176,5 +175,5 @@
             }
         });
     });
-</script>
+</script> --}}
 @endpush

@@ -11,7 +11,7 @@
         <div class="serach-and-filter-box">
             <form action="">
                 <div class="pro-search-box">
-                    <input type="text" name="filter_by_name" class="form-control" value="" placeholder="Search Product By Name">
+                    <input type="text" name="filter_by_name" class="form-control" value="" placeholder="Search">
                     <button type="submit" class="btn primary-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
             </form>
@@ -19,7 +19,7 @@
                 <img src="{{ asset('assets/images/add-round-icon.svg') }}" alt=""> Bulk upload
             </a>
             <a href="javascript:void(0)" class="btn primary-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                <img src="{{ asset('assets/images/add-round-icon.svg') }}" alt=""> ADD
+                <img src="{{ asset('assets/images/add-round-icon.svg') }}" alt=""> Add
             </a>
         </div>
     </div>
@@ -49,14 +49,13 @@
                 {{-- @dd($products[3]->featuredProduct[]->id); --}}
                 @forelse ($products as $key => $product)
                 <tr>
-                    @foreach ($product->productImage as $a => $image)
                     <td>
                         <div class="pro-img-box" data-bs-toggle="modal" data-bs-target="#pro-detail-model">
-                            <img src="{{ Storage::url($image->file_url) }}" alt="img">
+                            <img src="{{$product->productImage && count($product->productImage) ?  Storage::url($product->productImage[0]->file_url) : asset('assets/images/car-logo1.png') }}" alt="img">
                         </div>
                     </td>
-                    @break
-                    @endforeach
+
+                    
                     <td>
                         <p>{{ $product->name }}</p>
                     </td>
@@ -136,25 +135,25 @@
             <!-- <div class="modal-header">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               </div> -->
             <div class="modal-body">
                 <div class="add-pro-form">
-                    <h2>Add New Products</h2>
+                    <h2>Add new products</h2>
                     <form id="product" action="{{ route('Dealer.products.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">Product Name</label>
+                                    <label for=""> Name</label>
                                     <div class="form-field">
-                                        <input type="text" name="name" class="form-control" placeholder="Product Name">
+                                        <input type="text" name="name" class="form-control" placeholder=" Name">
 
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">Product Category</label>
+                                    <label for=""> Category</label>
                                     <div class="form-field">
-                                        <select type="text" name="category" class="form-control category" placeholder="Product Category">
-                                            <option value="">Select the category</option>
+                                        <select type="text" name="category" class="form-control category" placeholder=" Category">
+                                            <option value="">Select category</option>
                                             @foreach (get_category() as $category)
                                             <option value="{{ $category->id }}">{{ $category->name }}</option>
                                             @endforeach
@@ -164,19 +163,19 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">Product SubCategory</label>
+                                    <label for=""> Sub category</label>
                                     <div class="form-field subcategory">
-                                        <select type="text" name="subcategory" class="form-control" placeholder="Product SubCategory" id="subcategory">
-                                            <option value="">Select the category</option>
+                                        <select type="text" name="subcategory" class="form-control" placeholder="Select subCategory" id="subcategory">
+                                            <option value="">Select  subcategory</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">Part Number</label>
+                                    <label for="">Part number</label>
                                     <div class="form-field subcategory">
-                                        <input type="text" class="form-control" id="part_number" name="part_number" value="{{ old('part_number', $product->part_number ?? ' ') }}" placeholder="Part Number">
+                                        <input type="text" class="form-control" id="part_number" name="part_number" value="" placeholder="Part Number">
                                         @error('part_number')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -187,7 +186,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="">Product Description</label>
+                                    <label for=""> Description</label>
                                     <div class="form-field">
                                         <textarea name="description" class="form-control" id="" cols="30" rows="2"></textarea>
 
@@ -205,7 +204,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="">Add Product Images (Up to 5)</label>
+                                    <label for="">Add  Images (Up to 5)</label>
                                     <label class="img-upload-box">
                                         <p>Upload Images</p>
                                         <input type="file" name="images[]" id="upload-image" multiple minlength="5" upload-image-count="0">
@@ -218,16 +217,16 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">Product Quantity</label>
+                                    <label for=""> Quantity</label>
                                     <div class="form-field">
-                                        <input type="text" name="stocks_avaliable" class="form-control" placeholder="Product Quantity">
+                                        <input type="text" name="stocks_avaliable" class="form-control" placeholder=" Quantity">
 
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">Product Price</label>
+                                    <label for=""> Price</label>
                                     <div class="form-field">
                                         <input type="text" name="price" class="form-control" placeholder="$000">
 
@@ -271,7 +270,7 @@
                                     </div>
                                 </div>
                             </div> --}}
-                            <div class="col-md-3">
+                            {{-- <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="length">Length:</label>
                                     <div class="form-field">
@@ -354,7 +353,7 @@
                                         </select>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             {{-- <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="">Shipping Price*</label>
@@ -471,7 +470,8 @@
             <div class="modal-body">
                 <div class="add-pro-form">
                     <h2>Bulk Upload</h2>
-                    <form action="{{route('Dealer.products.bulk.upload')}}">
+                    <form action="{{route('Dealer.products.bulk.upload')}}" method="post" enctype="multipart/form-data">
+                    @csrf
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -479,11 +479,14 @@
                                     <label class="img-upload-box">
                                         <img src="images/upload-img.png" alt="">
                                         <p>Upload Images</p>
-                                        <input type="file">
+                                        <input type="file" name=csv_file>
                                     </label>
                                 </div>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-6">
+                                <a href="{{route('Dealer.download.sample')}}" class="btn secondary-btn full-btn">Get sample csv</a>
+                            </div>
+                            <div class="col-md-6">
                                 <button type="submit" class="btn secondary-btn full-btn">submit</button>
                             </div>
                         </div>
@@ -704,11 +707,11 @@
 
     jQuery(document).ready(function() {
         jQuery('#submit').click(function(e) {
-            var no_image = $('#upload-image').attr('upload-image-count');
+            {{-- var no_image = $('#upload-image').attr('upload-image-count');
             if (parseInt(no_image) < 5) {
                 e.preventDefault();
                 return toastr.error("Please enter atleast 5 images");
-            }
+            } --}}
             // var formData = new FormData($('form#product').get(0));
             $('#product').valid()
         });

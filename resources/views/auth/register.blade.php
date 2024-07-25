@@ -100,12 +100,12 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">Dealership Name*</label>
+                                                <label for="">Dealership name*</label>
                                                 <div class="form-field">
                                                     <input type="text" name="dealershipName"
                                                         value="{{ old('dealership_name') }}"
                                                         class="form-control @error('dealershipName') is-invalid @enderror"
-                                                        placeholder="DealerShip Name">
+                                                        placeholder="DealerShip name">
 
                                                     @error('dealershipName')
                                                         <span class="invalid-feedback" role="alert">
@@ -119,10 +119,10 @@
                                             <div class="form-group">
                                                 <label for="">Phone*</label>
                                                 <div class="form-field">
-                                                    <input type="number" name="phone_number"
+                                                    <input type="text" name="phone_number"
                                                         value="{{ old('phone_number') }}"
                                                         class="form-control @error('phone_number') is-invalid @enderror"
-                                                        placeholder="Phone Number">
+                                                        placeholder="Phone number">
 
                                                     @error('phone_number')
                                                         <span class="invalid-feedback" role="alert">
@@ -134,7 +134,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">Complete Address*</label>
+                                                <label for="">Complete address*</label>
                                                 <div class="form-field">
                                                     <input type="text" name="address" value="{{ old('address') }}"
                                                         class="form-control @error('address') is-invalid @enderror"
@@ -150,11 +150,11 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">Zip Code*</label>
+                                                <label for="">Zip code*</label>
                                                 <div class="form-field">
                                                     <input type="number" name="zipcode" value="{{ old('zipcode') }}"
                                                         class="form-control @error('zipcode') is-invalid @enderror"
-                                                        placeholder="Zip Code">
+                                                        placeholder="Zip code">
 
                                                     @error('zipcode')
                                                         <span class="invalid-feedback" role="alert">
@@ -166,7 +166,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">Select Industry*</label>
+                                                <label for="">Select industry*</label>
                                                 <div class="form-field">
                                                     {{-- <select name="industry_type" id="industury" class="form-control">
                                                         <option value="volvo">Select industry</option>
@@ -252,12 +252,12 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">Confirm Password*</label>
+                                                <label for="">Confirm password*</label>
                                                 <div class="form-field">
                                                     <input type="password" name="password_confirmation"
                                                         value="{{ old('password_confirmation') }}"
                                                         class="form-control @error('password_confirmation') is-invalid @enderror"
-                                                        placeholder="Password Confirmation">
+                                                        placeholder="Password confirmation">
 
                                                     @error('password_confirmation')
                                                         <span class="invalid-feedback" role="alert">
