@@ -2764,7 +2764,9 @@ span.filter-serach-icon {
 .accessories-parts-box .more-product-cards.cstm-card {
     height: 100%;
 }
-
+.pagination-wrapper {
+	margin: 20px 0 0 auto;
+}
 
 
 

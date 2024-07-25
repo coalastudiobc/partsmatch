@@ -1439,11 +1439,10 @@ ul.order-summary-list li:last-child {
     padding-bottom: 0;
     margin-bottom: 0;
 }
-
 .summary-list-box>p {
     font-size: 16px;
-    font-weight: 500;
-    font-family: 'Times New Roman';
+    font-weight: 600;
+    font-family: Arial;
 }
 
 

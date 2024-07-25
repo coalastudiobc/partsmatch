@@ -1654,6 +1654,9 @@ button.btn-close {
 .dealer-pro-commission-info .form-group:has(.symbol) input {
     padding-left: 40px;
 }
+.pagination-wrapper {
+	margin: 20px 0 0 auto;
+}
 
 
 

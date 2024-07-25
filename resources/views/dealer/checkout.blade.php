@@ -321,7 +321,7 @@
                         </ul>
                     </div>
                     <div class="col-md-12">
-                        <button type="submit" id="place-order" class="btn primary-btn full-btn">Place Order</button>
+                        <button type="submit" id="place-order" class="btn primary-btn full-btn mt-2">Place Order</button>
                     </div>
                     </form>
 
