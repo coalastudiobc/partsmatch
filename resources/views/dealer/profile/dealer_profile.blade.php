@@ -30,14 +30,13 @@
                                         <div class="dealer-profile-upload-box">
                                             <div class="upload-img">
                                                 <div class="file-upload-box">
-                                                    <label for="file-upload">
+                                                    <label for="file-upload" style="cursor:auto;">
                                                         <div class="profile-without-img">
                                                             <img src="{{ Storage::url($user->profile_picture_url) }} " alt="img">
                                                             {{-- <div class="upload-icon">
                                                                     <i class="fa-sharp fa-solid fa-pen"></i>
                                                                 </div> --}}
                                                         </div>
-                                                        <input type="file" id="file-upload">
                                                     </label>
                                                 </div>
                                             </div>
@@ -47,7 +46,7 @@
                                         <div class="form-group">
                                             <label for="">Name</label>
                                             <div class="form-field">
-                                                <input type="text" value="{{ $user->name }}" class="form-control" placeholder="" readonly>
+                                                <input type="text" value="{{ $user->name }}" class="form-control" placeholder="" disabled readonly>
 
                                             </div>
                                         </div>
@@ -56,7 +55,7 @@
                                             <div class="form-group">
                                                 <label for="">Email</label>
                                                 <div class="form-field">
-                                                    <input type="email" value="{{ $user->email }}" class="form-control"
+                                                    <input type="email" value="{{ $user->email }}" disabled class="form-control"
                                     placeholder="" readonly>
 
                                 </div>
@@ -76,7 +75,7 @@
             <div class="form-group">
                 <label for="">Industry</label>
                 <div class="form-field">
-                    <input type="text" value="{{ $user->industry_type }}" class="form-control" placeholder="" readonly>
+                    <input type="text" value="{{ $user->industry_type }}" class="form-control" placeholder="" disabled readonly>
 
                 </div>
             </div>

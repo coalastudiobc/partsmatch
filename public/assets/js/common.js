@@ -48,7 +48,7 @@ jQuery(document).ready(function () {
     if ($("td.no-record-found").length)
         $("td.no-record-found").attr("colspan", $("td.no-record-found").closest("table").find("tr:first-child th").length)
 
-    $(document).on('click', '.addtocart', function() {
+    $(document).on('click', '.addtocart', function () {
         var element = $(this);
         var product_id = $(this).attr('product-id')
         url = APP_URL + '/dealer/add/to/cart/' + product_id
@@ -57,14 +57,18 @@ jQuery(document).ready(function () {
 
         function handleStateData(response) {
             if (response.success == true) {
-                if(response.product_id){
-                    $('#alreadyAddedOwner').attr('href',response.dealer_url)
-                    $('#deleteAndAdd').attr('data-url',response.product_url)
+                if (response.product_id) {
+                    $('#alreadyAddedOwner').attr('href', response.dealer_url)
+                    $('#deleteAndAdd').attr('data-url', response.product_url)
                     $('#restrictMultiple').modal('show');
-                }else{
+                } else {
 
                     element.empty().append('<span>Added</span>');
                     jQuery(".cart-icon").html(response.cart_icon);
+                    if (response.message == "Product already in Cart.") {
+                        return toastr.error(response.message);
+
+                    }
                     return toastr.success(response.message);
                 }
             } else {
@@ -77,9 +81,9 @@ jQuery(document).ready(function () {
 
         }
     });
-    $(document).on('click', '#deleteAndAdd', function() {
+    $(document).on('click', '#deleteAndAdd', function () {
         var url = $(this).attr('data-url');
-        if(url){
+        if (url) {
             var response = ajaxCall(url, 'post', null, false);
             response.then(handleStateData).catch(handleStateError)
         }
