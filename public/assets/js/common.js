@@ -48,11 +48,13 @@ jQuery(document).ready(function () {
     if ($("td.no-record-found").length)
         $("td.no-record-found").attr("colspan", $("td.no-record-found").closest("table").find("tr:first-child th").length)
 
-    $(document).on('click', '.addtocart', function () {
+    $(document).on('click', '.addtocart', function (e) {
+        e.preventDefault();
+        var quantity = $(this).attr('data-quantity') ? $(this).attr('data-quantity') : 1;
         var element = $(this);
         var product_id = $(this).attr('product-id')
         url = APP_URL + '/dealer/add/to/cart/' + product_id
-        var response = ajaxCall(url, 'post', null, false);
+        var response = ajaxCall(url, 'post', {'quantity': quantity}, false);
         response.then(handleStateData).catch(handleStateError)
 
         function handleStateData(response) {
@@ -60,16 +62,17 @@ jQuery(document).ready(function () {
                 if (response.product_id) {
                     $('#alreadyAddedOwner').attr('href', response.dealer_url)
                     $('#deleteAndAdd').attr('data-url', response.product_url)
+                    $('#deleteAndAdd').attr('data-quantity', response.quantity)
                     $('#restrictMultiple').modal('show');
                 } else {
 
                     element.empty().append('<span>Added</span>');
                     jQuery(".cart-icon").html(response.cart_icon);
                     if (response.message == "Product already in Cart.") {
-                        return toastr.error(response.message);
+                        // return toastr.error(response.message);
 
                     }
-                    return toastr.success(response.message);
+                    // return toastr.success(response.message);
                 }
             } else {
                 jQuery('#errormessage').html(response.error);
@@ -83,8 +86,9 @@ jQuery(document).ready(function () {
     });
     $(document).on('click', '#deleteAndAdd', function () {
         var url = $(this).attr('data-url');
+        var quantity = $(this).attr('data-quantity') ? $(this).attr('data-quantity') : 1;
         if (url) {
-            var response = ajaxCall(url, 'post', null, false);
+            var response = ajaxCall(url, 'post', {'quantity':quantity}, false);
             response.then(handleStateData).catch(handleStateError)
         }
 
@@ -92,7 +96,7 @@ jQuery(document).ready(function () {
             if (response.success == true) {
                 $(this).empty().append('<span>Added</span>');
                 jQuery(".cart-icon").html(response.cart_icon);
-                return toastr.success(response.message);
+                // return toastr.success(response.message);
             } else {
                 jQuery('#errormessage').html(response.error);
             }

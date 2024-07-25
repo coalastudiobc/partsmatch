@@ -54,7 +54,7 @@ if (!function_exists('IspackageParcel')) {
     {
         try {
             $isalready = OrderParcels::where('orderItem_id', $orderItem_id)->where('product_id', $product_id)->first();
-            if ($isalready) {
+            if ($isalready->status) {
                 return  $isalready;
             }
             return false;

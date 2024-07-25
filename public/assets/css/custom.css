@@ -256,13 +256,33 @@
 .quantity-btn {
     display: flex;
     align-items: center;
-    background-color: var(--white);
-    max-width: 77px;
+    background-color: #efefef;
+    max-width: 130px;
     width: 100%;
     justify-content: space-around;
     padding: 6px 0px;
     border-radius: 5px;
+    position: relative;
+    border: 1px solid #bfc0c1;
 }
+/* .quantity-btn::after {
+    content: "";
+    position: absolute;
+    top: 6px;
+    left: 43px;
+    width: 1px;
+    height: 39px;
+    background-color: #25292d3d;
+}
+.quantity-btn::before {
+    content: "";
+    position: absolute;
+    top: 6px;
+    right: 43px;
+    width: 1px;
+    height: 39px;
+    background-color: #25292d3d;
+} */
 
 .quantity-btn p {
     margin: 0;
@@ -270,6 +290,12 @@
 
 .quantity-btn a {
     color: var(--gray-color);
+    font-size: 25px;
+    max-width: 35px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .product-quantity-box {
@@ -690,10 +716,10 @@
 }
 
 .pagination-box {
-    max-width: 53px;
+    max-width: 40px;
     border: 1px solid var(--heading-color);
     width: 100%;
-    padding: 14px 0px;
+    padding: 7px 0px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -969,8 +995,9 @@
 .quantity-btn input {
     max-width: 20px;
     border: 0;
-    font-size: 12px;
+    font-size: 16px;
     text-align: center;
+    background-color: transparent;
 }
 .dropdown-item:focus,
 .dropdown-item:hover {
@@ -1436,8 +1463,8 @@ ul.order-summary-list li:last-child {
 
 .summary-list-box>p {
     font-size: 16px;
-    font-weight: 500;
-    font-family: 'Times New Roman';
+    font-weight: 600;
+    font-family: arial;
 }
 
 
@@ -1850,7 +1877,7 @@ a.btn.primary-btn.dashboard-btn.nav-link {
 }
 .shipping-list ul li label > p {
     font-weight: 500;
-    font-family: 'Times New Roman';
+    font-family: arial;
 }
 ul.order-total-list {
     padding-top: 10px;

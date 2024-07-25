@@ -37,7 +37,8 @@
                                     <td>{{ $product->product ? $product->product->name : '' }}</td>
                                     <td>{{ $product->product ? $product->product->price : '' }} </td>
                                     <td>
-                                        <div class="product-quantity-box">
+                                        <div class="product-quantity-box targetLoaderDiv">
+                                            <div class="button-loader d-none" ></div>
                                             <div class="quantity-btn quantity-brd">
                                                 @if ($product->quantity != 1)
                                                 <a href="javascript:void(0)" class="minus cartupdate" data-product_id="{{ $product->id }}" data_quantity_id="{{ '#quantity' . $product->id }}" data-stocks="{{ $product->product ? $product->product->stocks_avaliable : '' }}">-</a>

@@ -41,7 +41,7 @@ class HomeController extends Controller
     public function index($subcategory_id = null)
     {
         $category = Category::where('status', '1')->get();
-        $collections = Category::with('products.cartProduct')->has('products.cartProduct')->where('parent_id', '!=', null)->where('status', '1')->inRandomOrder()->take(10)->get();
+        $collections = Category::with('products')->has('products')->where('parent_id', '!=', null)->where('status', '1')->inRandomOrder()->take(10)->get();
         $subcategories = Category::with('products')->has('products')->Where('parent_id', '!=', null)->where('status', '1')->inRandomOrder()->take(6)->get();
         $brands = CarBrandMake::inRandomOrder()->get();
         if (Auth::user()) {
@@ -65,7 +65,7 @@ class HomeController extends Controller
     }
     public function getProductsForCategory(Request $request, Category $category)
     {
-        $products = $category->products;
+        $products = Product::where('status','1')->where('subcategory_id',$category->id)->inRandomOrder()->limit(5)->get();
         $data = view('components.home-product-tab', compact('products'))->render();
 
         return response()->json(['status' => true, 'message' => 'products fetched successfully', 'data' => $data], 200);
@@ -148,15 +148,15 @@ class HomeController extends Controller
     }
     public function allProducts(Request $request)
     {
-        $brands = CarBrandMake::distinct('makes')->get();
-
+        ;        $brands = CarBrandMake::distinct('makes')->get();
+        
         $sdk = \CarApiSdk\CarApi::build([
             'token' => env('CAR_API_TOKEN'),
             'secret' => env('CAR_API_SECRET'),
         ]);
         $filePath = storage_path('app/text.txt');
         $jwt = file_exists($filePath) ? file_get_contents($filePath) : null;
-
+        
         if (empty($jwt) || $sdk->loadJwt($jwt)->isJwtExpired()) {
             try {
                 $jwt = $sdk->authenticate();
@@ -168,7 +168,8 @@ class HomeController extends Controller
         }
         $years = $sdk->years();
         $models = AllModel::all();
-        $products = Product::with('productImage', 'featuredProduct', 'productCompatible')->global()->category()->compatiblity()->paginate('12');
+        $products = Product::with('productImage', 'featuredProduct', 'productCompatible')->where('status','1')->global()->category()->compatiblity()->paginate(12);
+        // dd($products);
         $categories =  Category::with('children')->has('children')->orWhereNull('parent_id')->get();
         return view('public_shop', compact("categories", "products", "brands", "years", "models"));
     }

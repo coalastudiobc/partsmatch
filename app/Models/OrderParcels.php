@@ -12,5 +12,11 @@ class OrderParcels extends Model
         'parcel_id',
         'product_id',
         'orderItem_id',
+        'status',
     ];
+
+    public function ordeItems()
+    {
+        return $this->hasOne(OrderItem::class, 'id', 'orderItem_id');
+    }
 }

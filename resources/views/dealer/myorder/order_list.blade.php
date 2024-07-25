@@ -26,7 +26,7 @@
                     <th>Total product</th>
                     <th>Total price</th>
                     <th>Quantity</th>
-                    <th>Shipment Price</th>
+                    <th>Shipment price</th>
                     <th>Date</th>
                     <th>Action</th>
                 </tr>

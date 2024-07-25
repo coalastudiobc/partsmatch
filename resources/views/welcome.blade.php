@@ -257,7 +257,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>          
 @endif
 @if (isset($collections[0]))
     <section class="collection-sec">
@@ -359,7 +359,7 @@
 
             <div id="brandContainer" class="sp-brands brand-height-fix">
                 @foreach($brands as $brand)
-                <div class="brands-image brand-container">
+                <div class="brands-image brand-container make-filter" data-make="{{$brand->makes}}">
                     <img src="{{ $brand->image_url ? $brand->image_url : asset('assets/images/car-logo2.png') }}" alt="" class="">
                     <div class="brands-image-content">
                         <h6>{{$brand->makes}}</h6>
@@ -367,6 +367,10 @@
                 </div>
                 @endforeach
             </div>
+            <form id="brandFilter" method="POST" action="{{route('products')}}" class="d-none">
+                @csrf
+                <input type="hidden" id="searchFieldMake" name="brand[]" class="max-input" >
+            </form>
 
         </div>
     </div>
@@ -534,6 +538,12 @@
                 $(this).html('See more');
             }
             
+        });
+
+        $('.make-filter').on('click', function() {
+            var make = $(this).attr('data-make');
+            $('#searchFieldMake').val(make);
+            $('#brandFilter').submit();
         });
 
 

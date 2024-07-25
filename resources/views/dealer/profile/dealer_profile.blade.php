@@ -33,9 +33,7 @@
                                                     <label for="file-upload" style="cursor:auto;">
                                                         <div class="profile-without-img">
                                                             <img src="{{ Storage::url($user->profile_picture_url) }} " alt="img">
-                                                            {{-- <div class="upload-icon">
-                                                                    <i class="fa-sharp fa-solid fa-pen"></i>
-                                                                </div> --}}
+                                                         
                                                         </div>
                                                     </label>
                                                 </div>
@@ -51,26 +49,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    {{-- <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="">Email</label>
-                                                <div class="form-field">
-                                                    <input type="email" value="{{ $user->email }}" disabled class="form-control"
-                                    placeholder="" readonly>
-
-                                </div>
-                        </div>
-                    </div> --}}
-                    {{-- <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="">Phone Number</label>
-                                                <div class="form-field">
-                                                    <input type="tel" value="{{ $user->phone_number }}"
-                    class="form-control" placeholder="" readonly>
-
-                </div>
-            </div>
-        </div> --}}
+                
         <div class="col-md-6">
             <div class="form-group">
                 <label for="">Industry</label>
@@ -80,33 +59,15 @@
                 </div>
             </div>
         </div>
-
-        {{-- <div class="col-md-12">
-                                            <div class="dealer-profile-form-btn">
-                                                @if (auth()->user()->id === $user->id)
-                                                @else
-                                                    <a href="{{ route('dealer.chat.inbox.view', ['user_id' => jsencode_userdata($user->id)]) }}"
-        class="btn primary-btn sendMessage"
-        data-id="{{ jsencode_userdata($user->id) }}">Send Message</a>
-        @endif
-    </div>
-    </div> --}}
     </div>
 
     </form>
     </div>
     </div>
     <div class="dealer-product-bxx">
-        <div class="dealer-product-header">
-            <h3>Product</h3>
-            <a href="#" class="btn secondary-btn view-btn">
-                View all products
-            </a>
-        </div>
         <div class="dealer-product-category">
             <div class="dealer-category-box">
                 @foreach ($allproducts as $product)
-                {{-- @dd($product) --}}
                 <div class="collection-box cstm-card">
                     <a href="{{ route('Dealer.products.details', $product->id) }}">
                         <div class="collection-img">
@@ -142,38 +103,5 @@
     </div>
     </div>
     </div>
-    <!-- Start -->
-    <!-- End -->
 </section>
 @endsection
-
-@push('scripts')
-{{-- <script>
-    $(document).ready(function() {
-        $('.addtocart').on('click', function() {
-            console.log('hrerererer');
-            var product_id = $(this).attr('product-id')
-            url = APP_URL + '/dealer/add/to/cart/' + product_id
-            console.log(url);
-            var response = ajaxCall(url, 'post', null, false);
-            response.then(handleStateData).catch(handleStateError)
-
-            function handleStateData(response) {
-                if (response.success == true) {
-                    console.log('hererererer')
-                    // location.reload();
-                    jQuery(".cart-icon").html(response.cart_icon);
-                    return toastr.success(response.msg);
-                } else {
-                    jQuery('#errormessage').html(response.error);
-                }
-            }
-
-            function handleStateError(error) {
-                console.log('error', error)
-
-            }
-        });
-    });
-</script> --}}
-@endpush

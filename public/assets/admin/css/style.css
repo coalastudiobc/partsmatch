@@ -1650,7 +1650,9 @@ button.btn-close {
 .dealer-last-five-product .product-detail-table table tr td .primary-btn {
     padding: 7px 14px;
 }
-
+.pagination-wrapper {
+    margin: 20px 0 0;
+}
 
 
 

@@ -327,7 +327,7 @@ class CheckoutController extends Controller
             BuyerAddress::create([
                 'user_id' => auth()->user()->id,
                 'shippo_address_id' => $responseInArray->object_id,
-                'selected_method_id' => $request->shipping_Method,
+                'selected_method_id' => $request->shipping_Method ?? 0,
             ]);
             $toAddress = $responseInArray->object_id;
             $stripeCustomer = auth()->user()->createOrGetStripeCustomer();
