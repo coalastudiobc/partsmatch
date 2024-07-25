@@ -1248,7 +1248,7 @@ input.custm-check[type=checkbox]:before {
 
 /* ================= toggle switch css ===================  */
 .modal-dialog.modal-dialog-centered {
-    max-width: 700px;
+    max-width: 1000px;
 }
 
 .modal-body {
@@ -1985,7 +1985,7 @@ span.sidebar-cross-icon i {
 
 
 .add-new-pro-modal .modal-dialog.modal-dialog-centered {
-    max-width: 900px;
+    max-width: 1000px;
 }
 
 .add-pro-submit {
@@ -2761,7 +2761,9 @@ span.filter-serach-icon {
     grid-template-columns: 1fr 1fr;
     column-gap: 50px;
 }
-
+.accessories-parts-box .more-product-cards.cstm-card {
+    height: 100%;
+}
 
 
 

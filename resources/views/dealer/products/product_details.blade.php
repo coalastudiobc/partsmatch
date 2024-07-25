@@ -281,7 +281,7 @@
         asNavFor: '.slick-product',
         prevArrow: $('.prev-btn-multi'),
         nextArrow: $('.next-btn-multi'),
-        // focusOnSelect: true,
+        focusOnSelect: true,
     });
     $('a[data-slide]').click(function(e) {
         e.preventDefault();
