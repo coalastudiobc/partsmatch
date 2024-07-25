@@ -126,6 +126,139 @@
 
                 </table>
             </div>
+                    <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#shipment-details-modal">
+                Launch static backdrop modal
+            </button>
+            <!-- Modal -->
+            <div class="modal shipment-details-modal fade" id="shipment-details-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="shipment-details-main">
+                            <h2>Shipment Details</h2>
+                            <div class="shipment-details-list-box">
+                                <ul class="shipment-details-list">
+                                    <li>
+                                        <h3>Order Id</h3>
+                                        <p>56464</p>
+                                    </li>
+                                    <li>
+                                        <h3>Rate Id</h3>
+                                        <p>56464</p>
+                                    </li>
+                                    <li>
+                                        <h3>Shipment Id</h3>
+                                        <p>56464</p>
+                                    </li>
+                                    <li>
+                                        <h3>Amount</h3>
+                                        <p>56464</p>
+                                    </li>
+
+                                    <li>
+                                        <h3>Currency</h3>
+                                        <p>USD</p>
+                                    </li>
+                                    <li>
+                                        <h3>Rate Provider</h3>
+                                        <p>UPS</p>
+                                    </li>
+                                    <li>
+                                        <h3>Service level Token</h3>
+                                        <p>UPS_</p>
+                                    </li>
+                                    <li>
+                                        <h3>Days</h3>
+                                        <p>56464</p>
+                                    </li>
+                                    <li>
+                                        <h3>Result</h3>
+                                        <p>56464</p>
+                                    </li>
+                                    <li>
+                                        <h3>Master Rate Id</h3>
+                                        <p>56464</p>
+                                    </li>
+                                    <li>
+                                        <h3>Tracking Number</h3>
+                                        <p>56464</p>
+                                    </li>
+                                    <li>
+                                        <h3>Label URL</h3>
+                                        <p>56464</p>
+                                    </li>
+                                    <li>
+                                        <h3>QR</h3>
+                                        <p>534563</p>
+                                    </li>
+
+
+                                </ul>
+                                <ul class="shipment-details-list">
+                                    <li>
+                                        <h3>Order Id</h3>
+                                        <p>56464</p>
+                                    </li>
+                                    <li>
+                                        <h3>Rate Id</h3>
+                                        <p>56464</p>
+                                    </li>
+                                    <li>
+                                        <h3>Shipment Id</h3>
+                                        <p>56464</p>
+                                    </li>
+                                    <li>
+                                        <h3>Amount</h3>
+                                        <p>56464</p>
+                                    </li>
+
+                                    <li>
+                                        <h3>Currency</h3>
+                                        <p>USD</p>
+                                    </li>
+                                    <li>
+                                        <h3>Rate Provider</h3>
+                                        <p>UPS</p>
+                                    </li>
+                                    <li>
+                                        <h3>Service level Token</h3>
+                                        <p>UPS_</p>
+                                    </li>
+                                    <li>
+                                        <h3>Days</h3>
+                                        <p>56464</p>
+                                    </li>
+                                    <li>
+                                        <h3>Result</h3>
+                                        <p>56464</p>
+                                    </li>
+                                    <li>
+                                        <h3>Master Rate Id</h3>
+                                        <p>56464</p>
+                                    </li>
+                                    <li>
+                                        <h3>Tracking Number</h3>
+                                        <p>56464</p>
+                                    </li>
+                                    <li>
+                                        <h3>Label URL</h3>
+                                        <p>56464</p>
+                                    </li>
+                                    <li>
+                                        <h3>QR</h3>
+                                        <p>534563</p>
+                                    </li>
+
+
+                                </ul>
+                            </div>
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                </div>
+                </div>
+            </div>
         </div>
         <div class="shipper-page-main-outer">
             <div class="shipper-page-main">

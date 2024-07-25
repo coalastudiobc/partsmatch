@@ -2465,8 +2465,40 @@ span.filter-serach-icon {
     margin: 40px 0px;
     line-height: 22px;
 }
-
-
+.shipment-details-main > h2 {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 22px;
+    line-height: 24px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+.shipment-details-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+}
+.shipment-details-list li + li{
+    margin-top: 15px;
+}
+.shipment-details-list li h3 {
+    font-size: 18px;
+    line-height: 22px;
+}
+.shipment-details-list li p {
+    font-size: 18px;
+    line-height: 22px;
+}
+.shipment-details-modal .modal-dialog-centered{
+    max-width: 1000px;
+}
+.shipment-details-list-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 50px;
+}
 
 
 
