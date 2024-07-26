@@ -3,7 +3,6 @@
         $.validator.addMethod('checkboxRequired', function(value, element) {
             return $('#checkbox3').is(':checked');
         }, 'You must accept the terms.');
-
         $("#packageDimension").validate({
             rules: {
                 length: {
@@ -21,16 +20,10 @@
                     number: true,
                     min: 0
                 },
-                dimension_unit: {
-                    required: true
-                },
                 weight: {
                     required: true,
                     number: true,
                     min: 0
-                },
-                weight_unit: {
-                    required: true
                 },
                 create_return_label: {
                     checkboxRequired: true
@@ -52,16 +45,10 @@
                     number: "Height must be a number.",
                     min: "Height must be a positive number."
                 },
-                dimension_unit: {
-                    required: "Please select a dimension unit."
-                },
                 weight: {
                     required: "Please enter the weight.",
                     number: "Weight must be a number.",
                     min: "Weight must be a positive number."
-                },
-                weight_unit: {
-                    required: "Please select a weight unit."
                 },
                 create_return_label: {
                     checkboxRequired: "You must check the box to create a return label."
@@ -83,7 +70,11 @@
             },
             submitHandler: (form, event) => {
                 event.preventDefault();
-                let formData = $(form).serialize();
+                var formData = $(form).serializeArray();
+
+                // productIds.forEach(function(productId) {
+                //     formData.push({ name: 'product_id[]', value: productId });
+                // });
 
                 // fetch($(form).attr('action') {
                 //         method: $(form).attr('method'),
@@ -109,8 +100,10 @@
                 //         console.error('Fetch Error:', error);
                 //         alert(error.message || 'An error occurred while submitting the form.');
                 //     });
-
-                let url = APP_URL + '/dealer/parcel/dimension/' + order_item_id;
+                let dimensionsJSON = JSON.stringify(productIds);
+                let product = encodeURIComponent(dimensionsJSON);
+                let url = APP_URL + '/dealer/parcel/dimension/' + product;
+                console.log(productIds);
                 const result = ajaxCall(url, 'post', formData, true);
                 $("#fullPageLoader").removeClass('d-none');
                 result.then(handleParcelSuccessResponse).catch(handleParcelErrorResponse)
@@ -120,10 +113,16 @@
                     $("#fullPageLoader").addClass('d-none');
                     if (jQuery('.harvinder').hasClass('addingDim')) {
                         var productOrderItemId = jQuery('.harvinder').attr('data-productId');
-                        jQuery('.addingDim').text('Edit');
+                        jQuery('.add-dimension-btn').text('Edit');
                     }
                     $('#Package-modal').modal('toggle')
-                    toastr.success(response.message);
+                    if (response.status == false) {
+                        var errorMessage = response.message;
+                        errorMessage += ' Please make group first.';
+                        toastr.error(errorMessage);
+                    } else {
+                        toastr.success(response.message);
+                    }
                     $('#Package-modal').on('hidden.bs.modal', function() {
                         $(this).find('form').trigger('reset');
                     })
@@ -138,17 +137,36 @@
 
                 function handleParcelErrorResponse(error) {
                     console.log('error', error)
+                    $("#fullPageLoader").addClass('d-none');
+
                 }
             }
         });
-        var order_item_id = 0;
-        jQuery('.harvinder').on('click', function(e) {
-            var productName = jQuery(this).attr('data-productName');
-            jQuery(this).addClass('addingDim');
-            order_item_id = jQuery(this).attr('data-productId');
-            jQuery('.productName').text(productName);
-            console.log(productName);
+        var productIds = 0;
+        $(document).on('click', '.add-dimension-btn', function() {
+            console.log($(this).closest('.grouped-data').data('ids'));
+            productIds = $(this).closest('.grouped-data').data('ids');
+            console.log(productIds, typeof productIds, productIds.length);
+
+            if (typeof productIds === 'string') {
+                console.log(productIds, productIds);
+                productIds = $(this).closest('.grouped-data').data('ids').split(',');
+            } else {
+                console.log($(this).closest('.grouped-data').data('ids'));
+                productIds = $(this).closest('.grouped-data').data('ids');
+            }
+            console.log('Product IDs:', productIds);
         });
+
+        // jQuery('.harvinder').on('click', function(e) {
+        //     var productIds = $(this).closest('.grouped-data').data('ids').split(',');
+        //     console.log(productIds);
+        //     var productName = jQuery(this).attr('data-productName');
+        //     jQuery(this).addClass('addingDim');
+        //     order_item_id = jQuery(this).attr('data-productId');
+        //     jQuery('.productName').text(productName);
+        //     console.log(productName);
+        // });
         var flag = jQuery('.harvinder').data('flag');
         if (flag) {
             if (jQuery('.payment-btn').hasClass('disabled-shippmentPayment')) {
@@ -156,5 +174,8 @@
             }
             console.log(flag);
         }
+        $('.btn-close').on('click', function(e) {
+            var productIds = 0;
+        })
     });
 </script>

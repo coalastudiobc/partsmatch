@@ -15,7 +15,7 @@
 
 
             // delete product form the cart
-            $(document).on('click', '.cartDelete', function() {
+              $(document).on('click', '.cartDelete', function() {
                 var product_id = $(this).attr('data-product_id')
                 url = APP_URL + '/dealer/delete/to/cart/' + product_id
                 var response = ajaxCall(url, 'get', null, false);
@@ -40,6 +40,9 @@
 
             // update cart with minus
             $(document).on('click', '.cartupdate', function() {
+                var container = $(this).parent().parent().parent().find('.targetLoaderDiv');
+                container.addClass('d-none');
+                $('.button-loader').removeClass('d-none');
                 var element = $(this).attr('data_quantity_id');
                 var quan = $(element).val();
                 if ($(this).hasClass('minus')) {
@@ -60,6 +63,8 @@
                 response.then(handleStateData).catch(handleStateError)
 
                 function handleStateData(response) {
+                    container.removeClass('d-none');
+                    $('.button-loader').addClass('d-none');
                     if (response.success == true) {
                         $('#cartContainer').html(response.cart);
                         if (response.status == true) {

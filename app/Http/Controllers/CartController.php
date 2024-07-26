@@ -27,7 +27,11 @@ class CartController extends Controller
     public function addToCart(Request $request, $product_id)
     {
         try {
-
+            if($request->has('quantity')){
+                $quantity = $request->quantity;
+            }else{
+                $quantity = 1;
+            }
             $cart = Cart::where('user_id', auth()->id())->first();
             $product = Product::where('id', $product_id)->first();
 
@@ -39,12 +43,12 @@ class CartController extends Controller
                 ];
                 $cart = Cart::create($cart);
             }
-            $message = "Product already in Cart.";
+            
 
             $dealerCheck = CartProduct::where('cart_id', $cart->id)->first();
             if ($dealerCheck) {
                 if ($dealerCheck->product_of != $product->user_id) {
-                    return response()->json(['success' => true, 'product_id' => $product->id, 'dealer_url' => route('Dealer.view.public', ['dealer' => $dealerCheck->product_of]), 'product_url' => route('Dealer.cart.delete.add', ['product_id' => $product->id])]);
+                    return response()->json(['success' => true, 'product_id' => $product->id, 'dealer_url' => route('Dealer.view.public', ['dealer' => $dealerCheck->product_of]), 'product_url' => route('Dealer.cart.delete.add', ['product_id' => $product->id]),'quantity'=>$quantity]);
                 }
             }
             $alreadyProduct =  CartProduct::where('product_id', $product->id)->where('cart_id', $cart->id)->first();
@@ -53,12 +57,15 @@ class CartController extends Controller
                 $cart_product = [
                     'product_id' => $product->id,
                     'cart_id' => $cart->id,
-                    'quantity' => 1,
+                    'quantity' => $quantity,
                     'product_price' => $product->price,
                 ];
 
                 CartProduct::create($cart_product);
                 $message = "Product added to cart.";
+            }else{
+                $alreadyProduct->update(['quantity' => $quantity]);
+                $message = "Product quantity updated.";
             }
             $user =  User::with('cart', 'cart.cartProducts')->where('id', auth()->user()->id)->first();
             $cart_icon = view('components.cart-icon', compact('user'))->render();
@@ -71,6 +78,12 @@ class CartController extends Controller
     public function deleteAndAddToCart(Request $request, $product_id)
     {
         try {
+
+            if($request->has('quantity')){
+                $quantity = $request->quantity;
+            }else{
+                $quantity = 1;
+            }
 
             $cart = Cart::where('user_id', auth()->id())->first();
             $product = Product::where('id', $product_id)->first();
@@ -87,7 +100,7 @@ class CartController extends Controller
                 $cart_product = [
                     'product_id' => $product->id,
                     'cart_id' => $cart->id,
-                    'quantity' => 1,
+                    'quantity' =>  $quantity,
                     'product_price' => $product->price,
                 ];
                 CartProduct::create($cart_product);

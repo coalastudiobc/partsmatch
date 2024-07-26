@@ -14,7 +14,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="">First Name<span class="required-field">*</span></label>
+                                            <label for="">First name<span class="required-field">*</span></label>
                                             <div class="form-field">
                                                 <input type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('first_name', $deliveryAddress->first_name ?? '') }}" placeholder="First Name">
                                                 @error('first_name')
@@ -28,7 +28,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="">Last Name<span class="required-field">*</span></label>
+                                            <label for="">Last name<span class="required-field">*</span></label>
                                             <div class="form-field">
                                                 <input type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ old('last_name', $deliveryAddress->last_name ?? '') }}" placeholder="Last Name">
                                                 @error('last_name')
@@ -41,7 +41,7 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="">Street No. & Name<span class="required-field">*</span></label>
+                                            <label for="">Street no. & name<span class="required-field">*</span></label>
                                             <div class="form-field">
                                                 <input type="text" class="form-control @error('street1') is-invalid @enderror" name="street1" value="{{ old('address1', $deliveryAddress->address1 ?? '')}}" placeholder="Address">
                                                 @error('street1')
@@ -52,7 +52,7 @@
                                             </div>
                                         </div>
                                         {{-- <div class="add-adress">
-                                                <a href="javascript:void(0)">+ Add Apartment , Suite, etc.</a>
+                                                <a href="javascript:void(0)">+ Add apartment , suite, etc.</a>
                                             </div> --}}
                                     </div>
                                     <div class="col-md-12">
@@ -103,7 +103,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="">Phone Number<span class="required-field">*</span></label>
+                                            <label for="">Phone number<span class="required-field">*</span></label>
                                             <input type="number" name="phone_number" value="{{ old('number', $deliveryAddress->phone_number ?? '') }}" class="form-control @error('phonenumber') is-invalid @enderror">
                                             @error('phonenumber')
                                             <span class="invalid-feedback" role="alert">
@@ -114,7 +114,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="">Address Type</label>
+                                            <label for="">Address type</label>
                                             <div class="add-type-main">
                                                 <label for="s-option">
                                                     <p>Home</p>
@@ -321,7 +321,7 @@
                         </ul>
                     </div>
                     <div class="col-md-12">
-                        <button type="submit" id="place-order" class="btn primary-btn full-btn mt-2">Place Order</button>
+                        <button type="submit" id="place-order" class="btn primary-btn full-btn mt-3">Place Order</button>
                     </div>
                     </form>
 

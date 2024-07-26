@@ -5,7 +5,7 @@
             <div class="page-content-wrapper">
                 <div class="row g-3">
                     <div class="col-xl-8 col-lg-12 col-md-12 payment-page">
-                        <div class="order-summary cstm-card">
+                        <div class="order-summary cstm-card payment-field-card">
                             <h3>Payment</h3>
                             <p>All transactions are secure and encrypted.</p>
                             <form id="paymentform" action="{{ route('order.payment') }}" method="POST">

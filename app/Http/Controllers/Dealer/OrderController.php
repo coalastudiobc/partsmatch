@@ -13,7 +13,9 @@ use App\Models\OrderParcels;
 use Illuminate\Http\Request;
 use App\Models\UserAddresses;
 use App\Models\ShippingAddress;
+use Illuminate\Support\Str;
 use App\Models\ShippmentCreation;
+use Stripe\PaymentIntent;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
@@ -46,6 +48,17 @@ class OrderController extends Controller
         session()->put('selectedPickAddressId', $request->selectadress);
         session()->put('selectedOrderId', $order->id);
         $orderProducts = OrderItem::with('product')->where('order_id', $order->id)->get();
+        $orderProducts1 = OrderItem::where('order_id', $order->id)->pluck('id');
+        $groups = OrderParcels::with('ordeItems')->whereIn('orderItem_id', $orderProducts1)->get()->groupBy('parcel_id');
+        if ($groups && count($groups)) {
+            return view('dealer.order.product_parcel', compact('groups'));
+        }
+        foreach ($orderProducts as $key => $orderProduct) {
+            OrderParcels::updateOrCreate(
+                ['orderItem_id' => $orderProduct->id],
+                ['product_id' => $orderProduct->product_id, 'parcel_id' => Str::random(5), 'status' => 0]
+            );
+        }
         return view('dealer.order.product_parcel', compact('orderProducts'));
     }
     public function addressDelete(UserAddresses $address)
@@ -80,13 +93,27 @@ class OrderController extends Controller
             return response()->json($data);
         }
     }
-    public function productDimension(Request $request, OrderItem $product)
+    public function productDimension(Request $request, $product)
     {
         try {
+            $decodedDimensionsJSON = urldecode($product);
+            $orderItemId = json_decode($decodedDimensionsJSON);
+
+
             $parcel_id =  $this->createParcel($request);
+            if (gettype($orderItemId) !== 'integer') {
+                foreach ($orderItemId as $key => $value) {
+                    $orderItem = OrderItem::where('id', $value)->first();
+                    OrderParcels::updateOrCreate(
+                        ['orderItem_id' => $orderItem->id, 'product_id' => $orderItem->product_id],
+                        ['parcel_id' => $parcel_id, 'status' => 1]
+                    );
+                }
+            }
+            $orderItem = OrderItem::where('id', $orderItemId)->first();
             OrderParcels::updateOrCreate(
-                ['orderItem_id' => $product->id, 'product_id' => $product->product_id],
-                ['parcel_id' => $parcel_id]
+                ['orderItem_id' => $orderItemId, 'product_id' => $orderItem->product_id],
+                ['parcel_id' => $parcel_id, 'status' => 1]
             );
             $data = ['status' => true,  'message' => 'Product dimensions data saved successfully.'];
             return response()->json($data);
@@ -154,7 +181,8 @@ class OrderController extends Controller
                 return view('dealer.order.payment', compact('pickupAddress', 'response_in_array', 'stripeCustomer', 'intent', 'reciever_address'));
             }
         } catch (\Exception $e) {
-            throw new \Exception('shipmeerror: ' . $e->getMessage());
+            toastr()->error($e->getMessage());
+            return redirect()->back();
         }
     }
     public function saveInDb($data, $parcelsIdInArray = null)
@@ -180,6 +208,7 @@ class OrderController extends Controller
     {
         try {
             $res = $this->shippmentTranscation($request->rate_id);
+            $this->stripeTranscation($request);
             toastr()->success('Shippment created successfully');
             return redirect()->route('Dealer.order.orderlist');
         } catch (\Exception $th) {
@@ -230,5 +259,35 @@ class OrderController extends Controller
         } catch (\Exception $e) {
             throw new \Exception('storing_RateDetail error:  ' . $e->getMessage());
         }
+    }
+    public function stripeTranscation($request)
+    {
+        try {
+            DB::beginTransaction();
+
+            \Stripe\Stripe::setApiKey(config('services.Stripe.stripe_secret'));
+            $stripeResponse = $this->StripePayment($request); //makng stripe payment for orders
+            DB::commit();
+            return true;
+        } catch (\Exception $th) {
+            DB::rollback();
+            throw new \Exception('stripe transaction error: ' . $th->getMessage());
+        }
+    }
+    private function StripePayment($request)
+    {
+        return  PaymentIntent::create([
+            'amount' => floatval($request->amount) * 100, // amount in cents
+            'currency' => 'usd',
+            'customer' => $request->stripeCustomer_id,
+            'payment_method' => $request->token,
+            'confirmation_method' => 'manual',
+            'confirm' => true,
+            'description' => jsencode_userdata($request->rate_id),
+            'metadata' => [
+                'selected_rate' => jsencode_userdata($request->rate_id), // Add your custom order ID as metadata
+            ],
+            'return_url' => route('Dealer.order.orderlist')
+        ]);
     }
 }

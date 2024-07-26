@@ -469,7 +469,7 @@ class ProductController extends Controller
         $userdetails = User::where('id', $product->user_id)->first();
         $productImages = $product->productImage;
         $shippingCharge = AdminSetting::where('name', 'shipping_charge')->first();
-        $allproducts = Product::with('productImage')->where('user_id', $userdetails->id)->inRandomOrder()->limit(6)->get();
+        $allproducts = Product::with('productImage')->where('status','1')->where('user_id', $userdetails->id)->inRandomOrder()->limit(6)->get();
         if (auth()->user()) {
             $cart =  Cart::with('cartProducts', 'cartProducts.product', 'cartProducts.product.productImage')->where('user_id', auth()->id())->first();
             return view('dealer.products.product_details', compact('product', 'productImages', 'shippingCharge', 'userdetails', 'allproducts', 'cart'));

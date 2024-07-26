@@ -47,7 +47,7 @@ class Category extends Model
 
     public function products()
     {
-        return $this->hasMany(Product::class, 'subcategory_id', 'id')->inRandomOrder()->limit(5);
+        return $this->hasMany(Product::class, 'subcategory_id', 'id')->where('status','1')->inRandomOrder()->limit(5);
     }
 
     public function productForWelcome()
