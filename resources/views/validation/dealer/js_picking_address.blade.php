@@ -5,33 +5,34 @@
             rules: {
                 country: {
                     required: true,
-                    
-                    minlength: 1,
                 },
                 state: {
                     required: true,
                     minlength: 1,
                 },
                 city: {
-                    required: true, 
-                    minlength: 1,
+                    required: true,
                 },
                 pin_code: {
-                    required: true, 
-                    minlength: 5, 
-                    maxlength: 10, 
+                    required: true,
+                    minlength: 5,
+                    maxlength: 10,
+                },
+                email: {
+                    email: true,
+                    regex: emailRegex
                 },
                 first_name: {
                     required: true,
                     minlength: nameMinLength,
                     maxlength: nameMaxLength,
-                    regex: nameRegex
+                    regex: firstNameRegex
                 },
                 last_name: {
                     required: true,
                     minlength: nameMinLength,
                     maxlength: nameMaxLength,
-                    regex: nameRegex
+                    regex: lastNameRegex
                 },
                 phone_number: {
                     required: true,
@@ -69,16 +70,20 @@
                     maxlength: "PIN code must be at most 10 characters long."
                 },
                 first_name: {
-                    required: `{{ __('customvalidation.user.name.required') }}`,
-                    minlength: `{{ __('customvalidation.user.name.min', ['min' => '${nameMinLength}', 'max' => '${nameMaxLength}']) }}`,
-                    maxlength: `{{ __('customvalidation.user.name.max', ['min' => '${nameMinLength}', 'max' => '${nameMaxLength}']) }}`,
-                    regex: `{{ __('customvalidation.user.name.regex', ['regex' => '${nameRegex}']) }}`,
+                    required: `{{ __('customvalidation.user.firstName.required') }}`,
+                    minlength: `{{ __('customvalidation.user.firstName.min', ['min' => '${nameMinLength}', 'max' => '${nameMaxLength}']) }}`,
+                    maxlength: `{{ __('customvalidation.user.firstName.max', ['min' => '${nameMinLength}', 'max' => '${nameMaxLength}']) }}`,
+                    regex: `{{ __('customvalidation.user.firstName.regex', ['regex' => '${nameRegex}']) }}`,
                 },
                 last_name: {
-                    required: `{{ __('customvalidation.user.name.required') }}`,
-                    minlength: `{{ __('customvalidation.user.name.min', ['min' => '${nameMinLength}', 'max' => '${nameMaxLength}']) }}`,
-                    maxlength: `{{ __('customvalidation.user.name.max', ['min' => '${nameMinLength}', 'max' => '${nameMaxLength}']) }}`,
-                    regex: `{{ __('customvalidation.user.name.regex', ['regex' => '${nameRegex}']) }}`,
+                    required: `{{ __('customvalidation.user.lastName.required') }}`,
+                    minlength: `{{ __('customvalidation.user.lastName.min', ['min' => '${nameMinLength}', 'max' => '${nameMaxLength}']) }}`,
+                    maxlength: `{{ __('customvalidation.user.lastName.max', ['min' => '${nameMinLength}', 'max' => '${nameMaxLength}']) }}`,
+                    regex: `{{ __('customvalidation.user.lastName.regex', ['regex' => '${nameRegex}']) }}`,
+                },
+                email: {
+                    email: `{{ __('customvalidation.user.email.email') }}`,
+                    regex: `{{ __('customvalidation.user.email.regex', ['regex' => '${emailRegex}']) }}`,
                 },
                 street1: {
                     required: `{{ __('customvalidation.addresses.address1.required') }}`,
@@ -101,24 +106,61 @@
             },
             errorPlacement: function(error, element) {
                 error.addClass('invalid-feedback');
+                console.log(error, element);
 
-                if (element.prop('type') === 'hidden') {
-                    error.insertAfter(element
-                        .parent()); // For hidden elements, insert after parent element
+                if (error.prop('type') === 'hidden') {
+                    console.log(error, element.parent());
+                    error.insertAfter(element.parent());
                 } else {
-                    error.insertAfter(element); // Insert error message after the element
+                    error.insertAfter(element);
                 }
             },
 
             highlight: function(element, errorClass, validClass) {
-                $(element).addClass('is-invalid').removeClass('is-valid');
+                $(element).addClass('is-invalid');
             },
 
             unhighlight: function(element, errorClass, validClass) {
-                $(element).addClass('is-valid').removeClass('is-invalid');
+                $(element).removeClass('is-invalid');
             },
             submitHandler: function(form, event) {
                 event.preventDefault();
+
+                var countryValue = $('#country_code').val();
+                var stateValue = $('#state_iso').val();
+                var cityValue = $('#city_name').val();
+                var hasErrors = false; // Flag to track if there are validation errors
+
+                // Validate country
+                if (!countryValue) {
+                    $('#country_code').addClass('is-invalid');
+                    if ($('#country_code').next('.invalid-feedback').length === 0) {
+                        $('#country_code').after('<span class="invalid-feedback" role="alert"><strong>Please select a country.</strong></span>');
+                    }
+                    hasErrors = true;
+                }
+
+                // Validate state
+                if (!stateValue) {
+                    $('#state_iso').addClass('is-invalid');
+                    if ($('#state_iso').next('.invalid-feedback').length === 0) {
+                        $('#state_iso').after('<span class="invalid-feedback" role="alert"><strong>Please select a state.</strong></span>');
+                    }
+                    hasErrors = true;
+                }
+
+                // Validate city
+                if (!cityValue) {
+                    $('#city_name').addClass('is-invalid');
+                    if ($('#city_name').next('.invalid-feedback').length === 0) {
+                        $('#city_name').after('<span class="invalid-feedback" role="alert"><strong>Please select a city.</strong></span>');
+                    }
+                    hasErrors = true;
+                }
+
+                if (hasErrors) {
+                    return; // Prevent form submission if there are validation errors
+                }
                 let formData = $(form).serialize();
 
                 $.ajax({
@@ -165,6 +207,7 @@
             var selecttext = jQuery(this).attr('data-text');
             jQuery('#selectedItem').text(selecttext);
             jQuery('input[name="country"]').val(selectitem);
+            $('#country_code').removeClass('is-invalid').next('.invalid-feedback').text('');
             jQuery('#country_code').val(jQuery(this).attr('data-iso_code'));
             jQuery('#state_iso').val('');
             jQuery('#city_name').val('');
@@ -188,6 +231,7 @@
             var selecttext = jQuery(this).attr('data-text');
             jQuery('#selectedState').text(selecttext);
             jQuery('input[name="state"]').val(statevalue);
+            jQuery('input[name="state"]').removeClass('is-invalid').next('.invalid-feedback').text('');
             jQuery('#city_name').val('');
             jQuery('#selectedCity').text('Select City');
             jQuery('.city').empty();
@@ -206,6 +250,7 @@
             var selecttext = jQuery(this).attr('data-text');
             jQuery('#selectedCity').text(selecttext);
             jQuery('input[name="city"]').val(cityId);
+            jQuery('input[name="city"]').removeClass('is-invalid').next('.invalid-feedback').text('');
         });
 
         // Utility function for AJAX calls

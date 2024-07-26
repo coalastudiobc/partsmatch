@@ -2875,3 +2875,28 @@ span.filter-serach-icon {
     color: #fff;
     font-size: 10px;
 }
+
+.pagination-box.disabled {
+    pointer-events: none; /* Prevent clicks */
+    opacity: 0.5; /* Visual indication of being disabled */
+    cursor: not-allowed; /* Change cursor to indicate disabled */
+}
+
+.pagination-dot {
+    display: flex;
+    align-items: flex-end;
+    font-size: 29px;
+}
+
+.pagination-dot p {
+    font-size: 26px;
+    line-height: 1;
+}
+.pagination-boxes .pagination-box:first-child, .pagination-boxes .pagination-box:last-child{
+    border: 0;
+}
+.pagination-boxes .pagination-box:first-child:hover, .pagination-boxes .pagination-box:last-child:hover{
+    background-color: transparent;
+}
+.pagination-boxes .pagination-box:first-child:hover i, .pagination-boxes .pagination-box:last-child:hover i{
+    color: var(--secondary-color);

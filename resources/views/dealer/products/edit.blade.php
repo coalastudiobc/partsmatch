@@ -570,7 +570,6 @@
         var getid = []
         $(document).on('click', '.remove_uploaded', function() {
             var total_img = parseInt($('#total-img-preview').val())
-            if (total_img > 5) {
                 $(this).parent('div').parent('div').remove();
                 $('#total-img-preview').val(total_img - 1)
 
@@ -579,12 +578,6 @@
                 getid.push(getimgid)
                 console.log(getid, $.type(getid), "again check");
                 $('#get_image_id').val(getid);
-            } else {
-                return iziToast.error({
-                    message: "please provide images",
-                    position: 'topRight'
-                });
-            }
         });
 
     });

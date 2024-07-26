@@ -31,7 +31,7 @@
                         <p>Image</p>
                     </th>
                     <th>
-                        <p>Product Name</p>
+                        <p>Product name</p>
                     </th>
                     <th>
                         <p>Price</p>
@@ -39,23 +39,19 @@
                     <th>
                         <p>Status</p>
                     </th>
-                    {{-- <th>
-                            <p>Featured Status</p>
-                        </th> --}}
                     <th>
                         <p>Action</p>
                     </th>
                 </tr>
-                {{-- @dd($products[3]->featuredProduct[]->id); --}}
                 @forelse ($products as $key => $product)
                 <tr>
                     <td>
-                        <div class="pro-img-box" data-bs-toggle="modal" data-bs-target="#pro-detail-model">
-                            <img src="{{$product->productImage && count($product->productImage) ?  Storage::url($product->productImage[0]->file_url) : asset('assets/images/car-logo1.png') }}" alt="img">
+                        <div class="pro-img-box">
+                            <img src="{{$product->productImage && count($product->productImage) ?  Storage::url($product->productImage[0]->file_url) : asset('assets/images/gear-logo.svg') }}" alt="img">
                         </div>
                     </td>
 
-                    
+
                     <td>
                         <p>{{ $product->name }}</p>
                     </td>
@@ -122,10 +118,10 @@
     @endforelse
     </tr>
 
-    </table>
-</div>
-</div>
-{!! $products->links('dealer.pagination') !!}
+            </table>
+        </div>
+    </div>
+    {!! $products->links('dealer.pagination') !!}
 </div>
 @endsection
 @section('modals')
@@ -141,7 +137,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for=""> Name</label>
+                                    <label for=""> Name<span class="required-field">*</span></label>
                                     <div class="form-field">
                                         <input type="text" name="name" class="form-control" placeholder=" Name">
 
@@ -150,7 +146,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for=""> Category</label>
+                                    <label for=""> Category<span class="required-field">*</span></label>
                                     <div class="form-field">
                                         <select type="text" name="category" class="form-control category" placeholder=" Category">
                                             <option value="">Select category</option>
@@ -163,17 +159,17 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for=""> Sub category</label>
+                                    <label for=""> Sub category<span class="required-field">*</span></label>
                                     <div class="form-field subcategory">
                                         <select type="text" name="subcategory" class="form-control" placeholder="Select subCategory" id="subcategory">
-                                            <option value="">Select  subcategory</option>
+                                            <option value="">Select subcategory</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">Part number</label>
+                                    <label for=""> Part number</label>
                                     <div class="form-field subcategory">
                                         <input type="text" class="form-control" id="part_number" name="part_number" value="" placeholder="Part Number">
                                         @error('part_number')
@@ -186,7 +182,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for=""> Description</label>
+                                    <label for=""> Description<span class="required-field">*</span></label>
                                     <div class="form-field">
                                         <textarea name="description" class="form-control" id="" cols="30" rows="2"></textarea>
 
@@ -195,7 +191,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="">Additional details</label>
+                                    <label for=""> Additional details</label>
                                     <div class="form-field">
                                         <textarea name="additional_details" class="form-control" id="" cols="30" rows="2"></textarea>
 
@@ -204,7 +200,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="">Add  Images (Up to 5)</label>
+                                    <label for=""> Add Images (Up to 5)</label>
                                     <label class="img-upload-box">
                                         <p>Upload Images</p>
                                         <input type="file" name="images[]" id="upload-image" multiple minlength="5" upload-image-count="0">
@@ -217,7 +213,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for=""> Quantity</label>
+                                    <label for=""> Quantity<span class="required-field">*</span></label>
                                     <div class="form-field">
                                         <input type="text" name="stocks_avaliable" class="form-control" placeholder=" Quantity">
 
@@ -226,7 +222,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for=""> Price</label>
+                                    <label for=""> Price<span class="required-field">*</span></label>
                                     <div class="form-field">
                                         <input type="text" name="price" class="form-control" placeholder="$000">
 
@@ -275,86 +271,86 @@
                                     <label for="length">Length:</label>
                                     <div class="form-field">
                                         <input type="number" class="form-control" id="length" name="length" required value="{{ old('length', $product->length ?? ' ') }}">
-                                        @error('length')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
+                            @error('length')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
 
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="width">Width:</label>
-                                    <div class="form-field">
-                                        <input type="number" class="form-control" id="width" name="width" required value="{{ old('width', $product->width ?? '') }}">
-                                        @error('width')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
+                        </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="width">Width:</label>
+                    <div class="form-field">
+                        <input type="number" class="form-control" id="width" name="width" required value="{{ old('width', $product->width ?? '') }}">
+                        @error('width')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
 
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="height">Height:</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="height">Height:</label>
 
-                                    <div class="form-field">
-                                        <input type="number" class="form-control" id="height" name="height" required value="{{ old('height', $product->height ?? ' ') }}">
-                                        @error('height')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
+                    <div class="form-field">
+                        <input type="number" class="form-control" id="height" name="height" required value="{{ old('height', $product->height ?? ' ') }}">
+                        @error('height')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
 
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="weight">Weight:</label>
-                                    <div class="form-field">
-                                        <input type="number" class="form-control" id="weight" name="weight" required value="{{ old('weight', $product->weight ?? ' ') }}">
-                                        @error('weight')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="distance_unit">Distance Unit:</label>
-                                    <div class="form-field">
-                                        <select id="distance_unit" class="form-control" name="distance_unit" required>
-                                            <option value="cm">cm</option>
-                                            <option value="m">m</option>
-                                            <option value="in">in</option>
-                                            <option value="ft">ft</option>
-                                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="weight">Weight:</label>
+                    <div class="form-field">
+                        <input type="number" class="form-control" id="weight" name="weight" required value="{{ old('weight', $product->weight ?? ' ') }}">
+                        @error('weight')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="distance_unit">Distance Unit:</label>
+                    <div class="form-field">
+                        <select id="distance_unit" class="form-control" name="distance_unit" required>
+                            <option value="cm">cm</option>
+                            <option value="m">m</option>
+                            <option value="in">in</option>
+                            <option value="ft">ft</option>
+                        </select>
 
-                                    </div>
-                                </div>
-                            </div>
+                    </div>
+                </div>
+            </div>
 
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="mass_unit">Mass Unit:</label>
-                                    <div class="form-field">
-                                        <select id="mass_unit" class="form-control" name="mass_unit" required>
-                                            <option value="lb">lb</option>
-                                            <option value="kg">kg</option>
-                                            <option value="oz">oz</option>
-                                            <option value="g">g</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div> --}}
-                            {{-- <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="mass_unit">Mass Unit:</label>
+                    <div class="form-field">
+                        <select id="mass_unit" class="form-control" name="mass_unit" required>
+                            <option value="lb">lb</option>
+                            <option value="kg">kg</option>
+                            <option value="oz">oz</option>
+                            <option value="g">g</option>
+                        </select>
+                    </div>
+                </div>
+            </div> --}}
+            {{-- <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="">Shipping Price*</label>
                                     <div class="form-field">
@@ -364,99 +360,71 @@
                                     </div>
                                 </div>
                             </div> --}}
-                        </div>
-                        <div class="custm-field-for-ymmm">
-                            <div class="field-for-ymmm-box">
-                                <div class="form-group">
-                                    <label for="">Year</label>
-                                    <div class="form-field">
-                                        {{-- <select class="form-control api_call" name="car_years"
-                                                                id="car-years"></select> --}}
-                                        <select class="form-control" name="car_years" id="carYear">
-                                            <option id="selectYearDefault">Select year</option>
-                                            @foreach ($years as $year)
-                                            <option value="{{ $year }}">{{ $year }}</option>
-                                            @endforeach
+        </div>
+        <div class="custm-field-for-ymmm">
+            <div class="field-for-ymmm-box">
+                <div class="form-group">
+                    <label for="">Year</label>
+                    <div class="form-field">
+                        <select class="form-control" name="car_years" id="carYear">
+                            <option id="selectYearDefault">Select year</option>
+                            @foreach ($years as $year)
+                            <option value="{{ $year }}">{{ $year }}</option>
+                            @endforeach
 
-                                        </select>
-                                        <span class="form-icon">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none">
-                                                <path d="M13 1L7 7L1 1" stroke="#272643" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
-                                            </svg>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="">Brand</label>
-                                    <div class="form-field">
-                                        {{-- <select class="form-control api_call" name="car_model"
-                                                                id="car-makes"></select> --}}
-                                        <select class="form-control" name="car_model" id="carModel">
-                                            <option>please select year first</option>
-                                        </select>
-                                        <span class="form-icon">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none">
-                                                <path d="M13 1L7 7L1 1" stroke="#272643" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
-                                            </svg>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="">Model*</label>
-                                    <div class="form-field modelselect">
-                                        <div id="output"></div>
-                                        <select class="form-control car-model" id="carMake">
-                                            <option>Select your make</option>
-                                        </select>
-                                        <span class="form-icon">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none">
-                                                <path d="M13 1L7 7L1 1" stroke="#272643" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
-                                            </svg>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            {{-- <i id="addValue" style="font-size: 20px; margin-top:50px;" class="fa-solid fa-circle-plus fa-fw"></i> --}}
-                        </div>
-                </div>
-                <input type="hidden" name="compatable_with" class="form-control" id="compatableProducts" placeholder="Product Name">
-                <div id="test1234" class="ymmm-box-preview d-none">
-                    {{-- <div class="ymmm-data-outer">
-                        <div class="ymmm-box-data">
-                            <p>2023(Bentley)743</p>
-                        </div>
-                        <span class="ymmm-cross">×</span>
-                    </div> --}}
-                </div>
-                <div class="row">
-                    {{-- <div class="col-md-6">
-                        <a href="#" class="btn secondary-btn full-btn" data-bs-toggle="modal" data-bs-target="#bulk-upload">Bulk Upload</a>
-                    </div> --}}
-                    <div class="col-md-12">
-                        <div class="d-flex aign-items-center justify-content-end">
-                            <button type="submit" id="submit" class="btn primary-btn md-btn">submit</button>
-                        </div>
+                        </select>
+                        <span class="form-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none">
+                                <path d="M13 1L7 7L1 1" stroke="#272643" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </span>
                     </div>
                 </div>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="form-group">
+                    <label for="">Brand</label>
+                    <div class="form-field">
+                        <select class="form-control" name="car_model" id="carModel">
+                            <option>please select year first</option>
+                        </select>
+                        <span class="form-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none">
+                                <path d="M13 1L7 7L1 1" stroke="#272643" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="">Model*</label>
+                    <div class="form-field modelselect">
+                        <div id="output"></div>
+                        <select class="form-control car-model" id="carMake">
+                            <option>Select your make</option>
+                        </select>
+                        <span class="form-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none">
+                                <path d="M13 1L7 7L1 1" stroke="#272643" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
             </div>
-
-
-
-            {{-- <div class="col-md-6">
-                                <div class="form-group">
-                                    <div class="form-field">
-                                        <input type="checkbox" name="subscription_status"
-                                            @if (isset(plan_validity()->stripe_status) && plan_validity()->stripe_status == 'active') checked @else disabled @endif>
-
-                                    </div>
-                                </div>
-                            </div> --}}
-
-
-            </form>
         </div>
     </div>
+    <input type="hidden" name="compatable_with" class="form-control" id="compatableProducts" placeholder="Product Name">
+    <div id="test1234" class="ymmm-box-preview d-none">
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="d-flex aign-items-center justify-content-end">
+                <button type="submit" id="submit" class="btn primary-btn md-btn">Submit</button>
+            </div>
+        </div>
+    </div>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+</form>
+</div>
+</div>
 
 </div>
 </div>
@@ -469,25 +437,25 @@
         <div class="modal-content">
             <div class="modal-body">
                 <div class="add-pro-form">
-                    <h2>Bulk Upload</h2>
+                    <h2>Bulk upload</h2>
                     <form action="{{route('Dealer.products.bulk.upload')}}" method="post" enctype="multipart/form-data">
-                    @csrf
+                        @csrf
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="">Upload File</label>
+                                    <label for="">Upload file</label>
                                     <label class="img-upload-box">
                                         <img src="images/upload-img.png" alt="">
-                                        <p>Upload Images</p>
-                                        <input type="file" name=csv_file>
+                                        <p id="viewUploadedFileName">Upload CSV</p>
+                                        <input type="file" name=csv_file id="uploadCsvInput">
                                     </label>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <a href="{{route('Dealer.download.sample')}}" class="btn secondary-btn full-btn">Get sample csv</a>
+                                <a href="{{route('Dealer.download.sample')}}" class="btn secondary-btn full-btn">Get sample CSV</a>
                             </div>
                             <div class="col-md-6">
-                                <button type="submit" class="btn secondary-btn full-btn">submit</button>
+                                <button type="submit" class="btn secondary-btn full-btn">Submit</button>
                             </div>
                         </div>
                     </form>
@@ -502,10 +470,6 @@
 <div class="modal fade" id="pro-detail-model" tabindex="-1" aria-labelledby="bulk-upload" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <!-- <div class="modal-header">
-                                                                                                                                                                                                                                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                                                                                                                                                                                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                                                                                                                                                                                                        </div> -->
             <div class="modal-body">
                 <div class="pro-detail-body">
                     <img class="model-pro-img" src="images/collect1.png" alt="">
@@ -705,16 +669,26 @@
     });
 
 
-    jQuery(document).ready(function() {
-        jQuery('#submit').click(function(e) {
-            {{-- var no_image = $('#upload-image').attr('upload-image-count');
-            if (parseInt(no_image) < 5) {
-                e.preventDefault();
-                return toastr.error("Please enter atleast 5 images");
-            } --}}
-            // var formData = new FormData($('form#product').get(0));
-            $('#product').valid()
-        });
+    // jQuery(document).ready(function() {
+    //     jQuery('#submit').click(function(e) {
+    //         {
+    //             {
+    //                 var no_image = $('#upload-image').attr('upload-image-count');
+    //                 if (parseInt(no_image) < 5) {
+    //                     e.preventDefault();
+    //                     return toastr.error("Please enter at least 5 images");
+    //                 }
+    //             }
+    //         }
+    //         // var formData = new FormData($('form#product').get(0));
+    //         $('#product').valid()
+    //     });
+    // });
+
+    jQuery(document).on('change', '#uploadCsvInput', function() {
+
+        var fileName = $(this).val().split('\\').pop();
+        $('#viewUploadedFileName').html(fileName);
     });
 
     $(function() {

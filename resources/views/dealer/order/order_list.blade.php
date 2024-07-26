@@ -2,68 +2,68 @@
 @section('title', 'Order Management')
 @section('heading', 'Order Management')
 @section('content')
-    <div class="dashboard-right-box">
-        <div class="serach-and-filter-box justify-content-end">
-            <div class="pro-search-box">
-                <input type="text" class="form-control" name="filter_by_name" placeholder="Search">
-                <a href="#" class="btn primary-btn"><i class="fa-solid fa-magnifying-glass"></i></a>
-            </div>
-            {{-- <div class="pro-filter">
+<div class="dashboard-right-box">
+    <div class="serach-and-filter-box justify-content-end">
+        <div class="pro-search-box">
+            <input type="text" class="form-control" name="filter_by_name" placeholder="Search">
+            <a href="#" class="btn primary-btn"><i class="fa-solid fa-magnifying-glass"></i></a>
+        </div>
+        {{-- <div class="pro-filter">
                 <p>Filter:</p>
                 <a href="#" class="btn primary-btn outline-btn"><img
                         src="{{ asset('assets/images/calender-icon.png') }}" alt="">Select Date</a>
-            </div> --}}
-        </div>
-        <div class="product-detail-table product-list-table">
-            <x-alert-component />
-            <div class="table-responsive">
-                <div class="test">
-                    <table class="table">
-                        <tr>
-                            <th>
-                                <p>Total products</p>
-                            </th>
-                            <th>
-                                <p>Amount</p>
-                            </th>
-                            <th>
-                                <p>Date</p>
-                            </th>
-                            <th>
-                                <p>Order ID</p>
-                            </th>
+    </div> --}}
+</div>
+<div class="product-detail-table product-list-table">
+    <x-alert-component />
+    <div class="table-responsive">
+        <div class="test">
+            <table class="table">
+                <tr>
+                    <th>
+                        <p>Total products</p>
+                    </th>
+                    <th>
+                        <p>Amount</p>
+                    </th>
+                    <th>
+                        <p>Date</p>
+                    </th>
+                    <th>
+                        <p>Order ID</p>
+                    </th>
 
-                            <th>
-                                <p>Shipment price</p>
-                            </th>
-                            <th>
-                                <p>Action</p>
-                            </th>
-                        </tr>
-                        @if ($orders)
-                            @forelse ($orders as $order)
-                                <tr>
-                                    <td>
-                                        <div class="pro-list-name">
-                                            {{-- <input type="checkbox" class="custm-check" class="custm-check"> --}}
-                                            <h4>{{ count($order->orderItem) }}</h4>
-                                        </div>
-                                    </td>
+                    <th>
+                        <p>Shippment price</p>
+                    </th>
+                    <th>
+                        <p>Action</p>
+                    </th>
+                </tr>
+                @if ($orders)
+                @forelse ($orders as $order)
+                <tr>
+                    <td>
+                        <div class="pro-list-name">
+                            {{-- <input type="checkbox" class="custm-check" class="custm-check"> --}}
+                            <h4>{{ count($order->orderItem) }}</h4>
+                        </div>
+                    </td>
 
-                                    <td>
-                                        <p>${{ $order->total_amount }}</p>
-                                    </td>
-                                    <td>
-                                        <p>{{ date('d-m-Y', strtotime($order->created_at)) }}</p>
-                                    </td>
-                                    <td>
-                                        <p>{{ $order->id }}</p>
-                                    </td>
-                                    <td>
-                                        <p>${{ $order->shipment_price }}</p>
-                                    </td>
+                    <td>
+                        <p>${{ $order->total_amount }}</p>
+                    </td>
+                    <td>
+                        <p>{{ date('d-m-Y', strtotime($order->created_at)) }}</p>
+                    </td>
+                    <td>
+                        <p>{{ $order->id }}</p>
+                    </td>
+                    <td>
+                        <p>${{ $order->shipment_price }}</p>
+                    </td>
 
-                                    {{-- <td>
+                    {{-- <td>
                                         <div class="invoive-download">
                                             <a href="#" class="invoice-download">
                                                 <img src="images/invoice-download.png" alt="">
@@ -72,17 +72,16 @@
 
                                         </div>
                                     </td> --}}
-                                    <td>
-                                        @if (isFullFilledShippment($order->id))
-                                            <a class="btn primary-btn" href="#">
-                                                Fulfilled</a>
-                                        @else
-                                            <a class="btn primary-btn"
-                                                href="{{ route('Dealer.order.create.shippment', $order->id) }}">Pending
-                                                fulfillment</a>
-                                        @endif
-                                    </td>
-                                    {{-- <td>
+                    <td>
+                        @if (isFullFilledShippment($order->id))
+                        <a class="btn primary-btn" href="#">
+                            Fulfilled</a>
+                        @else
+                        <a class="btn primary-btn" href="{{ route('Dealer.order.create.shippment', $order->id) }}">Pending
+                            fulfillment</a>
+                        @endif
+                    </td>
+                    {{-- <td>
                                         <div class="pro-status">
 
                                             <div class="dropdown">
@@ -139,43 +138,20 @@
                                             </div>
                                         </div>
                                     </td> --}}
-                                </tr>
-                            @empty
-                                <div class="empty-data">
-                                    <img src="{{ asset('assets/images/no-product.svg') }}  " alt="" width="300">
-                                    <p class="text-center mt-1">Did not found any order</p>
-                                </div>
-                            @endforelse
-                        @endif
-                    </table>
+                </tr>
+                @empty
+                <div class="empty-data">
+                    <img src="{{ asset('assets/images/no-product.svg') }}  " alt="" width="300">
+                    <p class="text-center mt-1">Did not found any order</p>
                 </div>
-            </div>
+                @endforelse
+                @endif
+            </table>
         </div>
-        <div class="pagination-wrapper">
-            <div class="pagination-boxes">
-                {{-- <div class="pagination-box">
-                    <i class="fa-solid fa-angle-left"></i>
-                </div>
-                <div class="pagination-box active">
-                    <p>1</p>
-                </div>
-                <div class="pagination-box">
-                    <p>2</p>
-                </div>
-                <div class="pagination-box">
-                    <p>3</p>
-                </div>
-                <div class="pagination-box">
-                    <p>4</p>
-                </div>
-                <div class="pagination-box">
-                    <p>5</p>
-                </div>
-                <div class="pagination-box">
-                    <i class="fa-solid fa-angle-right"></i>
-                </div> --}}
-                {{-- </div> --}}
-                {!! $orders->links('dealer.pagination') !!}
-            </div>
-        </div>
-    @endsection
+    </div>
+</div>
+
+{!! $orders->links('dealer.pagination') !!}
+</div>
+</div>
+@endsection

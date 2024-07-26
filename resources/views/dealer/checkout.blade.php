@@ -260,7 +260,7 @@
                                 <div class="summary-list-box">
                                     <div class="summary-img-txt">
                                         <div class="summary-img-box">
-                                            <img src="{{ asset('storage/' . $products->product->productImage[0]->file_url) }}" alt="">
+                                            <img src="{{$products->product ? ( $products->product->productImage && count($products->product->productImage) ? Storage::url($products->product->productImage[0]->file_url) : asset('assets/images/gear-logo.svg')) : asset('assets/images/gear-logo.svg')}}">
                                             <div class="order-sum-number">
                                                 <span>{{ $products->quantity }}</span>
                                             </div>

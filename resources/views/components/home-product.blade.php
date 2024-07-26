@@ -4,12 +4,7 @@
     <a href="{{ route(auth()->check() && auth()->user()->hasRole('Administrator') ? 'admin.products.details' : (auth()->check() ? auth()->user()->getRoleNames()->first() . '.products.details' : 'Dealer.products.details'), $product->id) }}">
 
         <div class="collection-img">
-            @if (isset($product->productImage[0]))
-            <img src="{{ Storage::url($product->productImage[0]->file_url) }}" alt="">
-            @else
-            <img src="{{ asset('assets/images/collect1.png') }}" alt="img">
-            @endif
-
+            <img src="{{ $product->productImage && count($product->productImage) ?  Storage::url($product->productImage[0]->file_url) : asset('assets/images/gear-logo.svg')  }}" alt="">
         </div>
     </a>
     <a href="{{ route(auth()->check() && auth()->user()->hasRole('Administrator') ? 'admin.products.details' : (auth()->check() ? auth()->user()->getRoleNames()->first() . '.products.details' : 'Dealer.products.details'), $product->id) }}">
