@@ -907,6 +907,10 @@
     .add-pro-form h2 {
         font-size: 22px;
     }
+    .categories-box {
+        max-width: 174px;
+        min-width: 174px;
+    }
 
 }
 
@@ -1090,6 +1094,10 @@
 
     .header-logo img {
         max-width: 120px;
+    }
+    .categories-box {
+        max-width: 174px;
+        min-width: 95px;
     }
 
 }

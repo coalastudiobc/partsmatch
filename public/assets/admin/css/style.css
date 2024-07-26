@@ -1576,8 +1576,8 @@ button.btn-close {
     width: unset !important;
 }
 .header-logo img{
-    width: 100%;
-    max-width: 192px;
+    /* width: 100%; */
+    width: 192px;
 }
 .pro-search-box {
 	position: relative;
@@ -1629,7 +1629,7 @@ button.btn-close {
 .dealer-pro-personal-info ul li + li, .dealer-pro-commission-info ul li +li{
     margin-top: 15px;
 }
-.dealer-pro-commission-info ul li {
+.dealer-pro-commission-info > ul > li {
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
@@ -1641,6 +1641,7 @@ button.btn-close {
 .dealer-pro-commission-info {
     height: 100%;
     border-right: 1px solid #ddd;
+    padding-right: 20px;
 }
 .dealer-last-five-product .product-detail-table table tr td {
     background-color: #ffffff;
@@ -1650,8 +1651,11 @@ button.btn-close {
 .dealer-last-five-product .product-detail-table table tr td .primary-btn {
     padding: 7px 14px;
 }
+.dealer-pro-commission-info .form-group:has(.symbol) input {
+    padding-left: 40px;
+}
 .pagination-wrapper {
-    margin: 20px 0 0;
+	margin: 20px 0 0 auto;
 }
 
 

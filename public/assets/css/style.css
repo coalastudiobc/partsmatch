@@ -1248,7 +1248,7 @@ input.custm-check[type=checkbox]:before {
 
 /* ================= toggle switch css ===================  */
 .modal-dialog.modal-dialog-centered {
-    max-width: 700px;
+    max-width: 1000px;
 }
 
 .modal-body {
@@ -1879,7 +1879,7 @@ html {
 .page-content-sec .cart-product-image {
     max-width: 44px;
     height: 44px;
-    width: auto;
+    width: 44px;
 }
 
 .page-content-sec .cart-product-image img {
@@ -1985,7 +1985,7 @@ span.sidebar-cross-icon i {
 
 
 .add-new-pro-modal .modal-dialog.modal-dialog-centered {
-    max-width: 900px;
+    max-width: 1000px;
 }
 
 .add-pro-submit {
@@ -2792,5 +2792,56 @@ span.filter-serach-icon {
     color: #fff;
     margin: 0;
 }
+
+
+
+#restrictMultiple .add-pro-form > h2{
+    text-align: center;
+    font-size: 18px;
+    margin: 40px 0px;
+    line-height: 22px;
+}
+.shipment-details-main > h2 {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 22px;
+    line-height: 24px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+.shipment-details-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+}
+.shipment-details-list li + li{
+    margin-top: 15px;
+}
+.shipment-details-list li h3 {
+    font-size: 18px;
+    line-height: 22px;
+}
+.shipment-details-list li p {
+    font-size: 18px;
+    line-height: 22px;
+}
+.shipment-details-modal .modal-dialog-centered{
+    max-width: 1000px;
+}
+.shipment-details-list-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 50px;
+}
+.accessories-parts-box .more-product-cards.cstm-card {
+    height: 100%;
+}
+.pagination-wrapper {
+	margin: 20px 0 0 auto;
+}
+
+
 
 
