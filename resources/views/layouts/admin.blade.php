@@ -154,6 +154,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
     <script src="{{ asset('assets/admin/js/iziToast.min.js') }}"></script>
     <script src="{{ asset('assets/admin/js/toaster.min.js') }}"></script>
+    <script src="{{ asset('assets/js/additional_method.js') }}"></script>
     <script src="{{ asset('assets/admin/js/custom.js') }}"></script>
     <script src="{{ asset('assets/admin/js/common.js') }}?ver={{ now() }}"></script>
     <script>
