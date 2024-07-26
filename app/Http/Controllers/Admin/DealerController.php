@@ -51,7 +51,8 @@ class DealerController extends Controller
     public function dealerProfile(Request $request, User $user)
     {
         $paymentdetail = $user->paymentDetail;
-        return view('admin.user.view', compact('user', 'paymentdetail'));
+        $products=Product::with('category')->where('user_id',$user->id)->where('user_id', $user->id)->latest('created_at')->limit(5)->get();
+        return view('admin.user.view', compact('user', 'paymentdetail','products'));
     }
 
     public function productedit(AdminProductRequest $request, Product $product)
