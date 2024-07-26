@@ -117,7 +117,7 @@
     @empty
     <div class="empty-data">
         <img src="{{ asset('assets/images/no-product.svg') }}  " alt="" width="300">
-        <p class="text-center mt-1">Did not found any order</p>
+        <p class="text-center mt-1">Did not found any product</p>
     </div>
     @endforelse
     </tr>

@@ -740,6 +740,7 @@ header {
 .tab-inner-box {
     padding: 11px 18px;
     text-transform: capitalize;
+    text-align: center;
 }
 
 .slick-tab-btn {
@@ -751,6 +752,7 @@ header {
     background-color: var(--secondary-color);
     border-radius: 5px;
     color: var(--white) !important;
+    text-align: center;
 }
 
 /* ------------------more-product-sec---------------- */
@@ -2678,18 +2680,13 @@ span.filter-serach-icon {
     display: none;
 }
 
-.collect-tab-slider-main {
-    overflow-x: scroll;
-    padding-bottom: 5px;
-}
 
 .collect-tab-slider {
     display: flex;
-    max-width: 460px;
+    max-width: 715px;
     gap: 10px;
-    /* overflow-x: auto; */
+    margin: 0px 30px;
 }
-
 .collect-tab-slider-main::-webkit-scrollbar:horizontal {
     height: 1px;
 }
@@ -2841,7 +2838,40 @@ span.filter-serach-icon {
 .pagination-wrapper {
 	margin: 20px 0 0 auto;
 }
-
-
-
-
+.collect-tab-slider{
+    padding: 0;
+}
+.collect-tab-slider .slick-slide{
+    margin: 0px 10px;
+}
+.prev-loop-btn.slick-arrow {
+    border: 0;
+    background-color: transparent;
+    position: absolute;
+    left: 5px;
+    background-color: #272643;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.next-loop-btn.slick-arrow{
+    border: 0;
+    background-color: transparent;
+    position: absolute;
+    right: 6px;
+    background-color: #272643;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.collect-tab-slider-main {
+    position: relative;
+}
+.prev-loop-btn.slick-arrow i, .next-loop-btn.slick-arrow i{
+    color: #fff;
+    font-size: 10px;
+}

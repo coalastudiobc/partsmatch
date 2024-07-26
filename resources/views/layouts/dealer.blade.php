@@ -51,8 +51,9 @@
                             @auth
                                 <ul class="navbar-nav">
                                     <li class="nav-item">
-                                        <a class="nav-link" aria-current="page" href="{{ route('welcome.index') }}">
-                                            shop
+                                        <a class="nav-link btn secondary-btn sm-btn" style="color: #fff; padding: 3px 6px !important;" aria-current="page" href="{{ route('welcome.index') }}">
+                                            <i class="fa-solid fa-shop"></i>
+                                            Shop
                                         </a>
                                     </li>
                                     {{-- <li>

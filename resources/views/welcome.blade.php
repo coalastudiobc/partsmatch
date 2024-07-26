@@ -282,8 +282,10 @@
                                         </a>
                                     @endforeach
                                 </div>
+                                <div class="prev-loop-btn"><i class="fa-solid fa-arrow-left"></i></div>
+                                <div class="next-loop-btn"><i class="fa-solid fa-arrow-right"></i></div>
                             </div>
-                            <a href="{{route('products')}}" class="tab-inner-box" > View All </a>
+                            <a href="{{route('products')}}" class="tab-inner-box active" > View All </a>
                         </div>
                     </div>
                 </div>
@@ -433,46 +435,47 @@
 
         ]
     });
-    // $('.collect-tab-slider').slick({
-    //     infinite: true,
-    //     slidesToShow: 8,
-    //     slidesToScroll: 1,
-    //     arrows: true,
-    //     dots: false,
-    //     prevArrow: $('.prev-loop-btn'),
-    //     nextArrow: $('.next-loop-btn'),
-    //     responsive: [
-    //       {
-    //         breakpoint: 1200,
-    //         settings: {
-    //           slidesToShow: 5,
-    //           slidesToScroll: 2,
-    //         }
-    //       },
-    //       {
-    //         breakpoint: 1024,
-    //         settings: {
-    //           slidesToShow: 4,
-    //           slidesToScroll: 2,
-    //         }
-    //       },
-    //       {
-    //         breakpoint: 767,
-    //         settings: {
-    //           slidesToShow: 2,
-    //           slidesToScroll: 1,
-    //         }
-    //       },
-    //       {
-    //         breakpoint: 425,
-    //         settings: {
-    //           slidesToShow: 1,
-    //           slidesToScroll: 1,
-    //         }
-    //       }
+    $('.collect-tab-slider').slick({
+        infinite: true,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        autoplay: true,
+        arrows: true,
+        dots: false,
+        prevArrow: $('.prev-loop-btn'),
+        nextArrow: $('.next-loop-btn'),
+        responsive: [
+          {
+            breakpoint: 1200,
+            settings: {
+              slidesToShow: 3,
+              slidesToScroll: 2,
+            }
+          },
+          {
+            breakpoint: 1024,
+            settings: {
+              slidesToShow: 2,
+              slidesToScroll: 2,
+            }
+          },
+          {
+            breakpoint: 767,
+            settings: {
+              slidesToShow: 2,
+              slidesToScroll: 1,
+            }
+          },
+          {
+            breakpoint: 425,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1,
+            }
+          }
 
-    //     ]
-    // });
+        ]
+    });
 
     $(document).ready(function() {
         
