@@ -206,20 +206,21 @@
             <div class="dealer-product-category">
                 <div class="dealer-category-box">
                     @foreach ($allproducts as $product)
-                    <a href="{{
-    route(
-        auth()->check() && auth()->user()->hasRole('Administrator') ?
-            'admin.products.details' :
-            (auth()->check() ? auth()->user()->getRoleNames()->first() . '.products.details' : 'Dealer.products.details'),
-        ['product' => $product->id]
-    )
-}}">
-
-                    </a>
+                    
                     <div class="collection-box cstm-card ">
+                        <a href="{{
+                            route(
+                                auth()->check() && auth()->user()->hasRole('Administrator') ?
+                                    'admin.products.details' :
+                                    (auth()->check() ? auth()->user()->getRoleNames()->first() . '.products.details' : 'Dealer.products.details'),
+                                ['product' => $product->id]
+                            )
+                        }}">
                         <div class="collection-img">
+
                             <img src="{{$product->productImage && count($product->productImage) ? Storage::url($product->productImage[0]->file_url) : asset('assets/images/gear-logo.svg') }}" alt="">
                         </div>
+                    </a>
                         <p>{{$product->name}}</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <h4>${{ $product->price }}</h4>

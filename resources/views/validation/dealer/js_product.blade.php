@@ -72,6 +72,7 @@
 
         $("#product").on("submit", function() {
             if ($('#product').valid()) {
+                $("#submit").attr('disabled', true);
                 $("#product").find('button').attr('disabled', true);
             }
         });

@@ -318,7 +318,7 @@
                                                                 <div class="form-group">
                                                                     <label for="">Email</label>
                                                                     <div class="formfield">
-                                                                        <input type="text" class="form-control">
+                                                                        <input type="text" class="form-control" name="email">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -373,7 +373,7 @@
                                                                             </ul>
                                                                         </div>
                                                                     </div>
-                                                                    <input type="hidden" name="country" id="country_code" value="{{ $country->id ?? '' }}" class="form-control @error('country') is-invalid @enderror">
+                                                                    <input type="hidden" name="country" id="country_code" value="" class="form-control @error('country') is-invalid @enderror">
                                                                     @error('country')
                                                                     <span class="invalid-feedback" role="alert">
                                                                         <strong>{{ $message }}</strong>

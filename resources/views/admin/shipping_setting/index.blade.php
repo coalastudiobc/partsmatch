@@ -28,7 +28,7 @@
                             <p>Value</p>
                         </th>
                         <th>
-                            <p>Shipment Title</p>
+                            <p>Shippment Title</p>
                         </th>
                         <th>
                             <p>Country</p>

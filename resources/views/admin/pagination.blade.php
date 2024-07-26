@@ -2,7 +2,7 @@
     <div class="pagination-wrapper">
         <div class="pagination-boxes">
             @if ($paginator->onFirstPage())
-                <a class="pagination-box" href="javascript:void(0);"><i class="fa-solid fa-angle-left"></i></a>
+                <a class="pagination-box disabled" href="javascript:void(0);"><i class="fa-solid fa-angle-left"></i></a>
             @else
                 <a href="{{ $paginator->previousPageUrl() }}" class="pagination-box"><i
                         class="fa-solid fa-angle-left"></i></a>
@@ -33,7 +33,7 @@
                 <a href="{{ $paginator->nextPageUrl() }}" class="pagination-box"><i
                         class="fa-solid fa-angle-right"></i></a>
             @else
-                <a href="javascript:void(0);" class="pagination-box"><i class="fa-solid fa-angle-right"></i></a>
+                <a href="javascript:void(0);" class="pagination-box disabled"><i class="fa-solid fa-angle-right"></i></a>
             @endif
         </div>
     </div>

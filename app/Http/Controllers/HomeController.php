@@ -148,7 +148,9 @@ class HomeController extends Controller
     }
     public function allProducts(Request $request)
     {
-        ;        $brands = CarBrandMake::distinct('makes')->get();
+        if($request->method == "POST")
+            dd($request);
+        $brands = CarBrandMake::distinct('makes')->get();
         
         $sdk = \CarApiSdk\CarApi::build([
             'token' => env('CAR_API_TOKEN'),

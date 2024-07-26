@@ -1,6 +1,6 @@
 <div class="page-content-wrapper cart-page-wrapper">
     <div class="row g-3">
-        <div class="col-xl-8 col-lg-12 col-md-12">
+        <div class="col-xl-12 col-lg-12 col-md-12">
             <div class="cart-table-wrapper">
                 <div class="db-table-box">
                     <div class="tb-table table-responsive">
@@ -63,14 +63,19 @@
                         </table>
                     </div>
                 </div>
+                <div class="d-flex justify-content-end">
+                    <a href="{{ $cart && $cart->cartProducts && count($cart->cartProducts) ? route(auth()->user()->getRoleNames()->first() . '.checkout.create') :'#'}}" class="btn secondary-btn view-btn md-btn">
+                        Checkout
+                    </a>
+                </div>
             </div>
 
         </div>
-        <div class="col-xl-4 col-lg-12 col-md-12">
+        {{-- <div class="col-xl-4 col-lg-12 col-md-12">
             <div class="cart-sidebar-box">
                 <div class="cart-box-header">
                     <h3>Cart Totals</h3>
-                </div>
+                </div> --}}
                 {{-- <div class="cart-box-content">
                     <div class="cart-wrapper">
                         <p class="cart-txt">SubTotal</p>
@@ -102,67 +107,68 @@
             </div>
         </div>
 
-    </div> --}}
-    <div class="cart-box-content">
-        <div class="cart-wrapper">
-            <p class="cart-txt">SubTotal</p>
-            <p class="price-txt">
-                @if (isset($cart) && $cart->amount)
-                {{ number_format($cart->amount, 2, '.', ',') }}
-                @else
-                {{ '0.00' }}
-                @endif
-            </p>
+        </div> --}}
+        {{-- <div class="cart-box-content">
+            <div class="cart-wrapper">
+                <p class="cart-txt">SubTotal</p>
+                <p class="price-txt">
+                    @if (isset($cart) && $cart->amount)
+                    {{ number_format($cart->amount, 2, '.', ',') }}
+                    @else
+                    {{ '0.00' }}
+                    @endif
+                </p>
+            </div>
+            <!-- <div class="cart-wrapper">
+                <p class="cart-txt">Shipping</p>
+                <p class="price-txt">
+                    @php
+                    $shiping_value = 0;
+                    if (isset($cart) && $cart->amount) {
+                    foreach ($shippingCharges as $charge) {
+                    if (
+                    $cart->amount >= $charge->range_from &&
+                    $cart->amount <= $charge->range_to
+                        ) {
+                        if ($charge->type == 'fixed') {
+                        $shiping_value = $charge->value;
+                        } else {
+                        $shiping_value = $cart->amount * ($charge->value / 100);
+                        }
+                        }
+                        }
+                        }
+                        @endphp
+                        {{ number_format($shiping_value, 2, '.', ',') }}
+                </p>
+            </div> -->
+            <div class="sub-total-wrapper">
+                <h3>Payable Total</h3>
+                <h3>
+                    @if (isset($cart) && $cart->amount)
+                    {{ number_format($cart->amount , 2, '.', ',') }}
+                    @else
+                    {{ '0.00' }}
+                    @endif
+                </h3>
+            </div>
         </div>
-        <!-- <div class="cart-wrapper">
-            <p class="cart-txt">Shipping</p>
-            <p class="price-txt">
-                @php
-                $shiping_value = 0;
-                if (isset($cart) && $cart->amount) {
-                foreach ($shippingCharges as $charge) {
-                if (
-                $cart->amount >= $charge->range_from &&
-                $cart->amount <= $charge->range_to
-                    ) {
-                    if ($charge->type == 'fixed') {
-                    $shiping_value = $charge->value;
-                    } else {
-                    $shiping_value = $cart->amount * ($charge->value / 100);
-                    }
-                    }
-                    }
-                    }
-                    @endphp
-                    {{ number_format($shiping_value, 2, '.', ',') }}
-            </p>
-        </div> -->
-        <div class="sub-total-wrapper">
-            <h3>Payable Total</h3>
-            <h3>
-                @if (isset($cart) && $cart->amount)
-                {{ number_format($cart->amount , 2, '.', ',') }}
-                @else
-                {{ '0.00' }}
-                @endif
-            </h3>
+        @isset($cart)
+        @if ($cart->cartProducts->isNotEmpty())
+        <div class="cart-checkout">
+            <a href="{{ route(auth()->user()->getRoleNames()->first() . '.checkout.create') }}" class="btn secondary-btn view-btn " id="checkout-btn">
+                Checkout
+            </a>
         </div>
-    </div>
-    @isset($cart)
-    @if ($cart->cartProducts->isNotEmpty())
-    <div class="cart-checkout">
-        <a href="{{ route(auth()->user()->getRoleNames()->first() . '.checkout.create') }}" class="btn secondary-btn view-btn " id="checkout-btn">
-            Checkout
-        </a>
-    </div>
-    @else
-    <div class="cart-checkout">
-        <a href="#" class="btn secondary-btn view-btn">
-            Checkout
-        </a>
-    </div>
-    @endif
-    @endisset
+        @else
+        <div class="cart-checkout">
+            <a href="#" class="btn secondary-btn view-btn">
+                Checkout
+            </a>
+        </div>
+        @endif
+        @endisset --}}
 
-</div>
+    </div>
+
 </div>

@@ -244,6 +244,23 @@ return [
             'regex' => 'Only alphabets and in between space are allowed in Name',
 
         ],
+        'firstName' => [
+            'required' => 'Please enter the first name',
+            'min' => 'First name can be :min - :max characters',
+            'max' => 'Fist name can be :min - :max characters',
+            'string' => 'Only alphabets are allowed',
+            'regex' => 'Only alphabets are allowed',
+
+        ],
+        'lastName' => [
+            'required' => 'Please enter the last name',
+            'min' => 'Last name can be :min - :max characters',
+            'max' => 'Last name can be :min - :max characters',
+            'string' => 'Only alphabets are allowed',
+            'regex' => 'Only alphabets are allowed',
+
+
+        ],
         'dealershipName' => [
             'required' => 'Please enter the dealership Name',
             'min' => 'dealership Name can be :min - :max characters',

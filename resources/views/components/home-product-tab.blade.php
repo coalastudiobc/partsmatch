@@ -10,11 +10,7 @@
         ) }}"
             class="product-cards-img-outer">
             <div class="product-cards-img">
-                @if (isset($product->productImage[0]))
-                    <img src="{{ Storage::url($product->productImage[0]->file_url) }}" alt="">
-                @else
-                    <img src="{{ asset('assets/images/product2.png') }}" alt="">
-                @endif
+                    <img src="{{$product->productImage && count($product->productImage) ?  Storage::url($product->productImage[0]->file_url) : asset('assets/images/gear-logo.svg') }}" alt="">
             </div>
         </a>
         <div class="product-deails">

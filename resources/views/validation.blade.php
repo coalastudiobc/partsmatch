@@ -10,6 +10,8 @@
     const nameRegex = {{ config('validation.name_regex') }};
     const nameMinLength = {{ config('validation.name_minlength') }};
     const nameMaxLength = {{ config('validation.name_maxlength') }};
+    const firstNameRegex={{ config('validation.first_name_regex') }};
+    const lastNameRegex={{ config('validation.last_name_regex') }};
 
     //email
     const emailRegex = {{ config('validation.email_regex') }};

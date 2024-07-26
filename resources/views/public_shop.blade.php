@@ -205,29 +205,14 @@
                                             <div class="price-input"> 
                                                 <div class="price-field left"> 
                                                     <input type="number" disabled
-                                                    name="min_value"
+                                                    name="min_value" id="selectedMinValue"
                                                         class="min-input" 
-                                                        value="0"> 
+                                                        value="{{old('min_value','0')}}"> 
                                                 </div> 
                                                 <div class="price-field right"> 
                                                     <input type="number" disabled
-                                                    name="max_value"
+                                                    name="max_value" id="selectedMaxValue"
                                                         class="max-input" 
-                                                        value="10000"> 
-                                                </div> 
-                                            </div> 
-
-                                            <div class="test d-none"> 
-                                                <div class="test-field left"> 
-                                                    <input type="number" id="selectedMinValue"
-                                                    name="min_value1"
-                                                        class="min-input-1" 
-                                                        value="0"> 
-                                                </div> 
-                                                <div class="test-field right"> 
-                                                    <input type="number" id="selectedMaxValue"
-                                                    name="max_value1"
-                                                        class="max-input-1" 
                                                         value="10000"> 
                                                 </div> 
                                             </div> 
@@ -243,7 +228,7 @@
                                                 class="min-range" 
                                                 min="0" 
                                                 max="10000" 
-                                                value="0" 
+                                                value="{{old('min_value','0')}}" 
                                                 step="1"> 
                                             <input type="range" 
                                                 class="max-range" 
@@ -361,44 +346,18 @@
                                         </div>
                                     </div>
                                     @endforelse
-    
+
                                 </div>
     
                             </div>
+                             {!! $products->links('dealer.pagination') !!}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    {{-- @include('components.interior-component') --}}
-    <div class="pagination-wrapper">
-        {{-- <div class="pagination-boxes">
-                                    <div class="pagination-box">
-                                        <i class="fa-solid fa-angle-left"></i>
-                                    </div>
-                                    <div class="pagination-box active">
-                                        <p>1</p>
-                                    </div>
-                                    <div class="pagination-box">
-                                        <p>2</p>
-                                    </div>
-                                    <div class="pagination-box">
-                                        <p>3</p>
-                                    </div>
-                                    <div class="pagination-box">
-                                        <p>4</p>
-                                    </div>
-                                    <div class="pagination-box">
-                                        <p>5</p>
-                                    </div>
-                                    <div class="pagination-box">
-                                        <i class="fa-solid fa-angle-right"></i>
-                                    </div>
-                                </div> --}}
-        {{-- {!! $products->links('dealer.pagination') !!} --}}
-
-    </div>
+ 
     </div>
     </div>
   
@@ -411,27 +370,7 @@
 @push('scripts')
 
 
-<script>
-    function delayFormSubmission(formId, delay) {
-        const form = document.getElementById(formId);
-        
-        if (!form) {
-            console.error(`Form with id ${formId} not found.`);
-            return;
-        }
 
-        let timeout;
-
-        form.addEventListener('change', () => {
-            clearTimeout(timeout);
-            timeout = setTimeout(() => {
-                form.submit();
-            }, delay);
-        });
-    }
-
-    delayFormSubmission('filters', 100);
-</script>
 <script>
     $(document).ready(function() {
 
@@ -467,8 +406,6 @@
             $("#"+filter).prop('checked',false);
             $('#filters').submit();
         });
-
-
     });
 </script>
 
@@ -477,6 +414,7 @@
     const rangeInputvalue = document.querySelectorAll(".range-input input"); 
     let priceGap = 500; 
     const priceInputvalue = document.querySelectorAll(".price-input input"); 
+    console.log(priceInputvalue,"sdsdsdsds")
     for (let i = 0; i < priceInputvalue.length; i++) { 
         priceInputvalue[i].addEventListener("input", e => { 
             let minp = parseInt(priceInputvalue[0].value); 
@@ -521,7 +459,6 @@
                     parseInt(rangeInputvalue[0].value); 
                 let maxVal = 
                     parseInt(rangeInputvalue[1].value); 
-
                 let diff = maxVal - minVal 
                 if (diff < priceGap) { 
                     if (e.target.className === "min-range") { 
@@ -534,17 +471,41 @@
                 else { 
                     priceInputvalue[0].value = minVal; 
                     priceInputvalue[1].value = maxVal; 
-                    $('#selectedMinValue').val(minVal);
-                    $('#selectedMaxValue').val(maxVal);
+                    $(document).find('#selectedMinValue').val(minVal);
+                    $(document).find('#selectedMaxValue').val(maxVal);
                     rangevalue.style.left = 
                         `${(minVal / rangeInputvalue[0].max) * 100}%`; 
                     rangevalue.style.right = 
                         `${100 - (maxVal / rangeInputvalue[1].max) * 100}%`; 
+
+                    $('#filters').submit();
                 } 
             }); 
         } 
     }
 
+</script>
+<script>
+    function delayFormSubmission(formId, delay) {
+        const form = document.getElementById(formId);
+        
+        if (!form) {
+            console.error(`Form with id ${formId} not found.`);
+            return;
+        }
+
+        let timeout;
+
+        form.addEventListener('change', () => {
+            alert('dsaa');
+            clearTimeout(timeout);
+            timeout = setTimeout(() => {
+                form.submit();
+            }, delay);
+        });
+    }
+
+    delayFormSubmission('filters', 100);
 </script>
 @endpush
 @section('extra_css')
