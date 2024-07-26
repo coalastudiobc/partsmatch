@@ -153,10 +153,10 @@
                                                         </tr>
                                                         @foreach ($products as $product)
                                                         <tr>
-                                                            <td>{{$product->name}}</td>
-                                                            <td>{{$product->stocks_avaliable}}</td>
-                                                            <td>${{$product->price}}</td>
-                                                            <td>{{$product->category->name}}</td>
+                                                            <td>{{$product->name ?? ''}}</td>
+                                                            <td>{{$product->stocks_avaliable ?? ''}}</td>
+                                                            <td>${{$product->price ?? ''}}</td>
+                                                            <td>{{ $product && $product->category ? $product->category->name : '' }}</td>
                                                         </tr>  
                                                         @endforeach
                                                         {{-- <tr>
