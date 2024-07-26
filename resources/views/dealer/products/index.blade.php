@@ -31,7 +31,7 @@
                         <p>Image</p>
                     </th>
                     <th>
-                        <p>Product Name</p>
+                        <p>Product name</p>
                     </th>
                     <th>
                         <p>Price</p>
@@ -51,7 +51,7 @@
                 <tr>
                     <td>
                         <div class="pro-img-box" data-bs-toggle="modal" data-bs-target="#pro-detail-model">
-                            <img src="{{$product->productImage && count($product->productImage) ?  Storage::url($product->productImage[0]->file_url) : asset('assets/images/car-logo1.png') }}" alt="img">
+                            <img src="{{$product->productImage && count($product->productImage) ?  Storage::url($product->productImage[0]->file_url) : asset('assets/images/gear-logo.svg') }}" alt="img">
                         </div>
                     </td>
 
@@ -434,7 +434,7 @@
                     </div> --}}
                     <div class="col-md-12">
                         <div class="d-flex aign-items-center justify-content-end">
-                            <button type="submit" id="submit" class="btn primary-btn md-btn">submit</button>
+                            <button type="submit" id="submit" class="btn primary-btn md-btn">Submit</button>
                         </div>
                     </div>
                 </div>
@@ -469,7 +469,7 @@
         <div class="modal-content">
             <div class="modal-body">
                 <div class="add-pro-form">
-                    <h2>Bulk Upload</h2>
+                    <h2>Bulk upload</h2>
                     <form action="{{route('Dealer.products.bulk.upload')}}" method="post" enctype="multipart/form-data">
                     @csrf
                         <div class="row">
@@ -484,10 +484,10 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <a href="{{route('Dealer.download.sample')}}" class="btn secondary-btn full-btn">Get sample csv</a>
+                                <a href="{{route('Dealer.download.sample')}}" class="btn secondary-btn full-btn">Get sample CSV</a>
                             </div>
                             <div class="col-md-6">
-                                <button type="submit" class="btn secondary-btn full-btn">submit</button>
+                                <button type="submit" class="btn secondary-btn full-btn">Submit</button>
                             </div>
                         </div>
                     </form>

@@ -100,6 +100,7 @@ class Product extends Model
                     ->orWhere('price', 'like', '%' . $request->search_parameter . '%')
                     ->orWhere('year', 'like', '%' . $request->search_parameter . '%')
                     ->orWhere('brand', 'like', '%' . $request->search_parameter . '%')
+                    ->orWhere('part_number', 'like', '%' . $request->search_parameter . '%')
                     ->orWhere('model', 'like', '%' . $request->search_parameter . '%');
             });
         });
