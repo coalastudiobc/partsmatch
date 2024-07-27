@@ -120,8 +120,9 @@ class AdminController extends Controller
     public function commisionAdd(CommissionRequest $request, $user_id = null)
     {
         try {
-            $get_dealer_id =  jsdecode_userdata($user_id);
-
+            // $get_dealer_id =  jsdecode_userdata($user_id);
+            $get_dealer_id=$user_id;
+// dd($get_dealer_id);
             $data = [
                 'user_id' => $get_dealer_id,
                 'commision_type' => $request->order_commission_type,
@@ -162,6 +163,36 @@ class AdminController extends Controller
             return view('admin.commission', compact('user', 'username'));
         }
         return view('admin.commission');
+    }
+    public function commisionManagePerUser(CommissionRequest $request, $user_id = null)
+    {
+        try {
+            $get_dealer_id=$user_id;
+            $data = [
+                'user_id' => $get_dealer_id,
+                'commision_type' => $request->order_commission_type,
+                'commision_value' => $request->order_commission,
+            ];
+            $message = '';
+            if (UserCommisionSetting::where('user_id', $get_dealer_id)->exists()) {
+                UserCommisionSetting::where('user_id', $get_dealer_id)->update($data);
+                $message = "Commision updated  successfully";
+            } else {
+                UserCommisionSetting::create($data);
+                $message = "Commision created successfully";
+            }
+            $type='';
+            if($request->order_commission_type === 'Percentage'){
+                $type='%';
+            }else{
+                $type='$';
+            }
+            $data = ['status' => true, 'type'=>$type, 'data'=>$request->order_commission, 'message' => $message];
+            return response()->json($data);
+        } catch (\Throwable $e) {
+            $data = ['status' => false,  'message' => $e->getMessage()];
+            return response()->json($data);
+        }
     }
 
     public function shipping(ShippingRequest $request)

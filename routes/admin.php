@@ -44,7 +44,7 @@ Route::middleware(['auth', 'verified', 'admin'])->namespace('App\Http\Controller
     Route::get('show', 'AdminController@show')->name('show');
     Route::get('edit', 'AdminController@edit')->name('edit');
     Route::match(["GET", "POST"], "commission/{dealer_id?}", 'AdminController@commission')->name('commission');
-    Route::post('commision/setting/{user_id?}', 'AdminController@commisionAdd')->name('comission.add');
+   
 
     Route::match(["GET", "POST"], "shipping/view", 'AdminController@shipping')->name('shipping.view');
     Route::match(["GET", "POST"], 'shipping/edit/{shipping_id}', 'AdminController@shippingEdit')->name('shipping.edit');
@@ -88,6 +88,10 @@ Route::middleware(['auth', 'verified', 'admin'])->namespace('App\Http\Controller
         Route::post('packages/store/{id?}', 'PackageController@store')->name('store');
         Route::get('packages/edit/{id}', 'PackageController@edit')->name('edit');
         Route::get('packages/delete/{id}', 'PackageController@destroy')->name('delete');
+    });
+    //commission
+    Route::name('commission.')->group(function () {
+        Route::post('commission/manage/{user_id?}', 'AdminController@commisionManagePerUser')->name('manage');
     });
 
     //users
