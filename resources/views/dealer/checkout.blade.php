@@ -75,7 +75,7 @@
                                                 <div class="dropdown">
                                                     <div class="dropdown-toggle " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                                         <div id="selectedItem">
-                                                            {{ $country->name ?? 'Select' }}
+                                                            {{'Select' }}
 
                                                         </div>
                                                         <span class="custm-drop-icon">
@@ -86,7 +86,7 @@
                                                     </div>
                                                     <ul class="dropdown-menu outer-box" id="country" aria-labelledby="dropdownMenuButton1">
                                                         @foreach ($countries as $country)
-                                                        <li><a class="dropdown-item custom_dropdown_item" data-value="{{ $country->id }}" data-iso_code="{{ $country->iso_code }}" data-text="{{ $country->name }}" href="javascript:void(0)">{{ $country->name }}</a>
+                                                        <li><a class="dropdown-item custom_dropdown_item" data-value="{{ $country->id }}" data-iso_code="{{ $country->iso_code }}" data-text="{{ ucfirst($country->name) }}" href="javascript:void(0)">{{ ucfirst($country->name) }}</a>
                                                         </li>
                                                         @endforeach
 
@@ -344,8 +344,8 @@
             jQuery(document).find('input[name="country"]').val(selecttext);
 
             jQuery('#state').html('<option value="">Select State</option>');
-
-            let url = APP_URL + '/dealer/shipping/methods/' + selectitem;
+            console.log(selectitem, selecttext);
+            let url = APP_URL + '/dealer/shipping/methods/' + selecttext;
             const result = ajaxCall(url, 'get');
             result.then(handleShippingData).catch(handleShippingError)
         })
@@ -354,9 +354,9 @@
     function handleShippingData(response) {
         console.log(response);
         jQuery('.shipping_carts').empty();
-
-        jQuery.each(response.data, function(index, item) {
-            jQuery('.shipping_carts').append(`
+        if (response.status === 'true') {
+            jQuery.each(response.data, function(index, item) {
+                jQuery('.shipping_carts').append(`
             <li>
                 <input
                     type="radio"
@@ -372,7 +372,17 @@
                     <p>$${item.value}</p>
                 </label>
             </li>`);
-        });
+            });
+        } else {
+            jQuery('.shipping_carts').append(`<li>
+            <label>
+                <div class="shipping-details">
+                    <h3>Free shipping available</h3>
+                </div>
+                <p>$0</p>
+            </label>
+        </li>`);
+        }
         // Call this function to set the initial grand total
         updateGrandTotal();
     }
@@ -550,9 +560,9 @@
             response.data.forEach(state => {
                 $('.state').append(`<li><a class="dropdown-item state_dropdown_item select_state"
                                                                     data-value="${state.id}"
-                                                                    data-text="${state.name}"
-                                                                    data-name="${state.name}"
-                                                                    href="javascript:void(0)">${state.name}</a>
+                                                                    data-text="${capitalizeFirst(state.name)}"
+                                                                    data-name="${capitalizeFirst(state.name)}"
+                                                                    href="javascript:void(0)">${capitalizeFirst((state.name))}</a>
                                                             </li>`)
             });
             jQuery('#state').html(options);
@@ -565,7 +575,7 @@
             jQuery('.city').empty();
             response.data.forEach(city => {
                 $('.city').append(
-                    `<li><a class="dropdown-item city_dropdown_item" data-value="${city.id}" data-text="${city.name}" href="javascript:void(0)">${city.name}</a></li>`
+                    `<li><a class="dropdown-item city_dropdown_item" data-value="${city.id}" data-text="${capitalizeFirst(city.name)}" href="javascript:void(0)">${capitalizeFirst(city.name)}</a></li>`
                 );
             });
         }

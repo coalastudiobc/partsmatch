@@ -45,11 +45,11 @@ class OrderPaymentController extends Controller
                     'product_price' => $item->product_price
                 ]);
             }
+            
+            BuyerAddress::where('selected_method_id', $request->shipping_Method ?? 0)->where('user_id',auth()->id())->where('order_id',$cart->id)
+            ->update(['order_id' => $order->id]);
             CartProduct::where('cart_id', $cart->id)->delete();
             $cart->delete();
-
-            BuyerAddress::where('selected_method_id', $request->shipping_Method ?? 0)
-                ->update(['order_id' => $order->id]);
             $shipping_add_row_id = session()->get('shipping_address_row_id');
             if ($shipping_add_row_id) {
                 ShippingAddress::where('id', $shipping_add_row_id)->update(['order_id' => $order->id]);

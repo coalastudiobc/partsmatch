@@ -9,7 +9,7 @@ class Product extends Model
 {
     use HasFactory;
     protected $fillable = ['name', 'user_id', 'part_number', 'subcategory_id', 'description', 'additional_details', 'stocks_avaliable', 'price', 'shipping_price', 'other_specification', 'Specifications_and_dimensions', 'Shipping_info', 'field_3', 'year', 'brand', 'model', 'status'];
-
+    protected $with=['productImage'];
     public function productCompatible()
     {
         return $this->hasMany(ProductCompatabilty::class, 'product_id', 'id');

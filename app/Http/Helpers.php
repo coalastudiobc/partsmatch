@@ -7,6 +7,7 @@ use App\Models\CmsPage;
 use App\Models\Category;
 use App\Models\CartProduct;
 use App\Models\AdminSetting;
+use App\Models\OrderItem;
 use App\Models\OrderParcels;
 use App\Models\Product;
 use Laravel\Cashier\Cashier;
@@ -383,3 +384,45 @@ if (!function_exists('plan_validity')) {
 //         }
 //     }
 // }
+
+if (!function_exists('isFullFilledOrder')) {
+    function isFullFilledOrder($order_id)
+    {
+        try {
+            $all_products = OrderItem::where('order_id', $order_id)->pluck('id')->toArray();
+            $isalready = OrderParcels::whereIn('orderItem_id', $all_products)->get();
+            if($isalready && !count($isalready)){
+                return  false;
+            }
+            $isalready = OrderParcels::whereIn('orderItem_id', $all_products)->where('status', 0)->first();
+            if ($isalready) {
+                return  false;
+            } else {
+
+                return true;
+            }
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
+}
+
+if (!function_exists('groupWith')) {
+    function groupWith($orders)
+    {
+        try {
+            $ids = OrderParcels::with('ordeItems')->whereIn('orderItem_id',$orders)->get()->groupBy('parcel_id');
+            $groups = [];
+            foreach($ids as $parcel){
+                $items=[];
+                foreach($parcel as $group){
+                    array_push($items,$group->ordeItems);
+                }
+                array_push($groups,$items);
+            }
+            return $groups;
+        } catch (\Exception $e) {
+            return null;
+        }
+    }
+}

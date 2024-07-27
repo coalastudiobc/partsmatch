@@ -1,8 +1,5 @@
 <script>
     $(document).ready(function() {
-        $.validator.addMethod('checkboxRequired', function(value, element) {
-            return $('#checkbox3').is(':checked');
-        }, 'You must accept the terms.');
         $("#packageDimension").validate({
             rules: {
                 length: {
@@ -71,67 +68,25 @@
             submitHandler: (form, event) => {
                 event.preventDefault();
                 var formData = $(form).serializeArray();
-
-                // productIds.forEach(function(productId) {
-                //     formData.push({ name: 'product_id[]', value: productId });
-                // });
-
-                // fetch($(form).attr('action') {
-                //         method: $(form).attr('method'),
-                //         body: formData
-                //     })
-                //     .then(response => {
-                //         if (response.ok) {
-                //             return response.json(); // Parse JSON from the response
-                //         } else {
-                //             return response.json().then(errorData => {
-                //                 throw new Error(errorData.message ||
-                //                     'An error occurred while submitting the form.');
-                //             });
-                //         }
-                //     })
-                //     .then(result => {
-                //         console.log('Success:', result);
-                //         alert('Form submitted successfully!');
-                //         // You might want to redirect the user or do something with the result
-                //         // window.location.href = result.redirect_url;
-                //     })
-                //     .catch(error => {
-                //         console.error('Fetch Error:', error);
-                //         alert(error.message || 'An error occurred while submitting the form.');
-                //     });
-                let dimensionsJSON = JSON.stringify(productIds);
-                let product = encodeURIComponent(dimensionsJSON);
-                let url = APP_URL + '/dealer/parcel/dimension/' + product;
-                console.log(productIds);
+                let url = APP_URL + '/dealer/parcel/dimension';
                 const result = ajaxCall(url, 'post', formData, true);
                 $("#fullPageLoader").removeClass('d-none');
                 result.then(handleParcelSuccessResponse).catch(handleParcelErrorResponse)
 
                 function handleParcelSuccessResponse(response) {
-                    console.log(response);
                     $("#fullPageLoader").addClass('d-none');
-                    if (jQuery('.harvinder').hasClass('addingDim')) {
-                        var productOrderItemId = jQuery('.harvinder').attr('data-productId');
-                        jQuery('.add-dimension-btn').text('Edit');
-                    }
-                    $('#Package-modal').modal('toggle')
+                    $('#Package-modal').modal('toggle');
                     if (response.status == false) {
                         var errorMessage = response.message;
                         errorMessage += ' Please make group first.';
                         toastr.error(errorMessage);
                     } else {
-                        toastr.success(response.message);
-                    }
-                    $('#Package-modal').on('hidden.bs.modal', function() {
-                        $(this).find('form').trigger('reset');
-                    })
-                    var flag = jQuery('.harvinder').data('flag');
-                    if (flag) {
-                        if (jQuery('.payment-btn').hasClass('disabled-shippmentPayment')) {
-                            jQuery('.payment-btn').removeClass('disabled-shippmentPayment')
+                        if (response.payment) {
+                            $('#PaymentInitiate').attr('href', response.paymentUrl);
+                            $('#PaymentInitiate').removeClass('disabled_select');
                         }
-                        console.log(flag);
+                        $('#outerContainerFull').html(response.data);
+                        toastr.success(response.message);
                     }
                 }
 

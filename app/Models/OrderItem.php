@@ -11,6 +11,13 @@ class OrderItem extends Model
     protected $fillable = [
         'product_id', 'order_id', 'quantity', 'product_price'
     ];
+    protected $appends = [
+        'getOrderIdsWithSameParcel','getGroupedWith'
+    ];
+
+    protected $with = [
+        'product'
+    ];
 
     public function product()
     {
@@ -20,6 +27,25 @@ class OrderItem extends Model
     {
         return $this->hasOne(Order::class, 'id', 'order_id');
     }
+
+    public function parcel()
+    {
+        return $this->hasOne(OrderParcels::class,'orderItem_id');
+    }
+
+    public function getOrderIdsWithSameParcel()
+    {
+        return self::where('order_id',$this->order_id)->pluck('id')->toArray(); 
+        
+    }
+
+    public function getGroupedWith()
+    {
+        return OrderParcels::whereIn('orderItem_id',$this->getOrderIdsWithSameParcel())->get()->groupBy('parcel_id')->toArray(); 
+        
+    }
+
+
 
     // public function scopeSearch($query)
     // {

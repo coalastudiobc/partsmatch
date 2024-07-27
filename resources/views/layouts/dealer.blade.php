@@ -175,6 +175,11 @@
     <script src="{{ asset('assets/js/common.js') }}?ver={{ now() }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
+        function capitalizeFirst(string) {
+            if (!string) return string; // handle empty or null strings
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+
         $(document).ready(function() {
             // Check if the CSS file(s) are loaded
             var cssLoaded = false;

@@ -44,22 +44,10 @@ class OrderController extends Controller
     }
     public function productParcels(Request $request, Order $order)
     {
-        // dd('here', $request->toArray());
         session()->put('selectedPickAddressId', $request->selectadress);
-        session()->put('selectedOrderId', $order->id);
-        $orderProducts = OrderItem::with('product')->where('order_id', $order->id)->get();
-        $orderProducts1 = OrderItem::where('order_id', $order->id)->pluck('id');
-        $groups = OrderParcels::with('ordeItems')->whereIn('orderItem_id', $orderProducts1)->get()->groupBy('parcel_id');
-        if ($groups && count($groups)) {
-            return view('dealer.order.product_parcel', compact('groups'));
-        }
-        foreach ($orderProducts as $key => $orderProduct) {
-            OrderParcels::updateOrCreate(
-                ['orderItem_id' => $orderProduct->id],
-                ['product_id' => $orderProduct->product_id, 'parcel_id' => Str::random(5), 'status' => 0]
-            );
-        }
-        return view('dealer.order.product_parcel', compact('orderProducts'));
+        $orderProducts = OrderItem::with('product', 'parcel')->where('order_id', $order->id)->get();
+        $groups = groupWith($orderProducts[0]->getOrderIdsWithSameParcel());
+        return view('dealer.order.product_parcel', compact('orderProducts', 'order', 'groups'));
     }
     public function addressDelete(UserAddresses $address)
     {
@@ -93,57 +81,61 @@ class OrderController extends Controller
             return response()->json($data);
         }
     }
-    public function productDimension(Request $request, $product)
+    public function productDimension(Request $request)
     {
         try {
-            $decodedDimensionsJSON = urldecode($product);
-            $orderItemId = json_decode($decodedDimensionsJSON);
-
-
+            $products = explode(',', $request->products);
             $parcel_id =  $this->createParcel($request);
-            if (gettype($orderItemId) !== 'integer') {
-                foreach ($orderItemId as $key => $value) {
-                    $orderItem = OrderItem::where('id', $value)->first();
+
+            for ($i = 0; $i <  count($products); $i++) {
+                $orderItem = OrderItem::where('id', $products[$i])->first();
+                OrderParcels::updateOrCreate(
+                    ['orderItem_id' => $orderItem->id, 'product_id' => $orderItem->product_id],
+                    ['parcel_id' => $parcel_id, 'status' => 1]
+                );
+            }
+            $orderProducts = OrderItem::with('product', 'parcel')->where('order_id', $request->order_id)->get();
+            foreach ($orderProducts as $single) {
+                $check = OrderParcels::where('orderItem_id', $single->id)->first();
+                if (!$check) {
                     OrderParcels::updateOrCreate(
-                        ['orderItem_id' => $orderItem->id, 'product_id' => $orderItem->product_id],
-                        ['parcel_id' => $parcel_id, 'status' => 1]
+                        ['orderItem_id' => $single->id, 'product_id' => $single->product_id],
+                        ['parcel_id' => random_int(10000, 99999), 'status' => 0]
                     );
                 }
             }
-            $orderItem = OrderItem::where('id', $orderItemId)->first();
-            OrderParcels::updateOrCreate(
-                ['orderItem_id' => $orderItemId, 'product_id' => $orderItem->product_id],
-                ['parcel_id' => $parcel_id, 'status' => 1]
-            );
-            $data = ['status' => true,  'message' => 'Product dimensions data saved successfully.'];
+
+            $groups = groupWith($orderProducts[0]->getOrderIdsWithSameParcel());
+
+
+            $all_order_parcels = view('components.group-parcel', ['groups' => $groups])->render();
+            $data = ['status' => true,  'payment' => isFullFilledOrder($orderItem->order_id), 'data' => $all_order_parcels, 'paymentUrl' => route('Dealer.order.shippment.rates', ['order' => $orderItem->order_id]), 'message' => 'Product dimensions data saved successfully.', 'change_at' => $request->element_to_change];
             return response()->json($data);
         } catch (\Throwable $th) {
             $data = ['status' => false,  'message' => $th->getMessage()];
             return response()->json($data);
         }
     }
-    public function createShippment()
+
+    public function createShippment(Request $request)
     {
 
         try {
             $selected_order_id = session()->get('selectedPickAddressId');
             if ($selected_order_id) {
                 $pickupAddress = UserAddresses::where('id', session()->get('selectedPickAddressId'))->first();
-                // session()->forget('selectedPickAddressId');
             }
-            $selected_order_id = session()->get('selectedOrderId');
+            $selected_order_id = $request->order;
             if ($selected_order_id) {
                 $to_address = BuyerAddress::where('order_id', $selected_order_id)->pluck('shippo_address_id')->first();
                 $reciever_address = ShippingAddress::where('order_id', $selected_order_id)->first();
-                $getOrderItemIds =  OrderItem::where('order_id', session()->get('selectedOrderId'))->get();
-                // session()->forget('selectedOrderId');
+                $getOrderItemIds =  OrderItem::where('order_id', $request->order)->get();
             }
-            //storing parcels into single array
+            // dd($selected_order_id,$request,$to_address);
             $parcelsIdInArray = [];
             foreach ($getOrderItemIds as $key => $value) {
                 $parcelsIdInArray[] = OrderParcels::where('orderItem_id', $value->id)->pluck('parcel_id')->first();
             }
-            // dd($parcelsIdInArray);
 
             $body = [
                 "address_from" => $pickupAddress->shippo_address_id,
@@ -178,13 +170,14 @@ class OrderController extends Controller
                 $this->saveInDb($data, $parcelsIdInArray);
                 $stripeCustomer = auth()->user()->createOrGetStripeCustomer();
                 $intent = auth()->user()->createSetupIntent();
-                return view('dealer.order.payment', compact('pickupAddress', 'response_in_array', 'stripeCustomer', 'intent', 'reciever_address'));
+                return view('dealer.order.payment', compact('pickupAddress', 'response_in_array', 'stripeCustomer', 'intent', 'reciever_address', 'selected_order_id'));
             }
         } catch (\Exception $e) {
             toastr()->error($e->getMessage());
             return redirect()->back();
         }
     }
+
     public function saveInDb($data, $parcelsIdInArray = null)
     {
         try {
@@ -207,16 +200,16 @@ class OrderController extends Controller
     public function shippmentPayment(Request $request)
     {
         try {
-            $res = $this->shippmentTranscation($request->rate_id);
+            $res = $this->shippmentTranscation($request->rate_id, $request);
             $this->stripeTranscation($request);
             toastr()->success('Shippment created successfully');
             return redirect()->route('Dealer.order.orderlist');
         } catch (\Exception $th) {
             toastr()->error($th->getMessage());
-            return redirect()->back();
+            return redirect()->route('Dealer.order.orderlist');
         }
     }
-    public function shippmentTranscation($rate_id)
+    public function shippmentTranscation($rate_id, $request)
     {
         try {
             $body = [
@@ -227,18 +220,18 @@ class OrderController extends Controller
             $response = $this->createTransaction($body);
             if ($response->object_status == 'SUCCESS') {
                 $rateDetails = $this->getRateDetails($rate_id);
-                return  $this->storeRateDetails($rateDetails, $response);
+                return  $this->storeRateDetails($rateDetails, $response, $request);
             }
         } catch (\Exception $th) {
             toastr()->error($th->getMessage());
             return redirect()->back();
         }
     }
-    public function storeRateDetails($response, $masterResponse)
+    public function storeRateDetails($response, $masterResponse, $request)
     {
         try {
             $data = [
-                'order_id' => session()->get('selectedOrderId'),
+                'order_id' => $request->order_id,
                 'rate_id' => $response->object_id,
                 'shippment_id' => $response->shipment,
                 'amount' => $response->amount,

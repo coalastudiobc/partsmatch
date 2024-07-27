@@ -21,7 +21,7 @@
                     <td>
                         <div class="product-view-img">
                             <a href="{{ route('Dealer.products.details', productByOrderItem($order->product_id)->id)}}">
-                                <img src="{{ asset('storage/' . (productByOrderItem($order->product_id)->productImage[0]->file_url ?? '')) }}" alt="Product Image">
+                                <img src="{{ asset('storage/' . ( productByOrderItem($order->product_id)->productImage->isNotEmpty() ? productByOrderItem($order->product_id)->productImage[0]->file_url : 'assets/images/gear-logo.svg')) }}" alt="Product Image">
                             </a>
                         </div>
                     </td>

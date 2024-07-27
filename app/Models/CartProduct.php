@@ -13,6 +13,12 @@ class CartProduct extends Model
         'product_id', 'cart_id', 'product_price', 'quantity'
     ];
     protected $appends = ['product_of'];
+    protected $with = ['productImage'];
+
+    public function productImage()
+    {
+        return $this->hasMany(ProductImage::class, 'product_id', 'product_id');
+    }
 
     public function product()
     {

@@ -45,7 +45,7 @@
                         <div class="order-summary">
                             <h3>Payment</h3>
                             <p>All transactions are secure and encrypted.</p>
-                            <form id="shippmentPaymentForm" action="{{ route('Dealer.order.shippment.payment') }}" method="POST">
+                            <form id="shippmentPaymentForm"  action="{{ route('Dealer.order.shippment.payment',['order_id'=>$selected_order_id]) }}" method="POST">
                                 @csrf
                                 <div class="">
                                     <div class="row">

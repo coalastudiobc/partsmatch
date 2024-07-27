@@ -16,9 +16,11 @@ use App\Models\AdminSetting;
 use App\Models\BuyerAddress;
 use Illuminate\Http\Request;
 use App\Models\UserAddresses;
+use Illuminate\Support\Collection;
 use App\Models\ShippingAddress;
 use App\Models\ShippingSetting;
 use App\Models\ShippmentCreation;
+use App\Models\ProductParcelDetail;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\ShippoPurchasedLabel;
@@ -113,10 +115,11 @@ class CheckoutController extends Controller
     }
 
 
-    public function getShippingMethods(string $country)
+    public function getShippingMethods($country)
     {
         try {
-            ($country == 'CA') ? $country = 'Canada' : $country = 'United States';
+            // dd($country);
+            ($country == 'Canada') ? $country = 'Canada' : $country = 'United States';
             $total_amount = Cart::where('user_id', auth()->user()->id)->sum('amount');
 
             $integerAmount = (int) $total_amount;  // Convert to integer
@@ -124,9 +127,9 @@ class CheckoutController extends Controller
             if ($TotalShippings->isEmpty()) {
                 throw new \Exception('No shipping settings found for the specified country.');
             }
-            return response()->json(['title' => 'Success', 'data' => $TotalShippings, 'message' => 'TotalShippings retrieved successfully']);
+            return response()->json(['status' => 'true', 'data' => $TotalShippings, 'message' => 'TotalShippings retrieved successfully']);
         } catch (\Exception $e) {
-            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+            return response()->json(['status' => 'false', 'message' => $e->getMessage()]);
         }
     }
 
@@ -271,7 +274,7 @@ class CheckoutController extends Controller
         $user = auth()->user();
         $data = $user->shippingAddress;
         // $orders = Order::with('orderItem')->where('user_id', auth()->id())->orderByDesc('id')->paginate(10);
-        $orders =  Order::with('orderItem')->where('user_id', auth()->id())->paginate(__('pagination.pagination_nuber'));
+        $orders =  Order::with('orderItem')->where('user_id', auth()->id())->orderBy('id', 'DESC')->paginate(__('pagination.pagination_nuber'));
 
         // dd($orders);
         return view('dealer.myorder.order_list', compact('orders'));
@@ -324,16 +327,19 @@ class CheckoutController extends Controller
             $current_shipping_address = ShippingAddress::create($shippingAddress);
             session()->put('shipping_address_row_id', $current_shipping_address->id);
 
-            BuyerAddress::create([
+            $cart = Cart::with('cart_product', 'cart_product.product')->where('user_id', auth()->user()->id)->first();
+            $allProductsOfCart = CartProduct::with('product')->where('cart_id', $cart->id)->get();
+            BuyerAddress::updateOrCreate([
                 'user_id' => auth()->user()->id,
+                'order_id' => $cart->id
+            ], [
                 'shippo_address_id' => $responseInArray->object_id,
                 'selected_method_id' => $request->shipping_Method ?? 0,
             ]);
             $toAddress = $responseInArray->object_id;
             $stripeCustomer = auth()->user()->createOrGetStripeCustomer();
             $intent = auth()->user()->createSetupIntent();
-            $carts = Cart::with('cart_product', 'cart_product.product')->where('user_id', auth()->user()->id)->get();
-            $allProductsOfCart = CartProduct::where('cart_id', $carts[0]->id)->get();
+
             // dd($allProductsOfCart);
             $grandTotal = $request->grandTotal;
             $selectedShipping = ShippingSetting::find($request->shipping_Method);
