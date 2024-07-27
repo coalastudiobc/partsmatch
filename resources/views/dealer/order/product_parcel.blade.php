@@ -211,6 +211,11 @@
                 singleOrderProduct.find('.available-to-add-input').remove();
                 htmlContent = htmlContent + singleOrderProduct.prop('outerHTML');
                 singleOrderProduct.remove();
+                $(".available-to-add-input").addClass('d-none');
+                $('#makeGroup').removeClass('d-none');
+                $('#cancel').addClass('d-none');
+                $('#createGroup').addClass('d-none');
+
             });
                 $('#outerContainerFull').append("<div class='grouped-data'>"+htmlContent+"</div>");
         } else {
