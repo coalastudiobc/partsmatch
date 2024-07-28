@@ -40,9 +40,7 @@
 
             // update cart with minus
             $(document).on('click', '.cartupdate', function() {
-                var container = $(this).parent().parent().parent().find('.targetLoaderDiv');
-                container.addClass('d-none');
-                $('.button-loader').removeClass('d-none');
+                $("#fullPageLoader").removeClass('d-none');
                 var element = $(this).attr('data_quantity_id');
                 var quan = $(element).val();
                 if ($(this).hasClass('minus')) {
@@ -63,24 +61,21 @@
                 response.then(handleStateData).catch(handleStateError)
 
                 function handleStateData(response) {
-                    container.removeClass('d-none');
-                    $('.button-loader').addClass('d-none');
+                    $("#fullPageLoader").addClass('d-none');
                     if (response.success == true) {
                         $('#cartContainer').html(response.cart);
-                        if (response.status == true) {
-                            return toastr.success(response.message);
-                        } else {
+                         if(response.stock) {
                             return toastr.error(response.message);
-
-                        }
-                    } else {
-
+                         }
+                    } else{
                         return toastr.error(response.message);
-
                     }
+
                 }
 
                 function handleStateError(error) {
+                    $("#fullPageLoader").addClass('d-none');
+
                     console.log('error', error)
 
                 }
@@ -91,8 +86,7 @@
             });
 
             $(document).on('change', '.quantity', function() {
-                $('#overlay').addClass('overlay');
-                $('#loader').addClass('loader');
+                $("#fullPageLoader").removeClass('d-none');
                 var quan = $(this).val();
                 var product_id = $(this).attr('data-product_id')
                 var url = APP_URL + '/dealer/update/to/cart/' + product_id
@@ -102,8 +96,7 @@
                 response.then(handleStateData).catch(handleStateError)
 
                 function handleStateData(response) {
-                    $('#overlay').removeClass('overlay');
-                    $('#loader').removeClass('loader');
+                    $("#fullPageLoader").addClass('d-none');
                     if (response.success == true) {
                         $('#cartContainer').html(response.cart);
                         if (response.status == true) {
@@ -120,6 +113,7 @@
                 }
 
                 function handleStateError(error) {
+                    $("#fullPageLoader").addClass('d-none');
                     console.log('error', error)
 
                 }

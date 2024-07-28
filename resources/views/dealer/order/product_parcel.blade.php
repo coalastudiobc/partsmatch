@@ -44,11 +44,7 @@
                 </div>
             </div>
             <div id="outerContainerFull">
-            @if($groups && count($groups))
                 <x-group-parcel  :groups=$groups/>
-            @else
-                <x-parcel-grouping-component  :products=$orderProducts/>
-            @endif
             </div>
         </div>
     </div>
@@ -191,38 +187,88 @@
         $('#cancel').addClass('d-none');
         $('#createGroup').addClass('d-none');
     });
-
     $('#createGroup').on('click', function() {
         // Check if any checkboxes are checked
         var total_in_group = parseInt($('input.available-to-add-input:checked').length);
-        if ( total_in_group > 0) {
+        if ( total_in_group > 1) {
             var htmlContent ="";
             var ids =[];
             $('input.available-to-add-input:checked').each(function(index, item) {
                 var singleOrderProduct = $($(item).attr('data-add'));
                 ids.push($(item).attr('data-product_id'));
-                singleOrderProduct.find('.open-dimension-modal').attr('data-product_id',ids);
-                if(index == total_in_group -1 ){
-                    singleOrderProduct.find('.open-dimension-modal').removeClass('d-none');
-                }else{
-                    singleOrderProduct.find('.open-dimension-modal').addClass('d-none');
+            });
+            var order_id ="{{$order->id}}";
+            var formData = {'product_ids' : ids,'_token' :CSRF,'order_id' : order_id};
+            let url = APP_URL + '/dealer/parcel/groups';
+            const result = ajaxCall(url, 'post', formData, true);
+            $("#fullPageLoader").removeClass('d-none');
+            result.then(handleParcelGroup).catch(handleParcelGroupError)
 
+            function handleParcelGroup(response) {
+                console.log(response);
+                $("#fullPageLoader").addClass('d-none');
+                if (response.status == false) {
+                    var errorMessage = response.message;
+                    errorMessage += ' Please make group first.';
+                    toastr.error(errorMessage);
+                } else {
+                    if (response.payment) {
+                        $('#PaymentInitiate').attr('href', response.paymentUrl);
+                        $('#PaymentInitiate').removeClass('disabled_select');
+                    }
+                    $(".available-to-add-input").addClass('d-none');
+                    $('#makeGroup').removeClass('d-none');
+                    $('#cancel').addClass('d-none');
+                    $('#createGroup').addClass('d-none');
+                    $('#outerContainerFull').html(response.data);
                 }
-                singleOrderProduct.find('.available-to-add-input').remove();
-                htmlContent = htmlContent + singleOrderProduct.prop('outerHTML');
-                singleOrderProduct.remove();
+            }
+
+            function handleParcelGroupError(error) {
+                console.log('error', error)
+
+            }
+            $('#outerContainerFull').append("<div class='grouped-data mb-3'>"+htmlContent+"</div>");
+        } else {
+            alert('Please select at least two items to create a group.');
+        }
+    });
+
+    $(document).on('click','.dismantle', function() {
+        // Check if any checkboxes are checked
+        var product_ids = $(this).attr('data-ids');
+        var order_id ="{{$order->id}}";
+        var formData = {'product_ids' : product_ids,'_token' :CSRF,'order_id' : order_id};
+        let url = APP_URL + '/dealer/parcel/groups/delete';
+        const result = ajaxCall(url, 'post', formData, true);
+        $("#fullPageLoader").removeClass('d-none');
+        result.then(handleParcelGroupDelete).catch(handleParcelGroupDeleteError)
+
+        function handleParcelGroupDelete(response) {
+            $("#fullPageLoader").addClass('d-none');
+            if (response.status == false) {
+                var errorMessage = response.message;
+                errorMessage += ' Please make group first.';
+                toastr.error(errorMessage);
+            } else {
+                if (response.payment_btn_disable) {
+                    $('#PaymentInitiate').attr('href', "#");
+                    $('#PaymentInitiate').addClass('disabled_select');
+                }
                 $(".available-to-add-input").addClass('d-none');
                 $('#makeGroup').removeClass('d-none');
                 $('#cancel').addClass('d-none');
                 $('#createGroup').addClass('d-none');
-
-            });
-                $('#outerContainerFull').append("<div class='grouped-data'>"+htmlContent+"</div>");
-        } else {
-            alert('Please select at least one item to create a group.');
+                $('#outerContainerFull').html(response.data);
+            }
         }
-    });
 
+        function handleParcelGroupDeleteError(error) {
+            console.log('error', error)
+
+        }
+        
+    });
 
     </script>
 @endpush

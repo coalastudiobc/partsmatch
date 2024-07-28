@@ -275,7 +275,14 @@
                     </div>
                 </div>
                 <div class="collection-boxes productIndex">
-                    @include('components.home-product', ['products' => $collections[0]->productForWelcome])
+                        @forelse ($collections[0]->productForWelcome as $product)
+                            <x-home-product-tab :product="$product" />
+                        @empty
+                        <div class="collection-box">
+                            <img src="{{ asset('assets/images/no-product.svg') }}" alt="" width="300">
+                            <p class="text-center mt-1"> <b>No products avaliable at the moment</b></p>
+                        </div>
+                        @endforelse
                 </div>
             </div>
         </div>
@@ -312,9 +319,9 @@
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="head-tab-1" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
                         <div class="more-product-boxes tabProduct">
-                            @include('components.home-product-tab', [
-                            'products' => $subcategories[0]->productForWelcome,
-                            ])
+                        @foreach ($subcategories[0]->productForWelcome as $product)
+                            <x-home-product-tab :product="$product" />
+                        @endforeach
                         </div>
                     </div>
                 </div>

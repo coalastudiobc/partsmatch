@@ -23,13 +23,13 @@
                 <div class="custm-table-head-box">
                     <div class="pro-status dimensionbtn">
                         <div class="dropdown" title="Add dimension of package">
-                            <a href="javascript:void(0)" id="{{random_int(10000, 99999)}}"class="btn primary-btn open-dimension-modal" data-product_id="{{$item->id}}" style="font-size: 14px;padding: 12px 7px;" alt=""> {{$item->parcel && !is_null($item->parcel) && $item->parcel->status ? "Edit" : "Add dimensions"  }}</a>
+                            <a href="javascript:void(0)" id="{{random_int(10000, 99999)}}"class="btn primary-btn open-dimension-modal" data-product_id="{{$item->product_id}}" style="font-size: 14px;padding: 12px 7px;" alt=""> {{$item->parcel && !is_null($item->parcel) && $item->parcel->status ? "Edit dimensions" : "Add dimensions"  }}</a>
                         </div>
                     </div>
                 </div>
             </div>  
     @elseif(count($parcels) > 1)
-    <div class="grouped-data">
+    <div class="grouped-data mb-3">
         @forelse ($parcels as $item)
             @php $productIds = array_column($parcels, 'product_id'); $productIdsString = implode(',', $productIds); @endphp
             <div class="custm-table-body" id="{{'outer'.$item->id}}">
@@ -52,11 +52,14 @@
                     <p>${{ $item->quantity * $item->product_price }}</p>
                 </div>
                 <div class="custm-table-head-box">
+                    @if($loop->first)
                     <div class="pro-status dimensionbtn">
                         <div class="dropdown" title="Add dimension of package">
-                            <a href="javascript:void(0)" id="{{random_int(10000, 99999)}}"class="btn primary-btn open-dimension-modal" data-product_id="{{$productIdsString}}" style="font-size: 14px;padding: 12px 7px;" alt=""> {{$item->parcel && !is_null($item->parcel) && $item->parcel->status  ? "Edit" : "Add dimensions"  }}</a>
+                            <a href="javascript:void(0)" id="{{random_int(10000, 99999)}}"class="btn primary-btn open-dimension-modal" data-product_id="{{$productIdsString}}" style="font-size: 14px;padding: 12px 7px;" alt=""> {{$item->parcel && !is_null($item->parcel) && $item->parcel->status  ? "Edit dimensions" : "Add dimensions"  }}</a>
                         </div>
                     </div>
+                        <button class="dismantle" data-ids="{{$productIdsString}}">Dismantle group</button>
+                    @endif
                 </div>
             </div>
         @empty

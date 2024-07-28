@@ -21,16 +21,13 @@
             <table class="table">
                 <tr>
                     <th>
+                        <p>Order ID</p>
+                    </th>
+                    <th>
                         <p>Total products</p>
                     </th>
                     <th>
                         <p>Amount</p>
-                    </th>
-                    <th>
-                        <p>Date</p>
-                    </th>
-                    <th>
-                        <p>Order ID</p>
                     </th>
 
                     <th>
@@ -39,10 +36,16 @@
                     <th>
                         <p>Action</p>
                     </th>
+                    <th>
+                        <p>Date</p>
+                    </th>
                 </tr>
                 @if ($orders)
                 @forelse ($orders as $order)
                 <tr>
+                    <td>
+                        <p>{{ $order->id }}</p>
+                    </td>
                     <td>
                         <div class="pro-list-name">
                             {{-- <input type="checkbox" class="custm-check" class="custm-check"> --}}
@@ -54,13 +57,10 @@
                         <p>${{ $order->total_amount }}</p>
                     </td>
                     <td>
-                        <p>{{ date('d-m-Y', strtotime($order->created_at)) }}</p>
-                    </td>
-                    <td>
-                        <p>{{ $order->id }}</p>
-                    </td>
-                    <td>
                         <p>${{ $order->shipment_price }}</p>
+                    </td>
+                    <td>
+                        <p>{{ date('d-m-Y', strtotime($order->created_at)) }}</p>
                     </td>
 
                     {{-- <td>

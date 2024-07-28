@@ -2,17 +2,7 @@
 @section('title', 'Products')
 @section('heading', 'Interior Accessories')
 @section('content')
-<section class="banner-content-sec">
-    <div class="container">
-        <div class="banner-content-wrapper">
-            <div class="banner-content-heading single-heading">
-                <h2>Interior Accessories</h2>
-            </div>
-        </div>
-    </div>
-</section>
 <section class="page-content-sec bg-white ">
-    
         <div class="page-content-wrapper">
             <div class="sp-content-wrapper">
                 <div class="interior-content-left">
@@ -20,7 +10,7 @@
                         <h3>Filter</h3>
                         <a href="{{route('products')}}">Clear All</a>
                     </div>
-                    @if((request()->has('brand') && count(request()->brand)) || (request()->has('year') && count(request()->year)) || (request()->has('model') && count(request()->model)) )
+                    @if((request()->has('brand') && count(request()->brand)) || (request()->has('year') && count(request()->year)) || (request()->has('model') && count(request()->model)) || (request()->has('min_value') && (request()->has('max_value')) && ((request()->min_value != 0) || (request()->max_value != 10000)) ))
                         <div class="interior-filter-box filter-preview">
                             <div class="filter-selected-data">
                                 @if(request()->has('brand') && count(request()->brand))
@@ -49,6 +39,12 @@
                                             </div>
                                     @empty
                                     @endforelse
+                                @endif
+                                @if(request()->has('min_value') && ((request()->min_value != 0) || (request()->max_value != 10000))    )
+                                    <div class="filter-selected-box">
+                                        <a href="javascript:void(0)" data-action="price" class="delete-filter">✕</a>
+                                        <p>{{request()->min_value."-".request()->max_value}}</p>
+                                    </div>
                                 @endif
                             </div>
                         </div>
@@ -102,6 +98,7 @@
                                 </div>
                             </div>
                         </div>
+                        {{-- @dd(request()) --}}
                         <form id="filters" method="POST" action="">
                             @csrf
                             <div class="interior-filter-box">
@@ -204,16 +201,16 @@
                                         <div class="price-input-container"> 
                                             <div class="price-input"> 
                                                 <div class="price-field left"> 
-                                                    <input type="number" disabled
+                                                    <input type="number" 
                                                     name="min_value" id="selectedMinValue"
                                                         class="min-input" 
-                                                        value="{{old('min_value','0')}}"> 
+                                                        value="{{request()->has('min_value') ? request()->min_value : '0'}}"> 
                                                 </div> 
                                                 <div class="price-field right"> 
-                                                    <input type="number" disabled
+                                                    <input type="number" 
                                                     name="max_value" id="selectedMaxValue"
                                                         class="max-input" 
-                                                        value="10000"> 
+                                                        value="{{request()->has('max_value') ? request()->max_value : '10000'}}"> 
                                                 </div> 
                                             </div> 
                                             <div class="slider-container"> 
@@ -228,13 +225,13 @@
                                                 class="min-range" 
                                                 min="0" 
                                                 max="10000" 
-                                                value="{{old('min_value','0')}}" 
+                                                value="{{request()->has('min_value') ? request()->min_value : '0'}}" 
                                                 step="1"> 
                                             <input type="range" 
                                                 class="max-range" 
                                                 min="0" 
                                                 max="10000" 
-                                                value="10000" 
+                                                value="{{request()->has('max_value') ? request()->max_value : '10000'}}" 
                                                 step="1"> 
                                         </div> 
                                     </div>    
@@ -245,31 +242,25 @@
                     </div>
                     <div class="interior-content-right-outer">
                         <div class="interior-content-right" id="interiorComponent">
-                            {{-- <h2 class="interior-content-heading">Mirrors</h2> --}}
-                            <!-- <h3>Result : </h3>  -->
                             <div class="accessories-parts">
                                 <div class="row g-4">
-                                    {{-- @dd($product->productImage[0]->file_url) --}}
                                     @forelse ($products as $product)
+                                    {{-- <x-home-product-tab :product="$product"> --}}
+
                                     <div class="col-md-6 col-lg-4 col-xl-3">
                                         <div class="accessories-parts-box">
-    
                                                 <div class="more-product-cards cstm-card">
-                                            <a href="{{ route(auth()->check() && auth()->user()->hasRole('Administrator') ? 'admin.products.details' : (auth()->check() ? auth()->user()->getRoleNames()->first() . '.products.details' : 'Dealer.products.details'), ['product' => $product->id]) }}">
+                                            <a href="{{ route('product.detail', ['product' => $product->id]) }}">
                                                     <div class="product-cards-img">
                                                         <img src="{{ $product->productImage && count($product->productImage) ? Storage::url($product->productImage[0]->file_url) : asset('assets/images/gear-logo.svg') }}" alt="">
                                                     </div>
                                             </a>
-
                                                     <div class="product-deails">
                                                         <p>{{ $product->name }}</p>
                                                         <div class="price-and-cart">
                                                             <div class="discount-price">
-                                                                <!-- <span>{{ $product->price * 1.5 }}</span> -->
                                                                 <p>{{ $product->price }}</p>
                                                             </div>
-    
-    
                                                             @if (auth()->user())
                                                                 @if ($product->user_id !== auth()->user()->id)
                                                                     @if (in_array($product->id, authCartProducts()))
@@ -314,27 +305,6 @@
                                                             @endif
                                                         </div>
                                                     </div>
-    
-                                                    {{-- <div class="pro-dealer-box">
-                                                        <h4>Dealer</h4>
-                                                        <div class="pro-dealer-info">
-    
-                                                            <div class="dealer-img-box">
-    
-                                                                @if (isset($product->user->profile_picture_url))
-                                                                <img src="{{ Storage::url($product->user->profile_picture_url) }}" alt="">
-                                                                @endif
-                                                            </div>
-    
-                                                        </div>
-                                                        <div class="dealer-img-txt">
-                                                            <a href="{{ route('Dealer.view.profile', $product->id) }}">
-                                                                <u>
-                                                                    <h5>{{ $product->user->name ?? ' ' }}</h5>
-                                                                </u>
-                                                            </a>
-                                                        </div>
-                                                    </div> --}}
                                                 </div>
                                         </div>
                                     </div>
@@ -401,9 +371,15 @@
         });
 
         $('.delete-filter').on('click', function() {
+            var action = $(this).attr('data-action');
+            if(action == "price"){
+                $('#selectedMinValue').val('0');
+                $('#selectedMaxValue').val('10000');
+            }else{
             var filter = $(this).siblings('p').html();
             filter = $("label:contains('"+filter+"')").attr('for')
             $("#"+filter).prop('checked',false);
+            }
             $('#filters').submit();
         });
     });
@@ -497,7 +473,6 @@
         let timeout;
 
         form.addEventListener('change', () => {
-            alert('dsaa');
             clearTimeout(timeout);
             timeout = setTimeout(() => {
                 form.submit();

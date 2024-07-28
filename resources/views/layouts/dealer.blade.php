@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="{{ asset('assets/css/iziToast.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/toaster.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/slick-theme.css') }}">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!-- jQuery UI JS -->
     @include('layouts.include.favicon')
 
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.8/slick-theme.min.css"> -->
@@ -27,6 +29,7 @@
     @includeFirst(['validation'])
     <script>
         const APP_URL = "{{ url('') }}";
+        const CSRF = "{{ csrf_token() }}";
     </script>
 </head>
 
@@ -173,6 +176,7 @@
     <script src="{{ asset('assets/js/sweetalert.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
     <script src="{{ asset('assets/js/additional_method.js') }}"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="{{ asset('assets/js/common.js') }}?ver={{ now() }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>

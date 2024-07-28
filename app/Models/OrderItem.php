@@ -23,6 +23,11 @@ class OrderItem extends Model
     {
         return $this->belongsTo(Product::class, 'product_id');
     }
+    public function trashedProduct()
+    {
+        return $this->belongsTo(Product::class, 'product_id')->withTrashed();
+    }
+
     public function order()
     {
         return $this->hasOne(Order::class, 'id', 'order_id');
@@ -35,14 +40,14 @@ class OrderItem extends Model
 
     public function getOrderIdsWithSameParcel()
     {
-        return self::where('order_id',$this->order_id)->pluck('id')->toArray(); 
-        
+        return self::where('order_id',$this->order_id)->pluck('id')->toArray();
+
     }
 
     public function getGroupedWith()
     {
-        return OrderParcels::whereIn('orderItem_id',$this->getOrderIdsWithSameParcel())->get()->groupBy('parcel_id')->toArray(); 
-        
+        return OrderParcels::whereIn('orderItem_id',$this->getOrderIdsWithSameParcel())->get()->groupBy('parcel_id')->toArray();
+
     }
 
 

@@ -1,15 +1,7 @@
 @extends('layouts.front')
 @section('title', 'Dealer Profile')
 @section('content')
-<section class="banner-content-sec">
-    <div class="container">
-        <div class="banner-content-wrapper">
-            <div class="banner-content-heading single-heading">
-                <h2>Dealer Profile</h2>
-            </div>
-        </div>
-    </div>
-</section>
+
 <section class="page-content-sec section-padding">
     <div class="container">
         <div class="page-content-wrapper">

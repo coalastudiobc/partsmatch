@@ -13,9 +13,10 @@
                                 <h3>Pick up Address</h3>
                                 {{-- <a href="#">Edit Resipient</a> --}}
                             </div>
-                            <p>{{ $pickupAddress->first_name . ' ' . $pickupAddress->last_name }}</p>
-                            <h4>{{ $pickupAddress->address1 . ' ' . $pickupAddress->city . ',' . $pickupAddress->state . ',' . $pickupAddress->pin_code . ',' . $pickupAddress->country }}
+                            <p>{{ $pickupAddress ? ($pickupAddress->first_name ?? 'N/A') . ' ' . ($pickupAddress->last_name ?? 'N/A') : 'N/A' }}</p>
+                            <h4>{{ $pickupAddress ? ($pickupAddress->address1 ?? 'N/A') . ' ' . ($pickupAddress->city ?? 'N/A') . ', ' . ($pickupAddress->state ?? 'N/A') . ', ' . ($pickupAddress->pin_code ?? 'N/A') . ', ' . ($pickupAddress->country ?? 'N/A') : 'N/A' }}
                             </h4>
+
                             <div class="shipment-address-mail-phone">
                                 <a href="#">cyhujequ@mailinator.com</a>
                                 <a href="#">{{ $pickupAddress->phone_number }}</a>

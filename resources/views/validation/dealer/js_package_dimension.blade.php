@@ -86,7 +86,6 @@
                             $('#PaymentInitiate').removeClass('disabled_select');
                         }
                         $('#outerContainerFull').html(response.data);
-                        toastr.success(response.message);
                     }
                 }
 

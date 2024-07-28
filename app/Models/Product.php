@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
-    use HasFactory;
-    protected $fillable = ['name', 'user_id', 'part_number', 'subcategory_id', 'description', 'additional_details', 'stocks_avaliable', 'price', 'shipping_price', 'other_specification', 'Specifications_and_dimensions', 'Shipping_info', 'field_3', 'year', 'brand', 'model', 'status'];
+    use SoftDeletes, HasFactory;
+    protected $fillable = ['name', 'user_id', 'part_number', 'subcategory_id', 'description', 'additional_details', 'stocks_avaliable', 'price', 'shipping_price', 'other_specification', 'Specifications_and_dimensions', 'Shipping_info', 'field_3', 'year', 'brand', 'model', 'status','delete_by'];
     protected $with=['productImage'];
     public function productCompatible()
     {
@@ -45,10 +46,8 @@ class Product extends Model
     public function scopeSearch($query)
     {
         $request = request();
-        // dd($request);
         $query->when(!empty($request->filter_by_name), function ($q) use ($request) {
             $q->Where('name', 'like', '%' . $request->filter_by_name . '%');
-            // $q->orWhere('email', 'like', '%' . $request->filter_by_name . '%');
         })->when(!empty($request->filter_by_name) && $request->filter_by_name == 'active', function ($q) use ($request) {
             $q->where('status', '1');
         })->when(!is_null($request->dates), function ($q) use ($request) {
@@ -70,6 +69,16 @@ class Product extends Model
         $query->when(!empty($request->category), function ($q) use ($request) {
             $category = Category::where('id',$request->category)->first();
             $q->whereIn('subcategory_id', $category->categories);
+        });
+    }
+
+    public function scopePrice($query)
+    {
+        $request = request();
+        $query->when(($request->has('min_value')) , function ($q) use ($request) {
+            $q->where('price','>=',$request->min_value);
+        })->when(($request->has('max_value')) , function ($q) use ($request) {
+            $q->where('price','<=',$request->max_value);
         });
     }
 

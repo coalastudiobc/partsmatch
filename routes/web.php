@@ -32,13 +32,15 @@ Route::get('category', [HomeController::class, 'categoryCard'])->name('categorie
 Route::get('get/categorized/products/{category}', [HomeController::class, 'getProductsForCategory'])->name('categories.subcategory');
 Route::get('get/categorized/collection/products/{category}', [HomeController::class, 'getProductsCollectionForCategory'])->name('categories.collection');
 
-Route::get('redirect-to-dashboard', [HomeController::class, 'redirectToDashboard'])->name('redirect-to-dashboard');
+Route::middleware('auth')->get('redirect-to-dashboard', [HomeController::class, 'redirectToDashboard'])->name('redirect-to-dashboard');
 Route::get('verify-email/{user}/{token}', [RegisterController::class, 'verifyEmail'])->name('verify-email');
 
 Route::get('/search', [ProductController::class, 'search'])->name('search');
 Route::get('brands', [HomeController::class, 'brands'])->name('brands');
 Route::get('/sumit', [OrderController::class, 'testing']);
 Route::match(['get', 'post'], 'products', [HomeController::class, 'allProducts'])->name('products');
+Route::match(['get', 'post'], 'product/detail/{product}', [HomeController::class, 'ProductDetail'])->name('product.detail');
+Route::match(['get', 'post'], 'dealer/profile/{product}', [HomeController::class, 'dealerProfile'])->name('dealer.profile');
 
 
 Auth::routes();

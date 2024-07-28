@@ -2757,9 +2757,9 @@ span.filter-serach-icon {
     position: relative;
 }
 
- .grouped-data .custm-table-body:first-child .custm-table-head-box:last-child .pro-status {
+ /* .grouped-data .custm-table-head-box:last-child .pro-status {
     display: none;
-}
+} */
 /*
 .grouped-data .custm-table-body:first-child .custm-table-head-box .pro-status .test {
     display: none;

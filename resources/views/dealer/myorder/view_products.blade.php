@@ -20,22 +20,32 @@
                 <tr>
                     <td>
                         <div class="product-view-img">
-                            <a href="{{ route('Dealer.products.details', productByOrderItem($order->product_id)->id)}}">
-                                <img src="{{ asset('storage/' . ( productByOrderItem($order->product_id)->productImage->isNotEmpty() ? productByOrderItem($order->product_id)->productImage[0]->file_url : 'assets/images/gear-logo.svg')) }}" alt="Product Image">
+                            <a href="{{ route('product.detail', $order->product_id)}}">
+                                <img src="{{$order->trashedProduct ? (($order->trashedProduct->productImage && count($order->trashedProduct->productImage)) ? Storage::url($order->trashedProduct->productImage[0]->file_url)  : asset('assets/images/gear-logo.svg')) :asset('assets/images/gear-logo.svg') }}" alt="Product Image">
                             </a>
                         </div>
                     </td>
                     <td>
-                        <p>{{productByOrderItem($order->product_id)->name ?? 'N/A' }}</p>
+                        <p>{{$order->trashedProduct ? $order->trashedProduct->name : 'N/A' }}</p>
                     </td>
                     <td>
-                        <p>${{ productByOrderItem($order->product_id)->price ?? 'N/A' }}</p>
+                        <p>${{$order->trashedProduct ? $order->trashedProduct->price : 'N/A'  }}</p>
                     </td>
                     <td>
-                        <p>{{ productByOrderItem($order->product_id)->productCompatible[0]->make ?? 'N/A' }}</p>
+                        <p>{{ $order->trashedProduct
+            ? ($order->trashedProduct->productCompatible && isset($order->trashedProduct->productCompatible[0])
+                ? $order->trashedProduct->productCompatible[0]->make
+                : 'N/A'
+            )
+            : 'N/A'  }}</p>
                     </td>
                     <td>
-                        <p>{{ productByOrderItem($order->product_id)->productCompatible[0]->model ?? 'N/A' }}</p>
+                        <p>{{ $order->trashedProduct
+            ? ($order->trashedProduct->productCompatible && isset($order->trashedProduct->productCompatible[0])
+                ? $order->trashedProduct->productCompatible[0]->model
+                : 'N/A'
+            )
+            : 'N/A'  }}</p>
                     </td>
                     <td>
                         <div class="pro-status">

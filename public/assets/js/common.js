@@ -64,15 +64,13 @@ jQuery(document).ready(function () {
                     $('#deleteAndAdd').attr('data-url', response.product_url)
                     $('#deleteAndAdd').attr('data-quantity', response.quantity)
                     $('#restrictMultiple').modal('show');
-                } else {
+                } else if(response.out_of_stock) {
+                    return toastr.error(response.message);
+                }else {
 
                     element.empty().append('<span>Added</span>');
                     jQuery(".cart-icon").html(response.cart_icon);
-                    if (response.message == "Product already in Cart.") {
-                        // return toastr.error(response.message);
-
-                    }
-                    // return toastr.success(response.message);
+                    return toastr.success(response.message);
                 }
             } else {
                 jQuery('#errormessage').html(response.error);

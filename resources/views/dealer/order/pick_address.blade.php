@@ -14,6 +14,13 @@
                 </div>
                 <form id="selectedAddressForm" action="{{ route('Dealer.order.product.parcels', $orderid->id) }}" method="post">
                     @csrf
+                <div>
+                    <label for="date">Select Date:</label>
+                    <input type="text" id="datepicker" name="date"  value="{{ old('date', isset($getSelectedStuff->shippment_date) ? \Carbon\Carbon::parse($getSelectedStuff->shippment_date)->format('m/d/Y') : '') }}">
+                    @error('date')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
+                </div>
                     <button type="submit" class="btn primary-btn nextbtn">Next:Order Details</button>
             </div>
             <div class="right-btn-box">
@@ -467,7 +474,28 @@
                         @endsection
                         @push('scripts')
                         @includeFirst(['validation.dealer.js_picking_address'])
+                        <script>
+                                 jQuery(function() {
+                                        jQuery("#datepicker").datepicker({
+                                            dateFormat: "mm/dd/yy",
+                                            minDate: new Date(), // Prevent selection of previous dates
+                                        });
 
+                                        // var today = new Date();
+                                        // var formattedDate = $.datepicker.formatDate('mm/dd/yy', today);
+                                        // jQuery("#datepicker").datepicker("setDate", formattedDate);
+
+                                        jQuery('#selectedAddressForm').submit(function(event) {
+                                            var datepickerValue = $('#datepicker').val();
+                                            var selectedAddress = $('input[name="selectadress"]:checked').val();
+
+                                                if (!datepickerValue) {
+                                                    event.preventDefault();
+                                                    toastr.error('Please select shippment date first.');
+                                                }
+                                        });
+                                 });
+                        </script>
                         <script>
                             document.addEventListener('DOMContentLoaded', function() {
                                 var previousAddresses = @json($previousAddresses);
@@ -479,7 +507,7 @@
                                 }
                             });
 
-                            $(".add-address-box").addClass('open');
+                            jQuery(".add-address-box").addClass('open');
 
                             jQuery('.nextbtn').on('click', function(e) {
                                 if (!jQuery('input[name="selectadress"]').is(':checked')) {
@@ -489,16 +517,16 @@
 
                             })
 
-                            $('.add-address-btn').on('click', function() {
-                                $(".add-address-box").addClass('open');
+                            jQuery('.add-address-btn').on('click', function() {
+                                jQuery(".add-address-box").addClass('open');
                                 // jQuery('.addForm').attr('id', 'myFormId');
 
                             });
-                            $('.cancel-address').on('click', function() {
-                                $(".add-address-box").removeClass('open');
+                            jQuery('.cancel-address').on('click', function() {
+                                jQuery(".add-address-box").removeClass('open');
                             });
-                            $('.back-btn').on('click', function() {
-                                $("#fullPageLoader").removeClass('d-none');
+                            jQuery('.back-btn').on('click', function() {
+                                jQuery("#fullPageLoader").removeClass('d-none');
                             });
                         </script>
                         @endpush

@@ -20,10 +20,6 @@ class CartController extends Controller
         return view('dealer.cart.index', compact('cart', 'shippingCharges', 'user'));
     }
 
-    public function cart()
-    {
-    }
-
     public function addToCart(Request $request, $product_id)
     {
         try {
@@ -43,7 +39,7 @@ class CartController extends Controller
                 ];
                 $cart = Cart::create($cart);
             }
-            
+
 
             $dealerCheck = CartProduct::where('cart_id', $cart->id)->first();
             if ($dealerCheck) {
@@ -64,12 +60,19 @@ class CartController extends Controller
                 CartProduct::create($cart_product);
                 $message = "Product added to cart.";
             }else{
-                $alreadyProduct->update(['quantity' => $quantity]);
-                $message = "Product quantity updated.";
+                if((intval($quantity) + intval($alreadyProduct->quantity)) <= intval($product->stocks_avaliable)){
+
+                    $alreadyProduct->update(['quantity' => (intval($quantity) + intval($alreadyProduct->quantity))]);
+                    $message = "Product quantity updated.";
+                    $stock = false;
+                }else {
+                    $stock = true;
+                    $message = "Product out of stock";
+                }
             }
             $user =  User::with('cart', 'cart.cartProducts')->where('id', auth()->user()->id)->first();
             $cart_icon = view('components.cart-icon', compact('user'))->render();
-            return response()->json(['success' => true, 'cart_icon' => $cart_icon, 'message' => $message]);
+            return response()->json(['success' => true, 'cart_icon' => $cart_icon, 'message' => $message,'out_of_stock'=> $stock]);
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
@@ -134,7 +137,7 @@ class CartController extends Controller
             $productDetails = Product::find($product->product_id);
 
             if (intval($request->quantity) <= intval($productDetails->stocks_avaliable)) {
-                $product->update(['quantity' => $request->quantity]);
+                $product->update(['quantity' => intval($request->quantity)]);
                 $cart =  Cart::with('cartProducts', 'cartProducts.product', 'cartProducts.product.productImage')->where('user_id', auth()->id())->first();
                 $shippingCharges = ShippingSetting::all();
                 $cart = view('components.cart', compact('cart', 'shippingCharges'))->render();
@@ -145,7 +148,7 @@ class CartController extends Controller
                 // $shippingCharge = AdminSetting::where('name', 'shipping_charge')->first();
                 $shippingCharges = ShippingSetting::all();
                 $cart = view('components.cart', compact('cart', 'shippingCharges'))->render();
-                $data = ['success' => true, 'cart' => $cart, 'status' => false, 'message' => "stocks not available"];
+                $data = ['success' => true, 'cart' => $cart, 'stock'=>true, 'status' => false, 'message' => "stocks not available"];
                 return response()->json($data);
             }
         } catch (\Exception $e) {

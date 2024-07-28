@@ -21,6 +21,8 @@ use App\Http\Controllers\Controller;
 
 use App\Models\ShippoPurchasedLabel;
 use App\Http\Requests\ShippingAddressRequest;
+use App\Models\ShippmentAddressDetail;
+use Carbon\Carbon;
 use GuzzleHttp\Psr7\Request as GuzzleRequest;
 
 class OrderController extends Controller
@@ -38,16 +40,46 @@ class OrderController extends Controller
     }
     public function pickAddressOfShippment(Order $orderid)
     {
+        $getSelectedStuff = ShippmentAddressDetail::where('order_id',$orderid->id)->where('user_id',auth()->id())->first();
         $previousAddresses =  UserAddresses::where('user_id', auth()->user()->id)->where('type', 'Pickup')->get();
         $countries = Country::whereIn('name', ['Canada', 'United States'])->get();
+        if(!is_null($getSelectedStuff)){
+            return view('dealer.order.pick_address', compact('countries', 'previousAddresses', 'orderid','getSelectedStuff'));
+        }
         return view('dealer.order.pick_address', compact('countries', 'previousAddresses', 'orderid'));
+
     }
     public function productParcels(Request $request, Order $order)
     {
-        session()->put('selectedPickAddressId', $request->selectadress);
-        $orderProducts = OrderItem::with('product', 'parcel')->where('order_id', $order->id)->get();
-        $groups = groupWith($orderProducts[0]->getOrderIdsWithSameParcel());
-        return view('dealer.order.product_parcel', compact('orderProducts', 'order', 'groups'));
+            $messages = [
+                'date.required' => 'The date is required.',
+                'date.date' => 'The date must be a valid date.',
+                'date.after_or_equal' => 'The date must be today or a future date.',
+            ];
+
+            $request->validate([
+                'date' => 'required|date|after_or_equal:today',
+                'selectadress' => 'required',
+            ], $messages);
+        try {
+            $this->savingShippmentDateandAddress($request,$order);
+                session()->put('selectedPickAddressId', $request->selectadress);
+            $orderProducts = OrderItem::with('product', 'parcel')->where('order_id', $order->id)->get();
+            foreach ($orderProducts as $single) {
+                $check = OrderParcels::where('orderItem_id', $single->id)->first();
+                if (!$check) {
+                    OrderParcels::updateOrCreate(
+                        ['orderItem_id' => $single->id, 'product_id' => $single->product_id],
+                        ['parcel_id' => random_int(10000, 99999), 'status' => 0]
+                    );
+                }
+            }
+            $groups = groupWith($orderProducts[0]->getOrderIdsWithSameParcel());
+        return view('dealer.order.product_parcel', compact('order', 'groups'));
+    } catch (\Throwable $th) {
+        toastr()->error($th->getMessage());
+        return redirect()->back();
+    }
     }
     public function addressDelete(UserAddresses $address)
     {
@@ -86,12 +118,46 @@ class OrderController extends Controller
         try {
             $products = explode(',', $request->products);
             $parcel_id =  $this->createParcel($request);
+            $orderProducts = OrderItem::with('product', 'parcel')->where('order_id', $request->order_id)->whereIn('product_id',$products)->get();
+            foreach($orderProducts as $singleItem){
+                OrderParcels::updateOrCreate(
+                    ['orderItem_id' => $singleItem->id, 'product_id' => $singleItem->product_id],
+                    ['parcel_id' => $parcel_id, 'status' => 1]
+                );
+            }
+            $orderProducts = OrderItem::with('product', 'parcel')->where('order_id', $request->order_id)->get();
+            foreach ($orderProducts as $single) {
+                $check = OrderParcels::where('orderItem_id', $single->id)->first();
+                if (!$check) {
+                    OrderParcels::updateOrCreate(
+                        ['orderItem_id' => $single->id, 'product_id' => $single->product_id],
+                        ['parcel_id' => random_int(10000, 99999), 'status' => 0]
+                    );
+                }
+            }
 
-            for ($i = 0; $i <  count($products); $i++) {
-                $orderItem = OrderItem::where('id', $products[$i])->first();
+            $groups = groupWith($orderProducts[0]->getOrderIdsWithSameParcel());
+
+
+            $all_order_parcels = view('components.group-parcel', ['groups' => $groups])->render();
+            $data = ['status' => true,  'payment' => isFullFilledOrder($orderProducts[0]->order_id), 'data' => $all_order_parcels, 'paymentUrl' => route('Dealer.order.shippment.rates', ['order' => $orderProducts[0]->order_id]), 'message' => 'Product dimensions data saved successfully.', 'change_at' => $request->element_to_change];
+            return response()->json($data);
+        } catch (\Throwable $th) {
+            $data = ['status' => false,  'message' => $th->getMessage()];
+            return response()->json($data);
+        }
+    }
+
+    public function createGroups(Request $request)
+    {
+        try {
+            $products = $request->product_ids;
+            $parcel_dummy = random_int(10000, 99999);
+            foreach ($products as $product ) {
+                $orderItem = OrderItem::where('id', $product)->first();
                 OrderParcels::updateOrCreate(
                     ['orderItem_id' => $orderItem->id, 'product_id' => $orderItem->product_id],
-                    ['parcel_id' => $parcel_id, 'status' => 1]
+                    ['parcel_id' => $parcel_dummy, 'status' => 0]
                 );
             }
             $orderProducts = OrderItem::with('product', 'parcel')->where('order_id', $request->order_id)->get();
@@ -116,6 +182,32 @@ class OrderController extends Controller
             return response()->json($data);
         }
     }
+
+    public function deleteGroups(Request $request)
+    {
+        try {
+            $products = explode(',', $request->product_ids);
+            $orderProducts = OrderItem::with('product', 'parcel')->where('order_id', $request->order_id)->whereIn('product_id',$products)->get();
+            foreach ($orderProducts as $single) {
+                $check = OrderParcels::where('orderItem_id', $single->id)->where('product_id',$single->product_id)->first();
+                if ($check) {
+                    $check->update(['parcel_id' => random_int(10000, 99999), 'status' => 0]);
+                }
+            }
+
+
+            $groups = groupWith($orderProducts[0]->getOrderIdsWithSameParcel());
+
+
+            $all_order_parcels = view('components.group-parcel', ['groups' => $groups])->render();
+            $data = ['status' => true,  'payment_btn_disable' => true, 'data' => $all_order_parcels, 'paymentUrl' => route('Dealer.order.shippment.rates', ['order' =>$request->order_id]), 'message' => 'group dismantle', 'change_at' => $request->element_to_change];
+            return response()->json($data);
+        } catch (\Throwable $th) {
+            $data = ['status' => false,  'message' => $th->getMessage()];
+            return response()->json($data);
+        }
+    }
+
 
     public function createShippment(Request $request)
     {
@@ -282,5 +374,26 @@ class OrderController extends Controller
             ],
             'return_url' => route('Dealer.order.orderlist')
         ]);
+    }
+    public function savingShippmentDateandAddress($request,$order){
+        try {
+            //code...
+            // $date = Carbon::parse($request->date)->format('Y-m-d');
+            // $date = \Carbon\Carbon::createFromFormat('Y-m-d', $request->date)->format('Y-m-d');
+            // Parse the selected date
+            $selectedDate = Carbon::parse($request->date);
+            // Get the current time
+            $currentTime = Carbon::now();
+            // Apply the current hours and minutes to the selected date
+            $shipmentDateTime = $selectedDate->setTime($currentTime->hour, $currentTime->minute);
+
+            ShippmentAddressDetail::updateOrCreate(
+                ['order_id' => $order->id, 'user_id' => auth()->id()],
+                ['selected_shippo_address' => $request->selectadress, 'shippment_date' => $shipmentDateTime]
+            );
+        } catch (\Throwable $th) {
+            throw new \Exception('Error in shippment address and time : ' . $th->getMessage());
+
+        }
     }
 }

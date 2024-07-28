@@ -26,24 +26,24 @@
     <div class="product-detail-table product-list-table pro-manage-table">
         <div class="table-responsive">
             <table class="table ">
-                <tr>
-                    <th>
-                        <p>Image</p>
-                    </th>
-                    <th>
-                        <p>Product name</p>
-                    </th>
-                    <th>
-                        <p>Price</p>
-                    </th>
-                    <th>
-                        <p>Status</p>
-                    </th>
-                    <th>
-                        <p>Action</p>
-                    </th>
-                </tr>
-                @forelse ($products as $key => $product)
+                    <tr>
+                        <th>
+                            <p>Image</p>
+                        </th>
+                        <th>
+                            <p>Product name</p>
+                        </th>
+                        <th>
+                            <p>Price</p>
+                        </th>
+                        <th>
+                            <p>Status</p>
+                        </th>
+                        <th>
+                            <p>Action</p>
+                        </th>
+                    </tr>
+            @forelse ($products as $key => $product)
                 <tr>
                     <td>
                         <div class="pro-img-box">
@@ -73,54 +73,24 @@
                     product-id="{{ $product->id }}" class="custom-switch-input feature-switch"
                     @if (isset($product->featuredProduct) && $product->featuredProduct != null) checked="checked" @endif
                     @if (!plan_validity()) disabled @endif><label for="switch1{{ $key }}">Toggle</label>
-        </div>
-        </td> --}}
-        <td>
-            <div class="action-btns">
-                <a href="{{ route(auth()->user()->getRoleNames()->first() . '.products.edit', $product->id) }}"><i class="fa-solid fa-pen-to-square" style="color: #3EBE62;"></i></a>
-                <a href="{{ route(auth()->user()->getRoleNames()->first() . '.products.delete', $product->id) }}" class="delete"><i class="fa-regular fa-trash-can " style="color: #E13F3F;"></i></a>
+                            </div>
+                         </td> --}}
+                    <td>
+                        <div class="action-btns">
+                            <a href="{{ route(auth()->user()->getRoleNames()->first() . '.products.edit', $product->id) }}"><i class="fa-solid fa-pen-to-square" style="color: #3EBE62;"></i></a>
+                            <a href="{{ route(auth()->user()->getRoleNames()->first() . '.products.delete', $product->id) }}" class="delete"><i class="fa-regular fa-trash-can " style="color: #E13F3F;"></i></a>
+                        </div>
+                    </td>
+                </tr>
+            @empty
+            <div class="empty-data">
+                <img src="{{ asset('assets/images/no-product.svg') }}  " alt="" width="300">
+                <p class="text-center mt-1">Did not found any product</p>
             </div>
-        </td>
-        {{-- @foreach ($products as $key => $product) --}}
-        {{-- <tr>
-                            <td>
-                                <div class="pro-img-box" data-bs-toggle="modal" data-bs-target="#pro-detail-model">
-                                    <img src="{{ Storage::url($product->productImage["$key"]->file_url) }}" alt="img">
-    </div>
-    </td>
-    <td>
-        <p>{{ $product->name }}</p>
-    </td>
-    <td>
-        <p>{{ $product->price }}</p>
-    </td>
-    <td>
-        <div class="toggle-btn">
-            <input type="checkbox" id="switch100{{ $key }}" class="custom-switch-input" @if ($product->status == '1') checked="checked" @endif
-            onchange="toggleStatus(this, 'Product', '{{ $product->id }}');"
-            url="{{ route('dealer.products.status') }}"><label for="switch100{{ $key }}">Toggle</label>
-        </div>
-    </td>
-    <td>
-        <div class="action-btns">
-            <a href="{{ route('dealer.products.edit', $product->id) }}"><i class="fa-solid fa-pen-to-square" style="color: #3EBE62;"></i></a>
-            <a href="{{ route('dealer.products.delete', $product->id) }}"><i class="fa-regular fa-trash-can" style="color: #E13F3F;"></i></a>
-        </div>
-    </td>
-
-    </tr> --}}
-
-    @empty
-    <div class="empty-data">
-        <img src="{{ asset('assets/images/no-product.svg') }}  " alt="" width="300">
-        <p class="text-center mt-1">Did not found any product</p>
-    </div>
-    @endforelse
-    </tr>
-
+            @endforelse
             </table>
         </div>
-    </div>
+   </div>
     {!! $products->links('dealer.pagination') !!}
 </div>
 @endsection

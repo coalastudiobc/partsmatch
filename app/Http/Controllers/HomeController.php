@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\ChangePasswordRequest;
+use App\Models\AdminSetting;
 use App\Models\AllModel;
 use App\Models\CarBrandMake;
 use Exception;
@@ -62,22 +63,6 @@ class HomeController extends Controller
     {
         $categories = Category::all();
         return view('category_card', compact('categories'));
-    }
-    public function getProductsForCategory(Request $request, Category $category)
-    {
-        $products = Product::where('status','1')->where('subcategory_id',$category->id)->inRandomOrder()->limit(5)->get();
-        $data = view('components.home-product-tab', compact('products'))->render();
-
-        return response()->json(['status' => true, 'message' => 'products fetched successfully', 'data' => $data], 200);
-    }
-
-    public function getProductsCollectionForCategory(Request $request, Category $category)
-    {
-        $products = $category->products;
-
-        $data = view('components.home-product', compact('products'))->render();
-
-        return response()->json(['status' => true, 'message' => 'products fetched successfully', 'data' => $data], 200);
     }
     public function changePassword(ChangePasswordRequest $request)
     {
@@ -148,17 +133,17 @@ class HomeController extends Controller
     }
     public function allProducts(Request $request)
     {
-        if($request->method == "POST")
-            dd($request);
+        // if($request->method() == "POST")
+            // dd($request);
         $brands = CarBrandMake::distinct('makes')->get();
-        
+
         $sdk = \CarApiSdk\CarApi::build([
             'token' => env('CAR_API_TOKEN'),
             'secret' => env('CAR_API_SECRET'),
         ]);
         $filePath = storage_path('app/text.txt');
         $jwt = file_exists($filePath) ? file_get_contents($filePath) : null;
-        
+
         if (empty($jwt) || $sdk->loadJwt($jwt)->isJwtExpired()) {
             try {
                 $jwt = $sdk->authenticate();
@@ -170,9 +155,44 @@ class HomeController extends Controller
         }
         $years = $sdk->years();
         $models = AllModel::all();
-        $products = Product::with('productImage', 'featuredProduct', 'productCompatible')->where('status','1')->global()->category()->compatiblity()->paginate(12);
-        // dd($products);
+        $products = Product::with('productImage', 'featuredProduct', 'productCompatible')->where('status','1')->global()->category()->compatiblity()->price()->paginate(12);
         $categories =  Category::with('children')->has('children')->orWhereNull('parent_id')->get();
         return view('public_shop', compact("categories", "products", "brands", "years", "models"));
+    }
+
+    public function ProductDetail(Request $request ,  $product)
+    {
+        $product = Product::withTrashed()->find($product);
+        $userdetails = User::where('id', $product->user_id)->first();
+        $productImages = $product->productImage;
+        $shippingCharge = AdminSetting::where('name', 'shipping_charge')->first();
+        $allproducts = Product::with('productImage')->where('status','1')->where('user_id', $userdetails->id)->inRandomOrder()->limit(5)->get();
+        if (auth()->user()) {
+            $cart =  Cart::with('cartProducts', 'cartProducts.product', 'cartProducts.product.productImage')->where('user_id', auth()->id())->first();
+            return view('product_details', compact('product', 'productImages', 'shippingCharge', 'userdetails', 'allproducts', 'cart'));
+        }
+        return view('product_details', compact('product', 'productImages', 'shippingCharge', 'userdetails', 'allproducts'));
+    }
+
+    public function getProductsForCategory(Request $request, Category $category)
+    {
+        $products = Product::where('status','1')->where('subcategory_id',$category->id)->inRandomOrder()->limit(5)->get();
+        $data = view('components.home-product', compact('products'))->render();
+
+        return response()->json(['status' => true, 'message' => 'products fetched successfully', 'data' => $data], 200);
+    }
+
+    public function getProductsCollectionForCategory(Request $request, Category $category)
+    {
+        $products = $category->products;
+        $data = view('components.home-product', compact('products'))->render();
+
+        return response()->json(['status' => true, 'message' => 'products fetched successfully', 'data' => $data], 200);
+    }
+    public function dealerProfile(Product $product)
+    {
+        $user = $product->user;
+        $allproducts = Product::with('productImage', 'category')->where('user_id', $product->user->id)->limit(5)->get();
+        return view('dealer.profile.dealer_profile', compact('user', 'allproducts', 'product'));
     }
 }

@@ -20,7 +20,7 @@
                                 @forelse ($cart->cartProducts as $product)
                                 <tr>
                                     <td>
-                                        <a href="{{ route(auth()->check() && auth()->user()->hasRole('Administrator')? 'admin.products.details': (auth()->check() ? auth()->user()->getRoleNames()->first() . '.products.details': 'Dealer.products.details'),$product->product_id)}}">
+                                        <a href="{{ route('product.detail',['product' => $product->product_id])}}">
                                             <div class="cart-product-image">
 
                                                 <img src="{{ isset($product->product->productImage[0]) ? ($product->product->productImage[0])?( Storage::url($product->product->productImage[0]->file_url)) : asset('assets/images/gear-logo.svg') : asset('assets/images/gear-logo.svg') }}" alt="">

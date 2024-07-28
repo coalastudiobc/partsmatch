@@ -16,6 +16,8 @@ use App\Models\ProductCompatabilty;
 use App\Models\ProductParcelDetail;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use App\Models\OrderItem;
+use App\Models\ShippoPurchasedLabel;
 use GrahamCampbell\ResultType\Success;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Builder;
@@ -87,10 +89,10 @@ class ProductController extends Controller
                 $row[] = '';
             }
 
-            if ($index > 0) { 
+            if ($index > 0) {
                 $row[] = $allowedCategories[$index - 1] ?? '';
             } else {
-                $row[] = 'please delete this column as well as allowed_categories'; 
+                $row[] = 'please delete this column as well as allowed_categories';
             }
 
         }
@@ -115,7 +117,7 @@ class ProductController extends Controller
             $request->validate([
                 'csv_file' => 'required|file|mimes:csv',
             ]);
-            
+
             $path = $request->file('csv_file')->getRealPath();
             $data = array_map('str_getcsv', file($path));
             $header = array_shift($data);
@@ -391,17 +393,28 @@ class ProductController extends Controller
     {
         try {
             // Cart::where('product_id', $product->id)->first();
-            $featureproduct = FeaturedProduct::where('product_id', $product->id)->first();
-            $images = ProductImage::where('product_id', $product->id)->get();
+            // $featureproduct = FeaturedProduct::where('product_id', $product->id)->first();
+            // $images = ProductImage::where('product_id', $product->id)->get();
 
-            if ($featureproduct) {
-                $featureproduct->delete();
+            // if ($featureproduct) {
+            //     $featureproduct->delete();
+            // }
+            // foreach ($images as $image) {
+            //     Storage::disk('public')->delete('products/images', $image->file_url);
+            //     $image->delete();
+            // }
+            $getOrderItemId = OrderItem::where('product_id', $product->id)->get();
+
+            if ($getOrderItemId->isNotEmpty()) {
+                foreach ($getOrderItemId as $value) {
+                    $isFullFillmentComplete = ShippoPurchasedLabel::where('order_id', $value->order_id)->first();
+                    if ($isFullFillmentComplete) {
+                        return redirect()->back()->with(['error' => 'Due to pending fulfillment, the product cannot be deleted. Please complete fulfillment first.']);
+                    }
+                }
+                $product->delete();
             }
-            foreach ($images as $image) {
-                Storage::disk('public')->delete('products/images', $image->file_url);
-                $image->delete();
-            }
-            $product->delete();
+
             return redirect()->back()->with(['message' => "successfully deleted"]);
         } catch (Exception $e) {
             return redirect()->back()->with(['error' => $e->getMessage()]);

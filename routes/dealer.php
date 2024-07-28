@@ -69,6 +69,8 @@ Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer'
         Route::post('parcel/dimension', [OrderController::class, 'productDimension'])->name('product.parcels.dimensions');
         Route::get('parcel/shippment/create', [OrderController::class, 'createShippment'])->name('shippment.rates');
         Route::post('parcel/shippment/payment', [OrderController::class, 'shippmentPayment'])->name('shippment.payment');
+        Route::post('parcel/groups', [OrderController::class, 'createGroups'])->name('parcels.group');
+        Route::post('parcel/groups/delete', [OrderController::class, 'deleteGroups'])->name('parcels.group');
     });
     // cart
     Route::name('cart.')->group(function () {
