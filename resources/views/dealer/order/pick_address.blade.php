@@ -38,7 +38,7 @@
 
                         </div>
                         <label for="adress">
-                            <input type="radio" name="selectadress" id="adress" @if ($loop->first) checked @endif value="{{ $address->id }}">
+                            <input type="radio" name="selectadress" id="adress" @if ($getSelectedStuff->selected_shippo_address == $address->id ) checked @endif value="{{ $address->id }}">
                             <div class="adress-info-text">
                                 <h2>{{ $address->first_name }} {{ $address->last_name }}</h2>
                                 <p>{{ $address->address1 }}, {{ $address->city }}, {{ $address->state }},

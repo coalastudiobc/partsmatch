@@ -135,10 +135,7 @@ class OrderController extends Controller
                     );
                 }
             }
-
             $groups = groupWith($orderProducts[0]->getOrderIdsWithSameParcel());
-
-
             $all_order_parcels = view('components.group-parcel', ['groups' => $groups])->render();
             $data = ['status' => true,  'payment' => isFullFilledOrder($orderProducts[0]->order_id), 'data' => $all_order_parcels, 'paymentUrl' => route('Dealer.order.shippment.rates', ['order' => $orderProducts[0]->order_id]), 'message' => 'Product dimensions data saved successfully.', 'change_at' => $request->element_to_change];
             return response()->json($data);
@@ -170,10 +167,7 @@ class OrderController extends Controller
                     );
                 }
             }
-
             $groups = groupWith($orderProducts[0]->getOrderIdsWithSameParcel());
-
-
             $all_order_parcels = view('components.group-parcel', ['groups' => $groups])->render();
             $data = ['status' => true,  'payment' => isFullFilledOrder($orderItem->order_id), 'data' => $all_order_parcels, 'paymentUrl' => route('Dealer.order.shippment.rates', ['order' => $orderItem->order_id]), 'message' => 'Product dimensions data saved successfully.', 'change_at' => $request->element_to_change];
             return response()->json($data);
@@ -194,11 +188,7 @@ class OrderController extends Controller
                     $check->update(['parcel_id' => random_int(10000, 99999), 'status' => 0]);
                 }
             }
-
-
             $groups = groupWith($orderProducts[0]->getOrderIdsWithSameParcel());
-
-
             $all_order_parcels = view('components.group-parcel', ['groups' => $groups])->render();
             $data = ['status' => true,  'payment_btn_disable' => true, 'data' => $all_order_parcels, 'paymentUrl' => route('Dealer.order.shippment.rates', ['order' =>$request->order_id]), 'message' => 'group dismantle', 'change_at' => $request->element_to_change];
             return response()->json($data);
@@ -211,24 +201,25 @@ class OrderController extends Controller
 
     public function createShippment(Request $request)
     {
-
         try {
-            $selected_order_id = session()->get('selectedPickAddressId');
-            if ($selected_order_id) {
-                $pickupAddress = UserAddresses::where('id', session()->get('selectedPickAddressId'))->first();
+            $selectedPickupAddressId=ShippmentAddressDetail::where('order_id',$request->order)->where('user_id',auth()->id())->first();
+            if (is_null($selectedPickupAddressId)) {
+                throw new \Exception('Pick up address not found for this particular order');
             }
+            $pickupAddress = UserAddresses::where('id', $selectedPickupAddressId->selected_shippo_address)->first();
+            $shippmentDate=$selectedPickupAddressId->shippment_date;
+            $formattedDate = \Carbon\Carbon::parse($shippmentDate)->format('Y-m-d\TH:i');
             $selected_order_id = $request->order;
-            if ($selected_order_id) {
-                $to_address = BuyerAddress::where('order_id', $selected_order_id)->pluck('shippo_address_id')->first();
-                $reciever_address = ShippingAddress::where('order_id', $selected_order_id)->first();
-                $getOrderItemIds =  OrderItem::where('order_id', $request->order)->get();
+            if (is_null($selected_order_id)) {
+                throw new \Exception('Order id does not found for this particular order');
             }
-            // dd($selected_order_id,$request,$to_address);
+            $to_address = BuyerAddress::where('order_id', $selected_order_id)->pluck('shippo_address_id')->first();
+            $reciever_address = ShippingAddress::where('order_id', $selected_order_id)->first();
+            $getOrderItemIds =  OrderItem::where('order_id', $request->order)->get();
             $parcelsIdInArray = [];
             foreach ($getOrderItemIds as $key => $value) {
                 $parcelsIdInArray[] = OrderParcels::where('orderItem_id', $value->id)->pluck('parcel_id')->first();
             }
-
             $body = [
                 "address_from" => $pickupAddress->shippo_address_id,
                 "address_to" => $to_address,
@@ -237,32 +228,20 @@ class OrderController extends Controller
                 "async" => false,
                 "shipment_date" => $this->getCurrentTimeFormatted()
             ];
-
-            $guzzleRequest = new GuzzleRequest(
-                'POST',
-                'shipments/', // endpoint path relative to base_uri
-                $this->headerApi(),
-                json_encode($body)
-            );
-
-            $promise = $this->Client()->sendAsync($guzzleRequest)->then(function ($response) {
-                return $response->getBody()->getContents();
-            });
-            $res = $promise->wait();
-            $response_in_array = json_decode($res);
+            $endpoint='shipments/';
+           $response_in_array= $this->createPostRequest($endpoint,$body);
             if ($response_in_array->object_status == "SUCCESS") {
-                // $parcel_id_result = $response_in_array->object_id;
                 $data = [
                     'user_id' => auth()->user()->id,
                     'address_to' => $to_address,
                     'address_from' => $pickupAddress->shippo_address_id,
                     'shippment_id' => $response_in_array->object_id,
-                    'shippment_date' => $this->getCurrentTimeFormatted(),
+                    'shippment_date' => $formattedDate,
                 ];
                 $this->saveInDb($data, $parcelsIdInArray);
                 $stripeCustomer = auth()->user()->createOrGetStripeCustomer();
                 $intent = auth()->user()->createSetupIntent();
-                return view('dealer.order.payment', compact('pickupAddress', 'response_in_array', 'stripeCustomer', 'intent', 'reciever_address', 'selected_order_id'));
+                return view('dealer.order.payment', compact('pickupAddress', 'response_in_array', 'stripeCustomer', 'intent', 'reciever_address', 'selected_order_id','shippmentDate'));
             }
         } catch (\Exception $e) {
             toastr()->error($e->getMessage());
@@ -276,11 +255,9 @@ class OrderController extends Controller
             DB::beginTransaction();
             if ($parcelsIdInArray) {
                 foreach ($parcelsIdInArray as $item) {
-                    // dump($parcelsIdInArray, $item);
                     ShippmentCreation::where('parcel_id', $item)->update($data);
                 }
             } else {
-                // dump($data);
                 ShippmentCreation::updateOrCreate($data); //update the where parcel id match which comes from shippment function
             }
             DB::commit();
@@ -375,25 +352,23 @@ class OrderController extends Controller
             'return_url' => route('Dealer.order.orderlist')
         ]);
     }
-    public function savingShippmentDateandAddress($request,$order){
+    public function savingShippmentDateandAddress($request,$order)
+    {
         try {
             //code...
             // $date = Carbon::parse($request->date)->format('Y-m-d');
             // $date = \Carbon\Carbon::createFromFormat('Y-m-d', $request->date)->format('Y-m-d');
             // Parse the selected date
             $selectedDate = Carbon::parse($request->date);
-            // Get the current time
             $currentTime = Carbon::now();
             // Apply the current hours and minutes to the selected date
             $shipmentDateTime = $selectedDate->setTime($currentTime->hour, $currentTime->minute);
-
             ShippmentAddressDetail::updateOrCreate(
                 ['order_id' => $order->id, 'user_id' => auth()->id()],
                 ['selected_shippo_address' => $request->selectadress, 'shippment_date' => $shipmentDateTime]
             );
         } catch (\Throwable $th) {
             throw new \Exception('Error in shippment address and time : ' . $th->getMessage());
-
         }
     }
 }

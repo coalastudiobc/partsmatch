@@ -34,10 +34,10 @@
                         <p>Shippment price</p>
                     </th>
                     <th>
-                        <p>Action</p>
+                        <p>Date</p>
                     </th>
                     <th>
-                        <p>Date</p>
+                        <p>Action</p>
                     </th>
                 </tr>
                 @if ($orders)

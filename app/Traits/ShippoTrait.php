@@ -128,7 +128,7 @@ trait ShippoTrait
             $res = json_decode($response);
             return $res;
         } catch (\Exception $e) {
-            throw new \Exception('createPostRequest error: ' . $e->getMessage());
+            throw new \Exception('Shippo createPostRequest error: ' . $e->getMessage());
         }
     }
     public function headerApi()

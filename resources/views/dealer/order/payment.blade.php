@@ -110,7 +110,7 @@
                                         <!-- Shipment-id -->
                                         <p class="mb-2">{{ $response_in_array->object_id }}</p>
                                         <!-- Shipment Date -->
-                                        <p>07/23/2024</p>
+                                        <p>{{isset($shippmentDate) ? \Carbon\Carbon::parse($shippmentDate)->format('m/d/Y'): 'N/A'}}</p>
                                     </div>
                                 </div>
                             </div>
