@@ -70,6 +70,8 @@
                                                         <span class="filter-serach-icon">
                                                             <i class="fa-solid fa-magnifying-glass"></i>
                                                         </span>
+                                                        <button class="search-icon-btn cross-btn"><i class="fa-solid fa-xmark"></i></button>
+                                                        <button class="search-icon-btn tick-btn"><i class="fa-solid fa-check"></i></button>
                                                     </div>
                                                 </div>
                                                 <ul class="ps-3 mb-2 ">
@@ -118,10 +120,14 @@
                                                 
                                                 <div class="form-group">
                                                     <div class="formfield">
-                                                        <input type="text" class="form-control filter-serach internal-search" data-action="make" placeholder="Search">
+                                                        <p type="text" class="form-control filter-serach w-input-text" contenteditable><div class="w-placeholder">
+                                                            Search
+                                                          </div></p>
                                                         <span class="filter-serach-icon">
                                                             <i class="fa-solid fa-magnifying-glass"></i>
                                                         </span>
+                                                        <button class="search-icon-btn cross-btn"><i class="fa-solid fa-xmark"></i></button>
+                                                        <button class="search-icon-btn tick-btn"><i class="fa-solid fa-check"></i></button>
                                                     </div>
                                                 </div>
                                                 @foreach ($brands as $key => $brand )
@@ -158,6 +164,8 @@
                                                         <span class="filter-serach-icon">
                                                             <i class="fa-solid fa-magnifying-glass"></i>
                                                         </span>
+                                                        <button class="search-icon-btn cross-btn"><i class="fa-solid fa-xmark"></i></button>
+                                                        <button class="search-icon-btn tick-btn"><i class="fa-solid fa-check"></i></button>
                                                     </div>
                                                 </div>
                                                 @foreach ($years as $key => $year )
