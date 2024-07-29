@@ -2991,8 +2991,9 @@ button.accordion-button.analyics-tabs-btns {
 
 .w-input-text:empty+.w-placeholder {
     opacity: 1;
-  }
-  .search-icon-btn {
+}
+
+.search-icon-btn {
     padding: 0;
     border: unset;
     background: transparent;
@@ -3000,23 +3001,31 @@ button.accordion-button.analyics-tabs-btns {
     top: 3px;
     right: 6px;
 }
-.customer-table tr td, .customer-table tr th {
+
+.customer-table tr td,
+.customer-table tr th {
     padding: 12px 14px 12px 14px !important;
 }
-.table.customer-table p, .table.customer-table a {
+
+.table.customer-table p,
+.table.customer-table a {
     font-size: 14px;
 }
+
 .customer-table h3 {
     font-size: 18px;
 }
+
 .carrier-serv-bx {
     display: flex;
     gap: 2clr0px;
     align-items: center;
 }
+
 .carrier-serv-copy {
     font-size: 25px;
 }
+
 .download-btn {
     background: transparent;
     font-weight: 600;
@@ -3024,4 +3033,9 @@ button.accordion-button.analyics-tabs-btns {
     padding: 4px 8px;
     font-size: 14px;
     border-radius: 5px;
+}
+
+.analyics-tabs-list.active h4 {
+    color: #272643;
+    font-weight: 600;
 }
