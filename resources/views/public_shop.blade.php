@@ -113,6 +113,7 @@
                                       <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample1">
                                         <div class="accordion-body">
                                             <div id="brandContainer" class="interior-filter-inner">
+                                                
                                                 <div class="form-group">
                                                     <div class="formfield">
                                                         <input type="text" class="form-control filter-serach" placeholder="Search">
