@@ -2958,3 +2958,28 @@ button.accordion-button.analyics-tabs-btns {
     top: 3px;
     right: 6px;
 }
+.customer-table tr td, .customer-table tr th {
+    padding: 12px 14px 12px 14px !important;
+}
+.table.customer-table p, .table.customer-table a {
+    font-size: 14px;
+}
+.customer-table h3 {
+    font-size: 18px;
+}
+.carrier-serv-bx {
+    display: flex;
+    gap: 2clr0px;
+    align-items: center;
+}
+.carrier-serv-copy {
+    font-size: 25px;
+}
+.download-btn {
+    background: transparent;
+    font-weight: 600;
+    border: 1px solid;
+    padding: 4px 8px;
+    font-size: 14px;
+    border-radius: 5px;
+}
