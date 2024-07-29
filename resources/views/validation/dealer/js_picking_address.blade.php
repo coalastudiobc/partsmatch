@@ -162,14 +162,16 @@
                     return; // Prevent form submission if there are validation errors
                 }
                 let formData = $(form).serialize();
-
+                jQuery('#fullPageLoader').removeClass('d-none');
+                $("#From_address").find('button').attr('disabled', true);
                 $.ajax({
                     url: $(form).attr('action'),
                     method: $(form).attr('method'),
                     data: formData,
                     success: function(response) {
-                        // Handle the response from the server
                         if (response.status === true) {
+                            jQuery('#fullPageLoader').addClass('d-none');
+                            $("#From_address").find('button').attr('disabled', false);
                             $(function() {
                                 $('#pickadress-modal').modal('toggle');
                             });
@@ -178,14 +180,15 @@
                             toastr.success(response.message);
 
                         } else {
+                            jQuery('#fullPageLoader').addClass('d-none');
+                            $("#From_address").find('button').attr('disabled', false);
                             toastr.error(response.message);
                         }
                     },
                     error: function(xhr, status, error) {
-                        // Handle errors
+                        jQuery('#fullPageLoader').addClass('d-none');
+                        $("#From_address").find('button').attr('disabled', false);
                         console.log('Error:', error);
-                        console.log('Status:', status);
-                        console.log('XHR:', xhr);
                     }
                 });
             }
