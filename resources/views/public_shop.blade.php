@@ -116,7 +116,7 @@
                                                 
                                                 <div class="form-group">
                                                     <div class="formfield">
-                                                        <input type="text" class="form-control filter-serach" placeholder="Search">
+                                                        <input type="text" class="form-control filter-serach internal-search" data-action="make" placeholder="Search">
                                                         <span class="filter-serach-icon">
                                                             <i class="fa-solid fa-magnifying-glass"></i>
                                                         </span>
@@ -382,6 +382,17 @@
             $("#"+filter).prop('checked',false);
             }
             $('#filters').submit();
+        });
+
+        $('.internal-search').on('change', function(e) {
+            e.preventDefault();
+            var action = ".custm-check ."+$(this).attr('data-action');
+            $(action).removeClass('d-none');
+            $(action).each(function(index, item) {
+               console.log(index,item);
+            });
+
+           
         });
     });
 </script>

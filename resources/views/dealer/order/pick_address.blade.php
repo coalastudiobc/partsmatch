@@ -14,13 +14,13 @@
                 </div>
                 <form id="selectedAddressForm" action="{{ route('Dealer.order.product.parcels', $orderid->id) }}" method="post">
                     @csrf
-                <div>
-                    <label for="date">Select Date:</label>
-                    <input type="text" id="datepicker" name="date"  value="{{ old('date', isset($getSelectedStuff->shippment_date) ? \Carbon\Carbon::parse($getSelectedStuff->shippment_date)->format('m/d/Y') : '') }}">
-                    @error('date')
-                    <span class="text-danger">{{ $message }}</span>
-                @enderror
-                </div>
+                    <div>
+                        <label for="date">Select Date:</label>
+                        <input type="text" id="datepicker" name="date" value="{{ old('date', isset($getSelectedStuff->shippment_date) ? \Carbon\Carbon::parse($getSelectedStuff->shippment_date)->format('m/d/Y') : '') }}">
+                        @error('date')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
                     <button type="submit" class="btn primary-btn nextbtn">Next:Order Details</button>
             </div>
             <div class="right-btn-box">
@@ -38,7 +38,7 @@
 
                         </div>
                         <label for="adress">
-                            <input type="radio" name="selectadress" id="adress" @if ($getSelectedStuff->selected_shippo_address == $address->id ) checked @endif value="{{ $address->id }}">
+                            <input type="radio" name="selectadress" id="adress" @isset($getSelectedStuff) @if ($getSelectedStuff->selected_shippo_address == $address->id ) checked @endif @endisset value="{{ $address->id }}">
                             <div class="adress-info-text">
                                 <h2>{{ $address->first_name }} {{ $address->last_name }}</h2>
                                 <p>{{ $address->address1 }}, {{ $address->city }}, {{ $address->state }},
@@ -475,26 +475,26 @@
                         @push('scripts')
                         @includeFirst(['validation.dealer.js_picking_address'])
                         <script>
-                                 jQuery(function() {
-                                        jQuery("#datepicker").datepicker({
-                                            dateFormat: "mm/dd/yy",
-                                            minDate: new Date(), // Prevent selection of previous dates
-                                        });
+                            jQuery(function() {
+                                jQuery("#datepicker").datepicker({
+                                    dateFormat: "mm/dd/yy",
+                                    minDate: new Date(), // Prevent selection of previous dates
+                                });
 
-                                        // var today = new Date();
-                                        // var formattedDate = $.datepicker.formatDate('mm/dd/yy', today);
-                                        // jQuery("#datepicker").datepicker("setDate", formattedDate);
+                                // var today = new Date();
+                                // var formattedDate = $.datepicker.formatDate('mm/dd/yy', today);
+                                // jQuery("#datepicker").datepicker("setDate", formattedDate);
 
-                                        jQuery('#selectedAddressForm').submit(function(event) {
-                                            var datepickerValue = $('#datepicker').val();
-                                            var selectedAddress = $('input[name="selectadress"]:checked').val();
+                                jQuery('#selectedAddressForm').submit(function(event) {
+                                    var datepickerValue = $('#datepicker').val();
+                                    var selectedAddress = $('input[name="selectadress"]:checked').val();
 
-                                                if (!datepickerValue) {
-                                                    event.preventDefault();
-                                                    toastr.error('Please select shippment date first.');
-                                                }
-                                        });
-                                 });
+                                    if (!datepickerValue) {
+                                        event.preventDefault();
+                                        toastr.error('Please select shippment date first.');
+                                    }
+                                });
+                            });
                         </script>
                         <script>
                             document.addEventListener('DOMContentLoaded', function() {
