@@ -2983,3 +2983,35 @@ button.accordion-button.analyics-tabs-btns {
     font-size: 14px;
     border-radius: 5px;
 }
+.adress-info-haeder {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+#selectedAddressForm {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: flex-end;
+}
+#selectedAddressForm #datepicker {
+    max-width: 120px;
+    padding: 12px 10px;
+    border: 1px solid var(--secondary-color);
+    border-radius: 5px;
+}
+.sub-list-sidebar .analyics-tabs-list {
+    position: relative;
+}
+.sub-list-sidebar .analyics-tabs-list::before {
+    content: "\f105";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 12px;
+    position: absolute;
+    transition: 0.5s;
+    left: -25px;
+    top: 4px;
+}
+.sub-list-sidebar .analyics-tabs-list:hover::before{
+    left: -15px;
+}
