@@ -2950,4 +2950,11 @@ button.accordion-button.analyics-tabs-btns {
 .w-input-text:empty + .w-placeholder {
     opacity: 1;
   }
-  
+  .search-icon-btn {
+    padding: 0;
+    border: unset;
+    background: transparent;
+    position: absolute;
+    top: 3px;
+    right: 6px;
+}
