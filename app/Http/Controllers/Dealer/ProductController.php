@@ -94,14 +94,13 @@ class ProductController extends Controller
             } else {
                 $row[] = 'please delete this column as well as allowed_categories';
             }
-
         }
         $headers = [
             'Content-Type' => 'text/csv',
             'Content-Disposition' => 'attachment; filename="modified_sample.csv"',
         ];
 
-        return response()->streamDownload(function() use ($csvData) {
+        return response()->streamDownload(function () use ($csvData) {
             $output = fopen('php://output', 'w');
             foreach ($csvData as $row) {
                 fputcsv($output, $row);
@@ -113,7 +112,7 @@ class ProductController extends Controller
 
     public function bulkUpload(Request $request)
     {
-        try{
+        try {
             $request->validate([
                 'csv_file' => 'required|file|mimes:csv',
             ]);
@@ -123,9 +122,9 @@ class ProductController extends Controller
             $header = array_shift($data);
             foreach ($data as $row) {
                 $row = array_combine($header, $row);
-                $subcategory = Category::with('parent')->has('parent')->where('name',$row['category'])->first();
-                if(!$subcategory){
-                    $subcategory = Category::where('name','others')->first();
+                $subcategory = Category::with('parent')->has('parent')->where('name', $row['category'])->first();
+                if (!$subcategory) {
+                    $subcategory = Category::where('name', 'others')->first();
                 }
                 $product = [
                     'name' => $row['name'],
@@ -155,7 +154,7 @@ class ProductController extends Controller
                 DB::commit();
             }
             return redirect()->back()->with('message', 'Product added successfully');
-        }catch(Exception $e){
+        } catch (Exception $e) {
             DB::rollBack();
             return redirect()->back()->with('error', $e->getMessage());
         }
@@ -403,18 +402,18 @@ class ProductController extends Controller
             //     Storage::disk('public')->delete('products/images', $image->file_url);
             //     $image->delete();
             // }
+
             $getOrderItemId = OrderItem::where('product_id', $product->id)->get();
 
             if ($getOrderItemId->isNotEmpty()) {
                 foreach ($getOrderItemId as $value) {
-                    $isFullFillmentComplete = ShippoPurchasedLabel::where('order_id', $value->order_id)->first();
-                    if ($isFullFillmentComplete) {
+                    $pendingFulfillment  = ShippoPurchasedLabel::where('order_id', $value->order_id)->first();
+                    if (!is_null($pendingFulfillment)) {
                         return redirect()->back()->with(['error' => 'Due to pending fulfillment, the product cannot be deleted. Please complete fulfillment first.']);
                     }
                 }
-                $product->delete();
             }
-
+            $product->delete();
             return redirect()->back()->with(['message' => "successfully deleted"]);
         } catch (Exception $e) {
             return redirect()->back()->with(['error' => $e->getMessage()]);
@@ -482,7 +481,7 @@ class ProductController extends Controller
         $userdetails = User::where('id', $product->user_id)->first();
         $productImages = $product->productImage;
         $shippingCharge = AdminSetting::where('name', 'shipping_charge')->first();
-        $allproducts = Product::with('productImage')->where('status','1')->where('user_id', $userdetails->id)->inRandomOrder()->limit(6)->get();
+        $allproducts = Product::with('productImage')->where('status', '1')->where('user_id', $userdetails->id)->inRandomOrder()->limit(6)->get();
         if (auth()->user()) {
             $cart =  Cart::with('cartProducts', 'cartProducts.product', 'cartProducts.product.productImage')->where('user_id', auth()->id())->first();
             return view('dealer.products.product_details', compact('product', 'productImages', 'shippingCharge', 'userdetails', 'allproducts', 'cart'));
@@ -540,7 +539,6 @@ class ProductController extends Controller
 
         $products = $productsQuery->paginate(5)
             ->appends($request->globalquery);
-        return redirect()->route('products',['search_parameter'=>$request->globalquery]);
+        return redirect()->route('products', ['search_parameter' => $request->globalquery]);
     }
-
 }
