@@ -64,7 +64,9 @@
                                             <div class="category-list">
                                                 <div class="form-group">
                                                     <div class="formfield">
-                                                        <input type="text" class="form-control filter-serach" placeholder="Search">
+                                                        <p type="text" class="form-control filter-serach w-input-text" contenteditable><div class="w-placeholder">
+                                                            Search
+                                                          </div></p>
                                                         <span class="filter-serach-icon">
                                                             <i class="fa-solid fa-magnifying-glass"></i>
                                                         </span>
@@ -116,7 +118,9 @@
                                                 
                                                 <div class="form-group">
                                                     <div class="formfield">
-                                                        <input type="text" class="form-control filter-serach" placeholder="Search">
+                                                        <p type="text" class="form-control filter-serach w-input-text" contenteditable><div class="w-placeholder">
+                                                            Search
+                                                          </div></p>
                                                         <span class="filter-serach-icon">
                                                             <i class="fa-solid fa-magnifying-glass"></i>
                                                         </span>
@@ -150,7 +154,9 @@
                                             <div id="yearContainer" class="interior-filter-inner">
                                                 <div class="form-group">
                                                     <div class="formfield">
-                                                        <input type="text" class="form-control filter-serach" placeholder="Search">
+                                                        <p type="text" class="form-control filter-serach w-input-text" contenteditable><div class="w-placeholder">
+                                                            Search
+                                                          </div></p>
                                                         <span class="filter-serach-icon">
                                                             <i class="fa-solid fa-magnifying-glass"></i>
                                                         </span>
