@@ -19,7 +19,7 @@ class PackageController extends Controller
 
     public function index()
     {
-        $packages = Package::orderByDesc('id')->paginate(config('constants.pagination'));
+        $packages = Package::orderByDesc('id')->paginate(__('pagination.admin_paginaion_number'));
 
         return view('admin.packages.index', compact('packages'));
     }

@@ -16,7 +16,7 @@ class PartsManagerController extends Controller
     {
         $request = request();
         $role = 'Advance';
-        $users = User::where('working_for', auth()->user()->id)->Search()->orderBy('created_at', 'DESC')->Paginate(5);
+        $users = User::where('working_for', auth()->user()->id)->Search()->orderBy('created_at', 'DESC')->Paginate(__('pagination.pagination_nuber'));
         if (auth()->user()->permissions) {
             foreach (auth()->user()->permissions as $key => $roles) {
                 if ($roles->name == 'role-view' && $key == 0)
