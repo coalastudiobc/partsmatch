@@ -34,6 +34,18 @@ class OrderController extends Controller
         $orders =  Order::with('orderItem')->where('order_for', auth()->id())->orderBy('created_at', 'DESC')->paginate(__('pagination.pagination_nuber'));
         return view('dealer.order.order_list', compact('orders'));
     }
+    public function fullfilledShippment()
+    { 
+        $orderIds = Order::where('order_for', auth()->id())->pluck('id')->toArray();
+        if (empty($orderIds)) {
+            return redirect()->back()->with([
+                'error' => 'No orders found for the authenticated user.'
+            ]);
+        }
+        $fulfilledIds = ShippoPurchasedLabel::whereIn('order_id', $orderIds)->pluck('order_id')->toArray();
+        $fulfilledOrders = Order::whereIn('id', $fulfilledIds)->get();
+        return view('dealer.order.fullfilled_order', compact('fulfilledOrders'));
+    }
     public function testing()
     {
         return view('dealer.order.products');

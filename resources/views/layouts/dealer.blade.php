@@ -212,6 +212,14 @@
             }, 100);
         });
     </script>
+    <script>
+        // jQuery(document).ready(function (e) {
+        //     jQuery('#ordermanagemebt').on('click',function (e) {
+                // jQuery('.analyics-tabs-btns').removeClass('active');
+                // jQuery(this).addClass('active');
+        //     })
+        // })
+    </script>
     @stack('scripts')
 </body>
 

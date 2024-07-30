@@ -228,7 +228,7 @@ class AdminController extends Controller
                 return redirect()->back();
             }
         } else {
-            $shipping_details = ShippingSetting::orderBy('created_at', 'DESC')->paginate(__('pagination.pagination_nuber'));
+            $shipping_details = ShippingSetting::orderBy('created_at', 'DESC')->paginate(__('pagination.admin_paginaion_number'));
         }
 
         return view('admin.shipping_setting.index', compact('shipping_details'));

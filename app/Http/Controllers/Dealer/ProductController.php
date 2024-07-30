@@ -50,7 +50,7 @@ class ProductController extends Controller
     {
         $years = $this->sdk->years();
 
-        $products = Product::with('productImage', 'featuredProduct')->where('user_id', auth()->user()->id)->orderBy('id', 'DESC')->Search()->Paginate(5);
+        $products = Product::with('productImage', 'featuredProduct')->where('user_id', auth()->user()->id)->orderBy('id', 'DESC')->Search()->Paginate(__('pagination.pagination_nuber'));
 
         // $subscription =  DB::table('subscriptions')->where('user_id', auth()->user()->id)->first();
         return view('dealer.products.index', compact('years', 'products'));
@@ -259,12 +259,12 @@ class ProductController extends Controller
         }
         $category = Category::with('children', 'parent')->where('id', $request->category)->first();
         if ($category->parent) {
-            $products = Product::with('productImage', 'user')->where('subcategory_id', $category->id)->Paginate(5);
+            $products = Product::with('productImage', 'user')->where('subcategory_id', $category->id)->Paginate(__('pagination.pagination_nuber'));
             $parent = $category->parent->id;
         } else {
 
             $subcategories = $category->children->pluck('id');
-            $products = Product::with('productImage', 'user')->whereIn('subcategory_id', $subcategories->toArray())->Paginate(5);
+            $products = Product::with('productImage', 'user')->whereIn('subcategory_id', $subcategories->toArray())->Paginate(__('pagination.pagination_nuber'));
             $parent = $category->id;
         }
         $active_id = $category->id;

@@ -16,7 +16,7 @@ class DealerController extends Controller
     public function index()
     {
         $request = request();
-        $users = User::with('product')->Dealers()->orderBy('created_at', 'DESC')->Search()->paginate(__('pagination.pagination_nuber'));
+        $users = User::with('product')->Dealers()->orderBy('created_at', 'DESC')->Search()->paginate(__('pagination.admin_paginaion_number'));
         return view('admin.user.index', compact('users'));
     }
     public function products(User $user)

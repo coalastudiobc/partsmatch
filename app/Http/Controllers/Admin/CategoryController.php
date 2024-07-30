@@ -12,7 +12,7 @@ class CategoryController extends Controller
 {
     public function index(Request $request)
     {
-        $categories = Category::with('parent')->search()->latest()->paginate(__('pagination.pagination_nuber'));
+        $categories = Category::with('parent')->search()->latest()->paginate(__('pagination.admin_paginaion_number'));
 
         return view('admin.category.index', compact('categories'));
     }
