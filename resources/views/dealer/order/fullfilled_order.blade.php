@@ -67,7 +67,7 @@
                                             </div>
                                         </td> --}}
                         <td>
-                            <a class="btn primary-btn" href="#">
+                            <a class="btn primary-btn" href="{{route('Dealer.order.fullfilled.shippment.details',['order_id'=>$order->id])}}">
                             Track Details</a>
                         </td>
                     </tr>

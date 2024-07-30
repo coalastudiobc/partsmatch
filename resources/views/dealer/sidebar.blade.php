@@ -183,7 +183,7 @@
                                             </div>
                                         </a>
                                     </li>
-                                    <li class="analyics-tabs-list @if (Route::is('Dealer.order.fulllfilled')) active @endif">
+                                    <li class="analyics-tabs-list @if (in_array(Route::current()->getName(), ['Dealer.order.fulllfilled','Dealer.order.fullfilled.shippment.details']))  active @endif">
                                         <a href="{{ route('Dealer.order.fulllfilled') }}">
                                             <div class="analyics-tabs-name">
                                                 <h4>Fullfilled Orders</h4>

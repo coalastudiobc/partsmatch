@@ -3018,7 +3018,7 @@ button.accordion-button.analyics-tabs-btns {
 
 .carrier-serv-bx {
     display: flex;
-    gap: 2clr0px;
+    gap: 2px;
     align-items: center;
 }
 
@@ -3035,7 +3035,76 @@ button.accordion-button.analyics-tabs-btns {
     border-radius: 5px;
 }
 
+.adress-info-haeder {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+#selectedAddressForm {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+#selectedAddressForm #datepicker {
+    max-width: 120px;
+    padding: 12px 10px;
+    border: 1px solid var(--secondary-color);
+    border-radius: 5px;
+}
+
+.sub-list-sidebar .analyics-tabs-list {
+    position: relative;
+}
+
+.sub-list-sidebar .analyics-tabs-list::before {
+    content: "\f105";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 12px;
+    position: absolute;
+    transition: 0.5s;
+    left: -25px;
+    top: 4px;
+}
+
+.sub-list-sidebar .analyics-tabs-list:hover::before {
+    left: -15px;
+}
+
 .analyics-tabs-list.active h4 {
     color: #272643;
     font-weight: 600;
 }
+
+label#cardName-error {
+    color: red;
+}
+
+
+
+p.customer-track-no {
+    display: inline-block;
+    max-width: 10em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.text-elipses{
+    display: inline-block;
+    max-width: 10em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+
+
+
+
+
+
+
+

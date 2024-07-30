@@ -11,7 +11,7 @@
                 <h3>Create New Full Fillment</h3>
                 <p>Step 2 of 2</p>
             </div>
-            <div class="d-flex gap-3 align-items-cneter">
+            <div class="d-flex gap-3 align-items-cneter justify-content-end">
                 <a href="javascript:void(0)" id="makeGroup" class="btn secondary-btn"><img src="{{ asset('assets/images/add-round-icon.svg') }}" alt="">Make Group</a>
                 <a href="javascript:void(0)" id="createGroup" class="btn secondary-btn d-none">Create Group</a>
                 <a href="javascript:void(0)" id="cancel" class="btn secondary-btn d-none">Cancel</a>

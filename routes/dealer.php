@@ -72,6 +72,7 @@ Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer'
         Route::post('parcel/groups', [OrderController::class, 'createGroups'])->name('parcels.group');
         Route::post('parcel/groups/delete', [OrderController::class, 'deleteGroups'])->name('parcels.group.delete');
         Route::get('order/fullfillment/shippment', [OrderController::class, 'fullfilledShippment'])->name('fulllfilled');
+        Route::get('fullfilled/shippment/details/{order_id?}', [OrderController::class, 'detailsOfFullfilledShippment'])->name('fullfilled.shippment.details');
     });
     // cart
     Route::name('cart.')->group(function () {
