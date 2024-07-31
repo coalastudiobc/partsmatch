@@ -14,9 +14,14 @@
                 </div>
                 <form id="selectedAddressForm" action="{{ route('Dealer.order.product.parcels', $orderid->id) }}" method="post">
                         @csrf
-                            <div>
-                                <label for="date">Select Date:</label>
-                                <input type="text" id="datepicker" name="date" value="{{ old('date', isset($getSelectedStuff->shippment_date) ? \Carbon\Carbon::parse($getSelectedStuff->shippment_date)->format('m/d/Y') : '') }}">
+                            <div class="date-formfield">
+                                <label for="date">Shippment Date:</label>
+                                <div class="formfield ">
+                                    <input type="text" id="datepicker" placeholder="Select Date" name="date" value="{{ old('date', isset($getSelectedStuff->shippment_date) ? \Carbon\Carbon::parse($getSelectedStuff->shippment_date)->format('m/d/Y') : '') }}">
+                                    <span class="form-icon">
+                                        <i class="fa-solid fa-calendar-days"></i>
+                                    </span>
+                                </div>
                                 @error('date')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror

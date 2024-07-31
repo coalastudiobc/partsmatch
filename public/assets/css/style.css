@@ -2097,6 +2097,7 @@ span.ymmm-cross {
 
 .edit-product-sec .card {
     border-radius: 0;
+    border: 0;
 }
 
 .brands-header {
@@ -3048,7 +3049,7 @@ button.accordion-button.analyics-tabs-btns {
 }
 
 #selectedAddressForm #datepicker {
-    max-width: 120px;
+    max-width: 130px;
     padding: 12px 10px;
     border: 1px solid var(--secondary-color);
     border-radius: 5px;
@@ -3073,34 +3074,34 @@ button.accordion-button.analyics-tabs-btns {
     left: -15px;
 }
 
+
 .analyics-tabs-list.active h4 {
     color: #272643;
     font-weight: 600;
 }
 
-label#cardName-error {
-    color: red;
+.date-formfield .formfield .form-icon {
+    right: 12px;
+    top: 47%;
 }
 
-
-
-p.customer-track-no {
-    display: inline-block;
-    max-width: 10em;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.text-elipses {
-    display: inline-block;
-    max-width: 10em;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-.interior-content-right:has(.empty-category) {
+.date-formfield {
     display: flex;
+    gap: 10px;
     align-items: center;
-    justify-content: center;
+}
+
+.date-formfield>label {
+    white-space: nowrap;
+}
+
+.section-body.edit-product-sec {
+    padding: 30px 40px;
+    background-color: #Fff;
+}
+
+.section-body.edit-product-sec .card-body {
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px 4px #ddd;
+    border: 0;
 }

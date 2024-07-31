@@ -98,6 +98,7 @@
             </div>
         </div>
         {!! $products->links('dealer.pagination') !!}
+
     </div>
 @endsection
 @section('modals')
@@ -418,7 +419,6 @@
                 </form>
             </div>
         </div>
-
     </div>
     </div>
     </div>
