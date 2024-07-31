@@ -27,8 +27,8 @@
                                             </div>
                                         </a>
                                     </td>
-                                    <td>{{ $product->product ? $product->product->name : '' }}</td>
-                                    <td>{{ $product->product ? $product->product->price : '' }} </td>
+                                    <td>{{ $product->product ? $product->product->name : 'N/A' }}</td>
+                                    <td>${{ $product->product ? $product->product->price : 'N/A' }} </td>
                                     <td>
                                         <div class="product-quantity-box targetLoaderDiv">
                                             <div class="button-loader d-none"></div>
@@ -45,17 +45,23 @@
                                     <td> <a data-product_id="{{ $product->id }}" href="javascript:void(0)" class="cartDelete delete"><i style="color: #E13F3F;" class="fa-regular fa-trash-can"></i></a></td>
                                 </tr>
                                 @empty
-                                <div class="empty-data">No product in the cart</div>
+                                <div class="empty-data">
+                                    <img src="{{ asset('assets/images/no-product.svg') }}  " alt="" width="300">
+                                    <p class="text-center mt-1">Did not found any product</p>
+                                </div>
                                 @endforelse
                                 @else
-                                <p class="empty-data">No product in the cart</p>
+                                <div class="empty-data">
+                                    <img src="{{ asset('assets/images/no-product.svg') }}  " alt="" width="300">
+                                    <p class="text-center mt-1">Did not found any product</p>
+                                </div>
                                 @endif
                             </tbody>
                         </table>
                     </div>
                 </div>
                 <div class="d-flex justify-content-end">
-                    <a href="{{ $cart && $cart->cartProducts && count($cart->cartProducts) ? route(auth()->user()->getRoleNames()->first() . '.checkout.create') :'#'}}" class="btn secondary-btn view-btn md-btn">
+                    <a href="{{ $cart && $cart->cartProducts && count($cart->cartProducts) ? route(auth()->user()->getRoleNames()->first() . '.checkout.create') :'#'}}" class="btn secondary-btn view-btn md-btn @if($cart && $cart->cartProducts && count($cart->cartProducts)) @else disabled @endif">
                         Checkout
                     </a>
                 </div>

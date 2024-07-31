@@ -52,18 +52,14 @@
                 }
             },
             errorPlacement: function(error, element) {
-                if (element.attr("name") === "create_return_label") {
-                    error.insertAfter($("#checkbox3").parent().next("label"));
-                } else {
                     error.addClass('invalid-feedback');
                     error.insertAfter(element);
-                }
             },
             highlight: function(element, errorClass, validClass) {
-                $(element).addClass('is-invalid').removeClass('is-valid');
+                $(element).addClass('is-invalid');
             },
             unhighlight: function(element, errorClass, validClass) {
-                $(element).removeClass('is-invalid').addClass('is-valid');
+                $(element).removeClass('is-invalid');
             },
             submitHandler: (form, event) => {
                 event.preventDefault();

@@ -117,8 +117,7 @@
                                     <div class="form-group">
                                         <label for=""> Name<span class="required-field">*</span></label>
                                         <div class="form-field">
-                                            <input type="text" name="name" class="form-control" placeholder=" Name">
-
+                                            <input type="text" name="name" class="form-control" placeholder="Name">
                                         </div>
                                     </div>
                                 </div>
@@ -127,7 +126,7 @@
                                         <label for=""> Category<span class="required-field">*</span></label>
                                         <div class="form-field">
                                             <select type="text" name="category" class="form-control category"
-                                                placeholder=" Category">
+                                                placeholder="Category">
                                                 <option value="">Select category</option>
                                                 @foreach (get_category() as $category)
                                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -198,7 +197,7 @@
                                         <label for=""> Quantity<span class="required-field">*</span></label>
                                         <div class="form-field">
                                             <input type="text" name="stocks_avaliable" class="form-control"
-                                                placeholder=" Quantity">
+                                                placeholder="Quantity">
 
                                         </div>
                                     </div>

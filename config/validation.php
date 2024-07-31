@@ -67,6 +67,9 @@ return [
     'account_minlength' => 12,
     'account_maxlength' => 15,
 
+    'pincode_minlength' => 5,
+    'pincode_maxlength' => 6,
+
     'routing_minlength' => 9,
     'routing_maxlength' => 12,
     'js_package_maxlength' => 100000,

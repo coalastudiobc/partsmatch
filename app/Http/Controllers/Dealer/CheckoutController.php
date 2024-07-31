@@ -14,6 +14,10 @@ use App\Models\CartProduct;
 use App\Traits\ShippoTrait;
 use App\Models\AdminSetting;
 use App\Models\BuyerAddress;
+
+
+use App\Http\Requests\ShippingAddressRequest;
+
 use Illuminate\Http\Request;
 use App\Models\UserAddresses;
 use Illuminate\Support\Collection;
@@ -165,7 +169,7 @@ class CheckoutController extends Controller
     }
     public function cities($stateId)
     {
-        $cities = City::where('state_id', $stateId)->get();
+        $cities = City::where('state_id', $stateId)->get(['id','state_id','name',]);
         return response()->json(['title' => 'Success', 'data' => $cities, 'message' => 'Cities retrieved successfully']);
     }
     public function create()
@@ -279,7 +283,7 @@ class CheckoutController extends Controller
         // dd($orders);
         return view('dealer.myorder.order_list', compact('orders'));
     }
-    public function to_address(Request $request)
+    public function to_address(ShippingAddressRequest $request)
     {
         try {
             // dd($request->toArray());

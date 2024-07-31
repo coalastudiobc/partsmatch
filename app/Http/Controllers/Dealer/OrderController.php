@@ -346,7 +346,7 @@ class OrderController extends Controller
                 'service_level_token' => $response->servicelevel_token,
                 'days' => $response->days,
                 'result' => $masterResponse->object_status,
-                'master_rateId' => $masterResponse->rate,
+                'master_rateId' => $masterResponse->object_id,
                 'tracking_number' => $masterResponse->tracking_number,
                 'tracking_url' => $masterResponse->tracking_url_provider,
                 'label_url' => $masterResponse->label_url,
@@ -408,7 +408,8 @@ class OrderController extends Controller
             throw new \Exception('Error in shippment address and time : ' . $th->getMessage());
         }
     }
-    public function detailsOfFullfilledShippment($order_id){
+    public function detailsOfFullfilledShippment($order_id)
+    {
         try {
             $shippmentDetails= ShippoPurchasedLabel::where('order_id',$order_id)->first();
             if (empty($shippmentDetails)) {
@@ -418,5 +419,14 @@ class OrderController extends Controller
         } catch (\Throwable $th) {
             return redirect()->back()->with(['error'=>$th->getMessage()]);
         }
+    }
+    public function getFullfilledOrdersParcelsGroups($order)
+    {
+        try {
+            $orderProducts = OrderItem::with('product', 'parcel')->where('order_id', $order->id)->get();
+            $groups = groupWith($orderProducts[0]->getOrderIdsWithSameParcel());
+            } catch (\Throwable $th) {
+
+         }
     }
 }

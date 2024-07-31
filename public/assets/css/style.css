@@ -2218,7 +2218,7 @@ span.ymmm-cross {
 .right-btn-box {
     display: flex;
     align-items: center;
-    justify-content: end;
+    justify-content: space-between;
     margin: 0 0 20px;
 }
 
@@ -3091,20 +3091,11 @@ p.customer-track-no {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-.text-elipses{
+
+.text-elipses {
     display: inline-block;
     max-width: 10em;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-
-
-
-
-
-
-
-
-
-

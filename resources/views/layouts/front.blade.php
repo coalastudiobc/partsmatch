@@ -74,14 +74,6 @@
                                         </a>
                                     </li>
                                 @endauth
-                                @guest
-                                    <li class="nav-item">
-                                        <a class="nav-link" aria-current="page" href="{{ route('welcome') }}">
-
-                                            Home
-                                        </a>
-                                    </li>
-                                @endguest
                                 {{-- <li class="nav-item">
                                     <a class="nav-link" aria-current="page"
                                         href="{{ route('view', ['slug' => 'about-us']) }}">About Us</a>

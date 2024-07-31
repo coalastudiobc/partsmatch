@@ -8,7 +8,7 @@
         <div class="adress-info-haeder">
             <a class="back-btn" href="{{ route('Dealer.order.orderlist') }}"><i class="fa-solid fa-angle-left back-btn"></i> Back</a>
             <div class="order-label-center">
-                <h3>Create New Full Fillment</h3>
+                <h3>Create New Ful Fillment</h3>
                 <p>Step 2 of 2</p>
             </div>
             <div class="d-flex gap-3 align-items-cneter justify-content-end">
@@ -65,11 +65,11 @@
                         <input type=hidden name="element_to_change" value="" id="elementTochange">
                         <input type=hidden name="order_id" value="{{$order->id}}" >
                         <div class="package-main">
-                            <h3>Package Dimentions </h3>
+                            <h3>Package Dimensions </h3>
                             <p>Rates are calculated based on package dimensions and weight. It's recommended to enter the
                                 correct weight and dimensions. If not, you may receive adjustment charges.</p>
                             <div class="custm-dimention-box">
-                                <p>Dimention</p>
+                                <p>Dimensions</p>
                                 <div class="custm-dimention mb-3">
 
                                     <div class="form-group">
@@ -145,14 +145,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group checkbox-field">
+                    <!--    <div class="form-group checkbox-field">
                             <div class="formfield">
                                 <input type="checkbox" class="" name="" id="checkbox3">
                             </div>
-                            <!-- <label for="checkbox3">Create a return label</label> -->
-                        </div>
+                             <label for="checkbox3">Create a return label</label>
+                        </div>  -->
                         <div class="d-flex align-items-center gap-2 justify-content-end">
-                            {{-- <a href="#" class="btn secondary-btn md-btn mr-1">Back</a> --}}
                             <button class="btn primary-btn sm-btn mr-1" id="submit" type="submit">Submit</button>
                         </div>
                     </div>

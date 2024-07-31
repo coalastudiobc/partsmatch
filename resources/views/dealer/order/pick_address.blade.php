@@ -9,7 +9,7 @@
                 <a class="back-btn" href="{{ route('Dealer.order.orderlist') }}"><i class="fa-solid fa-angle-left back-btn"></i> Back to
                     orders</a>
                 <div class="order-label-center">
-                    <h3>Create New Full Fillment</h3>
+                    <h3>Create New Ful Fillment</h3>
                     <p>Step 1 of 2</p>
                 </div>
                 <form id="selectedAddressForm" action="{{ route('Dealer.order.product.parcels', $orderid->id) }}" method="post">
@@ -21,9 +21,10 @@
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                        <button type="submit" class="btn primary-btn nextbtn">Next:Order Details</button>
+                        <button type="submit" class="btn primary-btn nextbtn"><b style="gap:0px;">Next:</b>Order Details</button>
                     </div>
                     <div class="right-btn-box">
+                        <h3>Choose Pick Up Address</h3>
                         <a href="#" class="btn primary-btn add-address-btn" data-bs-toggle="modal" data-bs-target="#pickadress-modal"><img src="{{ asset('assets/images/add-round-icon.svg') }}" alt=""> Add address</a>
                     </div>
 
@@ -374,7 +375,7 @@
                                                     </div>
                                                     <ul class="dropdown-menu outer-box" id="country" aria-labelledby="dropdownMenuButton1">
                                                         @foreach ($countries as $country)
-                                                        <li><a class="dropdown-item custom_dropdown_item" data-iso_code="{{ $country->iso_code }}" data-value="{{ $country->id }}" data-text="{{ $country->name }}" href="javascript:void(0)">{{ $country->name }}</a>
+                                                        <li><a class="dropdown-item custom_dropdown_item" data-iso_code="{{ $country->iso_code }}" data-value="{{ $country->id }}" data-text="{{ $country->name }}" href="javascript:void(0)">{{ ucfirst($country->name) }}</a>
                                                         </li>
                                                         @endforeach
                                                     </ul>

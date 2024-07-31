@@ -426,3 +426,15 @@ if (!function_exists('groupWith')) {
         }
     }
 }
+if (!function_exists('viewGroups')) {
+    function viewGroups($order)
+    {
+        try {
+            $orderProducts = OrderItem::with('product', 'parcel')->where('order_id', $order->id)->get();
+            $groups = groupWith($orderProducts[0]->getOrderIdsWithSameParcel());
+            return $groups;
+        } catch (\Exception $e) {
+            return null;
+        }
+    }
+}

@@ -176,7 +176,7 @@
                         <div id="omcollapseOne" class="accordion-collapse collapse @if (Route::is('Dealer.order.*')) show @endif" aria-labelledby="omheadingOne" data-bs-parent="#accordionFlushExample">
                             <div class="accordion-body">
                                 <ul class="sub-list-sidebar">
-                                    <li class="analyics-tabs-list @if (Route::is('Dealer.order.orderlist')) active @endif">
+                                    <li class="analyics-tabs-list @if (in_array(Route::current()->getName(), ['Dealer.order.orderlist','Dealer.order.create.shippment','Dealer.order.product.parcels','Dealer.order.shippment.payment']))  active @endif">
                                         <a href="{{ route('Dealer.order.orderlist') }}">
                                             <div class="analyics-tabs-name">
                                                 <h4>Pending Fullfillment</h4>

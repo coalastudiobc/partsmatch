@@ -7,15 +7,15 @@
 
     <div class="dashboard-right-box">
         <x-alert-component />
-
-        {{-- <h2>CMS</h2> --}}
-
         <div class="product-detail-table cms-list-table">
             <div class="table-responsive">
                 <table class="table">
                     <tr>
                         <th>
                             <p>Product Name</p>
+                        </th>
+                        <th>
+                            <p>Order Id</p>
                         </th>
                         <th>
                             <p>Ammont</p>
@@ -41,7 +41,10 @@
                                 </div>
                             </td>
                             <td>
-                                <p>{{ $order->order->total_amount }}</p>
+                                <p>{{ $order->order->id }}</p>
+                            </td>
+                            <td>
+                                <p>${{ $order->order->total_amount }}</p>
                             </td>
                             <td>
                                 <p>{{ date('d-m-Y', strtotime($order->created_at)) }}</p>
@@ -113,11 +116,10 @@
                             </td>
                         </tr>
                     @empty
-                        <tr>
-                            <td class="no-record-found">
-                                <center>Did not found any order </center>
-                            </td>
-                        </tr>
+                    <div class="empty-data">
+                        <img src="{{ asset('assets/images/no-product.svg') }}  " alt="" width="300">
+                        <p class="text-center mt-1">Did not found any order</p>
+                    </div>
                     @endforelse
                 </table>
             </div>

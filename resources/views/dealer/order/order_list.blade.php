@@ -48,7 +48,6 @@
                     </td>
                     <td>
                         <div class="pro-list-name">
-                            {{-- <input type="checkbox" class="custm-check" class="custm-check"> --}}
                             <h4>{{ count($order->orderItem) }}</h4>
                         </div>
                     </td>
@@ -62,16 +61,6 @@
                     <td>
                         <p>{{ date('d-m-Y', strtotime($order->created_at)) }}</p>
                     </td>
-
-                    {{-- <td>
-                                        <div class="invoive-download">
-                                            <a href="#" class="invoice-download">
-                                                <img src="images/invoice-download.png" alt="">
-                                                Download
-                                            </a>
-
-                                        </div>
-                                    </td> --}}
                     <td>
                         @if (isFullFilledShippment($order->id))
                         <a class="btn primary-btn" href="#">

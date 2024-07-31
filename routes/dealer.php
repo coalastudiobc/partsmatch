@@ -31,7 +31,7 @@ Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer'
     Route::get('/download-csv', [ProductController::class, 'downloadModifiedCSV'])->name('download.sample');
     Route::get('/dashboard', [DealerController::class, 'dashboard'])->name('dashboard');
     Route::get('/profile', [AccountSettingController::class, 'profile'])->name('profile');
-    Route::post('profile/update', [AccountSettingController::class, 'update'])->name('profile.update');
+    Route::post('profile/post/update', [AccountSettingController::class, 'update'])->name('profile.post.update');
     Route::post('change-password', [AccountSettingController::class, 'updatePassword'])->name('changepassword');
     Route::match(['GET', "POST"], 'Dealers/status', [DealerController::class, 'toggleStatus'])->name('status');
 

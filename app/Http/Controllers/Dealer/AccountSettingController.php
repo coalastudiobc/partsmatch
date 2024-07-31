@@ -16,7 +16,7 @@ class AccountSettingController extends Controller
         $user = User::where('id', auth()->user()->id)->first();
         return view('dealer.account_setting', compact('user'));
     }
-    public function update(ProfileRequest $request)
+    public function update(Request $request)
     {
         $data = [
             'name' => $request->name,
@@ -34,12 +34,11 @@ class AccountSettingController extends Controller
             $data['profile_picture_file'] = $image['name'];
         }
 
-
         auth()->user()->update($data);
 
         return redirect()->back()->with(["message" => 'Updated successfully']);
     }
-
+   
     public function updatePassword(ChangePasswordRequest $request)
     {
         $old_password = $request->old_password;

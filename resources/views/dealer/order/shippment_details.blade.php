@@ -66,7 +66,7 @@
 
                         </td>
                         <td>
-                            <a  href="{{$shippmentDetails ? ($shippmentDetails->tracking_url ?? '#'): '#'}}" class="customer-price text-elipses" target="_blank">{{$shippmentDetails ? ($shippmentDetails->label_url ?? 'N/A'): 'N/A'}}</a>
+                            <a  href="{{$shippmentDetails ? ($shippmentDetails->label_url ?? '#'): '#'}}" class="customer-price text-elipses" target="_blank">{{$shippmentDetails ? ($shippmentDetails->label_url ?? 'N/A'): 'N/A'}}</a>
                         </td>
                         <td>
                             <div class="carrier-serv-bx">
@@ -74,9 +74,10 @@
                                 </div>
                                 <div class="carrier-serv-content">
                                     <h3>{{$shippmentDetails ? ($shippmentDetails->service_level_token ?? 'N/A'): 'N/A'}}</h3>
-                                    <a href="">{{$shippmentDetails ? ($shippmentDetails->tracking_number ?? 'N/A'): 'N/A'}}</a>
+                                    <span id="trackingDisplay">{{ $shippmentDetails ? (substr($shippmentDetails->tracking_number, 0, 4) . 'XXXXXX') : 'N/A' }}</span>
+                                    <a href="#" id="copy_trackingNumber" style="display:none;">{{ $shippmentDetails ? $shippmentDetails->tracking_number : 'N/A' }}</a>
                                 </div>
-                                <div class="carrier-serv-copy"><i class="fa-regular fa-copy"></i>
+                                <div class="carrier-serv-copy"><i class="fa-regular fa-copy" style="cursor: pointer;" onclick="copyToClipboard('copy_trackingNumber')"></i>
                                 </div>
                             </div>
                         </td>
@@ -91,10 +92,10 @@
                             </div>
                         </td>
                         <td>
-                            <button class="download-btn"><span><svg width="10" height="12" viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <a  href="{{$shippmentDetails ? ($shippmentDetails->label_url ?? '#'): '#'}}"  class="download-btn" download="example.pdf"  ><span><svg width="10" height="12" viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M7.87841 4.74981V0H2.12204V4.74981H0L5 11.1111L10 4.74981H7.87841Z" fill="CurrentColor"/>
                                 </svg>
-                                </span>Download</button>
+                                </span>Download</a>
                         </td>
                         <td>
                             <div class="pro-status">
@@ -110,3 +111,20 @@
     </div>
 </div>
 @endsection
+<script>
+    function copyToClipboard(id) {
+    var element = document.getElementById(id);
+    if (element) {
+        // Create a temporary textarea element
+        var textarea = document.createElement('textarea');
+        textarea.value = element.textContent || element.innerText; 
+        document.body.appendChild(textarea); 
+        textarea.select(); 
+        document.execCommand('copy'); 
+        document.body.removeChild(textarea);
+        toastr.success('Copied to clipboard!')
+    } else {
+         toastr.error('Something went wrong');
+    }
+}
+</script>
