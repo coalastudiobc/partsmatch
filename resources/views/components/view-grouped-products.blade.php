@@ -48,7 +48,7 @@
             @php $productIds = array_column($parcels, 'product_id'); $productIdsString = implode(',', $productIds); @endphp
             <div class="custm-table-body" id="{{'outer'.$item->id}}">
                 <div class="custm-table-head-box ">
-                    <img  class="available-to-add-input" src="{{Storage::url($item->product->productImage[0]->file_url)}}" >
+                    <img  class="available-to-add-input" src="{{ $item->product?->productImage?->first()?->file_url ? Storage::url($item->product->productImage->first()->file_url) : asset('assets/images/logo.svg') )}}" >
                 </div>
                 <div class="custm-table-head-box">
                     <p>{{ $item->quantity }}</p>
