@@ -2958,3 +2958,8 @@ button.accordion-button.analyics-tabs-btns {
     top: 3px;
     right: 6px;
 }
+.interior-content-right:has(.empty-category) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

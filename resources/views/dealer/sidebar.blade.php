@@ -153,7 +153,7 @@ class="analyics-tabs-btns @if (Route::is('Dealer.address.*')) active @endif ">
         </div>
     </div>
 </li>
-<li class="analyics-tabs-list">
+{{-- <li class="analyics-tabs-list">
     <div class="accordion accordion-flush" id="accordionFlushExample">
 
         <div class="accordion-item new-tab-btn">
@@ -197,7 +197,7 @@ class="analyics-tabs-btns @if (Route::is('Dealer.address.*')) active @endif ">
           </div>
           
     </div>
-</li>
+</li> --}}
 <!-- <li class="analyics-tabs-list">
     <div class="accordion accordion-flush" id="accordionFlushExample">
         <div class="accordion-item">

@@ -62,18 +62,7 @@
                                     <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                         <div class="accordion-body p-0">
                                             <div class="category-list">
-                                                <div class="form-group">
-                                                    <div class="formfield">
-                                                        <p type="text" class="form-control filter-serach w-input-text" contenteditable><div class="w-placeholder">
-                                                            Search
-                                                          </div></p>
-                                                        <span class="filter-serach-icon">
-                                                            <i class="fa-solid fa-magnifying-glass"></i>
-                                                        </span>
-                                                        <button class="search-icon-btn cross-btn"><i class="fa-solid fa-xmark"></i></button>
-                                                        <button class="search-icon-btn tick-btn"><i class="fa-solid fa-check"></i></button>
-                                                    </div>
-                                                </div>
+                                                
                                                 <ul class="ps-3 mb-2 ">
                                                     @foreach ($categories as $category )
                                                    <li>
@@ -105,6 +94,7 @@
                         {{-- @dd(request()) --}}
                         <form id="filters" method="POST" action="">
                             @csrf
+                            <input type="hidden" name="style" id="styleForSlider">
                             <div class="interior-filter-box">
 
                                 <div class="accordion" id="accordionExample1">
@@ -126,8 +116,8 @@
                                                         <span class="filter-serach-icon">
                                                             <i class="fa-solid fa-magnifying-glass"></i>
                                                         </span>
-                                                        <button class="search-icon-btn cross-btn"><i class="fa-solid fa-xmark"></i></button>
-                                                        <button class="search-icon-btn tick-btn"><i class="fa-solid fa-check"></i></button>
+                                                        <button class="search-icon-btn cross-btn d-none"><i class="fa-solid fa-xmark"></i></button>
+                                                        <button class="search-icon-btn tick-btn d-none"><i class="fa-solid fa-check"></i></button>
                                                     </div>
                                                 </div>
                                                 @foreach ($brands as $key => $brand )
@@ -187,6 +177,7 @@
                                 <div class="accordion" id="accordionExample3">
                                     <div class="accordion-item">
                                       <h2 class="accordion-header" id="headingFour">
+
                                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                                             <h4>Models</h4>
                                         </button>
@@ -194,6 +185,19 @@
                                       <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample3">
                                         <div class="accordion-body">
                                             <div id="modelContainer" class="interior-filter-inner">
+                                            <div class="form-group">
+                                                    <div class="formfield">
+                                                        <p type="text" class="form-control filter-serach w-input-text" contenteditable><div class="w-placeholder">
+                                                            Search
+                                                          </div></p>
+                                                        <span class="filter-serach-icon">
+                                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                                        </span>
+                                                        <button class="search-icon-btn cross-btn d-none"><i class="fa-solid fa-xmark"></i></button>
+                                                        <button class="search-icon-btn tick-btn d-none"><i class="fa-solid fa-check"></i></button>
+                                                    </div>
+                                                </div>
+                                                
                                                 @foreach ($models as $key => $model )
                                                     <div class="custm-check model">
                                                         <input type="checkbox" id="{{'model'.$key}}" name="model[]" @if(request()->has('model') && count(request()->model) && in_array($model->value, request()->model)) class="selected-entry" checked @endif value="{{$model->value}}">
@@ -227,7 +231,7 @@
                                                 </div> 
                                             </div> 
                                             <div class="slider-container"> 
-                                                <div class="price-slider"> 
+                                                <div class="price-slider" style = "@if(request()->has('style')) {{request()->style}} @endif" > 
                                                 </div> 
                                             </div> 
                                         </div> 
@@ -477,6 +481,7 @@
                         `${(minVal / rangeInputvalue[0].max) * 100}%`; 
                     rangevalue.style.right = 
                         `${100 - (maxVal / rangeInputvalue[1].max) * 100}%`; 
+                    $(document).find('#styleForSlider').val(`left:${(minVal / rangeInputvalue[0].max) * 100}%; right: ${100 - (maxVal / rangeInputvalue[1].max) * 100}%;`);
 
                     $('#filters').submit();
                 } 
