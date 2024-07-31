@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use App\Models\UserAddresses;
 use App\Models\ShippingAddress;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
 use App\Models\ShippmentCreation;
 use Stripe\PaymentIntent;
 use Illuminate\Support\Facades\DB;
@@ -31,41 +32,41 @@ class OrderController extends Controller
     public function order()
     {
         try {
-                $orderIds = Order::where('order_for', auth()->id())->pluck('id')->toArray();
-                if (empty($orderIds)) {
-                    return redirect()->back()->with(['error' => 'No orders found for the authenticated user.']);
-                }
-
-                // Fetch fulfilled order IDs
-                $fulfilledIds = ShippoPurchasedLabel::whereIn('order_id', $orderIds)->pluck('order_id')->toArray();
-
-                if (empty($fulfilledIds)) {
-                    return redirect()->back()->with(['info' => 'No fulfilled shipments found for the orders.']);
-                }
-
-                // Fetch orders that are not fulfilled
-                $orders = Order::whereIn('id', $orderIds)->whereNotIn('id', $fulfilledIds)->orderBy('created_at', 'DESC')->paginate(__('pagination.pagination_nuber'));
-                // $orders =  Order::with('orderItem')->where('order_for', auth()->id())->orderBy('created_at', 'DESC')->paginate(__('pagination.pagination_nuber'));
-                return view('dealer.order.order_list', compact('orders'));
-            } catch (\Throwable $th) {
-                return redirect()->back()->with(['error'=>$th->getMessage()]);
+            $orderIds = Order::where('order_for', auth()->id())->pluck('id')->toArray();
+            if (empty($orderIds)) {
+                return redirect()->back()->with(['error' => 'No orders found for the authenticated user.']);
             }
+
+            // Fetch fulfilled order IDs
+            $fulfilledIds = ShippoPurchasedLabel::whereIn('order_id', $orderIds)->pluck('order_id')->toArray();
+
+            if (empty($fulfilledIds)) {
+                return redirect()->back()->with(['info' => 'No fulfilled shipments found for the orders.']);
+            }
+
+            // Fetch orders that are not fulfilled
+            $orders = Order::whereIn('id', $orderIds)->whereNotIn('id', $fulfilledIds)->orderBy('created_at', 'DESC')->paginate(__('pagination.pagination_nuber'));
+            // $orders =  Order::with('orderItem')->where('order_for', auth()->id())->orderBy('created_at', 'DESC')->paginate(__('pagination.pagination_nuber'));
+            return view('dealer.order.order_list', compact('orders'));
+        } catch (\Throwable $th) {
+            return redirect()->back()->with(['error' => $th->getMessage()]);
+        }
     }
     public function fullfilledShippment()
-    { 
+    {
         try {
-                $orderIds = Order::where('order_for', auth()->id())->pluck('id')->toArray();
-                    if (empty($orderIds)) {
-                        return redirect()->back()->with([
-                            'error' => 'No orders found for the authenticated user.'
-                        ]);
-                    }
-                $fulfilledIds = ShippoPurchasedLabel::whereIn('order_id', $orderIds)->pluck('order_id')->toArray();
-                $fulfilledOrders = Order::whereIn('id', $fulfilledIds)->get();
-                return view('dealer.order.fullfilled_order', compact('fulfilledOrders'));
-            } catch (\Throwable $th) {
-                return redirect()->back()->with(['error'=>$th->getMessage()]);
+            $orderIds = Order::where('order_for', auth()->id())->pluck('id')->toArray();
+            if (empty($orderIds)) {
+                return redirect()->back()->with([
+                    'error' => 'No orders found for the authenticated user.'
+                ]);
             }
+            $fulfilledIds = ShippoPurchasedLabel::whereIn('order_id', $orderIds)->pluck('order_id')->toArray();
+            $fulfilledOrders = Order::whereIn('id', $fulfilledIds)->get();
+            return view('dealer.order.fullfilled_order', compact('fulfilledOrders'));
+        } catch (\Throwable $th) {
+            return redirect()->back()->with(['error' => $th->getMessage()]);
+        }
     }
     public function testing()
     {
@@ -74,80 +75,91 @@ class OrderController extends Controller
     public function pickAddressOfShippment(Order $orderid)
     {
         try {
-                $getSelectedStuff = ShippmentAddressDetail::where('order_id',$orderid->id)->where('user_id',auth()->id())->first();
-                $previousAddresses =  UserAddresses::where('user_id', auth()->user()->id)->where('type', 'Pickup')->get();
-                $countries = Country::whereIn('name', ['Canada', 'United States'])->get();
-                if(!is_null($getSelectedStuff)){
-                    return view('dealer.order.pick_address', compact('countries', 'previousAddresses', 'orderid','getSelectedStuff'));
-                }
-                return view('dealer.order.pick_address', compact('countries', 'previousAddresses', 'orderid'));
-            } catch (\Throwable $th) {
-                return redirect()->back()->with(['error'=>$th->getMessage()]);
+            $getSelectedStuff = ShippmentAddressDetail::where('order_id', $orderid->id)->where('user_id', auth()->id())->first();
+            $previousAddresses =  UserAddresses::where('user_id', auth()->user()->id)->where('type', 'Pickup')->get();
+            $countries = Country::whereIn('name', ['Canada', 'United States'])->get();
+            if (!is_null($getSelectedStuff)) {
+                return view('dealer.order.pick_address', compact('countries', 'previousAddresses', 'orderid', 'getSelectedStuff'));
             }
-
+            return view('dealer.order.pick_address', compact('countries', 'previousAddresses', 'orderid'));
+        } catch (\Throwable $th) {
+            return redirect()->back()->with(['error' => $th->getMessage()]);
+        }
     }
     public function productParcels(Request $request, Order $order)
     {
-            $messages = [
-                'date.required' => 'The date is required.',
-                'date.date' => 'The date must be a valid date.',
-                'date.after_or_equal' => 'The date must be today or a future date.',
-            ];
+        // $messages = [
+        //     'date.required' => 'The date is required.',
+        //     'date.date' => 'The date must be a valid date.',
+        //     'date.after_or_equal' => 'The date must be today or a future date.',
+        // ];
 
-            $request->validate([
-                'date' => 'required|date|after_or_equal:today',
-                'selectadress' => 'required',
-            ], $messages);
+        // $request->validate([
+        //     'date' => 'required|date|after_or_equal:today',
+        //     'selectadress' => 'required',
+        // ], $messages);
+        $validator = Validator::make($request->all(), [
+            'date' => 'required|date|after_or_equal:today',
+            'selectadress' => 'required',
+        ], [
+            'date.required' => 'The date is required.',
+            'date.date' => 'The date must be a valid date.',
+            'date.after_or_equal' => 'The date must be today or a future date.',
+        ]);
         try {
-                $this->savingShippmentDateandAddress($request,$order);
-                session()->put('selectedPickAddressId', $request->selectadress);
-                $orderProducts = OrderItem::with('product', 'parcel')->where('order_id', $order->id)->get();
-                    foreach ($orderProducts as $single) {
-                        $check = OrderParcels::where('orderItem_id', $single->id)->first();
-                        if (!$check) {
-                            OrderParcels::updateOrCreate(
-                                ['orderItem_id' => $single->id, 'product_id' => $single->product_id],
-                                ['parcel_id' => random_int(10000, 99999), 'status' => 0]
-                            );
-                        }
-                    }
-                $groups = groupWith($orderProducts[0]->getOrderIdsWithSameParcel());
-                return view('dealer.order.product_parcel', compact('order', 'groups'));
-            } catch (\Throwable $th) {
-                toastr()->error($th->getMessage());
+            if ($validator->fails()) {
+                toastr()->error($validator->errors()->first());
                 return redirect()->back();
             }
+            $this->savingShippmentDateandAddress($request, $order);
+            session()->put('selectedPickAddressId', $request->selectadress);
+            $orderProducts = OrderItem::with('product', 'parcel')->where('order_id', $order->id)->get();
+            foreach ($orderProducts as $single) {
+                $check = OrderParcels::where('orderItem_id', $single->id)->first();
+                if (!$check) {
+                    OrderParcels::updateOrCreate(
+                        ['orderItem_id' => $single->id, 'product_id' => $single->product_id],
+                        ['parcel_id' => random_int(10000, 99999), 'status' => 0]
+                    );
+                }
+            }
+            $groups = groupWith($orderProducts[0]->getOrderIdsWithSameParcel());
+            return view('dealer.order.product_parcel', compact('order', 'groups'));
+        } catch (\Throwable $th) {
+            toastr()->error($th->getMessage());
+            return redirect()->back();
+        }
     }
     public function addressDelete(UserAddresses $address)
     {
         try {
-                $address->delete();
-                toastr()->success('Address has been Deleted successfully.');
-                return redirect()->back();
-            } catch (\Exception $th) {
-                toastr()->error($th->getMessage());
-                return redirect()->back();
-            }
+            $address->delete();
+            toastr()->success('Address has been Deleted successfully.');
+            return redirect()->back();
+        } catch (\Exception $th) {
+            toastr()->error($th->getMessage());
+            return redirect()->back();
+        }
     }
     public function picking_address(ShippingAddressRequest $request)
     {
         try {
-                $shippoResponse = $this->address($request);
-                if ($shippoResponse->object_state == "VALID") {
-                    $shippo_address_id = $shippoResponse->object_id;
-                    $addresstype = 'Pickup';
-                    $this->storeAddress($request, $addresstype, $shippo_address_id);
-                    $data = ['status' => true, 'message' => "Picking address added successfully"];
-                    return response()->json($data);
-                }
-                $error_code = $shippoResponse->messages[0]->code;
-                // $error_type = $shippoResponse->messages[0]->type;
-                $error_text = $shippoResponse->messages[0]->text;
-                $data = ['status' => false,  'message' => $error_text];
+            $shippoResponse = $this->address($request);
+            if ($shippoResponse->object_state == "VALID") {
+                $shippo_address_id = $shippoResponse->object_id;
+                $addresstype = 'Pickup';
+                $this->storeAddress($request, $addresstype, $shippo_address_id);
+                $data = ['status' => true, 'message' => "Picking address added successfully"];
                 return response()->json($data);
+            }
+            $error_code = $shippoResponse->messages[0]->code;
+            // $error_type = $shippoResponse->messages[0]->type;
+            $error_text = $shippoResponse->messages[0]->text;
+            $data = ['status' => false,  'message' => $error_text];
+            return response()->json($data);
         } catch (\Exception $e) {
-                $data = ['status' => false,  'message' => $e->getMessage()];
-                return response()->json($data);
+            $data = ['status' => false,  'message' => $e->getMessage()];
+            return response()->json($data);
         }
     }
     public function productDimension(Request $request)
@@ -155,23 +167,23 @@ class OrderController extends Controller
         try {
             $products = explode(',', $request->products);
             $parcel_id =  $this->createParcel($request);
-            $orderProducts = OrderItem::with('product', 'parcel')->where('order_id', $request->order_id)->whereIn('product_id',$products)->get();
-                foreach($orderProducts as $singleItem){
+            $orderProducts = OrderItem::with('product', 'parcel')->where('order_id', $request->order_id)->whereIn('product_id', $products)->get();
+            foreach ($orderProducts as $singleItem) {
+                OrderParcels::updateOrCreate(
+                    ['orderItem_id' => $singleItem->id, 'product_id' => $singleItem->product_id],
+                    ['parcel_id' => $parcel_id, 'status' => 1]
+                );
+            }
+            $orderProducts = OrderItem::with('product', 'parcel')->where('order_id', $request->order_id)->get();
+            foreach ($orderProducts as $single) {
+                $check = OrderParcels::where('orderItem_id', $single->id)->first();
+                if (!$check) {
                     OrderParcels::updateOrCreate(
-                        ['orderItem_id' => $singleItem->id, 'product_id' => $singleItem->product_id],
-                        ['parcel_id' => $parcel_id, 'status' => 1]
+                        ['orderItem_id' => $single->id, 'product_id' => $single->product_id],
+                        ['parcel_id' => random_int(10000, 99999), 'status' => 0]
                     );
                 }
-            $orderProducts = OrderItem::with('product', 'parcel')->where('order_id', $request->order_id)->get();
-                foreach ($orderProducts as $single) {
-                    $check = OrderParcels::where('orderItem_id', $single->id)->first();
-                    if (!$check) {
-                        OrderParcels::updateOrCreate(
-                            ['orderItem_id' => $single->id, 'product_id' => $single->product_id],
-                            ['parcel_id' => random_int(10000, 99999), 'status' => 0]
-                        );
-                    }
-                }
+            }
             $groups = groupWith($orderProducts[0]->getOrderIdsWithSameParcel());
             $all_order_parcels = view('components.group-parcel', ['groups' => $groups])->render();
             $data = ['status' => true,  'payment' => isFullFilledOrder($orderProducts[0]->order_id), 'data' => $all_order_parcels, 'paymentUrl' => route('Dealer.order.shippment.rates', ['order' => $orderProducts[0]->order_id]), 'message' => 'Product dimensions data saved successfully.', 'change_at' => $request->element_to_change];
@@ -187,23 +199,23 @@ class OrderController extends Controller
         try {
             $products = $request->product_ids;
             $parcel_dummy = random_int(10000, 99999);
-                foreach ($products as $product ) {
-                    $orderItem = OrderItem::where('id', $product)->first();
+            foreach ($products as $product) {
+                $orderItem = OrderItem::where('id', $product)->first();
+                OrderParcels::updateOrCreate(
+                    ['orderItem_id' => $orderItem->id, 'product_id' => $orderItem->product_id],
+                    ['parcel_id' => $parcel_dummy, 'status' => 0]
+                );
+            }
+            $orderProducts = OrderItem::with('product', 'parcel')->where('order_id', $request->order_id)->get();
+            foreach ($orderProducts as $single) {
+                $check = OrderParcels::where('orderItem_id', $single->id)->first();
+                if (!$check) {
                     OrderParcels::updateOrCreate(
-                        ['orderItem_id' => $orderItem->id, 'product_id' => $orderItem->product_id],
-                        ['parcel_id' => $parcel_dummy, 'status' => 0]
+                        ['orderItem_id' => $single->id, 'product_id' => $single->product_id],
+                        ['parcel_id' => random_int(10000, 99999), 'status' => 0]
                     );
                 }
-            $orderProducts = OrderItem::with('product', 'parcel')->where('order_id', $request->order_id)->get();
-                foreach ($orderProducts as $single) {
-                    $check = OrderParcels::where('orderItem_id', $single->id)->first();
-                    if (!$check) {
-                        OrderParcels::updateOrCreate(
-                            ['orderItem_id' => $single->id, 'product_id' => $single->product_id],
-                            ['parcel_id' => random_int(10000, 99999), 'status' => 0]
-                        );
-                    }
-                }
+            }
             $groups = groupWith($orderProducts[0]->getOrderIdsWithSameParcel());
             $all_order_parcels = view('components.group-parcel', ['groups' => $groups])->render();
             $data = ['status' => true,  'payment' => isFullFilledOrder($orderItem->order_id), 'data' => $all_order_parcels, 'paymentUrl' => route('Dealer.order.shippment.rates', ['order' => $orderItem->order_id]), 'message' => 'Product dimensions data saved successfully.', 'change_at' => $request->element_to_change];
@@ -218,16 +230,16 @@ class OrderController extends Controller
     {
         try {
             $products = explode(',', $request->product_ids);
-            $orderProducts = OrderItem::with('product', 'parcel')->where('order_id', $request->order_id)->whereIn('product_id',$products)->get();
+            $orderProducts = OrderItem::with('product', 'parcel')->where('order_id', $request->order_id)->whereIn('product_id', $products)->get();
             foreach ($orderProducts as $single) {
-                $check = OrderParcels::where('orderItem_id', $single->id)->where('product_id',$single->product_id)->first();
+                $check = OrderParcels::where('orderItem_id', $single->id)->where('product_id', $single->product_id)->first();
                 if ($check) {
                     $check->update(['parcel_id' => random_int(10000, 99999), 'status' => 0]);
                 }
             }
             $groups = groupWith($orderProducts[0]->getOrderIdsWithSameParcel());
             $all_order_parcels = view('components.group-parcel', ['groups' => $groups])->render();
-            $data = ['status' => true,  'payment_btn_disable' => true, 'data' => $all_order_parcels, 'paymentUrl' => route('Dealer.order.shippment.rates', ['order' =>$request->order_id]), 'message' => 'group dismantle', 'change_at' => $request->element_to_change];
+            $data = ['status' => true,  'payment_btn_disable' => true, 'data' => $all_order_parcels, 'paymentUrl' => route('Dealer.order.shippment.rates', ['order' => $request->order_id]), 'message' => 'group dismantle', 'change_at' => $request->element_to_change];
             return response()->json($data);
         } catch (\Throwable $th) {
             $data = ['status' => false,  'message' => $th->getMessage()];
@@ -239,12 +251,12 @@ class OrderController extends Controller
     public function createShippment(Request $request)
     {
         try {
-            $selectedPickupAddressId=ShippmentAddressDetail::where('order_id',$request->order)->where('user_id',auth()->id())->first();
+            $selectedPickupAddressId = ShippmentAddressDetail::where('order_id', $request->order)->where('user_id', auth()->id())->first();
             if (is_null($selectedPickupAddressId)) {
                 throw new \Exception('Pick up address not found for this particular order');
             }
             $pickupAddress = UserAddresses::where('id', $selectedPickupAddressId->selected_shippo_address)->first();
-            $shippmentDate=$selectedPickupAddressId->shippment_date;
+            $shippmentDate = $selectedPickupAddressId->shippment_date;
             $formattedDate = \Carbon\Carbon::parse($shippmentDate)->format('Y-m-d\TH:i');
             $selected_order_id = $request->order;
             if (is_null($selected_order_id)) {
@@ -265,8 +277,8 @@ class OrderController extends Controller
                 "async" => false,
                 "shipment_date" => $this->getCurrentTimeFormatted()
             ];
-            $endpoint='shipments/';
-           $response_in_array= $this->createPostRequest($endpoint,$body);
+            $endpoint = 'shipments/';
+            $response_in_array = $this->createPostRequest($endpoint, $body);
             if ($response_in_array->object_status == "SUCCESS") {
                 $data = [
                     'user_id' => auth()->user()->id,
@@ -278,7 +290,7 @@ class OrderController extends Controller
                 $this->saveInDb($data, $parcelsIdInArray);
                 $stripeCustomer = auth()->user()->createOrGetStripeCustomer();
                 $intent = auth()->user()->createSetupIntent();
-                return view('dealer.order.payment', compact('pickupAddress', 'response_in_array', 'stripeCustomer', 'intent', 'reciever_address', 'selected_order_id','shippmentDate'));
+                return view('dealer.order.payment', compact('pickupAddress', 'response_in_array', 'stripeCustomer', 'intent', 'reciever_address', 'selected_order_id', 'shippmentDate'));
             }
         } catch (\Exception $e) {
             toastr()->error($e->getMessage());
@@ -318,20 +330,20 @@ class OrderController extends Controller
     public function shippmentTranscation($rate_id, $request)
     {
         try {
-                $body = [
-                    "rate" => $rate_id,
-                    "async" => false,
-                    "label_file_type" => "PDF_4x6",
-                ];
-                $response = $this->createTransaction($body);
-                if ($response->object_status == 'SUCCESS') {
-                    $rateDetails = $this->getRateDetails($rate_id);
-                    return  $this->storeRateDetails($rateDetails, $response, $request);
-                }
-            } catch (\Exception $th) {
-                toastr()->error($th->getMessage());
-                return redirect()->back();
+            $body = [
+                "rate" => $rate_id,
+                "async" => false,
+                "label_file_type" => "PDF_4x6",
+            ];
+            $response = $this->createTransaction($body);
+            if ($response->object_status == 'SUCCESS') {
+                $rateDetails = $this->getRateDetails($rate_id);
+                return  $this->storeRateDetails($rateDetails, $response, $request);
             }
+        } catch (\Exception $th) {
+            toastr()->error($th->getMessage());
+            return redirect()->back();
+        }
     }
     public function storeRateDetails($response, $masterResponse, $request)
     {
@@ -389,7 +401,7 @@ class OrderController extends Controller
             'return_url' => route('Dealer.order.orderlist')
         ]);
     }
-    public function savingShippmentDateandAddress($request,$order)
+    public function savingShippmentDateandAddress($request, $order)
     {
         try {
             //code...
@@ -411,13 +423,13 @@ class OrderController extends Controller
     public function detailsOfFullfilledShippment($order_id)
     {
         try {
-            $shippmentDetails= ShippoPurchasedLabel::where('order_id',$order_id)->first();
+            $shippmentDetails = ShippoPurchasedLabel::where('order_id', $order_id)->first();
             if (empty($shippmentDetails)) {
-                return redirect()->back()->with(['error'=>'Something went wrong. Shippment details not found']);
+                return redirect()->back()->with(['error' => 'Something went wrong. Shippment details not found']);
             }
-            return view('dealer.order.shippment_details',compact('shippmentDetails'));
+            return view('dealer.order.shippment_details', compact('shippmentDetails'));
         } catch (\Throwable $th) {
-            return redirect()->back()->with(['error'=>$th->getMessage()]);
+            return redirect()->back()->with(['error' => $th->getMessage()]);
         }
     }
     public function getFullfilledOrdersParcelsGroups($order)
@@ -425,8 +437,7 @@ class OrderController extends Controller
         try {
             $orderProducts = OrderItem::with('product', 'parcel')->where('order_id', $order->id)->get();
             $groups = groupWith($orderProducts[0]->getOrderIdsWithSameParcel());
-            } catch (\Throwable $th) {
-
-         }
+        } catch (\Throwable $th) {
+        }
     }
 }
