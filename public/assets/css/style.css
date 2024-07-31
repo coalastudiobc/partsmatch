@@ -2097,6 +2097,7 @@ span.ymmm-cross {
 
 .edit-product-sec .card {
     border-radius: 0;
+    border: 0;
 }
 
 .brands-header {
@@ -3018,7 +3019,7 @@ button.accordion-button.analyics-tabs-btns {
 
 .carrier-serv-bx {
     display: flex;
-    gap: 2clr0px;
+    gap: 2px;
     align-items: center;
 }
 
@@ -3072,3 +3073,34 @@ button.accordion-button.analyics-tabs-btns {
     color: #272643;
     font-weight: 600;
 }
+.date-formfield .formfield .form-icon {
+    right: 12px;
+    top: 47%;
+}
+.date-formfield {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.date-formfield > label {
+    white-space: nowrap;
+}
+.section-body.edit-product-sec {
+    padding: 30px 40px;
+    background-color: #Fff;
+}
+.section-body.edit-product-sec .card-body{
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px 4px #ddd;
+    border: 0;
+}
+
+
+
+
+
+
+
+
+
+

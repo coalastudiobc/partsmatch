@@ -99,91 +99,6 @@
         </div>
         {!! $products->links('dealer.pagination') !!}
 
-        <div class="new-table-section">
-            <div class="product-detail-table product-list-table pro-manage-table">
-                <div class="table-responsive">
-                    <table class="table customer-table">
-                        <thead>
-                            <tr>
-                                <th>
-                                    <p>Customer</p>
-                                </th>
-                                <th>
-                                    <p>Track Status</p>
-                                </th>
-                                <th>
-                                    <p>Rate</p>
-                                </th>
-                                <th>
-                                    <p>Carrier Service</p>
-                                </th>
-                                <th>
-                                    <p>Order</p>
-                                </th>
-                                <th>
-                                    <p>Ship date</p>
-                                </th>
-                                <th>
-                                </th>
-                                <th>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div class="customer-profile">
-                                        <h3>Rishabh Girdhar</h3>
-                                        <p>Scottsdale, AZ 85254-8169</p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <p class="customer-track-no">123445678699</p>
-                                </td>
-                                <td>
-                                    <p class="customer-price">$37.62</p>
-                                </td>
-                                <td>
-                                    <div class="carrier-serv-bx">
-                                        <div class="carrier-serv-pro">
-                                        </div>
-                                        <div class="carrier-serv-content">
-                                            <h3>UPS Next Day Air®</h3>
-                                            <a href="">1ZXXXXXXXXXXXXXXXX</a>
-                                        </div>
-                                        <div class="carrier-serv-copy"><i class="fa-regular fa-copy"></i></div>
-                                    </div>
-                                </td>
-
-                                <td>
-                                    <div class="order-date">
-                                        <p>07/29/2024</p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="order-date">
-                                        <p>07/29/2024</p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <button class="download-btn"><span><svg width="10" height="12" viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M7.87841 4.74981V0H2.12204V4.74981H0L5 11.1111L10 4.74981H7.87841Z" fill="CurrentColor"/>
-                                        </svg>
-                                        </span>Download</button>
-                                </td>
-                                <td>
-                                    <div class="pro-status">
-                                            <div class="badge complete-badge" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="fa-solid fa-check"></i> Complete
-                                            </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
     </div>
 @endsection
 @section('modals')
@@ -505,7 +420,6 @@
                 </form>
             </div>
         </div>
-
     </div>
     </div>
     </div>
