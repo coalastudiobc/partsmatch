@@ -106,10 +106,7 @@
             },
             errorPlacement: function(error, element) {
                 error.addClass('invalid-feedback');
-                console.log(error, element);
-
                 if (error.prop('type') === 'hidden') {
-                    console.log(error, element.parent());
                     error.insertAfter(element.parent());
                 } else {
                     error.insertAfter(element);
@@ -162,14 +159,16 @@
                     return; // Prevent form submission if there are validation errors
                 }
                 let formData = $(form).serialize();
-
+                jQuery('#fullPageLoader').removeClass('d-none');
+                $("#From_address").find('button').attr('disabled', true);
                 $.ajax({
                     url: $(form).attr('action'),
                     method: $(form).attr('method'),
                     data: formData,
                     success: function(response) {
-                        // Handle the response from the server
                         if (response.status === true) {
+                            jQuery('#fullPageLoader').addClass('d-none');
+                            $("#From_address").find('button').attr('disabled', false);
                             $(function() {
                                 $('#pickadress-modal').modal('toggle');
                             });
@@ -178,14 +177,15 @@
                             toastr.success(response.message);
 
                         } else {
+                            jQuery('#fullPageLoader').addClass('d-none');
+                            $("#From_address").find('button').attr('disabled', false);
                             toastr.error(response.message);
                         }
                     },
                     error: function(xhr, status, error) {
-                        // Handle errors
+                        jQuery('#fullPageLoader').addClass('d-none');
+                        $("#From_address").find('button').attr('disabled', false);
                         console.log('Error:', error);
-                        console.log('Status:', status);
-                        console.log('XHR:', xhr);
                     }
                 });
             }
@@ -205,7 +205,7 @@
         jQuery(document).on('click', '.custom_dropdown_item', function() {
             var selectitem = jQuery(this).attr('data-value');
             var selecttext = jQuery(this).attr('data-text');
-            jQuery('#selectedItem').text(selecttext);
+            jQuery('#selectedItem').text(capitalizeFirst(selecttext));
             jQuery('input[name="country"]').val(selectitem);
             $('#country_code').removeClass('is-invalid').next('.invalid-feedback').text('');
             jQuery('#country_code').val(jQuery(this).attr('data-iso_code'));
@@ -218,9 +218,7 @@
 
             let url = APP_URL + '/dealer/state/' + selectitem;
             if (jQuery.isNumeric(selectitem) && selectitem > 0) {
-                ajaxCall(url, 'get')
-                    .then(handleCountryData)
-                    .catch(handleCountryError);
+                ajaxCall(url, 'get').then(handleCountryData).catch(handleCountryError);
             }
         });
 
@@ -238,9 +236,7 @@
 
             let url = APP_URL + '/dealer/cities/' + stateId;
             if (jQuery.isNumeric(stateId) && stateId > 0) {
-                ajaxCall(url, 'get')
-                    .then(handleStateData)
-                    .catch(handleCountryError);
+                ajaxCall(url, 'get').then(handleStateData).catch(handleCountryError);
             }
         });
 
@@ -270,9 +266,9 @@
             response.data.forEach(state => {
                 $('.state').append(`<li><a class="dropdown-item state_dropdown_item select_state"
                                                                     data-value="${state.id}"
-                                                                    data-text="${state.name}"
-                                                                    data-name="${state.name}"
-                                                                    href="javascript:void(0)">${state.name}</a>
+                                                                    data-text="${capitalizeFirst(state.name)}"
+                                                                    data-name="${capitalizeFirst(state.name)}"
+                                                                    href="javascript:void(0)">${capitalizeFirst(state.name)}</a>
                                                             </li>`)
             });
             jQuery('#state').html(options);
@@ -284,8 +280,10 @@
             let options = '<li> <a href="javascript:void(0)"> Select </a></li>';
             jQuery('.city').empty();
             response.data.forEach(city => {
-                $('.city').append(
-                    `<li><a class="dropdown-item city_dropdown_item" data-value="${city.id}" data-text="${city.name}" href="javascript:void(0)">${city.name}</a></li>`
+                $('.city').append(`<li><a class="dropdown-item city_dropdown_item" 
+                                                                data-value="${city.id}" 
+                                                                data-text="${capitalizeFirst(city.name)}" 
+                                                                href="javascript:void(0)">${capitalizeFirst(city.name)}</a></li>`
                 );
             });
         }

@@ -26,7 +26,7 @@
                     <x-alert-component />
                     <div class="cstm-card account-detail-card">
                         <div class="accounts-form">
-                            <form id="account_setting" action="{{ route('Dealer.profile.update') }}" enctype="multipart/form-data" method="post">
+                            <form id="account_setting" action="{{ route('Dealer.profile.post.update') }}" enctype="multipart/form-data" method="post">
                                 @csrf
                                 <div class="row">
                                     <div class="dealer-profile-upload-box">

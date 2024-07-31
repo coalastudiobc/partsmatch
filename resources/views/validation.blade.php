@@ -16,6 +16,10 @@
     //email
     const emailRegex = {{ config('validation.email_regex') }};
 
+    //Pincode
+    const pincodeMinLength = {{ config('validation.pincode_minlength') }};
+    const pincodeMaxLength = {{ config('validation.pincode_maxlength') }};
+
     //password
     const passwordRegex = {{ config('validation.password_regex') }};
     const passwordMinLength = parseInt(`${passwordRegex}`.match(/(?<={)\d+/)[0]);

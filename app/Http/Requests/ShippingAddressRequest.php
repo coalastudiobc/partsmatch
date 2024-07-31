@@ -32,7 +32,7 @@ class ShippingAddressRequest extends FormRequest
             'street1' => ['required', 'string', 'min:' . config('validation.address1_minlength'), 'max:' . config('validation.address1_maxlength')],
             'street2' => 'nullable|string|max:35',
             'description' => 'nullable|string|max:100',
-            'pin_code' => ['required', 'digits_between:2,6'],
+            'pin_code' => ['required', 'digits_between:5,6'],
         ];
     }
 
@@ -49,23 +49,23 @@ class ShippingAddressRequest extends FormRequest
             'last_name.max' => 'Last name may not be greater than :max characters.',
             'last_name.regex' => 'Last name format is invalid.',
 
-            'phone_number.required' => 'Phone number is required.',
+            'phone_number.required' => `{{ __('customvalidation.user.phone_number.required') }}`,
             'phone_number.digits' => 'Phone number must be exactly 10 digits.',
 
-            'country.required' => 'Country is required.',
-            'state.required' => 'State is required.',
-            'city.required' => 'City is required.',
+            'country.required' => `{{ __('customvalidation.user.country.required') }}`,
+            'state.required' => `{{ __('customvalidation.user.state.required') }}`,
+            'city.required' =>  `{{ __('customvalidation.user.city.required') }}`,
 
-            'street1.required' => 'Street address is required.',
-            'street1.min' => 'Street address must be at least :min characters.',
-            'street1.max' => 'Street address may not be greater than :max characters.',
+            'street1.required' => `{{ __('customvalidation.addresses.address1.required') }}`,
+            'street1.min' => `{{ __('customvalidation.addresses.address1.min') }}`,
+            'street1.max' => `{{ __('customvalidation.addresses.address1.max') }}`,
 
-            'street2.max' => 'Street address line 2 may not be greater than :max characters.',
+            'street2.max' => `{{ __('customvalidation.addresses.description.max') }}`,
 
             'description.max' => 'Description may not be greater than :max characters.',
 
-            'pin_code.required' => 'Pin code is required.',
-            'pin_code.digits_between' => 'Pin code must be between :min and :max digits.',
+            'pin_code.required' => `{{ __('customvalidation.user.pin_code.required') }}`,
+            'pin_code.digits_between' =>  `{{ __('customvalidation.user.pin_code.minlength', ['min' => config('validation.pincode_maxlength'), 'max' => config('validation.pincode_minlength')]) }}`,
         ];
     }
 }

@@ -22,7 +22,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="">Product Name</label>
+                            <label for="">Product Name<span class="required-field">*</span></label>
 
                             <div class="form-field">
                                 <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name', $product->name) }}">
@@ -37,7 +37,7 @@
 
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="">Product Category</label>
+                            <label for="">Product Category<span class="required-field">*</span></label>
                             <div class="form-field">
                                 <select type="text" name="category" class="form-control category" placeholder="Product Category">
                                     <option value="">Select the category</option>
@@ -52,7 +52,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="">Product SubCategory</label>
+                            <label for="">Product SubCategory<span class="required-field">*</span></label>
                             <div class="form-field subcategory">
                                 <select type="text" name="subcategory" class="form-control" placeholder="Product SubCategory" id="subcategory">
                                     <option value="{{ $product->subcategory_id }}">
@@ -77,7 +77,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="">Product Description</label>
+                            <label for="">Description<span class="required-field">*</span></label>
                             <div class="form-field">
                                 <textarea name="description" class="form-control summernote @error('description') is-invalid @enderror">{{ $product->description ? $product->description : '' }} </textarea>
                                 @error('description')
@@ -191,7 +191,7 @@
     </div>
     <div class="col-md-6">
         <div class="form-group">
-            <label for="">Product Quantity</label>
+            <label for="">Product Quantity<span class="required-field">*</span></label>
             <div class="form-field">
                 <input type="text" name="stocks_avaliable" class="form-control @error('quantity') is-invalid @enderror" value="{{ old('stocks_avaliable', $product->stocks_avaliable) }}">
                 @error('stocks_avaliable')
@@ -204,7 +204,7 @@
     </div>
     <div class="col-md-6">
         <div class="form-group">
-            <label for="">Product Price</label>
+            <label for="">Product Price<span class="required-field">*</span></label>
             <div class="form-field">
                 <input type="text" name="price" class="form-control @error('price') is-invalid @enderror" value="{{ old('price', $product->price) }}">
                 @error('price')

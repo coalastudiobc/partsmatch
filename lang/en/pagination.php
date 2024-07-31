@@ -16,5 +16,6 @@ return [
     'previous' => '&laquo; Previous',
     'next' => 'Next &raquo;',
     'pagination_nuber' => '7',
+    'admin_paginaion_number'=>'10',
 
 ];

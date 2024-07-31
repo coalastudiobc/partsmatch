@@ -31,13 +31,23 @@
                                 <h3>Reciever Address</h3>
                                 {{-- <a href="#">Edit Resipient</a> --}}
                             </div>
-                            <p>{{ $reciever_address->name . ' ' . $reciever_address->last_name }}</p>
-                            <h4>{{ $reciever_address->address1 . ' ' . $reciever_address->city . ',' . $reciever_address->state . ',' . $reciever_address->pin_code . ',' . $reciever_address->country }}
+                            @if (!is_null($reciever_address))
+                            <p>{{$reciever_address ? ($reciever_address->name ?? 'N/A') . ' ' . ($reciever_address->last_name ?? 'N/A'): 'N/A' }}</p>
+                            <h4>{{ $reciever_address ? ($reciever_address->address1 ?? 'N/A')  . ' ' . ($reciever_address->city ?? 'N/A') . ',' . ($reciever_address->state ?? 'N/A') . ',' . ($reciever_address->pin_code ?? 'N/A' ). ',' . ($reciever_address->country ?? 'N/A') : 'N/A' }}
                             </h4>
                             <div class="shipment-address-mail-phone">
                                 <a href="#">cyhujequ@mailinator.com</a>
-                                <a href="#">{{ $reciever_address->phone_number }}</a>
+                                <a href="#">{{ $reciever_address ? ($reciever_address->phone_number ?? 'N/A') : 'N/A' }}</a>
                             </div>
+                            @else
+                            <p>Due to some reason. currently reciever address not showing</p>
+                            <h4>if any issue. please contact to Administrator
+                            </h4>
+                            <div class="shipment-address-mail-phone">
+                                <a href="#">{{ $reciever_address ? ($reciever_address->email ?? 'N/A') : 'N/A' }}</a>
+                                <a href="#">{{ $reciever_address ? ($reciever_address->phone_number ?? 'N/A') : 'N/A' }}</a>
+                            </div> 
+                            @endif
                         </div>
                     </div>
                 </div>

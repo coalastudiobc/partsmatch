@@ -40,7 +40,7 @@ class CartController extends Controller
                 $cart = Cart::create($cart);
             }
 
-
+            $stock=false;
             $dealerCheck = CartProduct::where('cart_id', $cart->id)->first();
             if ($dealerCheck) {
                 if ($dealerCheck->product_of != $product->user_id) {
