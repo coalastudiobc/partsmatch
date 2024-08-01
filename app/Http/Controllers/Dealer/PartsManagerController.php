@@ -54,7 +54,12 @@ class PartsManagerController extends Controller
 
     public function edit(User $user)
     {
-        return view('dealer.parts_manager.edit', compact('user'));
+        try {
+            $role= $this->getUserRole($user);
+            return view('dealer.parts_manager.edit', compact('user','role'));
+        } catch (\Throwable $th) {
+            return redirect()->back()->with(['error',  $th->getMessage()]);
+        }
     }
 
     public function update(PartsManagerRequest $request, User $user)
@@ -94,21 +99,41 @@ class PartsManagerController extends Controller
     }
     public function getPartManagerDetail(User $user)
     {
-        $role = 'Advance';
-        if ($user->permissions) {
-            foreach ($user->permissions as $key => $roles) {
-                if ($roles->name == 'role-view' && $key == 0)
-                    $role = 'Basic';
+        try {
+            $role=$this->getUserRole($user);
+            if(is_null($role))
+            {
+                throw new Exception('Did not found role:.');
             }
+            $data = [
+                'name' => $user->name,
+                'email' => $user->email,
+                'phone' => $user->phone_number,
+                'role' => $role,
+                'profile_pic_url' => $user->profile_picture_url,
+            ];
+            
+            return response()->json(['status'=>false,'data' => $data,'message'=>"Data fetch successfully"]);
+        } catch (\Throwable $th) {
+           return response()->json(['status'=>false, 'message'=>$th->getMessage()]);
         }
-
-        $data = [
-            'name' => $user->name,
-            'email' => $user->email,
-            'phone' => $user->phone_number,
-            'role' => $role,
-            'profile_pic_url' => $user->profile_picture_url,
-        ];
-        return response()->json(['data' => $data]);
+        $role=$this->getUserRole($user);
     }
+    protected function getUserRole(User $user)
+    {
+       try
+        {
+            $role = 'Advance';
+            if ($user->permissions) {
+                foreach ($user->permissions as $key => $roles) {
+                    if ($roles->name == 'role-view' && $key == 0)
+                        $role = 'Basic';
+                }
+            }
+           return $role;
+        } catch (\Throwable $th) {
+            throw new Exception('Did not found role:.'.$th->getMessage());
+           
+    }
+}
 }

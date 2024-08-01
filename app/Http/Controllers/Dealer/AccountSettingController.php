@@ -16,7 +16,7 @@ class AccountSettingController extends Controller
         $user = User::where('id', auth()->user()->id)->first();
         return view('dealer.account_setting', compact('user'));
     }
-    public function update(Request $request)
+    public function update(ProfileRequest $request)
     {
         $data = [
             'name' => $request->name,

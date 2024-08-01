@@ -117,6 +117,6 @@ Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer'
         Route::post('product/from/address', [ShippoController::class, 'from_address'])->name('from');
         Route::post('product/picking/address', [OrderController::class, 'picking_address'])->name('picking');
         Route::get('picking/address/delete/{address}', [OrderController::class, 'addressDelete'])->name('delete');
-        Route::post('product/shipping/toaddress', [CheckoutController::class, 'to_address'])->name('to');
+        Route::match(['get', 'post'],'product/shipping/toaddress', [CheckoutController::class, 'to_address'])->name('to');
     });
 });

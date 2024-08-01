@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dealer;
 
 use Exception;
 use App\Models\Cart;
+use App\Models\User;
 use App\Models\Order;
 use App\Models\OrderItem;
 use Stripe\PaymentIntent;
@@ -12,6 +13,7 @@ use App\Models\AdminSetting;
 use App\Models\BuyerAddress;
 use Illuminate\Http\Request;
 use App\Models\ShippingAddress;
+use App\Notifications\OrderPlaced;
 use App\Models\ShippingSetting;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -56,6 +58,17 @@ class OrderPaymentController extends Controller
                 session()->forget('shipping_address_row_id');
             }
             DB::commit();
+
+        //   $orderDetail=  Order::find($order->id);
+            $seller=User::find($item->product->user_id);
+            if(!is_null($seller)){
+                $seller->notify(new OrderPlaced($order));
+            }
+            auth()->user()->notify(new OrderPlaced($order));
+            $admin = User::Role('Administrator')->first();
+            if(!is_null($admin)){
+                $admin->notify(new OrderPlaced($order));
+            }
             toastr()->success('Order placed successfully.');
             return redirect()->route('Dealer.myorder.orderlist');
         } catch (Exception $e) {

@@ -7,7 +7,10 @@
                 maxlength: nameMaxLength,
                 regex: nameRegex,
             },
-
+            image: {
+                filesize: profilePicSize,
+                extension: profilePicMimes,
+            },
             email: {
                 required: true,
                 email: true,
@@ -32,6 +35,10 @@
                 minlength: `{{ __('customvalidation.profile.name.min', ['min' => '${nameMinLength}', 'max' => '${nameMaxLength}']) }}`,
                 maxlength: `{{ __('customvalidation.profile.name.max', ['min' => '${nameMinLength}', 'max' => '${nameMaxLength}']) }}`,
                 regex: `{{ __('customvalidation.profile.name.regex', ['regex' => '${nameRegex}']) }}`,
+            },
+            image: {
+                filesize: `{{ __('customvalidation.profile.profile_pic.size', ['min' => '${profilePicSize}']) }}`,
+                extension: `{{ __('customvalidation.profile.profile_pic.mimes', ['mime' => '${profilePicMimes}']) }}`,
             },
             email: {
                 required: `{{ __('customvalidation.user.email.required') }}`,

@@ -30,22 +30,22 @@
                                 @csrf
                                 <div class="row">
                                     <div class="dealer-profile-upload-box">
-                                        <div class="upload-img">
+                                        <div class="upload-img dealer-profile-img">
                                             <div class="file-upload-box">
                                                 <label for="file-upload">
                                                     <div class="profile-without-img">
                                                         <img src="{{ $user->profile_picture_url ? Storage::url($user->profile_picture_url) : asset('assets/images/user.png') }}" alt="" id="Userimage">
                                                     </div>
+                                                    <div class="upload-icon d-none editable" style="cursor: pointer;">
+                                                        <i class="fa-sharp fa-solid fa-pen"></i>
+                                                    </div>
+                                                    <input type="file" name="image" disabled accept=".jpg,.png,.jpeg" class="disabled-inputs @error('image') is-invalid @enderror" id="file-upload">
+                                                    @error('image')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
                                                 </label>
-                                                <input type="file" name="image" disabled accept=".jpg,.png,.jpeg" class="disabled-inputs @error('image') is-invalid @enderror" id="file-upload">
-                                                <div class="upload-icon d-none editable">
-                                                    <i class="fa-sharp fa-solid fa-pen"></i>
-                                                </div>
-                                                @error('image')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                                @enderror
                                             </div>
                                         </div>
                                     </div>

@@ -20,9 +20,20 @@ class Order extends Model
         'payment_raw_data',
     ];
 
+    protected $casts = [
+        'total_amount'=>'float',
+    ];
     public function orderItem()
     {
         return $this->hasMany(OrderItem::class, 'order_id', 'id');
+    }
+    public function buyerDetail()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+    public function sellerDetail()
+    {
+        return $this->belongsTo(User::class, 'order_for');
     }
 
     public function scopeSearch($query)

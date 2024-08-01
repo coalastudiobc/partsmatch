@@ -15,8 +15,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="">Card Number<span class="required-field">*</span></label>
-                                            <div class="form-field" id="cardNumberElement">
-                                                <input type="text" class="form-control" placeholder="Card-number">
+                                            <div class="form-field form-control-payment" id="cardNumberElement">
                                                 <label for="card-number" class="stripe-error-messages"></label>
                                             </div>
                                             <div class="is-invalid stripe-error" id="cardNumberError"></div>
@@ -25,8 +24,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="">Card Expiration Date<span class="required-field">*</span></label>
-                                            <div class="form-field" id="cardExpiryElement">
-                                                <input type="text" class="form-control" placeholder="MM / YY">
+                                            <div class="form-field form-control-payment " id="cardExpiryElement">
                                                 <label for="card-expiry" class="stripe-error-messages"></label>
                                             </div>
                                             <div class="is-invalid stripe-error" id="cardExpiryError"></div>
@@ -35,8 +33,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="">Card Security Code<span class="required-field">*</span></label>
-                                            <div class="form-field" id="cardCVCElement" class="form-control">
-                                                <input type="password" class="form-control" placeholder="****">
+                                            <div class="form-field form-control-payment" id="cardCVCElement" class="form-control">
                                             </div>
                                             <div class="is-invalid stripe-error" id="cardCVVError"></div>
                                             <input type="hidden" name="stripeCustomer_id" value="{{ $stripeCustomer->id }}">
@@ -139,19 +136,17 @@
     var style = {
         base: {
             iconColor: '#666EE8',
-            color: '#31325F',
+            color: '#5C5C5C',
             lineHeight: '40px',
-            fontWeight: 300,
-            fontFamily: 'Helvetica Neue',
-            fontSize: '15px',
+           
+            fontSize: '14px',
             '::placeholder': {
                 color: '#CFD7E0',
             },
             iconStyle: 'solid',
         },
         invalid: {
-            color: "#fa755a",
-            fontSize: "20px",
+            color: "#5C5C5C",
         },
     };
 

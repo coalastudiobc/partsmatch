@@ -286,7 +286,6 @@ class CheckoutController extends Controller
     public function to_address(ShippingAddressRequest $request)
     {
         try {
-            // dd($request->toArray());
 
             $responseInArray = $this->address($request);
             // dd($responseInArray);

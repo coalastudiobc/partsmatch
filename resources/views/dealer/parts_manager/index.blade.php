@@ -266,6 +266,7 @@
     </div>
 </div>
 @endsection
+
 @section('view_manager_modals')
 <div class="modal fade" id="view-manager-model" tabindex="-1" aria-labelledby="viewexampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
     <div class="modal-dialog modal-dialog-centered">
@@ -330,9 +331,20 @@
 </div>
 @endsection
 @push('scripts')
+
+@if ($errors->any())
+        <script>
+            $(document).ready(function() {
+                @foreach ($errors->all() as $error)
+                    toastr.error('{{ $error }}');
+                @endforeach
+            });
+        </script>
+@endif
+
 @includeFirst(['validation.dealer.js_parts_manager'])
 <script>
-    jQuery(document).ready(function() {
+    jQuery(document).ready(function() { 
         jQuery('.custom_dropdown_commission').on('click', function() {
             var selectitem = jQuery(this).attr('data-value')
             var selecttext = jQuery(this).attr('data-text')

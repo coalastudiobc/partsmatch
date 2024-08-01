@@ -40,12 +40,18 @@ class OrderController extends Controller
             // Fetch fulfilled order IDs
             $fulfilledIds = ShippoPurchasedLabel::whereIn('order_id', $orderIds)->pluck('order_id')->toArray();
 
-            if (empty($fulfilledIds)) {
-                return redirect()->back()->with(['info' => 'No fulfilled shipments found for the orders.']);
-            }
+            // if (empty($fulfilledIds)) {
+            //     return redirect()->back()->with(['info' => 'No fulfilled shipments found for the orders.']);
+            // }
 
-            // Fetch orders that are not fulfilled
-            $orders = Order::whereIn('id', $orderIds)->whereNotIn('id', $fulfilledIds)->orderBy('created_at', 'DESC')->paginate(__('pagination.pagination_nuber'));
+            $orders = Order::whereIn('id', $orderIds)
+            ->when(!empty($fulfilledIds), function ($query) use ($fulfilledIds) {
+                return $query->whereNotIn('id', $fulfilledIds);
+            })
+            ->orderBy('created_at', 'DESC')
+            ->paginate(__('pagination.pagination_nuber'));
+
+            // $orders = Order::whereIn('id', $orderIds)->whereNotIn('id', $fulfilledIds)->orderBy('created_at', 'DESC')->paginate(__('pagination.pagination_nuber'));
             // $orders =  Order::with('orderItem')->where('order_for', auth()->id())->orderBy('created_at', 'DESC')->paginate(__('pagination.pagination_nuber'));
             return view('dealer.order.order_list', compact('orders'));
         } catch (\Throwable $th) {
@@ -62,7 +68,7 @@ class OrderController extends Controller
                 ]);
             }
             $fulfilledIds = ShippoPurchasedLabel::whereIn('order_id', $orderIds)->pluck('order_id')->toArray();
-            $fulfilledOrders = Order::whereIn('id', $fulfilledIds)->get();
+            $fulfilledOrders = Order::whereIn('id', $fulfilledIds)->latest()->get();
             return view('dealer.order.fullfilled_order', compact('fulfilledOrders'));
         } catch (\Throwable $th) {
             return redirect()->back()->with(['error' => $th->getMessage()]);

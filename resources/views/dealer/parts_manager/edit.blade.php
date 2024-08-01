@@ -5,7 +5,7 @@
 @section('content')
 <div class="main-content">
     <section class="section ">
-        <div class="section-body">
+        <div class="section-body edit-product-sec">
             <div class="row">
                 <div class="col-12 col-md-12 col-lg-12">
                     <div class="card">
@@ -23,8 +23,10 @@
                                                     <div class="profile-without-img">
                                                         <img src="{{ $user->profile_picture_url ? Storage::url($user->profile_picture_url) : asset(`assets/images/user.png`) }}" id="Userimage" alt="User Image">
                                                     </div>
-                                                    <div class="upload-icon">
+                                                    <div class="upload-icon imageeditIcon">
+                                                        
                                                         <img src="{{ asset(`assets/images/upload.png`) }}" alt="">
+                                                        <i class="fa-sharp fa-solid fa-pen"></i>
                                                     </div>
                                                 </div>
                                             </label>
@@ -53,7 +55,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="">email*</label>
+                                            <label for="">Email*</label>
                                             <div class="form-field">
                                                 <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email', $user->email) }}">
                                                 @error('email')
@@ -79,7 +81,7 @@
                     </div> --}}
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="">phone*</label>
+                            <label for="">Phone*</label>
                             <div class="form-field">
                                 <input type="text" name="phone_number" class="form-control @error('phone_number') is-invalid @enderror" value="{{ old('phone_number', $user->phone_number) }}">
                                 @error('phone_number')
@@ -92,9 +94,9 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="">role</label>
+                            <label for="">Role</label>
                             <div class="form-field">
-                                <input type="text" name="role" class="form-control @error('role') is-invalid @enderror" value="{{ old('page_title') }}">
+                                <input type="text" name="role" disabled class="form-control @error('role') is-invalid @enderror" value="{{ old('role',$role) }}">
                                 @error('role')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
