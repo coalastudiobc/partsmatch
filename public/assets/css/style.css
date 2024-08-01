@@ -3106,6 +3106,179 @@ button.accordion-button.analyics-tabs-btns {
     border: 0;
 }
 
+
+/* ================== partsmanager-CSS ================== */
+.card.custom-partsmanager-card {
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px 4px #ddd;
+    border: 0;
+    padding: 30px 33px;
+}
+
+.custom-partsmanager-box .partsmanager-info-box h2 {
+    font-size: 25px;
+    line-height: 30px;
+}
+
+.custom-partsmanager-box .partsmanager-info-box h3 {
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.custom-partsmanager-box .partsmanager-info-box h4 {
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 500;
+}
+
+.custom-partsmanager-box .partsmanager-info-box {
+    margin: 0 0 16px;
+}
+
+.custom-partsmanager-box {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin: 0 0 22px;
+}
+
+.confirm-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: fit-content;
+    padding: 8px 17px;
+    border-radius: 5px;
+    background-color: #DEFFEB;
+}
+
+.confirm-badge p {
+    font-size: 14px;
+    color: #219653;
+    font-weight: 500;
+}
+
+.confirm-badge i {
+    color: #219653;
+}
+
+.partsmanager-info-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 20px;
+    justify-content: flex-end;
+}
+
+.custom-partsmanager-box .partsmanager-info-box p,
+.partsmanager-info-status>p {
+    font-size: 14px;
+    color: #727272;
+    line-height: 16px;
+}
+
+.custom-partsmanager-box .custom-partsmanager-right .partsmanager-info-box {
+    text-align: right;
+}
+
+.partsmanager-dates-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: #ebebeb75;
+    border-radius: 5px;
+}
+
+.partsmanager-dates-inner {
+    padding: 7px 16px;
+}
+
+.partsmanager-dates-inner h4 {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 19px;
+    margin: 0 0 5px;
+}
+
+.partsmanager-dates-inner p {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    margin: 0 0 0px;
+    color: #727272;
+}
+
+.partsmanager-link-box {
+    padding: 15px 18px;
+    background-color: #ebebeb75;
+    height: 100%;
+    border-radius: 5px;
+}
+
+.partsmanager-link-box p {
+    font-size: 14px;
+    font-weight: 400;
+    margin: 0 0 3px;
+    color: #727272;
+}
+
+.partsmanager-link-box h5 {
+    font-size: 15px;
+    font-weight: 500;
+    margin: 0 0 0px;
+    color: #272643;
+    display: inline-block;
+    max-width: 45em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.partsmanager-dates-box .partsmanager-dates-inner:first-child {
+    border-right: 2px solid #fff;
+}
+
+.partsmanager-dates-inner:last-child {
+    text-align: right;
+}
+
+.carrier-services-box {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+    margin: 18px 0 0;
+}
+
+.carrier-services-serever {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 370px;
+    width: 100%;
+    background-color: #BAE8E8;
+    padding: 12px;
+    border-radius: 5px;
+}
+
+.carrier-services-box p {
+    color: #727272;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.carrier-services-serever p {
+    font-size: 14px;
+    color: #272643;
+    line-height: 16px;
+    font-weight: 700;
+}
+.carrier-services-serever p span{
+    font-weight: 500;
+}
+
+
+/* ================== partsmanager-CSS ================== */
+
 .imageeditIcon {
     width: 30px;
     height: 30px;
@@ -3129,5 +3302,4 @@ button.accordion-button.analyics-tabs-btns {
     border: 1.81px solid #E8E8E8;
     padding: 2px 17px;
     min-height: 47px;
-
 }

@@ -433,7 +433,13 @@ class OrderController extends Controller
             if (empty($shippmentDetails)) {
                 return redirect()->back()->with(['error' => 'Something went wrong. Shippment details not found']);
             }
-            return view('dealer.order.shippment_details', compact('shippmentDetails'));
+            // dd($shippmentDetails);
+           $selectedShippmentDate= ShippmentAddressDetail::where('order_id',$order_id)->pluck('shippment_date')->first();
+        //    if(empty($selectedShippmentDate)){
+        //     return redirect()->back()->with(['error' => 'Something went wrong. Selected Shippment Date not found']);
+        //    }
+          $buyerAddress= ShippingAddress::where('order_id',$order_id)->first();
+            return view('dealer.order.shippment_details', compact('shippmentDetails','buyerAddress','selectedShippmentDate'));
         } catch (\Throwable $th) {
             return redirect()->back()->with(['error' => $th->getMessage()]);
         }
