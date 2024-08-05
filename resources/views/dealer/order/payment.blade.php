@@ -101,7 +101,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button type="submit" id="payNow" class="btn secondary-btn full-btn">Pay
+                            
+                                <button type="submit" id="payNow" class="btn secondary-btn full-btn  @if (is_array($response_in_array->messages) && count($response_in_array->messages) > 0 && (empty($response_in_array->rates_list) || !is_array($response_in_array->rates_list))) disabled @endif">Pay
                                     Now</button>
                             </form>
                         </div>
@@ -130,10 +131,12 @@
                         <div class="shipper-rates">
                             <h4>RATES</h4>
                             <ul class="shipper-rates-list">
-                                @isset($response_in_array->rates_list)
-                                @forelse ($response_in_array->rates_list as $rates)
+                           {{-- Check if rates_list is set and not null --}}
+                            @if (isset($response_in_array->rates_list) && is_array($response_in_array->rates_list) && count($response_in_array->rates_list) > 0)
+                            {{-- Display rates_list items --}}
+                            @foreach ($response_in_array->rates_list as $rates)
                                 <li>
-                                    <a href="#" class="shippment-rate ">
+                                    <a href="#" class="shippment-rate">
                                         <div class="shipper-rates-left">
                                             <div class="shipper-rates-img">
                                                 <!-- Add an image if needed -->
@@ -142,33 +145,39 @@
                                             <h3>{{ $rates->servicelevel_token }}</h3>
                                         </div>
                                         <div class="shipper-rates-prize">
-                                            <h4 class="rate_amount" data-rateId={{ $rates->object_id }} data-amount={{ $rates->amount }}>
-                                                ${{ $rates->amount }}</h4>
+                                            <h4 class="rate_amount" data-rateId="{{ $rates->object_id }}" data-amount="{{ $rates->amount }}">
+                                                ${{ $rates->amount }}
+                                            </h4>
                                             <p>{{ $rates->days }} days</p>
                                         </div>
                                     </a>
                                 </li>
-                                @empty
-
-                                <div class="shipper-rates">
-                                    <ul class="shipper-rates-list">
-                                        <li>
-                                            <a href="#" class="">
-                                                <div class="shipper-rates-left">
-                                                    <div class="shipper-rates-img">
-                                                        <!-- Add an image if needed -->
+                            @endforeach
+                            @else
+                            {{-- Check if messages is an array and rates_list is empty --}}
+                            @if (is_array($response_in_array->messages) && count($response_in_array->messages) > 0 && (empty($response_in_array->rates_list) || !is_array($response_in_array->rates_list)))
+                                @foreach ($response_in_array->messages as $key => $message)
+                                    <div class="shipper-rates">
+                                        <ul class="shipper-rates-list">
+                                            <li>
+                                                <a href="#" class="">
+                                                    <div class="shipper-rates-left">
+                                                        <div class="shipper-rates-img">
+                                                            <!-- Add an image if needed -->
+                                                        </div>
+                                                        <h3>{{ $message->text }}</h3>
                                                     </div>
-                                                    <h3>No Rates available right now.</h3>
-                                                </div>
-                                                <div class="shipper-rates-prize">
-                                                    <!-- You can add any message or leave empty -->
-                                                </div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                @endforelse
-                                @endisset
+                                                    <div class="shipper-rates-prize">
+                                                        <!-- You can add any message or leave empty -->
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                @endforeach
+                            @endif
+                         @endif
+
                             </ul>
                         </div>
                     </div>

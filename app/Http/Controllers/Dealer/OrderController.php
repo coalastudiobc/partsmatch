@@ -37,7 +37,6 @@ class OrderController extends Controller
                 return redirect()->back()->with(['error' => 'No orders found for the authenticated user.']);
             }
 
-            // Fetch fulfilled order IDs
             $fulfilledIds = ShippoPurchasedLabel::whereIn('order_id', $orderIds)->pluck('order_id')->toArray();
 
             // if (empty($fulfilledIds)) {
@@ -257,6 +256,7 @@ class OrderController extends Controller
     public function createShippment(Request $request)
     {
         try {
+            // dd($request->toArray());
             $selectedPickupAddressId = ShippmentAddressDetail::where('order_id', $request->order)->where('user_id', auth()->id())->first();
             if (is_null($selectedPickupAddressId)) {
                 throw new \Exception('Pick up address not found for this particular order');
@@ -269,6 +269,9 @@ class OrderController extends Controller
                 throw new \Exception('Order id does not found for this particular order');
             }
             $to_address = BuyerAddress::where('order_id', $selected_order_id)->pluck('shippo_address_id')->first();
+            if (is_null($to_address)) {
+                throw new \Exception('Buyer Address did not found for this order');
+            }
             $reciever_address = ShippingAddress::where('order_id', $selected_order_id)->first();
             $getOrderItemIds =  OrderItem::where('order_id', $request->order)->get();
             $parcelsIdInArray = [];
@@ -296,11 +299,12 @@ class OrderController extends Controller
                 $this->saveInDb($data, $parcelsIdInArray);
                 $stripeCustomer = auth()->user()->createOrGetStripeCustomer();
                 $intent = auth()->user()->createSetupIntent();
+                // dd($response_in_array);
                 return view('dealer.order.payment', compact('pickupAddress', 'response_in_array', 'stripeCustomer', 'intent', 'reciever_address', 'selected_order_id', 'shippmentDate'));
             }
         } catch (\Exception $e) {
             toastr()->error($e->getMessage());
-            return redirect()->back();
+            return redirect()->route('Dealer.order.orderlist');
         }
     }
 

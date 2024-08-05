@@ -229,7 +229,7 @@
                                     <div class="col-md-12">
                                         <div class="accounts-btns">
                                             <button type="submit" disabled class="btn secondary-btn disabled-inputs">Save changes</button>
-                                            <a href="#" disabled class="btn primary-btn disabled-inputs">Cancel</a>
+                                            <a href="#"  class="btn primary-btn disabled-inputs closeEditProfilebtn d-none">Cancel</a>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
@@ -243,7 +243,7 @@
                         </div>
                         <div class="edit-icon">
                             <a href="#"><i id="editProfile" class="fa-solid fa-pen-to-square" style="color: #3EBE62;"></i></a>
-                            <span id="closeEditProfile" class='d-none'><i class="fa-sharp fa-solid fa-close"></i></span>
+                            <span id="closeEditProfile" class='d-none closeEditProfilebtn'><i class="fa-sharp fa-solid fa-close"></i></span>
                         </div>
                     </div>
                 </div>
@@ -493,10 +493,11 @@
 </script>
 <script>
     $(document).ready(function() {
+
         $('#editProfile').click(function(e) {
             e.preventDefault();
             $(this).addClass('d-none')
-            $('#closeEditProfile').removeClass('d-none')
+            $('.closeEditProfilebtn').removeClass('d-none')
             $('.disabled-inputs').removeAttr('disabled');
             $('.editable').removeClass('d-none');
             $('.dropmenu').removeClass('disabled_select');
@@ -505,10 +506,10 @@
 
     });
     $(document).ready(function() {
-        $('#closeEditProfile').click(function(e) {
+        $('.closeEditProfilebtn').click(function(e) {
             e.preventDefault();
             $('.dropmenu').addClass('disabled_select');
-            $(this).addClass('d-none')
+            $('.closeEditProfilebtn').addClass('d-none')
             $('#editProfile').removeClass('d-none')
             $('.disabled-inputs').attr('disabled', 'disabled');
             $('#dropdownMenuButton1').prop('disabled', true);

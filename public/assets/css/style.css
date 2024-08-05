@@ -1455,13 +1455,16 @@ button.btn-close {
 .custm-drop-icon {
     position: absolute;
     right: 15px;
-    transition: all 0.3s ease-in;
-    top: 50%;
-    transform: translateY(-50%);
+    transition: all 0.2s ease-in;
+    top: 12px;
 }
 
 .dropdown:has(.dropdown-menu.show) .custm-drop-icon {
-    transform: rotate(180deg) translateX(-4px) translateY(13px);
+    transform: rotate(180deg);
+}
+
+.form-group:has(input.is-invalid) .custm-dropdown .dropdown .dropdown-toggle {
+    border-color: #dc3545;
 }
 
 .dropdown-menu.show li a:hover {
@@ -2091,7 +2094,7 @@ span.ymmm-cross {
 }
 
 .edit-product-sec {
-    height: calc(100vh - 66px);
+    height: calc(100vh - 54px);
     overflow: auto;
 }
 
@@ -2158,6 +2161,7 @@ span.ymmm-cross {
     border-radius: 10px;
     padding: 20px;
     box-shadow: 1px 1px 10px 4px #ddd;
+    border: 1px solid transparent;
 }
 
 .adress-info-haeder {
@@ -2202,6 +2206,10 @@ span.ymmm-cross {
     align-items: center;
     justify-content: space-between;
     margin: 0 0 15px;
+}
+
+.formfield:has(.form-icon) #datepicker {
+    padding-right: 32px !important;
 }
 
 .address-haeding-edit>h3 {
@@ -2267,9 +2275,13 @@ span.ymmm-cross {
 
 .custm-dimention {
     display: grid;
-    align-items: center;
+    /* align-items: center; */
     grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
     column-gap: 20px;
+}
+
+.custm-dimention>p {
+    padding-top: 14px;
 }
 
 .package-main>h3 {
@@ -2670,6 +2682,8 @@ span.filter-serach-icon {
 .grouped-data {
     border: 1px solid #ddd;
     border-radius: 15px;
+    position: relative;
+    min-height: 140px;
 }
 
 .grouped-data .custm-table-body {
@@ -3233,6 +3247,7 @@ button.accordion-button.analyics-tabs-btns {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
 .partsmanager-dates-box .partsmanager-dates-inner:first-child {
     border-right: 2px solid #fff;
 }
@@ -3272,7 +3287,8 @@ button.accordion-button.analyics-tabs-btns {
     line-height: 16px;
     font-weight: 700;
 }
-.carrier-services-serever p span{
+
+.carrier-services-serever p span {
     font-weight: 500;
 }
 
@@ -3302,4 +3318,84 @@ button.accordion-button.analyics-tabs-btns {
     border: 1.81px solid #E8E8E8;
     padding: 2px 17px;
     min-height: 47px;
+}
+
+.dashboard-custm-card {
+    min-height: 600px;
+}
+
+.card-statistic-4 {
+    padding: 10px;
+}
+
+.card-statistic-4 .card-content h2 {
+    font-size: 20px;
+}
+
+.db-analytics-card {
+    background-color: #fff;
+    border-radius: 10px;
+    border: none;
+    position: relative;
+    /* margin-bottom: 30px; */
+    box-shadow: 0 0.46875rem 2.1875rem rgba(90, 97, 105, 0.1), 0 0.9375rem 1.40625rem rgba(90, 97, 105, 0.1), 0 0.25rem 0.53125rem rgba(90, 97, 105, 0.12), 0 0.125rem 0.1875rem rgba(90, 97, 105, 0.1);
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    justify-content: space-between;
+    align-content: space-between;
+    height: 100%;
+}
+
+.db-analytics-data {
+    height: 100%;
+    padding: 20px 0px;
+}
+
+.db-analytics-data h3 {
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0 0 20px;
+    line-height: 1.2;
+}
+
+.db-analytics-data h5 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 0;
+    line-height: 1.2;
+}
+
+.adress-info-inner:has(:checked) {
+    border: 1px solid;
+}
+
+/* .dimensionAndDismantleBtn {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.dimensionAndDismantleBtn a,
+.dimensionAndDismantleBtn button {
+    white-space: nowrap;
+    font-size: 16px !important;
+} */
+.dimensionAndDismantleBtn .dropdown a {
+    width: 100%;
+}
+
+.dimensionAndDismantleBtn {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: absolute;
+    width: 100%;
+    max-width: 165px;
+    right: 25px;
+}
+
+.dimensionAndDismantleBtn button {
+    text-align: center;
+    justify-content: center;
 }

@@ -306,6 +306,7 @@ header {
     background-color: var(--white);
     width: 100%;
 }
+
 .navbar-collapse {
     justify-content: end;
 }
@@ -1529,18 +1530,21 @@ button.btn-close {
     display: block;
     white-space: nowrap;
 }
-.error{
+
+.error {
     width: 100%;
     margin-top: .25rem;
     font-size: .875em;
     color: #dc3545;
 }
+
 .test .primary-btn {
     width: 100%;
     min-width: 67px;
     min-height: 36px;
     padding: 5px 10px;
 }
+
 .min-width-1200 table {
     width: 100%;
     border-collapse: separate;
@@ -1562,9 +1566,11 @@ button.btn-close {
 .pro-main-img {
     position: relative;
 }
+
 .invalid-feedback strong {
     font-weight: lighter !important;
 }
+
 .brands-imgs img {
     width: 50px;
     height: 50px;
@@ -1572,98 +1578,125 @@ button.btn-close {
     border-radius: 50px;
     border: 1px solid #Fff;
 }
-.brand-table table tr th:last-child{
+
+.brand-table table tr th:last-child {
     width: unset !important;
 }
-.header-logo img{
+
+.header-logo img {
     /* width: 100%; */
     width: 192px;
 }
+
 .pro-search-box {
-	position: relative;
+    position: relative;
     box-shadow: 0px 4px 30px 1px rgb(0 0 0 / 6%);
     max-width: 384px;
 }
+
 .pro-search-box input {
-	min-width: 384px;
-	width: 100%;
-	background-color: #Fff;
-	/* border: 0; */
-	padding-right: 80px;
+    min-width: 384px;
+    width: 100%;
+    background-color: #Fff;
+    /* border: 0; */
+    padding-right: 80px;
 }
+
 .pro-search-box .primary-btn {
-	position: absolute;
-	max-width: fit-content;
-	max-height: 32px;
-	padding: 18px 10px;
-	right: 4px;
-	top: 4px;
+    position: absolute;
+    max-width: fit-content;
+    max-height: 32px;
+    padding: 18px 10px;
+    right: 4px;
+    top: 4px;
     min-width: unset;
 }
+
 .page-content-wrapper {
     width: 100%;
 }
+
 .dealer-profile-content {
     height: calc(100vh - 66px);
     overflow: auto;
 }
+
 .section.add-brand .card {
     height: calc(100vh - 66px);
     overflow: auto;
     border-radius: 0;
 }
-.edit-cms .card, .commission-sec .card, .shipping-add-sec .card, .category-add-sec .card {
+
+.edit-cms .card,
+.commission-sec .card,
+.shipping-add-sec .card,
+.category-add-sec .card {
     height: calc(100vh - 66px);
     overflow-y: auto;
     overflow-x: hidden;
     border-radius: 0;
 }
-.shipping-add-sec .custm-dropdown .dropdown-toggle.form-control{
+
+.shipping-add-sec .custm-dropdown .dropdown-toggle.form-control {
     min-height: 47px;
 }
+
 .dealer-pro-personal-info ul li {
     display: grid;
     align-items: center;
     grid-template-columns: 1fr 1fr;
 }
-.dealer-pro-personal-info ul li + li, .dealer-pro-commission-info ul li +li{
+
+.dealer-pro-personal-info ul li+li,
+.dealer-pro-commission-info ul li+li {
     margin-top: 15px;
 }
-.dealer-pro-commission-info > ul > li {
+
+.dealer-pro-commission-info>ul>li {
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
 }
+
 .dealer-pro-personal-info {
     border-right: 1px solid #ddd;
     height: 100%;
 }
+
 .dealer-pro-commission-info {
     height: 100%;
     border-right: 1px solid #ddd;
     padding-right: 20px;
 }
+
 .dealer-last-five-product .product-detail-table table tr td {
     background-color: #ffffff;
     height: unset;
     padding: 6px 30px 6px 20px;
 }
+
 .dealer-last-five-product .product-detail-table table tr td .primary-btn {
     padding: 7px 14px;
 }
+
 .dealer-pro-commission-info .form-group:has(.symbol) input {
     padding-left: 40px;
 }
+
 .pagination-wrapper {
-	margin: 20px 0 0 auto;
+    margin: 20px 0 0 auto;
 }
 
 
 .pagination-box.disabled {
-    pointer-events: none; /* Prevent clicks */
-    opacity: 0.5; /* Visual indication of being disabled */
-    cursor: not-allowed; /* Change cursor to indicate disabled */
+    pointer-events: none;
+    /* Prevent clicks */
+    opacity: 0.5;
+    /* Visual indication of being disabled */
+    cursor: not-allowed;
+    /* Change cursor to indicate disabled */
 }
+
 .pagination-dot {
     display: flex;
     align-items: flex-end;
@@ -1673,15 +1706,52 @@ button.btn-close {
 .pagination-dot p {
     font-size: 26px;
 }
-.pagination-boxes .pagination-box:first-child, .pagination-boxes .pagination-box:last-child{
+
+.pagination-boxes .pagination-box:first-child,
+.pagination-boxes .pagination-box:last-child {
     border: 0;
 }
-.pagination-boxes .pagination-box:first-child:hover, .pagination-boxes .pagination-box:last-child:hover{
+
+.pagination-boxes .pagination-box:first-child:hover,
+.pagination-boxes .pagination-box:last-child:hover {
     background-color: transparent;
 }
-.pagination-boxes .pagination-box:first-child:hover i, .pagination-boxes .pagination-box:last-child:hover i{
+
+.pagination-boxes .pagination-box:first-child:hover i,
+.pagination-boxes .pagination-box:last-child:hover i {
     color: var(--secondary-color);
 }
 
+.db-analytics-card {
+    background-color: #fff;
+    border-radius: 10px;
+    border: none;
+    position: relative;
+    /* margin-bottom: 30px; */
+    box-shadow: 0 0.46875rem 2.1875rem rgba(90, 97, 105, 0.1), 0 0.9375rem 1.40625rem rgba(90, 97, 105, 0.1), 0 0.25rem 0.53125rem rgba(90, 97, 105, 0.12), 0 0.125rem 0.1875rem rgba(90, 97, 105, 0.1);
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    justify-content: space-between;
+    align-content: space-between;
+    height: 100%;
+}
 
+.db-analytics-data {
+    height: 100%;
+    padding: 20px 0px;
+}
 
+.db-analytics-data h3 {
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0 0 20px;
+    line-height: 1.2;
+}
+
+.db-analytics-data h5 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 0;
+    line-height: 1.2;
+}

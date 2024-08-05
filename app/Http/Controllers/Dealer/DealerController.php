@@ -4,14 +4,40 @@ namespace App\Http\Controllers\Dealer;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\Order;
+use App\Models\ShippoPurchasedLabel;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class DealerController extends Controller
 {
     public function dashboard()
-    {
-        return view('dealer.dashboard');
+    {      
+        try {
+            $totalAmountOfAllOrders = Order::where('order_for', auth()->id())->sum('total_amount');
+            $ordersCount = Order::where('order_for', auth()->id())->count();
+            $orderIds = Order::where('order_for', auth()->id())->pluck('id')->toArray();
+            $fulfilledIds = [];
+            $pendingOrders = 0;
+            $fulfilledOrders = 0;
+        
+            if (!empty($orderIds)) {
+                $fulfilledIds = ShippoPurchasedLabel::whereIn('order_id', $orderIds)->pluck('order_id')->toArray();
+        
+                $pendingOrders = Order::whereIn('id', $orderIds)
+                    ->when(!empty($fulfilledIds), function ($query) use ($fulfilledIds) {
+                        return $query->whereNotIn('id', $fulfilledIds);
+                    })
+                    ->orderBy('created_at', 'DESC')
+                    ->count();
+        
+                $fulfilledOrders = Order::whereIn('id', $fulfilledIds)->count();
+            }
+        
+            return view('dealer.dashboard', compact('ordersCount', 'pendingOrders', 'fulfilledOrders','totalAmountOfAllOrders'));                                                                                                                                                         
+        } catch (\Throwable $th) {
+            return redirect()->back()->with(['error' => $th->getMessage()]);
+        }
     }
 
 

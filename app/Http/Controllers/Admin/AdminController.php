@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
-
-
+use App\Models\Order;
 use App\Models\AdminSetting;
 use Illuminate\Http\Request;
 use App\Models\FeaturedProduct;
@@ -22,7 +21,11 @@ class AdminController extends Controller
     public function dashboard(Request $request)
     {
         $dealers = User::role('Dealer')->search()->count();
-        return view('admin.dashboard', compact('dealers'));
+        //raw query for calculating total after all 
+        $totalOrderPlacedAmount = Order::selectRaw('SUM(total_amount + shipment_price) as total')->value('total');
+        $placedOrdersCount = Order::count();
+
+        return view('admin.dashboard', compact('dealers','totalOrderPlacedAmount','placedOrdersCount'));
     }
 
     public function show()

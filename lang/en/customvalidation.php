@@ -348,8 +348,8 @@ return [
         ],
         'pin_code' => [
             'required' => 'Please enter the pin code.',
-            'minlength' => 'pincode can be :min - :max digits',
-            'maxlength' => 'pincode can be :min - :max digits',
+            'minlength' => 'pincode should be :min - :max digits',
+            'maxlength' => 'pincode should be :min - :max digits',
         ],
 
     ],

@@ -8,7 +8,7 @@
         <div class="adress-info-haeder">
             <a class="back-btn" href="{{ route('Dealer.order.orderlist') }}"><i class="fa-solid fa-angle-left back-btn"></i> Back</a>
             <div class="order-label-center">
-                <h3>Create New Ful Fillment</h3>
+                <h3>Create New FulFillment</h3>
                 <p>Step 2 of 2</p>
             </div>
             <div class="d-flex gap-3 align-items-cneter justify-content-end">
@@ -133,6 +133,7 @@
                                             <option value="g">g</option>
                                             <option value="kg">kg</option>
                                             <option value="oz">oz</option>
+                                            <option value="lb">lb</option>
                                         </select>
                                         <span class="custm-drop-icon">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="23" viewBox="0 0 24 23" fill="none">

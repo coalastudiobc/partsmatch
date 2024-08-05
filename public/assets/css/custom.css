@@ -572,7 +572,7 @@
     border-right: 1px solid #DDD;
     /* position: sticky; */
     top: 270px;
-    height: calc(100vh - 66px);
+    height: calc(100vh - 54px);
     overflow: auto;
 }
 
@@ -798,7 +798,7 @@
 .page-content-sec {
     padding: 0px 0px;
     background: #F6F6F6;
-    height: calc(100vh - 68px);
+    height: calc(100vh - 54px);
     overflow: auto;
 }
 

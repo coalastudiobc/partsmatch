@@ -1,10 +1,16 @@
 <script>
     jQuery(document).ready(function() {
+        $.validator.addMethod("notEmpty", function(value, element) {
+            return $.trim(value).length > 0;
+        }, "This field cannot be empty.");
+
         // Initialize jQuery Validation
         $("#From_address").validate({
+            ignore:[],
             rules: {
                 country: {
                     required: true,
+                    notEmpty: true
                 },
                 state: {
                     required: true,
@@ -16,7 +22,7 @@
                 pin_code: {
                     required: true,
                     minlength: 5,
-                    maxlength: 10,
+                    maxlength: 6,
                 },
                 email: {
                     email: true,
@@ -57,6 +63,7 @@
             messages: {
                 country: {
                     required: "Please select a country.",
+                    notEmpty: "Please select a country.",
                 },
                 state: {
                     required: "Please select a state.",
@@ -66,8 +73,8 @@
                 },
                 pin_code: {
                     required: "Please enter a pin code.",
-                    minlength: "PIN code must be at least 5 characters long.",
-                    maxlength: "PIN code must be at most 10 characters long."
+                    minlength: `{{ __('customvalidation.user.pin_code.minlength', ['min' => '${pincodeMinLength}', 'max' => '${pincodeMaxLength}']) }}`,
+                    maxlength: `{{ __('customvalidation.user.pin_code.maxlength', ['min' => '${pincodeMinLength}', 'max' => '${pincodeMaxLength}']) }}`,
                 },
                 first_name: {
                     required: `{{ __('customvalidation.user.firstName.required') }}`,
@@ -106,9 +113,10 @@
             },
             errorPlacement: function(error, element) {
                 error.addClass('invalid-feedback');
-                if (error.prop('type') === 'hidden') {
-                    error.insertAfter(element.parent());
-                } else {
+                if(element.hasClass('form-control')){
+                    console.log('herer');
+                    error.insertAfter(element)
+                }else {
                     error.insertAfter(element);
                 }
             },
@@ -122,42 +130,6 @@
             },
             submitHandler: function(form, event) {
                 event.preventDefault();
-
-                var countryValue = $('#country_code').val();
-                var stateValue = $('#state_iso').val();
-                var cityValue = $('#city_name').val();
-                var hasErrors = false; // Flag to track if there are validation errors
-
-                // Validate country
-                if (!countryValue) {
-                    $('#country_code').addClass('is-invalid');
-                    if ($('#country_code').next('.invalid-feedback').length === 0) {
-                        $('#country_code').after('<span class="invalid-feedback" role="alert"><strong>Please select a country.</strong></span>');
-                    }
-                    hasErrors = true;
-                }
-
-                // Validate state
-                if (!stateValue) {
-                    $('#state_iso').addClass('is-invalid');
-                    if ($('#state_iso').next('.invalid-feedback').length === 0) {
-                        $('#state_iso').after('<span class="invalid-feedback" role="alert"><strong>Please select a state.</strong></span>');
-                    }
-                    hasErrors = true;
-                }
-
-                // Validate city
-                if (!cityValue) {
-                    $('#city_name').addClass('is-invalid');
-                    if ($('#city_name').next('.invalid-feedback').length === 0) {
-                        $('#city_name').after('<span class="invalid-feedback" role="alert"><strong>Please select a city.</strong></span>');
-                    }
-                    hasErrors = true;
-                }
-
-                if (hasErrors) {
-                    return; // Prevent form submission if there are validation errors
-                }
                 let formData = $(form).serialize();
                 jQuery('#fullPageLoader').removeClass('d-none');
                 $("#From_address").find('button').attr('disabled', true);
@@ -268,13 +240,10 @@
                                                                     data-value="${state.id}"
                                                                     data-text="${capitalizeFirst(state.name)}"
                                                                     data-name="${capitalizeFirst(state.name)}"
-                                                                    href="javascript:void(0)">${capitalizeFirst(state.name)}</a>
-                                                            </li>`)
+                                                                    href="javascript:void(0)">${capitalizeFirst(state.name)}</a></li>`)
             });
             jQuery('#state').html(options);
         }
-
-
 
         function handleStateData(response) {
             let options = '<li> <a href="javascript:void(0)"> Select </a></li>';

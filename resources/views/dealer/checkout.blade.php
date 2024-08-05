@@ -40,9 +40,9 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="">Street no. & name<span class="required-field">*</span></label>
+                                            <label for="">Address<span class="required-field">*</span></label>
                                             <div class="form-field">
-                                                <input type="text" class="form-control @error('street1') is-invalid @enderror" name="street1" value="{{ old('address1', $deliveryAddress->address1 ?? '')}}" placeholder="Address">
+                                                <input type="text" class="form-control @error('street1') is-invalid @enderror" name="street1" value="{{ old('address1', $deliveryAddress->address1 ?? '')}}" placeholder="e.g: street no. & name">
                                                 @error('street1')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -58,7 +58,7 @@
                                         <div class="form-group">
                                             <label for="">Address 2</label>
                                             <div class="form-field">
-                                                <input type="text" class="form-control @error('street2') is-invalid @enderror" name="street2" value="{{ $deliveryAddress->address2 ?? '' }}" placeholder="Address">
+                                                <input type="text" class="form-control @error('street2') is-invalid @enderror" name="street2" value="{{ $deliveryAddress->address2 ?? '' }}" placeholder="Description of above address">
                                                 @error('street2')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -92,7 +92,7 @@
                                                     </ul>
                                                 </div>
                                             </div>
-                                            <input type="hidden" name="country" value="{{ $country->iso_code ?? '' }}" class="@error('country') is-invalid @enderror">
+                                            <input type="hidden" name="country" value="" class="@error('country') is-invalid @enderror">
                                             @error('country')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -415,6 +415,7 @@
             jQuery('#selectedItem').text(selecttext);
             jQuery('input[name="country"]').val(selecttext);
             jQuery('#country_code').val(jQuery(this).attr('data-iso_code'));
+            jQuery('input[name="country"]').removeClass('is-invalid');
             jQuery('#state_iso').val('');
             jQuery('#city_name').val('');
             jQuery('input[name="state"]').val('');
@@ -439,6 +440,7 @@
             var selecttext = jQuery(this).attr('data-text');
             jQuery('#selectedState').text(selecttext);
             jQuery('input[name="state"]').val(statevalue);
+            jQuery('input[name="state"]').removeClass('is-invalid');
             jQuery('#state-error').text('');
             jQuery('#city_name').val('');
             jQuery('#selectedCity').text('Select City');
@@ -456,6 +458,7 @@
             var selecttext = jQuery(this).attr('data-text');
             jQuery('#selectedCity').text(selecttext);
             jQuery('input[name="city"]').val(cityId);
+            jQuery('input[name="city"]').removeClass('is-invalid');
             jQuery('#city-error').text('');
         });
 

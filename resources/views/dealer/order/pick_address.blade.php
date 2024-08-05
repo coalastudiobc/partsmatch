@@ -9,11 +9,11 @@
                 <a class="back-btn" href="{{ route('Dealer.order.orderlist') }}"><i class="fa-solid fa-angle-left back-btn"></i> Back to
                     orders</a>
                 <div class="order-label-center">
-                    <h3>Create New Ful Fillment</h3>
+                    <h3>Create New FulFillment</h3>
                     <p>Step 1 of 2</p>
                 </div>
-                <form id="selectedAddressForm" action="{{ route('Dealer.order.product.parcels', $orderid->id) }}" method="post">
-                        @csrf
+                        <form id="selectedAddressForm" action="{{ route('Dealer.order.product.parcels', $orderid->id) }}" method="post">
+                          @csrf
                             <div class="date-formfield">
                                 <label for="date">Shippment Date:</label>
                                 <div class="formfield ">
@@ -26,41 +26,41 @@
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                        <button type="submit" class="btn primary-btn nextbtn"><b style="gap:0px;">Next:</b>Order Details</button>
-                    </div>
-                    <div class="right-btn-box">
-                        <h3>Choose Pick Up Address</h3>
-                        <a href="#" class="btn primary-btn add-address-btn" data-bs-toggle="modal" data-bs-target="#pickadress-modal"><img src="{{ asset('assets/images/add-round-icon.svg') }}" alt=""> Add address</a>
-                    </div>
-
-                    @isset($previousAddresses)
-                    <div class="row g-3">
-                        @forelse ($previousAddresses as $key=> $address)
-                        <div class="col-md-6">
-                            <div class="adress-info-inner">
-                                <div class="address-haeding-edit">
-                                    <h3>Address {{ $key + 1 }}</h3>
-                                    <a href="{{ route(auth()->user()->getRoleNames()->first() . '.address.delete', ['address' => $address->id]) }}" class="delete"><i class="fa-regular fa-trash-can " style="color: #E13F3F;"></i></a>
-
-                                </div>
-                                <label for="adress">
-                                    <input type="radio" name="selectadress" id="adress" @isset($getSelectedStuff) @if ($getSelectedStuff->selected_shippo_address == $address->id ) checked @endif @endisset value="{{ $address->id }}">
-                                    <div class="adress-info-text">
-                                        <h2>{{ $address->first_name }} {{ $address->last_name }}</h2>
-                                        <p>{{ $address->address1 }}, {{ $address->city }}, {{ $address->state }},
-                                            {{ $address->pin_code }},
-                                            {{ $address->country }}
-                                        </p>
-                                        <p>{{ $address->phone_number }}</p>
-                                    </div>
-                                </label>
+                            <button type="submit" class="btn primary-btn nextbtn"><b style="gap:0px;">Next:</b>Order Details</button>
+            </div>
+                            <div class="right-btn-box">
+                                <h3>Choose Pick Up Address</h3>
+                                <a href="#" class="btn primary-btn add-address-btn" data-bs-toggle="modal" data-bs-target="#pickadress-modal"><img src="{{ asset('assets/images/add-round-icon.svg') }}" alt=""> Add address</a>
                             </div>
-                        </div>
-                        @empty
-                        @endforelse
-                    </div>
-                    @endisset
-             </form>
+
+                            @isset($previousAddresses)
+                                <div class="row g-3">
+                                    @forelse ($previousAddresses as $key=> $address)
+                                    <div class="col-md-6">
+                                        <div class="adress-info-inner">
+                                            <div class="address-haeding-edit">
+                                                <h3>Address {{ $key + 1 }}</h3>
+                                                <a href="{{ route(auth()->user()->getRoleNames()->first() . '.address.delete', ['address' => $address->id]) }}" class="delete"><i class="fa-regular fa-trash-can " style="color: #E13F3F;"></i></a>
+
+                                            </div>
+                                            <label for="adress">
+                                                <input type="radio" name="selectadress" id="adress{{$key}}" @isset($getSelectedStuff) @if ($getSelectedStuff->selected_shippo_address == $address->id ) checked @endif @endisset value="{{ $address->id }}">
+                                                <div class="adress-info-text">
+                                                    <h2>{{ $address->first_name }} {{ $address->last_name }}</h2>
+                                                    <p>{{ $address->address1 }}, {{ $address->city }}, {{ $address->state }},
+                                                        {{ $address->pin_code }},
+                                                        {{ $address->country }}
+                                                    </p>
+                                                    <p>{{ $address->phone_number }}</p>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    @empty
+                                    @endforelse
+                                </div>
+                            @endisset
+                     </form>
                                 {{-- <div class="col-md-6">
                                             <div class="adress-info-inner add-addres-box">
                                                 <div class="address-haeding-edit">
@@ -340,7 +340,7 @@
                                         <div class="form-group">
                                             <label for="">Street No. & Name<span class="required-field">*</span></label>
                                             <div class="form-field">
-                                                <input type="text" class="form-control @error('street1') is-invalid @enderror" name="street1" placeholder="Address">
+                                                <input type="text" class="form-control @error('street1') is-invalid @enderror" name="street1" placeholder="e.g: 001 Bellevue Square, Space 201">
                                                 @error('street1')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -386,7 +386,7 @@
                                                     </ul>
                                                 </div>
                                             </div>
-                                            <input type="hidden" name="country" id="country_code" value="" class="form-control @error('country') is-invalid @enderror">
+                                            <input type="hidden" name="country" id="country_code" value=''  class="form-control @error('country') is-invalid @enderror">
                                             @error('country')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -412,7 +412,7 @@
                                                         </div>
                                                         <ul class="dropdown-menu outer-box state" aria-labelledby="dropdownMenuButton1">
                                                         </ul>
-                                                        <input type="hidden" name="state" id="state_iso" value="{{ $state->id ?? '' }}" class="@error('state') is-invalid @enderror">
+                                                        <input type="hidden" name="state" id="state_iso" value="{{$state->id ?? ''}}" class="@error('state') is-invalid @enderror">
                                                     </div>
                                                 </div>
                                             </div>
@@ -433,14 +433,14 @@
                                                                 </svg>
                                                             </span>
                                                         </div>
-                                                        <ul class="dropdown-menu outer-box city" aria-labelledby="dropdownMenuButton1">
-                                                        </ul>
-                                                        <input type="hidden" name="city" id="city_name" value="" class="@error('city') is-invalid @enderror">
-                                                        @error('city')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                        @enderror
+                                                            <ul class="dropdown-menu outer-box city" aria-labelledby="dropdownMenuButton1">
+                                                            </ul>
+                                                            <input type="hidden" name="city" id="city_name" value="" class="@error('city') is-invalid @enderror">
+                                                            @error('city')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                            @enderror
                                                     </div>
                                                 </div>
                                             </div>
@@ -480,6 +480,7 @@
 @endsection
 @push('scripts')
 @includeFirst(['validation.dealer.js_picking_address'])
+@
 <script>
     jQuery(function() {
         jQuery("#datepicker").datepicker({

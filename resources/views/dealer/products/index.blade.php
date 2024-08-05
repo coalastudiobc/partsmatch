@@ -37,7 +37,7 @@
                             <p>Price</p>
                         </th>
                         <th>
-                            <p>Status</p>
+                            <p>Listing Status</p>
                         </th>
                         <th>
                             <p>Action</p>
@@ -60,11 +60,11 @@
                                 <p>{{ $product->price }}</p>
                             </td>
                             <td>
-                                <div class="toggle-btn">
+                                <div class="toggle-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Click to deactivate/active listing of products">
                                     <input type="checkbox" id="switch100{{ $key }}" class="custom-switch-input"
                                         @if ($product->status == '1') checked="checked" @endif
                                         onchange="toggleStatus(this, 'Product', '{{ $product->id }}');"
-                                        url="{{ route('Dealer.products.status') }}"><label
+                                        url="{{ route('Dealer.products.status') }}" ><label
                                         for="switch100{{ $key }}">Toggle</label>
                                 </div>
                             </td>
