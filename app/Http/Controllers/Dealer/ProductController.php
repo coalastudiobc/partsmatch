@@ -378,7 +378,7 @@ class ProductController extends Controller
                 'mass_unit' => $request->mass_unit,
             ]);
             DB::commit();
-            return redirect()->back()->with('message', 'Data updated successfully');
+            return redirect()->route('Dealer.products.index')->with('success', 'Data updated successfully');
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->with('error', $e->getMessage());

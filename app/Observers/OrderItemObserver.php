@@ -26,6 +26,9 @@ class OrderItemObserver
         $product = Product::where('id', $orderItem->product_id)->first();
 
         $quantity = $product->stocks_avaliable - $orderItem->quantity;
+        if ($quantity < 1) {
+            throw new \Exception('Quantity must be greater than 0');
+        }
         $product->update(['stocks_avaliable' => $quantity]);
     }
 

@@ -47,7 +47,7 @@
                         <span class="navbar-toggler-icon"></span>
                         <span class="navbar-toggler-icon"></span>
                     </button> --}}
-                    @if (!in_array(Route::current()->getName(), ['register']))  
+                    @if (!in_array(Route::current()->getName(), ['register','login']))  
                         <div>
                             <ul>
                                 <li>

@@ -175,7 +175,6 @@ class CheckoutController extends Controller
     public function create()
     {
         try {
-            // $countries = Country::where('name', ['canada', 'united states'])->get();
             $countries = Country::whereIn('name', ['Canada', 'United States'])->get();
             $total_amount = Cart::where('user_id', auth()->user()->id)->sum('amount');
             $shippingCharge = AdminSetting::where('name', 'shipping_charge')->first();
@@ -183,8 +182,12 @@ class CheckoutController extends Controller
             $user = auth()->user();
 
             // $data = $user->shippingAddress;
-            $carts = Cart::with('cart_product', 'cart_product.product')->where('user_id', $user->id)->get();
-            $allProductsOfCart = CartProduct::where('cart_id', $carts[0]->id)->get();
+            $carts = Cart::with('cart_product', 'cart_product.product')->where('user_id', $user->id)->first();
+            $allProductsOfCart = CartProduct::with('product')->where('cart_id', $carts->id)->get();
+            $isStockClear= $this->checkStockAvailForCart($allProductsOfCart,$carts);
+            if(!$isStockClear){
+                return redirect()->back()->with('error','Now stocks not available as much in your cart. Please refresh the page.');
+            }
             $deliveryAddress = UserAddresses::where('user_id', auth()->user()->id)->where('type', 'Deliver')->first();
             // dd($deliveryAddress);
             // if (!is_null($data)) {
@@ -690,5 +693,24 @@ class CheckoutController extends Controller
     */
     public function getProductByshipmentId($shippment_id)
     {
+    }
+    
+    public function checkStockAvailForCart($allProductsOfCart){
+        try {
+            $flag=false;
+                foreach($allProductsOfCart as $key=>$product)
+                {
+                    if( $product->quantity <= $product->product->stocks_avaliable)
+                    {
+                      $flag=true;
+                    }else{
+                        $flag=false;
+                      return $flag;
+                    }
+                }
+            return $flag;
+        } catch (\Throwable $th) {
+           throw new Exception("Something went wrong in stocks of cart and stock availibility".$th->getMessage());
+        }
     }
 }

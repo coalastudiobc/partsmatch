@@ -82,18 +82,25 @@
                                             @auth
                                                 @if ($product->user_id !== auth()->id())
                                                             <div class="product-quantity-box mb-3">
-                                                                <div class="quantity-btn">
-                                                                    <a href="javascript:void(0)" class="decrease-btn">-</a>
-                                                                    <input type="text" placeholder="1" class="quantity-input" value="1" data-stock="{{$product->stocks_avaliable}}" data-product_id="{{$product->id}}">
-                                                                    <a href="javascript:void(0)" class="increase-btn">+</a>
-                                                                </div>
-                                                                    @if($product->stocks_avaliable < 5)
+                                                                @if($product->stocks_avaliable <> 0)
+                                                                    <div class="quantity-btn">
+                                                                        <a href="javascript:void(0)" class="decrease-btn">-</a>
+                                                                        <input type="text" placeholder="1" class="quantity-input" value="1" data-stock="{{$product->stocks_avaliable}}" data-product_id="{{$product->id}}">
+                                                                        <a href="javascript:void(0)" class="increase-btn">+</a>
+                                                                    </div>
+                                                                @endif
+
+                                                                @if(($product->stocks_avaliable < 5) && ($product->stocks_avaliable > 1) )
                                                                     <div class="left-badge">
                                                                         <p>Only {{$product->stocks_avaliable}} left</p>
                                                                     </div>
-                                                                    @endif
+                                                                @elseif($product->stocks_avaliable == 0)
+                                                                    <div class="left-badge">
+                                                                        <p>Out of stock</p>
+                                                                    </div>
+                                                                @endif
                                                             </div>
-                                                        @if (!in_array($product->id, authCartProducts()))
+                                                            @if (!in_array($product->id, authCartProducts()) && ($product->stocks_avaliable >0))
                                                             <button product-id="{{ $product->id }}" class="btn secondary-btn full-btn addtocart cart_add">Add to
                                                                 Cart
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 20 19" fill="none">
@@ -109,6 +116,10 @@
                                                                     </defs>
                                                                 </svg>
                                                             </button>
+
+                                                        @elseif($product->stocks_avaliable == 0)
+                                                        <button  class="btn disabled-btn btn btn-secondary full-btn ">Out of stock</button>
+
                                                         @else
                                                             <a href="{{ route('Dealer.cart.cart.index') }}" class="btn secondary-btn full-btn cart_add">Go to Cart</a>
                                                         @endif

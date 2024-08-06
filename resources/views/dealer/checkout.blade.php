@@ -281,7 +281,7 @@
                                         </div>
                                     </div>
                                     <p class="total_charge">
-                                        ${{ isset($products->product) ? number_format($carts[0]->amount, 2, '.', ',') : 'Total amount' }}
+                                        ${{ isset($products->product) ? number_format($carts->amount, 2, '.', ',') : 'Total amount' }}
                                     </p>
                                 </div>
                             </li>
@@ -302,9 +302,9 @@
                                             <h3>Grand Total</h3>
                                         </div>
                                     </div>
-                                    <p class="grandTotal" data-amount="{{ isset($products->product) ? number_format($carts[0]->amount, 2, '.', ',') : 'grand Total amount' }}">
+                                    <p class="grandTotal" data-amount="{{ isset($products->product) ? number_format($carts->amount, 2, '.', ',') : 'grand Total amount' }}">
                                         $
-                                        {{ isset($products->product) ? number_format($carts[0]->amount, 2, '.', ',') : 'grand Total amount' }}
+                                        {{ isset($products->product) ? number_format($carts->amount, 2, '.', ',') : 'grand Total amount' }}
                                     </p>
                                     <input type="hidden" id="grandTotal" name="grandTotal" value="">
                                 </div>
