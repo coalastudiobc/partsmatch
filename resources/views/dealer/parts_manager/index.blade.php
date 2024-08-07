@@ -2,123 +2,94 @@
 @section('title', 'Parts Manager')
 @section('heading', 'parts manager')
 @section('content')
-<div class="dashboard-right-box parts-manager-table-box">
-    <x-alert-component />
-    <div class="bredcrum-plus-filter justify-content-end">
-        <!-- <div class="cstm-bredcrum">
-            <a href="#" class="bredcrum-list">Home</a>
-            <a href="#" class="bredcrum-list">Parts match</a>
-            <a href="#" class="bredcrum-list active">Listing</a>
-        </div> -->
-        <div class="serach-and-filter-box">
-
-            <form action="">
-                <div class="pro-search-box">
-                    <input type="text" class="form-control" name="filter_by_name" placeholder="Search">
-                    <button type="submit" class="btn primary-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    <a href="#" class="btn secondary-btn filter-open-btn">Filter</a>
-                </div>
-            </form>
-            {{-- @can('role-view', $user) --}}
-            @if ($role == 'Advance')
-            {{-- <a href="#" class="btn primary-btn" data-bs-toggle="modal" data-bs-target="#add-manager-model">
-                        + Add New Manager
-                    </a> --}}
+  <div class="dashboard-right-box parts-manager-table-box">
+        <x-alert-component />
+        <div class="bredcrum-plus-filter justify-content-end">
             <div class="serach-and-filter-box">
-                <a href="javascript:void(0)" class="btn primary-btn" data-bs-toggle="modal" data-bs-target="#add-manager-model">
-                    <img src="{{ asset('assets/images/add-round-icon.svg') }}" alt=""> Add
-                </a>
+                <form action="">
+                    <div class="pro-search-box">
+                        <input type="text" class="form-control" name="filter_by_name" placeholder="Search">
+                        <button type="submit" class="btn primary-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        <a href="#" class="btn secondary-btn filter-open-btn">Filter</a>
+                    </div>
+                </form>
+                {{-- @can('role-view', $user) --}}
+                @if ($role == 'Advance')
+                    <div class="serach-and-filter-box">
+                        <a href="javascript:void(0)" class="btn primary-btn" data-bs-toggle="modal" data-bs-target="#add-manager-model">
+                            <img src="{{ asset('assets/images/add-round-icon.svg') }}" alt=""> Add
+                        </a>
+                    </div>
+                @endif
+                {{-- @endcan --}}
             </div>
-            @endif
-            {{-- @endcan --}}
-
         </div>
-    </div>
 
-    <div class="product-detail-table product-list-table pro-manage-table">
-        <div class="table-responsive">
-            <table class="table ">
-                <tr>
-                    <th>
-                        <p>Image</p>
-                    </th>
-                    <th>
-                        <p>Name</p>
-                    </th>
-                    <th>
-                        <p>Email</p>
-                    </th>
-                    <th>
-                        <p>Status</p>
-                    </th>
-                    <th>
-                        <p>Action</p>
-                    </th>
-                </tr>
-                @forelse ($users as $key => $user)
-                <tr>
-                    <td>
-                        <div class="parts-mang-img-box" data-bs-toggle="modal" data-bs-target="#pro-detail-model">
-                            <img class="profile_pics" src="{{ $user->profile_picture_url ? Storage::url($user->profile_picture_url) : asset('assets/images/user.png') }}" alt="part manager profile pic" title="profile pic" data-bs-toggle="modal" data-bs-target="#view-manager-model" data={{ $user->id }}>
-                        </div>
-                    </td>
-                    <td>
-                        <p id="user_name">{{ $user->name }}</p>
-                    </td>
-                    <td>
-                        <p>{{ $user->email }}</p>
-                    </td>
-                    <td>
-                        <div class="toggle-btn">
-                            <input type="checkbox" id="switch{{ $key }}" class="custom-switch-input" @if ($user->status == 'ACTIVE') checked="checked" @endif
-                            onchange="toggleStatus(this, 'User', '{{ $user->id }}');"
-                            url="{{ route('Dealer.status') }}"><label for="switch{{ $key }}">Toggle</label>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="action-btns">
-                            <a href="{{ route('Dealer.partsmanager.edit', [$user->id]) }}"><i class="fa-solid fa-pen-to-square" style="color: #3EBE62;" title="edit"></i></a>
-                            <a class="delete" href="{{ route('Dealer.partsmanager.delete', ['user' => $user->id]) }}"><i class="fa-regular fa-trash-can " style="color: #E13F3F;" title="delete"></i></a>
-                        </div>
-                    </td>
+        <div class="product-detail-table product-list-table pro-manage-table">
+            <div class="table-responsive">
+                <table class="table ">
+                    <tr>
+                        <th>
+                            <p>Image</p>
+                        </th>
+                        <th>
+                            <p>Name</p>
+                        </th>
+                        <th>
+                            <p>Email</p>
+                        </th>
+                        <th>
+                            <p>Added Product</p>
+                        </th>
+                        <th>
+                            <p>Status</p>
+                        </th>
+                        <th>
+                            <p>Action</p>
+                        </th>
+                    </tr>
+                    @forelse ($users as $key => $user)
+                    <tr>
+                        <td>
+                            <div class="parts-mang-img-box" data-bs-toggle="modal" data-bs-target="#pro-detail-model">
+                                <img class="profile_pics" src="{{ $user->profile_picture_url ? Storage::url($user->profile_picture_url) : asset('assets/images/user.png') }}" alt="part manager profile pic" title="profile pic" data-bs-toggle="modal" data-bs-target="#view-manager-model" data={{ $user->id }}>
+                            </div>
+                        </td>
+                        <td>
+                            <p id="user_name">{{ $user->name ?? 'N/A' }}</p>
+                        </td>
+                        <td>
+                            <p>{{ $user->email ?? 'N/A' }}</p>
+                        </td>
+                        <td>
+                            <p>{{ $user->productOfManager->count() ?? 'N/A' }}</p>     
+                        </td>
+                        <td>
+                            <div class="toggle-btn">
+                                <input type="checkbox" id="switch{{ $key }}" class="custom-switch-input" @if ($user->status == 'ACTIVE') checked="checked" @endif
+                                onchange="toggleStatus(this, 'User', '{{ $user->id }}');"
+                                url="{{ route('Dealer.status') }}"><label for="switch{{ $key }}">Toggle</label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="action-btns">
+                                <a href="{{ route('Dealer.partsmanager.edit', [$user->id]) }}"><i class="fa-solid fa-pen-to-square" style="color: #3EBE62;" title="edit"></i></a>
+                                <a class="delete" href="{{ route('Dealer.partsmanager.delete', ['user' => $user->id]) }}"><i class="fa-regular fa-trash-can " style="color: #E13F3F;" title="delete"></i></a>
+                            </div>
+                        </td>
 
-                </tr>
-                @empty
-                <div class="empty-data">
-                    <img src="{{ asset('assets/images/no-product.svg') }}  " alt="" width="300">
-                    <p class="text-center mt-1">Did not found any Products</p>
-                </div>
-                @endforelse
-            </table>
-        </div>
-    </div>
-    {{-- <div class="pagination-wrapper">
-            <div class="pagination-boxes">
-                <div class="pagination-box">
-                    <i class="fa-solid fa-angle-left"></i>
-                </div>
-                <div class="pagination-box active">
-                    <p>1</p>
-                </div>
-                <div class="pagination-box">
-                    <p>2</p>
-                </div>
-                <div class="pagination-box">
-                    <p>3</p>
-                </div>
-                <div class="pagination-box">
-                    <p>4</p>
-                </div>
-                <div class="pagination-box">
-                    <p>5</p>
-                </div>
-                <div class="pagination-box">
-                    <i class="fa-solid fa-angle-right"></i>
-                </div>
+                    </tr>
+                    @empty
+                    <div class="empty-data">
+                        <img src="{{ asset('assets/images/no-product.svg') }}  " alt="" width="300">
+                        <p class="text-center mt-1">Did not found any Products</p>
+                    </div>
+                    @endforelse
+                </table>
             </div>
-        </div> --}}
-    {!! $users->links('admin.pagination') !!}
-</div>
+        </div>
+        {!! $users->links('admin.pagination') !!}
+    </div>
 @endsection
 @section('modals')
 <div class="modal fade" id="add-manager-model" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">

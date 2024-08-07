@@ -37,6 +37,9 @@
                             <p>Price</p>
                         </th>
                         <th>
+                            <p>Available Quantity</p>
+                        </th>
+                        <th>
                             <p>Listing Status</p>
                         </th>
                         <th>
@@ -51,13 +54,14 @@
                                         alt="img">
                                 </div>
                             </td>
-
-
                             <td>
                                 <p>{{ $product->name }}</p>
                             </td>
                             <td>
-                                <p>{{ $product->price }}</p>
+                                <p>${{ $product->price }}</p>
+                            </td>
+                            <td>
+                                <p>{{ $product->stocks_avaliable }}</p>
                             </td>
                             <td>
                                 <div class="toggle-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Click to deactivate/active listing of products">
@@ -98,7 +102,6 @@
             </div>
         </div>
         {!! $products->links('dealer.pagination') !!}
-
     </div>
 @endsection
 @section('modals')
@@ -214,136 +217,126 @@
                                     </div>
                                 </div>
 
-                                {{-- <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="">Other specifications</label>
-                                    <div class="form-field">
-                                        <textarea name="other_specification" class="form-control" id="" cols="30" rows="2"></textarea>
+                               {{-- 
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="">Other specifications</label>
+                                            <div class="form-field">
+                                                <textarea name="other_specification" class="form-control" id="" cols="30" rows="2"></textarea>
 
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="">Specifications and dimensions</label>
-                                    <div class="form-field">
-                                        <textarea name="Specifications_and_dimensions" class="form-control" id="" cols="30" rows="2"></textarea>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="">Specifications and dimensions</label>
+                                            <div class="form-field">
+                                                <textarea name="Specifications_and_dimensions" class="form-control" id="" cols="30" rows="2"></textarea>
 
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="">Shipping info</label>
-                                    <div class="form-field">
-                                        <textarea name="Shipping_info" class="form-control" id="" cols="30" rows="2"></textarea>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="">Shipping info</label>
+                                            <div class="form-field">
+                                                <textarea name="Shipping_info" class="form-control" id="" cols="30" rows="2"></textarea>
 
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="">field 3</label>
-                                    <div class="form-field">
-                                        <textarea name="field_3" class="form-control" id="" cols="30" rows="2"></textarea>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="">field 3</label>
+                                            <div class="form-field">
+                                                <textarea name="field_3" class="form-control" id="" cols="30" rows="2"></textarea>
 
+                                            </div>
+                                        </div>
+                                    </div> 
+                                   <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="length">Length:</label>
+                                                <div class="form-field">
+                                                    <input type="number" class="form-control" id="length" name="length" required value="{{ old('length', $product->length ?? ' ') }}">
+                                                        @error('length')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror
+                                                </div>
+                                        </div>
+                                   </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="width">Width:</label>
+                                            <div class="form-field">
+                                                <input type="number" class="form-control" id="width" name="width" required value="{{ old('width', $product->width ?? '') }}">
+                                                @error('width')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                                @enderror
+
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div> --}}
-                                {{-- <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="length">Length:</label>
-                                    <div class="form-field">
-                                        <input type="number" class="form-control" id="length" name="length" required value="{{ old('length', $product->length ?? ' ') }}">
-                            @error('length')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="height">Height:</label>
 
-                        </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="width">Width:</label>
-                    <div class="form-field">
-                        <input type="number" class="form-control" id="width" name="width" required value="{{ old('width', $product->width ?? '') }}">
-                        @error('width')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
+                                            <div class="form-field">
+                                                <input type="number" class="form-control" id="height" name="height" required value="{{ old('height', $product->height ?? ' ') }}">
+                                                @error('height')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                                @enderror
 
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="height">Height:</label>
-
-                    <div class="form-field">
-                        <input type="number" class="form-control" id="height" name="height" required value="{{ old('height', $product->height ?? ' ') }}">
-                        @error('height')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="weight">Weight:</label>
-                    <div class="form-field">
-                        <input type="number" class="form-control" id="weight" name="weight" required value="{{ old('weight', $product->weight ?? ' ') }}">
-                        @error('weight')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="distance_unit">Distance Unit:</label>
-                    <div class="form-field">
-                        <select id="distance_unit" class="form-control" name="distance_unit" required>
-                            <option value="cm">cm</option>
-                            <option value="m">m</option>
-                            <option value="in">in</option>
-                            <option value="ft">ft</option>
-                        </select>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="mass_unit">Mass Unit:</label>
-                    <div class="form-field">
-                        <select id="mass_unit" class="form-control" name="mass_unit" required>
-                            <option value="lb">lb</option>
-                            <option value="kg">kg</option>
-                            <option value="oz">oz</option>
-                            <option value="g">g</option>
-                        </select>
-                    </div>
-                </div>
-            </div> --}}
-                                {{-- <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="">Shipping Price*</label>
-                                    <div class="form-field">
-                                        <input type="text" name="shipping_price" class="form-control"
-                                            placeholder="$000">
-
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div> --}}
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="weight">Weight:</label>
+                                            <div class="form-field">
+                                                <input type="number" class="form-control" id="weight" name="weight" required value="{{ old('weight', $product->weight ?? ' ') }}">
+                                                @error('weight')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="distance_unit">Distance Unit:</label>
+                                            <div class="form-field">
+                                                <select id="distance_unit" class="form-control" name="distance_unit" required>
+                                                    <option value="cm">cm</option>
+                                                    <option value="m">m</option>
+                                                    <option value="in">in</option>
+                                                    <option value="ft">ft</option>
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="mass_unit">Mass Unit:</label>
+                                            <div class="form-field">
+                                                <select id="mass_unit" class="form-control" name="mass_unit" required>
+                                                    <option value="lb">lb</option>
+                                                    <option value="kg">kg</option>
+                                                    <option value="oz">oz</option>
+                                                    <option value="g">g</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                --}}
                             </div>
                             <div class="custm-field-for-ymmm">
                                 <div class="field-for-ymmm-box">
@@ -403,25 +396,25 @@
                                 </div>
                             </div>
                     </div>
-                    <input type="hidden" name="compatable_with" class="form-control" id="compatableProducts"
-                        placeholder="Product Name">
-                    <div id="test1234" class="ymmm-box-preview d-none">
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="d-flex aign-items-center justify-content-end">
-                                <button type="submit" id="submit" class="btn primary-btn md-btn">Submit</button>
+                        <input type="hidden" name="compatable_with" class="form-control" id="compatableProducts"
+                            placeholder="Product Name">
+                        <div id="test1234" class="ymmm-box-preview d-none">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="d-flex aign-items-center justify-content-end">
+                                    <button type="submit" id="submit" class="btn primary-btn md-btn">Submit</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                </form>
+                  </form>
             </div>
         </div>
     </div>
-    </div>
-    </div>
+        {{-- </div>
+            </div> --}}
 
 
 

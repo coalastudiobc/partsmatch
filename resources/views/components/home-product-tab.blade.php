@@ -12,8 +12,10 @@
             <div class="discount-price">
                 <p>${{ $product->price }}</p>
             </div>
-            @if (auth()->user())
-                @if ($product->user_id !== auth()->user()->id)
+            <x-public-shop-cart-buy-button :product="$product" />
+
+            {{-- @if (auth()->user())
+                @if (($product->user_id !== auth()->id() ) && ($product->dealer_id !== auth()->id()))
                     @if (in_array($product->id, authCartProducts()))
                         <button class="btn secondary-btn add-cart-btn " id="added_btn">
                             <span>Added</span>
@@ -68,7 +70,7 @@
                         </defs>
                     </svg>
                 </a>
-            @endif
+            @endif --}}
         </div>
     </div>
 </div>

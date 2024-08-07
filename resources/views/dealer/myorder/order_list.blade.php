@@ -20,7 +20,7 @@
     </div>
     <div class="product-detail-table product-list-table">
         <div class="table-responsive">
-            <table class="table">
+            <table class="table my-order-table">
                 <tr>
                     <th>OrderId</th>
                     <th>Total product</th>

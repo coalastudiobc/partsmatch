@@ -18,10 +18,12 @@ class DatabaseSeeder extends Seeder
             CommissionSeeder::class,
             PermissionsSeeder::class,
             AdminSettingSeeder::class,
-            CarMakeSeeder::class,
+            CountrySeeder::class,
+            StateSeeder::class,
+            CitySeeder::class,
             CarYearSeeder::class,
             CarAllMakeSeeder::class,
-            AllModelSeeder::class
+            AllModelSeeder::class,
         ]);
     }
 }

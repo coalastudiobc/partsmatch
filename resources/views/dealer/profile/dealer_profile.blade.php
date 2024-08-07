@@ -22,12 +22,12 @@
                     <a href="#" class="bredcrum-list active">{{ $user->name }}</a>
                 </div>
                 <div class="dealer-profile-content">
-                    <div class="dealer-profile-form-box">
+                    {{-- <div class="dealer-profile-form-box">
                         <div class="dealer-profile-detail-form">
                             <form action="">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div class="dealer-profile-upload-box">
+                                        <div class="dealer-profile-upload-box" style="cursor: auto;">
                                             <div class="upload-img">
                                                 <div class="file-upload-box">
                                                     <label for="file-upload" style="cursor:auto;">
@@ -36,46 +36,44 @@
 
                                                         </div>
                                                     </label>
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label for="">Business Name</label>
+                                                            <div class="form-field">
+                                                                <input type="text" value="{{ $user->dealership_name ?? 'Business Name' }}" class="form-control" placeholder="" disabled readonly>
+                
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="">Name</label>
+                                            <label for="">Industry</label>
                                             <div class="form-field">
-                                                <input type="text" value="{{ $user->name }}" class="form-control" placeholder="" disabled readonly>
+                                                <input type="text" value="{{ $user->industry_type }}" class="form-control" placeholder="" disabled readonly>
 
                                             </div>
                                         </div>
                                     </div>
-
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="">Industry</label>
-                <div class="form-field">
-                    <input type="text" value="{{ $user->industry_type }}" class="form-control" placeholder="" disabled readonly>
-
+                                </div>
+                            </form>
+                        </div>
+                    </div> --}}
+                    <div class="dealer-product-bxx">
+                        <div class="dealer-product-category">
+                            <div class="dealer-category-box">
+                                @foreach ($allproducts as $product)
+                                    <x-home-product-tab :product="$product" />
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-
-    </form>
-    </div>
-    </div>
-    <div class="dealer-product-bxx">
-        <div class="dealer-product-category">
-            <div class="dealer-category-box">
-                @foreach ($allproducts as $product)
-                    <x-home-product-tab :product="$product" />
-                @endforeach
-
-            </div>
-        </div>
-    </div>
-    </div>
-    </div>
     </div>
 </section>
 @endsection

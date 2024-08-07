@@ -30,7 +30,6 @@
                         <th>
                             <p>Status</p>
                         </th>
-
                     </tr>
                     @forelse($orders as $order)
                         <tr>
@@ -116,38 +115,16 @@
                             </td>
                         </tr>
                     @empty
-                    <div class="empty-data">
-                        <img src="{{ asset('assets/images/no-product.svg') }}  " alt="" width="300">
-                        <p class="text-center mt-1">Did not found any order</p>
-                    </div>
+                    <tr>
+                        <td class="no-record-found">
+                            <center>Did not found any order </center>
+                        </td>
+                    </tr>
                     @endforelse
                 </table>
             </div>
         </div>
         <div class="pagination-wrapper">
-            {{--   <div class="pagination-boxes">
-                <div class="pagination-box">
-                    <i class="fa-solid fa-angle-left"></i>
-                </div>
-                <div class="pagination-box active">
-                    <p>1</p>
-                </div>
-                <div class="pagination-box">
-                    <p>2</p>
-                </div>
-                <div class="pagination-box">
-                    <p>3</p>
-                </div>
-                <div class="pagination-box">
-                    <p>4</p>
-                </div>
-                <div class="pagination-box">
-                    <p>5</p>
-                </div>
-                <div class="pagination-box">
-                    <i class="fa-solid fa-angle-right"></i>
-                </div>
-            </div> --}}
             {!! $orders->links('admin.pagination') !!}
         </div>
     </div>

@@ -78,9 +78,9 @@
                                         <span>See more products by: </span> <a href="{{ route('dealer.profile', ['product' => $product->id]) }}">
                                             <u style="color:#272643">{{ $userdetails->dealership_name ?? 'Dealership Name' }}</u></a>
                                         <h2 class="product-prize-head">${{ $product->price }}</h2>
-                                        @if(!$product->deleted_at)
+                                        {{-- @if(!$product->deleted_at)
                                             @auth
-                                                @if ($product->user_id !== auth()->id())
+                                                @if (($product->user_id !== auth()->id() ) && ($product->dealer_id !== auth()->id()))
                                                             <div class="product-quantity-box mb-3">
                                                                 @if($product->stocks_avaliable <> 0)
                                                                     <div class="quantity-btn">
@@ -145,7 +145,9 @@
 
                                          @else
                                             <span>No longer available</span>
-                                        @endif
+                                        @endif --}}
+                                        <x-product-detail-buy-button :product="$product" />
+
 
                                     <div class="singlr-pro-detail">
                                         <!-- <div class="product-name-detail">

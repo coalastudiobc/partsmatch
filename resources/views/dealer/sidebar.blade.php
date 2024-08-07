@@ -8,13 +8,11 @@
     <h2>Dashboard</h2>
     <div class="analyics-tabs">
         <ul>
-             <li class="analyics-tabs-list">
+            @if(is_null(auth()->user()->working_for))
+            <li class="analyics-tabs-list">
                 <div class="accordion accordion-flush" id="accordionFlushExample">
                     <div class="accordion-item">
                          <h2 class="accordion-header" id="flush-headingOne">
-                                                {{-- <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                                    data-bs-target="#flush-collapseOne1" aria-expanded="false"
-                                                    aria-controls="flush-collapseOne"> --}}
                             <a href="{{ route('Dealer.dashboard') }}" class="analyics-tabs-btns @if (Route::is('Dealer.dashboard')) active @endif ">
                                 <div class="analyics-tabs-name">
                                     <span>
@@ -27,11 +25,11 @@
                                     <h4>Dashboard</h4>
                                 </div>
                             </a>
-                                {{-- </button> --}}
                         </h2>
                     </div>
                 </div>
-             </li>
+            </li>
+            @endif
             <li class="analyics-tabs-list">
                 <div class="accordion accordion-flush" id="accordionFlushExample">
                     <div class="accordion-item">
@@ -147,6 +145,8 @@
                     </div>
                 </div>
             </li> --}}
+            @if(is_null(auth()->user()->working_for))
+
             <li class="analyics-tabs-list">
                 <div class="accordion accordion-flush" id="accordionFlushExample">
 
@@ -189,9 +189,9 @@
                             </div>
                         </div>
                     </div>
-                    
                 </div>
             </li>
+            @endif
             <!-- <li class="analyics-tabs-list">
                 <div class="accordion accordion-flush" id="accordionFlushExample">
                     <div class="accordion-item">

@@ -49,9 +49,14 @@ class ProductController extends Controller
     public function index()
     {
         $years = $this->sdk->years();
+        if($this->getUserParent() == auth()->id())
+        {
+            $products = Product::with('productImage', 'featuredProduct')->where('user_id', auth()->user()->id)->orderBy('id', 'DESC')->Search()->Paginate(__('pagination.pagination_nuber'));
+        }else
+        {
+            $products = Product::with('productImage', 'featuredProduct')->where('dealer_id', auth()->user()->id)->orderBy('id', 'DESC')->Search()->Paginate(__('pagination.pagination_nuber'));
 
-        $products = Product::with('productImage', 'featuredProduct')->where('user_id', auth()->user()->id)->orderBy('id', 'DESC')->Search()->Paginate(__('pagination.pagination_nuber'));
-
+        }
         // $subscription =  DB::table('subscriptions')->where('user_id', auth()->user()->id)->first();
         return view('dealer.products.index', compact('years', 'products'));
     }
@@ -108,7 +113,6 @@ class ProductController extends Controller
             fclose($output);
         }, 'modified_sample.csv', $headers);
     }
-
 
     public function bulkUpload(Request $request)
     {
@@ -169,23 +173,24 @@ class ProductController extends Controller
         try {
             $product = [
                 'name' => $request->name,
-                'user_id' => auth()->user()->id,
+                'user_id' =>$this->getUserParent(),
+                'dealer_id' =>  auth()->user()->id,
                 'subcategory_id' => $request->subcategory,
                 'description' => $request->description,
                 'part_number' => $request->part_number,
                 'additional_details' => $request->additional_details,
                 'stocks_avaliable' => $request->stocks_avaliable,
                 'price' => $request->price,
-                // 'shipping_price' => $request->shipping_price,
-                // 'other_specification' => $request->other_specification,
-                // 'Specifications_and_dimensions' => $request->Specifications_and_dimensions,
-                // 'Shipping_info' => $request->Shipping_info,
-                // 'field_3' => $request->field_3,
-                // 'year' => $request->car_years,
-                // 'brand' => $request->car_model,
-                // 'model' => $request->car_make,
                 'status' => '1',
             ];
+            // 'shipping_price' => $request->shipping_price,
+            // 'other_specification' => $request->other_specification,
+            // 'Specifications_and_dimensions' => $request->Specifications_and_dimensions,
+            // 'Shipping_info' => $request->Shipping_info,
+            // 'field_3' => $request->field_3,
+            // 'year' => $request->car_years,
+            // 'brand' => $request->car_model,
+            // 'model' => $request->car_make,
             DB::beginTransaction();
             $product = Product::create($product);
             if (isset($request->subscription_status)) {
@@ -296,33 +301,31 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        // dd($product);
         foreach ($request->image_id as $image) {
             $id = $image;
             $ids[] = explode(',', $id);
         }
-
-
         try {
 
             $products = [
                 'name' => $request->name,
-                'user_id' => auth()->user()->id,
+               'user_id' =>$this->getUserParent(),
+                'dealer_id' =>  auth()->user()->id,
                 'subcategory_id' => $request->subcategory,
                 'description' => $request->description,
                 'additional_details' => $request->additional_details,
                 'stocks_avaliable' => $request->stocks_avaliable,
                 'price' => $request->price,
-                // 'shipping_price' => $request->shipping_price,
-                // 'other_specification' => $request->other_specification,
-                // 'Specifications_and_dimensions' => $request->Specifications_and_dimensions,
-                // 'Shipping_info' => $request->Shipping_info,
-                // 'field_3' => $request->field_3,
-                // 'year' => $request->year,
-                // 'brand' => $request->brand,
-                // 'model' => $request->model,
                 'status' => '1',
             ];
+            // 'shipping_price' => $request->shipping_price,
+            // 'other_specification' => $request->other_specification,
+            // 'Specifications_and_dimensions' => $request->Specifications_and_dimensions,
+            // 'Shipping_info' => $request->Shipping_info,
+            // 'field_3' => $request->field_3,
+            // 'year' => $request->year,
+            // 'brand' => $request->brand,
+            // 'model' => $request->model,
 
             DB::beginTransaction();
             $product->update($products);
@@ -540,5 +543,14 @@ class ProductController extends Controller
         $products = $productsQuery->paginate(5)
             ->appends($request->globalquery);
         return redirect()->route('products', ['search_parameter' => $request->globalquery]);
+    }
+
+    public function getUserParent()
+    {
+        $parentId=auth()->user()->working_for;
+        if(is_null($parentId)){
+            return auth()->id();
+        }
+       return $parentId;
     }
 }

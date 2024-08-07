@@ -163,10 +163,13 @@ class HomeController extends Controller
     public function ProductDetail(Request $request ,  $product)
     {
         $product = Product::withTrashed()->find($product);
-        $userdetails = User::where('id', $product->user_id)->first();
+        $userdetails = User::where(function($query) use ($product){
+                $query->where('id',$product->user_id)
+                ->orWhere('id', '=', $product->dealer_id);
+        })->first();
         $productImages = $product->productImage;
         $shippingCharge = AdminSetting::where('name', 'shipping_charge')->first();
-        $allproducts = Product::with('productImage')->where('status','1')->where('user_id', $userdetails->id)->inRandomOrder()->limit(5)->get();
+        $allproducts = Product::with(['productImage','productOfDealer'])->where('status','1')->where('user_id', $userdetails->id)->inRandomOrder()->limit(5)->get();
         if (auth()->user()) {
             $cart =  Cart::with('cartProducts', 'cartProducts.product', 'cartProducts.product.productImage')->where('user_id', auth()->id())->first();
             return view('product_details', compact('product', 'productImages', 'shippingCharge', 'userdetails', 'allproducts', 'cart'));

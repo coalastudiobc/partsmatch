@@ -8,11 +8,12 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Cashier\Billable;
 use Laravel\Cashier\Subscription;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use Billable, HasApiTokens, HasFactory, Notifiable, HasRoles;
+    use Billable, HasApiTokens, HasFactory, Notifiable, HasRoles,SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -33,6 +34,7 @@ class User extends Authenticatable
         'industry_type',
         'address',
         'zipcode',
+        'deleted_at',
         'email_verification_token'
     ];
 
@@ -68,6 +70,10 @@ class User extends Authenticatable
     public function product()
     {
         return $this->hasMany(Product::class,  'user_id', 'id');
+    }
+    public function productOfManager()
+    {
+        return $this->hasMany(Product::class,  'dealer_id', 'id');
     }
     public function subscription()
     {

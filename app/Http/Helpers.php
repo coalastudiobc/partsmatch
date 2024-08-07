@@ -190,6 +190,7 @@ if (!function_exists('getChat')) {
         }
     }
 }
+
 if (!function_exists('encrypt_userdata')) {
     function encrypt_userdata(string $data)
     {

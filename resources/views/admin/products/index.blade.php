@@ -13,7 +13,6 @@
                 </div>
             </form>
         </div>
-
         <div class="product-detail-table product-list-table">
             <div class="table-responsive">
                 <table class="table">
@@ -76,12 +75,16 @@
                 </table>
             </div>
         </div>
+        @isset($orders)  
+        <div class="pagination-wrapper">
+            {!! $orders->links('admin.pagination') !!}
+        </div>
+        @endif
     </div>
 @endsection
 @section('modals')
     <div id="productDetailsModel">
-        <div class="modal fade" id="pro-detail-model" tabindex="-1" aria-labelledby="bulk-upload" aria-hidden="true"
-            data-bs-backdrop="static">
+        <div class="modal fade" id="pro-detail-model" tabindex="-1" aria-labelledby="bulk-upload" aria-hidden="true" data-bs-backdrop="static">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content" id="ajax-form-html">
                 </div>

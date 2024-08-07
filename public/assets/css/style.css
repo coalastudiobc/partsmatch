@@ -3060,6 +3060,7 @@ button.accordion-button.analyics-tabs-btns {
     align-items: center;
     gap: 10px;
     justify-content: flex-end;
+    flex-wrap: wrap;
 }
 
 #selectedAddressForm #datepicker {
@@ -3398,4 +3399,7 @@ button.accordion-button.analyics-tabs-btns {
 .dimensionAndDismantleBtn button {
     text-align: center;
     justify-content: center;
+}
+.my-order-table{
+    min-width: 1440px;
 }

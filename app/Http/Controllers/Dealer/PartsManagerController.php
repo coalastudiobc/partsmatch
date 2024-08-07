@@ -14,16 +14,9 @@ class PartsManagerController extends Controller
 {
     public function index()
     {
-        $request = request();
-        $role = 'Advance';
-        $users = User::where('working_for', auth()->user()->id)->Search()->orderBy('created_at', 'DESC')->Paginate(__('pagination.pagination_nuber'));
-        if (auth()->user()->permissions) {
-            foreach (auth()->user()->permissions as $key => $roles) {
-                if ($roles->name == 'role-view' && $key == 0)
-                    $role = 'Basic';
-            }
-        }
-
+        // $request = request();
+        $users = User::with('productOfManager')->where('working_for', auth()->user()->id)->Search()->orderBy('created_at', 'DESC')->Paginate(__('pagination.pagination_nuber'));
+        $role= $this->getUserRole(auth()->user());
         return view('dealer.parts_manager.index', compact('users', 'role'));
     }
     public function store(PartsManagerRequest $request)
@@ -92,11 +85,13 @@ class PartsManagerController extends Controller
             return redirect()->back()->with(['status' => 'error', 'message' => $th->getMessage()]);
         }
     }
+
     public function delete(User $user)
     {
         $user->delete();
         return redirect()->back()->with(['status' => "success", 'message' => 'successfully deleted']);
     }
+
     public function getPartManagerDetail(User $user)
     {
         try {
@@ -119,6 +114,7 @@ class PartsManagerController extends Controller
         }
         $role=$this->getUserRole($user);
     }
+
     protected function getUserRole(User $user)
     {
        try
@@ -134,6 +130,6 @@ class PartsManagerController extends Controller
         } catch (\Throwable $th) {
             throw new Exception('Did not found role:.'.$th->getMessage());
            
+        }
     }
-}
 }

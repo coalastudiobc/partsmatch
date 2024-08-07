@@ -44,7 +44,7 @@
                             <p><i class="fa-regular fa-calendar-days"></i> Order Date</p>
                         </div>
                         <div class="partsmanager-dates-inner">
-                            <h4>{{$selectedShippmentDate ??  'N/A'}}</h4>
+                            <h4>{{$selectedShippmentDate ?( Carbon\Carbon::parse($selectedShippmentDate)->format('m/d/Y') ??  'N/A'):'N/A'}}</h4>
                             <p><i class="fa-regular fa-calendar-days"></i> ship date</p>
                         </div>
                     </div>

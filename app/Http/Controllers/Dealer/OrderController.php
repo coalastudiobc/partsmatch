@@ -33,9 +33,9 @@ class OrderController extends Controller
     {
         try {
             $orderIds = Order::where('order_for', auth()->id())->pluck('id')->toArray();
-            if (empty($orderIds)) {
-                return redirect()->back()->with(['error' => 'No orders found for the authenticated user.']);
-            }
+            // if (empty($orderIds)) {
+            //     return redirect()->back()->with(['error' => 'No orders found for the authenticated user.']);
+            // }
 
             $fulfilledIds = ShippoPurchasedLabel::whereIn('order_id', $orderIds)->pluck('order_id')->toArray();
 
@@ -61,11 +61,11 @@ class OrderController extends Controller
     {
         try {
             $orderIds = Order::where('order_for', auth()->id())->pluck('id')->toArray();
-            if (empty($orderIds)) {
-                return redirect()->back()->with([
-                    'error' => 'No orders found for the authenticated user.'
-                ]);
-            }
+            // if (empty($orderIds)) {
+            //     return redirect()->back()->with([
+            //         'error' => 'No orders found for the authenticated user.'
+            //     ]);
+            // }
             $fulfilledIds = ShippoPurchasedLabel::whereIn('order_id', $orderIds)->pluck('order_id')->toArray();
             $fulfilledOrders = Order::whereIn('id', $fulfilledIds)->latest()->get();
             return view('dealer.order.fullfilled_order', compact('fulfilledOrders'));
@@ -330,8 +330,8 @@ class OrderController extends Controller
         try {
             $res = $this->shippmentTranscation($request->rate_id, $request);
             $this->stripeTranscation($request);
-            toastr()->success('Shippment created successfully');
-            return redirect()->route('Dealer.order.orderlist');
+            toastr()->success('Order fulfilled successfully');
+            return redirect()->route('Dealer.order.fulllfilled');
         } catch (\Exception $th) {
             toastr()->error($th->getMessage());
             return redirect()->route('Dealer.order.orderlist');
