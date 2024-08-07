@@ -439,3 +439,27 @@ if (!function_exists('viewGroups')) {
         }
     }
 }
+if (!function_exists('checkForBuyButton')) {
+    function checkForBuyButton($product)
+    {
+        try {
+            $userId = auth()->id();
+            $workingFor = auth()->user()->working_for;
+            $workingForInt = $workingFor !== null ? (int) $workingFor : null;
+
+            $shouldShowButton = $product->user_id !== $userId
+                && $product->dealer_id !== $userId
+                && ($product->dealer_id !== $workingForInt)
+                && ($product->productOfDealer 
+                    ? (int) $product->productOfDealer->first()->working_for !== $workingForInt
+                    : $workingForInt === null);
+
+            return $shouldShowButton;
+        } catch (\Exception $e) {
+            // Log::error('Error in checkForBuyButton: ' . $e->getMessage());
+            return false; 
+        }
+    }
+}
+
+

@@ -1,22 +1,7 @@
 @if(!$product->deleted_at)
 @auth
-    {{-- @if(($product->user_id !== auth()->id() ) && ($product->dealer_id !== auth()->id()) && ( auth()->user()->working_for ? ($product->dealer_id !== auth()->user()->working_for):false)) --}}
-        {{-- @if( $product->user_id !== auth()->id()
-         && $product->dealer_id !== auth()->id()  
-         && ($product->dealer_id !==(int) auth()->user()->working_for)
-         && ($product->productOfDealer ? ((int)$product->productOfDealer->first()->working_for !== (int) auth()->user()->working_for):false)) --}}
-         @php
-    $userId = auth()->id();
-    $workingFor = (int) auth()->user()->working_for;
-    $isNotUserProduct = $product->user_id !== $userId;
-    $isNotDealerProduct = $product->dealer_id !== $userId;
-    $isNotWorkingForDealer = (int) $product->dealer_id !== $workingFor;
-    $isNotWorkingForProductOfDealer = $product->productOfDealer ? 
-        (int) $product->productOfDealer->first()->working_for !== $workingFor 
-        : false;
-@endphp
+@if( checkForBuyButton($product))
 
-@if($isNotUserProduct && $isNotDealerProduct && $isNotWorkingForDealer && $isNotWorkingForProductOfDealer)
                 <div class="product-quantity-box mb-3">
                     @if($product->stocks_avaliable <> 0)
                         <div class="quantity-btn">

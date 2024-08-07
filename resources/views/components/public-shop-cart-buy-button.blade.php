@@ -1,21 +1,7 @@
 @auth
 {{-- @if ( $product->user_id !== auth()->id() && $product->dealer_id !== auth()->id()  && ($product->dealer_id !==(int) auth()->user()->working_for)) --}}
-{{-- @if( $product->user_id !== auth()->id()
-&& $product->dealer_id !== auth()->id()  
-&& ($product->dealer_id !==(int) auth()->user()->working_for)
-&& ($product->productOfDealer ? ((int)$product->productOfDealer->first()->working_for !== (int) auth()->user()->working_for):false)) --}}
-@php
-    $userId = auth()->id();
-    $workingFor = (int) auth()->user()->working_for;
-    $isNotUserProduct = $product->user_id !== $userId;
-    $isNotDealerProduct = $product->dealer_id !== $userId;
-    $isNotWorkingForDealer = (int) $product->dealer_id !== $workingFor;
-    $isNotWorkingForProductOfDealer = $product->productOfDealer ? 
-        (int) $product->productOfDealer->first()->working_for !== $workingFor 
-        : false;
-@endphp
+@if( checkForBuyButton($product))
 
-@if($isNotUserProduct && $isNotDealerProduct && $isNotWorkingForDealer && $isNotWorkingForProductOfDealer)
         @if (in_array($product->id, authCartProducts()))
                 <button class="btn secondary-btn add-cart-btn " id="added_btn">
                     <span>added</span>
