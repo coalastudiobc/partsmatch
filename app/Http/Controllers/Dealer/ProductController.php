@@ -7,17 +7,17 @@ use App\Models\Cart;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\OrderItem;
 use App\Models\AdminSetting;
 use App\Models\ProductImage;
-use Illuminate\Http\Request;
 use App\Models\FeaturedProduct;
 use Illuminate\Support\Facades\DB;
 use App\Models\ProductCompatabilty;
 use App\Models\ProductParcelDetail;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
-use App\Models\OrderItem;
 use App\Models\ShippoPurchasedLabel;
+use App\Http\Requests\ProductRequest;
 use GrahamCampbell\ResultType\Success;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Builder;
@@ -167,7 +167,7 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
         // dd($request->toArray());
         try {
@@ -299,7 +299,7 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(ProductRequest $request, Product $product)
     {
         foreach ($request->image_id as $image) {
             $id = $image;
@@ -313,6 +313,7 @@ class ProductController extends Controller
                 'dealer_id' =>  auth()->user()->id,
                 'subcategory_id' => $request->subcategory,
                 'description' => $request->description,
+                'part_number' => $request->part_number,
                 'additional_details' => $request->additional_details,
                 'stocks_avaliable' => $request->stocks_avaliable,
                 'price' => $request->price,

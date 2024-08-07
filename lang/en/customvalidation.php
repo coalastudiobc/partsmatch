@@ -356,6 +356,7 @@ return [
     'product' => [
         'name' => [
             'required' => 'Please enter product Name',
+            'max' => 'Only 255 characters allow',
         ],
         'category' => [
             'required' => 'Please enter product Category',
@@ -376,10 +377,15 @@ return [
         'price' => [
             'required' => 'Please enter product Price',
             'number' => 'please enter numbers only',
-            'regex' => 'please enter only two decimal numbers'
+            'regex' => 'The price cannot start with leading zeroes and please enter only two decimal numbers'
         ],
         'shipping_price' => [
             'required' => 'Please enter product Shipping price',
+        ],
+        'part_number' => [
+            'required' => 'Please enter product Part Number',
+            'regex' => 'Only alphanumeric characters and underscores (_) are allowed',
+            'max'=>'Only 255 characters allow'
         ],
     ],
 

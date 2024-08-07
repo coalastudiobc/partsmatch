@@ -63,6 +63,11 @@ return [
     'package_regex' => '/^[^-\s][a-zA-Z\s]{10,100000}$/',
     'package_minlength' => 10,
     'package_maxlength' => 1000,
+    
+    'part_number_regex' => '/^[a-zA-Z0-9_]+$/',
+
+    'product_price_regex'=>'/^(?!0\d)\d+(?:\.\d{1,2})?$/',
+
 
     'account_minlength' => 12,
     'account_maxlength' => 15,

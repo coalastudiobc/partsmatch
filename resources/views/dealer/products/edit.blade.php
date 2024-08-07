@@ -39,7 +39,7 @@
                         <div class="form-group">
                             <label for="">Product Category<span class="required-field">*</span></label>
                             <div class="form-field">
-                                <select type="text" name="category" class="form-control category" placeholder="Product Category">
+                                <select type="text" name="category" class="form-control category @error('category') is-invalid @enderror" placeholder="Product Category">
                                     <option value="">Select the category</option>
                                     @foreach (get_category() as $category)
                                     <option value="{{ $category->id }}" @if ($product->category->parent_id == $category->id) Selected @endif>
@@ -54,11 +54,16 @@
                         <div class="form-group">
                             <label for="">Product SubCategory<span class="required-field">*</span></label>
                             <div class="form-field subcategory">
-                                <select type="text" name="subcategory" class="form-control" placeholder="Product SubCategory" id="subcategory">
+                                <select type="text" name="subcategory" class="form-control @error('subcategory') is-invalid @enderror" placeholder="Product SubCategory" id="subcategory">
                                     <option value="{{ $product->subcategory_id }}">
                                         {{ $product->category ? $product->category->name : 'Select the subcategory' }}
                                     </option>
                                 </select>
+                                @error('subcategory')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -66,7 +71,7 @@
                         <div class="form-group">
                             <label for="">Part Number</label>
                             <div class="form-field subcategory">
-                                <input type="text" class="form-control" id="part_number" name="part_number" value="{{ old('part_number', $product->part_number ?? ' ') }}" placeholder="Part Number">
+                                <input type="text" class="form-control @error('part_number') is-invalid @enderror" id="part_number" name="part_number" value="{{ old('part_number', $product->part_number ?? ' ') }}" placeholder="Part Number">
                                 @error('part_number')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -193,7 +198,7 @@
         <div class="form-group">
             <label for="">Product Quantity<span class="required-field">*</span></label>
             <div class="form-field">
-                <input type="text" name="stocks_avaliable" class="form-control @error('quantity') is-invalid @enderror" value="{{ old('stocks_avaliable', $product->stocks_avaliable) }}">
+                <input type="text" name="stocks_avaliable" class="form-control @error('stocks_avaliable') is-invalid @enderror" value="{{ old('stocks_avaliable', $product->stocks_avaliable) }}">
                 @error('stocks_avaliable')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>

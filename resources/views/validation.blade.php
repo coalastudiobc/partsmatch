@@ -16,6 +16,12 @@
     //email
     const emailRegex = {{ config('validation.email_regex') }};
 
+    //part number regex
+    const partNumberRegex = {{ config('validation.part_number_regex') }};
+
+    //product price regex
+    const productPriceRegex = {{ config('validation.product_price_regex') }};
+
     //Pincode
     const pincodeMinLength = {{ config('validation.pincode_minlength') }};
     const pincodeMaxLength = {{ config('validation.pincode_maxlength') }};

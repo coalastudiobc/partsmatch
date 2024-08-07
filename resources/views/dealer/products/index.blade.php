@@ -121,7 +121,12 @@
                                     <div class="form-group">
                                         <label for=""> Name<span class="required-field">*</span></label>
                                         <div class="form-field">
-                                            <input type="text" name="name" class="form-control" placeholder="Name">
+                                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"  placeholder="Name">
+                                            @error('name')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -129,13 +134,18 @@
                                     <div class="form-group">
                                         <label for=""> Category<span class="required-field">*</span></label>
                                         <div class="form-field">
-                                            <select type="text" name="category" class="form-control category"
+                                            <select type="text" name="category" class="form-control category @error('category') is-invalid @enderror"
                                                 placeholder="Category">
                                                 <option value="">Select category</option>
                                                 @foreach (get_category() as $category)
                                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                                                 @endforeach
                                             </select>
+                                            @error('category')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -143,10 +153,15 @@
                                     <div class="form-group">
                                         <label for=""> Sub category<span class="required-field">*</span></label>
                                         <div class="form-field subcategory">
-                                            <select type="text" name="subcategory" class="form-control"
+                                            <select type="text" name="subcategory" class="form-control @error('subcategory') is-invalid @enderror"
                                                 placeholder="Select subCategory" id="subcategory">
                                                 <option value="">Select subcategory</option>
                                             </select>
+                                            @error('subcategory')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -154,7 +169,7 @@
                                     <div class="form-group">
                                         <label for=""> Part number</label>
                                         <div class="form-field subcategory">
-                                            <input type="text" class="form-control" id="part_number"
+                                            <input type="text" class="form-control @error('part_number') is-invalid @enderror" id="part_number"
                                                 name="part_number" value="" placeholder="Part Number">
                                             @error('part_number')
                                                 <span class="invalid-feedback" role="alert">
@@ -168,8 +183,12 @@
                                     <div class="form-group">
                                         <label for=""> Description<span class="required-field">*</span></label>
                                         <div class="form-field">
-                                            <textarea name="description" class="form-control" id="" cols="30" rows="2"></textarea>
-
+                                            <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="" cols="30" rows="2"></textarea>
+                                            @error('description')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -177,8 +196,12 @@
                                     <div class="form-group">
                                         <label for=""> Additional details</label>
                                         <div class="form-field">
-                                            <textarea name="additional_details" class="form-control" id="" cols="30" rows="2"></textarea>
-
+                                            <textarea name="additional_details" class="form-control @error('additional_details') is-invalid @enderror" id="" cols="30" rows="2"></textarea>
+                                            @error('additional_details')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -200,19 +223,27 @@
                                     <div class="form-group">
                                         <label for=""> Quantity<span class="required-field">*</span></label>
                                         <div class="form-field">
-                                            <input type="text" name="stocks_avaliable" class="form-control"
+                                            <input type="text" name="stocks_avaliable" class="form-control @error('stocks_avaliable') is-invalid @enderror"
                                                 placeholder="Quantity">
-
+                                                @error('stocks_avaliable')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for=""> Price<span class="required-field">*</span></label>
+                                        <label for="price"> Price<span class="required-field">*</span></label>
                                         <div class="form-field">
-                                            <input type="text" name="price" class="form-control"
+                                            <input type="text" name="price" class="form-control @error('price') is-invalid @enderror"
                                                 placeholder="$000">
-
+                                                @error('price')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>

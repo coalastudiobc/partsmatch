@@ -28,10 +28,11 @@
             price: {
                 required: true,
                 number: true,
-                regex: /^\d+(\.\d{1,2})?$/,
+                regex:productPriceRegex,
             },
-            shipping_price: {
+            part_number: {
                 required: true,
+                regex:partNumberRegex,
             },
 
         }
@@ -59,11 +60,15 @@
             price: {
                 required: `{{ __('customvalidation.product.price.required') }}`,
                 number: `{{ __('customvalidation.product.price.number') }}`,
-                regex: `{{ __('customvalidation.product.price.regex') }}`, // Add this message in your validation messages
+                regex: `{{ __('customvalidation.product.price.regex') }}`,
     
             },
             shipping_price: {
                 required: `{{ __('customvalidation.product.shipping_price.required') }}`,
+            },
+            part_number: {
+                required: `{{ __('customvalidation.product.part_number.required') }}`,
+                regex: `{{ __('customvalidation.product.part_number.regex') }}`,
             },
 
         };
