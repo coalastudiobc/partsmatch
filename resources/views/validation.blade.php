@@ -22,6 +22,9 @@
     //product price regex
     const productPriceRegex = {{ config('validation.product_price_regex') }};
 
+    //product stock regex
+    const productStockRegex = {{ config('validation.product_stock_regex') }};
+
     //Pincode
     const pincodeMinLength = {{ config('validation.pincode_minlength') }};
     const pincodeMaxLength = {{ config('validation.pincode_maxlength') }};

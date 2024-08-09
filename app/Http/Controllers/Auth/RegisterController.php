@@ -57,15 +57,26 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+       return Validator::make($data,[ 
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'dealershipName' => ['required', 'string', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'phone_number' => ['required', 'unique:users', 'max:10', 'min:10'],
-            'address' => ['required'],
-            'zipcode' => ['required', 'min:6', 'max:6'],
-            'industry_type' => ['required'],
+            'phone_number' => [
+                'required',
+                function ($attribute, $value, $fail) {
+                    $digits = preg_replace('/\D/', '', $value);
+                    if (strlen($digits) < 10 || $digits[0] === '0') {
+                        return $fail('The ' . $attribute . ' must be a valid phone number and cannot start with zero.');
+                    }
+                    if (!preg_match('/^\(\d{3}\) \d{3}-\d{4}$/', $value)) {
+                        return $fail('The ' . $attribute . ' must be a valid phone number in the format (XXX) XXX-XXXX.');
+                    }
+                }
+            ],
+            'address' => ['required', 'string'],
+            'zipcode' => ['required', 'size:6'], 
+            'industry_type' => ['required', 'string'],
             'image' => ['required', 'mimes:jpeg,jpg,png'],
         ]);
     }

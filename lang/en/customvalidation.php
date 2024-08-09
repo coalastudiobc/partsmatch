@@ -372,12 +372,13 @@ return [
         ],
         'stocks_avaliable' => [
             'required' => 'Please enter product Stock',
-            'number' => 'please enter only integer numbers'
+            'number' => 'please enter only integer numbers',
+            'regex' => 'Only number are allowed',
         ],
         'price' => [
             'required' => 'Please enter product Price',
             'number' => 'please enter numbers only',
-            'regex' => 'The price cannot start with leading zeroes and please enter only two decimal numbers'
+            'regex' => 'The price cannot start with leading zeroes and please enter only two decimal numbers',
         ],
         'shipping_price' => [
             'required' => 'Please enter product Shipping price',

@@ -67,6 +67,7 @@ return [
     'part_number_regex' => '/^[a-zA-Z0-9_]+$/',
 
     'product_price_regex'=>'/^(?!0\d)\d+(?:\.\d{1,2})?$/',
+    'product_stock_regex'=>'/^[0-9]+$/',
 
 
     'account_minlength' => 12,

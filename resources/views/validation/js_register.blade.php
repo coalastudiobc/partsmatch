@@ -2,6 +2,29 @@
     jQuery(document).ready(function() {
         $("#submit").attr('disabled', false);
 
+        $.validator.addMethod("phoneNumber", function (value, element) {
+            var digits = value.replace(/\D/g, '');
+            return this.optional(element) || (digits.length === 10);
+        }, "Please enter a valid phone number with 10 digits.");
+
+        $.validator.addMethod("phoneNumberFormat", function (value, element) {
+        var digits = value.replace(/\D/g, '');
+        if (digits.startsWith('0')) {
+            return false; // Invalid: Starts with a zero
+        }
+        var formattedValue = '';
+        if (digits.length > 0) {
+            formattedValue = '(' + digits.substring(0, 3);
+            if (digits.length > 3) {
+                formattedValue += ') ' + digits.substring(3, 6);
+            }
+            if (digits.length > 6) {
+                formattedValue += '-' + digits.substring(6, 10);
+            }
+        }
+        return this.optional(element) || value === formattedValue;
+        }, "Phone number format is invalid or starts with zero.");
+
         const rules = {
             name: {
                 required: true,
@@ -17,9 +40,11 @@
             },
             phone_number: {
                 required: true,
-                digits: true,
-                minlength: 10,
-                maxlength: 10
+                phoneNumber:true,
+                phoneNumberFormat:true,
+                // digits: true,
+                // minlength: 10,
+                // maxlength: 10
             },
 
             email: {
@@ -73,7 +98,6 @@
             },
             phone_number: {
                 required: `{{ __('customvalidation.user.phone_number.required') }}`,
-                digits: "only number allowed",
                 minlength: `{{ __('customvalidation.user.phone_number.minlength') }}`,
                 maxlength: `{{ __('customvalidation.user.phone_number.maxlength') }}`,
             },

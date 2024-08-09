@@ -2698,7 +2698,7 @@ span.filter-serach-icon {
 
 .collect-tab-slider {
     display: flex;
-    max-width: 715px;
+    max-width: 500px;
     gap: 10px;
     margin: 0px 30px;
 }
@@ -3403,3 +3403,27 @@ button.accordion-button.analyics-tabs-btns {
 .my-order-table{
     min-width: 1440px;
 }
+.pro-manage-table table{
+    min-width: 1300px;
+}
+.sidebar-opener {
+    display: none;
+}
+.dasboard-nav .navbar-nav:first-child {
+    /* margin-right: 30px; */
+    margin-right: 0 !important;
+}
+.dasboard-btn {
+    color: #fff !important;
+    padding: 3px 6px !important;
+    background-color: var(--heading-color);
+    border-radius: 5px;
+    display: flex;
+    gap: 10px;
+}
+
+
+
+
+
+

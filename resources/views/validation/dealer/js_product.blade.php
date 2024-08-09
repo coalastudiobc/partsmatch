@@ -7,7 +7,6 @@
             name: {
                 required: true,
             },
-
             category: {
                 required: true,
 
@@ -24,6 +23,7 @@
             stocks_avaliable: {
                 required: true,
                 number: true,
+                regex: productStockRegex,
             },
             price: {
                 required: true,
@@ -56,6 +56,7 @@
             stocks_avaliable: {
                 required: `{{ __('customvalidation.product.stocks_avaliable.required') }}`,
                 number: `{{ __('customvalidation.product.stocks_avaliable.number') }}`,
+                regex: `{{ __('customvalidation.product.stocks_avaliable.regex') }}`,
             },
             price: {
                 required: `{{ __('customvalidation.product.price.required') }}`,

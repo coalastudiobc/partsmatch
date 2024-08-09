@@ -405,6 +405,28 @@
         width: 100%;
         padding: 30px 36px;
     }
+    .dasboard-nav .navbar {
+        flex-wrap: nowrap;
+    }
+    .dasboard-nav .navbar .custm-nav-menu {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+    .sidebar-opener {
+        display: block;
+    }
+    .dasboard-btn {
+        gap: 0px;
+        font-size: 0 !important;
+        min-height: 30px;
+        align-items: center;
+        justify-content: center;
+        max-width: 30px;
+        overflow: hidden;
+        min-width: 30px;
+    }
+   
 
 }
 
@@ -607,7 +629,7 @@
     }
 
     .page-content-sec {
-        padding: 20px 0px;
+        padding: 0px 0px;
     }
 
     .signup-img-txt h2 {
@@ -911,6 +933,34 @@
         max-width: 174px;
         min-width: 174px;
     }
+    .bg-body-tertiary .navbar-brand{
+        order: 1;
+    }
+    .bg-body-tertiary .navbar-serch-box{
+        order: 3;
+    }
+    .bg-body-tertiary #navbarNav{
+        order: 2;
+    }
+    .bg-body-tertiary .navbar-serch-box {
+        order: 3;
+        width: 100%;
+        margin: 20px 0 0;
+    }
+    .brands-header h3 {
+        font-size: 28px;
+        text-align: left;
+    }
+    .brands-header>.brands-btn a {
+        justify-content: center;
+    }
+    .brands-header > div:first-child {
+        display: none;
+    }
+    .brands-header {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
 
 }
 
@@ -1072,6 +1122,15 @@
         min-width: 159px;
         font-size: 11px;
     }
+    .nav-profile .dropdown-toggle{
+        font-size: 0;
+    }
+    .shop-btn {
+        max-width: 30px;
+        max-height: 30px;
+        overflow: hidden;
+    }
+    
 }
 
 @media screen and (max-width:480px) {

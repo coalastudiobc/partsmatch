@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\OrderItem;
+use Illuminate\Http\Request;
 use App\Models\AdminSetting;
 use App\Models\ProductImage;
 use App\Models\FeaturedProduct;
@@ -519,33 +520,6 @@ class ProductController extends Controller
 
         return response()->json(['success' => true, 'makes' => $make]);
     }
-    public function search(Request $request)
-    {
-        if (is_null($request->globalquery)) {
-            return redirect()->back();
-        }
-
-        $productsQuery = Product::query();
-
-        $productsQuery->when(!empty($request->globalquery), function ($query) use ($request) {
-            $query->where(function ($query) use ($request) {
-                $query->where('name', 'like', '%' . $request->globalquery . '%')
-                    ->orWhere('price', 'like', '%' . $request->globalquery . '%')
-                    ->orWhere('year', 'like', '%' . $request->globalquery . '%')
-                    ->orWhere('brand', 'like', '%' . $request->globalquery . '%')
-                    ->orWhere('model', 'like', '%' . $request->globalquery . '%');
-            });
-        });
-
-        $productsQuery->when(!empty($request->globalquery) && $request->globalquery == 'active', function ($query) {
-            $query->where('status', '1');
-        });
-
-        $products = $productsQuery->paginate(5)
-            ->appends($request->globalquery);
-        return redirect()->route('products', ['search_parameter' => $request->globalquery]);
-    }
-
     public function getUserParent()
     {
         $parentId=auth()->user()->working_for;
@@ -554,4 +528,68 @@ class ProductController extends Controller
         }
        return $parentId;
     }
+
+    public function search(Request $request)
+    {
+        if (is_null($request->globalquery)) {
+            // return redirect()->route('products', ['search_parameter' => $request->globalquery]);
+            return redirect()->back();
+        }
+       $response= $this->searchByVin($request);
+        $productsQuery = Product::query();
+
+        $productsQuery->when(!empty($request->globalquery), function ($query) use ($request,$response) {
+            $query->where(function ($query) use ($request,$response) {
+                $query->where('name', 'like', '%' . $request->globalquery . '%')
+                    ->orWhere('price', 'like', '%' . $request->globalquery . '%')
+                    ->orWhere('year', 'like', '%' . $request->globalquery . '%')
+                    ->orWhere('brand', 'like', '%' . $request->globalquery . '%')
+                    ->orWhere('model', 'like', '%' . $request->globalquery . '%')
+                    ->orWhere('year', 'like', '%' . $response['year'] ?? ''. '%')
+                    ->orWhere('brand', 'like', '%' . $response['make'] ?? '' . '%')
+                    ->orWhere('model', 'like', '%' . $response['model'] ?? ''. '%');
+            });
+        });
+
+        // $productsQuery->when(!empty($request->globalquery) && $request->globalquery == 'active', function ($query) {
+        //     $query->where('status', '1');
+        // });
+        $productsQuery->when(
+            (!empty($request->globalquery) && $request->globalquery == 'active') || 
+            (!empty($response['status']) && $response['status'] == 'active'),
+            function ($query) {
+                $query->where('status', '1');
+            }
+        );
+
+        $products = $productsQuery->paginate(5)->appends($request->globalquery);
+        return redirect()->route('products', ['search_parameter' => $request->globalquery]);
+    }
+
+    public function searchByVin(Request $request)
+    {
+        try 
+        {
+            $vin = $request->globalquery;
+            if (empty($vin)) {
+                return null;
+            }
+            
+            $apiResponse = $this->sdk->vin($vin);
+            $data=[
+                'year'=>$apiResponse->year ?? ' ',
+                'make'=>$apiResponse->make ?? ' ',
+                'model'=>$apiResponse->model ?? ' ',
+            ];
+            return $data;
+        } catch (\Exception $th) {
+           return 
+           $data=[
+            'year'=> ' ',
+            'make'=>' ',
+            'model'=> ' ',
+                 ];
+        }
+    }
+
 }

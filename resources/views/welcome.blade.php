@@ -419,7 +419,7 @@
     });
     $('.collect-tab-slider').slick({
         infinite: true,
-        slidesToShow: 4,
+        slidesToShow: 2,
         slidesToScroll: 1,
         autoplay: true,
         arrows: true,
@@ -430,7 +430,7 @@
           {
             breakpoint: 1200,
             settings: {
-              slidesToShow: 3,
+              slidesToShow: 2,
               slidesToScroll: 2,
             }
           },

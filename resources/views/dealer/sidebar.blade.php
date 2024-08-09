@@ -2,7 +2,7 @@
 
 
     <span class="sidebar-cross-icon">
-        <i class="fa-solid fa-xmark cross-filter"></i>
+        <i class="fa-solid fa-xmark cross-sidebar"></i>
     </span>
 
     <h2>Dashboard</h2>

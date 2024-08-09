@@ -18,9 +18,8 @@
             },
             phone_number: {
                 required: true,
-                digits: true,
-                minlength: 10,
-                maxlength: 10
+                phoneNumber:true,
+                phoneNumberFormat:true,
             },
             industry_type: {
                 required: true,
@@ -47,7 +46,6 @@
             },
             phone_number: {
                 required: `{{ __('customvalidation.user.phone_number.required') }}`,
-                digits: "only number allowed",
                 minlength: `{{ __('customvalidation.user.phone_number.minlength') }}`,
                 maxlength: `{{ __('customvalidation.user.phone_number.maxlength') }}`,
             },
@@ -61,5 +59,11 @@
         };
 
         handleValidation('account_setting', rules, messages);
+        $("#account_setting").on("submit", function() {
+            if ($('#account_setting').valid()) {
+                $("#submit").attr('disabled', true);
+                $("#account_setting").find('button').attr('disabled', true);
+            }
+        });
     });
 </script>

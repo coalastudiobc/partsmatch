@@ -36,25 +36,25 @@
                         </th>
                     </tr>
                  @isset ($fulfilledOrders)
-                    @forelse ($fulfilledOrders as $order)
+                    @forelse ($fulfilledOrders as $fulfilledOrder)
                     <tr>
                         <td>
-                            <p>{{$order? ( $order->id ?? 'N/A') : 'N/A'}}</p>
+                            <p>{{$fulfilledOrder? ( $fulfilledOrder->order_id ?? 'N/A') : 'N/A'}}</p>
                         </td>
                         <td>
                             <div class="pro-list-name" data-bs-toggle="modal" data-bs-target="#pickadress-modal">
-                                <h4>{{$order ? (count($order->orderItem) ?? 'N/A') : 'N/A' }}</h4>
+                                <h4>{{$fulfilledOrder ? (count($fulfilledOrder->orderDetails->orderItem) ?? 'N/A') : 'N/A' }}</h4>
                             </div>
                         </td>
 
                         <td>
-                            <p>${{$order? ( $order->total_amount ?? 'N/A') : 'N/A'  }}</p>
+                            <p>${{$fulfilledOrder? ( $fulfilledOrder->orderDetails->total_amount ?? 'N/A') : 'N/A'  }}</p>
                         </td>
                         <td>
-                            <p>${{$order? ( $order->shipment_price ?? 'N/A') : 'N/A' }}</p>
+                            <p>${{$fulfilledOrder? ( $fulfilledOrder->orderDetails->shipment_price ?? 'N/A') : 'N/A' }}</p>
                         </td>
                         <td>
-                            <p>{{ $order ? ($order->created_at ? date('d-m-Y', strtotime($order->created_at)) : 'N/A'):'N/A' }}</p>
+                            <p>{{ $fulfilledOrder ? ($fulfilledOrder->orderDetails->created_at ? date('m/d/Y', strtotime($fulfilledOrder->orderDetails->created_at)) : 'N/A'):'N/A' }}</p>
                         </td>
 
                         {{-- <td>
@@ -67,7 +67,7 @@
                                             </div>
                                         </td> --}}
                         <td>
-                            <a class="btn primary-btn" href="{{route('Dealer.order.fullfilled.shippment.details',['order_id'=>$order->id])}}">
+                            <a class="btn primary-btn" href="{{route('Dealer.order.fullfilled.shippment.details',['order_id'=>$fulfilledOrder->orderDetails->id])}}">
                             Track Details</a>
                         </td>
                     </tr>

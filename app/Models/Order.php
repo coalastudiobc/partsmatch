@@ -23,6 +23,17 @@ class Order extends Model
     protected $casts = [
         'total_amount'=>'float',
     ];
+
+    public function scopeForUser($query, $userId)
+    {
+        return $query->where('order_for', $userId);
+    }
+
+    public function scopeNotFulfilled($query, $fulfilledOrderIds)
+    {
+        return $query->whereNotIn('id', $fulfilledOrderIds);
+    }
+
     public function orderItem()
     {
         return $this->hasMany(OrderItem::class, 'order_id', 'id');

@@ -23,18 +23,17 @@ class DealerController extends Controller
         
             if (!empty($orderIds)) {
                 $fulfilledIds = ShippoPurchasedLabel::whereIn('order_id', $orderIds)->pluck('order_id')->toArray();
-        
                 $pendingOrders = Order::whereIn('id', $orderIds)
-                    ->when(!empty($fulfilledIds), function ($query) use ($fulfilledIds) {
-                        return $query->whereNotIn('id', $fulfilledIds);
-                    })
-                    ->orderBy('created_at', 'DESC')
-                    ->count();
-        
+                ->when(!empty($fulfilledIds), function ($query) use ($fulfilledIds) {
+                    return $query->whereNotIn('id', $fulfilledIds);
+                })
+                ->count();
+                
                 $fulfilledOrders = Order::whereIn('id', $fulfilledIds)->count();
+                // dd($orderIds,$fulfilledIds,$fulfilledOrders);
             }
         
-            return view('dealer.dashboard', compact('ordersCount', 'pendingOrders', 'fulfilledOrders','totalAmountOfAllOrders'));                                                                                                                                                         
+            return view('dealer.dashboard', compact('ordersCount', 'pendingOrders', 'fulfilledOrders','totalAmountOfAllOrders'));                                                                                                                                                  
         } catch (\Throwable $th) {
             return redirect()->back()->with(['error' => $th->getMessage()]);
         }

@@ -3,27 +3,27 @@
 namespace App\Http\Controllers\Dealer;
 
 use toastr;
+use Carbon\Carbon;
 use App\Models\Order;
 use App\Models\Country;
 use App\Models\Product;
 use App\Models\OrderItem;
+use Stripe\PaymentIntent;
 use App\Traits\ShippoTrait;
+use Illuminate\Support\Str;
 use App\Models\BuyerAddress;
 use App\Models\OrderParcels;
 use Illuminate\Http\Request;
 use App\Models\UserAddresses;
+use App\Models\FulFilledOrder;
 use App\Models\ShippingAddress;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Validator;
 use App\Models\ShippmentCreation;
-use Stripe\PaymentIntent;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-
 use App\Models\ShippoPurchasedLabel;
-use App\Http\Requests\ShippingAddressRequest;
 use App\Models\ShippmentAddressDetail;
-use Carbon\Carbon;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\ShippingAddressRequest;
 use GuzzleHttp\Psr7\Request as GuzzleRequest;
 
 class OrderController extends Controller
@@ -32,42 +32,55 @@ class OrderController extends Controller
     public function order()
     {
         try {
-            $orderIds = Order::where('order_for', auth()->id())->pluck('id')->toArray();
+            // $orderIds = Order::where('order_for', auth()->id())->pluck('id')->toArray();
             // if (empty($orderIds)) {
             //     return redirect()->back()->with(['error' => 'No orders found for the authenticated user.']);
             // }
 
-            $fulfilledIds = ShippoPurchasedLabel::whereIn('order_id', $orderIds)->pluck('order_id')->toArray();
+            // $fulfilledIds = ShippoPurchasedLabel::whereIn('order_id', $orderIds)->pluck('order_id')->toArray();
+
+            // $fulfilledIds = FulFilledOrder::whereIn('order_id', $orderIds)->pluck('order_id')->toArray();
 
             // if (empty($fulfilledIds)) {
             //     return redirect()->back()->with(['info' => 'No fulfilled shipments found for the orders.']);
             // }
+            $fulfilledIds = FulFilledOrder::forUser(auth()->id());
+        
+            $orders =  Order::forUser(auth()->id())
+                ->notFulfilled($fulfilledIds)
+                ->orderBy('created_at', 'DESC')
+                ->paginate(__('pagination.pagination_nuber'));
+        
 
-            $orders = Order::whereIn('id', $orderIds)
-            ->when(!empty($fulfilledIds), function ($query) use ($fulfilledIds) {
-                return $query->whereNotIn('id', $fulfilledIds);
-            })
-            ->orderBy('created_at', 'DESC')
-            ->paginate(__('pagination.pagination_nuber'));
+            // $orders = Order::whereIn('id', $orderIds)
+            // ->when(!empty($fulfilledIds), function ($query) use ($fulfilledIds) {
+            //     return $query->whereNotIn('id', $fulfilledIds);
+            // })
+            // ->orderBy('created_at', 'DESC')
+            // ->paginate(__('pagination.pagination_nuber'));
 
             // $orders = Order::whereIn('id', $orderIds)->whereNotIn('id', $fulfilledIds)->orderBy('created_at', 'DESC')->paginate(__('pagination.pagination_nuber'));
             // $orders =  Order::with('orderItem')->where('order_for', auth()->id())->orderBy('created_at', 'DESC')->paginate(__('pagination.pagination_nuber'));
             return view('dealer.order.order_list', compact('orders'));
-        } catch (\Throwable $th) {
+        } catch (\Exception $th) {
             return redirect()->back()->with(['error' => $th->getMessage()]);
         }
     }
     public function fullfilledShippment()
     {
         try {
-            $orderIds = Order::where('order_for', auth()->id())->pluck('id')->toArray();
+            // $orderIds = Order::where('order_for', auth()->id())->pluck('id')->toArray();
             // if (empty($orderIds)) {
             //     return redirect()->back()->with([
             //         'error' => 'No orders found for the authenticated user.'
             //     ]);
             // }
-            $fulfilledIds = ShippoPurchasedLabel::whereIn('order_id', $orderIds)->pluck('order_id')->toArray();
-            $fulfilledOrders = Order::whereIn('id', $fulfilledIds)->latest()->get();
+
+            // $fulfilledIds = ShippoPurchasedLabel::whereIn('order_id', $orderIds)->pluck('order_id')->toArray();
+            // $fulfilledOrders = Order::whereIn('id', $fulfilledIds)->latest()->get();
+
+            // $fulfilledOrders = FulFilledOrder::whereIn('user_id', auth()->id())->latest()->get();
+            $fulfilledOrders = FulFilledOrder::with('orderDetails')->fulFilledOrders()->get();
             return view('dealer.order.fullfilled_order', compact('fulfilledOrders'));
         } catch (\Throwable $th) {
             return redirect()->back()->with(['error' => $th->getMessage()]);
@@ -252,16 +265,17 @@ class OrderController extends Controller
         }
     }
 
-
     public function createShippment(Request $request)
     {
         try {
-            // dd($request->toArray());
             $selectedPickupAddressId = ShippmentAddressDetail::where('order_id', $request->order)->where('user_id', auth()->id())->first();
             if (is_null($selectedPickupAddressId)) {
                 throw new \Exception('Pick up address not found for this particular order');
             }
             $pickupAddress = UserAddresses::where('id', $selectedPickupAddressId->selected_shippo_address)->first();
+            if (is_null($pickupAddress)) {
+                throw new \Exception('Pick up address not found for this particular order');
+            }
             $shippmentDate = $selectedPickupAddressId->shippment_date;
             $formattedDate = \Carbon\Carbon::parse($shippmentDate)->format('Y-m-d\TH:i');
             $selected_order_id = $request->order;
@@ -296,11 +310,18 @@ class OrderController extends Controller
                     'shippment_id' => $response_in_array->object_id,
                     'shippment_date' => $formattedDate,
                 ];
-                $this->saveInDb($data, $parcelsIdInArray);
-                $stripeCustomer = auth()->user()->createOrGetStripeCustomer();
-                $intent = auth()->user()->createSetupIntent();
+                // $this->saveInDb($data, $parcelsIdInArray);
+               $ifDataSave = $this->saveFulfilledShippmentOfDealer($selected_order_id,$response_in_array);
+               if($ifDataSave){
+                toastr()->success('Order fulfilled successfully');
+                return redirect()->route('Dealer.order.fulllfilled');
+               }else{
+                throw new Exception("Error something went wrong in saving data");
+               }
+                // $stripeCustomer = auth()->user()->createOrGetStripeCustomer();
+                // $intent = auth()->user()->createSetupIntent();
                 // dd($response_in_array);
-                return view('dealer.order.payment', compact('pickupAddress', 'response_in_array', 'stripeCustomer', 'intent', 'reciever_address', 'selected_order_id', 'shippmentDate'));
+                // return view('dealer.order.payment', compact('pickupAddress', 'response_in_array', 'stripeCustomer', 'intent', 'reciever_address', 'selected_order_id', 'shippmentDate'));
             }
         } catch (\Exception $e) {
             toastr()->error($e->getMessage());
@@ -435,7 +456,7 @@ class OrderController extends Controller
         try {
             $shippmentDetails = ShippoPurchasedLabel::where('order_id', $order_id)->first();
             if (empty($shippmentDetails)) {
-                return redirect()->back()->with(['error' => 'Something went wrong. Shippment details not found']);
+                return redirect()->back()->with(['info' => 'Shippment label creation not done yet by platfom managers. please try again later.']);
             }
             // dd($shippmentDetails);
            $selectedShippmentDate= ShippmentAddressDetail::where('order_id',$order_id)->pluck('shippment_date')->first();
@@ -454,6 +475,20 @@ class OrderController extends Controller
             $orderProducts = OrderItem::with('product', 'parcel')->where('order_id', $order->id)->get();
             $groups = groupWith($orderProducts[0]->getOrderIdsWithSameParcel());
         } catch (\Throwable $th) {
+        }
+    }
+    public function saveFulfilledShippmentOfDealer($selected_order_id,$response_in_array)
+    {
+        try {
+            $data=[
+                'user_id'=>auth()->id(),
+                'order_id'=>$selected_order_id,
+                'fullfilled_ship_id'=>$response_in_array->object_id,
+            ];
+            FulFilledOrder::create($data);
+            return true;
+        } catch (\Exception $th) {
+            throw new Exception("Error in saving Fulfilled Shippmentm Data: ". $th->getMessage());
         }
     }
 }

@@ -17,9 +17,11 @@
     <link rel="stylesheet" href="{{ asset('assets/admin/css/toaster.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/admin/css/slick.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/admin/css/slick-theme.css') }}">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
         integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     @include('layouts.include.favicon')
 
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.8/slick-theme.min.css"> -->
@@ -157,6 +159,7 @@
     <script src="{{ asset('assets/js/additional_method.js') }}"></script>
     <script src="{{ asset('assets/admin/js/custom.js') }}"></script>
     <script src="{{ asset('assets/admin/js/common.js') }}?ver={{ now() }}"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
         $(document).ready(function() {
             // Check if the CSS file(s) are loaded

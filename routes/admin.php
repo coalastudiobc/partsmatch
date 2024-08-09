@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\shippmentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dealer\ProductController;
 use App\Http\Controllers\Dealer\DealerController;
@@ -60,6 +61,16 @@ Route::middleware(['auth', 'verified', 'admin'])->namespace('App\Http\Controller
     Route::name('settings.')->group(function () {
         Route::get('settings', 'AdminController@settings')->name('view');
         Route::post('settings/update', 'AdminController@stripeSettings')->name('update');
+    });
+
+    // shippment creation
+    Route::name('shippment.')->group(function () {
+        Route::get('pending/shipment/labels',[shippmentController::class, 'index'])->name('listing');
+        Route::get('creating/shipment/{fulfilled_id?}',[shippmentController::class, 'getShippmentRates'])->name('rate.shipment');
+        Route::post('transaction/shipment/label/{id?}',[shippmentController::class, 'createShippmentPayment'])->name('create.label.payment');
+        Route::get('fulfilled/shipment/label',[shippmentController::class, 'getFulfilledShippment'])->name('fulfilled.listing');
+        Route::get('create/manual/shipment/{fulfilled_id?}',[shippmentController::class, 'getManualShippment'])->name('manual');
+        Route::post('manual/shipment/process/{fulfilled_id?}',[shippmentController::class, 'createShippmentManual'])->name('manual.create');
     });
 
     //payments history

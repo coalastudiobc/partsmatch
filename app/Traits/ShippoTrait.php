@@ -219,4 +219,41 @@ trait ShippoTrait
     {
         return date('Y-m-d\TH:i');  //time format in "YYYY-MM-DDTHH:MM"
     }
+    protected function getHeadersCurl(): array
+    {
+        return [
+            'Authorization: ShippoToken '.config('services.shippo_key.SHIPPO_API_KEY'),
+            'Content-Type: application/json',
+        ];
+    }
+    protected function makeCurlRequest(string $url, array $headers): string
+    {
+        $curl = curl_init();
+
+        curl_setopt_array($curl, [
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_HTTPHEADER => $headers,
+        ]);
+
+        $response = curl_exec($curl);
+
+        // Check for errors
+        if (curl_errno($curl)) {
+            $errorMsg = curl_error($curl);
+            curl_close($curl);
+            throw new RuntimeException("cURL Error: $errorMsg");
+        }
+
+        curl_close($curl);
+
+        return $response;
+    }
+
 }

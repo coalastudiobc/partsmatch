@@ -26,7 +26,7 @@ class ProductRequest extends FormRequest
             'category' => ['required', 'string',],
             'subcategory' => ['required'],
             'description' => ['required'],
-            'stocks_avaliable' => ['required' ,'max:10'],
+            'stocks_avaliable' => ['required','regex:'.config('validation.product_stock_regex')],
             'price' => ['required','regex:' . config('validation.product_price_regex'), 'max:255'],
             'part_number'=>['required', 'regex:'.config('validation.part_number_regex') ,'max:255'],
         ];
@@ -42,7 +42,7 @@ class ProductRequest extends FormRequest
             'description.required' => __('customvalidation.product.description.required'),
             'stocks_avaliable.required' => __('customvalidation.product.stocks_avaliable.required'),
             'stocks_avaliable.number' => __('customvalidation.product.stocks_avaliable.number'),
-            'stocks_avaliable.max' => __('customvalidation.product.industry_type.required'),
+            'stocks_avaliable.regex' => __('customvalidation.product.stocks_avaliable.regex'),
             'price.required' => __('customvalidation.product.price.required'),
             'price.regex' => __('customvalidation.product.price.regex'),
             'price.max' => __('customvalidation.product.price.max'),

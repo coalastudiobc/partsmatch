@@ -35,7 +35,7 @@
 
 <body>
     <header>
-        <div class="custm-nav">
+        <div class="custm-nav dasboard-nav">
             <div class="container">
                 <nav class="navbar navbar-expand-lg bg-body-tertiary">
                     <a class="navbar-brand" href="{{ route('welcome') }}">
@@ -43,18 +43,18 @@
                             <img src="{{ asset('assets/images/header-logo.svg') }}  " alt="">
                         </div>
                     </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                         <span class="navbar-toggler-icon"></span>
                         <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse ms-auto" id="navbarNav">
+                    </button> -->
+                    <div class="navbar-collapse" id="navbarNav">
                         <div class="custm-nav-menu login-nav">
                             @auth
                                 <ul class="navbar-nav">
                                     <li class="nav-item">
-                                        <a class="nav-link btn secondary-btn sm-btn" style="color: #fff; padding: 3px 6px !important;" aria-current="page" href="{{ route('welcome.index') }}">
+                                        <a class="nav-link btn secondary-btn sm-btn shop-btn" style="color: #fff; padding: 3px 6px !important;" aria-current="page" href="{{ route('welcome.index') }}">
                                             <i class="fa-solid fa-shop"></i>
                                             Shop
                                         </a>
@@ -98,6 +98,11 @@
                                                     </ul>
                                                 </div>
                                             </div>
+                                    </li>
+                                    <li>
+                                        <div class="sidebar-opener">
+                                            <i class="fa-solid fa-bars"></i>
+                                        </div>
                                     </li>
                                 </ul>
                             @endauth
@@ -180,6 +185,18 @@
     <script src="{{ asset('assets/js/common.js') }}?ver={{ now() }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
+jQuery(document).ready(function (e) {
+    jQuery('.sidebar-opener').on('click',function (event) {
+        jQuery('.dashboard-left-box').addClass('open');
+        jQuery('.cross-sidebar').removeClass('open');
+    })
+    jQuery('.cross-sidebar').on('click',function (event) {
+        jQuery('.dashboard-left-box').removeClass('open');
+    })
+})
+
+
+
         function capitalizeFirst(string) {
             if (!string) return string; // handle empty or null strings
             return string.charAt(0).toUpperCase() + string.slice(1);

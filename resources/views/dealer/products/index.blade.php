@@ -34,6 +34,9 @@
                             <p>Product name</p>
                         </th>
                         <th>
+                            <p>Part Number</p>
+                        </th>
+                        <th>
                             <p>Price</p>
                         </th>
                         <th>
@@ -56,6 +59,9 @@
                             </td>
                             <td>
                                 <p>{{ $product->name }}</p>
+                            </td>
+                            <td>
+                                <p>{{ $product->part_number }}</p>
                             </td>
                             <td>
                                 <p>${{ $product->price }}</p>
