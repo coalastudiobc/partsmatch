@@ -10,6 +10,7 @@ use App\Models\AdminSetting;
 use App\Models\OrderItem;
 use App\Models\OrderParcels;
 use App\Models\Product;
+use App\Models\UserCommisionSetting;
 use Laravel\Cashier\Cashier;
 use App\Models\UserAddresses;
 use App\Models\ShippingSetting;
@@ -455,6 +456,41 @@ if (!function_exists('checkForBuyButton')) {
                     : $workingForInt === null);
 
             return $shouldShowButton;
+        } catch (\Exception $e) {
+            // Log::error('Error in checkForBuyButton: ' . $e->getMessage());
+            return false; 
+        }
+    }
+}
+if (!function_exists('calculatePayOuts')) {
+    function calculatePayOuts($sellerId,$shipping,$cartAmnt)
+    {
+        try {
+            $payout=0;
+          $getUserCommission=  UserCommisionSetting::where('user_id',$sellerId)->first();
+          $total=$shipping+$cartAmnt;
+          if(is_null($getUserCommission))
+            {
+              $default_order_commission_type=AdminSetting::where('name','order_commission_type')->pluck('value')->first();
+              $default_order_commission=AdminSetting::where('name','order_commission')->pluck('value')->first();
+              if($default_order_commission_type == 'Percentage')
+                {
+                    $payout =  ($total* $default_order_commission)/100;
+                }else
+                {
+                    $payout=$default_order_commission + $total;
+                }
+            }
+            else{
+                if ($getUserCommission->commision_type == 'Percentage')
+                 {
+                    $payout =  ($total* $getUserCommission->commision_value)/100;
+                }else
+                {
+                    $payout=$getUserCommission->commision_value + $total;
+                }
+            }
+            return $payout;
         } catch (\Exception $e) {
             // Log::error('Error in checkForBuyButton: ' . $e->getMessage());
             return false; 

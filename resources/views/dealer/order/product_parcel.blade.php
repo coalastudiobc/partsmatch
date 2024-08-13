@@ -19,32 +19,34 @@
 
             </div>
         </div>
-        <div class="cstm-table-box make-group" id="outerBox">
-            <div class="custm-table-head">
-                <div class="custm-table-head-box">
-                    <p></p>
+        <div class="x-scroll">
+            <div class="cstm-table-box make-group" id="outerBox">
+                <div class="custm-table-head">
+                    <div class="custm-table-head-box">
+                        <p></p>
+                    </div>
+                    <div class="custm-table-head-box">
+                        <p>Order ID</p>
+                    </div>
+                    <div class="custm-table-head-box">
+                        <p>Product name</p>
+                    </div>
+                    <div class="custm-table-head-box">
+                        <p>Quantity</p>
+                    </div>
+                    <div class="custm-table-head-box">
+                        <p>Price</p>
+                    </div>
+                    <div class="custm-table-head-box">
+                        <p>Total price</p>
+                    </div>
+                    <div class="custm-table-head-box">
+                        <p>Action</p>
+                    </div>
                 </div>
-                <div class="custm-table-head-box">
-                    <p>Order ID</p>
+                <div id="outerContainerFull">
+                    <x-group-parcel  :groups=$groups/>
                 </div>
-                <div class="custm-table-head-box">
-                    <p>Product name</p>
-                </div>
-                <div class="custm-table-head-box">
-                    <p>Quantity</p>
-                </div>
-                <div class="custm-table-head-box">
-                    <p>Price</p>
-                </div>
-                <div class="custm-table-head-box">
-                    <p>Total price</p>
-                </div>
-                <div class="custm-table-head-box">
-                    <p>Action</p>
-                </div>
-            </div>
-            <div id="outerContainerFull">
-                <x-group-parcel  :groups=$groups/>
             </div>
         </div>
     </div>

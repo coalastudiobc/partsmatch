@@ -221,7 +221,7 @@ class CheckoutController extends Controller
             $cartItems = CartProduct::with('product')->where('cart_id', $cart->id)->get();
             $intent = PaymentIntent::create([
                 'amount' => floatval($request->total_amount) * 100, // amount in cents
-                'currency' => 'usd',
+                'currency' => config('services.Stripe.currency'),//change according to country
                 'customer' => $request->stripeCustomer_id,
                 'payment_method' => $request->token,
                 'confirmation_method' => 'manual',

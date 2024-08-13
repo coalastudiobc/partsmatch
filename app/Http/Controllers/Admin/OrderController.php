@@ -10,7 +10,8 @@ class OrderController extends Controller
 {
     public function index()
     {
-        $orders =  OrderItem::with('product', 'order')->orderByDesc('id')->paginate(__('pagination.admin_paginaion_number'));
+        $orders =  OrderItem::with('product', 'order')->orderByDesc('id');
+        
         return view('admin.order.index', compact('orders'));
     }
    public function hlo(){

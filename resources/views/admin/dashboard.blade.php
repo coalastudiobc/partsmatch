@@ -7,7 +7,7 @@
         <div class="dashboard-right-box">
             <div class="custm-card dashboard-custm-card">
                 <div class="row g-3">
-                    <div class="col-md-3">
+                    <div class="col-xl-3 col-lg-6 col-md-12">
                         <div class="db-analytics-card">
                             <div class="db-analytics-data">
                                 <h3>Total Dealers</h3>
@@ -18,7 +18,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-xl-3 col-lg-6 col-md-12">
                         <div class="db-analytics-card">
                             <div class="db-analytics-data">
                                 <h3>Order Amount + Shipping Charges</h3>
@@ -29,7 +29,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-xl-3 col-lg-6 col-md-12">
                         <div class="db-analytics-card">
                             <div class="db-analytics-data">
                                 <h3>Total Placed Orders</h3>
@@ -40,7 +40,7 @@
                             </div>
                         </div>
                     </div>
-                    {{-- <div class="col-md-3">
+                    {{-- <div class="col-xl-3 col-lg-6 col-md-12">
                         <div class="db-analytics-card">
                             <div class="db-analytics-data">
                                 <h3>Total Orders</h3>

@@ -7,14 +7,14 @@
                         <div class="col-lg-7">
                             <div class="footer-logo-box">
                                 <h6><a href="#" class="footer-name">PartsMatch</a></h6>
-                                <h2 class="footer-title">Buy or sell <br>spare parts from this Platform</h2>
+                                <h2 class="footer-title">The Right Part<br> for the Right Price Every Time</h2>
                                 <p class="ls-footer-title">Lorem ipsum, or lipsum as it is sometimes known, is dummy
                                     text
                                     used in laying out print, graphic or web designs.</p>
                                 <!-- <div class="footer-btn">
                                     <a href="#" class="btn primary-btn">View More</a>
                                 </div> -->
-
+                                
                             </div>
                         </div>
                         <div class="col-lg-3">
@@ -51,7 +51,7 @@
                     </div>
                 </div>
                 <div class="footer-small">
-                    <p class="right-reserve">{{ date('Y') }} partsmatch.com All Right Reserved</p>
+                    <p class="right-reserve">{{ date('Y') }} partsmatch.ai All Right Reserved</p>
                 </div>
             </div>
         </div>

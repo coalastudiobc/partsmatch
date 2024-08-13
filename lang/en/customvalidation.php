@@ -359,29 +359,29 @@ return [
             'max' => 'Only 255 characters allow',
         ],
         'category' => [
-            'required' => 'Please enter product Category',
+            'required' => 'Please enter product category',
         ],
         'subcategory' => [
-            'required' => 'Please enter product Subcategory',
+            'required' => 'Please enter product subcategory',
         ],
         'description' => [
-            'required' => 'Please enter product Description',
+            'required' => 'Please enter product description',
         ],
         'images' => [
-            'required' => 'Please enter product Images',
+            'required' => 'Please enter product images',
         ],
         'stocks_avaliable' => [
-            'required' => 'Please enter product Stock',
-            'number' => 'please enter only integer numbers',
+            'required' => 'Please enter product stock',
+            'number' => 'please enter only numbers',
             'regex' => 'Only number are allowed',
         ],
         'price' => [
-            'required' => 'Please enter product Price',
+            'required' => 'Please enter product price',
             'number' => 'please enter numbers only',
             'regex' => 'The price cannot start with leading zeroes and please enter only two decimal numbers',
         ],
         'shipping_price' => [
-            'required' => 'Please enter product Shipping price',
+            'required' => 'Please enter product shipping price',
         ],
         'part_number' => [
             'required' => 'Please enter product Part Number',

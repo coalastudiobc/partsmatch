@@ -431,7 +431,43 @@
                     </div>
                 </li>
                 <li class="analyics-tabs-list">
-
+                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingOne">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapseOne4" aria-expanded="false"
+                                    aria-controls="flush-collapseOne">
+                                    <a href="{{ route('admin.payouts.view') }}"
+                                        class="analyics-tabs-btns @if (Route::is('admin.payouts.*')) active @endif ">
+                                        <div class="analyics-tabs-name">
+                                            <span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                                                    viewBox="0 0 17 17" fill="none">
+                                                    <g opacity="0.3" clip-path="url(#clip0_234_93)">
+                                                        <path
+                                                            d="M12.3104 8.14587C10.1153 8.14587 8.32813 9.933 8.32813 12.1282C8.32812 14.3233 10.1153 16.1105 12.3104 16.1105C14.5056 16.1105 16.2927 14.3233 16.2927 12.1282C16.2927 9.933 14.5056 8.14587 12.3104 8.14587ZM11.3033 10.6202L12.3104 11.6274L13.3176 10.6202C13.4726 10.4666 13.6661 10.4679 13.8184 10.6202C13.9567 10.7585 13.9567 10.9827 13.8184 11.121L12.8112 12.1282L13.8184 13.1353C13.9567 13.2736 13.9567 13.4978 13.8184 13.6361C13.6801 13.7744 13.4559 13.7744 13.3176 13.6361L12.3104 12.629L11.3033 13.6361C11.165 13.7744 10.9408 13.7744 10.8024 13.6361C10.6642 13.4978 10.6642 13.2736 10.8024 13.1353L11.8096 12.1282L10.8024 11.121C10.6642 10.9827 10.6642 10.7585 10.8024 10.6202C10.9441 10.4776 11.1688 10.4858 11.3033 10.6202Z"
+                                                            fill="black" />
+                                                        <path
+                                                            d="M1.42908 0.889587C1.03615 0.889587 0.708984 1.21682 0.708984 1.60968V2.94956C0.708984 3.34244 1.03615 3.66966 1.42908 3.66966H5.39547V0.889587H1.42908ZM6.1038 0.889587V6.10665L7.0411 5.17004C7.17941 5.03179 7.4036 5.03179 7.54191 5.17004L8.50411 6.13155V0.889602L6.1038 0.889587ZM9.21244 0.889587V3.66966H13.1415C13.5344 3.66966 13.8623 3.34244 13.8623 2.94956V1.60968C13.8623 1.21682 13.5344 0.889587 13.1415 0.889587H9.21244ZM1.3018 4.31089V11.7816C1.3018 12.5224 1.93977 12.8455 2.52755 12.8455H7.67196C7.63551 12.6109 7.61108 12.3726 7.61108 12.1282C7.61108 9.54416 9.72607 7.42922 12.31 7.42922C12.6387 7.42922 12.9593 7.46446 13.2695 7.52952V4.31089C11.8791 4.33462 10.419 4.32715 9.21244 4.32191V6.98651C9.21232 7.30195 8.83099 7.45989 8.60787 7.23692L7.2915 5.92124L6.00004 7.21202C5.77692 7.43499 5.39559 7.27704 5.39547 6.96161V4.3273C3.95795 4.32588 2.54623 4.32481 1.3018 4.31089Z"
+                                                            fill="black" />
+                                                    </g>
+                                                    <defs>
+                                                        <clipPath id="clip0_234_93">
+                                                            <rect width="17" height="17" fill="white" />
+                                                        </clipPath>
+                                                    </defs>
+                                                </svg>
+                                            </span>
+                                            <h4>Payouts</h4>
+                                        </div>
+                                        <p class="analyics-tabs-num"></p>
+                                    </a>
+                                </button>
+                            </h2>
+                        </div>
+                    </div>
+                </li>
+                <li class="analyics-tabs-list">
                     <div class="accordion accordion-flush" id="accordionFlushExample">
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="flush-headingOne">

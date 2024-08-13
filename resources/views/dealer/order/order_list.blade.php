@@ -14,7 +14,7 @@
                         src="{{ asset('assets/images/calender-icon.png') }}" alt="">Select Date</a>
     </div> --}}
 </div>
-<div class="product-detail-table product-list-table">
+<div class="product-detail-table product-list-table fullfilment-table">
     <x-alert-component />
     <div class="table-responsive">
         <div class="test">

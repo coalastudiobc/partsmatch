@@ -55,7 +55,7 @@ class OrderPaymentController extends Controller
         try {
                 return  PaymentIntent::create([
                     'amount' => floatval($request->total_payment) * 100, // amount in cents
-                    'currency' => 'usd',
+                    'currency' => config('services.Stripe.currency'),//change according to country
                     'customer' => $request->stripeCustomer_id,
                     'payment_method' => $request->token,
                     'confirmation_method' => 'manual',

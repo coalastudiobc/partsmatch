@@ -10,7 +10,11 @@
         </p>
         <div class="price-and-cart">
             <div class="discount-price">
-                <p>${{ $product->price }}</p>
+                <p> @if($product && is_numeric($product->price))
+                    ${!! number_format((float) $product->price, 2, '.', ',') !!}
+                @else
+                    N/A
+                @endif</p>
             </div>
             <x-public-shop-cart-buy-button :product="$product" />
 

@@ -10,7 +10,7 @@
                     <div class="pro-search-box">
                         <input type="text" class="form-control" name="filter_by_name" placeholder="Search">
                         <button type="submit" class="btn primary-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
-                        <a href="#" class="btn secondary-btn filter-open-btn">Filter</a>
+                        <!-- <a href="#" class="btn secondary-btn filter-open-btn">Filter</a> -->
                     </div>
                 </form>
                 {{-- @can('role-view', $user) --}}
@@ -65,12 +65,15 @@
                             <p>{{ $user->productOfManager->count() ?? 'N/A' }}</p>     
                         </td>
                         <td>
-                            <div class="toggle-btn">
-                                <input type="checkbox" id="switch{{ $key }}" class="custom-switch-input" @if ($user->status == 'ACTIVE') checked="checked" @endif
-                                onchange="toggleStatus(this, 'User', '{{ $user->id }}');"
-                                url="{{ route('Dealer.status') }}"><label for="switch{{ $key }}">Toggle</label>
-                            </div>
+                            <span class="d-inline-block" data-bs-toggle="tooltip" data-bs-placement="left" title="Click to deactivate/active ">
+                                <div class="toggle-btn" >
+                                    <input type="checkbox" id="switch{{ $key }}" class="custom-switch-input" @if ($user->status == 'ACTIVE') checked="checked" @endif
+                                    onchange="toggleStatus(this, 'User', '{{ $user->id }}');"
+                                    url="{{ route('Dealer.status') }}"><label for="switch{{ $key }}">Toggle</label>
+                                </div>
+                            </span>
                         </td>
+                        
                         <td>
                             <div class="action-btns">
                                 <a href="{{ route('Dealer.partsmanager.edit', [$user->id]) }}"><i class="fa-solid fa-pen-to-square" style="color: #3EBE62;" title="edit"></i></a>

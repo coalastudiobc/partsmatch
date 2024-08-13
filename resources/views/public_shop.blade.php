@@ -271,7 +271,7 @@
                                                         <p>{{ $product->name }}</p>
                                                         <div class="price-and-cart">
                                                             <div class="discount-price">
-                                                                <p>{{ $product->price }}</p>
+                                                                <p>${{isset($product->price) ? number_format($product->price, 2, '.', ',') : 'product amount'  }}</p>
                                                             </div>
                                                             <x-public-shop-cart-buy-button :product="$product" />
                                                             {{-- @if (auth()->user())

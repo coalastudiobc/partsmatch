@@ -3421,6 +3421,39 @@ button.accordion-button.analyics-tabs-btns {
     display: flex;
     gap: 10px;
 }
+#onboard-account .modal-dialog {
+    max-width: 550px;
+}
+.btn-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 14px;
+}
+.btn-modal-footer .btn {
+    min-width: 185px;
+    justify-content: center;
+}
+.model-pro-img {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 30px;
+}
+
+.fullfilment-table table tr td:last-child a{
+    min-width: 152px;
+    font-size: 14px;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 

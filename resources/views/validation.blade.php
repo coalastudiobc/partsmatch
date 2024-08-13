@@ -16,6 +16,9 @@
     //email
     const emailRegex = {{ config('validation.email_regex') }};
 
+    //email
+    const zipCodeRegex = {{ config('validation.email_regex') }};
+
     //part number regex
     const partNumberRegex = {{ config('validation.part_number_regex') }};
 

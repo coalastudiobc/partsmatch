@@ -62,7 +62,11 @@
                                 </a>
                                 <p>R1 Concepts® – eLINE Series Plain Brake Rotors</p>
                                 <div class="price-and-cart">
-                                    <h4>${{ $product->price }}</h4>
+                                    <h4> @if($product && is_numeric($product->price))
+                                        ${!! number_format((float) $product->price, 2, '.', ',') !!}
+                                    @else
+                                        N/A
+                                    @endif</h4>
                                     @if ($product->user_id != auth()->user()->id)
                                     <button product-id="{{ $product->id }}" class="btn secondary-btn add-cart-btn addtocart">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="17" height="18" viewBox="0 0 17 18" fill="none">

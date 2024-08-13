@@ -18,9 +18,15 @@
                 <a href="javascript:void(0)" class="btn primary-btn" data-bs-toggle="modal" data-bs-target="#bulk-upload">
                     <img src="{{ asset('assets/images/add-round-icon.svg') }}" alt=""> Bulk upload
                 </a>
-                <a href="javascript:void(0)" class="btn primary-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                @if (auth()->user()->stripe_account_id)
+                <a href="javascript:void(0)" class="btn primary-btn " data-bs-toggle="modal" data-bs-target="#exampleModal">
                     <img src="{{ asset('assets/images/add-round-icon.svg') }}" alt=""> Add
                 </a>
+                @else  
+                <a href="javascript:void(0)" class="btn primary-btn " data-bs-toggle="modal" data-bs-target="#onboard-account">
+                    <img src="{{ asset('assets/images/add-round-icon.svg') }}" alt=""> Add
+                </a>
+                @endif
             </div>
         </div>
         <div class="product-detail-table product-list-table pro-manage-table">
@@ -64,7 +70,11 @@
                                 <p>{{ $product->part_number }}</p>
                             </td>
                             <td>
-                                <p>${{ $product->price }}</p>
+                                <p> @if($product && is_numeric($product->price))
+                                    ${!! number_format((float) $product->price, 2, '.', ',') !!}
+                                @else
+                                    N/A
+                                @endif</p>
                             </td>
                             <td>
                                 <p>{{ $product->stocks_avaliable }}</p>
@@ -551,6 +561,22 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="onboard-account" tabindex="-1" aria-labelledby="onboard-account" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="pro-detail-body">
+                        <img class="model-pro-img new-pro-img"  src="{{ asset('assets/images/bank.png') }}" alt="Bank Image">
+                        <div class="btn-modal-footer">
+                            <button type="button" class="btn secondary-btn md-btn" data-bs-dismiss="modal">Cancel</button>
+                            <a href="{{route('Dealer.stripe.onboarding.create')}}" class="btn primary-btn md-btn">Create Account</a>
+                        </div> 
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 @endsection
@@ -612,6 +638,26 @@
                 })
             }
         })
+        jQuery(document).on('click', '.add-product-btn', function() {
+            var url = APP_URL + '/dealer/check/onboard/account/'
+            var response = ajaxCall(url, 'get', null, false);
+            response.then(handleStateData).catch(handleStateError)
+
+            function handleStateData(response) {
+                if (response.success == true) {
+                    console.log(response);
+                } else {
+                    console.log(response);
+
+                }
+            }
+
+            function handleStateError(error) {
+                console.log('error', error)
+
+            }
+        });
+
     </script>
     <script>
         jQuery(document).ready(function() {

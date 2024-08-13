@@ -128,7 +128,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="">State<span class="required-field">*</span></label>
+                                            <label for="">State/Province<span class="required-field">*</span></label>
                                             <div class="form-field">
                                                 <div class="custm-dropdown">
                                                     <div class="dropdown">
@@ -204,7 +204,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="">Pin code<span class="required-field">*</span></label>
+                                            <label for="">Zip/Postal Code<span class="required-field">*</span></label>
                                             <div class="form-field">
                                                 <input type="text" name="pin_code" class="form-control @error('pin_code') is-invalid @enderror" value="{{ DelveryAddress()->pin_code ?? '' }}" placeholder="PIN code">
                                                 @error('pin_code')
@@ -269,8 +269,6 @@
                                 </div>
                             </li>
                             @endforeach
-
-
                         </ul>
                         <ul class="order-total-list">
                             <li>
@@ -309,14 +307,12 @@
                                     <input type="hidden" id="grandTotal" name="grandTotal" value="">
                                 </div>
                             </li>
-
                         </ul>
                     </div>
                     <div class="col-md-12">
-                        <button type="submit" id="place-order" class="btn primary-btn full-btn mt-3">Place Order</button>
+                        <button type="submit" id="place-order" class="btn primary-btn full-btn mt-3">Continue to payment</button>
                     </div>
                     </form>
-
                 </div>
             </div>
         </div>

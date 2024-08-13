@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\shippmentController;
+use App\Http\Controllers\Admin\PayoutsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dealer\ProductController;
 use App\Http\Controllers\Dealer\DealerController;
@@ -78,6 +79,11 @@ Route::middleware(['auth', 'verified', 'admin'])->namespace('App\Http\Controller
         Route::get('payments/history/{export?}', 'AdminController@paymentHistory')->name('all');
     });
 
+    //payments payouts
+    Route::name('payouts.')->group(function () {
+        Route::get('payouts/view', [PayoutsController::class, 'index'])->name('view');
+    });
+    
     //cms management
     Route::name('cms.')->group(function () {
         Route::get('cms/list', 'CmsManagementController@index')->name('index');

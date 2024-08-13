@@ -68,7 +68,8 @@ return [
 
     'product_price_regex'=>'/^(?!0\d)\d+(?:\.\d{1,2})?$/',
     'product_stock_regex'=>'/^[0-9]+$/',
-
+    
+    'zip_code_regex'=>'/^(?:\d{5}(?:-\d{4})?|\b[A-Z]\d[A-Z]\d[A-Z]\d\b)$/',
 
     'account_minlength' => 12,
     'account_maxlength' => 15,

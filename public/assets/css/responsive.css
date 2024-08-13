@@ -140,6 +140,20 @@
         padding: 25px 30px 30px;
         border-right: 1px solid var(--border-color);
     }
+    .adress-info-haeder {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: 1fr;
+        justify-items: center;
+    }
+    #selectedAddressForm {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+    .adress-info-haeder > a {
+        width: 100%;
+    }
 
 
 }
@@ -869,7 +883,8 @@
     }
 
     .dashboard-right-box h2 {
-        font-size: 22px;
+        font-size: 20px;
+        line-height: 22px;
     }
 
     .product-total h5 {
@@ -960,6 +975,32 @@
     .brands-header {
         display: grid;
         grid-template-columns: 1fr 1fr;
+    }
+    .collect-tab-slider {
+        display: flex;
+        max-width: 400px;
+    }
+    .pro-search-box {
+        margin-right: 0px;
+    }
+    #selectedAddressForm #datepicker {
+        max-width: 130px;
+        padding: 5px 10px;
+        font-size: 14px;
+    }
+    #selectedAddressForm label{
+        font-size: 12px;;
+    }
+    .right-btn-box > h3 {
+        font-size: 18px;
+    }
+    .pickup-adress-box .row h3{
+        margin-bottom: 10px;
+        font-size: 18px;
+    } 
+    .modal-body:has(.pickup-adress-box){
+        padding: 20px;
+
     }
 
 }
@@ -1130,7 +1171,41 @@
         max-height: 30px;
         overflow: hidden;
     }
-    
+    .login-nav .login-btn {
+        min-width: 50px;
+        padding: 8px !important;
+    }
+    .collect-tab-slider {
+        display: flex;
+        max-width: 200px;
+    }
+    .more-product-sec,.shop-by-brands-sec {
+        padding: 20px 0px;
+    }
+    .right-btn-box {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+    .adress-info-text p {
+        font-size: 14px;
+        margin: 0 0 10px;
+    }
+    .dashboard-right-box h2 {
+        font-size: 18px;
+        margin: 0 0 5px;
+    }
+    .date-formfield {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+    button.btn.primary-btn.nextbtn {
+        font-size: 0 !important;
+    }
+    button.btn.primary-btn.nextbtn b{
+        font-size: 12px !important;
+    }
+
 }
 
 @media screen and (max-width:480px) {
@@ -1158,6 +1233,22 @@
         max-width: 174px;
         min-width: 95px;
     }
+    .login-nav .navbar-nav {
+        gap: 10px;
+    }
+    .header-logo img {
+        max-width: 87px;
+    }
+    .brands-header h3 {
+        font-size: 16px;
+    }
+    .brands-header {
+        align-items: center;
+    }
+    .right-reserve {
+        padding: 5px 0;
+    }
+   
 
 }
 

@@ -43,6 +43,7 @@ return [
     'Stripe' => [
         'stripe_key' => env('STRIPE_KEY'),
         'stripe_secret' => env('STRIPE_SECRET'),
+        'currency' => 'cad',
     ],
     'shippo_key' => [
         'SHIPPO_API_KEY' => env('TEST_API_KEY'),

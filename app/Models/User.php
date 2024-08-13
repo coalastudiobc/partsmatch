@@ -34,6 +34,7 @@ class User extends Authenticatable
         'industry_type',
         'address',
         'zipcode',
+        'stripe_account_id',
         'deleted_at',
         'email_verification_token'
     ];

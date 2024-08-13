@@ -60,9 +60,7 @@
             },
             zipcode: {
                 required: true,
-                digits: true,
-                minlength: 6,
-                maxlength: 6,
+                regex:
             },
             image: {
                 required: true,

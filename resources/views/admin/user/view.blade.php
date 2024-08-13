@@ -155,7 +155,11 @@
                                                         <tr>
                                                             <td>{{$product->name ?? ''}}</td>
                                                             <td>{{$product->stocks_avaliable ?? ''}}</td>
-                                                            <td>${{$product->price ?? ''}}</td>
+                                                            <td> @if($product && is_numeric($product->price))
+                                                                ${!! number_format((float) $product->price, 2, '.', ',') !!}
+                                                            @else
+                                                                N/A
+                                                            @endif</td>
                                                             <td>{{ $product && $product->category ? $product->category->name : '' }}</td>
                                                         </tr>  
                                                         @endforeach

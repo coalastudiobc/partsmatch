@@ -12,7 +12,7 @@
                     <div class="col-md-7">
                         <div class="signup-img-txt">
                             <img src="{{ asset('assets/images/sign-up-img.png') }}" alt="">
-                            <h2>Buy Or sell any spare part At best Price</h2>
+                            <h2>The Right Part for the Right Price Every Time</h2>
                             <p>It is a long established fact that a reader will be distracted by the readable content of a
                                 page when looking at its layout.</p>
                         </div>
@@ -100,12 +100,12 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">Dealership name*</label>
+                                                <label for="">Business name*</label>
                                                 <div class="form-field">
                                                     <input type="text" name="dealershipName"
                                                         value="{{ old('dealership_name') }}"
                                                         class="form-control @error('dealershipName') is-invalid @enderror"
-                                                        placeholder="DealerShip name">
+                                                        placeholder="Business name">
 
                                                     @error('dealershipName')
                                                         <span class="invalid-feedback" role="alert">
@@ -150,7 +150,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">Zip code*</label>
+                                                <label for=""> Zip/Postal Code*</label>
                                                 <div class="form-field">
                                                     <input type="number" name="zipcode" value="{{ old('zipcode') }}"
                                                         class="form-control @error('zipcode') is-invalid @enderror"

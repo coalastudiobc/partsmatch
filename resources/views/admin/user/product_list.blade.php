@@ -44,7 +44,7 @@
                                 <p>{{ $product->stocks_avaliable ? $product->stocks_avaliable : 'N/A' }}</p>
                             </td>
                             <td>
-                                <p>{{ $product->price ? $product->price : 'N/A' }}</p>
+                                <p>{{ $product->price ? number_format($product->price,2,'.',',') : 'N/A' }}</p>
                             </td>
                             {{-- <td>
                                 <p>{{ $product->shipping_price ? $product->shipping_price : 'N/A' }}</p>

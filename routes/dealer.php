@@ -8,6 +8,7 @@ use App\Http\Controllers\Dealer\ChatController;
 use App\Http\Controllers\Dealer\OrderController;
 use App\Http\Controllers\Dealer\DealerController;
 use App\Http\Controllers\Dealer\ProductController;
+use App\Http\Controllers\Dealer\EscrowController;
 use App\Http\Controllers\Dealer\CheckoutController;
 use App\Http\Controllers\Admin\CmsManagementController;
 use App\Http\Controllers\Dealer\PartsManagerController;
@@ -118,5 +119,12 @@ Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer'
         Route::post('product/picking/address', [OrderController::class, 'picking_address'])->name('picking');
         Route::get('picking/address/delete/{address}', [OrderController::class, 'addressDelete'])->name('delete');
         Route::match(['get', 'post'],'product/shipping/toaddress', [CheckoutController::class, 'to_address'])->name('to');
+    });
+    Route::name('stripe.onboarding.')->group(function () {
+        Route::get('check/onboard/account/', [EscrowController::class, 'checkAccountExist'])->name('check.onboard.account');
+        Route::match(['get', 'post'],'complete/onboard/account/', [EscrowController::class, 'completeOnboarding'])->name('complete');
+        Route::match(['get', 'post'],'refresh/onboard/account/', [EscrowController::class, 'refreshOnboarding'])->name('refresh');
+        Route::match(['get', 'post'],'create/onboard/account/', [EscrowController::class, 'redirectToStripe'])->name('create');
+      
     });
 });

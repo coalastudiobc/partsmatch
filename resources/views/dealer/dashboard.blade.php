@@ -6,7 +6,7 @@
     <div class="dashboard-right-box">
         <div class="custm-card dashboard-custm-card">
             <div class="row g-3">
-                <div class="col-md-3">
+                <div class="col-xl-3 col-lg-6 col-md-6">
                     <div class="db-analytics-card">
                         <div class="db-analytics-data">
                             <h3>Total Orders</h3>
@@ -17,7 +17,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-xl-3 col-lg-6 col-md-6">
                     <div class="db-analytics-card">
                         <div class="db-analytics-data">
                             <h3>Total Payment Earned</h3>
@@ -28,7 +28,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-xl-3 col-lg-6 col-md-6">
                     <div class="db-analytics-card">
                         <div class="db-analytics-data">
                             <h3>Total Fulfilled Orders</h3>
@@ -39,7 +39,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-xl-3 col-lg-6 col-md-6">
                     <div class="db-analytics-card">
                         <div class="db-analytics-data">
                             <h3>Total Pending Orders</h3>
