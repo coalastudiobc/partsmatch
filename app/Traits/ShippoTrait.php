@@ -134,7 +134,7 @@ trait ShippoTrait
     public function headerApi()
     {
         $headers = [
-            'Authorization' => 'ShippoToken shippo_test_96a55176aa0a6093d9b2fde00a924bd3160f4f68',
+            'Authorization' => 'ShippoToken '.config('services.shippo_key.SHIPPO_API_KEY'),
             'Content-Type' => 'application/json',
             'SHIPPO-API-VERSION' => '2014-02-11',
             'Cookie' => '__cf_bm=ZN9Wds4ygR_aqtdtvLW7OfP5Y4aR8veUZ.LL7L7rr4s-1719379749-1.0.1.1-z00R4n466DEP6g8ZAzFro6jty06Gy6D44j5hJcXnuDU65uloLZUPLYY.FMyy4jj8YnmmxPUotzTCP8uIIbLf4w; tracker_sessionid=b29ad3c54c8b4d73bb89d123f52d4615'
@@ -146,7 +146,7 @@ trait ShippoTrait
         $client = new Client([
             'base_uri' => 'https://api.goshippo.com/',
             'headers' => [
-                'Authorization' => 'ShippoToken shippo_test_96a55176aa0a6093d9b2fde00a924bd3160f4f68',
+                'Authorization' => 'ShippoToken '.config('services.shippo_key.SHIPPO_API_KEY'),
                 'Content-Type' => 'application/json',
                 'SHIPPO-API-VERSION' => '2014-02-11',
             ],

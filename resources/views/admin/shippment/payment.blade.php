@@ -16,8 +16,8 @@
                             </h4>
 
                             <div class="shipment-address-mail-phone">
-                                <a href="#">{{ $responseShippoInArray->address_from ? ($responseShippoInArray->address_from->email  ?? 'N/A'):'N/A'}}</a>
-                                <a href="#">{{ $responseShippoInArray->address_from ? ($responseShippoInArray->address_from->phone  ?? 'N/A'):'N/A'}}</a>
+                                <a href="#">{{ $responseShippoInArray ? ($responseShippoInArray->address_from->email  ?? 'N/A'):'N/A'}}</a>
+                                <a href="#">{{ $responseShippoInArray ? ($responseShippoInArray->address_from->phone  ?? 'N/A'):'N/A'}}</a>
                             </div>
                         </div>
                     </div>
@@ -34,8 +34,8 @@
                             </h4>
 
                             <div class="shipment-address-mail-phone">
-                                <a href="#">{{ $responseShippoInArray->address_to ? ($responseShippoInArray->address_to->email  ?? 'N/A'):'N/A'}}</a>
-                                <a href="#">{{ $responseShippoInArray->address_to ? ($responseShippoInArray->address_to->phone  ?? 'N/A'):'N/A'}}</a>
+                                <a href="#">{{ $responseShippoInArray ? ($responseShippoInArray->address_to->email  ?? 'N/A'):'N/A'}}</a>
+                                <a href="#">{{ $responseShippoInArray ? ($responseShippoInArray->address_to->phone  ?? 'N/A'):'N/A'}}</a>
                             </div>
                         </div>
                     </div>
@@ -45,7 +45,7 @@
                         <div class="order-summary">
                             <h3>Payment</h3>
                             <p>All transactions are secure and encrypted.</p>
-                            <form id="shippmentPaymentForm"  action="{{ route('admin.shippment.create.label.payment',jsencode_userdata($responseShippoInArray->object_id)) }}" method="POST">
+                            <form id="shippmentPaymentForm"  @isset($responseShippoInArray->object_id) action="{{ route('admin.shippment.create.label.payment',jsencode_userdata($responseShippoInArray->object_id)) }}" @endisset method="POST">
                                 @csrf
                                 <div class="">
                                     <div class="row">
@@ -95,7 +95,7 @@
                                     $hasRates = isset($responseShippoInArray->rates) && is_array($responseShippoInArray->rates) && count($responseShippoInArray->rates) > 0;
                                    @endphp
                                 
-                                  <button type="submit" id="payNow" class="btn secondary-btn full-btn @if ($hasMessages && !$hasRates) disabled @endif">Pay</button>
+                                  <button type="submit" id="payNow" class="btn secondary-btn full-btn @if ($hasMessages && !$hasRates)  disabled @elseif(!$hasMessages && !$hasRates) disabled @endif">Pay</button>
                                 
                                 {{-- <button type="submit" id="payNow" class="btn secondary-btn full-btn  @if (is_array($$responseShippoInArray->messages) && (count($$responseShippoInArray->messages) > 0) && (empty($$responseShippoInArray->rates) || !is_array($$responseShippoInArray->rates))) disabled @endif">Pay
                                     Now</button> --}}
@@ -113,7 +113,7 @@
                                         <h3>Shipment Date</h3>
                                     </div>
                                     <div class="shipment-data-field">
-                                        <p class="mb-2">{{ $responseShippoInArray->object_id }}</p>
+                                        <p class="mb-2">{{ $responseShippoInArray ?( $responseShippoInArray->object_id ?? 'N/A') : 'N/A' }}</p>
                                         <p>{{isset($responseShippoInArray->shipment_date) ? \Carbon\Carbon::parse($responseShippoInArray->shipment_date)->format('m/d/Y'): 'N/A'}}</p>
                                     </div>
                                 </div>
@@ -123,7 +123,7 @@
                             <h4>RATES</h4>
                             <ul class="shipper-rates-list">
                            {{-- Check if rates_list is set and not null --}}
-                            @if (isset($responseShippoInArray->rates) && is_array($responseShippoInArray->rates) && count($responseShippoInArray->rates) > 0)
+                        @if (isset($responseShippoInArray->rates) && is_array($responseShippoInArray->rates) && count($responseShippoInArray->rates) > 0)
                             {{-- Display rates_list items --}}
                             @foreach ($responseShippoInArray->rates as $rates)
                                 <li>
@@ -146,6 +146,7 @@
                             @endforeach
                             @else
                             {{-- Check if messages is an array and rates_list is empty --}}
+                            @isset($responseShippoInArray->messages)
                             @if (is_array($responseShippoInArray->messages) && count($responseShippoInArray->messages) > 0 && (empty($responseShippoInArray->rates) || !is_array($responseShippoInArray->rates)))
                                 @foreach ($responseShippoInArray->messages as $key => $message)
                                     <div class="shipper-rates">
@@ -165,6 +166,7 @@
                                     </div>
                                 @endforeach
                             @endif
+                            @endisset
                          @endif
 
                             </ul>

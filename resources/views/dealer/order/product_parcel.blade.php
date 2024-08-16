@@ -1,6 +1,4 @@
 @extends('layouts.dealer')
-@section('title', 'Order Management')
-@section('heading', 'Order Management')
 @section('content')
 <div class="dashboard-right-box">
 
@@ -15,7 +13,7 @@
                 <a href="javascript:void(0)" id="makeGroup" class="btn secondary-btn"><img src="{{ asset('assets/images/add-round-icon.svg') }}" alt="">Make Group</a>
                 <a href="javascript:void(0)" id="createGroup" class="btn secondary-btn d-none">Create Group</a>
                 <a href="javascript:void(0)" id="cancel" class="btn secondary-btn d-none">Cancel</a>
-                <a href="{{ !isFullFilledOrder($order->id) ? '#' : route('Dealer.order.shippment.rates',['order'=>$order->id])  }}" id="PaymentInitiate" class="btn primary-btn payment-btn disabled-shippmentPayment @if(!isFullFilledOrder($order->id))disabled_select @endif ">Payment</a>
+                <a href="{{ !isFullFilledOrder($order->id) ? '#' : route('Dealer.order.shippment.rates',['order'=>$order->id])  }}" id="PaymentInitiate" class="btn primary-btn payment-btn disabled-shippmentPayment @if(!isFullFilledOrder($order->id))disabled_select @endif ">Make FulFill</a>
 
             </div>
         </div>
