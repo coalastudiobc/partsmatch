@@ -1,5 +1,5 @@
 <script>
-    jQuery(document).ready(function() {
+    $(document).ready(function() {
         $("#submit").attr('disabled', false);
 
         $.validator.addMethod("phoneNumber", function (value, element) {
@@ -60,7 +60,8 @@
             },
             zipcode: {
                 required: true,
-                regex:
+                // minlength: 5,
+                // maxlength: 6,
             },
             image: {
                 required: true,
@@ -109,9 +110,8 @@
             },
             zipcode: {
                 required: `{{ __('customvalidation.user.zipcode.required') }}`,
-                // digits: 'only number allowed',
-                minlength: `{{ __('customvalidation.user.zipcode.minlength') }}`,
-                maxlength: `{{ __('customvalidation.user.zipcode.maxlength') }}`,
+                minlength: `{{ __('customvalidation.user.pin_code.minlength', ['min' => '${pincodeMinLength}', 'max' => '${pincodeMaxLength}']) }}`,
+                maxlength: `{{ __('customvalidation.user.pin_code.minlength', ['min' => '${pincodeMinLength}', 'max' => '${pincodeMaxLength}']) }}`,
             },
             country_id: {
                 required: `{{ __('customvalidation.user.country.required') }}`,

@@ -133,7 +133,8 @@ class ProductController extends Controller
                 }
                 $product = [
                     'name' => $row['name'],
-                    'user_id' => auth()->user()->id,
+                    'user_id' =>$this->getUserParent(),
+                    'dealer_id' =>  auth()->user()->id,
                     'subcategory_id' => $subcategory->id,
                     'description' => $row['description'],
                     'part_number' => $row['part_number'],

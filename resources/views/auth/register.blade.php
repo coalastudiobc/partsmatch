@@ -1,6 +1,4 @@
 @extends('layouts.front')
-@section('title', 'register')
-
 @section('content')
     {{-- @if ($errors->any())
         {{ implode('', $errors->all('<div>:message</div>')) }}
@@ -150,17 +148,29 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for=""> Zip/Postal Code*</label>
-                                                <div class="form-field">
-                                                    <input type="number" name="zipcode" value="{{ old('zipcode') }}"
+                                                <label for=""> Zip/ Postal Code*</label>
+                                                <div class="form-field custm-error-field">
+                                                    <select name="zipcode" id="zipcode" class="form-control @error('zipcode') is-invalid @enderror">
+                                                    </select>
+                                                    {{-- <input type="number" name="zipcode" value="{{ old('zipcode') }}"
                                                         class="form-control @error('zipcode') is-invalid @enderror"
-                                                        placeholder="Zip code">
+                                                        placeholder="Zip code"> --}}
 
                                                     @error('zipcode')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
+                                                    <span class="custm-drop-icon">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                            height="23" viewBox="0 0 24 23"
+                                                            fill="none">
+                                                            <path d="M19 9.00006L14 14.0001L9 9.00006"
+                                                                stroke="#151515" stroke-width="1.8"
+                                                                stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                        </svg>
+                                                     </span>
                                                 </div>
                                             </div>
                                         </div>
@@ -223,12 +233,9 @@
                                                             </ul>
                                                         </div>
                                                     </div>
-
                                                     {{-- <input type="text" name="industry_type" value="{{ old('industry_type') }}"
                                                         class="form-control @error('industry_type') is-invalid @enderror"
                                                         placeholder="Select industry"> --}}
-
-
                                                 </div>
                                                 <div class="errorViewers"></div>
                                             </div>
@@ -286,6 +293,7 @@
     @includeFirst(['validation'])
     @includeFirst(['validation.js_register'])
     <script>
+      jQuery(document).ready(function(){
         $("#file-upload").change(function() {
             if (this.files && this.files[0]) {
 
@@ -297,7 +305,8 @@
             }
             jQuery('.errorViewer').text('');
         });
-
+      });
+       
         // $('form#register').on('submit', function(e) {
         //     e.preventDefault();
         //     jQuery('form#register').validate();
@@ -308,6 +317,35 @@
     </script>
     <script>
         jQuery(document).ready(function() {
+            jQuery('#zipcode').select2({
+                ajax: {
+                    url: "{{ route('postal.search') }}", 
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        return {
+                            q: params.term, // Search query
+                            page: params.page || 1 // Pagination (if applicable)
+                        };
+                    },
+                    processResults: function (data, params) {
+                        params.page = params.page || 1;
+                        console.log(data.results);
+                        return {
+                            results: data.results,
+                            pagination: {
+                                more: data.pagination.more
+                            }
+                        };
+                    },
+                    cache: true
+                },
+                minimumInputLength: 1,
+                placeholder: 'Search for zip/postal',
+                tags: false
+            });
+
+        
             jQuery('.custom_dropdown_item').on('click', function() {
                 var selectitem = jQuery(this).attr('data-value')
                 jQuery('#selectedItem').text(selectitem)

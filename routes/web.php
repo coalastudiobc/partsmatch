@@ -26,7 +26,7 @@ Route::get('/', function () {
     // else
     return redirect()->route('welcome.index');
 })->name('welcome');
-
+Route::get('/postal/search', [RegisterController::class, 'search'])->name('postal.search');
 Route::match(['get', 'post'], 'welcome/{subcategory?}/{category?}', [HomeController::class, 'index'])->name('welcome.index');
 Route::get('category', [HomeController::class, 'categoryCard'])->name('categories');
 Route::get('get/categorized/products/{category}', [HomeController::class, 'getProductsForCategory'])->name('categories.subcategory');

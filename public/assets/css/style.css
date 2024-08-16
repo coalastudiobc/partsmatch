@@ -3444,11 +3444,42 @@ button.accordion-button.analyics-tabs-btns {
     font-size: 14px;
 }
 
+.sign-up-card .form-group .form-field .select2.select2-container .select2-selection--single {
+    height: 47px;
+    border: 1px solid #e8e8e8;
+}
+.sign-up-card .form-group .form-field .select2.select2-container .select2-selection--single  .select2-selection__rendered {
+    padding-top: 10px;
+    overflow: hidden;
+    padding-bottom: 10px;
+}
+.sign-up-card .form-group .form-field .select2.select2-container .select2-selection--single .select2-selection__arrow {
+    height: 26px;
+    position: absolute;
+    top: 13px;
+    right: 7px;
+    width: 20px;
+    display: none;
+}
 
 
-
-
-
+.custm-error-field .invalid-feedback{
+    position: absolute;
+    bottom: -40px;
+}
+.custm-error-field:has(.invalid-feedback)  .select2.select2-container .select2-selection--single {
+    /* height: 47px; */
+    border: 1px solid #dc3545 !important;
+}
+.x-scroll {
+    overflow: auto;
+}
+.cstm-table-box.make-group{
+    min-width: 1500px;
+}
+.x-scroll::-webkit-scrollbar:horizontal {
+    height: 2px;
+}
 
 
 

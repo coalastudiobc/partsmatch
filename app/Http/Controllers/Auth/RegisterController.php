@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\PaymentDetail;
 use App\Models\User;
+use App\Models\PostalCode;
 use App\Notifications\UserRegistered;
 use Carbon\Carbon;
+use Illuminate\Validation\Rule;
 use Exception;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
@@ -49,6 +51,30 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    public function search(Request $request)
+    {
+        $query = $request->get('q');
+        $page = $request->get('page', 1);
+        
+        // Fetch data from the database
+        $results = PostalCode::where('code', 'LIKE', "%{$query}%")
+            ->paginate(10, ['id', 'code'], 'page', $page);
+
+        // Format the results for select2
+        $formattedResults = $results->map(function ($item) {
+            return [
+                'id' => $item->id,
+                'text' => $item->code
+            ];
+        });
+        return response()->json([
+            'results' => $formattedResults,
+            'pagination' => [
+                'more' => $results->hasMorePages()
+            ]
+        ]);
+    }
+   
     /**
      * Get a validator for an incoming registration request.
      *
@@ -57,6 +83,7 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        // dd($data);
        return Validator::make($data,[ 
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -75,7 +102,13 @@ class RegisterController extends Controller
                 }
             ],
             'address' => ['required', 'string'],
-            'zipcode' => ['required', 'size:6'], 
+            'zipcode' => [
+                'required',
+                'string',
+                Rule::exists('postal_codes', 'id')->where(function ($query) use ($data) {
+                    return $query->where('id', $data['zipcode']);
+                })
+            ],
             'industry_type' => ['required', 'string'],
             'image' => ['required', 'mimes:jpeg,jpg,png'],
         ]);
