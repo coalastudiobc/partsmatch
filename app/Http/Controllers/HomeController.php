@@ -154,8 +154,12 @@ class HomeController extends Controller
             }
         }
         $years = $sdk->years();
+        $request_test = $this->searchByVin($request,$sdk);
+        if($request_test){
+            $request = $request->merge($request_test);
+        }
         $models = AllModel::all();
-        $products = Product::with('productImage', 'featuredProduct', 'productCompatible')->where('status','1')->global()->category()->compatiblity()->price()->paginate(12);
+        $products = Product::with('productImage', 'featuredProduct', 'productCompatible')->where('status','1')->global()->category()->compatiblity($request)->price()->paginate(12)->appends($request->query());
         $categories =  Category::with('children')->has('children')->orWhereNull('parent_id')->get();
         return view('public_shop', compact("categories", "products", "brands", "years", "models"));
     }
@@ -197,5 +201,27 @@ class HomeController extends Controller
         $user = $product->user;
         $allproducts = Product::with('productImage', 'category')->where('user_id', $product->user->id)->limit(5)->get();
         return view('dealer.profile.dealer_profile', compact('user', 'allproducts', 'product'));
+    }
+
+    public function searchByVin(Request $request,$sdk)
+    {
+        try{
+            $request_clone = $request;
+            $vin = $request_clone->globalquery;
+            if (empty($vin)) {
+                return null;
+            }
+            
+            $apiResponse = $sdk->vin($vin);
+            $data=[
+                'year'=>[$apiResponse->year] ?? ' ',
+                'brand'=>[$apiResponse->make] ?? ' ',
+                'model'=>[$apiResponse->model] ?? ' ',
+            ];
+            return $data;
+        }catch(Exception $e){
+            return null;
+        }
+       
     }
 }

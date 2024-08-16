@@ -47,9 +47,9 @@ class Product extends Model
     {
         return $this->belongsTo(CartProduct::class, 'id', 'product_id');
     }
-    public function scopeSearch($query)
+    public function scopeSearch($query,$request = null)
     {
-        $request = request();
+        $request = $request ?? request();
         $query->when(!empty($request->filter_by_name), function ($q) use ($request) {
             $q->Where('name', 'like', '%' . $request->filter_by_name . '%');
         })->when(!empty($request->filter_by_name) && $request->filter_by_name == 'active', function ($q) use ($request) {
@@ -67,18 +67,18 @@ class Product extends Model
         });
     }
 
-    public function scopeCategory($query)
+    public function scopeCategory($query,$request = null)
     {
-        $request = request();
+        $request = $request ?? request();
         $query->when(!empty($request->category), function ($q) use ($request) {
             $category = Category::where('id',$request->category)->first();
             $q->whereIn('subcategory_id', $category->categories);
         });
     }
 
-    public function scopePrice($query)
+    public function scopePrice($query,$request = null)
     {
-        $request = request();
+        $request = $request ?? request();
         $query->when(($request->has('min_value')) , function ($q) use ($request) {
             $q->where('price','>=',$request->min_value);
         })->when(($request->has('max_value')) , function ($q) use ($request) {
@@ -86,27 +86,44 @@ class Product extends Model
         });
     }
 
-    public function scopeCompatiblity($query)
+    public function scopeCompatiblity($query,$request = null)
     {
-        $request = request();
-        $query->when(($request->has('year') && count($request->year)) , function ($q) use ($request) {
-            $q->whereHas('productCompatible', function ($query) use ($request) {
-                $query->OrwhereIn('year', $request->year);
+        $request = $request ?? request();
+        if($request->has('globalquery')){
+            $query->when(($request->has('year') && count($request->year)) , function ($q) use ($request) {
+                $q->whereHas('productCompatible', function ($query) use ($request) {
+                    $query->whereIn('year', $request->year);
+                });
+            })->when(($request->has('brand') && count($request->brand)) , function ($q) use ($request) {
+                $q->whereHas('productCompatible', function ($query) use ($request) {
+                    $query->whereIn('make', $request->brand);
+                });
+            })->when(($request->has('model') && count($request->model)) , function ($q) use ($request) {
+                $q->whereHas('productCompatible', function ($query) use ($request) {
+                    $query->whereIn('model', $request->model);
+                });
             });
-        })->when(($request->has('brand') && count($request->brand)) , function ($q) use ($request) {
-            $q->whereHas('productCompatible', function ($query) use ($request) {
-                $query->OrwhereIn('make', $request->brand);
+        }else {
+            $query->when(($request->has('year') && count($request->year)) , function ($q) use ($request) {
+                $q->whereHas('productCompatible', function ($query) use ($request) {
+                    $query->OrwhereIn('year', $request->year);
+                });
+            })->when(($request->has('brand') && count($request->brand)) , function ($q) use ($request) {
+                $q->whereHas('productCompatible', function ($query) use ($request) {
+                    $query->OrwhereIn('make', $request->brand);
+                });
+            })->when(($request->has('model') && count($request->model)) , function ($q) use ($request) {
+                $q->whereHas('productCompatible', function ($query) use ($request) {
+                    $query->OrwhereIn('model', $request->model);
+                });
             });
-        })->when(($request->has('model') && count($request->model)) , function ($q) use ($request) {
-            $q->whereHas('productCompatible', function ($query) use ($request) {
-                $query->OrwhereIn('model', $request->model);
-            });
-        });
+        }
+        
     }
 
-    public function scopeGlobal($query)
+    public function scopeGlobal($query,$request = null)
     {
-        $request = request();
+        $request = $request ?? request();
         $query->when(!empty($request->search_parameter), function ($query) use ($request) {
             $query->where(function ($query) use ($request) {
                 $query->where('name', 'like', '%' . $request->search_parameter . '%')

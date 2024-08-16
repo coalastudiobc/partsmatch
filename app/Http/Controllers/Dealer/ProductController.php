@@ -11,6 +11,8 @@ use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use App\Models\AdminSetting;
 use App\Models\ProductImage;
+use App\Models\CarBrandMake;
+use App\Models\AllModel;
 use App\Models\FeaturedProduct;
 use Illuminate\Support\Facades\DB;
 use App\Models\ProductCompatabilty;
@@ -32,8 +34,8 @@ class ProductController extends Controller
     public function __construct()
     {
         $this->sdk = \CarApiSdk\CarApi::build([
-            'token' => "1e9f178a-f016-4aa9-b582-99934fc52ff9",
-            'secret' => "37e149448eeae0e28026dcdbaea8d8c7",
+            'token' => env('CAR_API_TOKEN'),
+            'secret' => env('CAR_API_SECRET'),
         ]);
         $filePath = storage::path('text.txt');
         $jwt = file_get_contents($filePath);
@@ -536,61 +538,36 @@ class ProductController extends Controller
             // return redirect()->route('products', ['search_parameter' => $request->globalquery]);
             return redirect()->back();
         }
-       $response= $this->searchByVin($request);
-        $productsQuery = Product::query();
+    //    $request_test = $this->searchByVin($request);
+    //    if($request_test){
+    //     $request = $request->merge($request_test);
+    //    }
+    //    $brands = CarBrandMake::distinct('makes')->get();
 
-        $productsQuery->when(!empty($request->globalquery), function ($query) use ($request,$response) {
-            $query->where(function ($query) use ($request,$response) {
-                $query->where('name', 'like', '%' . $request->globalquery . '%')
-                    ->orWhere('price', 'like', '%' . $request->globalquery . '%')
-                    ->orWhere('year', 'like', '%' . $request->globalquery . '%')
-                    ->orWhere('brand', 'like', '%' . $request->globalquery . '%')
-                    ->orWhere('model', 'like', '%' . $request->globalquery . '%')
-                    ->orWhere('year', 'like', '%' . $response['year'] ?? ''. '%')
-                    ->orWhere('brand', 'like', '%' . $response['make'] ?? '' . '%')
-                    ->orWhere('model', 'like', '%' . $response['model'] ?? ''. '%');
-            });
-        });
+    //    $sdk = \CarApiSdk\CarApi::build([
+    //        'token' => env('CAR_API_TOKEN'),
+    //        'secret' => env('CAR_API_SECRET'),
+    //    ]);
+    //    $filePath = storage_path('app/text.txt');
+    //    $jwt = file_exists($filePath) ? file_get_contents($filePath) : null;
 
-        // $productsQuery->when(!empty($request->globalquery) && $request->globalquery == 'active', function ($query) {
-        //     $query->where('status', '1');
-        // });
-        $productsQuery->when(
-            (!empty($request->globalquery) && $request->globalquery == 'active') || 
-            (!empty($response['status']) && $response['status'] == 'active'),
-            function ($query) {
-                $query->where('status', '1');
-            }
-        );
+    //    if (empty($jwt) || $sdk->loadJwt($jwt)->isJwtExpired()) {
+    //        try {
+    //            $jwt = $sdk->authenticate();
+    //            file_put_contents($filePath, $jwt);
+    //        } catch (Exception $e) {
+    //            Log::channel('daily')->error($e->getMessage());
+    //            return;
+    //        }
+    //    }
+    //    $years = $sdk->years();
+    //    $models = AllModel::all();
+    //    $products = Product::with('productImage', 'featuredProduct', 'productCompatible')->where('status','1')->global()->category()->compatiblity($request)->price()->paginate(12);
+    //    $categories =  Category::with('children')->has('children')->orWhereNull('parent_id')->get();
+    //    return view('public_shop', compact("categories", "products", "brands", "years", "models"));
+            return redirect()->route('products',['globalquery'=>$request->globalquery]);
+}
 
-        $products = $productsQuery->paginate(5)->appends($request->globalquery);
-        return redirect()->route('products', ['search_parameter' => $request->globalquery]);
-    }
-
-    public function searchByVin(Request $request)
-    {
-        try 
-        {
-            $vin = $request->globalquery;
-            if (empty($vin)) {
-                return null;
-            }
-            
-            $apiResponse = $this->sdk->vin($vin);
-            $data=[
-                'year'=>$apiResponse->year ?? ' ',
-                'make'=>$apiResponse->make ?? ' ',
-                'model'=>$apiResponse->model ?? ' ',
-            ];
-            return $data;
-        } catch (\Exception $th) {
-           return 
-           $data=[
-            'year'=> ' ',
-            'make'=>' ',
-            'model'=> ' ',
-                 ];
-        }
-    }
+    
 
 }
