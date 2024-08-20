@@ -30,8 +30,8 @@
                                                     </div>
                                                 </div>
                                             </label>
-                                            <input type="file" name="image" id="file-upload" class="@error(`image`) is-invalid @enderror">
-                                            @error(`image`)
+                                            <input type="file" name="image" id="file-upload" class="@error('image') is-invalid @enderror">
+                                            @error('image')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -66,45 +66,32 @@
                                             </div>
                                         </div>
                                     </div>
-                                    {{-- <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="">phone</label>
-                                                <div class="form-field">
-                                                    <textarea name="content" class="form-control summernote @error('content') is-invalid @enderror"></textarea>
-                                                    @error('content')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                        </div>
-                    </div> --}}
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="">Phone*</label>
-                            <div class="form-field">
-                                <input type="text" name="phone_number" class="form-control @error('phone_number') is-invalid @enderror" value="{{ old('phone_number', $user->phone_number) }}">
-                                @error('phone_number')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="">Role</label>
-                            <div class="form-field">
-                                <input type="text" name="role" disabled class="form-control @error('role') is-invalid @enderror" value="{{ old('role',$role) }}">
-                                @error('role')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Phone*</label>
+                                            <div class="form-field">
+                                                <input type="text" name="phone_number" class="form-control @error('phone_number') is-invalid @enderror" value="{{ old('phone_number', $user->phone_number) }}">
+                                                @error('phone_number')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Role</label>
+                                            <div class="form-field">
+                                                <input type="text" name="role" disabled class="form-control @error('role') is-invalid @enderror" value="{{ old('role',$role) }}">
+                                                @error('role')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
                     {{-- <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="">role</label>

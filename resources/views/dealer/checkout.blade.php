@@ -103,7 +103,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="">Phone number<span class="required-field">*</span></label>
-                                            <input type="number" name="phone_number" value="{{ old('number', $deliveryAddress->phone_number ?? '') }}" class="form-control @error('phonenumber') is-invalid @enderror">
+                                            <input type="text" name="phone_number" value="{{ old('number', $deliveryAddress->phone_number ?? '') }}" class="form-control @error('phonenumber') is-invalid @enderror">
                                             @error('phonenumber')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -206,7 +206,7 @@
                                         <div class="form-group">
                                             <label for="">Zip/Postal Code<span class="required-field">*</span></label>
                                             <div class="form-field">
-                                                <input type="text" name="pin_code" class="form-control @error('pin_code') is-invalid @enderror" value="{{ DelveryAddress()->pin_code ?? '' }}" placeholder="PIN code">
+                                                <input type="text" name="pin_code" class="form-control @error('pin_code') is-invalid @enderror" value="{{ DelveryAddress()->pin_code ?? '' }}" placeholder="Zip/Postal Code">
                                                 @error('pin_code')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -242,7 +242,7 @@
                             <input type="hidden" id="selected_shipping" name="shipping_Method" value="">
                             <h3>Shipping</h3>
                             <ul class="shipping_carts">
-                                <p>Please select country first. It vary country to country</p>
+                                <p style="font-family: aeonik">Please select country first. It vary country to country</p>
                             </ul>
                         </div>
                         <ul class="order-summary-list">

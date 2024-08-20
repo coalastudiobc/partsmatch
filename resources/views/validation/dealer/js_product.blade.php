@@ -19,6 +19,8 @@
             },
             images: {
                 required: true,
+                imageExtension: true,
+
             },
             stocks_avaliable: {
                 required: true,
@@ -52,6 +54,8 @@
             },
             images: {
                 required: `{{ __('customvalidation.product.images.required') }}`,
+                imageExtension: `{{ __('customvalidation.user.image.imageExtension') }}`,
+
             },
             stocks_avaliable: {
                 required: `{{ __('customvalidation.product.stocks_avaliable.required') }}`,

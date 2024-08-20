@@ -72,9 +72,9 @@
                     required: "Please select a city.",
                 },
                 pin_code: {
-                    required: "Please enter a pin code.",
-                    minlength: `{{ __('customvalidation.user.pin_code.minlength', ['min' => '${pincodeMinLength}', 'max' => '${pincodeMaxLength}']) }}`,
-                    maxlength: `{{ __('customvalidation.user.pin_code.maxlength', ['min' => '${pincodeMinLength}', 'max' => '${pincodeMaxLength}']) }}`,
+                    required: `{{ __('customvalidation.user.Postal_Code.required') }}`,
+                    minlength: `{{ __('customvalidation.user.Postal_Code.minlength', ['min' => '${pincodeMinLength}', 'max' => '${pincodeMaxLength}']) }}`,
+                    maxlength: `{{ __('customvalidation.user.Postal_Code.maxlength', ['min' => '${pincodeMinLength}', 'max' => '${pincodeMaxLength}']) }}`,
                 },
                 first_name: {
                     required: `{{ __('customvalidation.user.firstName.required') }}`,

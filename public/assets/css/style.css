@@ -858,6 +858,10 @@ header {
 .product-deails {
     padding-top: 10px;
     border-top: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
 }
 
 .more-product-boxes {
@@ -3480,7 +3484,13 @@ button.accordion-button.analyics-tabs-btns {
 .x-scroll::-webkit-scrollbar:horizontal {
     height: 2px;
 }
-
+/* .product-deails > p:first-child {
+    display: inline-block;
+    max-width: 10em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+} */
 
 
 

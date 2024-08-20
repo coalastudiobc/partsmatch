@@ -27,15 +27,26 @@ class PartsManagerRequest extends FormRequest
         $rules = [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255'],
-            'phone_number' => ['required'],
             'image' => ['sometimes', 'nullable', 'image', 'mimes:' . config('validation.php_profile_pic_mimes'), 'max:' . config('validation.php_profile_pic_size')],
+            'phone_number' =>
+            [ 'required',
+                function ($attribute,$value,$fail)
+                {
+                    $digits = preg_replace('/\D/', '', $value);
+                    if (strlen($digits) < 10 || $digits[0] === '0') {
+                        return $fail('The ' . $attribute . ' must be a valid phone number and cannot start with zero.');
+                    }
+                    if (!preg_match('/^\(\d{3}\) \d{3}-\d{4}$/', $value)) {
+                        return $fail('The ' . $attribute . ' must be a valid phone number in the format (XXX) XXX-XXXX.');
+                    }
+                }
+            ],
             'password' =>  ['sometimes', 'nullable', 'between:8,32', 'same:confirm_password'],
             'confirm_password' => ['sometimes',  'nullable', 'between:8,32'],
 
         ];
-
+        //for user creating time
         if (!$parameter) {
-            $rules['image'] = ['required'];
             $rules['email'] = ['required', 'string', 'email', 'max:255', 'unique:users'];
             $rules['password'] =  ['required'];
             $rules['image'] = ['required', 'image', 'mimes:' . config('validation.php_profile_pic_mimes'), 'max:' . config('validation.php_profile_pic_size')];

@@ -1,56 +1,56 @@
 <script>
-        function handleSpaces(event) {
-            const input = event.target;
-            const currentValue = input.value;
-            const cursorPos = input.selectionStart; 
+        // function handleSpaces(event) {
+        //     const input = event.target;
+        //     const currentValue = input.value;
+        //     const cursorPos = input.selectionStart; 
 
-            if (currentValue.includes('  ')) {
-                const newValue = currentValue.replace(/ {2}/g, '');
-                input.value = newValue;
-                input.selectionStart = input.selectionEnd = newValue.length;
-            }
-        }
+        //     if (currentValue.includes('  ')) {
+        //         const newValue = currentValue.replace(/ {2}/g, '');
+        //         input.value = newValue;
+        //         input.selectionStart = input.selectionEnd = newValue.length;
+        //     }
+        // }
 
-        function preventLeadingSpaces(event) {
-            const charCode = (event.which) ? event.which : event.keyCode;
-            const input = event.target;
-            const currentValue = input.value;
+        // function preventLeadingSpaces(event) {
+        //     const charCode = (event.which) ? event.which : event.keyCode;
+        //     const input = event.target;
+        //     const currentValue = input.value;
             
-            if ([8, 9, 27, 13, 46, 190,189].indexOf(charCode) !== -1 ||
-                // Allow: Ctrl+A, Command+A
-                (charCode === 65 && (event.ctrlKey === true || event.metaKey === true)) ||
-                // Allow: Ctrl+C, Ctrl+X, Ctrl+V
-                (event.ctrlKey === true && [67, 88, 86].indexOf(charCode) !== -1)) {
-                // Let it happen, don't do anything
-                return;
-            }
+        //     if ([8, 9, 27, 13, 46, 190,189].indexOf(charCode) !== -1 ||
+        //         // Allow: Ctrl+A, Command+A
+        //         (charCode === 65 && (event.ctrlKey === true || event.metaKey === true)) ||
+        //         // Allow: Ctrl+C, Ctrl+X, Ctrl+V
+        //         (event.ctrlKey === true && [67, 88, 86].indexOf(charCode) !== -1)) {
+        //         // Let it happen, don't do anything
+        //         return;
+        //     }
             
-            // Prevent leading space
-            if (charCode === 32 && (currentValue.length === 0 || /^\s/.test(currentValue))) {
-                event.preventDefault();
-            }
-        }
+        //     // Prevent leading space
+        //     if (charCode === 32 && (currentValue.length === 0 || /^\s/.test(currentValue))) {
+        //         event.preventDefault();
+        //     }
+        // }
 
-        function handleBlur(event) {
-            const input = event.target;
-            const value = input.value;
+        // function handleBlur(event) {
+        //     const input = event.target;
+        //     const value = input.value;
 
-            let trimmedValue = value.trimEnd();
-            if (value.endsWith(' ')) {
-                trimmedValue += ' '; 
-            }
-            input.value = trimmedValue;
-        }
+        //     let trimmedValue = value.trimEnd();
+        //     if (value.endsWith(' ')) {
+        //         trimmedValue += ' '; 
+        //     }
+        //     input.value = trimmedValue;
+        // }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const inputs = document.querySelectorAll('#product-card-details input[type="text"]');
+        // document.addEventListener('DOMContentLoaded', () => {
+        //     const inputs = document.querySelectorAll('#product-card-details input[type="text"]');
             
-            inputs.forEach(input => {
-                input.addEventListener('keypress', preventLeadingSpaces);
-                input.addEventListener('blur', handleBlur);
-                input.addEventListener('input', handleSpaces);
-            });
-        });
+        //     inputs.forEach(input => {
+        //         input.addEventListener('keypress', preventLeadingSpaces);
+        //         input.addEventListener('blur', handleBlur);
+        //         input.addEventListener('input', handleSpaces);
+        //     });
+        // });
 
     $(document).ready(function() {
 
@@ -69,9 +69,8 @@
             },
             phone_number: {
                 required: true,
-                digits: true,
-                minlength: 10,
-                maxlength: 10
+                phoneNumber:true,
+                phoneNumberFormat:true,
             },
             country: {
                 required: true
@@ -84,7 +83,6 @@
             },
             pin_code: {
                 required: true,
-                digits: true,
                 minlength: 5,
                 maxlength: 6,
             },
@@ -120,11 +118,10 @@
                 maxlength: `{{ __('customvalidation.user.phone_number.maxlength') }}`,
             },
             pin_code: {
-                required: `{{ __('customvalidation.user.pin_code.required') }}`,
-                digits: 'only number are allowed',
-                minlength: `{{ __('customvalidation.user.pin_code.minlength', ['min' => '${pincodeMinLength}', 'max' => '${pincodeMaxLength}']) }}`,
-                maxlength: `{{ __('customvalidation.user.pin_code.minlength', ['min' => '${pincodeMinLength}', 'max' => '${pincodeMaxLength}']) }}`,
-            },
+                    required: `{{ __('customvalidation.user.Postal_Code.required') }}`,
+                    minlength: `{{ __('customvalidation.user.Postal_Code.minlength', ['min' => '${pincodeMinLength}', 'max' => '${pincodeMaxLength}']) }}`,
+                    maxlength: `{{ __('customvalidation.user.Postal_Code.maxlength', ['min' => '${pincodeMinLength}', 'max' => '${pincodeMaxLength}']) }}`,
+                },
             country: {
                 required: `{{ __('customvalidation.user.country.required') }}`,
             },

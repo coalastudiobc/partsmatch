@@ -1002,6 +1002,11 @@
         padding: 20px;
 
     }
+    .section-body.edit-product-sec {
+        padding: 20px 15px;
+        background-color: #Fff;
+    }
+    
 
 }
 

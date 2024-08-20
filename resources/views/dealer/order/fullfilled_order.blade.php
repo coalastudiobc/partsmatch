@@ -99,6 +99,8 @@
             </div>
         </div>
     </div>
+    {!! $fulfilledOrders->links('dealer.pagination') !!}
+
     @endisset
 </div>
 @endsection

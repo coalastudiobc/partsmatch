@@ -106,7 +106,7 @@
                     <h2 id="modal_title">Add New Manager</h2>
                     <form id="parts_manager" action="{{ route('Dealer.partsmanager.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
-                        <div class="row">
+                        <div class="row g-3">
                             <div class="col-md-12">
                                 <div class="upload-img">
                                     <div class="file-upload-box ">

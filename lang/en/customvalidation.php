@@ -351,6 +351,11 @@ return [
             'minlength' => 'pincode should be :min - :max digits',
             'maxlength' => 'pincode should be :min - :max digits',
         ],
+        'Postal_Code' => [
+            'required' => 'Please enter the Zip/ Postal code.',
+            'minlength' => 'Zip/ Postal code should be :min - :max digits',
+            'maxlength' => 'Zip/ Postal code should be :min - :max digits',
+        ],
 
     ],
     'product' => [

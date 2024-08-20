@@ -1293,11 +1293,11 @@ ul.card-list li {
     background: #fff;
     height: 100%;
     padding: 20px;
-
-}
-.cart-table-wrapper .db-table-box{
     min-height: 600px;
 }
+/* .cart-table-wrapper .db-table-box{
+    min-height: 600px;
+} */
 
 .tb-table table thead tr th {
     color: #727272;

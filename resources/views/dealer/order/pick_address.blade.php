@@ -448,9 +448,9 @@
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="pin_code">Pin code<span class="required-field">*</span></label>
+                                            <label for="pin_code">Zip/ Postal Code<span class="required-field">*</span></label>
                                             <div class="form-field">
-                                                <input type="text" name="pin_code" class="form-control @error('pin_code') is-invalid @enderror" value="{{ old('pin_code', auth()->user()->shippingAddress->post_code ?? '') }}" placeholder="PIN code">
+                                                <input type="text" name="pin_code" class="form-control @error('pin_code') is-invalid @enderror" value="{{ old('pin_code', auth()->user()->shippingAddress->post_code ?? '') }}" placeholder="Zip/ Postal Code">
                                                 @error('pin_code')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>

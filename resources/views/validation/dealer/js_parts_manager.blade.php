@@ -19,9 +19,8 @@
             },
             phone_number: {
                 required: true,
-                digits: true,
-                minlength: 10,
-                maxlength: 10
+                phoneNumber:true,
+                phoneNumberFormat:true,
             },
             password: {
                 required: true,

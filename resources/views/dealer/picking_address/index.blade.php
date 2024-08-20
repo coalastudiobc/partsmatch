@@ -250,12 +250,12 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="">Pin code</label>
+                            <label for="">Zip/ Postal Code</label>
                             <div class="form-field">
                                 <input type="text" name="pin_code"
                                     class="form-control @error('pin_code') is-invalid @enderror"
                                     value="{{ auth()->user()->shippingAddress->post_code ?? '' }}"
-                                    placeholder="PIN code">
+                                    placeholder="Zip/ Postal Code">
                                 @error('pin_code')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

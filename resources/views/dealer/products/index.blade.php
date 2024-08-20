@@ -18,7 +18,7 @@
                 <a href="javascript:void(0)" class="btn primary-btn" data-bs-toggle="modal" data-bs-target="#bulk-upload">
                     <img src="{{ asset('assets/images/add-round-icon.svg') }}" alt=""> Bulk upload
                 </a>
-                @if (auth()->user()->stripe_account_id)
+                @if (auth()->user()->stripe_account_id || auth()->user()->working_for)
                 <a href="javascript:void(0)" class="btn primary-btn " data-bs-toggle="modal" data-bs-target="#exampleModal">
                     <img src="{{ asset('assets/images/add-round-icon.svg') }}" alt=""> Add
                 </a>
@@ -227,7 +227,7 @@
                                         <label class="img-upload-box">
                                             <p>Upload Images</p>
                                             <input type="file" name="images[]" id="upload-image" multiple
-                                                minlength="5" upload-image-count="0">
+                                                minlength="5" upload-image-count="0" accept="image/png, image/gif, image/jpeg" >
 
                                         </label>
                                         <div class="upload-img-preview">
