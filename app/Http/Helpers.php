@@ -445,16 +445,15 @@ if (!function_exists('checkForBuyButton')) {
     {
         try {
             $userId = auth()->id();
-            $workingFor = auth()->user()->working_for;
+            $workingFor = optional(auth()->user())->working_for;
             $workingForInt = $workingFor !== null ? (int) $workingFor : null;
 
-            $shouldShowButton = $product->user_id !== $userId
+            $shouldShowButton =( $product->user_id !== $userId
                 && $product->dealer_id !== $userId
                 && ($product->dealer_id !== $workingForInt)
                 && ($product->productOfDealer 
-                    ? (int) $product->productOfDealer->first()->working_for !== $workingForInt
-                    : $workingForInt === null);
-
+                    ? (int) optional($product->productOfDealer->first())->working_for !== $workingForInt
+                    : $workingForInt === null));            
             return $shouldShowButton;
         } catch (\Exception $e) {
             // Log::error('Error in checkForBuyButton: ' . $e->getMessage());

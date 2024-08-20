@@ -1,6 +1,6 @@
 @if(!$product->deleted_at)
-    @auth
-        @if( checkForBuyButton($product))
+@auth
+@if( checkForBuyButton($product))
             <div class="product-quantity-box mb-3">
                 @if($product->stocks_avaliable <> 0)
                     <div class="quantity-btn">
