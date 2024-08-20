@@ -1,6 +1,4 @@
 @extends('layouts.front')
-@section('title', 'Products')
-@section('heading', 'Interior Accessories')
 @section('content')
 <section class="page-content-sec bg-white ">
         <div class="page-content-wrapper">
