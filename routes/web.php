@@ -45,7 +45,7 @@ Route::match(['get', 'post'], 'dealer/profile/{product}', [HomeController::class
 
 Auth::routes();
 Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers')->group(function () {
-    Route::post('/order/payment', [OrderPaymentController::class, 'index'])->name('order.payment');
+    Route::match(['GET', 'POST'],'/order/payment', [OrderPaymentController::class, 'index'])->name('order.payment');
 });
 
 Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers')->group(function () {

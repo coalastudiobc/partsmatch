@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\PaymentDetail;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use App\Models\PostalCode;
 use App\Notifications\UserRegistered;
 use Carbon\Carbon;
@@ -123,6 +124,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         try {
+            // dd($user);
             $user = [
                 'name' => $data['name'],
                 'email' => $data['email'],
@@ -143,15 +145,17 @@ class RegisterController extends Controller
             }
 
             $userdetails = User::create($user);
-            $userdetails->assignRole('Dealer');
+            if($data['industry_type'] == 'Franchise Dealership')
+            {
+               $userdetails->assignRole('Dealer');
+            }
+               $userdetails->assignRole('User');   
 
             return $userdetails;
         } catch (\Exception $e) {
-
             return redirect()->back()->with(['status' => 'success', 'message' => $e->getMessage()]);
         }
     }
-
 
     protected function registered(Request $request, $user)
     {

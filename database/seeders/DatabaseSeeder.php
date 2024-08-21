@@ -24,6 +24,8 @@ class DatabaseSeeder extends Seeder
             CarYearSeeder::class,
             CarAllMakeSeeder::class,
             AllModelSeeder::class,
+            PostalCodesSeeder::class,
+            BrandSeeder::class,
         ]);
     }
 }

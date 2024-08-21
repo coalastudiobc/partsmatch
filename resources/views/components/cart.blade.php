@@ -60,11 +60,14 @@
                         </table>
                     </div>
                 </div>
+                @if($cart && $cart->cartProducts && count($cart->cartProducts)) 
                 <div class="d-flex justify-content-end">
                     <a href="{{ $cart && $cart->cartProducts && count($cart->cartProducts) ? route(auth()->user()->getRoleNames()->first() . '.checkout.create') :'#'}}" class="btn secondary-btn view-btn md-btn @if($cart && $cart->cartProducts && count($cart->cartProducts)) @else disabled @endif">
                         Checkout
                     </a>
                 </div>
+                @else
+                @endif
             </div>
 
         </div>

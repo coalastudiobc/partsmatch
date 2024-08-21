@@ -11,8 +11,8 @@
     </div>
      <div class="product-detail-table product-list-table">
         <x-alert-component />
-        <div class="table-responsive">
-            <div class="test">
+        <div class="order-managment-table">
+            <div class="test table-responsive">
                 <table class="table">
                     <tr>
                         <th>

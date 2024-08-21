@@ -9,7 +9,7 @@
                         <x-alert-component />
                         <h2>Delivery Address</h2>
                         <div class="delivery-form">
-                            <form id="product-card-details" action="{{ route('Dealer.address.to') }}" method="post" enctype="multipart/form-data">
+                            <form id="product-card-details" action="{{ route(auth()->check() ? (auth()->user()->getRoleNames()->first().  '.address.to') : 'Dealer.address.to') }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6">

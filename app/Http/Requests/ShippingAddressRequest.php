@@ -49,23 +49,23 @@ class ShippingAddressRequest extends FormRequest
             'last_name.max' => 'Last name may not be greater than :max characters.',
             'last_name.regex' => 'Last name format is invalid.',
 
-            'phone_number.required' => `{{ __('customvalidation.user.phone_number.required') }}`,
+            'phone_number.required' => __('customvalidation.user.phone_number.required') ,
             'phone_number.digits' => 'Phone number must be exactly 10 digits.',
 
-            'country.required' => `{{ __('customvalidation.user.country.required') }}`,
-            'state.required' => `{{ __('customvalidation.user.state.required') }}`,
-            'city.required' =>  `{{ __('customvalidation.user.city.required') }}`,
+            'country.required' =>  __('customvalidation.user.country.required') ,
+            'state.required' =>  __('customvalidation.user.state.required') ,
+            'city.required' =>   __('customvalidation.user.city.required') ,
 
-            'street1.required' => `{{ __('customvalidation.addresses.address1.required') }}`,
-            'street1.min' => `{{ __('customvalidation.addresses.address1.min') }}`,
-            'street1.max' => `{{ __('customvalidation.addresses.address1.max') }}`,
+            'street1.required' => __('customvalidation.addresses.address1.required') ,
+            'street1.min' =>  __('customvalidation.addresses.address1.min') ,
+            'street1.max' =>  __('customvalidation.addresses.address1.max') ,
 
-            'street2.max' => `{{ __('customvalidation.addresses.description.max') }}`,
+            'street2.max' => __('customvalidation.addresses.description.max') ,
 
             'description.max' => 'Description may not be greater than :max characters.',
 
-            'pin_code.required' => `{{ __('customvalidation.user.pin_code.required') }}`,
-            'pin_code.digits_between' =>  `{{ __('customvalidation.user.pin_code.minlength', ['min' => config('validation.pincode_maxlength'), 'max' => config('validation.pincode_minlength')]) }}`,
+            'pin_code.required' =>  __('customvalidation.user.pin_code.required') ,
+            'pin_code.digits_between' =>  __('customvalidation.user.pin_code.minlength', ['min' => config('validation.pincode_maxlength'), 'max' => config('validation.pincode_minlength')]) ,
         ];
     }
 }

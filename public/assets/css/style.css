@@ -3072,6 +3072,8 @@ button.accordion-button.analyics-tabs-btns {
     padding: 12px 10px;
     border: 1px solid var(--secondary-color);
     border-radius: 5px;
+    background-color: transparent;
+    cursor: pointer;
 }
 
 .sub-list-sidebar .analyics-tabs-list {
@@ -3088,7 +3090,16 @@ button.accordion-button.analyics-tabs-btns {
     left: -25px;
     top: 4px;
 }
-
+.date-formfield .formfield {
+    position: relative;
+    width: 100%;
+    z-index: 1;
+}
+.date-formfield .formfield .form-icon {
+    right: 12px;
+    top: 47%;
+    z-index: -1;
+}
 .sub-list-sidebar .analyics-tabs-list:hover::before {
     left: -15px;
 }

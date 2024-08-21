@@ -319,7 +319,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="">Phone Number<span class="required-field">*</span></label>
-                                            <input type="number" name="phone_number" value="" class="form-control @error('phone_number') is-invalid @enderror" placeholder="Phone number">
+                                            <input type="text" name="phone_number" value="" class="form-control @error('phone_number') is-invalid @enderror" placeholder="Phone number">
                                             @error('phone_number')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>

@@ -1984,7 +1984,9 @@ ul.order-total-list {
 .product-prize-head {
     margin: 10px 0px 20px !important;
 }
-
+.order-managment-table table {
+    min-width: 992px;
+}
 
 
 

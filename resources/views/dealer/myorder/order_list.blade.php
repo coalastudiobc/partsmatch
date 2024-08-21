@@ -1,7 +1,4 @@
 @extends('layouts.dealer')
-@section('title', 'My Orders')
-@section('heading', 'Order')
-
 @section('content')
 
 <div class="dashboard-right-box">
