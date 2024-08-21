@@ -66,13 +66,13 @@ Follow these steps to set up the project:
 1. **Get a Car API Key**: Sign up at [carapi.app](https://carapi.app/) to obtain an API key.
 2. **Get a Shippo API Key**: Sign up at [shippo.com](https://apps.goshippo.com) to obtain an API key.
 
-2. **Clone the repository**: Copy the repository to your local machine:
+3. **Clone the repository**: Copy the repository to your local machine:
 
     ```bash
     git clone https://github.com/github_username/repo_name.git
     ```
 
-3. **Install NPM packages**: Navigate to the project directory and install the required packages:
+4. **Install NPM packages**: Navigate to the project directory and install the required packages:
 
     ```bash
     cd repo_name
@@ -80,25 +80,25 @@ Follow these steps to set up the project:
     composer update
     ```
 
-4. **Install PHP dependencies**: Install Laravel’s PHP dependencies using Composer:
+5. **Install PHP dependencies**: Install Laravel’s PHP dependencies using Composer:
 
     ```bash
     composer install
     ```
 
-5. **Configure your API keys**: Open the `.env` file in the project root and set your API keys and other environment-specific settings. Add or update the necessary environment variables:
+6. **Configure your API keys**: Open the `.env` file in the project root and set your API keys and other environment-specific settings. Add or update the necessary environment variables:
 
     ```dotenv
     API_KEY=ENTER_YOUR_API_KEY
     ```
 
-6. **Generate an application key**: Laravel requires an application key to be set. Generate this key using Artisan:
+7. **Generate an application key**: Laravel requires an application key to be set. Generate this key using Artisan:
 
     ```bash
     php artisan key:generate
     ```
 
-7. **Set up your database**: Configure your database connection settings in the `.env` file:
+8. **Set up your database**: Configure your database connection settings in the `.env` file:
 
     ```dotenv
     DB_CONNECTION=mysql
@@ -109,13 +109,28 @@ Follow these steps to set up the project:
     DB_PASSWORD=your_database_password
     ```
 
-8. **Run migrations**: Apply the database migrations to set up your database schema:
+9. **Run migrations**: Apply the database migrations to set up your database schema:
 
     ```bash
     php artisan migrate
     ```
 
-9. **Serve the application**: Start the Laravel development server:
+10. **Run seeders**: Seed your database with initial data. You can run all seeders by executing:
+
+    ```bash
+    php artisan db:seed
+    ```
+
+    If you have specific seeders you want to run, you can specify them like this:
+
+    ```bash
+    php artisan db:seed --class=YourSeederClassName
+    ```
+
+    Replace `YourSeederClassName` with the name of the seeder class you want to execute. Seeders are usually located in the `database/seeders` directory.
+
+
+11. **Serve the application**: Start the Laravel development server:
 
     ```bash
     php artisan serve
