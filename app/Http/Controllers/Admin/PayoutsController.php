@@ -18,7 +18,7 @@ class PayoutsController extends Controller
     {
 
         $fulfilledIds = ShippoPurchasedLabel::pluck('order_id');
-        $fulfilledOrders = $fulfilledIds->isNotEmpty() ? Order::whereIn('id', $fulfilledIds)->latest()->paginate(__('pagination.admin_paginaion_number')) : collect(); 
+        $fulfilledOrders = $fulfilledIds->isNotEmpty() ? Order::whereIn('id', $fulfilledIds)->latest()->paginate(__('pagination.admin_paginaion_number')) : null; 
         return view('admin.payouts.index', compact('fulfilledOrders'));
 
     }

@@ -85,7 +85,7 @@ class shippmentController extends Controller
     public function getFulfilledShippment()
     {
         $fulfilledIds = ShippoPurchasedLabel::pluck('order_id');
-        $fulfilledOrders = $fulfilledIds->isNotEmpty() ? Order::whereIn('id', $fulfilledIds)->latest()->paginate(__('pagination.admin_paginaion_number')) : collect(); 
+        $fulfilledOrders = $fulfilledIds->isNotEmpty() ? Order::whereIn('id', $fulfilledIds)->latest()->paginate(__('pagination.admin_paginaion_number')) :null; 
         return view('admin.shippment.fulfilled', compact('fulfilledOrders'));
     }
     

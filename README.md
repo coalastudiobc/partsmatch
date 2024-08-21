@@ -21,6 +21,38 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
+## Steps to project setup 
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/coalastudiobc/partsmatch.git
+
+2. Navigate to the project directory:
+  ```bash
+  cd repository_name
+
+3. Update the composer 
+  ```bash
+  composer update
+4. Make the env file or update and adding all necessary keys 
+  php artisan key:generate
+
+5. Run the following commands 
+  ```bash
+  php artisan optimize
+  php artisna config:cache
+  php artisan cache:clear
+
+6. Make databases and prerequire data
+  ```bash
+  php artisan migrate:fresh --seed
+
+7. Run the command to remove duplicacy data
+  ```bash
+  php artisan distnict:models
+
+8. Create a empty text.txt file at \storage\app\text.txt
+ 
+ 
 ## Learning Laravel
 
 Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
