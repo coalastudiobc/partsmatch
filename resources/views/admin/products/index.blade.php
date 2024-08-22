@@ -75,9 +75,9 @@
                 </table>
             </div>
         </div>
-        @isset($orders)  
+        @isset($products)  
         <div class="pagination-wrapper">
-            {!! $product->links('admin.pagination') !!}
+            {!! $products->links('admin.pagination') !!}
         </div>
         @endif
     </div>
