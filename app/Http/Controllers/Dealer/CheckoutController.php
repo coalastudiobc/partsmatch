@@ -112,6 +112,7 @@ class CheckoutController extends Controller
     public function orderProductView(Order $order)
     {
         $orderItem = OrderItem::where('order_id', $order->id)->get();
+        $role = auth()->user()->getRoleNames()->first();
         if($role == 'User'){
             return view('dealer.myorder.view_public_product', compact('orderItem'));
         }
