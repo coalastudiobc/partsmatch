@@ -148,8 +148,10 @@ class RegisterController extends Controller
             if($data['industry_type'] == 'Franchise Dealership')
             {
                $userdetails->assignRole('Dealer');
+            }else
+            {
+                $userdetails->assignRole('User');   
             }
-               $userdetails->assignRole('User');   
 
             return $userdetails;
         } catch (\Exception $e) {
