@@ -279,7 +279,11 @@ class CheckoutController extends Controller
         $data = $user->shippingAddress;
         // $orders = Order::with('orderItem')->where('user_id', auth()->id())->orderByDesc('id')->paginate(10);
         $orders =  Order::with('orderItem')->where('user_id', auth()->id())->orderBy('id', 'DESC')->paginate(__('pagination.pagination_nuber'));
-        return view('dealer.myorder.index', compact('orders'));
+        $role = auth()->user()->getRoleNames()->first();
+        if($role == 'User'){
+         return view('dealer.myorder.order_list', compact('orders'));
+        }
+         return view('dealer.myorder.index', compact('orders'));
     }
     public function to_address(Request $request)
     {   
