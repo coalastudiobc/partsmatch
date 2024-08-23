@@ -20,9 +20,14 @@
                         <div class="col-lg-3">
                             <div class="footer-link-list">
                                 <h4>Customer Service</h4>
+                                @php
+                                    $contactUsRoute=get_cms()->where('slug','contact-us')->first();
+                                @endphp
+                                @if ($contactUsRoute)
                                 <ul>
-                                    <li><a href="#">Contact Us</a></li>
+                                    <li><a href="{{ route('view', ['slug' => $contactUsRoute->slug]) }}">{{ $contactUsRoute->name }}</a></li>
                                 </ul>
+                                @endif
                             </div>
                         </div>
                         <div class="col-lg-2">

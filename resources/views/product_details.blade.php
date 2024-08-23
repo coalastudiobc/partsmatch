@@ -74,7 +74,13 @@
                             <div class="single-img-info ">
                                 <div class="product-infography">
                                     <h2>{{$product->part_number}} {{ $product->name }}</h2>
-                                        <span>{{ $product->category->name }}</span><br>
+                                        {{-- <span>{{ $product->category->name }}</span><br> --}}
+                                        @if($product && $product->productCompatible && $product->productCompatible->isNotEmpty())
+                                        <span>{{ $product->productCompatible->first()->make }}</span><br>
+                                        @else
+                                            <span></span><br>
+                                        @endif
+                                    
                                         <span>See more products by: </span> <a href="{{ route('dealer.profile', ['product' => $product->id]) }}">
                                             {{-- <u style="color:#272643">{{ $userdetails->dealership_name ?? 'Dealership Name' }}</u></a> --}}
                                             <u style="color:#272643">this seller</u></a>
@@ -170,7 +176,13 @@
                                                     </h2>
                                                     <div id="additional-information" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                                                         <div class="accordion-body">
-                                                            <p>{{ $product->description }} </p>
+                                                            @if($product && $product->description)
+                                                                @foreach(explode(PHP_EOL, $product->description) as $value)
+                                                                    <p>{{ $value }}</p>
+                                                                @endforeach
+                                                            @else
+                                                                <p>No description available.</p> 
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </div>
@@ -186,6 +198,13 @@
                                                     <div id="additional-information1" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                                                         <div class="accordion-body">
                                                             <p>{{ $product->additional_details }} </p>
+                                                            @if($product && $product->description)
+                                                                @foreach(explode(PHP_EOL, $product->additional_details) as $value)
+                                                                    <p>{{ $value }}</p>
+                                                                @endforeach
+                                                            @else
+                                                                <p>No additional_details available.</p> <!-- Fallback content -->
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </div>
@@ -361,6 +380,7 @@
                 jQuery('#fullPageLoader').addClass('d-none');
             }, 3000);
         })
+        jQuery('#additional-information').collapse('show');
     });
 </script>
 @endpush

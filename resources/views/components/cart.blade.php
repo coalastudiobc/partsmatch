@@ -9,12 +9,13 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th>image</th>
-                                            <th>product</th>
-                                            <th>price</th>
-                                            <th>quantity</th>
-                                            <th>total</th>
-                                            <th>action</th>
+                                            <th>Image</th>
+                                            <th>Part Number</th>
+                                            <th>Part name</th>
+                                            <th>Price</th>
+                                            <th>Quantity</th>
+                                            <th>Total</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -28,6 +29,7 @@
                                                         </div>
                                                     </a>
                                                 </td>
+                                                <td>{{ $product->product ? $product->product->part_number : 'N/A' }}</td>
                                                 <td>{{ $product->product ? $product->product->name : 'N/A' }}</td>
                                                 <td>${{ $product->product ? $product->product->price : 'N/A' }} </td>
                                                 <td>
@@ -48,7 +50,7 @@
                                         @empty
                                             <div class="empty-data">
                                                 <img src="{{ asset('assets/images/no-product.svg') }}  " alt="" width="300">
-                                                <p class="text-center mt-1">Did not found any part</p>
+                                                <p class="text-center mt-1">Did not found any parts</p>
                                             </div>
                                         @endforelse
                                     </tbody>
@@ -56,14 +58,14 @@
                             @else
                                 <div class="empty-data">
                                     <img src="{{ asset('assets/images/no-product.svg') }}  " alt="" width="300">
-                                    <p class="text-center mt-1">Did not found any part</p>
+                                    <p class="text-center mt-1">Did not found any parts</p>
                                 </div>
                             @endif
 
                         @else
                             <div class="empty-data">
                                 <img src="{{ asset('assets/images/no-product.svg') }}  " alt="" width="300">
-                                <p class="text-center mt-1">Did not found any  part</p>
+                                <p class="text-center mt-1">Did not found any  parts</p>
                             </div>
                         @endif
                     </div>

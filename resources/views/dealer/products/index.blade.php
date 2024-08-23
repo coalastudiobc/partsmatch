@@ -34,13 +34,13 @@
                 <table class="table ">
                     <tr>
                         <th>
-                            <p>Image</p>
-                        </th>
-                        <th>
-                            <p>Product name</p>
+                            <p>Part Image</p>
                         </th>
                         <th>
                             <p>Part Number</p>
+                        </th>
+                        <th>
+                            <p>Part name</p>
                         </th>
                         <th>
                             <p>Price</p>
@@ -62,6 +62,9 @@
                                     <img src="{{ $product->productImage && count($product->productImage) ? Storage::url($product->productImage[0]->file_url) : asset('assets/images/gear-logo.svg') }}"
                                         alt="img">
                                 </div>
+                            </td>
+                            <td>
+                                <p>{{ $product->part_number }}</p>
                             </td>
                             <td>
                                 <p>{{ $product->name }}</p>
@@ -101,16 +104,16 @@
                             <td>
                                 <div class="action-btns">
                                     <a
-                                        href="{{ route(auth()->user()->getRoleNames()->first() . '.products.edit', $product->id) }}"><i
+                                        href="{{ route(auth()->user()->getRoleNames()->first() . '.products.edit', $product->id) }}" title="Edit"><i
                                             class="fa-solid fa-pen-to-square" style="color: #3EBE62;"></i></a>
-                                    <a href="{{ route(auth()->user()->getRoleNames()->first() . '.products.delete', $product->id) }}"
+                                    <a href="{{ route(auth()->user()->getRoleNames()->first() . '.products.delete', $product->id) }}" title="Deleteq"
                                         class="delete"><i class="fa-regular fa-trash-can " style="color: #E13F3F;"></i></a>
                                 </div>
                             </td>
                         </tr>
                     @empty
                         <div class="empty-data">
-                            <img src="{{ asset('assets/images/no-product.svg') }}  " alt="" width="300">
+                            <img src="{{ asset('assets/images/no-product.svg') }}" alt="" width="300">
                             <p class="text-center mt-1">Did not found any parts</p>
                         </div>
                     @endforelse

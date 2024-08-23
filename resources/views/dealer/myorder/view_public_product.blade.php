@@ -9,6 +9,7 @@
             <table class="table">
                 <tr>
                     <th>product Image</th>
+                    <th>Part Number</th>
                     <th>Name</th>
                     <th>Price</th>
                     <th>Brand</th>
@@ -23,6 +24,9 @@
                                 <img src="{{$order->trashedProduct ? (($order->trashedProduct->productImage && count($order->trashedProduct->productImage)) ? Storage::url($order->trashedProduct->productImage[0]->file_url)  : asset('assets/images/gear-logo.svg')) :asset('assets/images/gear-logo.svg') }}" alt="Product Image">
                             </a>
                         </div>
+                    </td>
+                    <td>
+                        <p>{{$order->trashedProduct ? $order->trashedProduct->part_number : 'N/A' }}</p>
                     </td>
                     <td>
                         <p>{{$order->trashedProduct ? $order->trashedProduct->name : 'N/A' }}</p>

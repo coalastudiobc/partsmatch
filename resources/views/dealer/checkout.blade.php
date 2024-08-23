@@ -42,7 +42,7 @@
                                         <div class="form-group">
                                             <label for="">Address<span class="required-field">*</span></label>
                                             <div class="form-field">
-                                                <input type="text" class="form-control @error('street1') is-invalid @enderror" name="street1" value="{{ old('address1', $deliveryAddress->address1 ?? '')}}" placeholder="e.g: street no. & name">
+                                                <input type="text" class="form-control @error('street1') is-invalid @enderror" name="street1" value="{{ old('address1', $deliveryAddress->address1 ?? '')}}" placeholder="E.g: street & apt. Number & street name">
                                                 @error('street1')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -58,7 +58,7 @@
                                         <div class="form-group">
                                             <label for="">Address 2</label>
                                             <div class="form-field">
-                                                <input type="text" class="form-control @error('street2') is-invalid @enderror" name="street2" value="{{ $deliveryAddress->address2 ?? '' }}" placeholder="Description of above address">
+                                                <input type="text" class="form-control @error('street2') is-invalid @enderror" name="street2" value="{{ $deliveryAddress->address2 ?? '' }}" placeholder="E.g: suite number">
                                                 @error('street2')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>

@@ -65,7 +65,7 @@
                             <p>{{ $user->productOfManager->count() ?? 'N/A' }}</p>     
                         </td>
                         <td>
-                            <span class="d-inline-block" data-bs-toggle="tooltip" data-bs-placement="left" title="Click to Active/Inactive ">
+                            <span class="d-inline-block" data-bs-toggle="tooltip" data-bs-placement="left" title="Click to Active/Inactive the profile ">
                                 <div class="toggle-btn" >
                                     <input type="checkbox" id="switch{{ $key }}" class="custom-switch-input" @if ($user->status == 'ACTIVE') checked="checked" @endif
                                     onchange="toggleStatus(this, 'User', '{{ $user->id }}');"

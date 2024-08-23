@@ -165,7 +165,7 @@ class HomeController extends Controller
 
     public function ProductDetail(Request $request ,  $product)
     {
-        $product = Product::withTrashed()->find($product);
+        $product = Product::with('productCompatible')->withTrashed()->find($product);
         $userdetails = User::where(function($query) use ($product){
                 $query->where('id',$product->user_id)
                 ->orWhere('id', '=', $product->dealer_id);

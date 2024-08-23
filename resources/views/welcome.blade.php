@@ -218,18 +218,23 @@
 
                         <div class="categories-loop-boxes-outer">
                             <div class="categories-loop-boxes">
-                                @foreach ($category as $key => $category)
-                                @if ($loop->iteration > 7)
-                                @break
-                                @endif
-                                <a href="{{ route('products', ['category' => $category->id]) }}">
-                                    <div class="categories-box">
-                                        <img src="{{ asset('assets/images/categorie1.svg') }}" alt="">
-                                        <p>{{ $category->name }}</p>
-                                    </div>
-                                </a>
+                                @foreach ($category as $key => $category) 
+                                    @if ($loop->iteration > 7)
+                                        @break
+                                    @endif
+                                    <a href="{{ route('products', ['category' => $category->id]) }}">
+                                        <div class="categories-box">
+                                            @if($category?->icon)
+                                            <p style="max-height: 100px;max-width: 100px">{!! $category->icon ?? $category->icon !!}</p>
+                                            @else
+                                            <img src="{{ asset('assets/images/categorie1.svg') }}" alt="">  
+                                            @endisset
+                                            <p>{{ $category->name ?? 'Others' }}</p>
+                                        </div>
+                                    </a>
                                 @endforeach
                             </div>
+                            
                         </div>
                         <a href="{{ route('products') }}">
                             <div class="categories-box">
