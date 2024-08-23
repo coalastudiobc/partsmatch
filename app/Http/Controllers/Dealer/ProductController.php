@@ -34,8 +34,8 @@ class ProductController extends Controller
     public function __construct()
     {
         $this->sdk = \CarApiSdk\CarApi::build([
-            'token' => env('CAR_API_TOKEN'),
-            'secret' => env('CAR_API_SECRET'),
+           'token' => config('services.Car_api.CAR_API_TOKEN'),
+            'secret' => config('services.Car_api.CAR_API_SECRET'),
         ]);
         $filePath = storage::path('text.txt');
         $jwt = file_get_contents($filePath);
@@ -545,8 +545,8 @@ class ProductController extends Controller
     //    $brands = CarBrandMake::distinct('makes')->get();
 
     //    $sdk = \CarApiSdk\CarApi::build([
-    //        'token' => env('CAR_API_TOKEN'),
-    //        'secret' => env('CAR_API_SECRET'),
+    //        'token' => config('services.Car_api.CAR_API_TOKEN'),
+    //        'secret' => config('services.Car_api.CAR_API_SECRET'),
     //    ]);
     //    $filePath = storage_path('app/text.txt');
     //    $jwt = file_exists($filePath) ? file_get_contents($filePath) : null;

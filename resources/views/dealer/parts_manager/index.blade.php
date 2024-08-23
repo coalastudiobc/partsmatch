@@ -65,7 +65,7 @@
                             <p>{{ $user->productOfManager->count() ?? 'N/A' }}</p>     
                         </td>
                         <td>
-                            <span class="d-inline-block" data-bs-toggle="tooltip" data-bs-placement="left" title="Click to deactivate/active ">
+                            <span class="d-inline-block" data-bs-toggle="tooltip" data-bs-placement="left" title="Click to Active/Inactive ">
                                 <div class="toggle-btn" >
                                     <input type="checkbox" id="switch{{ $key }}" class="custom-switch-input" @if ($user->status == 'ACTIVE') checked="checked" @endif
                                     onchange="toggleStatus(this, 'User', '{{ $user->id }}');"
@@ -85,7 +85,7 @@
                     @empty
                     <div class="empty-data">
                         <img src="{{ asset('assets/images/no-product.svg') }}  " alt="" width="300">
-                        <p class="text-center mt-1">Did not found any Products</p>
+                        <p class="text-center mt-1">Did not found any parts</p>
                     </div>
                     @endforelse
                 </table>

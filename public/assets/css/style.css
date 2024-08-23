@@ -3502,7 +3502,12 @@ button.accordion-button.analyics-tabs-btns {
     text-overflow: ellipsis;
     white-space: nowrap;
 } */
-
+a.nav-serch-cross {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 50px;
+}
 
 
 

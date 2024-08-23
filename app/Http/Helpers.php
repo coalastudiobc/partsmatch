@@ -13,6 +13,7 @@ use App\Models\Product;
 use App\Models\UserCommisionSetting;
 use Laravel\Cashier\Cashier;
 use App\Models\UserAddresses;
+use App\Models\DealerPayout;
 use App\Models\ShippingSetting;
 use App\Models\ShippmentCreation;
 use App\Models\ShippoPurchasedLabel;
@@ -490,6 +491,22 @@ if (!function_exists('calculatePayOuts')) {
                 }
             }
             return $payout;
+        } catch (\Exception $e) {
+            // Log::error('Error in checkForBuyButton: ' . $e->getMessage());
+            return false; 
+        }
+    }
+}
+if (!function_exists('isPaid')) {
+    function isPaid($fulfilledOrder)
+    {
+        try {
+          $getDealerPay =  DealerPayout::where('dealer_id',$fulfilledOrder->order_for)->where('order_id',$fulfilledOrder->id)->first();
+          if(is_null($getDealerPay))
+            {
+                return false;
+            }
+            return true;
         } catch (\Exception $e) {
             // Log::error('Error in checkForBuyButton: ' . $e->getMessage());
             return false; 

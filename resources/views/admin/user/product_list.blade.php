@@ -67,7 +67,7 @@
                     @empty
                         <tr>
                             <td class="no-record-found">
-                                <center>Did not found any product </center>
+                                <center>Did not found any parts </center>
                             </td>
                         </tr>
                     @endforelse

@@ -4,60 +4,68 @@
             <div class="cart-table-wrapper">
                 <div class="db-table-box">
                     <div class="tb-table table-responsive">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>image</th>
-                                    <th>product</th>
-                                    <th>price</th>
-                                    <th>quantity</th>
-                                    <th>total</th>
-                                    <th>action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @if (isset($cart->cartProducts))
-                                @forelse ($cart->cartProducts as $product)
-                                <tr>
-                                    <td>
-                                        <a href="{{ route('product.detail',['product' => $product->product_id])}}">
-                                            <div class="cart-product-image">
+                        @if (isset($cart->cartProducts))
+                            @if ($cart && $cart->cartProducts && count($cart->cartProducts))
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>image</th>
+                                            <th>product</th>
+                                            <th>price</th>
+                                            <th>quantity</th>
+                                            <th>total</th>
+                                            <th>action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @forelse ($cart->cartProducts as $product)
+                                            <tr>
+                                                <td>
+                                                    <a href="{{ route('product.detail',['product' => $product->product_id])}}">
+                                                        <div class="cart-product-image">
 
-                                                <img src="{{ isset($product->product->productImage[0]) ? ($product->product->productImage[0])?( Storage::url($product->product->productImage[0]->file_url)) : asset('assets/images/gear-logo.svg') : asset('assets/images/gear-logo.svg') }}" alt="">
+                                                            <img src="{{ isset($product->product->productImage[0]) ? ($product->product->productImage[0])?( Storage::url($product->product->productImage[0]->file_url)) : asset('assets/images/gear-logo.svg') : asset('assets/images/gear-logo.svg') }}" alt="">
+                                                        </div>
+                                                    </a>
+                                                </td>
+                                                <td>{{ $product->product ? $product->product->name : 'N/A' }}</td>
+                                                <td>${{ $product->product ? $product->product->price : 'N/A' }} </td>
+                                                <td>
+                                                    <div class="product-quantity-box targetLoaderDiv">
+                                                        <div class="button-loader d-none"></div>
+                                                        <div class="quantity-btn quantity-brd">
+                                                            @if ($product->quantity != 1)
+                                                            <a href="javascript:void(0)" class="minus cartupdate" data-product_id="{{ $product->id }}" data_quantity_id="{{ '#quantity' . $product->id }}" data-stocks="{{ $product->product ? $product->product->stocks_avaliable : '' }}">-</a>
+                                                            @endif
+                                                            <input type="text" name="quantity" class="quantity" id="{{ 'quantity' . $product->id }}" value="{{ $product->quantity ?? '' }}" data-product_id="{{ $product->id }}" data_quantity_id="{{ '#quantity' . $product->id }}" placeholder="">
+                                                            <a href="javascript:void(0)" class="plus cartupdate" data-product_id="{{ $product->id }}" data_quantity_id="{{ '#quantity' . $product->id }}" data-stocks="{{ $product->product ? $product->product->stocks_avaliable : '' }}">+</a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="total">${{ $product->quantity ? ($product->product ? $product->quantity * $product->product->price : ' ') : ' ' }}</td>
+                                                <td> <a data-product_id="{{ $product->id }}" href="javascript:void(0)" class="cartDelete delete"><i style="color: #E13F3F;" class="fa-regular fa-trash-can"></i></a></td>
+                                            </tr>
+                                        @empty
+                                            <div class="empty-data">
+                                                <img src="{{ asset('assets/images/no-product.svg') }}  " alt="" width="300">
+                                                <p class="text-center mt-1">Did not found any part</p>
                                             </div>
-                                        </a>
-                                    </td>
-                                    <td>{{ $product->product ? $product->product->name : 'N/A' }}</td>
-                                    <td>${{ $product->product ? $product->product->price : 'N/A' }} </td>
-                                    <td>
-                                        <div class="product-quantity-box targetLoaderDiv">
-                                            <div class="button-loader d-none"></div>
-                                            <div class="quantity-btn quantity-brd">
-                                                @if ($product->quantity != 1)
-                                                <a href="javascript:void(0)" class="minus cartupdate" data-product_id="{{ $product->id }}" data_quantity_id="{{ '#quantity' . $product->id }}" data-stocks="{{ $product->product ? $product->product->stocks_avaliable : '' }}">-</a>
-                                                @endif
-                                                <input type="text" name="quantity" class="quantity" id="{{ 'quantity' . $product->id }}" value="{{ $product->quantity ?? '' }}" data-product_id="{{ $product->id }}" data_quantity_id="{{ '#quantity' . $product->id }}" placeholder="">
-                                                <a href="javascript:void(0)" class="plus cartupdate" data-product_id="{{ $product->id }}" data_quantity_id="{{ '#quantity' . $product->id }}" data-stocks="{{ $product->product ? $product->product->stocks_avaliable : '' }}">+</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="total">${{ $product->quantity ? ($product->product ? $product->quantity * $product->product->price : ' ') : ' ' }}</td>
-                                    <td> <a data-product_id="{{ $product->id }}" href="javascript:void(0)" class="cartDelete delete"><i style="color: #E13F3F;" class="fa-regular fa-trash-can"></i></a></td>
-                                </tr>
-                                @empty
+                                        @endforelse
+                                    </tbody>
+                                </table>
+                            @else
                                 <div class="empty-data">
                                     <img src="{{ asset('assets/images/no-product.svg') }}  " alt="" width="300">
-                                    <p class="text-center mt-1">Did not found any product</p>
+                                    <p class="text-center mt-1">Did not found any part</p>
                                 </div>
-                                @endforelse
-                                @else
-                                <div class="empty-data">
-                                    <img src="{{ asset('assets/images/no-product.svg') }}  " alt="" width="300">
-                                    <p class="text-center mt-1">Did not found any product</p>
-                                </div>
-                                @endif
-                            </tbody>
-                        </table>
+                            @endif
+
+                        @else
+                            <div class="empty-data">
+                                <img src="{{ asset('assets/images/no-product.svg') }}  " alt="" width="300">
+                                <p class="text-center mt-1">Did not found any  part</p>
+                            </div>
+                        @endif
                     </div>
                 </div>
                 @if($cart && $cart->cartProducts && count($cart->cartProducts)) 
@@ -66,7 +74,6 @@
                         Checkout
                     </a>
                 </div>
-                @else
                 @endif
             </div>
 

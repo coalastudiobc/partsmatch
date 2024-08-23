@@ -14,7 +14,7 @@ class PackageController extends Controller
     private $stripe;
     public function __construct()
     {
-        $this->stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
+        $this->stripe = new \Stripe\StripeClient(config('services.Stripe.stripe_secret'));
     }
 
     public function index()

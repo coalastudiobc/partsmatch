@@ -80,7 +80,7 @@
                                 <p>{{ $product->stocks_avaliable }}</p>
                             </td>
                             <td>
-                                <div class="toggle-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Click to deactivate/active listing of products">
+                                <div class="toggle-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Click to Active/Inactive listing of products">
                                     <input type="checkbox" id="switch100{{ $key }}" class="custom-switch-input"
                                         @if ($product->status == '1') checked="checked" @endif
                                         onchange="toggleStatus(this, 'Product', '{{ $product->id }}');"
@@ -111,7 +111,7 @@
                     @empty
                         <div class="empty-data">
                             <img src="{{ asset('assets/images/no-product.svg') }}  " alt="" width="300">
-                            <p class="text-center mt-1">Did not found any product</p>
+                            <p class="text-center mt-1">Did not found any parts</p>
                         </div>
                     @endforelse
                 </table>

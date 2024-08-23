@@ -377,7 +377,7 @@ return [
         ],
         'stocks_avaliable' => [
             'required' => 'Please enter product stock',
-            'number' => 'please enter only numbers',
+            'number' => 'please enter valid product quantity',
             'regex' => 'Only number are allowed',
         ],
         'price' => [

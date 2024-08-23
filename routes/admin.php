@@ -82,6 +82,7 @@ Route::middleware(['auth', 'verified', 'admin'])->namespace('App\Http\Controller
     //payments payouts
     Route::name('payouts.')->group(function () {
         Route::get('payouts/view', [PayoutsController::class, 'index'])->name('view');
+        Route::get('payouts/payment/{fulfilledOrder}', [PayoutsController::class, 'payToDealer'])->name('getpayment');
     });
     
     //cms management

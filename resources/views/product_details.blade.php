@@ -76,7 +76,9 @@
                                     <h2>{{$product->part_number}} {{ $product->name }}</h2>
                                         <span>{{ $product->category->name }}</span><br>
                                         <span>See more products by: </span> <a href="{{ route('dealer.profile', ['product' => $product->id]) }}">
-                                            <u style="color:#272643">{{ $userdetails->dealership_name ?? 'Dealership Name' }}</u></a>
+                                            {{-- <u style="color:#272643">{{ $userdetails->dealership_name ?? 'Dealership Name' }}</u></a> --}}
+                                            <u style="color:#272643">this seller</u></a>
+
                                         <h2 class="product-prize-head"> @if($product && is_numeric($product->price))
                                             ${!! number_format((float) $product->price, 2, '.', ',') !!}
                                         @else

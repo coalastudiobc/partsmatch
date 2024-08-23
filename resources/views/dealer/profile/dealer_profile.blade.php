@@ -19,7 +19,8 @@
                     <a href="{{ route('products', ['category' => $product->category->parent->id]) }}" class="bredcrum-list">{{ $product->category->parent->name ?? 'category'}}</a>
                     <a href="{{ route('products', ['category' => $product->subcategory_id]) }}" class="bredcrum-list">{{ $product->category->name ?? 'sub Category' }}</a>
                     <a href="{{ route('product.detail', $product->id) }}" class="bredcrum-list">{{ $product->name ?? 'product name' }}</a>
-                    <a href="#" class="bredcrum-list active">{{ $user->name }}</a>
+                    {{-- <a href="#" class="bredcrum-list active">{{ $user->name }}</a> --}}
+                    <a href="#" class="bredcrum-list active">seller</a>
                 </div>
                 <div class="dealer-profile-content">
                     {{-- <div class="dealer-profile-form-box">

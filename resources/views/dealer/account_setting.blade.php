@@ -128,16 +128,16 @@
                                                 <input type="hidden" id="industry" name="industry_type" value="{{ old('industry_type', $user->industry_type ?? '') }}">
                                                 <div class=" custm-dropdown dropmenu disabled_select ">
                                                     <div class="dropdown">
-                                                        <div class=" form-control  dropdown-toggle " type="button" data-bs-toggle='dropdown' id="dropdownMenuButton1" aria-expanded="false" disabled>
+                                                        <div class=" form-control  dropdown-toggle " type="button" readonly id="dropdownMenuButton1" aria-expanded="false"  disabled>
                                                             <div id="selectedItem">
                                                                 {{ $user->industry_type }}
 
                                                             </div>
-                                                            <span class="custm-drop-icon">
+                                                            {{-- <span class="custm-drop-icon">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="23" viewBox="0 0 24 23" fill="none">
                                                                     <path d="M19 9.00006L14 14.0001L9 9.00006" stroke="#151515" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
                                                                 </svg>
-                                                            </span>
+                                                            </span> --}}
                                                         </div>
                                                         <ul class="dropdown-menu dropdownlist" aria-labelledby="dropdownMenuButton1">
                                                             <li><a class="dropdown-item custom_dropdown_item" data-value="Volvo" href="javascript:void(0)">Volvo</a>
@@ -534,12 +534,14 @@
 </script>
 <script>
     jQuery(document).ready(function() {
-        jQuery('.custom_dropdown_item').on('click', function() {
-            var selectitem = jQuery(this).attr('data-value')
-            jQuery('#selectedItem').text(selectitem)
-            jQuery(document).find('input[name="industry_type"]').val(selectitem);
+        jQuery('.custom_dropdown_item').attr('readonly',true);
+        jQuery('.custom_dropdown_item').attr('disabled',true);
+        // jQuery('.custom_dropdown_item').on('click', function() {
+        //     var selectitem = jQuery(this).attr('data-value')
+        //     jQuery('#selectedItem').text(selectitem)
+        //     jQuery(document).find('input[name="industry_type"]').val(selectitem);
 
-        })
+        // })
     });
 </script>
 @includeFirst(['validation'])

@@ -24,11 +24,14 @@
                         <th>
                             <p>Buy Date</p>
                         </th>
-                        <th>
+                        {{-- <th>
                             <p>Fullfilled Date</p>
-                        </th>
+                        </th> --}}
                         <th>
                             <p>Delivered Date</p>
+                        </th>
+                        <th>
+                            <p>Paying Amount</p>
                         </th>
                         <th>
                             <p>Action</p>
@@ -56,16 +59,26 @@
                         <td>
                             <p>{{ $fulfilledOrder ? ($fulfilledOrder->created_at ? date('m/d/Y', strtotime($fulfilledOrder->created_at)) : 'N/A'):'N/A' }}</p>
                         </td>
+                        {{-- <td>
+                            <p>{{ $fulfilledOrder ? ($fulfilledOrder->created_at ? date('m/d/Y', strtotime($fulfilledOrder->created_at)) : 'N/A'):'N/A' }}</p>
+                        </td> --}}
                         <td>
                             <p>{{ $fulfilledOrder ? ($fulfilledOrder->created_at ? date('m/d/Y', strtotime($fulfilledOrder->created_at)) : 'N/A'):'N/A' }}</p>
                         </td>
                         <td>
-                            <p>{{ $fulfilledOrder ? ($fulfilledOrder->created_at ? date('m/d/Y', strtotime($fulfilledOrder->created_at)) : 'N/A'):'N/A' }}</p>
+                            <p>${{calculatePayOuts($fulfilledOrder->order_for,$fulfilledOrder->shipment_price,$fulfilledOrder->total_amount)}}</p>
                         </td>
                         <td>
-                            <td>
-                                <button class="btn primary-btn" >Pay Out  ${{calculatePayOuts($fulfilledOrder->order_for,$fulfilledOrder->shipment_price,$fulfilledOrder->total_amount)}}</button>
-                             </td>
+                            @if (isPaid($fulfilledOrder))
+                                <div class="confirm-badge">
+                                    <i class="fa-solid fa-check"></i>
+                                    <p>Confirmed</p>
+                                </div>
+                            @else
+                                <td>
+                                    <a href="{{route('admin.payouts.getpayment',$fulfilledOrder)}}" class="btn primary-btn payout"  data-amount="{{calculatePayOuts($fulfilledOrder->order_for,$fulfilledOrder->shipment_price,$fulfilledOrder->total_amount)}}">Pay Out</a>
+                                </td>
+                            @endif
                         </td>
                     </tr>
                     @empty
@@ -82,5 +95,32 @@
             {!! $fulfilledOrders->links('admin.pagination') !!}
         </div>
     </div>
-
 @endsection
+@push('scripts')
+<script>
+    jQuery(document).ready(function () {
+    jQuery(".payout").click(function (e) {
+        e.preventDefault();
+        jQuery('body').addClass('modal-open');
+       var amount= jQuery(this).attr('data-amount');
+        let url = jQuery(this).attr('href');
+        swal({
+            title: 'Do you want to proceed with the payout?',
+            text: 'You will pay out $' + amount ,
+            icon: 'warning',
+            buttons: true,
+            successMode: true,
+            buttons: ["No", "Yes"],
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    window.location.replace(url)
+                } else {
+                    jQuery('body').removeClass('modal-open');
+                }
+            });
+    });
+});
+</script>
+    
+@endpush

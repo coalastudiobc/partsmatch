@@ -22,7 +22,7 @@
                     </svg>
                 </button>
             @else
-                <p class="text-danger">Out of stocks</p>
+                <p class="text-danger">No more stock available</p>
         @endif
 @endif
 @endauth

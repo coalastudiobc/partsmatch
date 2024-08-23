@@ -47,7 +47,7 @@ class HomeController extends Controller
         $brands = CarBrandMake::inRandomOrder()->get();
         if (Auth::user()) {
             if (Auth::user()->hasRole("Administrator")) {
-                return redirect()->route('admin.category.index');
+                return redirect()->route('admin.dashboard');
             }
         }
         return view('welcome', compact('category', 'subcategories', 'collections', "subcategory_id", "brands"));
@@ -80,7 +80,6 @@ class HomeController extends Controller
     public function logout()
     {
         Auth::logout();
-
         return redirect('/');
     }
 
@@ -89,7 +88,7 @@ class HomeController extends Controller
         if (Auth::user()->hasRole("Administrator")) {
             return redirect()->route('admin.category.index');
         } else if (Auth::user()->hasRole("Dealer")) {
-            return redirect()->route('Dealer.products.index');
+            return redirect()->route('Dealer.dashboard');
         } else if (Auth::user()->hasRole("Manager")) {
             return redirect()->route('Manager.products.index');
         } else {
@@ -134,12 +133,12 @@ class HomeController extends Controller
     public function allProducts(Request $request)
     {
         // if($request->method() == "POST")
-            // dd($request);
+            // dump($request->toArray());
         $brands = CarBrandMake::distinct('makes')->get();
 
         $sdk = \CarApiSdk\CarApi::build([
-            'token' => env('CAR_API_TOKEN'),
-            'secret' => env('CAR_API_SECRET'),
+            'token' => config('services.Car_api.CAR_API_TOKEN'),
+            'secret' => config('services.Car_api.CAR_API_SECRET'),
         ]);
         $filePath = storage_path('app/text.txt');
         $jwt = file_exists($filePath) ? file_get_contents($filePath) : null;
@@ -159,7 +158,7 @@ class HomeController extends Controller
             $request = $request->merge($request_test);
         }
         $models = AllModel::all();
-        $products = Product::with('productImage', 'featuredProduct', 'productCompatible')->where('status','1')->global()->category()->compatiblity($request)->price()->paginate(12)->appends($request->query());
+        $products = Product::with('productImage', 'featuredProduct', 'productCompatible')->where('status','1')->global()->category()->compatiblity($request)->price()->orderBy('id','desc')->paginate(12)->appends($request->query());
         $categories =  Category::with('children')->has('children')->orWhereNull('parent_id')->get();
         return view('public_shop', compact("categories", "products", "brands", "years", "models"));
     }

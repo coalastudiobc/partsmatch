@@ -55,10 +55,13 @@
                         <div class="navbar-serch-box">
                             <ul>
                                 <li>
-                                    <form action="{{ route('search') }}" method="GET">
+                                    <form action="{{ route('search') }}" id="searchglobaly" method="GET">
                                         <div class="pro-search-box">
-                                            <input type="text" name="globalquery" class="form-control" value="{{request()->has('search_parameter') ? request()->search_parameter : ''}}"
-                                            placeholder="Search">
+                                            <input type="text" name="globalquery" id="globalquery" class="form-control" value="{{ request()->has('globalquery') ? request()->input('globalquery') : '' }}"
+                                            placeholder="Search Part #">
+                                            @if(request()->has('globalquery'))
+                                            <a href="{{route('products')}}" class="nav-serch-cross"><i class="fa-solid fa-xmark"></i></a>
+                                            @endif
                                             <button type="submit" class="btn primary-btn"><i
                                                 class="fa-solid fa-magnifying-glass"></i></button>
                                             </div>
@@ -237,6 +240,13 @@
                 }
             }, 100);
         });
+
+    //     document.addEventListener('DOMContentLoaded', function () {
+    //         document.getElementById('clear-search').addEventListener('click', function () {
+    //         document.getElementById('globalquery').value = ' ';
+    //         document.getElementById('searchglobaly').submit();
+    //     });
+    // });
     </script>
     @stack('scripts')
 </body>
