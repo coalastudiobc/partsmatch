@@ -323,7 +323,7 @@
                                         <div class="col-md-12 col-lg-12 col-xl-12">
                                             <div class="accessories-parts-box empty-category ">
                                                 <img src="{{ asset('assets/images/no-product.svg') }}  " alt="" width="300">
-                                                <p class="text-center mt-1">Did not found any order</p>
+                                                <p class="text-center mt-1">Did not found any parts</p>
                                             </div>
                                         </div>
                                     @endforelse

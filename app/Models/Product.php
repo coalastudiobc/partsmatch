@@ -124,14 +124,14 @@ class Product extends Model
     public function scopeGlobal($query,$request = null)
     {
         $request = $request ?? request();
-        $query->when(!empty($request->search_parameter), function ($query) use ($request) {
+        $query->when(!empty($request->globalquery), function ($query) use ($request) {
             $query->where(function ($query) use ($request) {
-                $query->where('name', 'like', '%' . $request->search_parameter . '%')
-                    ->orWhere('price', 'like', '%' . $request->search_parameter . '%')
-                    ->orWhere('year', 'like', '%' . $request->search_parameter . '%')
-                    ->orWhere('brand', 'like', '%' . $request->search_parameter . '%')
-                    ->orWhere('part_number', 'like', '%' . $request->search_parameter . '%')
-                    ->orWhere('model', 'like', '%' . $request->search_parameter . '%');
+                $query->where('name', 'like', '%' . $request->globalquery . '%')
+                    ->orWhere('price', 'like', '%' .  $request->globalquery. '%')
+                    ->orWhere('year', 'like', '%' . $request->globalquery. '%')
+                    ->orWhere('brand', 'like', '%' .  $request->globalquery . '%')
+                    ->orWhere('part_number', 'like', '%' .  $request->globalquery. '%')
+                    ->orWhere('model', 'like', '%' .  $request->globalquery. '%');
             });
         });
     }
