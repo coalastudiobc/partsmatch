@@ -3512,12 +3512,12 @@ a.nav-serch-cross {
 
 .form-group.custom-upload-images-box {
     position: relative;
+    margin-bottom: 30px;
 }
 .custom-upload-images-box label#upload-image-error {
     position: absolute;
-    bottom: -10px;
+    bottom: -19px;
 }
-
 
 
 

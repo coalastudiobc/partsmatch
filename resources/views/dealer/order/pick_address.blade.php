@@ -370,7 +370,7 @@
                                             <div class="custm-dropdown">
                                                 <div class="dropdown">
                                                     <div class=" form-control dropdown-toggle " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                                        <div id="selectedItem">
+                                                        <div id="selectedItem">Select Country
                                                         </div>
                                                         <span class="custm-drop-icon">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="23" viewBox="0 0 24 23" fill="none">
@@ -400,8 +400,8 @@
                                             <div class="form-field">
                                                 <div class="custm-dropdown">
                                                     <div class="dropdown">
-                                                        <div class="form-control dropdown-toggle " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                                            <div id="selectedState">
+                                                        <div class="form-control dropdown-toggle " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" >
+                                                            <div id="selectedState" >Select State
                                                                 {{-- {{ $state->name ?? 'select' }} --}}
                                                             </div>
                                                             <span class="custm-drop-icon">
@@ -425,7 +425,7 @@
                                                 <div class="custm-dropdown">
                                                     <div class="dropdown">
                                                         <div class="form-control dropdown-toggle " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                                            <div id="selectedCity">
+                                                            <div id="selectedCity">Select City
                                                             </div>
                                                             <span class="custm-drop-icon">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="23" viewBox="0 0 24 23" fill="none">
@@ -480,7 +480,6 @@
 @endsection
 @push('scripts')
 @includeFirst(['validation.dealer.js_picking_address'])
-@
 <script>
     jQuery(function() {
         jQuery("#datepicker").datepicker({

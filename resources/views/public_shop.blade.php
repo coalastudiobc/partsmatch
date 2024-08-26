@@ -259,12 +259,12 @@
 
                                         <div class="col-md-6 col-lg-4 col-xl-3">
                                             <div class="accessories-parts-box">
-                                                <div class="more-product-cards cstm-card">
-                                                    <a href="{{ route('product.detail', ['product' => $product->id]) }}">
+                                                <a href="{{ route('product.detail', ['product' => $product->id]) }}" class="more-product-cards cstm-card">
+                                                    <div >
                                                         <div class="product-cards-img">
                                                             <img src="{{ $product->productImage && count($product->productImage) ? Storage::url($product->productImage[0]->file_url) : asset('assets/images/gear-logo.svg') }}" alt="">
                                                         </div>
-                                                        </a>
+                                                    </div>
                                                     <div class="product-deails">
                                                         <p>{{ $product->name }}</p>
                                                         <div class="price-and-cart">
@@ -316,7 +316,7 @@
                                                             @endif --}}
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </a>
                                             </div>
                                         </div>
                                     @empty

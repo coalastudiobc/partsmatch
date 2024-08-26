@@ -27,8 +27,8 @@
                 equalTo: "#conPassword",
             },
             profile_pic: {
-                filesize: profilePicSize,
-                extension: profilePicMimes,
+                // filesize: profilePicSize,
+                imageExtension: true,
             },
         }
         const messages = {

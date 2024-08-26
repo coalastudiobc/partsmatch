@@ -22,17 +22,17 @@
                                                 <label for="file-upload">
                                                     <div class="pro-main-img">
                                                         <div class="profile-without-img">
-                                                            <img src="{{ asset('storage/' . $authUser->profile_picture_url) ?? asset('assets/images/user.png') }}"
-                                                                alt="" id="Userimage">
-                                                            {{-- <img src="{{ $authUser->profile_picture_url ? Storage::url($authUser->profile_picture_url) : asset('assets/images/user.png') }}"
+                                                            {{-- <img src="{{ asset('storage/' . $authUser->profile_picture_url) ?? asset('assets/images/user.png') }}"
                                                                 alt="" id="Userimage"> --}}
+                                                            <img src="{{ $authUser->profile_picture_url ? Storage::url($authUser->profile_picture_url) : asset('assets/images/user.png') }}"
+                                                                alt="" id="Userimage">
                                                         </div>
                                                         <div class="upload-icon d-none editable">
                                                             <i class="fa-sharp fa-solid fa-pen"></i>
                                                         </div>
                                                     </div>
                                                 </label>
-                                                <input type="file" disabled accept=".jpg,.png,.jpeg"
+                                                <input type="file" disabled 
                                                     class="d-none disabled-inputs  @error('image') is-invalid @enderror"
                                                     name="image" id="file-upload">
                                                 @error('image')
@@ -43,7 +43,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
@@ -100,7 +99,7 @@
                                         <div class="form-field">
                                             <input type="password" name="password" id="conPassword"
                                                 class="form-control disabled-inputs @error('password') is-invalid @enderror"
-                                                placeholder="*********" disabled value="{{ old('password') }}">
+                                                 disabled value="{{ old('password') }}">
                                             @error('password')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -115,7 +114,7 @@
                                         <div class="form-field">
                                             <input type="password" name="confirm_password"
                                                 class="form-control disabled-inputs @error('confirm_password') is-invalid @enderror"
-                                                placeholder="*********" disabled value="{{ old('confirm_password') }}">
+                                                 disabled value="{{ old('confirm_password') }}">
                                             @error('confirm_password')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>

@@ -1,20 +1,22 @@
-<div class="more-product-cards">
-    <a href="{{ route('product.detail',['product' => $product->id]) }}"
+<a  href="{{ route('product.detail',['product' => $product->id]) }}" class="more-product-cards">
+    <div
         class="product-cards-img-outer">
         <div class="product-cards-img">
                 <img src="{{$product->productImage && count($product->productImage) ?  Storage::url($product->productImage[0]->file_url) : asset('assets/images/gear-logo.svg') }}" alt="">
         </div>
-    </a>
+    </div>
     <div class="product-deails">
         <p>{{ $product->name }}</p>
         </p>
         <div class="price-and-cart">
             <div class="discount-price">
-                <p> @if($product && is_numeric($product->price))
-                    ${!! number_format((float) $product->price, 2, '.', ',') !!}
-                @else
-                    N/A
-                @endif</p>
+                <p>
+                    @if($product && is_numeric($product->price))
+                        ${!! number_format((float) $product->price, 2, '.', ',') !!}
+                    @else
+                        N/A
+                    @endif
+               </p>
             </div>
             <x-public-shop-cart-buy-button :product="$product" />
 
@@ -77,4 +79,4 @@
             @endif --}}
         </div>
     </div>
-</div>
+</a>
