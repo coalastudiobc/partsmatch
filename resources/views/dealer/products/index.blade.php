@@ -70,9 +70,6 @@
                                 <p>{{ $product->name }}</p>
                             </td>
                             <td>
-                                <p>{{ $product->part_number }}</p>
-                            </td>
-                            <td>
                                 <p> @if($product && is_numeric($product->price))
                                     ${!! number_format((float) $product->price, 2, '.', ',') !!}
                                 @else

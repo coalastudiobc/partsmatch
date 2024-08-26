@@ -18,6 +18,9 @@
                 <table class="table">
                     <tr>
                         <th>
+                            <p>Part Number</p>
+                        </th>
+                        <th>
                             <p>Name</p>
                         </th>
                         <th>
@@ -39,13 +42,16 @@
                     @forelse ($products as $key => $product)
                         <tr>
                             <td>
+                                <p>{{ $product->part_number ? $product->part_number : 'N/A' }}</p>
+                            </td>
+                            <td>
                                 <p>{{ $product->name ? $product->name : 'N/A' }}</p>
                             </td>
                             <td>
                                 <p>{{ $product->stocks_avaliable ? $product->stocks_avaliable : 'N/A' }}</p>
                             </td>
                             <td>
-                                <p>{{ $product->price ? number_format($product->price,2,'.',',') : 'N/A' }}</p>
+                                <p>${{ $product->price ? number_format($product->price,2,'.',',') : 'N/A' }}</p>
                             </td>
                             {{-- <td>
                                 <p>{{ $product->shipping_price ? $product->shipping_price : 'N/A' }}</p>
