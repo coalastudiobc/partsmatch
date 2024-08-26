@@ -76,8 +76,8 @@
                         
                         <td>
                             <div class="action-btns">
-                                <a href="{{ route('Dealer.partsmanager.edit', [$user->id]) }}"><i class="fa-solid fa-pen-to-square" style="color: #3EBE62;" title="edit"></i></a>
-                                <a class="delete" href="{{ route('Dealer.partsmanager.delete', ['user' => $user->id]) }}"><i class="fa-regular fa-trash-can " style="color: #E13F3F;" title="delete"></i></a>
+                                <a href="{{ route('Dealer.partsmanager.edit', [$user->id]) }}"><i class="fa-solid fa-pen-to-square" style="color: #3EBE62;" title="Click to modify details"></i></a>
+                                <a class="delete" href="{{ route('Dealer.partsmanager.delete', ['user' => $user->id]) }}"><i class="fa-regular fa-trash-can " style="color: #E13F3F;" title="Click to remove item"></i></a>
                             </div>
                         </td>
 

@@ -63,9 +63,9 @@
                                 <div class="action-btns">
                                     <a href="{{ route('admin.packages.edit', [jsencode_userdata($package->id)]) }}"><i
                                             class="fa-solid fa-pen-to-square" style="color: #3EBE62;"
-                                            title="Edit"></i></a>
+                                            title="Click to modify details"></i></a>
                                     <a href="{{ route('admin.packages.delete', [jsencode_userdata($package->id)]) }}"><i
-                                            class="fa-regular fa-trash-can" style="color: #E13F3F;" title="Delete"></i></a>
+                                            class="fa-regular fa-trash-can" style="color: #E13F3F;" title="Click to remove item"></i></a>
                                 </div>
 
                             </td>

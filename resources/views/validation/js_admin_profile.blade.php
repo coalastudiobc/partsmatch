@@ -14,9 +14,9 @@
                 regex: emailRegex,
             },
             phone_number: {
-                digits: true,
-                minlength: 10,
-                maxlength: 10,
+                required: true,
+                phoneNumber:true,
+                phoneNumberFormat:true,
             },
             password: {
                 minlength: passwordMinLength,

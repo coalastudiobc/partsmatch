@@ -63,6 +63,10 @@ class User extends Authenticatable
     {
         return $this->hasOne(PaymentDetail::class, 'user_id', 'id');
     }
+    public function postalCode()
+    {
+        return $this->belongsTo(PostalCode::class, 'zipcode', 'id');
+    }
     public function ComissionDetails()
     {
         return $this->hasOne(UserCommisionSetting::class, 'user_id', 'id');

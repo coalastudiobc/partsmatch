@@ -206,7 +206,7 @@
                                         <div class="form-group">
                                             <label for="">Zip code</label>
                                             <div class="form-field">
-                                                <input type="text" name="zipcode" disabled class="form-control @error('zipcode') is-invalid @enderror disabled-inputs" value="{{ old('zipcode', $user->zipcode ?? $user->zipcode) }}" placeholder="Zip code">
+                                                <input type="text" name="zipcode"  class="form-control @error('zipcode') is-invalid @enderror " value="{{ old('zipcode', $user->postalCode?->code ?? $user->zipcode ) }}" placeholder="Zip code" disabled>
                                                 @error('zipcode')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>

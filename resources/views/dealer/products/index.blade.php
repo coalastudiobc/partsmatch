@@ -101,9 +101,9 @@
                             <td>
                                 <div class="action-btns">
                                     <a
-                                        href="{{ route(auth()->user()->getRoleNames()->first() . '.products.edit', $product->id) }}" title="Edit"><i
+                                        href="{{ route(auth()->user()->getRoleNames()->first() . '.products.edit', $product->id) }}" title="Click to modify details"><i
                                             class="fa-solid fa-pen-to-square" style="color: #3EBE62;"></i></a>
-                                    <a href="{{ route(auth()->user()->getRoleNames()->first() . '.products.delete', $product->id) }}" title="Deleteq"
+                                    <a href="{{ route(auth()->user()->getRoleNames()->first() . '.products.delete', $product->id) }}" title="Click to remove item"
                                         class="delete"><i class="fa-regular fa-trash-can " style="color: #E13F3F;"></i></a>
                                 </div>
                             </td>

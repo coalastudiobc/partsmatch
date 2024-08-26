@@ -2011,3 +2011,6 @@ button.btn-close {
     border-radius: 5px;
     background-color: #a7ffca;
 }
+.invalid-feedback strong {
+    font-weight: normal !important;
+}

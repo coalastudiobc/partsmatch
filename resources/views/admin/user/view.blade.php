@@ -59,7 +59,7 @@
                                                 </li>
                                                 <li>
                                                     <h4>Zipcode</h4>
-                                                    <p>{{ $user->zipcode ? $user->zipcode : 'N/A' }}</p>
+                                                    <p>{{ optional($user->postalCode)->zipcode ?? 'N/A' }}</p>
                                                 </li>
                                             </ul>
                                         </div>

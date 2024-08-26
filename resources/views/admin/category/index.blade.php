@@ -63,9 +63,9 @@
                             <td>
                                 <div class="action-btns">
                                     <a href="{{ route('admin.category.edit', [jsencode_userdata($category->id)]) }}"
-                                        title="edit"><i class="fa-solid fa-pen-to-square" style="color: #3EBE62;"></i></a>
+                                        title="Click to modify details"><i class="fa-solid fa-pen-to-square" style="color: #3EBE62;"></i></a>
                                     <a href="{{ route('admin.category.delete', [jsencode_userdata($category->id)]) }}"
-                                        class="delete" data-bs-toggle="tooltip" data-bs-placement="top" title="delete"><i
+                                        class="delete" data-bs-toggle="tooltip" data-bs-placement="top" title="Click to remove item"><i
                                             class="fa-regular fa-trash-can" style="color: #E13F3F;"></i></a>
                                 </div>
                             </td>
