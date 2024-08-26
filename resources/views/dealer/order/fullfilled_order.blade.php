@@ -81,6 +81,7 @@
                 </table>
             </div>
         </div>
+        {!! $fulfilledOrders->links('dealer.pagination') !!}
     </div>
     @isset($order)
     <div class="modal fade" id="pickadress-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

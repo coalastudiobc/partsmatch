@@ -225,9 +225,13 @@
                                     <a href="{{ route('products', ['category' => $category->id]) }}">
                                         <div class="categories-box">
                                             @if($category?->icon)
-                                            <p style="max-height: 100px;max-width: 100px">{!! $category->icon ?? $category->icon !!}</p>
+                                            <div class="categories-img-box">
+                                                {!! $category->icon ?? $category->icon !!}
+                                            </div>
                                             @else
+                                            <div class="categories-img-box">
                                             <img src="{{ asset('assets/images/categorie1.svg') }}" alt="">  
+                                            </div>
                                             @endisset
                                             <p>{{ $category->name ?? 'Others' }}</p>
                                         </div>

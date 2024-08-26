@@ -146,14 +146,14 @@
                                                 <div class="table-responsive">
                                                     <table class="table">
                                                         <tr>
-                                                            <th>Name</th>
+                                                            <th>Part Number</th>
                                                             <th>Stocks</th>
                                                             <th>Price</th>
                                                             <th>Category</th>
                                                         </tr>
                                                         @foreach ($products as $product)
                                                         <tr>
-                                                            <td>{{$product->name ?? ''}}</td>
+                                                            <td>{{$product->part_number ?? ''}}</td>
                                                             <td>{{$product->stocks_avaliable ?? ''}}</td>
                                                             <td> @if($product && is_numeric($product->price))
                                                                 ${!! number_format((float) $product->price, 2, '.', ',') !!}

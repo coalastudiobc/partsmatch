@@ -72,6 +72,9 @@
                         </tr>
                     @endforelse
                 </table>
+                <div class=" col-md-12 pagination-wrapper" style="margin-bottom: 14px;">
+            {!! $products->links('admin.pagination') !!}
+        </div>
                 <div class="col-md-12">
                     <div class="dealer-profile-form-btn">
                         <a class="btn primary-btn " href="{{ url()->previous() }}">Back</a>

@@ -130,7 +130,7 @@
                                                     <div class="dropdown">
                                                         <div class=" form-control  dropdown-toggle " type="button" readonly id="dropdownMenuButton1" aria-expanded="false"  disabled>
                                                             <div id="selectedItem">
-                                                                {{ $user->industry_type }}
+                                                                {{ $user->industry_type ?? 'N/A' }}
 
                                                             </div>
                                                             {{-- <span class="custm-drop-icon">

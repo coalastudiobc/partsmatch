@@ -80,7 +80,7 @@ class OrderController extends Controller
             // $fulfilledOrders = Order::whereIn('id', $fulfilledIds)->latest()->get();
 
             // $fulfilledOrders = FulFilledOrder::whereIn('user_id', auth()->id())->latest()->get();
-            $fulfilledOrders = FulFilledOrder::with('orderDetails')->fulFilledOrders()->paginate(__('pagination.pagination_nuber'));;
+            $fulfilledOrders = FulFilledOrder::with('orderDetails')->fulFilledOrders()->paginate(__('pagination.pagination_nuber'));
             return view('dealer.order.fullfilled_order', compact('fulfilledOrders'));
         } catch (\Throwable $th) {
             return redirect()->back()->with(['error' => $th->getMessage()]);
