@@ -41,9 +41,9 @@
                     regex: lastNameRegex
                 },
                 phone_number: {
-                    // required: true,
-                    // phoneNumber:true,
-                    // phoneNumberFormat:true,
+                    required: true,
+                    phoneNumber:true,
+                    phoneNumberFormat:true,
                 },
                 street1: {
                     required: true,
