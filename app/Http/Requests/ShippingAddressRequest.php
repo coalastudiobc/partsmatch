@@ -25,14 +25,22 @@ class ShippingAddressRequest extends FormRequest
         return [
             'first_name' => ['required', 'string', 'min:' . config('validation.first_name_minlength'), 'max:' . config('validation.first_name_maxlength'), 'regex:' . config('validation.first_name_regex')],
             'last_name' => ['required', 'string', 'min:' . config('validation.last_name_minlength'), 'max:' . config('validation.last_name_maxlength'), 'regex:' . config('validation.last_name_regex')],
-            'phone_number' => ['required', 'digits:10'],
+            'phone_number' => ['required',  function ($attribute, $value, $fail) {
+                $digits = preg_replace('/\D/', '', $value);
+                if (strlen($digits) < 10 || $digits[0] === '0') {
+                    return $fail('The ' . $attribute . ' must be a valid phone number and cannot start with zero.');
+                }
+                if (!preg_match('/^\(\d{3}\) \d{3}-\d{4}$/', $value)) {
+                    return $fail('The ' . $attribute . ' must be a valid phone number in the format (XXX) XXX-XXXX.');
+                }
+            }],
             'country' => 'required',
             'state' => 'required',
             'city' => 'required',
             'street1' => ['required', 'string', 'min:' . config('validation.address1_minlength'), 'max:' . config('validation.address1_maxlength')],
             'street2' => 'nullable|string|max:35',
             'description' => 'nullable|string|max:100',
-            'pin_code' => ['required', 'digits_between:5,6'],
+            'pin_code' => ['required'],
         ];
     }
 

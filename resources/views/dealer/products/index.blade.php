@@ -225,7 +225,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <div class="form-group">
+                                    <div class="form-group custom-upload-images-box">
                                         <label for=""> Add Images (Up to 5)</label>
                                         <label class="img-upload-box">
                                             <p>Upload Images</p>

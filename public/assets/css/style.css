@@ -3510,7 +3510,13 @@ a.nav-serch-cross {
 }
 
 
-
+.form-group.custom-upload-images-box {
+    position: relative;
+}
+.custom-upload-images-box label#upload-image-error {
+    position: absolute;
+    bottom: -10px;
+}
 
 
 

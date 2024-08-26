@@ -41,10 +41,9 @@
                     regex: lastNameRegex
                 },
                 phone_number: {
-                    required: true,
-                    digits: true,
-                    minlength: 10,
-                    maxlength: 10
+                    // required: true,
+                    // phoneNumber:true,
+                    // phoneNumberFormat:true,
                 },
                 street1: {
                     required: true,
@@ -105,11 +104,11 @@
                 },
 
                 phone_number: {
-                    required: `{{ __('customvalidation.user.phone_number.required') }}`,
-                    digits: "only number allowed",
-                    minlength: `{{ __('customvalidation.user.phone_number.minlength') }}`,
-                    maxlength: `{{ __('customvalidation.user.phone_number.maxlength') }}`,
-                },
+                required: `{{ __('customvalidation.user.phone_number.required') }}`,
+                digits: "only number allowed",
+                minlength: `{{ __('customvalidation.user.phone_number.minlength') }}`,
+                maxlength: `{{ __('customvalidation.user.phone_number.maxlength') }}`,
+            },
             },
             errorPlacement: function(error, element) {
                 error.addClass('invalid-feedback');
@@ -157,7 +156,11 @@
                     error: function(xhr, status, error) {
                         jQuery('#fullPageLoader').addClass('d-none');
                         $("#From_address").find('button').attr('disabled', false);
-                        console.log('Error:', error);
+                        if (xhr.status === 422) { // 422 is the status code for validation errors
+                            toastr.error(xhr.responseJSON.message);
+                            let errors = xhr.responseJSON.errors;
+                            console.log('Error:', errors.message);
+                        }
                     }
                 });
             }
