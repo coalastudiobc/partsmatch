@@ -2015,5 +2015,7 @@ button.btn-close {
     font-weight: normal !important;
 }
 
-
+.ui-datepicker table tr th {
+    padding: 0 !important;
+}
 

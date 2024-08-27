@@ -68,7 +68,7 @@
                     <div class="carrier-services-box">
                         <p>Carrier services</p>
                         <div class="carrier-services-serever">
-                            <p>{{$shippmentDetails ? ($shippmentDetails->service_level_token ?? 'N/A'): 'N/A'}}:  <span id="trackingDisplay">{{ $shippmentDetails ? (substr($shippmentDetails->tracking_number, 0, 4) . 'XXXXXX') : 'N/A' }}</span>
+                            <p>{{$shippmentDetails ? ($shippmentDetails->service_level_token ?? 'N/A'): 'N/A'}}:  <span id="trackingDisplay">{{ $shippmentDetails ? ($shippmentDetails->tracking_number  ? (substr($shippmentDetails->tracking_number, 0, 4) . 'XXXXXX') : '' ): 'N/A'}}</span>
                                 <a href="#" id="copy_trackingNumber" style="display:none;">{{ $shippmentDetails ? $shippmentDetails->tracking_number : 'N/A' }}</a></p>
                                     <span style="cursor: pointer" onclick="copyToClipboard('copy_trackingNumber')">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
