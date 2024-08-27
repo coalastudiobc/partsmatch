@@ -78,3 +78,7 @@
     </div>
 </section>
 @endsection
+@push('scripts')
+@include('modals.restrict_multiple')
+    
+@endpush

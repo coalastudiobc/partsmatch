@@ -3258,7 +3258,7 @@ button.accordion-button.analyics-tabs-btns {
     margin: 0 0 0px;
     color: #272643;
     display: inline-block;
-    max-width: 45em;
+    max-width: 600px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
