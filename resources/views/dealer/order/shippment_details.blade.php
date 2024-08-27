@@ -68,8 +68,8 @@
                     <div class="carrier-services-box">
                         <p>Carrier services</p>
                         <div class="carrier-services-serever" @if (isset($shippmentDetails) && empty($shippmentDetails->tracking_number)) style="width:auto;" @endif >
-                            <p>{{$shippmentDetails ? ($shippmentDetails->service_level_token ?? 'N/A'): 'N/A'}}:  <span id="trackingDisplay">{{ $shippmentDetails ? ($shippmentDetails->tracking_number  ? (substr($shippmentDetails->tracking_number, 0, 4) . 'XXXXXX') : '' ): 'N/A'}}</span>
-                                <a href="#" id="copy_trackingNumber" style="display:none;">{{ $shippmentDetails ? $shippmentDetails->tracking_number : 'N/A' }}</a>
+                            <p>{{$shippmentDetails ? ($shippmentDetails->service_level_token ?? 'N/A'): 'N/A'}}  <span id="trackingDisplay">{{ $shippmentDetails ? ($shippmentDetails->tracking_number  ? (substr($shippmentDetails->tracking_number, 0, 4) . 'XXXXXX') : '' ): 'N/A'}}</span>
+                                <a href="#" id="copy_trackingNumber" style="display:none;">{{ $shippmentDetails ? ($shippmentDetails->tracking_number) : 'N/A' }}</a>
                             </p>
                                 @if (isset($shippmentDetails) && $shippmentDetails->tracking_number)
                                     <span style="cursor: pointer" onclick="copyToClipboard('copy_trackingNumber')">
