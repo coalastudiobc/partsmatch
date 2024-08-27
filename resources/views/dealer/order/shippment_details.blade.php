@@ -22,7 +22,7 @@
                         <p>Address</p>
                     </div>
                     <div class="partsmanager-info-box">
-                        <h4>{{$shippmentDetails ? ($shippmentDetails->shippment_id ?? 'N/A'): 'N/A'}}</h4>
+                        <h4>{{$shippmentDetails ? ($shippmentDetails->shippment_id ?? $shippmentDetails->id): 'N/A'}}</h4>
                         <p>Shipping id</p>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
                         </div>
                     </div>
                     <div class="partsmanager-info-box">
-                        <h3>${{$shippmentDetails ? ($shippmentDetails->amount ?? 'N/A'): 'N/A'}}</h3>
+                        <h3>${{$shippmentDetails ? ($shippmentDetails->amount ?? '0'): 'N/A'}}</h3>
                         <p>Price</p>
                     </div>
                     <div class="partsmanager-dates-box">
