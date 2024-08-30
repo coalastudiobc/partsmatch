@@ -87,7 +87,7 @@
                                             </g>
                                         </svg>
                                     </span>
-                                    <h4>Plan management</h4>
+                                    <h4>Subscription </h4>
                                 </div>
                             </a>
                         </h2>

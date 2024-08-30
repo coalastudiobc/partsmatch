@@ -142,7 +142,7 @@ class ProductController extends Controller
                     'description' => $row['description'],
                     'part_number' => $row['part_number'],
                     'additional_details' => $row['additional_details'],
-                    'stocks_avaliable' => $row['quantity'] ?? 0,
+                    'stocks_avaliable' => !empty($row['quantity']) && $row['quantity'] >= 0 ? $row['quantity'] : 0,
                     'price' => $row['price'],
                     'status' => '1',
                 ];

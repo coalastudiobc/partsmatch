@@ -40,7 +40,7 @@
                                     <p>${{ $order->shipment_price }}</p>
                                 </td>
                                 <td>
-                                    <p>{{ date('d-m-Y', strtotime($order->created_at)) }}</p>
+                                    <p>{{ date('d/m/Y', strtotime($order->created_at)) }}</p>
                                 </td>
             
                                 <td>
