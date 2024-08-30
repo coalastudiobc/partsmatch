@@ -41,10 +41,10 @@
                 // minlength: 5,
                 // maxlength: 6,
             },
-            image: {
-                required: true,
-                imageExtension: true,
-            },
+            // image: {
+            //     required: true,
+            //     imageExtension: true,
+            // },
             industry_type: {
                 required: true,
             },
@@ -94,10 +94,10 @@
             country_id: {
                 required: `{{ __('customvalidation.user.country.required') }}`,
             },
-            image: {
-                required: `{{ __('customvalidation.user.image.required') }}`,
-                imageExtension: `{{ __('customvalidation.user.image.imageExtension') }}`,
-            },
+            // image: {
+            //     required: `{{ __('customvalidation.user.image.required') }}`,
+            //     imageExtension: `{{ __('customvalidation.user.image.imageExtension') }}`,
+            // },
             industry_type: {
                 required: `{{ __('customvalidation.user.industry_type.required') }}`,
             },

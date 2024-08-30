@@ -348,6 +348,7 @@
 
 <script>
     $(document).ready(function() {
+        jQuery('#collapseOne').collapse('hide'); //hiding or closing accordian of category
 
         $('.see-more-less-make').on('click', function() {
             $('#brandContainer').toggleClass('full-data-view');
@@ -398,6 +399,8 @@
 
            
         });
+        
+
     });
 </script>
 
@@ -500,6 +503,3 @@
     delayFormSubmission('filters', 100);
 </script>
 @endpush
-@section('extra_css')
-    <link rel="stylesheet" href="{{ asset('assets/css/price_slider.css') }}">
-@endSection

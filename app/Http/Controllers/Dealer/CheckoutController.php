@@ -113,9 +113,9 @@ class CheckoutController extends Controller
     {
         $orderItem = OrderItem::where('order_id', $order->id)->get();
         $role = auth()->user()->getRoleNames()->first();
-        if($role == 'User'){
+        // if($role == 'User'){
             return view('dealer.myorder.view_public_product', compact('orderItem'));
-        }
+        // }
         return view('dealer.myorder.view_products', compact('orderItem'));
     }
 
@@ -284,10 +284,11 @@ class CheckoutController extends Controller
         // $orders = Order::with('orderItem')->where('user_id', auth()->id())->orderByDesc('id')->paginate(10);
         $orders =  Order::with('orderItem')->where('user_id', auth()->id())->orderBy('id', 'DESC')->paginate(__('pagination.pagination_nuber'));
         $role = auth()->user()->getRoleNames()->first();
-        if($role == 'User'){
-            return view('dealer.myorder.index', compact('orders'));
-        }
-        return view('dealer.myorder.order_list', compact('orders'));
+        // if($role == 'User'){
+        //     return view('dealer.myorder.index', compact('orders'));
+        // }
+        return view('dealer.myorder.index', compact('orders'));
+        // return view('dealer.myorder.order_list', compact('orders'));
     }
     public function to_address(Request $request)
     {   

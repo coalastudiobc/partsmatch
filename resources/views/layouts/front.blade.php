@@ -139,7 +139,7 @@
                                                 <div class="dropdown">
                                                     <button class="btn btn-secondary dropdown-toggle" type="button"
                                                         data-bs-toggle="dropdown" aria-expanded="false">
-                                                        <img src="{{ Storage::url($authUser->profile_picture_url) }}"
+                                                        <img src="{{$authUser->profile_picture_url ? Storage::url($authUser->profile_picture_url) : asset('assets/images/user.png') }}"
                                                             alt="">
                                                         {{ $authUser->name }}
                                                     </button>
@@ -148,17 +148,17 @@
                                                                 href="{{ route('Dealer.profile') }}"><i
                                                                     class="fa-solid fa-user"></i> Profile</a>
                                                         </li>
-                                                        @if (auth()->user()->hasRole('User'))
+                                                        {{-- @if (auth()->user()->hasRole('User')) --}}
                                                         <li><a class="dropdown-item"
                                                             href="{{ route('Dealer.myorder.orderlist') }}"><i
                                                             class="fa-solid fa-user"></i> My Orders</a>
                                                         </li>
-                                                        @endif
-                                                        <li><a class="dropdown-item"
+                                                        {{-- @endif --}}
+                                                        {{-- <li><a class="dropdown-item"
                                                                 href="{{ route('Dealer.subscription.plan') }}"><i
                                                                     class="fa-solid fa-crown"></i> Subscription
                                                                 Plan</a>
-                                                        </li>
+                                                        </li> --}}
                                                         {{-- <li><a class="dropdown-item" href="#">Another action</a></li> --}}
                                                         <li><a class="dropdown-item" href="{{ route('logout') }}">
                                                                 <i class="fa-solid fa-right-from-bracket"></i> Logout

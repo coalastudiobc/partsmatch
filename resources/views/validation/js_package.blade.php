@@ -13,6 +13,10 @@
             time_type: {
                 required: true,
             },
+            product_count: {
+                required: true,
+                digits: true,
+            },
             description: {
                 minlength: packageMinLength,
                 maxlength: packageMaxLength,
@@ -30,6 +34,10 @@
             },
             time_type: {
                 required: `{{ __('customvalidation.package.timetype.required') }}`,
+            },
+            product_count: {
+                required: `{{ __('customvalidation.package.timetype.required') }}`,
+                digits: `{{ __('customvalidation.package.product_count.integer') }}`,
             },
             description: {
                 minlength: `{{ __('customvalidation.package.description.min', ['min' => '${packageMinLength}', 'max' => '${packageMaxLength}']) }}`,

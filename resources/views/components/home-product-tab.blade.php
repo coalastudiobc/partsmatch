@@ -5,9 +5,13 @@
                 <img src="{{$product->productImage && count($product->productImage) ?  Storage::url($product->productImage[0]->file_url) : asset('assets/images/gear-logo.svg') }}" alt="">
         </div>
     </div>
-    <div class="product-deails">
-        <p>{{ $product->name }}</p>
-        </p>
+   <div class="product-deails-row">
+    <div class="product-deails-main">
+        <p>{{ $product->part_number }} </p>
+        <span class="public-product-name-span">{{$product->name}}</span>
+    </div>
+    <div style="min-height:10px; flex:1;"></div>
+
         <div class="price-and-cart">
             <div class="discount-price">
                 <p>
@@ -17,6 +21,11 @@
                         N/A
                     @endif
                </p>
+               {{-- <p style="border: 2px solid red">
+                @if($product->stocks_avaliable > 0)
+                    {{$product->stocks_avaliable}}
+                @endif
+               </p> --}}
             </div>
             <x-public-shop-cart-buy-button :product="$product" />
 
@@ -78,5 +87,6 @@
                 </a>
             @endif --}}
         </div>
-    </div>
+
+   </div>
 </a>

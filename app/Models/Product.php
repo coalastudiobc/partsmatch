@@ -15,6 +15,12 @@ class Product extends Model
     {
         return $this->hasMany(ProductCompatabilty::class, 'product_id', 'id');
     }
+    public function featuredByUsers()
+    {
+        return $this->belongsToMany(User::class, 'featured_products', 'product_id', 'user_id')
+                    ->withTimestamps();
+    }
+
     public function productOfDealer()
     {
         return $this->hasMany(User::class,'id' ,'dealer_id');
@@ -52,6 +58,7 @@ class Product extends Model
         $request = $request ?? request();
         $query->when(!empty($request->filter_by_name), function ($q) use ($request) {
             $q->Where('name', 'like', '%' . $request->filter_by_name . '%');
+            $q->orWhere('part_number', 'like', '%' . $request->filter_by_name . '%');
         })->when(!empty($request->filter_by_name) && $request->filter_by_name == 'active', function ($q) use ($request) {
             $q->where('status', '1');
         })->when(!is_null($request->dates), function ($q) use ($request) {

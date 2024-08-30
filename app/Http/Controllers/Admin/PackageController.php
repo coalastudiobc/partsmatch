@@ -48,6 +48,7 @@ class PackageController extends Controller
             $data = [
                 'name' => $request->name,
                 'price' => $request->price,
+                'product_count' => $request->product_count,
                 'billing_cycle' => jsdecode_userdata($request->time_type),
                 'description' => $request->description,
                 'status' => $request->status,
@@ -76,11 +77,11 @@ class PackageController extends Controller
                 $package = Package::where('id', $id)->firstOrFail();
 
                 if ($package) {
-                    // dd($request);
                     $product =  $this->stripe->products->update($package->stripe_id, ['name' => $request->name]);
                     $data = [
                         'name' => $request->name,
                         'price' => $request->price,
+                        'product_count' => $request->product_count,
                         'billing_cycle' => jsdecode_userdata($request->time_type),
                         'description' => $request->description,
                         'status' => $request->status,

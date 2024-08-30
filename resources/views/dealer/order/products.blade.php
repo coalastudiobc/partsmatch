@@ -195,7 +195,7 @@
                                 <div class="dropdown">
 
 
-                                    <a href="#" class="btn primary-btn" data-bs-toggle="modal" data-bs-target="#Package-modal"><i class="fa-solid fa-eye"></i> view</a>
+                                    <a href="#" class="btn primary-btn" data-bs-toggle="modal" data-bs-target="#Package-modal">view</a>
 
                                 </div>
                             </div>

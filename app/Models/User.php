@@ -108,6 +108,11 @@ class User extends Authenticatable
     {
         return $query->role('dealer');
     }
+    public function featuredProducts()
+    {
+        return $this->belongsToMany(Product::class, 'featured_products', 'user_id', 'product_id')
+                    ->withTimestamps();
+    }
 
     public function scopeSearch($query)
     {

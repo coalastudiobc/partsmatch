@@ -800,8 +800,9 @@ header {
     flex-direction: column;
     align-items: center;
     border: 0.893px solid var(--border-color);
-    padding: 40px 20px 20px;
+    padding: 20px 20px 20px;
     background-color: #fff;
+    border-radius: 5px;
 }
 
 .product-deails {
@@ -856,8 +857,6 @@ header {
 }
 
 .product-deails {
-    padding-top: 10px;
-    border-top: 1px solid #ddd;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -1532,8 +1531,9 @@ button.btn-close {
     background-color: #fff;
     margin: 20px 0 0;
     border-radius: 10px;
-    padding: 10px;
-    box-shadow: 1px 1px 10px 4px #ddd;
+    padding: 20px;
+    /* box-shadow: 1px 1px 10px 4px #ddd; */
+    border: 1px solid #ddd;
 }
 
 .empty-data {
@@ -1543,7 +1543,7 @@ button.btn-close {
     top: 125px;
 }
 
-/* Loader css Start */
+      /* Loader css Start */
 .sk-circle {
     width: 40px;
     height: 40px;
@@ -2156,7 +2156,8 @@ span.ymmm-cross {
     margin: 0px 0 0;
     border-radius: 10px;
     padding: 20px;
-    box-shadow: 1px 1px 10px 4px #ddd;
+    /* box-shadow: 1px 1px 10px 4px #ddd; */
+    border: 1px solid #ddd;
 }
 
 .adress-info-inner {
@@ -3351,10 +3352,10 @@ button.accordion-button.analyics-tabs-btns {
 .db-analytics-card {
     background-color: #fff;
     border-radius: 10px;
-    border: none;
+    border: 1px solid #ddd;
     position: relative;
     /* margin-bottom: 30px; */
-    box-shadow: 0 0.46875rem 2.1875rem rgba(90, 97, 105, 0.1), 0 0.9375rem 1.40625rem rgba(90, 97, 105, 0.1), 0 0.25rem 0.53125rem rgba(90, 97, 105, 0.12), 0 0.125rem 0.1875rem rgba(90, 97, 105, 0.1);
+    /* box-shadow: 0 0.46875rem 2.1875rem rgba(90, 97, 105, 0.1), 0 0.9375rem 1.40625rem rgba(90, 97, 105, 0.1), 0 0.25rem 0.53125rem rgba(90, 97, 105, 0.12), 0 0.125rem 0.1875rem rgba(90, 97, 105, 0.1); */
     display: flex;
     align-items: center;
     padding: 15px;
@@ -3376,7 +3377,7 @@ button.accordion-button.analyics-tabs-btns {
 }
 
 .db-analytics-data h5 {
-    font-size: 18px;
+    font-size: 27px;
     font-weight: 700;
     margin: 0 0 0;
     line-height: 1.2;
@@ -3405,7 +3406,7 @@ button.accordion-button.analyics-tabs-btns {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    position: absolute;
+    /* position: absolute; */
     width: 100%;
     max-width: 165px;
     right: 25px;
@@ -3416,11 +3417,11 @@ button.accordion-button.analyics-tabs-btns {
     justify-content: center;
 }
 .my-order-table{
-    min-width: 1440px;
+    min-width: 1100px;
 }
-.pro-manage-table table{
+/* .pro-manage-table table{
     min-width: 1300px;
-}
+} */
 .sidebar-opener {
     display: none;
 }
@@ -3435,6 +3436,7 @@ button.accordion-button.analyics-tabs-btns {
     border-radius: 5px;
     display: flex;
     gap: 10px;
+    align-items: center;
 }
 #onboard-account .modal-dialog {
     max-width: 550px;
@@ -3455,10 +3457,12 @@ button.accordion-button.analyics-tabs-btns {
 }
 
 .fullfilment-table table tr td:last-child a{
-    min-width: 152px;
+    min-width: 90px;
     font-size: 14px;
 }
-
+.product-detail-table.product-list-table td:last-child .fullfilment-btn {
+    min-width: 90px;
+}
 .sign-up-card .form-group .form-field .select2.select2-container .select2-selection--single {
     height: 47px;
     border: 1px solid #e8e8e8;
@@ -3529,3 +3533,97 @@ a.nav-serch-cross {
 
 
 
+.payment-page .form-group .is-invalid, .payment-page .form-group .errors{
+    color: red;
+    font-size: 14px;
+}
+.payment-page .card-detail-box{
+    padding: 0 !important;
+}
+.payment-page .card-detail-box .form-group > label{
+    margin-bottom: 0;
+}
+.my-pro-view-table{
+    min-width: 1100px;
+}
+
+
+/* 30/08/24 by gulshan for making table non scrolling in 1280 screen size */
+
+.product-deails-row {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+th.featured-product-qua {
+    padding-right: 0 !important;
+}
+.cards:hover .plan-details-list li::marker {
+    color: #000 !important;
+}
+
+.product-deails-main {
+padding-top: 10px;
+border-top: 1px solid #ddd; 
+width: 100%;
+}
+
+.product-deails-main p {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    text-transform: capitalize;
+}
+ul.plan-details-list {
+    padding-left: 30px;
+}
+.plan-details-list li {
+    font-size: 18px;
+    line-height: 1;
+    margin-bottom: 20px;
+    word-wrap: break-word;
+    list-style: initial;
+}
+.cards:hover {
+    background-color: #ffffff !important;
+}
+.cards:hover ul li {
+    color: #000;
+}
+.cards:hover .card-details h3{
+    color: #000 !important;
+}
+.cards {
+    position: relative;
+}
+
+#pointer {
+    width: 130px;
+    height: 40px;
+    position: absolute;
+    background: #2c8533;
+    right: 0;
+    color: white;
+    text-align: center;
+    margin-top: 0;
+    top: 0;
+    border-top-right-radius: 13px;
+}
+.horizontal {
+    width: 100%;
+    position: absolute;
+    top: 8px;
+    right: -8px;
+}
+#pointer:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-left: 20px solid white;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+}

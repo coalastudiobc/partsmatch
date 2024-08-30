@@ -9,7 +9,7 @@
 
                 <div class="dealer-profile-form-box">
                     <div class="dealer-profile-detail-form">
-                        <span id="editProfile"><i class="fa-sharp fa-solid fa-edit"></i></span>
+                        <span id="editProfile"><i class="fa-sharp fa-solid fa-edit" style="font-size: 22px; color:#3EBE62;"></i></span>
                         {{-- <span id="closeEditProfile" class='d-none'><i class="fa-sharp fa-solid fa-close"></i></span> --}}
                         <form id="adminprofile" action="{{ route('admin.profile.update') }}" enctype="multipart/form-data"
                             method="POST">

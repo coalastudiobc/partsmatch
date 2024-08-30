@@ -198,7 +198,7 @@
     /* max-width: 400px; */
     margin: 0 auto;
     height: 500px;
-    background-color: #ddd;
+    background-color: #F6F6F6;
     border-radius: 10px;
     overflow: hidden;
 }
@@ -663,15 +663,21 @@
     border-bottom: 1px solid var(--border-color);
 }
 
+.pro-search-box .search-cross-btn {
+    position: absolute;
+    top: 12px;
+    right: 55px;
+}
+
 .product-detail-table table {
     width: 100%;
     border-collapse: separate;
-    border-spacing: 0 5px;
+    border-spacing: 0 12px;
 }
 
 .product-detail-table table tr td {
     background-color: #F6F6F6;
-    padding: 12px 40px 12px 22px;
+    padding: 12px 10px 12px 10px;
     vertical-align: middle;
     border-bottom: 0;
 }
@@ -683,14 +689,16 @@
 
 .product-detail-table table tr th {
     border-bottom: 0;
-    padding: 8px 40px 8px 22px;
+    padding: 8px 10px 8px 10px;
 }
 
 .product-detail-table table tr th p, .product-detail-table table tr th  {
     font-size: 16px;
     font-weight: 600;
     color: var(--gray-color);
+    white-space: nowrap;
 }
+/*  end  30/08/24 by gulshan for making table non scrolling in 1280 screen size */
 
 .product-detail-table table tr th:last-child {
     text-align: right;
@@ -1978,18 +1986,25 @@ ul.order-total-list {
 .more-info-box .accordion-body p{
     font-size: 16px;
 }
-.more-info-box .accordion-header button{
+.more-info-box .accordion-header button{.modal-body > h3{
+    text-align: center;
+}
     font-size:20px;
 }
 .product-prize-head {
     margin: 10px 0px 20px !important;
 }
 .order-managment-table table {
-    min-width: 992px;
+    min-width: 800px;
 }
-
-
-
+.add-new-pro-modal .modal-body > h3{
+    text-align: center;
+}
+.add-new-pro-modal #feature-product-form table tr td:first-child input {
+    width: 20px;
+    height: 20px;
+    accent-color: #272643;
+}
 
 
 
