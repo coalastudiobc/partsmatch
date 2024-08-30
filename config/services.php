@@ -50,8 +50,8 @@ return [
        
     ],
     'Car_api' => [
-        'CAR_API_TOKEN' => env('TEST_API_KEY'),
-        'CAR_API_SECRET' => env('TEST_API_KEY'),
+        'CAR_API_TOKEN' => env('CAR_API_KEY'),
+        'CAR_API_SECRET' => env('CAR_API_SECRET'),
        
     ],
 

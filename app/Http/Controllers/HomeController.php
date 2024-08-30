@@ -135,21 +135,20 @@ class HomeController extends Controller
         // if($request->method() == "POST")
             // dump($request->toArray());
         $brands = CarBrandMake::distinct('makes')->get();
-
         $sdk = \CarApiSdk\CarApi::build([
             'token' => config('services.Car_api.CAR_API_TOKEN'),
             'secret' => config('services.Car_api.CAR_API_SECRET'),
         ]);
         $filePath = storage_path('app/text.txt');
         $jwt = file_exists($filePath) ? file_get_contents($filePath) : null;
-
+        
         if (empty($jwt) || $sdk->loadJwt($jwt)->isJwtExpired()) {
             try {
                 $jwt = $sdk->authenticate();
                 file_put_contents($filePath, $jwt);
             } catch (Exception $e) {
                 Log::channel('daily')->error($e->getMessage());
-                return;
+                return redirect()->route('welcome')->with('error',$e->getMessage());
             }
         }
         $years = $sdk->years();
