@@ -117,7 +117,7 @@
                                             <div class="add-type-main">
                                                 <label for="s-option">
                                                     <p>Home</p>
-                                                    <input type="radio" name="addressType" id="s-option" style="display: none" value="Home" {{ $deliveryAddress ? ($deliveryAddress->address_type == 'Home' ? 'checked' : '') : '' }}>
+                                                    <input type="radio" name="addressType" id="s-option" checked style="display: none" value="Home" {{ $deliveryAddress ? ($deliveryAddress->address_type == 'Home' ? 'checked' : 'checked') : '' }}>
                                                 </label>
                                                 <label for="v-option">
                                                     <p>Office</p>

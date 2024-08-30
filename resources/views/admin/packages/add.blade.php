@@ -35,7 +35,7 @@
                                                     <i class="fa-solid fa-question"></i>
                                                 </span>
                                                 <div class="tooltip">
-                                                    <p>ghfvjvhm</p>
+                                                    <p>Enter the name of the subscription package that will be displayed to users when they are making a purchase. This name should clearly describe the package and what it offers.</p>
                                                 </div>
                                             </div>
 
@@ -58,13 +58,13 @@
                                                     <i class="fa-solid fa-question"></i>
                                                 </span>
                                                 <div class="tooltip">
-                                                    <p>ghfvjvhm</p>
+                                                    <p>Enter the amount that the user will be charged for purchasing the subscription package. This is the price that the user needs to pay to acquire the package.</p>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="form-group col-md-6">
-                                            <label>Type<span class="required-field">*</span></label>
+                                            <label>Billing Cycle Type<span class="required-field">*</span></label>
                                             {{-- <select name="time_type"
                                                 class="form-control @error('time_type') is-invalid @enderror">
                                                 <option value="{{ jsencode_userdata('Yearly') }}">Yearly </option>
@@ -153,7 +153,7 @@
                                             <div id="errorViewer">
                                             </div>
                                         </div>
-
+                                       
                                         <div class="form-group col-md-6">
                                             <label>Status</label>
                                             {{-- <select name="status"
@@ -201,7 +201,27 @@
                                                 </span>
                                             @enderror
                                         </div>
-                                        <div class="form-group col-md-12">
+                                        <div class="form-group col-md-6">
+                                            <label>Number of Products<span class="required-field">*</span></label>
+                                            <div class="doller-input-field @error('product_count') is-invalid @enderror">
+                                                <input type="text" name="product_count" class="form-control two-decimals"
+                                                    value="{{ old('product_count', $package->product_count ?? $package->product_count) }}">
+                                            </div>
+                                            @error('product_count')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                            <div class="input-icon-custm tooltip-open">
+                                                <span>
+                                                    <i class="fa-solid fa-question"></i>
+                                                </span>
+                                                <div class="tooltip">
+                                                    <p>Enter the total number of products available for this package. This field represents the count of products included in the package and helps users understand how many products are offered.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6">
                                             <label>Description*</label>
                                             <textarea class="form-control summernote @error('description') is-invalid @enderror" name="description">{{ $package->description ? $package->description : '' }}</textarea>
                                             <div class="input-icon-custm tooltip-open">
@@ -209,10 +229,11 @@
                                                     <i class="fa-solid fa-question"></i>
                                                 </span>
                                                 <div class="tooltip">
-                                                    <p>ghfvjvhm</p>
+                                                    <p>Provide a detailed description of the package. This description will be visible to users and should include information about what the package offers, its features, and any other relevant details that help users understand what is included. </p>
                                                 </div>
                                             </div>
                                         </div>
+                                      
                                         <div class=" col-md-6">
                                             <a class="btn secondary-btn mr-1 full-btn"
                                                 href="{{ route('admin.packages.all') }}">Back</a>

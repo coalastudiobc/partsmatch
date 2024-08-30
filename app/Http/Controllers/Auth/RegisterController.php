@@ -111,7 +111,7 @@ class RegisterController extends Controller
                 })
             ],
             'industry_type' => ['required', 'string'],
-            'image' => ['required', 'mimes:jpeg,jpg,png'],
+            // 'image' => ['required', 'mimes:jpeg,jpg,png'],
         ]);
     }
 
@@ -124,7 +124,6 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         try {
-            // dd($user);
             $user = [
                 'name' => $data['name'],
                 'email' => $data['email'],
@@ -136,9 +135,9 @@ class RegisterController extends Controller
                 'zipcode' => $data['zipcode'],
                 'industry_type' => $data['industry_type'],
                 'email_verification_token' => str::random(50)
-
             ];
-            if ($data['image']) {
+            
+            if (isset($data['image'])) {
                 $image = store_image(request()->image, 'profile_pictures');
                 $user['profile_picture_url'] = $image['url'];
                 $user['profile_picture_file'] = $image['name'];

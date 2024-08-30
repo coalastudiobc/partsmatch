@@ -350,9 +350,9 @@
         padding: 10px 10px;
     }
 
-    .product-detail-table table {
+    /* .product-detail-table table {
         min-width: 1100px;
-    }
+    } */
 
     .product-detail-table table tr th {
         padding: 2px 0px 12px 12px;
@@ -692,10 +692,10 @@
     .cart-wrapper {
         margin-bottom: 25px;
     }
-
+/* 
     .product-list-table table {
         min-width: 900px;
-    }
+    } */
 
     .hero-txt h1 {
         font-size: 29px;

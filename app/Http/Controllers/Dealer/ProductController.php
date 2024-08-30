@@ -7,12 +7,12 @@ use App\Models\Cart;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\AllModel;
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use App\Models\AdminSetting;
 use App\Models\ProductImage;
 use App\Models\CarBrandMake;
-use App\Models\AllModel;
 use App\Models\FeaturedProduct;
 use Illuminate\Support\Facades\DB;
 use App\Models\ProductCompatabilty;
@@ -20,6 +20,7 @@ use App\Models\ProductParcelDetail;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Models\ShippoPurchasedLabel;
+use App\Models\PackagePaymentDetail;
 use App\Http\Requests\ProductRequest;
 use GrahamCampbell\ResultType\Success;
 use Illuminate\Support\Facades\Storage;
@@ -141,7 +142,7 @@ class ProductController extends Controller
                     'description' => $row['description'],
                     'part_number' => $row['part_number'],
                     'additional_details' => $row['additional_details'],
-                    'stocks_avaliable' => $row['quantity'],
+                    'stocks_avaliable' => $row['quantity'] ?? 0,
                     'price' => $row['price'],
                     'status' => '1',
                 ];
@@ -423,24 +424,93 @@ class ProductController extends Controller
             }
             $product->delete();
             return redirect()->back()->with(['message' => "successfully deleted"]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return redirect()->back()->with(['error' => $e->getMessage()]);
         }
     }
+    public function saveFeatureProducts(Request $request)
+    {
+        try {
+            $this->validateProductIds($request);
+            $featureLimit= $this->getFeatureLimit();
+            $featuredProductIds =$this->getCurrentFeaturedProducts();
+            if ($this->canAddMoreProducts($featureLimit, $featuredProductIds, $request->featured_product_Ids))
+            {
+                auth()->user()->featuredProducts()->attach($request->featured_product_Ids); //using pivot table relation
+                return redirect()->route('Dealer.feature.products.view')->with(['success'=>'successfully added']);
+            }
+            return redirect()->route('Dealer.feature.products.view')->with(['error'=>'Limit Exceeded. Please upgrade the existing plan to add more']);
+        } catch (\Exception $e) {
+            return redirect()->back()->with(['error' => $e->getMessage()]);
+        }
+    }
+    public function validateProductIds($request)
+    {
+        if(is_null($request->featured_product_Ids) || empty($request->featured_product_Ids))
+            {
+                throw new Exception("Product IDs cannot be null or empty.");
+            }
+    }
+   
+    public function getFeatureLimit()
+    {
+        return PackagePaymentDetail::where('user_id', auth()->id())
+            ->pluck('plan_product_count')
+            ->firstOrFail();
+    }
+    public function canAddMoreProducts(int $featureLimit, array $featuredProductIds, array $newProducts)
+    {
+        return $featureLimit >= (count($featuredProductIds) + count($newProducts));
+    }
 
+    public function getDealerProductsExcludingFeatured()
+    {
+        try {
+            $alreadyFeaturedProductIds = $this->getCurrentFeaturedProducts();
+
+        // $featuredProductIds = FeaturedProduct::where('user_id',auth()->id())->pluck('product_id')->toArray();
+        $products = Product::where('user_id', auth()->id())->whereNotIn('id', $alreadyFeaturedProductIds)->get();
+            return response()->json(['status'=>true,'data'=>view('components.product-listing-table', compact('products','alreadyFeaturedProductIds'))->render(),'message'=>'Products retrieved successfully']);
+        } catch (\Exception $e) {
+         return  response()->json(['status'=>false,'message'=>$e->getMessage()]);
+        }
+    }
+    public function getCurrentFeaturedProducts()
+    {
+        return FeaturedProduct::where('user_id', auth()->id())
+            ->pluck('product_id')
+            ->toArray();
+    }
+
+    public function viewFeatureProducts(Request $request)
+    {
+        try {
+            $featureLimit= PackagePaymentDetail::where('user_id',auth()->id())->pluck('plan_product_count')->firstOrFail();
+            // $products=FeaturedProduct::where('user_id',auth()->id())->orderBy('created_at','desc')->Paginate(__('pagination.pagination_nuber'));
+            $alreadyFeaturedProductIds = FeaturedProduct::where('user_id',auth()->id())->pluck('product_id')->toArray();
+            $products=Product::where('user_id',auth()->id())
+                                ->whereIn('id',$alreadyFeaturedProductIds)
+                                ->Search($request)
+                                ->orderBy('created_at','desc')
+                                ->Paginate(__('pagination.pagination_nuber'));
+            return view('dealer.featuredProducts.index',compact('products','featureLimit','alreadyFeaturedProductIds'));
+        } catch (\Exception $e) {
+         return redirect()->back()->with(['Error'=>$e->getMessage()]);
+        }
+    }
     public function featuredproductcreate(Product $product)
     {
         try {
-            if (isset(plan_validity()->stripe_status) && plan_validity()->stripe_status != 'active') {
-
-                session()->flash('success', 'Please purchase plan');
+            if (isset(plan_validity()->stripe_status) && plan_validity()->stripe_status != 'active')
+            {
+                session()->flash('success', 'Please purchase plan first');
                 return response()->json([
                     'status' => false,
-                    'message' => 'Please purchase plan'
+                    'message' => 'Please purchase plan first'
                 ], 200);
             }
-            if (!plan_validity()) {
-
+            if (!plan_validity()) 
+            {
                 // session()->flash('success', 'Please purchase plan');
                 return response()->json([
                     'status' => false,
@@ -449,7 +519,8 @@ class ProductController extends Controller
             }
 
             $category = Category::where('id', $product->subcategory_id)->first();
-            $featured_product = [
+            $featured_product =
+            [
                 'user_id' => auth()->user()->id,
                 'product_id' => $product->id,
                 'category_id' => $category->id

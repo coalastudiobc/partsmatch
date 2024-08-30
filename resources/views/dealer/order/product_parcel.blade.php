@@ -13,7 +13,7 @@
                 <a href="javascript:void(0)" id="makeGroup" class="btn secondary-btn"><img src="{{ asset('assets/images/add-round-icon.svg') }}" alt="">Make Group</a>
                 <a href="javascript:void(0)" id="createGroup" class="btn secondary-btn d-none">Create Group</a>
                 <a href="javascript:void(0)" id="cancel" class="btn secondary-btn d-none">Cancel</a>
-                <a href="{{ !isFullFilledOrder($order->id) ? '#' : route('Dealer.order.shippment.rates',['order'=>$order->id])  }}" id="PaymentInitiate" class="btn primary-btn payment-btn disabled-shippmentPayment @if(!isFullFilledOrder($order->id))disabled_select @endif ">Make FulFill</a>
+                <a href="{{ !isFullFilledOrder($order->id) ? '#' : route('Dealer.order.shippment.rates',['order'=>$order->id])  }}" id="PaymentInitiate" class="btn primary-btn payment-btn disabled-shippmentPayment @if(!isFullFilledOrder($order->id))disabled_select @endif ">FulFillment</a>
 
             </div>
         </div>
@@ -27,7 +27,7 @@
                         <p>Order ID</p>
                     </div>
                     <div class="custm-table-head-box">
-                        <p>Product name</p>
+                        <p>Part Number</p>
                     </div>
                     <div class="custm-table-head-box">
                         <p>Quantity</p>
@@ -36,7 +36,7 @@
                         <p>Price</p>
                     </div>
                     <div class="custm-table-head-box">
-                        <p>Total price</p>
+                        <p>Total Price</p>
                     </div>
                     <div class="custm-table-head-box">
                         <p>Action</p>

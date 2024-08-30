@@ -12,10 +12,15 @@
             <form action="{{ route('admin.dealers.all') }}">
                 <div class="pro-search-box">
                     <input type="text" name="filter_by_name" value="{{ old('filter_by_name', request()->filter_by_name) }}"
-                        class="form-control" placeholder="Search Dealer By Name">
+                        class="form-control" placeholder="Search Dealer">
                     <button type="submit" class="btn primary-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
             </form>
+            @if(request('filter_by_name'))
+                <div class="search-cross-btn"> 
+                    <a href="{{ route('admin.dealers.all') }}" ><i class="fa-solid fa-xmark"></i></a>
+                </div>
+            @endif
         </div>
 
 

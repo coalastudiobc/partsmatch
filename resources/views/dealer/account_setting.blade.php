@@ -242,8 +242,8 @@
                             </form>
                         </div>
                         <div class="edit-icon">
-                            <a href="#"><i id="editProfile" class="fa-solid fa-pen-to-square" style="color: #3EBE62;"></i></a>
-                            <span id="closeEditProfile" class='d-none closeEditProfilebtn'><i class="fa-sharp fa-solid fa-close"></i></span>
+                            <a href="#"><i id="editProfile" class="fa-solid fa-pen-to-square"  style="color: #3EBE62; font-size:22px;"></i></a>
+                            <span id="closeEditProfile" class='d-none closeEditProfilebtn'><i class="fa-sharp fa-solid fa-close" style="font-size:22px;"></i></span>
                         </div>
                     </div>
                 </div>

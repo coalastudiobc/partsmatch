@@ -3,19 +3,47 @@
 @section('heading', $user->name . '\'s Products')
 
 @section('content')
-
     <div class="dashboard-right-box">
-        <form action="">
+        <div class="serach-and-filter-box justify-content-end">
+            <form action="">
+                <div class="pro-search-box">
+                    <input type="text" name="filter_by_name" class="form-control" value="{{ request('filter_by_name') }}" placeholder="Search Product">
+                    <button type="submit" class="btn primary-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+            </form>
+            @if(request('filter_by_name'))
+            {{-- <form action="">
+                <div class="search-cross-btn">
+                    <input type="hidden" name="filter_by_name">
+                    <button type="submit" ><i class="fa-solid fa-xmark"></i></button>
+                </div>
+            </form> --}}
+                <div class="search-cross-btn"> 
+                    <a href="{{route('admin.dealers.product.list', [$user->id]) }}" ><i class="fa-solid fa-xmark"></i></a>
+                </div>
+            @endif
+        </div>
+        {{-- <form action="">
             <div class="pro-search-box">
-                <input type="text" name="filter_by_name" class="form-control" placeholder="Search Product By Name">
+                <input type="text" name="filter_by_name" class="form-control" placeholder="Search Product">
                 <button type="submit" class="btn primary-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
         </form>
+        @if(request('filter_by_name'))
+        <form action="">
+            <div class="search-cross-btn">
+                <input type="hidden" name="filter_by_name">
+                <button type="submit" ><i class="fa-solid fa-xmark"></i></button>
+            </div>
+        </form>
+        @endif --}}
         <div class="product-detail-table product-list-table">
             <div class="table-responsive">
                 <table class="table">
-
                     <tr>
+                        <th>
+                            <p>Part Number</p>
+                        </th>
                         <th>
                             <p>Name</p>
                         </th>
@@ -38,13 +66,17 @@
                     @forelse ($products as $key => $product)
                         <tr>
                             <td>
-                                <p>{{ $product->name ? $product->name : 'N/A' }}</p>
+                                <p>{{ $product ? ($product->part_number ?? 'N/A') : 'N/A' }}</p>
                             </td>
                             <td>
-                                <p>{{ $product->stocks_avaliable ? $product->stocks_avaliable : 'N/A' }}</p>
+                                <p>{{ $product ? ($product->name ?? 'N/A') : 'N/A' }}</p>
                             </td>
                             <td>
-                                <p>{{ $product->price ? number_format($product->price,2,'.',',') : 'N/A' }}</p>
+                                <p>{{ $product ? ( $product->stocks_avaliable ?? '0') : 'N/A' }}</p>
+
+                            </td>
+                            <td>
+                                <p>${{ $product->price ? number_format($product->price,2,'.',',') : 'N/A' }}</p>
                             </td>
                             {{-- <td>
                                 <p>{{ $product->shipping_price ? $product->shipping_price : 'N/A' }}</p>
@@ -73,11 +105,11 @@
                     @endforelse
                 </table>
                 <div class=" col-md-12 pagination-wrapper" style="margin-bottom: 14px;">
-            {!! $products->links('admin.pagination') !!}
-        </div>
+                    {!! $products->links('admin.pagination') !!}
+                </div>
                 <div class="col-md-12">
                     <div class="dealer-profile-form-btn">
-                        <a class="btn primary-btn " href="{{ url()->previous() }}">Back</a>
+                        <a class="btn primary-btn " href="{{ route('admin.dealers.all') }}">Back</a>
 
                     </div>
                 </div>

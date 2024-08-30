@@ -11,8 +11,13 @@
             <div class="serach-and-filter-box">
                 <form action="">
                     <div class="pro-search-box">
-                        <input type="text" name="filter_by_name" class="form-control" value="" placeholder="Search">
+                        <input type="text" name="filter_by_name" class="form-control"value="{{ request('filter_by_name') }}" placeholder="Search">
                         <button type="submit" class="btn primary-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        @if(request('filter_by_name'))
+                        <div class="search-cross-btn">
+                            <a href="{{ route('Dealer.products.index') }}"><i class="fa-solid fa-xmark"></i></a>
+                        </div>
+                    @endif
                     </div>
                 </form>
                 <a href="javascript:void(0)" class="btn primary-btn" data-bs-toggle="modal" data-bs-target="#bulk-upload">
@@ -46,10 +51,10 @@
                             <p>Price</p>
                         </th>
                         <th>
-                            <p>Available Quantity</p>
+                            <p>Quantity</p>
                         </th>
                         <th>
-                            <p>Listing Status</p>
+                            <p>Status</p>
                         </th>
                         <th>
                             <p>Action</p>
@@ -128,16 +133,30 @@
                 <!-- <div class="modal-header">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               </div> -->
                 <div class="modal-body">
                     <div class="add-pro-form">
-                        <h2>Add new products</h2>
+                        <h2>Add new product</h2>
                         <form id="product" action="{{ route('Dealer.products.store') }}" method="post"
                             enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        <label for=""> Part number<span class="required-field">*</span></label>
+                                        <div class="form-field subcategory">
+                                            <input type="text" class="form-control @error('part_number') is-invalid @enderror" id="part_number"
+                                                name="part_number" value="" placeholder="Part Number">
+                                            @error('part_number')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
                                         <label for=""> Name<span class="required-field">*</span></label>
                                         <div class="form-field">
-                                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"  placeholder="Name">
+                                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"  placeholder="Part Name">
                                             @error('name')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -181,20 +200,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for=""> Part number</label>
-                                        <div class="form-field subcategory">
-                                            <input type="text" class="form-control @error('part_number') is-invalid @enderror" id="part_number"
-                                                name="part_number" value="" placeholder="Part Number">
-                                            @error('part_number')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                </div>
+                                
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for=""> Description<span class="required-field">*</span></label>
@@ -240,7 +246,7 @@
                                         <label for=""> Quantity<span class="required-field">*</span></label>
                                         <div class="form-field">
                                             <input type="text" name="stocks_avaliable" class="form-control @error('stocks_avaliable') is-invalid @enderror"
-                                                placeholder="Quantity">
+                                                placeholder="Quantity of Part or product ">
                                                 @error('stocks_avaliable')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -254,7 +260,7 @@
                                         <label for="price"> Price<span class="required-field">*</span></label>
                                         <div class="form-field">
                                             <input type="text" name="price" class="form-control @error('price') is-invalid @enderror"
-                                                placeholder="$000">
+                                                placeholder="$ 0.00">
                                                 @error('price')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -726,20 +732,23 @@
                         <div class="ymmm-box-data">
                             <p>` + models[i] + `</p>
                         </div>
-                        <span class="ymmm-cross">×</span>
+                        <span class="ymmm-cross" style="cursor:pointer;">×</span>
                     </div>`;
                 }
                 jQuery('#test1234').html(htmlText)
                 jQuery('#test1234').removeClass('d-none');
             });
-
             jQuery(document).on('click', '.ymmm-cross', function() {
                 var data = jQuery(this).siblings('.ymmm-box-data').find('p').text();
                 var index = models.indexOf(data);
+                console.log(index);
                 if (index > -1) {
                     models.splice(index, 1);
                 }
                 jQuery(this).closest('.ymmm-data-outer').remove();
+                if(index == 0){
+                jQuery('#test1234').addClass('d-none'); 
+                }
             });
         });
 

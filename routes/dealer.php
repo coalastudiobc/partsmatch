@@ -50,9 +50,6 @@ Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer'
         Route::post('/products/update/{product}', [ProductController::class, 'update'])->name('update');
         Route::get('/products/delete/{product}', [ProductController::class, 'destroy'])->name('delete');
         Route::get('/products/subcategory/{id}', [ProductController::class, 'subcategory'])->name('subcategory');
-        Route::match(['get', 'post'], '/featured/products/create/{product}', [ProductController::class, 'featuredproductcreate'])->name('featured.create');
-
-        Route::get('/featured/products/delete/{id}', [ProductController::class, 'featuredproductdelete'])->name('featured.products.delete');
 
         Route::get('/model/{year}', [ProductController::class, 'model'])->name('model');
         Route::get('/make/{model}', [ProductController::class, 'make'])->name('make');
@@ -120,11 +117,22 @@ Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer'
         Route::get('picking/address/delete/{address}', [OrderController::class, 'addressDelete'])->name('delete');
         Route::match(['get', 'post'],'product/shipping/toaddress', [CheckoutController::class, 'to_address'])->name('to');
     });
+
     Route::name('stripe.onboarding.')->group(function () {
         Route::get('check/onboard/account/', [EscrowController::class, 'checkAccountExist'])->name('check.onboard.account');
         Route::match(['get', 'post'],'complete/onboard/account/', [EscrowController::class, 'completeOnboarding'])->name('complete');
         Route::match(['get', 'post'],'refresh/onboard/account/', [EscrowController::class, 'refreshOnboarding'])->name('refresh');
         Route::match(['get', 'post'],'create/onboard/account/', [EscrowController::class, 'redirectToStripe'])->name('create');
+      
+    });
+
+    Route::name('feature.products.')->group(function () {
+        Route::match(['get', 'post'], '/featured/products', [ProductController::class, 'viewFeatureProducts'])->name('view');
+        Route::match(['get', 'post'], '/featured/products/creating', [ProductController::class, 'saveFeatureProducts'])->name('save');
+        Route::get('/products/excludeFeatured', [ProductController::class, 'getDealerProductsExcludingFeatured']);
+
+        // Route::match(['get', 'post'], '/featured/products/create/{product}', [ProductController::class, 'featuredproductcreate'])->name('featured.create');
+        // Route::get('/featured/products/delete/{id}', [ProductController::class, 'featuredproductdelete'])->name('featured.products.delete');
       
     });
 });

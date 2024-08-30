@@ -52,7 +52,7 @@
                                                         aria-expanded="false">
                                                         <i class="fa-solid fa-check"></i> Complete
                                                     </div> --}}
-                                            <a href="{{ auth()->check() ? route(auth()->user()->getRoleNames()->first() . '.myorder.view.products', ['order' => $order->id]) : route('logout') }}" class="btn primary-btn"><i class="fa-solid fa-eye"></i>View</a>
+                                            <a href="{{ auth()->check() ? route(auth()->user()->getRoleNames()->first() . '.myorder.view.products', ['order' => $order->id]) : route('logout') }}" class="btn primary-btn">View</a>
                                             {{-- <ul class="dropdown-menu"
                                                                             aria-labelledby="dropdownMenuButton1">
                                                                             <li><a class="dropdown-item" href="#"><i

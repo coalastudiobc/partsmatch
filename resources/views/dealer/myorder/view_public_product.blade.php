@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="product-detail-table product-list-table">
                     <div class="table-responsive">
-            <table class="table">
+            <table class="table my-pro-view-table">
                 <tr>
                     <th>product Image</th>
                     <th>Part Number</th>
