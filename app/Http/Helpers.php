@@ -14,6 +14,7 @@ use App\Models\UserCommisionSetting;
 use Laravel\Cashier\Cashier;
 use App\Models\UserAddresses;
 use App\Models\DealerPayout;
+use App\Models\PackagePaymentDetail;
 use App\Models\ShippingSetting;
 use App\Models\ShippmentCreation;
 use App\Models\ShippoPurchasedLabel;
@@ -507,6 +508,22 @@ if (!function_exists('isPaid')) {
                 return false;
             }
             return true;
+        } catch (\Exception $e) {
+            // Log::error('Error in checkForBuyButton: ' . $e->getMessage());
+            return false; 
+        }
+    }
+}
+if (!function_exists('isPlanActive')) {
+    function isPlanActive()
+    {
+        try {
+          $planDetails =  PackagePaymentDetail::where('user_id',auth()->id())->first();
+          if(is_null($planDetails))
+            {
+                return false;
+            }
+            return $planDetails;
         } catch (\Exception $e) {
             // Log::error('Error in checkForBuyButton: ' . $e->getMessage());
             return false; 

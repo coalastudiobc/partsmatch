@@ -8,9 +8,11 @@
             @forelse  ($plans as $plan)
                 <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                     <div class="cards" id="card{{ $plan->id }}">
+                        @if(isPlanActive()->plan_id == $plan->id)
                         <div id="pointer">
                             <span class="horizontal">Purchased</span>
                           </div>
+                          @endif
                         <div class="card-details">
                             <span>{{ $plan->name }}</span>
                             <h3>${{ $plan->price }}<span>/{{ $plan->billing_cycle }}</span></h3>
@@ -38,10 +40,15 @@
                             </ul> --}}
                         </div>
                         <div>
+                        @if(isPlanActive()->plan_id == $plan->id)
+                        <a href="javascript:void(0)" class="btn secondary-btn full-btn ">Active
+                        </a>
+                        @else
                             <a href="javascript:void(0)" class="btn secondary-btn full-btn parchase"
                                 data-plan-id="{{ jsencode_userdata($plan->id) }}"
                                 data-plan-price="{{ $plan->price }}">Purchase
                             </a>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -59,7 +66,7 @@
     <div class="modal fade" id="card-parchase-Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
                 <div class="modal-body">
                     <div class="payment-page">
                         <h3>Payment</h3>

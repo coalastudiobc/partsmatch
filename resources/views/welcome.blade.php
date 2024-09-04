@@ -401,7 +401,7 @@
             <div id="brandContainer" class="sp-brands brand-height-fix">
                 @foreach($brands as $brand)
                 <div class="brands-image brand-container make-filter" data-make="{{$brand->makes}}">
-                    <img src="{{ $brand->image_url ? storage::url($brand->image_url) : asset('assets/images/car-logo2.png') }}" alt="" class="">
+                    <img src="{{ $brand->image_url ? Storage::url($brand->image_url) : asset('assets/images/car-logo2.png') }}" alt="" class="">
                     <div class="brands-image-content">
                         <h6>{{$brand->makes}}</h6>
                     </div>
