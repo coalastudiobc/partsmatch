@@ -3627,3 +3627,60 @@ ul.plan-details-list {
     border-top: 20px solid transparent;
     border-bottom: 20px solid transparent;
 }
+
+
+.interior-filter-box .formfield .select2-container{
+    width: 100% !important;
+    min-height: 38px;
+}
+.interior-filter-box .formfield .select2-container .select2-selection--single{
+    height: 38px;
+}
+.interior-filter-box .select2-container .select2-selection--single .select2-selection__rendered {
+    height: 38px;
+    display: flex;
+    align-items: center;
+    padding-left: 25px;
+}
+.interior-filter-box .select2-container--default .select2-selection--single .select2-selection__placeholder {
+    color: #999;
+    height: 38px;
+    display: flex;
+    align-items: center;
+}
+.interior-filter-box .formfield .select2-container span.filter-serach-icon {
+    position: absolute;
+    top: 9px;
+    left: 5px;
+}
+.interior-filter-box .formfield  .select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 38px;
+}
+.interior-filter-box .formfield  .select2-container--default .select2-selection--single .select2-selection__clear {
+    height: 38px;
+}
+
+.feature-slider {
+    /* margin-bottom: 30px; */
+    padding: 0px 0px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

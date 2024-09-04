@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\CartProduct;
+use App\Models\FeaturedProduct;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -44,13 +45,24 @@ class HomeController extends Controller
         $category = Category::where('status', '1')->get();
         $collections = Category::with('products')->has('products')->where('parent_id', '!=', null)->where('status', '1')->inRandomOrder()->take(10)->get();
         $subcategories = Category::with('products')->has('products')->Where('parent_id', '!=', null)->where('status', '1')->inRandomOrder()->take(6)->get();
+
         $brands = CarBrandMake::inRandomOrder()->get();
         if (Auth::user()) {
             if (Auth::user()->hasRole("Administrator")) {
                 return redirect()->route('admin.dashboard');
             }
         }
-        return view('welcome', compact('category', 'subcategories', 'collections', "subcategory_id", "brands"));
+
+        // featured product
+        $alreadyFeaturedProductIds = FeaturedProduct::pluck('product_id')->toArray();
+        $products = Product::whereIn('id',$alreadyFeaturedProductIds)
+                            ->orderBy('created_at','desc')
+                            ->Paginate(__('pagination.pagination_nuber'));
+        // end 
+        $subcategorie = Category::with('products')->has('products')->Where('parent_id', '!=', null)->where('status', '1')->inRandomOrder()->take(6)->get();
+                    
+                              
+        return view('welcome', compact('category', 'subcategories', 'collections', "subcategory_id", "brands",'products','subcategorie'));
     }
 
     public function brands()
@@ -132,8 +144,7 @@ class HomeController extends Controller
     }
     public function allProducts(Request $request)
     {
-        // if($request->method() == "POST")
-            // dump($request->toArray());
+        
         $brands = CarBrandMake::distinct('makes')->get();
         $sdk = \CarApiSdk\CarApi::build([
             'token' => config('services.Car_api.CAR_API_TOKEN'),
@@ -159,6 +170,11 @@ class HomeController extends Controller
         $models = AllModel::all();
         $products = Product::with('productImage', 'featuredProduct', 'productCompatible')->where('status','1')->global($request)->category()->compatiblity($request)->price()->orderBy('id','desc')->paginate(12)->appends($request->query());
         $categories =  Category::with('children')->has('children')->orWhereNull('parent_id')->get();
+        
+        if($request->method() == "POST")
+        {
+        $products = Product::with('productImage', 'featuredProduct', 'productCompatible')->where('status','1')->category()->FilterCompatiblity($request)->price()->orderBy('id','desc')->paginate(12)->appends($request->query());
+        }
         return view('public_shop', compact("categories", "products", "brands", "years", "models"));
     }
 

@@ -124,9 +124,58 @@ class Product extends Model
                     $query->OrwhereIn('model', $request->model);
                 });
             });
+          
         }
         
     }
+    // public function scopeFilterCompatiblity($query,$request = null)
+    // {
+    //     $request = $request ?? request();
+    //         $query->when(($request->has('year') && count($request->year)) , function ($q) use ($request) {
+    //             $q->whereHas('productCompatible', function ($query) use ($request) {
+    //                 $query->whereIn('year', $request->year);
+    //             });
+    //         })->when(($request->has('brand') && count($request->brand)) , function ($q) use ($request) {
+    //             $q->whereHas('productCompatible', function ($query) use ($request) {
+    //                 $query->whereIn('make', $request->brand);
+    //             });
+    //         })->when(($request->has('model') && count($request->model)) , function ($q) use ($request) {
+    //             $q->whereHas('productCompatible', function ($query) use ($request) {
+    //                 $query->whereIn('model', $request->model);
+    //             });
+    //         });
+    // }
+    public function scopeFilterCompatiblity($query, $request = null)
+{
+    $request = $request ?? request();
+
+    // Initialize a base query
+    $query->where(function ($q) use ($request) {
+        // Check if 'model' values are provided
+        if ($request->has('model') && count($request->model)) {
+            $q->whereHas('productCompatible', function ($query) use ($request) {
+                $query->whereIn('model', $request->model);
+            });
+        }
+
+        // Check if 'make' values are provided
+        if ($request->has('brand') && count($request->brand)) {
+            $q->orWhereHas('productCompatible', function ($query) use ($request) {
+                $query->whereIn('make', $request->brand);
+            });
+        }
+
+        // Check if 'year' values are provided (if needed)
+        if ($request->has('year') && count($request->year)) {
+            $q->orWhereHas('productCompatible', function ($query) use ($request) {
+                $query->whereIn('year', $request->year);
+            });
+        }
+    });
+}
+
+    
+
 
     public function scopeGlobal($query,$request = null)
     {

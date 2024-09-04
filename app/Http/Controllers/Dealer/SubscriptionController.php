@@ -16,7 +16,6 @@ class SubscriptionController extends Controller
     public function index()
     {
         try {
-
             $user = auth()->user();
             $plans = Package::where('status', '1')->get();
             $intent = $user->createSetupIntent();
@@ -36,7 +35,16 @@ class SubscriptionController extends Controller
             {
                 throw new \Exception('Selected plan did not found : ' .$e->getMessage());
             }
-            $subscription = $user->newSubscription($plan->stripe_id, $plan->stripe_price)->create($request->token);
+
+            $subscription = $user->subscriptions()->active()->first(); // Check if the user has an active subscription
+            if ($subscription) {
+                 // If the user already has a subscription, upgrade it
+                 $subscription->swap($plan->stripe_price);
+            } else {
+                 // If the user doesn't have a subscription, create a new one
+                 $subscription = $user->newSubscription($plan->stripe_id, $plan->stripe_price)->create($request->token);
+            }   
+
             if (!$subscription) 
             {
                 throw new \Exception('Something went wrong in subscription creation : ' .$e->getMessage());

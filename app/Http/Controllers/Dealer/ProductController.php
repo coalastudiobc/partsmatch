@@ -485,7 +485,9 @@ class ProductController extends Controller
     public function viewFeatureProducts(Request $request)
     {
         try {
-            $featureLimit= PackagePaymentDetail::where('user_id',auth()->id())->pluck('plan_product_count')->firstOrFail();
+            // $featureLimit= PackagePaymentDetail::where('user_id',auth()->id())->pluck('plan_product_count')->firstOrFail();
+            $featureLimit= PackagePaymentDetail::where('user_id',auth()->id())->orderBy('created_at', 'desc')
+            ->value('plan_product_count');
             // $products=FeaturedProduct::where('user_id',auth()->id())->orderBy('created_at','desc')->Paginate(__('pagination.pagination_nuber'));
             $alreadyFeaturedProductIds = FeaturedProduct::where('user_id',auth()->id())->pluck('product_id')->toArray();
             $products=Product::where('user_id',auth()->id())

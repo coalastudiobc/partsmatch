@@ -14,7 +14,7 @@
                                         @if(request()->has('brand') && count(request()->brand))
                                             @forelse(request()->brand as $brand)
                                                     <div class="filter-selected-box">
-                                                        <a href="javascript:void(0)" data-action="brand" class="delete-filter">✕</a>
+                                                        <a href="javascript:void(0)" data-action="brand" class="delete-filter" style="cursor:pointer;">✕</a>
                                                         <p>{{$brand}}</p>
                                                     </div>
                                             @empty
@@ -23,7 +23,7 @@
                                         @if(request()->has('year') && count(request()->year))
                                             @forelse(request()->year as $year)
                                                     <div class="filter-selected-box">
-                                                        <a href="javascript:void(0)" data-action="year" class="delete-filter">✕</a>
+                                                        <a href="javascript:void(0)" data-action="year" class="delete-filter" style="cursor:pointer;">✕</a>
                                                         <p>{{$year}}</p>
                                                     </div>
                                             @empty
@@ -32,7 +32,7 @@
                                         @if(request()->has('model') && count(request()->model))
                                             @forelse(request()->model as $model)
                                                     <div class="filter-selected-box">
-                                                        <a href="javascript:void(0)" data-action="model" class="delete-filter">✕</a>
+                                                        <a href="javascript:void(0)" data-action="model" class="delete-filter" style="cursor:pointer;">✕</a>
                                                         <p>{{$model}}</p>
                                                     </div>
                                             @empty
@@ -40,7 +40,7 @@
                                         @endif
                                         @if(request()->has('min_value') && ((request()->min_value != 0) || (request()->max_value != 10000))    )
                                             <div class="filter-selected-box">
-                                                <a href="javascript:void(0)" data-action="price" class="delete-filter">✕</a>
+                                                <a href="javascript:void(0)" data-action="price" class="delete-filter" style="cursor:pointer;">✕</a>
                                                 <p>{{request()->min_value."-".request()->max_value}}</p>
                                             </div>
                                         @endif
@@ -106,9 +106,18 @@
                                                         
                                                         <div class="form-group">
                                                             <div class="formfield">
-                                                                <p type="text" class="form-control filter-serach w-input-text" contenteditable><div class="w-placeholder">
+                                                                {{-- <p type="text" class="form-control filter-serach w-input-text" contenteditable><div class="w-placeholder">
                                                                     Search
-                                                                </div></p>
+                                                                </div></p> --}}
+                                                                <select id="makeSearch" class="form-control filter-serach select2search">
+                                                                    <option value="">Search</option>
+                                                                    @foreach ($brands as $key => $make)
+                                                                        <option value="{{$make->makes}}">{{$make->makes}}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                                <span class="filter-serach-icon">
+                                                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                                                </span>
                                                                 <span class="filter-serach-icon">
                                                                     <i class="fa-solid fa-magnifying-glass"></i>
                                                                 </span>
@@ -135,41 +144,44 @@
                                         <div class="accordion" id="accordionExample3">
                                             <div class="accordion-item">
                                                 <h2 class="accordion-header" id="headingFour">
-
                                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                                                         <h4>Models</h4>
                                                     </button>
                                                 </h2>
                                                 <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample3">
-                                                        <div class="accordion-body">
-                                                            <div id="modelContainer" class="interior-filter-inner">
-                                                                <div class="form-group">
-                                                                    <div class="formfield">
-                                                                        <p type="text" class="form-control filter-serach w-input-text" contenteditable><div class="w-placeholder">
-                                                                            Search
-                                                                        </div></p>
-                                                                        <span class="filter-serach-icon">
-                                                                            <i class="fa-solid fa-magnifying-glass"></i>
-                                                                        </span>
-                                                                        <button class="search-icon-btn cross-btn d-none"><i class="fa-solid fa-xmark"></i></button>
-                                                                        <button class="search-icon-btn tick-btn d-none"><i class="fa-solid fa-check"></i></button>
-                                                                    </div>
+                                                    <div class="accordion-body">
+                                                        <div id="modelContainer" class="interior-filter-inner">
+                                                            <div class="form-group">
+                                                                <div class="formfield">
+                                                                    <select id="modelSearch" class="form-control filter-serach select2search">
+                                                                        <option value="">Search</option>
+                                                                        @foreach ($models as $key => $model)
+                                                                            <option value="{{$model->value}}">{{$model->value}}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                    <span class="filter-serach-icon">
+                                                                        <i class="fa-solid fa-magnifying-glass"></i>
+                                                                    </span>
                                                                 </div>
-                                                                
-                                                                @foreach ($models as $key => $model )
-                                                                    <div class="custm-check model">
-                                                                        <input type="checkbox" id="{{'model'.$key}}" name="model[]" @if(request()->has('model') && count(request()->model) && in_array($model->value, request()->model)) class="selected-entry" checked @endif value="{{$model->value}}">
-                                                                        <label for="{{'model'.$key}}">{{$model->value}}</label>
-                                                                    </div>
-                                                                @endforeach
                                                             </div>
+                                                            
+                                                            @foreach ($models as $key => $model)
+                                                                <div class="custm-check model">
+                                                                    <input type="checkbox" id="{{'model'.$key}}" name="model[]" @if(request()->has('model') && count(request()->model) && in_array($model->value, request()->model)) class="selected-entry" checked @endif value="{{$model->value}}">
+                                                                    <label for="{{'model'.$key}}">{{$model->value}}</label>
+                                                                </div>
+                                                            @endforeach
                                                         </div>
-                                                        <div class="cat-count"><span class="see-more-less-model">See More</span>
-                                                        </div>
+                                                    </div>
+                                                    <div class="cat-count" style="cursor: pointer;"><span class="see-more-less-model">See More</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    
+
+                                     
                                     <div class="interior-filter-box">
                                         <div class="accordion" id="accordionExample2">
                                             <div class="accordion-item">
@@ -183,14 +195,22 @@
                                                     <div id="yearContainer" class="interior-filter-inner">
                                                         <div class="form-group">
                                                             <div class="formfield">
-                                                                <p type="text" class="form-control filter-serach w-input-text" contenteditable><div class="w-placeholder">
+                                                                {{-- <p type="text" class="form-control filter-serach w-input-text" contenteditable>
+                                                                    <div class="w-placeholder">
                                                                     Search
-                                                                    </div></p>
+                                                                    </div>
+                                                                </p> --}}
+                                                                <select id="yearSearch" class="form-control filter-serach select2search">
+                                                                    <option value="">Search</option>
+                                                                    @foreach ($years as $key => $year)
+                                                                        <option value="{{$year}}">{{$year}}</option>
+                                                                    @endforeach
+                                                                </select>
                                                                 <span class="filter-serach-icon">
-                                                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                                                    <i class="fa-solid fa-magnifying-glass" style="cursor: pointer;"></i>
                                                                 </span>
-                                                                <button class="search-icon-btn cross-btn"><i class="fa-solid fa-xmark"></i></button>
-                                                                <button class="search-icon-btn tick-btn"><i class="fa-solid fa-check"></i></button>
+                                                                    {{-- <button class="search-icon-btn cross-btn"><i class="fa-solid fa-xmark"></i></button>
+                                                                    <button class="search-icon-btn tick-btn"><i class="fa-solid fa-check"></i></button> --}}
                                                             </div>
                                                         </div>
                                                         @foreach ($years as $key => $year )
@@ -341,13 +361,115 @@
     </div> --}}
 </section>
 @endsection
+@section('extra_css')
+<link rel="stylesheet" href="{{ asset('assets/css/price_slider.css') }}">
+@endsection
 @section('modals')
 @include('modals.restrict_multiple')
 @endsection
 @push('scripts')
 
 <script>
-    $(document).ready(function() {
+    jQuery(document).ready(function() {
+
+        $('.select2search').select2({
+            placeholder: 'Search',
+            allowClear: true
+        });
+
+        // Event handler for select2 change events
+        $('.select2search').on('change', function() {
+            var selectedValues = {
+                modelSearch: $('#modelSearch').val(),
+                makeSearch: $('#makeSearch').val(),
+                yearSearch: $('#yearSearch').val()
+            };
+
+            filterCheckboxes(selectedValues);
+        });
+        function filterCheckboxes(selectedValues) {
+            $('.custm-check').each(function() {
+                var checkboxValue = $(this).find('input[type="checkbox"]').val();
+                var shouldShow = true;
+
+                // Check if any of the select filters are applied and the checkbox should be visible
+                if (selectedValues.modelSearch && !selectedValues.modelSearch.includes(checkboxValue)) {
+                    shouldShow = false;
+                }
+                if (selectedValues.makeSearch && !selectedValues.makeSearch.includes(checkboxValue)) {
+                    shouldShow = false;
+                }
+                if (selectedValues.yearSearch && !selectedValues.yearSearch.includes(checkboxValue)) {
+                    shouldShow = false;
+                }
+
+                $(this).toggle(shouldShow);
+            });
+        }
+
+
+                // jQuery('#modelSearch').select2({
+                //     placeholder: 'Search',
+                //     allowClear: true
+                // });
+                // jQuery('#makeSearch').select2({
+                //     placeholder: 'Search',
+                //     allowClear: true
+                // });
+                // jQuery('#yearSearch').select2({
+                //     placeholder: 'Search',
+                //     allowClear: true
+                // });
+
+                // jQuery('#modelSearch').on('change', function() {
+                //     var selectedValue = jQuery(this).val();
+                //     if (selectedValue) {
+                //         console.log('model');
+                //         jQuery('.custm-check').each(function() {
+                //             var checkboxValue = jQuery(this).find('input[type="checkbox"]').val();
+                //             if (selectedValue.includes(checkboxValue)) {
+                //                 jQuery(this).show();
+                //             } else {
+                //                 jQuery(this).hide();
+                //             }
+                //         });
+                //     } else {
+                //         jQuery('.custm-check').show();
+                //     }
+                // });
+                // jQuery('#makeSearch').on('change', function() {
+                //     var selectedValue = jQuery(this).val();
+                //     if (selectedValue) {
+                //         console.log('makeseach');
+                //         jQuery('.custm-check').each(function() {
+                //             var checkboxValue = jQuery(this).find('input[type="checkbox"]').val();
+                //             if (selectedValue.includes(checkboxValue)) {
+                //                 jQuery(this).show();
+                //             } else {
+                //                 jQuery(this).hide();
+                //             }
+                //         });
+                //     } else {
+                //         jQuery('.custm-check').show();
+                //     }
+                // });
+                // jQuery('#yearSearch').on('change', function() {
+                //     var selectedValue = jQuery(this).val();
+                //     if (selectedValue) {
+                //         console.log('makeseach');
+                //         jQuery('.custm-check').each(function() {
+                //             var checkboxValue = jQuery(this).find('input[type="checkbox"]').val();
+                //             if (selectedValue.includes(checkboxValue)) {
+                //                 jQuery(this).show();
+                //             } else {
+                //                 jQuery(this).hide();
+                //             }
+                //         });
+                //     } else {
+                //         jQuery('.custm-check').show();
+                //     }
+                // });
+
         jQuery('#collapseOne').collapse('hide'); //hiding or closing accordian of category
 
         $('.see-more-less-make').on('click', function() {
@@ -387,6 +509,7 @@
             $("#"+filter).prop('checked',false);
             }
             $('#filters').submit();
+            jQuery('#fullPageLoader').removeClass('d-none');
         });
 
         $('.internal-search').on('change', function(e) {
@@ -493,9 +616,12 @@
         let timeout;
 
         form.addEventListener('change', () => {
+            console.log(timeout);
             clearTimeout(timeout);
             timeout = setTimeout(() => {
                 form.submit();
+            jQuery('#fullPageLoader').removeClass('d-none');
+
             }, delay);
         });
     }
