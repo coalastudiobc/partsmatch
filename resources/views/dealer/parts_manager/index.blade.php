@@ -6,13 +6,13 @@
         <x-alert-component />
         <div class="bredcrum-plus-filter justify-content-end">
             <div class="serach-and-filter-box">
-                <form action="">
+                {{-- <form action="">
                     <div class="pro-search-box">
                         <input type="text" class="form-control" name="filter_by_name" placeholder="Search">
                         <button type="submit" class="btn primary-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
                         <!-- <a href="#" class="btn secondary-btn filter-open-btn">Filter</a> -->
                     </div>
-                </form>
+                </form> --}}
                 {{-- @can('role-view', $user) --}}
                 @if ($role == 'Advance')
                     <div class="serach-and-filter-box">
@@ -191,8 +191,8 @@
 
                                                 <li><a class="dropdown-item custom_dropdown_commission" data-value="Basic" data-text="Basic" href="javascript:void(0)">Basic</a>
                                                 </li>
-                                                <li><a class="dropdown-item custom_dropdown_commission" data-value="Advanced" data-text="Advanced" href="javascript:void(0)">Advanced</a>
-                                                </li>
+                                                {{-- <li><a class="dropdown-item custom_dropdown_commission" data-value="Advanced" data-text="Advanced" href="javascript:void(0)">Advanced</a>
+                                                </li> --}}
 
                                             </ul>
                                         </div>

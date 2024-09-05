@@ -6,9 +6,9 @@
         <x-alert-component />
         <div class="row g-4 ">
             @forelse  ($plans as $plan)
-                <div class="col-xl-4 col-lg-4 col-md-6 col-12">
+                <div class="col-xxl-3 col-xl-4 col-lg-6 col-md-6 col-12">
                     <div class="cards" id="card{{ $plan->id }}">
-                        @if(isPlanActive()->plan_id == $plan->id)
+                        @if(isPlanActive($plan))
                         <div id="pointer">
                             <span class="horizontal">Purchased</span>
                           </div>
@@ -40,9 +40,12 @@
                             </ul> --}}
                         </div>
                         <div>
-                        @if(isPlanActive()->plan_id == $plan->id)
-                        <a href="javascript:void(0)" class="btn secondary-btn full-btn ">Active
-                        </a>
+                        @if(isPlanActive($plan))
+                            @if (isAlreadyCancelled($plan))
+                                <p class="subscription-cancelled">Subscription has been cancelled.</p>
+                            @else
+                                <a href="{{ route('Dealer.subscription.plan.cancel') }}" disabled class="btn secondary-btn full-btn delete">Cancel</a>
+                            @endif                
                         @else
                             <a href="javascript:void(0)" class="btn secondary-btn full-btn parchase"
                                 data-plan-id="{{ jsencode_userdata($plan->id) }}"

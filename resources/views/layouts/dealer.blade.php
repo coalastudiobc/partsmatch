@@ -112,7 +112,7 @@
                                 </ul>
                             @endauth
                         </div>
-
+                        
                     </div>
                 </nav>
             </div>

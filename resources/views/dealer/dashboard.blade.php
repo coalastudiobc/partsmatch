@@ -33,7 +33,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-lg-6 col-md-12">
+                <div class="col-xl-3 col-lg-6 col-md-6">
                     <div class="db-analytics-card">
                         <div class="db-analytics-data">
                             <h3>Total Fulfilled Orders</h3>

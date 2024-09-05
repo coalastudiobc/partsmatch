@@ -33,8 +33,8 @@
                                 </div>
 
 
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-6">
+                                <div class="row g-4">
+                                    <div class="col-xl-4 col-lg-6 col-md-12">
                                         <div class="dealer-pro-personal-info">
                                             <ul>
                                                 <li>
@@ -64,7 +64,7 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4 col-md-6">
+                                    <div class="col-xl-4 col-lg-6 col-md-12">
                                         <div class="dealer-pro-commission-info">
                                             <ul>
                                                 <li>
@@ -139,7 +139,7 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4 col-md-12">
+                                    <div class="col-xl-4 col-lg-12 col-md-12">
                                         <div class="dealer-last-five-product">
                                             <h3>Recent Products</h3>
                                             <div class="product-detail-table">

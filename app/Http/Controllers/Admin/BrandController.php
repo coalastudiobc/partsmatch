@@ -35,7 +35,7 @@ class BrandController extends Controller
 
     public function index()
     {
-        $makes = CarBrandMake::select('id', 'makes', 'image_url')->orderBy('created_at', 'DESC')->Search()->paginate(__('pagination.admin_paginaion_number'));
+        $makes = CarBrandMake::select('id', 'makes', 'image_url','status')->orderBy('created_at', 'DESC')->Search()->paginate(__('pagination.admin_paginaion_number'));
         return view('admin.brands.index', compact('makes'));
     }
     public function add()

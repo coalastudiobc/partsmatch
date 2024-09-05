@@ -570,6 +570,7 @@
             response.then(handleCategoriezedData).catch(handleCategoriezedError)
 
             function handleCategoriezedData(response) {
+              
                 if (response.status == true) {
                     jQuery('.productIndex').html(response.data)
                     jQuery('.collectionSubcategory').removeClass('active');
@@ -586,7 +587,6 @@
         });
 
         $('.productsubcategory').on('click', function() {
-            console.log('here');
             element = jQuery(this)
             dataUrl = $(this).attr('data-url');
             jQuery('#subcategoryViewAll').attr('href', dataUrl);
@@ -596,6 +596,7 @@
             response.then(handleCategoriezedData).catch(handleCategoriezedError)
 
             function handleCategoriezedData(response) {
+                console.log('hlo');
                 if (response.status == true) {
                     jQuery('.tabProduct').html(response.data)
                     jQuery('.productsubcategory').removeClass('active');

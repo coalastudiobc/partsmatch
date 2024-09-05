@@ -12,6 +12,7 @@ class CarBrandMake extends Model
         'makes',
         'image_url',
         'image_name',
+        'status',
     ];
     public function scopeSearch($query)
     {

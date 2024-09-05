@@ -39,11 +39,43 @@
     
     
 }
+@media screen and (max-width:1024px) {
+    .page-content-sec .dashboard-left-box {
+        position: fixed;
+        left: 0;
+        max-width: 300px;
+        z-index: 9999;
+        transform: translateX(-100%);
+        transition: all 0.3s linear;
+        height: 100%;
+        top: 0;
+    }
+    .page-content-sec .dashboard-left-box.open {
+        transform: translateX(0);
+    }
+    
+}
 @media screen and (max-width:992px) {
-  
+    .dealer-pro-personal-info {
+        border-right: 0px;
+        height: 100%;
+    }
+    .dealer-pro-commission-info {
+        border-right: 0px;
+    }
 }
 @media screen and (max-width:767px) {
+    .header-logo {
+        max-width: 120px;
+    }
+    .pro-search-box input {
+        min-width: 200px;
+    }
+    .dashboard-right-box {
+        padding: 30px 20px;
+    }
    
+    
 }
 
 @media screen and (max-width:575px) {

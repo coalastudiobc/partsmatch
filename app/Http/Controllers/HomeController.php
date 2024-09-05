@@ -46,7 +46,7 @@ class HomeController extends Controller
         $collections = Category::with('products')->has('products')->where('parent_id', '!=', null)->where('status', '1')->inRandomOrder()->take(10)->get();
         $subcategories = Category::with('products')->has('products')->Where('parent_id', '!=', null)->where('status', '1')->inRandomOrder()->take(6)->get();
 
-        $brands = CarBrandMake::inRandomOrder()->get();
+        $brands = CarBrandMake::where('status','1')->inRandomOrder()->get();
         if (Auth::user()) {
             if (Auth::user()->hasRole("Administrator")) {
                 return redirect()->route('admin.dashboard');
@@ -115,24 +115,35 @@ class HomeController extends Controller
         try {
             $class = "App\Models\\{$request->model}";
 
-            if (empty($class)) {
+            if (empty($class)) 
+            {
                 return response()->json(['status' => 'error', 'message' => ucwords($request->model) . ' not found'], 404);
             }
             $result = $class::where('id', $id)->firstOrFail();
             $status = ($result->status == 1) ? '0' : '1';
 
-            if ($result->update(['status' => $status])) {
-                if ($status == '1') {
-                    if ($class != "App\Models\Package") {
-                        return response()->json(['status' => 'success', 'message' => $request->model . " has been activated"], 200);
-                    } else {
+            if ($result->update(['status' => $status])) 
+            {
+                if ($status == '1') 
+                {
+                    if ($class == "App\Models\Package") {
                         return response()->json(['status' => 'success', 'message' => "Subscription plan" . " has been activated"], 200);
+                    } else if($class == "App\Models\CarBrandMake") {
+                        return response()->json(['status' => 'success', 'message' => "Brand" . " has been activated"], 200);
+                    } else 
+                    {
+                        return response()->json(['status' => 'success', 'message' => $request->model . " has been activated"], 200);
                     }
                 } else {
-                    if ($class != "App\Models\Package") {
-                        return response()->json(['status' => 'danger', 'message' => $request->model . " has been deactivated"], 200);
-                    } else {
+                    if ($class == "App\Models\Package") 
+                    {
                         return response()->json(['status' => 'danger', 'message' => "Subscription plan" . " has been deactivated"], 200);
+                    } else if($class == "App\Models\CarBrandMake")
+                    {
+                        return response()->json(['status' => 'danger', 'message' => "Brand" . " has been deactivated"], 200);
+                    } else
+                    {
+                        return response()->json(['status' => 'danger', 'message' => $request->model . " has been deactivated"], 200);
                     }
                 }
             } else {
@@ -173,7 +184,11 @@ class HomeController extends Controller
         
         if($request->method() == "POST")
         {
-        $products = Product::with('productImage', 'featuredProduct', 'productCompatible')->where('status','1')->category()->FilterCompatiblity($request)->price()->orderBy('id','desc')->paginate(12)->appends($request->query());
+           if($request->sortorder)
+           {
+               $products = Product::with('productImage', 'featuredProduct', 'productCompatible')->where('status','1')->category()->FilterCompatiblity($request)->price()->sort()->paginate(12)->appends($request->query());
+            
+           }
         }
         return view('public_shop', compact("categories", "products", "brands", "years", "models"));
     }

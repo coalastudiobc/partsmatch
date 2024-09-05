@@ -42,19 +42,19 @@
     <header>
         <div class="custm-nav">
             <div class="container">
-                <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                <nav class="navbar  bg-body-tertiary">
                     <a class="navbar-brand" href="{{ route('welcome') }}">
                         <div class="header-logo">
                             <img src="{{ asset('assets/admin/images/header-logo.svg') }}  " alt="">
                         </div>
                     </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                         <span class="navbar-toggler-icon"></span>
                         <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse ms-auto" id="navbarNav">
+                    </button> -->
+                    <div class="admin-header-right" id="navbarNav">
                         <div class="custm-nav-menu login-nav">
                             @auth
                                 <ul class="navbar-nav">
@@ -86,7 +86,7 @@
                                 </ul>
                             @endauth
                         </div>
-
+                        <div  class="sidebar-opener"><i class="fa-solid fa-bars"></i></div>
                     </div>
                 </nav>
             </div>

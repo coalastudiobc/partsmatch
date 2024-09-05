@@ -23,6 +23,10 @@ class Order extends Model
     protected $casts = [
         'total_amount'=>'float',
     ];
+    public function shippoPurchasedLabel()
+    {
+        return $this->hasOne(ShippoPurchasedLabel::class,'order_id','id');
+    }
 
     public function scopeForUser($query, $userId)
     {

@@ -53,7 +53,12 @@
                         <td>
                             <div class="confirm-badge">
                                 <i class="fa-solid fa-check"></i>
+                                @if (is_null($fulfilledOrder->shippoPurchasedLabel->rate_provider))
+                                    <p>Manually</p>
+                                @else
+                                    
                                 <p>Confirmed</p>
+                                @endif
                             </div>
                         </td>
                     </tr>
@@ -67,9 +72,11 @@
                 </table>
             </div>
         </div>
+        @if($fulfilledOrders && count($fulfilledOrders)> 0)
         <div class="pagination-wrapper">
             {!! $fulfilledOrders->links('admin.pagination') !!}
         </div>
+        @endif
     </div>
 
 @endsection

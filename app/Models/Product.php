@@ -191,4 +191,32 @@ class Product extends Model
             });
         });
     }
+    public function scopeSort($query,$request = null)
+    {
+        $request = $request ?? request();
+        $query->when(($request->has('sortorder')) , function ($q) use ($request) {
+            switch ($request->sortorder) {
+                case 'low':
+                    $q->orderBy('price','asc');
+                    break;
+                
+                case 'high':
+                    $q->orderBy('price','desc');
+                    break;
+                
+                case 'new':
+                    $q->orderBy('created_at','desc');
+                    break;
+                
+                case 'old':
+                    $q->orderBy('created_at','asc');
+                    break;
+                
+                default:
+                $q->orderBy('id','desc');
+                    break;
+            }});
+    }
+
+
 }

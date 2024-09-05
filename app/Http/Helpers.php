@@ -17,6 +17,7 @@ use App\Models\DealerPayout;
 use App\Models\PackagePaymentDetail;
 use App\Models\ShippingSetting;
 use App\Models\ShippmentCreation;
+use Laravel\Cashier\Subscription;
 use App\Models\ShippoPurchasedLabel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -402,7 +403,6 @@ if (!function_exists('isFullFilledOrder')) {
             if ($isalready) {
                 return  false;
             } else {
-
                 return true;
             }
         } catch (\Exception $e) {
@@ -515,18 +515,51 @@ if (!function_exists('isPaid')) {
     }
 }
 if (!function_exists('isPlanActive')) {
-    function isPlanActive()
+    function isPlanActive($plan)
     {
         try {
-          $planDetails =  PackagePaymentDetail::where('user_id',auth()->id())->first();
+          $planDetails =  PackagePaymentDetail::where('user_id',auth()->id())->orderBy('created_at','Desc')->first();
           if(is_null($planDetails))
             {
                 return false;
+            }else{
+                if($planDetails->plan_id ==$plan->id){
+                    return true;
+                }
+                return false;
             }
-            return $planDetails;
+            return false;
+            // return $planDetails;
         } catch (\Exception $e) {
             // Log::error('Error in checkForBuyButton: ' . $e->getMessage());
             return false; 
+        }
+    }
+}
+if (!function_exists('isAlreadyCancelled')) {
+    function isAlreadyCancelled($plan)
+    {
+        try {
+            
+            $subscription = Subscription::where('user_id', auth()->id())
+                ->orderBy('created_at', 'desc')
+                ->first();
+
+            if ($subscription && !is_null($subscription->ends_at)) {
+                // Check if the ends_at date is in the past (subscription has ended)
+                
+                // if ($subscription->ends_at->isPast()) {
+                //     return true;
+                // }
+                if ($subscription->ends_at) {
+                    return true;
+                }
+            }
+
+            return false;
+        } catch (\Exception $e) {
+            // Log::error('Error in isAlreadyCancelled: ' . $e->getMessage());
+            return false;
         }
     }
 }

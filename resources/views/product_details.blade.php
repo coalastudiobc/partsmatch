@@ -201,11 +201,80 @@
                                             <div class="accordion" id="accordionExample">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header">
-                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#additional-information1" aria-expanded="false" aria-controls="collapseTwosumit">
-                                                            Additional Information
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#additional-information1" aria-expanded="false" aria-controls="collapseTwo">
+                                                            Fittment
                                                         </button>
                                                     </h2>
                                                     <div id="additional-information1" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                                        <div class="accordion-body">
+                                                            <div class="fittment-details">
+                                                                <ul class="fittment-detail-list">
+                                                                    @forelse ($product->productCompatible as $fitmentYears)
+                                                                    
+                                                                    <div>
+                                                                        <li>
+                                                                            <p>Year: 
+                                                                                <span>
+                                                                                
+                                                                                    {{$fitmentYears->year}} 
+                                                                                </span>
+                                                                            </p>
+                                                                        </li>
+                                                                        <li>
+                                                                            <p>Make: 
+                                                                                <span>
+                                                                                    {{$fitmentYears->make}}
+                                                                                </span>
+                                                                            </p>
+                                                                        </li>
+                                                                        <li>
+                                                                            <p>Model: 
+                                                                                <span>
+                                                                                    {{$fitmentYears->model}}
+                                                                                </span>
+                                                                            </p>
+                                                                        </li>
+                                                                    </div>
+                                                                    @empty
+                                                                   <div>
+                                                                    <li>
+                                                                            <p>Year: 
+                                                                                <span>
+                                                                                    N/A
+                                                                                </span>
+                                                                            </p>
+                                                                        </li>
+                                                                        <li>
+                                                                            <p>Make: 
+                                                                                <span>
+                                                                                N/A
+                                                                                </span>
+                                                                            </p>
+                                                                        </li>
+                                                                        <li>
+                                                                            <p>Model: 
+                                                                                <span>
+                                                                                    N/A
+                                                                                </span>
+                                                                            </p>
+                                                                        </li>
+                                                                   </div>
+                                                                @endforelse
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="accordion" id="accordionExample">
+                                                <div class="accordion-item">
+                                                    <h2 class="accordion-header">
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#additional-information2" aria-expanded="false" aria-controls="collapseTwosumit">
+                                                            Additional Information
+                                                        </button>
+                                                    </h2>
+                                                    <div id="additional-information2" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                                                         <div class="accordion-body">
                                                             <p>{{ $product->additional_details }} </p>
                                                             @if($product && $product->description)

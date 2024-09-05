@@ -452,12 +452,6 @@ class ProductController extends Controller
             }
     }
    
-    public function getFeatureLimit()
-    {
-        return PackagePaymentDetail::where('user_id', auth()->id())
-            ->pluck('plan_product_count')
-            ->firstOrFail();
-    }
     public function canAddMoreProducts(int $featureLimit, array $featuredProductIds, array $newProducts)
     {
         return $featureLimit >= (count($featuredProductIds) + count($newProducts));
@@ -486,8 +480,8 @@ class ProductController extends Controller
     {
         try {
             // $featureLimit= PackagePaymentDetail::where('user_id',auth()->id())->pluck('plan_product_count')->firstOrFail();
-            $featureLimit= PackagePaymentDetail::where('user_id',auth()->id())->orderBy('created_at', 'desc')
-            ->value('plan_product_count');
+            // $featureLimit= PackagePaymentDetail::where('user_id',auth()->id())->orderBy('created_at', 'desc')->value('plan_product_count');
+            $featureLimit= $this->getFeatureLimit();
             // $products=FeaturedProduct::where('user_id',auth()->id())->orderBy('created_at','desc')->Paginate(__('pagination.pagination_nuber'));
             $alreadyFeaturedProductIds = FeaturedProduct::where('user_id',auth()->id())->pluck('product_id')->toArray();
             $products=Product::where('user_id',auth()->id())
@@ -499,6 +493,15 @@ class ProductController extends Controller
         } catch (\Exception $e) {
          return redirect()->back()->with(['Error'=>$e->getMessage()]);
         }
+    }
+    public function getFeatureLimit()
+    {
+        // return PackagePaymentDetail::where('user_id', auth()->id())
+        //     ->pluck('plan_product_count')
+        //     ->firstOrFail();
+       return  PackagePaymentDetail::where('user_id',auth()->id())
+                            ->orderBy('created_at', 'desc')
+                            ->value('plan_product_count');
     }
     public function featuredproductcreate(Product $product)
     {

@@ -90,6 +90,7 @@ Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer'
     Route::name('subscription.')->group(function () {
         Route::get('subscription/plans', [SubscriptionController::class, 'index'])->name('plan');
         Route::post('subscription/plans/purchase', [SubscriptionController::class, 'purchaseSubscription'])->name('plan.purchase');
+        Route::get('subscription/plan/cancel', [SubscriptionController::class, 'unsubscribe'])->name('plan.cancel');
     });
 
     Route::name('partsmanager.')->group(function () {

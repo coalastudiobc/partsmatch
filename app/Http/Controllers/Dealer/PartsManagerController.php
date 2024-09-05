@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dealer;
 
+use Exception;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
@@ -17,34 +18,43 @@ class PartsManagerController extends Controller
         // $request = request();
         $users = User::with('productOfManager')->where('working_for', auth()->user()->id)->Search()->orderBy('created_at', 'DESC')->Paginate(__('pagination.pagination_nuber'));
         $role= $this->getUserRole(auth()->user());
+       
         return view('dealer.parts_manager.index', compact('users', 'role'));
     }
     public function store(PartsManagerRequest $request)
     {
-        $user = [
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'phone_number' => $request->phone_number,
-            'working_for' => auth()->user()->id,
-            'image' => ['image', 'mimes:' . config('validation.php_profile_pic_mimes'), 'max:' . config('validation.php_profile_pic_size')],
+        try {
+            if($this->checkDealerPartManagers())
+            {
+                $user = [
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'password' => Hash::make($request->password),
+                    'phone_number' => $request->phone_number,
+                    'working_for' => auth()->user()->id,
 
-        ];
-        if ($request->image) {
-            $image = store_image($request->image, 'profile_pictures');
-            $user['profile_picture_url'] = $image['url'];
-            $user['profile_picture_file'] = $image['name'];
+                ];
+                if ($request->image) {
+                    $image = store_image($request->image, 'profile_pictures');
+                    $user['profile_picture_url'] = $image['url'];
+                    $user['profile_picture_file'] = $image['name'];
+                }
+                $userdetails = User::create($user);
+                $userdetails->assignRole('Manager');
+                if ($request->permission_type == "Basic") {
+                    $userdetails->givePermissionTo('role-view');
+                } else {
+                    $userdetails->syncPermissions(['role-edit', 'role-view', 'role-create', 'role-delete']);
+                }
+                return redirect()->back()->with(['status' => 'success', 'message' => "created successfully"]);
+            }
+            else{
+                return redirect()->back()->with('info','You can not add more than one part manager.');
+            }
+        } catch (\Exception $th) {
+            return redirect()->back()->with(['error',  $th->getMessage()]);
         }
-        $userdetails = User::create($user);
-        $userdetails->assignRole('Manager');
-        if ($request->permission_type == "Basic") {
-            $userdetails->givePermissionTo('role-view');
-        } else {
-            $userdetails->syncPermissions(['role-edit', 'role-view', 'role-create', 'role-delete']);
-        }
-        return redirect()->back()->with(['status' => 'success', 'message' => "created successfully"]);
     }
-
     public function edit(User $user)
     {
         try {
@@ -130,6 +140,22 @@ class PartsManagerController extends Controller
         } catch (\Throwable $th) {
             throw new Exception('Did not found role:.'.$th->getMessage());
            
+        }
+    }
+    public function checkDealerPartManagers()
+    {
+        try {
+           $DealerPartManager= User::where('working_for', auth()->id())->get();
+           if(count($DealerPartManager) == 0)
+           {
+            return true;
+            }else{
+                return false;
+            }
+            
+        } catch (\Exception $e) {
+            throw new Exception('Did not found any part: '.$th->getMessage());
+
         }
     }
 }

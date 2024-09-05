@@ -13,7 +13,7 @@
                         <th>Part Name</th>
                         <th>Quantity</th>
                     </tr>
-                    @foreach ($products as $product)
+                    @forelse ($products as $product)
                     <tr>
                         <td>
                             <input type="checkbox" name="featured_product_Ids[]" value="{{ $product->id }}" class="feature-checkbox"  id="featureCheckbox"
@@ -27,10 +27,18 @@
                         <td>{{ $product->name }}</td>
                         <td>{{ $product->stocks_avaliable }}</td>
                     </tr>
-                    @endforeach
+                    @empty
+                    <div class="empty-data">
+                        <img src="{{ asset('assets/images/no-product.svg') }}" alt="" width="300">
+                        <p class="text-center mt-1">Did not found any parts. Please  <a href="{{ route(auth()->user()->getRoleNames()->first() . '.products.index') }}"><u>add</u></a></u> part first</p>
+                    </div>
+                    @endforelse
                 </table>
+                @if (isset($products) && count($products)>0)
                 <p id="limit-message" style="color:red;"></p>
                 <button type="submit" class="btn primary-btn float-end" id="submit-button">Add in Features</button>
+                    
+                @endif
             </form>
         </div>
     </div>

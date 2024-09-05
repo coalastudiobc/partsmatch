@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Exception;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\FulFilledOrder;
@@ -84,9 +85,20 @@ class shippmentController extends Controller
 
     public function getFulfilledShippment()
     {
-        $fulfilledIds = ShippoPurchasedLabel::pluck('order_id');
-        $fulfilledOrders = $fulfilledIds->isNotEmpty() ? Order::whereIn('id', $fulfilledIds)->latest()->paginate(__('pagination.admin_paginaion_number')) : collect(); 
-        return view('admin.shippment.fulfilled', compact('fulfilledOrders'));
+        try {
+            $manualshippingIds=ShippoPurchasedLabel::where('rate_provider',null)->get(['order_id']);
+            
+            $fulfilledIds = ShippoPurchasedLabel::pluck('order_id');
+            if (!$fulfilledIds || is_null($fulfilledIds)) 
+            {
+            throw new Exception("fulfilledIds did not found");  
+            }
+            $fulfilledOrders = $fulfilledIds ? Order::with('shippoPurchasedLabel')->whereIn('id', $fulfilledIds)->latest()->paginate(__('pagination.admin_paginaion_number')) : collect(); 
+            return view('admin.shippment.fulfilled', compact('fulfilledOrders','manualshippingIds'));
+        } catch (\Exception $th) {
+            toastr()->error($th->getMessage());
+            return redirect()->back();
+        }
     }
     
     public function createShippmentManual(Request $request,$fulfilled_id)

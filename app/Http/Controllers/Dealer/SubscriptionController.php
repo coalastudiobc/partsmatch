@@ -15,20 +15,20 @@ class SubscriptionController extends Controller
 {
     public function index()
     {
+
         try {
             $user = auth()->user();
             $plans = Package::where('status', '1')->get();
             $intent = $user->createSetupIntent();
             return view('dealer.subscription.plans', compact('plans', 'intent'));
         } catch (\Exception $e) {
-            return redirect()->back()->with(['Error'=> $e->getMessage()]);   
+            return redirect()->back()->with(['error'=> $e->getMessage()]);   
         }
     }
 
     function purchaseSubscription(Request $request)
     {
         try {
-            $user = auth()->user();
             $plan_id = jsdecode_userdata($request->plan_id);
             $plan = Package::find($plan_id);
             if (!$plan) 
@@ -36,13 +36,20 @@ class SubscriptionController extends Controller
                 throw new \Exception('Selected plan did not found : ' .$e->getMessage());
             }
 
-            $subscription = $user->subscriptions()->active()->first(); // Check if the user has an active subscription
+            $subscription = $this->getActiveSubscription(); // Check if the user has an active subscription
             if ($subscription) {
                  // If the user already has a subscription, upgrade it
                  $subscription->swap($plan->stripe_price);
             } else {
                  // If the user doesn't have a subscription, create a new one
-                 $subscription = $user->newSubscription($plan->stripe_id, $plan->stripe_price)->create($request->token);
+                 $subscription = auth()->user()->newSubscription($plan->stripe_id, $plan->stripe_price)->create($request->token);
+
+                // $subscription = $user->newSubscription($plan->stripe_id, $plan->stripe_price)
+                //                     ->create($request->token, [
+                //                         'email' => $user->email,
+                //                         'ends_at' => Carbon::now()->$this->billingCycleLogic($plan),
+                //                     ]);
+
             }   
 
             if (!$subscription) 
@@ -50,14 +57,30 @@ class SubscriptionController extends Controller
                 throw new \Exception('Something went wrong in subscription creation : ' .$e->getMessage());
             }
                 $this->storeData($subscription,$plan);
-
             return redirect()->route('Dealer.subscription.plan')->with(['status' => 'success', 'message' => 'Subscription purchased successfully']);
         } catch (Exception $e) {
             return redirect()->back()->with(['error' => $e->getMessage()]);
         }
     }
+    
+    public function unsubscribe()
+    {
+        try {
+            $user = auth()->user();
+            
+            $subscription = $this->getActiveSubscription();
+            if (!$subscription || $subscription->ends_at) {
+                return redirect()->route('Dealer.subscription.plan')->with('error', 'You have already canceled the plan.');
+            }
+            $subscription->cancel(); //cancel the plan and insert current date in ends_at column for latest one row of subscription
+            return redirect()->route('Dealer.subscription.plan')->with('success', 'Subscription has been canceled successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('Dealer.subscription.plan')>with('error', $e->getMessage());
+        }
+    }
 
-    public function storeData($subscription,$plan){
+    public function storeData($subscription,$plan)
+    {
         try {
             if(!$subscription && !$plan)
             {
@@ -79,8 +102,12 @@ class SubscriptionController extends Controller
             
         }
     }
-   
 
+    public function getActiveSubscription()
+    {
+        return auth()->user()->subscriptions()->active()->first();
+    }
+    
     public function billingCycleLogic($subscription,$plan)
     {
         try {
@@ -114,5 +141,40 @@ class SubscriptionController extends Controller
             throw new \Exception(' in Adding billing Cycle Logic: ' .$e->getMessage());
         }   
     }
-    
+   
+
+
+ // public function billingCycleLogic($plan)
+    // {
+    //     try {
+    //         $createdDate = Carbon::now();
+
+    //         switch ($plan->billing_cycle) {
+    //             case 'Monthly':
+    //                 $expireDate = $createdDate->addMonth();
+    //                 break;
+
+    //             case 'Quarterly':
+    //                 $expireDate = $createdDate->addMonths(3);
+    //                 break;
+
+    //             case 'Halfly':
+    //                 $expireDate = $createdDate->addMonths(6);
+    //                 break;
+
+    //             case 'Yearly':
+    //                 $expireDate = $createdDate->addYear(); // Carbon automatically handles leap years
+    //                 break;
+
+    //             default:
+    //                 throw new \Exception('Invalid billing cycle type: ' . $plan->billing_cycle);
+    //         }
+
+    //         return $expireDate;
+
+    //     } catch (\Exception $e) {
+    //         throw new \Exception('Error in Adding Billing Cycle Logic: ' . $e->getMessage());
+    //     }
+    // }
+
 }

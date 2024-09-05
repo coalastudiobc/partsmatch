@@ -824,7 +824,7 @@ header {
 
 .discount-price {
     display: flex;
-    gap: 5px;
+    gap: 20px;
     align-items: center;
 }
 
@@ -1541,6 +1541,11 @@ button.btn-close {
     left: 50%;
     transform: translateX(-50%);
     top: 125px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    gap: 15px;
 }
 
       /* Loader css Start */
@@ -2165,8 +2170,10 @@ span.ymmm-cross {
     margin: 0px 0 0;
     border-radius: 10px;
     padding: 20px;
-    box-shadow: 1px 1px 10px 4px #ddd;
-    border: 1px solid transparent;
+    /* box-shadow: 1px 1px 10px 4px #ddd; */
+    /* border: 1px solid transparent; */
+    border: 1px solid #ddd;
+    width: 100%;
 }
 
 .adress-info-haeder {
@@ -2238,6 +2245,7 @@ span.ymmm-cross {
 
 .adress-info-inner {
     position: relative;
+    cursor: pointer;
 }
 
 .adress-info-inner .form-group label {
@@ -3133,8 +3141,8 @@ button.accordion-button.analyics-tabs-btns {
 
 .section-body.edit-product-sec .card-body {
     border-radius: 10px;
-    box-shadow: 1px 1px 10px 4px #ddd;
-    border: 0;
+    /* box-shadow: 1px 1px 10px 4px #ddd; */
+    border: 1px solid #ddd;
 }
 
 
@@ -3575,15 +3583,21 @@ width: 100%;
     line-height: 24px;
     text-transform: capitalize;
 }
-ul.plan-details-list {
+/* ul.plan-details-list {
     padding-left: 30px;
-}
+} */
 .plan-details-list li {
-    font-size: 18px;
-    line-height: 1;
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 600;
     margin-bottom: 20px;
+    padding-left: 30px;
+    /* text-transform: capitalize; */
     word-wrap: break-word;
-    list-style: initial;
+    list-style: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' id='Capa_1' x='0px' y='0px' viewBox='0 0 507.506 507.506' style='enable-background:new 0 0 507.506 507.506;' xml:space='preserve' width='15' height='15'%3E%3Cg%3E%3Cpath d='M163.865,436.934c-14.406,0.006-28.222-5.72-38.4-15.915L9.369,304.966c-12.492-12.496-12.492-32.752,0-45.248l0,0 c12.496-12.492,32.752-12.492,45.248,0l109.248,109.248L452.889,79.942c12.496-12.492,32.752-12.492,45.248,0l0,0 c12.492,12.496,12.492,32.752,0,45.248L202.265,421.019C192.087,431.214,178.271,436.94,163.865,436.934z'/%3E%3C/g%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: 10px 4px;
 }
 .cards:hover {
     background-color: #ffffff !important;
@@ -3664,15 +3678,143 @@ ul.plan-details-list {
     /* margin-bottom: 30px; */
     padding: 0px 0px;
 }
+.subscription-cancelled {
+    text-align: center;
+    font-weight: 600;
+}
+
+.feature-slider .slick-track{
+    display: flex;
+}
+
+.feature-slider .slick-track .slick-slide > div {
+    display: flex;
+    width: 100%;
+}
+.feature-slider .slick-track .slick-slide {
+    height: inherit;
+    display: flex;
+}
+.fittment-detail-list li p {
+    color: #000;
+    font-weight: 600;
+    /* font-size: 16px !important; */
+}
+.fittment-detail-list li p span {
+    font-weight: 600;
+}
+.pro-detail-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+}
+
+.shipment-date-box .date-formfield .formfield {
+    position: relative;
+    width: fit-content;
+    z-index: 1;
+}
+.shipment-date-box {
+    padding: 20px 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin: 0 0 20px;
+}
+.shipment-date-box label{
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 18px;
+}
+.date-formfield {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+}
+.adress-info-main .right-btn-box h3{
+    font-size: 18px;
+}
+.adress-info-main .right-btn-box a{
+    min-width: 221px;
+}
+.shipment-adress-details-box {
+    padding: 20px 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+.adress-info-inner:has(input[type="radio"]:checked)::before{
+    border: 4px solid var(--secondary-color);
+}
+
+label.adress-info-inner::before {
+    content: "";
+    position: absolute;
+    right: 22px;
+    top: 23px;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #9d9d9d;
+    border-radius: 50px;
+}
+.adress-info-inner input[type="radio"]{
+    display: none;
+}
+.shipment-adress-filled-data {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+.shipment-date-box .date-formfield .formfield .form-control {
+    background-color: transparent;
+    cursor: pointer;
+}
+.price-input-container .price-field span {
+    margin-right: 0px;
+    margin-top: 0px;
+    font-size: 17px;
+}
+
+.price-input-container .form-control {
+    border: 1.81px solid #272643;
+    font-size: 16px;
+    color: #272643;
+    font-weight: 600;
+}
+.fittment-detail-list > div {
+    background-color: #fff;
+    display: grid;
+    align-content: space-around;
+    width: 100%;
+    grid-template-columns: 0.7fr 1fr 1.5fr;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 5px 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+.fittment-detail-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 
 
+.price-and-cart > p.text-danger{
+    font-size: 12px;
+}
 
-
-
-
-
-
-
+.price-and-cart p.disabl {
+    background-color: #f6f6f6;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
 
 
 
