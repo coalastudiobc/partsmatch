@@ -52,11 +52,18 @@
                         <div class="accordion" id="accordionExample">
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="headingOne">
-                                <button class="accordion-button p-0 mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <button class="accordion-button p-0 mb-2 @if(count(request()->query()) === 0) collapsed   @endif" 
+                                    type="button" 
+                                    data-bs-toggle="collapse" 
+                                    data-bs-target="#collapseOne" 
+                                    aria-expanded="{{ count(request()->query()) === 0 ? 'false' : 'true' }}" 
+                                    aria-controls="collapseOne">
                                     <h4>Categories</h4>
                                 </button>
                                 </h2>
-                                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                <div id="collapseOne" class="accordion-collapse collapse  @if(count(request()->query()) === 0) @else show @endif"
+                                     aria-labelledby="headingOne" 
+                                     data-bs-parent="#accordionExample">
                                     <div class="accordion-body p-0">
                                         <div class="category-list">
                                             
@@ -96,11 +103,11 @@
                             <div class="accordion" id="accordionExample1">
                                 <div class="accordion-item">
                                 <h2 class="accordion-header" id="headingTwo">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    <button class="accordion-button @if(!request()->has('brand')) collapsed  @endif" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                         <h4>Makes</h4>
                                     </button>
                                 </h2>
-                                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample1">
+                                <div id="collapseTwo" class="accordion-collapse collapse  @if(request()->has('brand')) show  @endif" aria-labelledby="headingTwo" data-bs-parent="#accordionExample1">
                                     <div class="accordion-body">
                                         <div id="brandContainer" class="interior-filter-inner">
                                             
@@ -144,11 +151,11 @@
                             <div class="accordion" id="accordionExample3">
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="headingFour">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                        <button class="accordion-button @if(!request()->has('model')) collapsed  @endif" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                                             <h4>Models</h4>
                                         </button>
                                     </h2>
-                                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample3">
+                                    <div id="collapseFour" class="accordion-collapse collapse @if(request()->has('model')) show  @endif" aria-labelledby="headingFour" data-bs-parent="#accordionExample3">
                                         <div class="accordion-body">
                                             <div id="modelContainer" class="interior-filter-inner">
                                                 <div class="form-group">
@@ -183,11 +190,11 @@
                             <div class="accordion" id="accordionExample2">
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="headingThree">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    <button class="accordion-button collapsed @if(!request()->has('year')) collapsed  @endif" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                                         <h4>Years</h4>
                                     </button>
                                     </h2>
-                                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample2">
+                                    <div id="collapseThree" class="accordion-collapse collapse @if(request()->has('year')) show  @endif" aria-labelledby="headingThree" data-bs-parent="#accordionExample2">
                                     <div class="accordion-body">
                                         <div id="yearContainer" class="interior-filter-inner">
                                             <div class="form-group">
@@ -227,11 +234,11 @@
                             <div class="accordion" id="accordionExample">
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="headingThree">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsenew" aria-expanded="false" aria-controls="collapseThree">
+                                    <button class="accordion-button  @if(request('sortorder'))  @else collapsed  @endif " type="button" data-bs-toggle="collapse" data-bs-target="#collapsenew" aria-expanded="false" aria-controls="collapseThree">
                                         <h4>Sort</h4>
                                     </button>
                                     </h2>
-                                    <div id="collapsenew" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                    <div id="collapsenew" class="accordion-collapse collapse @if(request('sortorder')) show @else   @endif" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
                                             <div class="interior-filter-inner sortingclass">
                                                 <div class="custm-check">
@@ -463,72 +470,6 @@
         }
 
 
-            // jQuery('#modelSearch').select2(
-            // {
-            //     placeholder: 'Search',
-            //     allowClear: true
-            // });
-            // jQuery('#makeSearch').select2(
-            // {
-            //     placeholder: 'Search',
-            //     allowClear: true
-            // });
-            // jQuery('#yearSearch').select2(
-            // {
-            //     placeholder: 'Search',
-            //     allowClear: true
-            // });
-
-            // jQuery('#modelSearch').on('change', function() 
-           // {
-            //     var selectedValue = jQuery(this).val();
-            //     if (selectedValue) {
-            //         console.log('model');
-            //         jQuery('.custm-check').each(function() {
-            //             var checkboxValue = jQuery(this).find('input[type="checkbox"]').val();
-            //             if (selectedValue.includes(checkboxValue)) {
-            //                 jQuery(this).show();
-            //             } else {
-            //                 jQuery(this).hide();
-            //             }
-            //         });
-            //     } else {
-            //         jQuery('.custm-check').show();
-            //     }
-            // });
-            // jQuery('#makeSearch').on('change', function() {
-            //     var selectedValue = jQuery(this).val();
-            //     if (selectedValue) {
-            //         console.log('makeseach');
-            //         jQuery('.custm-check').each(function() {
-            //             var checkboxValue = jQuery(this).find('input[type="checkbox"]').val();
-            //             if (selectedValue.includes(checkboxValue)) {
-            //                 jQuery(this).show();
-            //             } else {
-            //                 jQuery(this).hide();
-            //             }
-            //         });
-            //     } else {
-            //         jQuery('.custm-check').show();
-            //     }
-            // });
-            // jQuery('#yearSearch').on('change', function() {
-            //     var selectedValue = jQuery(this).val();
-            //     if (selectedValue) {
-            //         console.log('makeseach');
-            //         jQuery('.custm-check').each(function() {
-            //             var checkboxValue = jQuery(this).find('input[type="checkbox"]').val();
-            //             if (selectedValue.includes(checkboxValue)) {
-            //                 jQuery(this).show();
-            //             } else {
-            //                 jQuery(this).hide();
-            //             }
-            //         });
-            //     } else {
-            //         jQuery('.custm-check').show();
-            //     }
-            // });
-
         // jQuery('#collapseOne').collapse('hide'); //hiding or closing accordian of category
 
         $('.see-more-less-make').on('click', function() 
@@ -562,6 +503,7 @@
 
         $('.delete-filter').on('click', function()
          {
+            
             var action = $(this).attr('data-action');
             if(action == "price"){
                 $('#selectedMinValue').val('0');
@@ -584,7 +526,7 @@
                console.log(index,item);
             }); 
         });
-        $('.sortingclass input[type="radio"]').on('change', function() {
+        $('input[name="sortorder"]').on('change', function() {
                 console.log('Selected value:', $(this).val());
                 $('#filters').submit();
                 jQuery('#fullPageLoader').removeClass('d-none');
@@ -685,7 +627,6 @@
 
         form.addEventListener('change', () => {
             clearTimeout(timeout);
-            return true;
             timeout = setTimeout(() => {
                 form.submit();
             jQuery('#fullPageLoader').removeClass('d-none');

@@ -308,7 +308,7 @@
             <div class="more-product-box">
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="head-tab-1" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-                        <div class="more-product-boxes tabProduct feature-slider">
+                        <div class="more-product-boxes  feature-slider">
                         @foreach ($products as $product)
                             <x-home-product-tab :product="$product" />
                         @endforeach
@@ -330,7 +330,7 @@
             <div class="more-product-box">
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="head-tab-1" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-                        <div class="more-product-boxes tabProduct feature-slider">
+                        <div class="more-product-boxes  feature-slider">
                         @foreach ($subcategorie[0]->productForWelcome as $product)
                             <x-home-product-tab :product="$product" />
                         @endforeach
@@ -400,7 +400,7 @@
 
             <div id="brandContainer" class="sp-brands brand-height-fix">
                 @foreach($brands as $brand)
-                <div class="brands-image brand-container make-filter" data-make="{{$brand->makes}}">
+                <div class="brands-image brand-container make-filter" data-make="{{$brand->makes}}" >
                     <img src="{{ $brand->image_url ? Storage::url($brand->image_url) : asset('assets/images/car-logo2.png') }}" alt="" class="">
                     <div class="brands-image-content">
                         <h6>{{$brand->makes}}</h6>

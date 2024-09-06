@@ -25,6 +25,9 @@
                             <p>Fullfilled Date</p>
                         </th>
                         <th>
+                            <p>Delivery Date</p>
+                        </th>
+                        <th>
                             <p>Action</p>
                         </th>
                     </tr>
@@ -49,6 +52,11 @@
                         </td>
                         <td>
                             <p>{{ $fulfilledOrder ? ($fulfilledOrder->created_at ? date('m/d/Y', strtotime($fulfilledOrder->created_at)) : 'N/A'):'N/A' }}</p>
+                        </td>
+                        <td>
+                            <p>{{ $fulfilledOrder ? ($fulfilledOrder->shippoPurchasedLabel->qr_code_url ?
+                             date('m/d/Y', strtotime($fulfilledOrder->shippoPurchasedLabel->qr_code_url)) : 
+                             \Carbon\Carbon::parse($fulfilledOrder->shippoPurchasedLabel->created_at)->addDays(5)->format('m/d/Y')):'N/A' }}</p>
                         </td>
                         <td>
                             <div class="confirm-badge">

@@ -30,8 +30,8 @@ Route::name('Manager.products.')->group(function () {
     Route::get('/products/interior', [ProductController::class, 'show'])->name('interior');
     Route::get('/products/details/{product}', [ProductController::class, 'details'])->name('details');
 });
-Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer')->name('Manager.')->group(
-    function () {
+Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer')->name('Manager.')->group( function () 
+    {
 
         Route::name('products.')->group(function () {
             Route::get('/products/create', [ProductController::class, 'create'])->name('create');
@@ -63,6 +63,13 @@ Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer'
             Route::post('checkout/store', [CheckoutController::class, 'store'])->name('store');
             Route::post('checkout/shiping/rates', [CheckoutController::class, 'getPaymentPage'])->name('rates');
             // Route::get('/sachin/testing', [CheckoutController::class, 'testing']);
+        });
+        Route::name('myorder.')->group(function () {
+            Route::get('order', [CheckoutController::class, 'order'])->name('orderlist');
+            Route::get('order/view/{order}', [CheckoutController::class, 'orderProductView'])->name('view.products');
+        });
+        Route::name('address.')->group(function () {
+            Route::match(['get', 'post'],'product/shipping/toaddress', [CheckoutController::class, 'to_address'])->name('to');
         });
     }
 );

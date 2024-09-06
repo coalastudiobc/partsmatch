@@ -7,26 +7,26 @@ use App\Models\Cart;
 use App\Models\City;
 use App\Models\Order;
 use App\Models\State;
+use App\Models\Product;
 use App\Models\Country;
-use App\Models\OrderItem;
 use Stripe\PaymentIntent;
+use App\Models\OrderItem;
 use App\Models\CartProduct;
 use App\Traits\ShippoTrait;
 use App\Models\AdminSetting;
 use App\Models\BuyerAddress;
-use App\Http\Requests\ShippingAddressRequest;
 use Illuminate\Http\Request;
 use App\Models\UserAddresses;
-use Illuminate\Support\Collection;
 use App\Models\ShippingAddress;
 use App\Models\ShippingSetting;
 use App\Models\ShippmentCreation;
-use App\Models\ProductParcelDetail;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use App\Models\ProductParcelDetail;
 use App\Http\Controllers\Controller;
 use App\Models\ShippoPurchasedLabel;
 use App\Http\Requests\CheckoutRequest;
-use App\Models\Product;
+use App\Http\Requests\ShippingAddressRequest;
 use GuzzleHttp\Psr7\Request as GuzzleRequest;
 
 class CheckoutController extends Controller
@@ -293,7 +293,6 @@ class CheckoutController extends Controller
     public function to_address(Request $request)
     {   
         try {
-
             $responseInArray = $this->address($request);
             // dd($responseInArray);
             if ($responseInArray->object_state !== 'VALID') {
@@ -327,12 +326,7 @@ class CheckoutController extends Controller
             //     $flag = 0;
             // }
 
-
-
-
             // 'shipping_address_table_id' => $for_address->id,
-
-
 
             $current_shipping_address = ShippingAddress::create($shippingAddress);
             session()->put('shipping_address_row_id', $current_shipping_address->id);
@@ -354,7 +348,7 @@ class CheckoutController extends Controller
             $selectedShipping = ShippingSetting::find($request->shipping_Method);
             return view('dealer.payment', compact('allProductsOfCart', 'grandTotal', 'selectedShipping', 'stripeCustomer', 'intent'));
         } catch (\Exception $e) {
-            return redirect()->back()->with('Error in shipping address: ', $e->getMessage());
+            return redirect()->back()->with('error','Error in shipping address: '. $e->getMessage());
         }
     }
 

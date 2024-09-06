@@ -41,7 +41,7 @@
                             </td>
                             <td>
                                 <div class="brands-imgs">
-                                    <img src="{{ asset('storage/' . $make->image_url) }}" alt="brand Image">
+                                    <img src="{{ $make->image_url ? asset('storage/' . $make->image_url) : asset('assets/images/car-logo2.png') }}" alt="brand Image">
                                 </div>
                             </td>
                             <td>

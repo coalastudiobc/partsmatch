@@ -3815,7 +3815,10 @@ label.adress-info-inner::before {
     border-radius: 5px;
     border: 1px solid #ddd;
 }
-
+.brands-image.brand-container.make-filter
+{
+cursor: pointer;
+}
 
 
 

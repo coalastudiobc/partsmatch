@@ -451,9 +451,10 @@
         // Handle City Selection
         jQuery(document).on('click', '.city_dropdown_item', function() {
             var cityId = jQuery(this).attr('data-value');
+            var cityname = jQuery(this).attr('data-text');
             var selecttext = jQuery(this).attr('data-text');
             jQuery('#selectedCity').text(selecttext);
-            jQuery('input[name="city"]').val(cityId);
+            jQuery('input[name="city"]').val(cityname);
             jQuery('input[name="city"]').removeClass('is-invalid');
             jQuery('#city-error').text('');
         });
