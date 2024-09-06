@@ -321,6 +321,7 @@
 </section>
 @else
 {{-- another product --}}
+ @isset($subcategories[0])
 <section class="more-product-sec">
     <div class="container">
         <div class="more-product-wrapper">
@@ -335,12 +336,14 @@
                             <x-home-product-tab :product="$product" />
                         @endforeach
                         </div>
+                       
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+ @endisset
 {{-- end --}}
 @endif
 {{-- end featured product --}}
