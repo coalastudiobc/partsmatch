@@ -321,6 +321,7 @@
 </section>
 @else
 {{-- another product --}}
+ @isset($subcategories[0])
 <section class="more-product-sec">
     <div class="container">
         <div class="more-product-wrapper">
@@ -330,17 +331,20 @@
             <div class="more-product-box">
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="head-tab-1" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                   
                         <div class="more-product-boxes tabProduct feature-slider">
-                        @foreach ($subcategorie[0]->productForWelcome as $product)
+                        @foreach ($subcategories[0]->productForWelcome as $product)
                             <x-home-product-tab :product="$product" />
                         @endforeach
                         </div>
+                       
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+ @endisset
 {{-- end --}}
 @endif
 {{-- end featured product --}}
