@@ -84,7 +84,7 @@
                     @empty
                     <tr>
                         <td class="no-record-found">
-                            <center>Did not found any order </center>
+                            <center>Did not found any payout </center>
                         </td>
                     </tr>
                     @endforelse
@@ -92,8 +92,10 @@
             </div>
         </div>
         <div class="pagination-wrapper">
-            {!! $fulfilledOrders->links('admin.pagination') !!}
-        </div>
+        @if($fulfilledOrders)
+        {!! $fulfilledOrders ?? $fulfilledOrders->links('admin.pagination')  !!}
+        @endif
+    </div>
     </div>
 @endsection
 @push('scripts')

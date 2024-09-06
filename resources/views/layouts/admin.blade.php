@@ -86,7 +86,7 @@
                                 </ul>
                             @endauth
                         </div>
-                        <div  class="sidebar-opener"><i class="fa-solid fa-bars"></i></div>
+                        <div  class="admin-sidebar-opener"><i class="fa-solid fa-bars"></i></div>
                     </div>
                 </nav>
             </div>
@@ -136,7 +136,7 @@
         <div class="footer-main">
             <div class="container">
                 <div class="footer-small">
-                    <p class="right-reserve">{{ date('Y') }} partsmatch.com All Right Reserved</p>
+                    <p class="right-reserve">© {{ date('Y') }} partsmatch.com All Right Reserved</p>
                 </div>
             </div>
         </div>
@@ -187,6 +187,14 @@
                     // Here you can trigger the rest of your page load functionality
                 }
             }, 100);
+
+            jQuery('.admin-sidebar-opener').on('click',function (e) {
+                jQuery('.dashboard-left-box').addClass('open');
+            })
+            jQuery('.admin-sidebar-cross-icon').on('click',function (e) {
+                jQuery('.dashboard-left-box').removeClass('open');
+            })
+
         });
     </script>
     @stack('scripts')

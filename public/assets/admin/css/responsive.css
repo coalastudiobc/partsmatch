@@ -40,6 +40,12 @@
     
 }
 @media screen and (max-width:1024px) {
+    .admin-sidebar-cross-icon{
+        display: block !important;
+    }
+    .admin-sidebar-opener {
+        display: block !important;
+    }
     .page-content-sec .dashboard-left-box {
         position: fixed;
         left: 0;

@@ -515,8 +515,9 @@
 
 .product-detail-table table tr th {
     border-bottom: 0;
-    padding: 12px 22px 12px 22px;
+    /* padding: 12px 22px 12px 22px; */
     white-space: nowrap;
+    padding: 12px 10px 12px 10px !important;
 }
 
 .product-detail-table table tr th p {

@@ -78,7 +78,7 @@
                                                 <div class="dropdown">
                                                     <button class="btn btn-secondary dropdown-toggle" type="button"
                                                         data-bs-toggle="dropdown" aria-expanded="false">
-                                                        <img src="{{ Storage::url($authUser->profile_picture_url) }}"
+                                                        <img src="{{ $authUser->profile_picture_url ? Storage::url($authUser->profile_picture_url) : asset('assets/images/user.png') }}"
                                                             alt="">
                                                         {{ $authUser->name }}
                                                     </button>

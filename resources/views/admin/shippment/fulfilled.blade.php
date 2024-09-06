@@ -16,7 +16,7 @@
                             <p>Cart Amount</p>
                         </th>
                         <th>
-                            <p>Shipment Charges</p>
+                            <p>Ship Charges</p>
                         </th>
                         <th>
                             <p>Buy Date</p>

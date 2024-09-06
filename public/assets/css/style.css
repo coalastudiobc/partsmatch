@@ -1546,6 +1546,7 @@ button.btn-close {
     align-items: center;
     align-content: center;
     gap: 15px;
+    max-width: 600px;
 }
 
       /* Loader css Start */
@@ -3819,6 +3820,25 @@ label.adress-info-inner::before {
 {
 cursor: pointer;
 }
+.quantity-box {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.quantity-box h4 {
+    font-size: 14px;
+    line-height: 18px;
+}
+
+.quantity-box > p {
+    font-size: 14px;
+}
+
+
+
+
+
 
 
 

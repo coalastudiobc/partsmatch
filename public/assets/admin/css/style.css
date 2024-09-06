@@ -1243,7 +1243,7 @@ table tr th {
     padding: 8px 10px;
     background-color: var(--secondary-color);
     color: #fff;
-    min-width: 90px;
+    min-width: 65px;
 }
 
 .action-view-btn:hover {
@@ -2025,3 +2025,18 @@ button.btn-close {
     right: 50px;
 }
 
+.admin-sidebar-opener {
+    display: none;
+}
+
+
+
+span.admin-sidebar-cross-icon {
+    position: absolute;
+    top: 0;
+    right: 21px;
+    display: none;
+}
+.cms-list-table table tr th:last-child p{
+    float: right;
+}
