@@ -71,6 +71,10 @@ class User extends Authenticatable
     {
         return $this->hasOne(UserCommisionSetting::class, 'user_id', 'id');
     }
+    public function UserBankAccount()
+    {
+        return $this->hasOne(UserBankDetail::class, 'user_id', 'id');
+    }
 
     public function product()
     {

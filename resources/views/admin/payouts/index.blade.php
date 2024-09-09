@@ -75,9 +75,7 @@
                                     <p>Confirmed</p>
                                 </div>
                             @else
-                                <td>
                                     <a href="{{route('admin.payouts.getpayment',$fulfilledOrder)}}" class="btn primary-btn payout"  data-amount="{{calculatePayOuts($fulfilledOrder->order_for,$fulfilledOrder->shipment_price,$fulfilledOrder->total_amount)}}">Pay Out</a>
-                                </td>
                             @endif
                         </td>
                     </tr>

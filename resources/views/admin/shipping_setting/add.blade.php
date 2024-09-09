@@ -7,7 +7,7 @@
         <section class="section shipping-add-sec">
             <div class="section-body">
                 <div class="row">
-                    <div class="col-6 col-md-6 col-lg-12">
+                    <div class="col-12 col-md-12 col-lg-12">
                         <div class="card">
                             <div class='ajax-response'></div>
                             <x-alert-component />
@@ -20,7 +20,7 @@
                                     action=" @isset($data) {{ route('admin.shipping.edit', ['shipping_id' => jsencode_userdata($data->id)]) }}  @else {{ route('admin.shipping.view') }} @endisset "
                                     enctype="multipart/form-data" method="post">
                                     @csrf
-                                    <div class="row">
+                                    <div class="row g-3">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="shipment_title">Shipment Title<span
@@ -185,11 +185,11 @@
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
-                                            <div class="input-icon-custm tooltip-open">
+                                            <div class="input-icon-custm tooltip-new">
                                                 <span>
                                                     <i class="fa-solid fa-question"></i>
                                                 </span>
-                                                <div class="tooltip">
+                                                <div class="tooltip-text">
                                                     <p>Average shipping charge for every consignment.</p>
                                                 </div>
                                             </div>

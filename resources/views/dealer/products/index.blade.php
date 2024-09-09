@@ -20,18 +20,26 @@
                     @endif
                     </div>
                 </form>
-                <a href="javascript:void(0)" class="btn primary-btn" data-bs-toggle="modal" data-bs-target="#bulk-upload">
-                    <img src="{{ asset('assets/images/add-round-icon.svg') }}" alt=""> Bulk upload
-                </a>
-                @if (auth()->user()->stripe_account_id || auth()->user()->working_for)
-                <a href="javascript:void(0)" class="btn primary-btn " data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    <img src="{{ asset('assets/images/add-round-icon.svg') }}" alt=""> Add
-                </a>
-                @else  
-                <a href="javascript:void(0)" class="btn primary-btn " data-bs-toggle="modal" data-bs-target="#onboard-account">
-                    <img src="{{ asset('assets/images/add-round-icon.svg') }}" alt=""> Add
-                </a>
+                @php
+                    $isVerified = UserbankVerify();
+                @endphp
+
+                @if ($isVerified)
+                    <a href="javascript:void(0)" class="btn primary-btn" data-bs-toggle="modal" data-bs-target="#bulk-upload">
+                        <img src="{{ asset('assets/images/add-round-icon.svg') }}" alt=""> Bulk upload
+                    </a>
+                    <a href="javascript:void(0)" class="btn primary-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <img src="{{ asset('assets/images/add-round-icon.svg') }}" alt=""> Add
+                    </a>
+                @else
+                <a href="javascript:void(0)" class="btn primary-btn" data-bs-toggle="modal" data-bs-target="#onboard-account">
+                        <img src="{{ asset('assets/images/add-round-icon.svg') }}" alt=""> Bulk upload
+                    </a>
+                    <a href="javascript:void(0)" class="btn primary-btn" data-bs-toggle="modal" data-bs-target="#onboard-account">
+                        <img src="{{ asset('assets/images/add-round-icon.svg') }}" alt=""> Add
+                    </a>
                 @endif
+
             </div>
         </div>
         <div class="product-detail-table product-list-table pro-manage-table">

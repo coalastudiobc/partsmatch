@@ -38,6 +38,22 @@ if (!function_exists('productByOrderItem')) {
         }
     }
 }
+if (!function_exists('UserbankVerify')) {
+    function UserbankVerify()
+    {
+        try {
+            if(auth()->user()->working_for && auth()->user()->hasRole('manager') )
+            {
+                return true;
+            }else if(auth()->user()->stripe_account_id && !is_null(auth()->user()->UserBankAccount) && auth()->user()->stripe_account_id === auth()->user()->UserBankAccount->stripe_id){
+                return true;
+            }
+            return false;
+        } catch (\Exception $e) {
+            abort('403', $e->getMessage());
+        }
+    }
+}
 
 if (!function_exists('isFullFilledShippment')) {
     function isFullFilledShippment($order_id)

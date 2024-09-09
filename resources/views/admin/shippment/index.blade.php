@@ -16,13 +16,13 @@
                             <p>Cart Amount</p>
                         </th>
                         <th>
-                            <p>shipment_Amount</p>
+                            <p>Shipment Amount</p>
                         </th>
                         <th>
                             <p>Buy Date</p>
                         </th>
                         <th>
-                            <p>Fullfilled Date</p>
+                            <p>Fullfilled date</p>
                         </th>
                         <th>
                             <p>Action</p>

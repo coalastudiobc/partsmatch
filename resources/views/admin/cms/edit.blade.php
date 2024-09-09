@@ -16,7 +16,7 @@
                                     <form id="cms" action="{{ route('admin.cms.update', [$page->id]) }}"
                                     enctype="multipart/form-data" method="post">
                                     @csrf
-                                    <div class="row">
+                                    <div class="row g-3">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="">Name*</label>
@@ -29,11 +29,11 @@
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
-                                                    <div class="input-icon-custm tooltip-open">
+                                                    <div class="input-icon-custm tooltip-new">
                                                         <span>
                                                             <i class="fa-solid fa-question"></i>
                                                         </span>
-                                                        <div class="tooltip">
+                                                        <div class="tooltip-text">
                                                             <p>ghfvjvhm</p>
                                                         </div>
                                                     </div>
@@ -52,11 +52,11 @@
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
-                                                    <div class="input-icon-custm tooltip-open">
+                                                    <div class="input-icon-custm tooltip-new">
                                                         <span>
                                                             <i class="fa-solid fa-question"></i>
                                                         </span>
-                                                        <div class="tooltip">
+                                                        <div class="tooltip-text">
                                                             <p>ghfvjvhm</p>
                                                         </div>
                                                     </div>
@@ -85,11 +85,11 @@
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
-                                                    <div class="input-icon-custm tooltip-open">
+                                                    <div class="input-icon-custm tooltip-new">
                                                         <span>
                                                             <i class="fa-solid fa-question"></i>
                                                         </span>
-                                                        <div class="tooltip">
+                                                        <div class="tooltip-text">
                                                             <p>ghfvjvhm</p>
                                                         </div>
                                                     </div>
@@ -167,11 +167,11 @@
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
-                                                    <div class="input-icon-custm tooltip-open">
+                                                    <div class="input-icon-custm tooltip-new">
                                                         <span>
                                                             <i class="fa-solid fa-question"></i>
                                                         </span>
-                                                        <div class="tooltip">
+                                                        <div class="tooltip-text">
                                                             <p>ghfvjvhm</p>
                                                         </div>
                                                     </div>

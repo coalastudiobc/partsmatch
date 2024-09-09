@@ -651,7 +651,7 @@
     /* max-width: 1178px; */
     width: 100%;
     padding: 30px 36px;
-    height: calc(100vh - 66px);
+    height: calc(100vh - 54px);
     overflow: auto;
 }
 
@@ -1147,7 +1147,7 @@
 }
 
 .cards {
-    max-width: 350px;
+    max-width: 450px;
     margin: 0 auto;
     border-radius: 15px;
     /* border: 1px solid #5c5c5c; */

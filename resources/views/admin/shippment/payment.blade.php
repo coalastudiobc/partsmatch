@@ -52,7 +52,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="">Card Number</label>
-                                                <div class="form-field" id="cardNumberElement">
+                                                <div class="form-field form-control" style="padding: 3px 17px;" id="cardNumberElement">
                                                     <input type="text" class="form-control" placeholder="Card-number">
                                                     <label for="card-number" class="stripe-error-messages"></label>
                                                 </div>
@@ -62,7 +62,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="">Card Expiration Date</label>
-                                                <div class="form-field" id="cardExpiryElement">
+                                                <div class="form-field form-control" style="padding: 3px 17px;" id="cardExpiryElement">
                                                     <input type="text" class="form-control" placeholder="MM / YY">
                                                     <label for="card-expiry" class="stripe-error-messages"></label>
                                                 </div>
@@ -72,7 +72,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="">Card Security Code</label>
-                                                <div class="form-field" id="cardCVCElement" class="form-control">
+                                                <div class="form-field form-control" style="padding: 3px 17px;" id="cardCVCElement" class="form-control">
                                                     <input type="password" class="form-control" placeholder="****">
                                                 </div>
                                                 <div class="is-invalid stripe-error" id="cardCVVError"></div>

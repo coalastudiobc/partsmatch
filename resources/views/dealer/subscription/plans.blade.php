@@ -2,75 +2,78 @@
 @section('title', 'Plan management')
 
 @section('content')
-    <div class="plan-wrapper">
-        <x-alert-component />
-        <div class="row g-4 ">
-            @forelse  ($plans as $plan)
-                <div class="col-xxl-3 col-xl-4 col-lg-6 col-md-6 col-12">
-                    <div class="cards" id="card{{ $plan->id }}">
-                        @if(isPlanActive($plan))
-                        <div id="pointer">
-                            <span class="horizontal">Purchased</span>
-                          </div>
-                          @endif
-                        <div class="card-details">
-                            <span>{{ $plan->name }}</span>
-                            <h3>${{ $plan->price }}<span>/{{ $plan->billing_cycle }}</span></h3>
-                            <ul class="plan-details-list">
-                
-                                @foreach(explode(PHP_EOL, $plan->description) as $line)
-                                  <li>  {{ $line }}   </li>
-                                @endforeach
-                          
-                            </ul>
-                            
-                            {{-- <ul class="card-list">
-                                <li>
-                                    <p>Lorem ipsum dolor sit</p>
-                                </li>
-                                <li>
-                                    <p>Lorem ipsum dolor sit</p>
-                                </li>
-                                <li>
-                                    <p>Lorem ipsum dolor sit</p>
-                                </li>
-                                <li>
-                                    <p>Lorem ipsum dolor sit</p>
-                                </li>
-                            </ul> --}}
-                        </div>
-                        <div>
-                        @if(isPlanActive($plan))
-                            @if (isAlreadyCancelled($plan))
-                                <p class="subscription-cancelled">Subscription has been cancelled.</p>
-                            @else
-                                <a href="{{ route('Dealer.subscription.plan.cancel') }}" disabled class="btn secondary-btn full-btn delete">Cancel</a>
-                            @endif                
-                        @else
-                            <a href="javascript:void(0)" class="btn secondary-btn full-btn parchase"
-                                data-plan-id="{{ jsencode_userdata($plan->id) }}"
-                                data-plan-price="{{ $plan->price }}">Purchase
-                            </a>
+    <div class="dashboard-right-box">
+        <div class="plan-wrapper">
+            <x-alert-component />
+            <div class="row g-4 ">
+                @forelse  ($plans as $plan)
+                    <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-6 col-12">
+                        <div class="cards" id="card{{ $plan->id }}">
+                            @if(isPlanActive($plan))
+                            <div id="pointer">
+                                <span class="horizontal">Purchased</span>
+                            </div>
                             @endif
+                            <div class="card-details">
+                                <span>{{ $plan->name }}</span>
+                                <h3>${{ $plan->price }}<span>/{{ $plan->billing_cycle }}</span></h3>
+                                <ul class="plan-details-list">
+                    
+                                    @foreach(explode(PHP_EOL, $plan->description) as $line)
+                                    <li>  {{ $line }}   </li>
+                                    @endforeach
+                            
+                                </ul>
+                                
+                                {{-- <ul class="card-list">
+                                    <li>
+                                        <p>Lorem ipsum dolor sit</p>
+                                    </li>
+                                    <li>
+                                        <p>Lorem ipsum dolor sit</p>
+                                    </li>
+                                    <li>
+                                        <p>Lorem ipsum dolor sit</p>
+                                    </li>
+                                    <li>
+                                        <p>Lorem ipsum dolor sit</p>
+                                    </li>
+                                </ul> --}}
+                            </div>
+                            <div>
+                            @if(isPlanActive($plan))
+                                @if (isAlreadyCancelled($plan))
+                                    <p class="subscription-cancelled">Subscription has been cancelled.</p>
+                                @else
+                                    <a href="{{ route('Dealer.subscription.plan.cancel') }}" disabled class="btn secondary-btn full-btn delete">Cancel</a>
+                                @endif                
+                            @else
+                                <a href="javascript:void(0)" class="btn secondary-btn full-btn parchase"
+                                    data-plan-id="{{ jsencode_userdata($plan->id) }}"
+                                    data-plan-price="{{ $plan->price }}">Purchase
+                                </a>
+                                @endif
+                            </div>
                         </div>
                     </div>
+                @empty
+                <div class="empty-data">
+                    <img src="{{ asset('assets/images/no-product.svg') }}  " alt="" width="300">
+                    <p class="text-center mt-1">Did not found any plan</p>
                 </div>
-            @empty
-            <div class="empty-data">
-                <img src="{{ asset('assets/images/no-product.svg') }}  " alt="" width="300">
-                <p class="text-center mt-1">Did not found any plan</p>
+                @endforelse
             </div>
-            @endforelse
         </div>
     </div>
 
 
     <!-- Modal -->
-    <div class="modal fade" id="card-parchase-Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="card-parchase-Modal"  data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
                 <div class="modal-body">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     <div class="payment-page">
                         <h3>Payment</h3>
                         <p>All transactions are secure and encrypted.</p>
@@ -82,16 +85,16 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="">name</label>
+                                            <label for="">Card Holder Name*</label>
                                             <div class="form-field">
                                                 <input type="text" class="form-control" id="card-holder-name"
-                                                    name="name" placeholder="Name">
+                                                    name="name" placeholder="Card Holder Name">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="">Card Number</label>
+                                            <label for="">Card Number*</label>
                                             <div class="form-control" id="cardNumberElement">
 
                                                 <label for="card-number" class="stripe-error-messages"></label>
@@ -103,7 +106,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="">Expiration date</label>
+                                            <label for="">Expiration date*</label>
                                             <div class="form-control" id="cardExpiryElement">
 
                                                 <label for="card-expiry" class="stripe-error-messages"></label>
@@ -116,7 +119,7 @@
 
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="">CVC</label>
+                                            <label for="">CVC*</label>
                                             <div class="form-control" id="cardCVCElement">
 
 

@@ -28,7 +28,7 @@
                             <p>Delivery Date</p>
                         </th>
                         <th>
-                            <p>Action</p>
+                            <p>Status</p>
                         </th>
                     </tr>
                     @forelse($fulfilledOrders as $fulfilledOrder)

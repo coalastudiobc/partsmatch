@@ -337,7 +337,7 @@
                             @forelse ($products as $product)
                             {{-- <x-home-product-tab :product="$product"> --}}
 
-                                <div class="col-md-6 col-lg-4 col-xl-3">
+                                <div class="col-md-6 col-lg-4 col-xl-4 col-xxl-3">
                                     <div class="accessories-parts-box">
                                         <a href="{{ route('product.detail', ['product' => $product->id]) }}" class="more-product-cards cstm-card">
                                             <div >

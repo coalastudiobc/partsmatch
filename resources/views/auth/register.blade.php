@@ -313,33 +313,67 @@
     </script>
     <script>
         jQuery(document).ready(function() {
+            // jQuery('#zipcode').select2({
+            //     ajax: {
+            //         url: "{{ route('postal.search') }}", 
+            //         dataType: 'json',
+            //         delay: 250,
+            //         data: function (params) {
+            //             return {
+            //                 q: params.term, // Search query
+            //                 page: params.page || 1 // Pagination (if applicable)
+            //             };
+            //         },
+            //         processResults: function (data, params) {
+            //             params.page = params.page || 1;
+            //             console.log(data.results);
+            //             return {
+            //                 results: data.results,
+            //                 pagination: {
+            //                     more: data.pagination.more
+            //                 }
+            //             };
+            //         },
+            //         cache: true
+            //     },
+            //     minimumInputLength: 1,
+            //     placeholder: 'Search for zip/postal',
+            //     tags: false
+            // });
             jQuery('#zipcode').select2({
-                ajax: {
-                    url: "{{ route('postal.search') }}", 
-                    dataType: 'json',
-                    delay: 250,
-                    data: function (params) {
-                        return {
-                            q: params.term, // Search query
-                            page: params.page || 1 // Pagination (if applicable)
-                        };
-                    },
-                    processResults: function (data, params) {
-                        params.page = params.page || 1;
-                        console.log(data.results);
-                        return {
-                            results: data.results,
-                            pagination: {
-                                more: data.pagination.more
-                            }
-                        };
-                    },
-                    cache: true
-                },
-                minimumInputLength: 1,
-                placeholder: 'Search for zip/postal',
-                tags: false
-            });
+            ajax: {
+            url: "{{ route('postal.search') }}", 
+            dataType: 'json',
+            delay: 250,
+            data: function (params) {
+                return {
+                    q: params.term, // Search query
+                    page: params.page || 1 // Pagination (if applicable)
+                };
+        },
+        processResults: function (data, params) {
+            params.page = params.page || 1;
+            return {
+                results: data.results,
+                pagination: {
+                    more: data.pagination.more
+                }
+            };
+        },
+        cache: true
+    },
+    minimumInputLength: 1,
+    placeholder: 'Search for zip/postal',
+    tags: false
+});
+
+// Trigger validation on select2 value change
+jQuery('#zipcode').on('select2:select', function () {
+    // Trigger form validation
+    $(this).valid();
+    console.log($(this).valid());
+    jQuery(this).parent().removeClass('custom-error-field');
+});
 
         
             jQuery('.custom_dropdown_item').on('click', function() {
