@@ -31,6 +31,7 @@
                             <p>Status</p>
                         </th>
                     </tr>
+                    @isset($fulfilledOrders)
                     @forelse($fulfilledOrders as $fulfilledOrder)
                     <tr>
                         <td>
@@ -77,6 +78,7 @@
                         </td>
                     </tr>
                     @endforelse
+                    @endisset
                 </table>
             </div>
         </div>

@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             CountrySeeder::class,
             StateSeeder::class,
             CitySeeder::class,
+            BrandSeeder::class,
             CarYearSeeder::class,
             CarAllMakeSeeder::class,
             AllModelSeeder::class,

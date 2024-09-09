@@ -37,6 +37,7 @@
                             <p>Action</p>
                         </th>
                     </tr>
+                    @isset($fulfilledOrders)
                     @forelse($fulfilledOrders as $fulfilledOrder)
                     <tr>
                         <td>
@@ -86,9 +87,12 @@
                         </td>
                     </tr>
                     @endforelse
+        @endisset
+
                 </table>
             </div>
         </div>
+        @isset($fulfilledOrders)
         <div class="pagination-wrapper">
         @if($fulfilledOrders)
         {!! $fulfilledOrders ?? $fulfilledOrders->links('admin.pagination')  !!}
