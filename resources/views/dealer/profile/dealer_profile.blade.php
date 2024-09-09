@@ -16,10 +16,13 @@
             <div class="dealer-profile-box">
                 <div class="cstm-bredcrum ms-4">
                     <a href="{{ route('welcome.index') }}" class="bredcrum-list">Home</a>
+                    @if($product->category && $product->category->parent)
                     <a href="{{ route('products', ['category' => $product->category->parent->id]) }}" class="bredcrum-list">{{ $product->category->parent->name ?? 'category'}}</a>
+                    @endif
                     <a href="{{ route('products', ['category' => $product->subcategory_id]) }}" class="bredcrum-list">{{ $product->category->name ?? 'sub Category' }}</a>
                     <a href="{{ route('product.detail', $product->id) }}" class="bredcrum-list">{{ $product->name ?? 'product name' }}</a>
-                    <a href="#" class="bredcrum-list active">{{ $user->name }}</a>
+                    {{-- <a href="#" class="bredcrum-list active">{{ $user->name }}</a> --}}
+                    <a href="#" class="bredcrum-list active">seller</a>
                 </div>
                 <div class="dealer-profile-content">
                     {{-- <div class="dealer-profile-form-box">
@@ -77,3 +80,7 @@
     </div>
 </section>
 @endsection
+@push('scripts')
+@include('modals.restrict_multiple')
+    
+@endpush

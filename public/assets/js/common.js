@@ -416,6 +416,7 @@ $('input[name="phone_number"]').keypress(function (e) {
         $(this).val(curval + "-");
         $(this).attr('maxlength', '14');
         }
-        console.log(curval);
+        // console.log(curval);
+        
     });
 });

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('country')->nullable();
             $table->string('state')->nullable();
             $table->string('city')->nullable();
-            $table->integer('pin_code')->nullable();
+            $table->string('pin_code')->nullable();
             $table->enum('address_type', ['Home', 'Office'])->default('Home');
             $table->string('address1')->nullable();
             $table->string('address2')->nullable();

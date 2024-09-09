@@ -25,6 +25,7 @@ class PackageRequest extends FormRequest
 
             'name' => ['required'],
             'price' => ['required'],
+            'product_count' => ['required','integer'],
             'time_type' => ['required'],
         ];
     }
@@ -34,6 +35,8 @@ class PackageRequest extends FormRequest
         return [
             'name.required' => __('customvalidation.package.name.required'),
             'price.required' => __('customvalidation.packageprice.price.required'),
+            'product_count.required' =>  __('customvalidation.package.product_count.required'),
+            'product_count.integer'=>__('customvalidation.package.product_count.integer'),
             'time_type.required' => __('customvalidation.package.timetype.required'),
         ];
     }

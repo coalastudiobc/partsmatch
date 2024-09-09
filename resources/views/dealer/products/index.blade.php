@@ -11,8 +11,13 @@
             <div class="serach-and-filter-box">
                 <form action="">
                     <div class="pro-search-box">
-                        <input type="text" name="filter_by_name" class="form-control" value="" placeholder="Search">
+                        <input type="text" name="filter_by_name" class="form-control"value="{{ request('filter_by_name') }}" placeholder="Search">
                         <button type="submit" class="btn primary-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        @if(request('filter_by_name'))
+                        <div class="search-cross-btn">
+                            <a href="{{ route('Dealer.products.index') }}"><i class="fa-solid fa-xmark"></i></a>
+                        </div>
+                    @endif
                     </div>
                 </form>
                 <a href="javascript:void(0)" class="btn primary-btn" data-bs-toggle="modal" data-bs-target="#bulk-upload">
@@ -34,22 +39,22 @@
                 <table class="table ">
                     <tr>
                         <th>
-                            <p>Image</p>
-                        </th>
-                        <th>
-                            <p>Product name</p>
+                            <p>Part Image</p>
                         </th>
                         <th>
                             <p>Part Number</p>
                         </th>
                         <th>
+                            <p>Part name</p>
+                        </th>
+                        <th>
                             <p>Price</p>
                         </th>
                         <th>
-                            <p>Available Quantity</p>
+                            <p>Quantity</p>
                         </th>
                         <th>
-                            <p>Listing Status</p>
+                            <p>Status</p>
                         </th>
                         <th>
                             <p>Action</p>
@@ -64,10 +69,10 @@
                                 </div>
                             </td>
                             <td>
-                                <p>{{ $product->name }}</p>
+                                <p>{{ $product->part_number }}</p>
                             </td>
                             <td>
-                                <p>{{ $product->part_number }}</p>
+                                <p>{{ $product->name }}</p>
                             </td>
                             <td>
                                 <p> @if($product && is_numeric($product->price))
@@ -80,7 +85,7 @@
                                 <p>{{ $product->stocks_avaliable }}</p>
                             </td>
                             <td>
-                                <div class="toggle-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Click to deactivate/active listing of products">
+                                <div class="toggle-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Click to Active/Inactive listing of products">
                                     <input type="checkbox" id="switch100{{ $key }}" class="custom-switch-input"
                                         @if ($product->status == '1') checked="checked" @endif
                                         onchange="toggleStatus(this, 'Product', '{{ $product->id }}');"
@@ -101,17 +106,17 @@
                             <td>
                                 <div class="action-btns">
                                     <a
-                                        href="{{ route(auth()->user()->getRoleNames()->first() . '.products.edit', $product->id) }}"><i
+                                        href="{{ route(auth()->user()->getRoleNames()->first() . '.products.edit', $product->id) }}" title="Click to modify details"><i
                                             class="fa-solid fa-pen-to-square" style="color: #3EBE62;"></i></a>
-                                    <a href="{{ route(auth()->user()->getRoleNames()->first() . '.products.delete', $product->id) }}"
+                                    <a href="{{ route(auth()->user()->getRoleNames()->first() . '.products.delete', $product->id) }}" title="Click to remove item"
                                         class="delete"><i class="fa-regular fa-trash-can " style="color: #E13F3F;"></i></a>
                                 </div>
                             </td>
                         </tr>
                     @empty
                         <div class="empty-data">
-                            <img src="{{ asset('assets/images/no-product.svg') }}  " alt="" width="300">
-                            <p class="text-center mt-1">Did not found any product</p>
+                            <img src="{{ asset('assets/images/no-product.svg') }}" alt="" width="300">
+                            <p class="text-center mt-1">Did not found any parts</p>
                         </div>
                     @endforelse
                 </table>
@@ -128,16 +133,30 @@
                 <!-- <div class="modal-header">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               </div> -->
                 <div class="modal-body">
                     <div class="add-pro-form">
-                        <h2>Add new products</h2>
+                        <h2>Add new product</h2>
                         <form id="product" action="{{ route('Dealer.products.store') }}" method="post"
                             enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        <label for=""> Part number<span class="required-field">*</span></label>
+                                        <div class="form-field subcategory">
+                                            <input type="text" class="form-control @error('part_number') is-invalid @enderror" id="part_number"
+                                                name="part_number" value="" placeholder="Part Number">
+                                            @error('part_number')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
                                         <label for=""> Name<span class="required-field">*</span></label>
                                         <div class="form-field">
-                                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"  placeholder="Name">
+                                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"  placeholder="Part Name">
                                             @error('name')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -181,20 +200,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for=""> Part number</label>
-                                        <div class="form-field subcategory">
-                                            <input type="text" class="form-control @error('part_number') is-invalid @enderror" id="part_number"
-                                                name="part_number" value="" placeholder="Part Number">
-                                            @error('part_number')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                </div>
+                                
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for=""> Description<span class="required-field">*</span></label>
@@ -222,7 +228,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <div class="form-group">
+                                    <div class="form-group custom-upload-images-box">
                                         <label for=""> Add Images (Up to 5)</label>
                                         <label class="img-upload-box">
                                             <p>Upload Images</p>
@@ -240,7 +246,7 @@
                                         <label for=""> Quantity<span class="required-field">*</span></label>
                                         <div class="form-field">
                                             <input type="text" name="stocks_avaliable" class="form-control @error('stocks_avaliable') is-invalid @enderror"
-                                                placeholder="Quantity">
+                                                placeholder="Quantity of Part or product ">
                                                 @error('stocks_avaliable')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -254,7 +260,7 @@
                                         <label for="price"> Price<span class="required-field">*</span></label>
                                         <div class="form-field">
                                             <input type="text" name="price" class="form-control @error('price') is-invalid @enderror"
-                                                placeholder="$000">
+                                                placeholder="$ 0.00">
                                                 @error('price')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -726,20 +732,23 @@
                         <div class="ymmm-box-data">
                             <p>` + models[i] + `</p>
                         </div>
-                        <span class="ymmm-cross">×</span>
+                        <span class="ymmm-cross" style="cursor:pointer;">×</span>
                     </div>`;
                 }
                 jQuery('#test1234').html(htmlText)
                 jQuery('#test1234').removeClass('d-none');
             });
-
             jQuery(document).on('click', '.ymmm-cross', function() {
                 var data = jQuery(this).siblings('.ymmm-box-data').find('p').text();
                 var index = models.indexOf(data);
+                console.log(index);
                 if (index > -1) {
                     models.splice(index, 1);
                 }
                 jQuery(this).closest('.ymmm-data-outer').remove();
+                if(index == 0){
+                jQuery('#test1234').addClass('d-none'); 
+                }
             });
         });
 

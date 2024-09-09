@@ -218,18 +218,27 @@
 
                         <div class="categories-loop-boxes-outer">
                             <div class="categories-loop-boxes">
-                                @foreach ($category as $key => $category)
-                                @if ($loop->iteration > 7)
-                                @break
-                                @endif
-                                <a href="{{ route('products', ['category' => $category->id]) }}">
-                                    <div class="categories-box">
-                                        <img src="{{ asset('assets/images/categorie1.svg') }}" alt="">
-                                        <p>{{ $category->name }}</p>
-                                    </div>
-                                </a>
+                                @foreach ($category as $key => $category) 
+                                    @if ($loop->iteration > 7)
+                                        @break
+                                    @endif
+                                    <a href="{{ route('products', ['category' => $category->id]) }}">
+                                        <div class="categories-box">
+                                            @if($category?->icon)
+                                            <div class="categories-img-box">
+                                                {!! $category->icon ?? $category->icon !!}
+                                            </div>
+                                            @else
+                                            <div class="categories-img-box">
+                                            <img src="{{ asset('assets/images/categorie1.svg') }}" alt="">  
+                                            </div>
+                                            @endisset
+                                            <p>{{ $category->name ?? 'Others' }}</p>
+                                        </div>
+                                    </a>
                                 @endforeach
                             </div>
+                            
                         </div>
                         <a href="{{ route('products') }}">
                             <div class="categories-box">
@@ -288,6 +297,56 @@
         </div>
     </section>
 @endif
+{{-- featured product --}}
+@if ($products->count() > 0)
+<section class="more-product-sec">
+    <div class="container">
+        <div class="more-product-wrapper">
+            <div class="heading-with-tab">
+                <h2>Featured Products</h2>
+            </div>
+            <div class="more-product-box">
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="head-tab-1" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                        <div class="more-product-boxes  feature-slider">
+                        @foreach ($products as $product)
+                            <x-home-product-tab :product="$product" />
+                        @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@else
+{{-- another product --}}
+ @isset($subcategories[0])
+<section class="more-product-sec">
+    <div class="container">
+        <div class="more-product-wrapper">
+            <div class="heading-with-tab">
+                <h2>Featured Products</h2>
+            </div>
+            <div class="more-product-box">
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="head-tab-1" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                        <div class="more-product-boxes  feature-slider">
+                        @foreach ($subcategorie[0]->productForWelcome as $product)
+                            <x-home-product-tab :product="$product" />
+                        @endforeach
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+ @endisset
+{{-- end --}}
+@endif
+{{-- end featured product --}}
 @if (isset($subcategories[0]))
 <section class="more-product-sec">
     <div class="container">
@@ -344,8 +403,8 @@
 
             <div id="brandContainer" class="sp-brands brand-height-fix">
                 @foreach($brands as $brand)
-                <div class="brands-image brand-container make-filter" data-make="{{$brand->makes}}">
-                    <img src="{{ $brand->image_url ? $brand->image_url : asset('assets/images/car-logo2.png') }}" alt="" class="">
+                <div class="brands-image brand-container make-filter" data-make="{{$brand->makes}}" >
+                    <img src="{{ $brand->image_url ? Storage::url($brand->image_url) : asset('assets/images/car-logo2.png') }}" alt="" class="">
                     <div class="brands-image-content">
                         <h6>{{$brand->makes}}</h6>
                     </div>
@@ -459,6 +518,48 @@
         ]
     });
 
+    $('.feature-slider').slick({
+        infinite: true,
+        autoplay: true,
+        slidesToShow: 5,
+        autoplaySpeed:1500,
+        slidesToScroll: 1,
+        arrows: true,
+        dots: false,
+        // prevArrow: $('.prev-loop-btn'),
+        // nextArrow: $('.next-loop-btn'),
+        responsive: [{
+                breakpoint: 1200,
+                settings: {
+                    slidesToShow: 5,
+                    slidesToScroll: 2,
+                }
+            },
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 4,
+                    slidesToScroll: 2,
+                }
+            },
+            {
+                breakpoint: 767,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                }
+            },
+            {
+                breakpoint: 425,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                }
+            }
+
+        ]
+    });
+
     $(document).ready(function() {
 
 
@@ -472,6 +573,7 @@
             response.then(handleCategoriezedData).catch(handleCategoriezedError)
 
             function handleCategoriezedData(response) {
+              
                 if (response.status == true) {
                     jQuery('.productIndex').html(response.data)
                     jQuery('.collectionSubcategory').removeClass('active');
@@ -488,7 +590,6 @@
         });
 
         $('.productsubcategory').on('click', function() {
-            console.log('here');
             element = jQuery(this)
             dataUrl = $(this).attr('data-url');
             jQuery('#subcategoryViewAll').attr('href', dataUrl);
@@ -498,6 +599,7 @@
             response.then(handleCategoriezedData).catch(handleCategoriezedError)
 
             function handleCategoriezedData(response) {
+                console.log('hlo');
                 if (response.status == true) {
                     jQuery('.tabProduct').html(response.data)
                     jQuery('.productsubcategory').removeClass('active');

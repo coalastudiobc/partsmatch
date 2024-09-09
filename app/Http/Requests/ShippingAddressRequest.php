@@ -25,14 +25,22 @@ class ShippingAddressRequest extends FormRequest
         return [
             'first_name' => ['required', 'string', 'min:' . config('validation.first_name_minlength'), 'max:' . config('validation.first_name_maxlength'), 'regex:' . config('validation.first_name_regex')],
             'last_name' => ['required', 'string', 'min:' . config('validation.last_name_minlength'), 'max:' . config('validation.last_name_maxlength'), 'regex:' . config('validation.last_name_regex')],
-            'phone_number' => ['required', 'digits:10'],
+            'phone_number' => ['required',  function ($attribute, $value, $fail) {
+                $digits = preg_replace('/\D/', '', $value);
+                if (strlen($digits) < 10 || $digits[0] === '0') {
+                    return $fail('The ' . $attribute . ' must be a valid phone number and cannot start with zero.');
+                }
+                if (!preg_match('/^\(\d{3}\) \d{3}-\d{4}$/', $value)) {
+                    return $fail('The ' . $attribute . ' must be a valid phone number in the format (XXX) XXX-XXXX.');
+                }
+            }],
             'country' => 'required',
             'state' => 'required',
             'city' => 'required',
             'street1' => ['required', 'string', 'min:' . config('validation.address1_minlength'), 'max:' . config('validation.address1_maxlength')],
             'street2' => 'nullable|string|max:35',
             'description' => 'nullable|string|max:100',
-            'pin_code' => ['required', 'digits_between:5,6'],
+            'pin_code' => ['required'],
         ];
     }
 
@@ -49,23 +57,23 @@ class ShippingAddressRequest extends FormRequest
             'last_name.max' => 'Last name may not be greater than :max characters.',
             'last_name.regex' => 'Last name format is invalid.',
 
-            'phone_number.required' => `{{ __('customvalidation.user.phone_number.required') }}`,
+            'phone_number.required' => __('customvalidation.user.phone_number.required') ,
             'phone_number.digits' => 'Phone number must be exactly 10 digits.',
 
-            'country.required' => `{{ __('customvalidation.user.country.required') }}`,
-            'state.required' => `{{ __('customvalidation.user.state.required') }}`,
-            'city.required' =>  `{{ __('customvalidation.user.city.required') }}`,
+            'country.required' =>  __('customvalidation.user.country.required') ,
+            'state.required' =>  __('customvalidation.user.state.required') ,
+            'city.required' =>   __('customvalidation.user.city.required') ,
 
-            'street1.required' => `{{ __('customvalidation.addresses.address1.required') }}`,
-            'street1.min' => `{{ __('customvalidation.addresses.address1.min') }}`,
-            'street1.max' => `{{ __('customvalidation.addresses.address1.max') }}`,
+            'street1.required' => __('customvalidation.addresses.address1.required') ,
+            'street1.min' =>  __('customvalidation.addresses.address1.min') ,
+            'street1.max' =>  __('customvalidation.addresses.address1.max') ,
 
-            'street2.max' => `{{ __('customvalidation.addresses.description.max') }}`,
+            'street2.max' => __('customvalidation.addresses.description.max') ,
 
             'description.max' => 'Description may not be greater than :max characters.',
 
-            'pin_code.required' => `{{ __('customvalidation.user.pin_code.required') }}`,
-            'pin_code.digits_between' =>  `{{ __('customvalidation.user.pin_code.minlength', ['min' => config('validation.pincode_maxlength'), 'max' => config('validation.pincode_minlength')]) }}`,
+            'pin_code.required' =>  __('customvalidation.user.pin_code.required') ,
+            'pin_code.digits_between' =>  __('customvalidation.user.pin_code.minlength', ['min' => config('validation.pincode_maxlength'), 'max' => config('validation.pincode_minlength')]) ,
         ];
     }
 }

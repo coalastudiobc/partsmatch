@@ -33,8 +33,8 @@
                                 </div>
 
 
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-6">
+                                <div class="row g-4">
+                                    <div class="col-xl-4 col-lg-6 col-md-12">
                                         <div class="dealer-pro-personal-info">
                                             <ul>
                                                 <li>
@@ -59,12 +59,12 @@
                                                 </li>
                                                 <li>
                                                     <h4>Zipcode</h4>
-                                                    <p>{{ $user->zipcode ? $user->zipcode : 'N/A' }}</p>
+                                                    <p>{{ optional($user->postalCode)->zipcode ?? 'N/A' }}</p>
                                                 </li>
                                             </ul>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4 col-md-6">
+                                    <div class="col-xl-4 col-lg-6 col-md-12">
                                         <div class="dealer-pro-commission-info">
                                             <ul>
                                                 <li>
@@ -139,21 +139,21 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4 col-md-12">
+                                    <div class="col-xl-4 col-lg-12 col-md-12">
                                         <div class="dealer-last-five-product">
                                             <h3>Recent Products</h3>
                                             <div class="product-detail-table">
                                                 <div class="table-responsive">
                                                     <table class="table">
                                                         <tr>
-                                                            <th>Name</th>
+                                                            <th>Part Number</th>
                                                             <th>Stocks</th>
                                                             <th>Price</th>
                                                             <th>Category</th>
                                                         </tr>
                                                         @foreach ($products as $product)
                                                         <tr>
-                                                            <td>{{$product->name ?? ''}}</td>
+                                                            <td>{{$product->part_number ?? ''}}</td>
                                                             <td>{{$product->stocks_avaliable ?? ''}}</td>
                                                             <td> @if($product && is_numeric($product->price))
                                                                 ${!! number_format((float) $product->price, 2, '.', ',') !!}

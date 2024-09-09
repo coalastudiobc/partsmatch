@@ -13,8 +13,11 @@ use App\Models\Product;
 use App\Models\UserCommisionSetting;
 use Laravel\Cashier\Cashier;
 use App\Models\UserAddresses;
+use App\Models\DealerPayout;
+use App\Models\PackagePaymentDetail;
 use App\Models\ShippingSetting;
 use App\Models\ShippmentCreation;
+use Laravel\Cashier\Subscription;
 use App\Models\ShippoPurchasedLabel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -400,7 +403,6 @@ if (!function_exists('isFullFilledOrder')) {
             if ($isalready) {
                 return  false;
             } else {
-
                 return true;
             }
         } catch (\Exception $e) {
@@ -493,6 +495,71 @@ if (!function_exists('calculatePayOuts')) {
         } catch (\Exception $e) {
             // Log::error('Error in checkForBuyButton: ' . $e->getMessage());
             return false; 
+        }
+    }
+}
+if (!function_exists('isPaid')) {
+    function isPaid($fulfilledOrder)
+    {
+        try {
+          $getDealerPay =  DealerPayout::where('dealer_id',$fulfilledOrder->order_for)->where('order_id',$fulfilledOrder->id)->first();
+          if(is_null($getDealerPay))
+            {
+                return false;
+            }
+            return true;
+        } catch (\Exception $e) {
+            // Log::error('Error in checkForBuyButton: ' . $e->getMessage());
+            return false; 
+        }
+    }
+}
+if (!function_exists('isPlanActive')) {
+    function isPlanActive($plan)
+    {
+        try {
+          $planDetails =  PackagePaymentDetail::where('user_id',auth()->id())->orderBy('created_at','Desc')->first();
+          if(is_null($planDetails))
+            {
+                return false;
+            }else{
+                if($planDetails->plan_id ==$plan->id){
+                    return true;
+                }
+                return false;
+            }
+            return false;
+            // return $planDetails;
+        } catch (\Exception $e) {
+            // Log::error('Error in checkForBuyButton: ' . $e->getMessage());
+            return false; 
+        }
+    }
+}
+if (!function_exists('isAlreadyCancelled')) {
+    function isAlreadyCancelled($plan)
+    {
+        try {
+            
+            $subscription = Subscription::where('user_id', auth()->id())
+                ->orderBy('created_at', 'desc')
+                ->first();
+
+            if ($subscription && !is_null($subscription->ends_at)) {
+                // Check if the ends_at date is in the past (subscription has ended)
+                
+                // if ($subscription->ends_at->isPast()) {
+                //     return true;
+                // }
+                if ($subscription->ends_at) {
+                    return true;
+                }
+            }
+
+            return false;
+        } catch (\Exception $e) {
+            // Log::error('Error in isAlreadyCancelled: ' . $e->getMessage());
+            return false;
         }
     }
 }

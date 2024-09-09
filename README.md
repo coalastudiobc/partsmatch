@@ -21,38 +21,121 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Steps to project setup 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/coalastudiobc/partsmatch.git
+## Built With
 
-2. Navigate to the project directory:
-  ```bash
-  cd repository_name
+This section lists any major frameworks/libraries used to bootstrap your project. Add-ons and plugins should be listed in the acknowledgements section.
 
-3. Update the composer 
-  ```bash
-  composer update
-4. Make the env file or update and adding all necessary keys 
-  php artisan key:generate
+- **[Laravel](https://laravel.com/)** - A PHP framework for web application development
+- **[Php](https://www.php.net/)** - A fast, small, and feature-rich JavaScript library 
+- **[Bootstrap](https://getbootstrap.com/)** - A front-end framework for developing responsive websites
+- **[jQuery](https://jquery.com/)** - A fast, small, and feature-rich JavaScript library 
 
-5. Run the following commands 
-  ```bash
-  php artisan optimize
-  php artisna config:cache
-  php artisan cache:clear
+## Getting Started
 
-6. Make databases and prerequire data
-  ```bash
-  php artisan migrate:fresh --seed
+This guide will help you set up and run the project locally. Follow these instructions to get a copy up and running on your local machine.
 
-7. Run the command to remove duplicacy data
-  ```bash
-  php artisan distnict:models
+## Prerequisites
 
-8. Create a empty text.txt file at \storage\app\text.txt
- 
- 
+Before you begin, ensure you have met the following requirements:
+
+- **PHP**: Laravel requires PHP version 7.3 or higher. Install PHP from [php.net](https://www.php.net/) or use a package manager like [Homebrew](https://brew.sh/) for macOS.
+
+- **Composer**: Dependency manager for PHP. Install Composer from [getcomposer.org](https://getcomposer.org/).
+
+- **MySQL or MariaDB**: Database management system. Install MySQL or MariaDB from [mysql.com](https://www.mysql.com/) or [mariadb.org](https://mariadb.org/), respectively. Ensure you have a database user and database created for your Laravel application.
+
+- **Node.js and npm**: Required for managing JavaScript dependencies. Install Node.js and npm from [nodejs.org](https://nodejs.org/).
+
+- **Laravel Installer (Optional)**: Install Laravel globally using Composer for easier project setup:
+
+    ```bash
+    composer global require laravel/installer
+    ```
+
+- **Git**: Version control system. Install Git from [git-scm.com](https://git-scm.com/).
+
+- **Apache or Nginx**: Web server for serving your Laravel application. You can install Apache or Nginx from their respective websites or use a local development environment like [XAMPP](https://www.apachefriends.org/) or [Laravel Homestead](https://laravel.com/docs/9.x/homestead).
+
+Ensure that you have all the required software installed and properly configured before proceeding with the installation of your Laravel project.
+
+
+### Installation
+
+Follow these steps to set up the project:
+
+1. **Get a Car API Key**: Sign up at [carapi.app](https://carapi.app/) to obtain an API key.
+2. **Get a Shippo API Key**: Sign up at [shippo.com](https://apps.goshippo.com) to obtain an API key.
+
+3. **Clone the repository**: Copy the repository to your local machine:
+
+    ```bash
+    git clone https://github.com/github_username/repo_name.git
+    ```
+
+4. **Install NPM packages**: Navigate to the project directory and install the required packages:
+
+    ```bash
+    cd repo_name
+    npm install
+    composer update
+    ```
+
+5. **Install PHP dependencies**: Install Laravel’s PHP dependencies using Composer:
+
+    ```bash
+    composer install
+    ```
+
+6. **Configure your API keys**: Open the `.env` file in the project root and set your API keys and other environment-specific settings. Add or update the necessary environment variables:
+
+    ```dotenv
+    API_KEY=ENTER_YOUR_API_KEY
+    ```
+
+7. **Generate an application key**: Laravel requires an application key to be set. Generate this key using Artisan:
+
+    ```bash
+    php artisan key:generate
+    ```
+
+8. **Set up your database**: Configure your database connection settings in the `.env` file:
+
+    ```dotenv
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=your_database_name
+    DB_USERNAME=your_database_username
+    DB_PASSWORD=your_database_password
+    ```
+
+9. **Run migrations**: Apply the database migrations to set up your database schema:
+
+    ```bash
+    php artisan migrate
+    ```
+
+10. **Run seeders**: Seed your database with initial data. You can run all seeders by executing:
+
+    ```bash
+    php artisan db:seed
+    ```
+
+    If you have specific seeders you want to run, you can specify them like this:
+
+    ```bash
+    php artisan db:seed --class=YourSeederClassName
+    ```
+
+    Replace `YourSeederClassName` with the name of the seeder class you want to execute. Seeders are usually located in the `database/seeders` directory.
+
+
+11. **Serve the application**: Start the Laravel development server:
+
+    ```bash
+    php artisan serve
+    ```
+
 ## Learning Laravel
 
 Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.

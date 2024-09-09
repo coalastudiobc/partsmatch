@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->command('distnict:models')->daily();
+        $schedule->command('subscriptions:cleanup')->daily();
     }
 
     /**

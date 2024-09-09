@@ -23,12 +23,12 @@
                         <th>
                             <p>Price</p>
                         </th>
-                        {{-- <th>
-                            <p>Price Id</p>
-                        </th> --}}
-                        {{-- <th>
-                            <p>Subscription Plan Id</p>
-                        </th> --}}
+                        <th>
+                            <p>Billing Cycle</p>
+                        </th>
+                        <th>
+                            <p>Allowed Products</p>
+                        </th>
                         <th>
                             <p>Status</p>
                         </th>
@@ -39,8 +39,10 @@
                     </tr>
                     @forelse($packages as $key=> $package)
                         <tr>
-                            <td>{{ $package->name ? ucFirst($package->name) : '' }}</td>
-                            <td>{{ $package->price ? "$" . $package->price : '' }}</td>
+                            <td>{{ $package->name ? ucFirst($package->name) ?? 'N/A' : 'N/A' }}</td>
+                            <td>{{ $package->price ? "$" . $package->price?? '0' : 'N/A' }}</td>
+                            <td>{{ $package ? $package->billing_cycle ?? 'N/A' : 'N/A' }}</td>
+                            <td>{{ $package ? $package->product_count ?? '0' : 'N/A'}}</td>
                             {{-- <td>{{ $package->stripe_price ? $package->stripe_price : '' }}</td> --}}
                             {{-- <td>{{ $package->stripe_id ? $package->stripe_id : '' }}</td> --}}
                             <td>
@@ -63,9 +65,9 @@
                                 <div class="action-btns">
                                     <a href="{{ route('admin.packages.edit', [jsencode_userdata($package->id)]) }}"><i
                                             class="fa-solid fa-pen-to-square" style="color: #3EBE62;"
-                                            title="Edit"></i></a>
+                                            title="Click to modify details"></i></a>
                                     <a href="{{ route('admin.packages.delete', [jsencode_userdata($package->id)]) }}"><i
-                                            class="fa-regular fa-trash-can" style="color: #E13F3F;" title="Delete"></i></a>
+                                            class="fa-regular fa-trash-can" style="color: #E13F3F;" title="Click to remove item"></i></a>
                                 </div>
 
                             </td>

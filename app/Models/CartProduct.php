@@ -15,6 +15,9 @@ class CartProduct extends Model
     protected $appends = ['product_of'];
     protected $with = ['productImage'];
 
+    protected $casts = [
+        'quantity' => 'integer',  // Ensure 'quantity' is always cast as an integer
+    ];
     public function productImage()
     {
         return $this->hasMany(ProductImage::class, 'product_id', 'product_id');

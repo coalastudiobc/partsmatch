@@ -16,9 +16,16 @@
                     </a>
                     <div class="cstm-bredcrum ms-4">
                         <a href="{{ route('welcome.index') }}" class="bredcrum-list">Home</a>
-                        <a href="{{ route('products', ['category' => $product->category->parent->id]) }}" class="bredcrum-list">{{ $product->category->parent->name }}</a>
+                        @if(isset($product) && $product->category && $product->category->parent)
+                            <a href="{{ route('products', ['category' => $product->category->parent->id]) }}" class="bredcrum-list">
+                                {{ $product->category->parent->name }}
+                            </a> 
+                        @endif
+                        {{-- <a href="{{ route('products', ['category' => $product->category->parent->id]) }}" class="bredcrum-list">{{ $product->category->parent->name }}</a> --}}
+                        @if(isset($product) && $product->subcategory_id)
                         <a href="{{ route('products', ['category' => $product->subcategory_id]) }}" class="bredcrum-list">{{ $product->category->name ?? '' }}</a>
-                        <a href="#" class="bredcrum-list active">{{ $product->name }}</a>
+                        @endif
+                        <a href="#" class="bredcrum-list active">{{ $product->name ?? 'product name' }}</a>
                     </div>
                 </div>
                 <div class="row ">
@@ -26,8 +33,6 @@
                         <div class="sticky-box">
                             <div class="single-pro-slide">
                                 <div class="slick-product">
-                                    <!-- Inside the containing div, add one div for each slide -->
-
                                     @forelse ($productImages as $image)
                                     <div>
                                         <div class="parts-image-box">
@@ -52,13 +57,15 @@
                             </div>
                             <div class="multi-img-slick-wrapper">
                                 <div class="pro-multi-img multi-img-slick">
-                                    @foreach ($productImages as $image)
-                                    <div class="parts-slider-box">
-                                        <div class="multi-img-box">
-                                            <img src="{{ Storage::url($image->file_url) }}" alt="img">
+                                    @isset($productImages)  
+                                        @foreach ($productImages as $image)
+                                        <div class="parts-slider-box">
+                                            <div class="multi-img-box">
+                                                <img src="{{ Storage::url($image->file_url) }}" alt="img">
+                                            </div>
                                         </div>
-                                    </div>
-                                    @endforeach
+                                        @endforeach
+                                    @endisset
                                 </div>
                                 <div class="prev-btn-multi">
                                     <i class="fa-solid fa-angle-left"></i>
@@ -73,10 +80,20 @@
                         <div class="sticky-box">
                             <div class="single-img-info ">
                                 <div class="product-infography">
-                                    <h2>{{$product->part_number}} {{ $product->name }}</h2>
-                                        <span>{{ $product->category->name }}</span><br>
+                                    @isset($product)
+                                        
+                                    <h2>{{$product->part_number ?? 'part_number not available'}} {{ $product->name }}</h2>
+                                        {{-- <span>{{ $product->category->name }}</span><br> --}}
+                                        @if($product && $product->productCompatible && $product->productCompatible->isNotEmpty())
+                                        <span>{{ $product->productCompatible ? ($product->productCompatible->first()->make): 'Part Brand'}}</span><br>
+                                        @else
+                                            <span></span><br>
+                                        @endif
+                                    
                                         <span>See more products by: </span> <a href="{{ route('dealer.profile', ['product' => $product->id]) }}">
-                                            <u style="color:#272643">{{ $userdetails->dealership_name ?? 'Dealership Name' }}</u></a>
+                                            {{-- <u style="color:#272643">{{ $userdetails->dealership_name ?? 'Dealership Name' }}</u></a> --}}
+                                            <u style="color:#272643">this seller</u></a>
+
                                         <h2 class="product-prize-head"> @if($product && is_numeric($product->price))
                                             ${!! number_format((float) $product->price, 2, '.', ',') !!}
                                         @else
@@ -151,6 +168,7 @@
                                             <span>No longer available</span>
                                         @endif --}}
                                         <x-product-detail-buy-button :product="$product" />
+                                        @endisset
 
 
                                     <div class="singlr-pro-detail">
@@ -168,7 +186,13 @@
                                                     </h2>
                                                     <div id="additional-information" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                                                         <div class="accordion-body">
-                                                            <p>{{ $product->description }} </p>
+                                                            @if($product && $product->description)
+                                                                @foreach(explode(PHP_EOL, $product->description) as $value)
+                                                                    <p>{{ $value }}</p>
+                                                                @endforeach
+                                                            @else
+                                                                <p>No description available.</p> 
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </div>
@@ -177,13 +201,89 @@
                                             <div class="accordion" id="accordionExample">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header">
-                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#additional-information1" aria-expanded="false" aria-controls="collapseTwosumit">
-                                                            Additional Information
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#additional-information1" aria-expanded="false" aria-controls="collapseTwo">
+                                                            Fittment
                                                         </button>
                                                     </h2>
                                                     <div id="additional-information1" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                                                         <div class="accordion-body">
+                                                            <div class="fittment-details">
+                                                                <ul class="fittment-detail-list">
+                                                                    @forelse ($product->productCompatible as $fitmentYears)
+                                                                    
+                                                                    <div>
+                                                                        <li>
+                                                                            <p>Year: 
+                                                                                <span>
+                                                                                
+                                                                                    {{$fitmentYears->year}} 
+                                                                                </span>
+                                                                            </p>
+                                                                        </li>
+                                                                        <li>
+                                                                            <p>Make: 
+                                                                                <span>
+                                                                                    {{$fitmentYears->make}}
+                                                                                </span>
+                                                                            </p>
+                                                                        </li>
+                                                                        <li>
+                                                                            <p>Model: 
+                                                                                <span>
+                                                                                    {{$fitmentYears->model}}
+                                                                                </span>
+                                                                            </p>
+                                                                        </li>
+                                                                    </div>
+                                                                    @empty
+                                                                   <div>
+                                                                    <li>
+                                                                            <p>Year: 
+                                                                                <span>
+                                                                                    N/A
+                                                                                </span>
+                                                                            </p>
+                                                                        </li>
+                                                                        <li>
+                                                                            <p>Make: 
+                                                                                <span>
+                                                                                N/A
+                                                                                </span>
+                                                                            </p>
+                                                                        </li>
+                                                                        <li>
+                                                                            <p>Model: 
+                                                                                <span>
+                                                                                    N/A
+                                                                                </span>
+                                                                            </p>
+                                                                        </li>
+                                                                   </div>
+                                                                @endforelse
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="accordion" id="accordionExample">
+                                                <div class="accordion-item">
+                                                    <h2 class="accordion-header">
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#additional-information2" aria-expanded="false" aria-controls="collapseTwosumit">
+                                                            Additional Information
+                                                        </button>
+                                                    </h2>
+                                                    <div id="additional-information2" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                                        <div class="accordion-body">
                                                             <p>{{ $product->additional_details }} </p>
+                                                            @if($product && $product->description)
+                                                                @foreach(explode(PHP_EOL, $product->additional_details) as $value)
+                                                                    <p>{{ $value }}</p>
+                                                                @endforeach
+                                                            @else
+                                                                <p>No additional_details available.</p> <!-- Fallback content -->
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </div>
@@ -359,6 +459,7 @@
                 jQuery('#fullPageLoader').addClass('d-none');
             }, 3000);
         })
+        jQuery('#additional-information').collapse('show');
     });
 </script>
 @endpush

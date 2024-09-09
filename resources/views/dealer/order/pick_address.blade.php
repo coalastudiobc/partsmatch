@@ -7,14 +7,15 @@
         <div class="adress-info-main">
             <div class="adress-info-haeder">
                 <a class="back-btn" href="{{ route('Dealer.order.orderlist') }}"><i class="fa-solid fa-angle-left back-btn"></i> Back to
-                    orders</a>
+                    orders
+                </a>
                 <div class="order-label-center">
                     <h3>Create New FulFillment</h3>
                     <p>Step 1 of 2</p>
                 </div>
                         <form id="selectedAddressForm" action="{{ route('Dealer.order.product.parcels', $orderid->id) }}" method="post">
                           @csrf
-                            <div class="date-formfield">
+                            <!-- <div class="date-formfield">
                                 <label for="date">Shippment Date:</label>
                                 <div class="formfield ">
                                     <input type="text" id="datepicker" placeholder="Select Date" name="date" value="{{ old('date', isset($getSelectedStuff->shippment_date) ? \Carbon\Carbon::parse($getSelectedStuff->shippment_date)->format('m/d/Y') : '') }}">
@@ -25,41 +26,58 @@
                                 @error('date')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
-                            </div>
+                            </div> -->
                             <button type="submit" class="btn primary-btn nextbtn"><b style="gap:0px;">Next:</b>Order Details</button>
             </div>
-                            <div class="right-btn-box">
-                                <h3>Choose Pick Up Address</h3>
-                                <a href="#" class="btn primary-btn add-address-btn" data-bs-toggle="modal" data-bs-target="#pickadress-modal"><img src="{{ asset('assets/images/add-round-icon.svg') }}" alt=""> Add address</a>
+
+                            <div class="shipment-date-box">
+                                <div class="date-formfield">
+                                    <label for="date">Shippment Date:</label>
+                                    <div class="formfield ">
+                                        <input type="text" id="datepicker"  class="form-control" placeholder="Select Date" name="date" value="{{ old('date', isset($getSelectedStuff->shippment_date) ? \Carbon\Carbon::parse($getSelectedStuff->shippment_date)->format('m/d/Y') : '') }}">
+                                        <span class="form-icon">
+                                            <i class="fa-solid fa-calendar-days"></i>
+                                        </span>
+                                    </div>
+                                    @error('date')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
                             </div>
+                            <div class="shipment-adress-details-box">
+                                <div class="right-btn-box">
+                                    <h3>Choose Pick Up Address</h3>
+                                    <a href="#" class="btn primary-btn add-address-btn" data-bs-toggle="modal" data-bs-target="#pickadress-modal"><img src="{{ asset('assets/images/add-round-icon.svg') }}" alt=""> Add address</a>
+                                </div>
+                                @isset($previousAddresses)
+                                    <div class="row g-3">
+                                        @forelse ($previousAddresses as $key=> $address)
+                                        <div class="col-md-12">
+                                            <label class="adress-info-inner" for="adress{{$key}}">
+                                                <div class="address-haeding-edit">
+                                                    <h3>Address {{ $key + 1 }}</h3>
 
-                            @isset($previousAddresses)
-                                <div class="row g-3">
-                                    @forelse ($previousAddresses as $key=> $address)
-                                    <div class="col-md-6">
-                                        <div class="adress-info-inner">
-                                            <div class="address-haeding-edit">
-                                                <h3>Address {{ $key + 1 }}</h3>
-                                                <a href="{{ route(auth()->user()->getRoleNames()->first() . '.address.delete', ['address' => $address->id]) }}" class="delete"><i class="fa-regular fa-trash-can " style="color: #E13F3F;"></i></a>
+                                                </div>
+                                                <div class="shipment-adress-filled-data">
+                                                    <input type="radio" name="selectadress" id="adress{{$key}}" @isset($getSelectedStuff) @if ($getSelectedStuff->selected_shippo_address == $address->id ) checked @endif @endisset value="{{ $address->id }}">
+                                                    <div class="adress-info-text">
+                                                        <h2>{{ $address->first_name }} {{ $address->last_name }}</h2>
+                                                        <p>{{ $address->address1 }}, {{ $address->city }}, {{ $address->state }},
+                                                            {{ $address->pin_code }},
+                                                            {{ $address->country }}
+                                                        </p>
+                                                        <p>{{ $address->phone_number }}</p>
+                                                    </div>
+                                                    <a href="{{ route(auth()->user()->getRoleNames()->first() . '.address.delete', ['address' => $address->id]) }}" class="delete"><i class="fa-regular fa-trash-can " style="color: #E13F3F;"></i></a>
 
-                                            </div>
-                                            <label for="adress">
-                                                <input type="radio" name="selectadress" id="adress{{$key}}" @isset($getSelectedStuff) @if ($getSelectedStuff->selected_shippo_address == $address->id ) checked @endif @endisset value="{{ $address->id }}">
-                                                <div class="adress-info-text">
-                                                    <h2>{{ $address->first_name }} {{ $address->last_name }}</h2>
-                                                    <p>{{ $address->address1 }}, {{ $address->city }}, {{ $address->state }},
-                                                        {{ $address->pin_code }},
-                                                        {{ $address->country }}
-                                                    </p>
-                                                    <p>{{ $address->phone_number }}</p>
                                                 </div>
                                             </label>
                                         </div>
+                                        @empty
+                                        @endforelse
                                     </div>
-                                    @empty
-                                    @endforelse
-                                </div>
-                            @endisset
+                                @endisset
+                            </div>
                      </form>
                                 {{-- <div class="col-md-6">
                                             <div class="adress-info-inner add-addres-box">
@@ -319,7 +337,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="">Phone Number<span class="required-field">*</span></label>
-                                            <input type="number" name="phone_number" value="" class="form-control @error('phone_number') is-invalid @enderror" placeholder="Phone number">
+                                            <input type="text" name="phone_number" value="" class="form-control @error('phone_number') is-invalid @enderror" placeholder="Phone number">
                                             @error('phone_number')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -370,7 +388,7 @@
                                             <div class="custm-dropdown">
                                                 <div class="dropdown">
                                                     <div class=" form-control dropdown-toggle " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                                        <div id="selectedItem">
+                                                        <div id="selectedItem">Select Country
                                                         </div>
                                                         <span class="custm-drop-icon">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="23" viewBox="0 0 24 23" fill="none">
@@ -400,8 +418,8 @@
                                             <div class="form-field">
                                                 <div class="custm-dropdown">
                                                     <div class="dropdown">
-                                                        <div class="form-control dropdown-toggle " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                                            <div id="selectedState">
+                                                        <div class="form-control dropdown-toggle " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" >
+                                                            <div id="selectedState" >Select State
                                                                 {{-- {{ $state->name ?? 'select' }} --}}
                                                             </div>
                                                             <span class="custm-drop-icon">
@@ -425,7 +443,7 @@
                                                 <div class="custm-dropdown">
                                                     <div class="dropdown">
                                                         <div class="form-control dropdown-toggle " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                                            <div id="selectedCity">
+                                                            <div id="selectedCity">Select City
                                                             </div>
                                                             <span class="custm-drop-icon">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="23" viewBox="0 0 24 23" fill="none">
@@ -480,7 +498,6 @@
 @endsection
 @push('scripts')
 @includeFirst(['validation.dealer.js_picking_address'])
-@
 <script>
     jQuery(function() {
         jQuery("#datepicker").datepicker({

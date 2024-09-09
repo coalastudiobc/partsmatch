@@ -22,7 +22,6 @@ class OrderPaymentController extends Controller
 {
     public function index(Request $request)
     {
-        // dd($request->toArray());
         try {
             DB::beginTransaction();
 
@@ -44,15 +43,20 @@ class OrderPaymentController extends Controller
         //   $orderDetail=  Order::find($order->id);
             // $this->notifyUsers($item,$order);
             toastr()->success('Order placed successfully.');
-            return redirect()->route('Dealer.myorder.orderlist');
+            $role = auth()->user()->getRoleNames()->first(); 
+            return redirect()->route($role . '.myorder.orderlist');
         } catch (Exception $e) {
             DB::rollback();
-            return redirect()->back()->with('error', $e->getMessage());
+            $role = auth()->user()->getRoleNames()->first(); 
+            return redirect()->route($role . '.checkout.create')->with('error', $e->getMessage());
+            // return redirect()->route()->with('error', $e->getMessage());
         }
     }
     private function StripePayment($request, $cart)
     { 
         try {
+            $role = auth()->user()->getRoleNames()->first(); // Be cautious if a user has multiple roles
+            $return_url = route($role . '.myorder.orderlist'); // Ensure this route exists
                 return  PaymentIntent::create([
                     'amount' => floatval($request->total_payment) * 100, // amount in cents
                     'currency' => config('services.Stripe.currency'),//change according to country
@@ -64,44 +68,41 @@ class OrderPaymentController extends Controller
                     'metadata' => [
                         'cart_id' => jsencode_userdata($cart->id), // Add your custom order ID as metadata
                     ],
-                    'return_url' => route('Dealer.myorder.orderlist')
+                    'return_url' => $return_url
                 ]);
             } catch (\Throwable $th) {
                throw new Exception("Error in stripe payment".$th->getMessage());
-               
             }
     }
     private function createOrder($cart,$item,$shippment_details,$stripeResponse,$request)
     {
         try{
-
-        return Order::UpdateOrCreate(
-            ['cart_id' => $cart->id, 'order_for' => $item->product->user_id, 'user_id' => auth()->id()],
-             [ 
-            'status' => '1',
-            'shipment_price' => ($shippment_details) ? $shippment_details->value : '0',
-            'shippment_details' => ($shippment_details) ? $shippment_details : 'Free Delivery due to unavailable of shippment method for this price range.',
-            'payment_raw_data' => $stripeResponse,
-            'payment_method' => $request->token 
-         ] );
+            $response= Order::UpdateOrCreate(
+                ['cart_id' => $cart->id, 'order_for' => $item->product->user_id, 'user_id' => auth()->id()],
+                [ 
+                'status' => '1',
+                'shipment_price' => ($shippment_details) ? $shippment_details->value : '0',
+                'shippment_details' => ($shippment_details) ? $shippment_details : 'Free Delivery due to unavailable of shippment method for this price range.',
+                'payment_raw_data' => $stripeResponse,
+                'payment_method' => $request->token 
+            ] );
+            return $response;
         } catch (\Throwable $th) {
-            throw new Exception("Error in createOrder".$th->getMessage());
-            
+            throw new Exception("Error in createOrder function: ".$th->getMessage());   
          }
     }
 
     private function createOrderItem($item,$order)
     {
         try{
-        OrderItem::create([
-            'product_id' => $item->product_id,
-            'order_id' => $order->id,
-            'quantity' => $item->quantity,
-            'product_price' => $item->product_price
-        ]);
+             OrderItem::create([
+                'product_id' => $item->product_id,
+                'order_id' => $order->id,
+                'quantity' => $item->quantity,
+                'product_price' => $item->product_price
+            ]);
         } catch (\Throwable $th) {
-            throw new Exception("Error in createOrder".$th->getMessage());
-            
+            throw new Exception("Error in createOrderItem function : ".$th->getMessage());
         }
     }
 
@@ -113,8 +114,7 @@ class OrderPaymentController extends Controller
             ->where('order_id',$cart->id)
             ->update(['order_id' => $order->id]);
         } catch (\Throwable $th) {
-            throw new Exception("Error in updateBuyerAddress".$th->getMessage());
-            
+            throw new Exception("Error in updateBuyerAddress function: ".$th->getMessage());
          }
     }
 
@@ -124,8 +124,7 @@ class OrderPaymentController extends Controller
             CartProduct::where('cart_id', $cart->id)->delete();
             $cart->delete();
         } catch (\Throwable $th) {
-            throw new Exception("Error in clearCart".$th->getMessage());
-            
+            throw new Exception("Error in clearCart function: ".$th->getMessage());
          }
         
     }
@@ -139,8 +138,7 @@ class OrderPaymentController extends Controller
                 session()->forget('shipping_address_row_id');
             }
         } catch (\Throwable $th) {
-            throw new Exception("Error in updateShippingAddress".$th->getMessage());
-            
+            throw new Exception("Error in updateShippingAddress function: ".$th->getMessage());
          }
         
     }
@@ -158,8 +156,7 @@ class OrderPaymentController extends Controller
                 $admin->notify(new OrderPlaced($order));
             }
         } catch (\Throwable $th) {
-            throw new Exception("Error in notifyUsers".$th->getMessage());
-            
+            throw new Exception("Error in notifyUsers function :   ".$th->getMessage());
          }
         
     }   

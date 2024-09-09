@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('address_type')->nullable();
             $table->string('address1')->nullable();
             $table->string('address2')->nullable();
-            $table->integer('post_code')->nullable();
+            $table->string('post_code')->nullable();
             $table->string('name')->nullable();
             $table->string('phone_number')->nullable();
             $table->string('email')->nullable();

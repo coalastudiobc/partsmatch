@@ -3,7 +3,6 @@
 @section('heading', 'All Brands')
 
 @section('content')
-
     <div class="dashboard-right-box " >
         <div class="serach-and-filter-box justify-content-end">
             <form action="">
@@ -29,6 +28,9 @@
                             <p>Image</p>
                         </th>
                         <th>
+                            <p>Status</p>
+                        </th>
+                        <th>
                             <p>Action</p>
                         </th>
                     </tr>
@@ -39,10 +41,18 @@
                             </td>
                             <td>
                                 <div class="brands-imgs">
-                                    <img src="{{ asset('storage/' . $make->image_url) }}" alt="brand Image">
+                                    <img src="{{ $make->image_url ? asset('storage/' . $make->image_url) : asset('assets/images/car-logo2.png') }}" alt="brand Image">
                                 </div>
                             </td>
-
+                            <td>
+                                <div class="toggle-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Click to Active /Inactive listing of brands in marketplace">
+                                    <input type="checkbox" id="switch100{{ $key }}" class="custom-switch-input"
+                                    @if ($make->status == '1') checked="checked" @endif
+                                        onchange="toggleStatus(this, 'CarBrandMake', '{{ $make->id }}');"
+                                        url="{{ route('admin.brands.listing.status') }}" ><label
+                                        for="switch100{{ $key }}">Toggle</label>
+                                </div>
+                            </td>
                             <td>
                                 <a href="{{ route('admin.brands.edit.make', ['id' => json_encode($make->id)]) }}"
                                     class="btn primary-btn">
@@ -52,7 +62,7 @@
                     @empty
                         <tr>
                             <td class="no-record-found">
-                                <center>Did not found any product </center>
+                                <center>Did not found any parts </center>
                             </td>
                         </tr>
                     @endforelse

@@ -44,10 +44,10 @@
                                                 <input type="hidden" name="country"
                                                     value="@isset($data) {{ $data->country == 'Canada' ? 'Canada' : 'United States' }}@endisset"
                                                     id=""
-                                                    class=" @error('country') is-invalid @enderror checktype">
-                                                <div class="custm-dropdown">
+                                                    class=" @error('country')  is-invalid @enderror checktype">
+                                                <div class="custm-dropdown ">
                                                     <div class="dropdown checktype">
-                                                        <div class="dropdown-toggle " type="button"
+                                                        <div class="dropdown-toggle form-control " type="button"
                                                             id="dropdownMenuButton1" data-bs-toggle="dropdown"
                                                             aria-expanded="false">
                                                             <div id="selectedCountry">

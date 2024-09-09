@@ -7,7 +7,9 @@
                 <div class="categories-boxes categoryCard">
                     @foreach ($categories as $key => $category)
                         <div class="categories-box">
-                            <img src="{{ asset('assets/images/categorie1.svg') }}" alt="">
+                            <div class="categories-img-box">
+                                <img src="{{ asset('assets/images/categorie1.svg') }}" alt="">
+                            </div>
                             
                             <p>{{ $category->name }}</p>
                         </div>

@@ -377,7 +377,7 @@ return [
         ],
         'stocks_avaliable' => [
             'required' => 'Please enter product stock',
-            'number' => 'please enter only numbers',
+            'number' => 'please enter valid product quantity',
             'regex' => 'Only number are allowed',
         ],
         'price' => [
@@ -422,6 +422,10 @@ return [
         ],
         'timetype' => [
             'required' => 'Please select the time type'
+        ],
+        'product_count' => [
+            'required' => 'Please enter product count value',
+            'integer' => 'Please enter a valid integer value. Decimal numbers are not allowed'
         ],
         'description' => [
             'min' => 'Description can be :min - :max characters',

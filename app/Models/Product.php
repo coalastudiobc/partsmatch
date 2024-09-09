@@ -15,6 +15,12 @@ class Product extends Model
     {
         return $this->hasMany(ProductCompatabilty::class, 'product_id', 'id');
     }
+    public function featuredByUsers()
+    {
+        return $this->belongsToMany(User::class, 'featured_products', 'product_id', 'user_id')
+                    ->withTimestamps();
+    }
+
     public function productOfDealer()
     {
         return $this->hasMany(User::class,'id' ,'dealer_id');
@@ -52,6 +58,7 @@ class Product extends Model
         $request = $request ?? request();
         $query->when(!empty($request->filter_by_name), function ($q) use ($request) {
             $q->Where('name', 'like', '%' . $request->filter_by_name . '%');
+            $q->orWhere('part_number', 'like', '%' . $request->filter_by_name . '%');
         })->when(!empty($request->filter_by_name) && $request->filter_by_name == 'active', function ($q) use ($request) {
             $q->where('status', '1');
         })->when(!is_null($request->dates), function ($q) use ($request) {
@@ -117,22 +124,99 @@ class Product extends Model
                     $query->OrwhereIn('model', $request->model);
                 });
             });
+          
         }
         
     }
+    // public function scopeFilterCompatiblity($query,$request = null)
+    // {
+    //     $request = $request ?? request();
+    //         $query->when(($request->has('year') && count($request->year)) , function ($q) use ($request) {
+    //             $q->whereHas('productCompatible', function ($query) use ($request) {
+    //                 $query->whereIn('year', $request->year);
+    //             });
+    //         })->when(($request->has('brand') && count($request->brand)) , function ($q) use ($request) {
+    //             $q->whereHas('productCompatible', function ($query) use ($request) {
+    //                 $query->whereIn('make', $request->brand);
+    //             });
+    //         })->when(($request->has('model') && count($request->model)) , function ($q) use ($request) {
+    //             $q->whereHas('productCompatible', function ($query) use ($request) {
+    //                 $query->whereIn('model', $request->model);
+    //             });
+    //         });
+    // }
+    public function scopeFilterCompatiblity($query, $request = null)
+{
+    $request = $request ?? request();
+
+    // Initialize a base query
+    $query->where(function ($q) use ($request) {
+        // Check if 'model' values are provided
+        if ($request->has('model') && count($request->model)) {
+            $q->whereHas('productCompatible', function ($query) use ($request) {
+                $query->whereIn('model', $request->model);
+            });
+        }
+
+        // Check if 'make' values are provided
+        if ($request->has('brand') && count($request->brand)) {
+            $q->orWhereHas('productCompatible', function ($query) use ($request) {
+                $query->whereIn('make', $request->brand);
+            });
+        }
+
+        // Check if 'year' values are provided (if needed)
+        if ($request->has('year') && count($request->year)) {
+            $q->orWhereHas('productCompatible', function ($query) use ($request) {
+                $query->whereIn('year', $request->year);
+            });
+        }
+    });
+}
+
+    
+
 
     public function scopeGlobal($query,$request = null)
     {
         $request = $request ?? request();
-        $query->when(!empty($request->search_parameter), function ($query) use ($request) {
+        $query->when(!empty($request->globalquery), function ($query) use ($request) {
             $query->where(function ($query) use ($request) {
-                $query->where('name', 'like', '%' . $request->search_parameter . '%')
-                    ->orWhere('price', 'like', '%' . $request->search_parameter . '%')
-                    ->orWhere('year', 'like', '%' . $request->search_parameter . '%')
-                    ->orWhere('brand', 'like', '%' . $request->search_parameter . '%')
-                    ->orWhere('part_number', 'like', '%' . $request->search_parameter . '%')
-                    ->orWhere('model', 'like', '%' . $request->search_parameter . '%');
+                $query->where('name', 'like', '%' . $request->globalquery . '%')
+                    ->orWhere('price', 'like', '%' .  $request->globalquery. '%')
+                    ->orWhere('year', 'like', '%' . $request->globalquery. '%')
+                    ->orWhere('brand', 'like', '%' .  $request->globalquery . '%')
+                    ->orWhere('part_number', 'like', '%' .  $request->globalquery. '%')
+                    ->orWhere('model', 'like', '%' .  $request->globalquery. '%');
             });
         });
     }
+    public function scopeSort($query,$request = null)
+    {
+        $request = $request ?? request();
+        $query->when(($request->has('sortorder')) , function ($q) use ($request) {
+            switch ($request->sortorder) {
+                case 'low':
+                    $q->orderBy('price','asc');
+                    break;
+                
+                case 'high':
+                    $q->orderBy('price','desc');
+                    break;
+                
+                case 'new':
+                    $q->orderBy('created_at','desc');
+                    break;
+                
+                case 'old':
+                    $q->orderBy('created_at','asc');
+                    break;
+                
+                default:
+                $q->orderBy('id','desc');
+                    break;
+            }});
+    }
+
+
 }

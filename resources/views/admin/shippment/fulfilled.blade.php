@@ -16,13 +16,16 @@
                             <p>Cart Amount</p>
                         </th>
                         <th>
-                            <p>Shipment Charges</p>
+                            <p>Ship Charges</p>
                         </th>
                         <th>
                             <p>Buy Date</p>
                         </th>
                         <th>
                             <p>Fullfilled Date</p>
+                        </th>
+                        <th>
+                            <p>Delivery Date</p>
                         </th>
                         <th>
                             <p>Action</p>
@@ -52,9 +55,19 @@
                             <p>{{ $fulfilledOrder ? ($fulfilledOrder->created_at ? date('m/d/Y', strtotime($fulfilledOrder->created_at)) : 'N/A'):'N/A' }}</p>
                         </td>
                         <td>
+                            <p>{{ $fulfilledOrder ? ($fulfilledOrder->shippoPurchasedLabel->qr_code_url ?
+                             date('m/d/Y', strtotime($fulfilledOrder->shippoPurchasedLabel->qr_code_url)) : 
+                             \Carbon\Carbon::parse($fulfilledOrder->shippoPurchasedLabel->created_at)->addDays(5)->format('m/d/Y')):'N/A' }}</p>
+                        </td>
+                        <td>
                             <div class="confirm-badge">
                                 <i class="fa-solid fa-check"></i>
+                                @if (is_null($fulfilledOrder->shippoPurchasedLabel->rate_provider))
+                                    <p>Manually</p>
+                                @else
+                                    
                                 <p>Confirmed</p>
+                                @endif
                             </div>
                         </td>
                     </tr>
@@ -69,11 +82,11 @@
                 </table>
             </div>
         </div>
-        @isset($fulfilledOrders)
+        @if($fulfilledOrders && count($fulfilledOrders)> 0)
         <div class="pagination-wrapper">
             {!! $fulfilledOrders->links('admin.pagination') !!}
         </div>
-        @endisset
+        @endif
     </div>
 
 @endsection

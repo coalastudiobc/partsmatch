@@ -17,6 +17,7 @@ class UserSeeder extends Seeder
     {
         Role::firstOrCreate([ 'name' =>  'Dealer' ]);
         Role::firstOrCreate([ 'name' =>  'Manager' ]);
+        Role::firstOrCreate([ 'name' =>  'User' ]);
         Role::firstOrCreate([ 'name' =>  'Administrator' ]);
         $user =['name' => 'Admin', 'status' => 'APPROVED', 'email' => 'admin@gmail.com', 'email_verified_at' => '2024-02-16 17:46:29' ,'password' => Hash::make('Shine@123')];
 

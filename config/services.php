@@ -49,5 +49,10 @@ return [
         'SHIPPO_API_KEY' => env('TEST_API_KEY'),
        
     ],
+    'Car_api' => [
+        'CAR_API_TOKEN' => env('CAR_API_TOKEN'),
+        'CAR_API_SECRET' => env('CAR_API_SECRET'),
+       
+    ],
 
 ];

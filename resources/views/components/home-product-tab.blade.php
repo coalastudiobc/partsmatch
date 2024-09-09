@@ -1,20 +1,36 @@
-<div class="more-product-cards">
-    <a href="{{ route('product.detail',['product' => $product->id]) }}"
+<a  href="{{ route('product.detail',['product' => $product->id]) }}" class="more-product-cards">
+    <div
         class="product-cards-img-outer">
         <div class="product-cards-img">
                 <img src="{{$product->productImage && count($product->productImage) ?  Storage::url($product->productImage[0]->file_url) : asset('assets/images/gear-logo.svg') }}" alt="">
         </div>
-    </a>
-    <div class="product-deails">
-        <p>{{ $product->name }}</p>
-        </p>
-        <div class="price-and-cart">
-            <div class="discount-price">
-                <p> @if($product && is_numeric($product->price))
-                    ${!! number_format((float) $product->price, 2, '.', ',') !!}
+    </div>
+   <div class="product-deails-row">
+    <div class="product-deails-main">
+        <p>{{ $product->part_number }}</p>
+        <span class="public-product-name-span">{{$product->name}}</span>
+        <div class="quantity-box">
+            <h4>Avaliable Stock:</h4><p class="disabl">{{$product->stocks_avaliable}}</p>
+
+        </div>
+    </div>
+    <div style="min-height:10px; flex:1;"></div>
+    
+    <div class="price-and-cart">
+        <div class="discount-price">
+            <p>
+                @if($product && is_numeric($product->price))
+                ${!! number_format((float) $product->price, 2, '.', ',') !!}
                 @else
-                    N/A
-                @endif</p>
+                N/A
+                @endif
+            </p>
+            
+               {{-- <p style="border: 2px solid red">
+                @if($product->stocks_avaliable > 0)
+                    {{$product->stocks_avaliable}}
+                @endif
+               </p> --}}
             </div>
             <x-public-shop-cart-buy-button :product="$product" />
 
@@ -76,5 +92,6 @@
                 </a>
             @endif --}}
         </div>
-    </div>
-</div>
+
+   </div>
+</a>

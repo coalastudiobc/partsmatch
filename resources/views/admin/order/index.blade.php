@@ -24,9 +24,9 @@
                             <p>Date</p>
                         </th>
 
-                        <th>
+                       <!--  <th>
                             <p>Invoice</p>
-                        </th>
+                        </th> -->
                         <th>
                             <p>Status</p>
                         </th>
@@ -49,7 +49,7 @@
                                 <p>{{ date('d-m-Y', strtotime($order->created_at)) }}</p>
                             </td>
 
-                            <td>
+                            <!-- <td>
                                 <div class="invoive-download">
                                     <a href="#" class="invoice-download">
                                         <img src="images/invoice-download.png" alt="">
@@ -57,7 +57,7 @@
                                     </a>
 
                                 </div>
-                            </td>
+                            </td> -->
                             <td style="width:150px;">
                                 <div class="pro-status">
 

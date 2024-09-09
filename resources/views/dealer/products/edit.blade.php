@@ -8,13 +8,13 @@
         <div class='ajax-response'></div>
         <x-alert-component />
         @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
         @endif
         <div class="card-body">
             <form id="product" action="{{ route(auth()->check() ? auth()->user()->getRoleNames()->first() . '.products.update' : 'Dealer.products.update', $product->id) }}" enctype="multipart/form-data" method="post">
@@ -34,7 +34,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="">Product Category<span class="required-field">*</span></label>
@@ -107,322 +106,291 @@
                         </div>
                     </div>
                     {{-- <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Other specifications</label>
-                                        <div class="form-field">
-                                            <textarea name="other_specification" class="form-control summernote @error('other_specification') is-invalid @enderror">{{ $product->other_specification ? $product->other_specification : '' }}</textarea>
-                    @error('other_specification')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-                </div>
-        </div>
-    </div>
-    <div class="col-md-12">
-        <div class="form-group">
-            <label for="">Specifications and dimensions</label>
-            <div class="form-field">
-                <textarea name="Specifications_and_dimensions" class="form-control @error('Specifications_and_dimensions') is-invalid @enderror" id="" cols="30" rows="2">{{ $product->Specifications_and_dimensions ? $product->Specifications_and_dimensions : '' }}</textarea>
-                @error('other_specification')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-            </div>
-        </div>
-    </div>
-    <div class="col-md-12">
-        <div class="form-group">
-            <label for="">Shipping info</label>
-            <div class="form-field">
-                <textarea name="Shipping_info" class="form-control @error('Shipping_info') is-invalid @enderror" id="" cols="30" rows="2">{{ $product->Shipping_info ? $product->Shipping_info : '' }}</textarea>
-                @error('Shipping_info')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-            </div>
-        </div>
-    </div>
-    <div class="col-md-12">
-        <div class="form-group">
-            <label for="">field 3</label>
-            <div class="form-field">
-                <textarea name="field_3" class="form-control @error('field_3') is-invalid @enderror" id="" cols="30" rows="2">{{ $product->field_3 ? $product->field_3 : '' }}</textarea>
-                @error('field_3')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-            </div>
-        </div>
-    </div> --}}
-    <div class="col-md-12">
-        <div class="form-group">
-            <label for="">Add Product Images (Up to 5)</label>
-            <!-- <label class="img-upload-box">
-                                            <p>Upload Images</p>
-                                            <input type="file" name="images[]" id="upload-image" multiple mixlength="5">
-                                            <input type="hidden" name="total-img-preview" id="total-img-preview"
-                                                value={{ count($product->productImage) }}>
-                                            <input type="hidden" name="image_id[]" value="imageid[]" id="get_image_id">
-
-                                        </label> -->
-
-            <div class="pre-upload-img-preview">
-                @foreach ($product->productImage as $image)
-                <div class="upload-img-box">
-                    <img src="{{ Storage::url($image->file_url) }}" class="uploadedimage" alt="img" img-id="{{ $image->id }}" height="100px" width="75px">
-                    <div class="upload-img-cross">
-                        <i class="fa-regular fa-circle-xmark remove_uploaded"></i>
-                    </div>
-                </div>
-                @endforeach
-                <label class="img-upload-box">
-                    <div class="img-upload-box-inner">
-                        <i class="fa-solid fa-plus"></i>
-                        <p>Upload Images</p>
-                    </div>
-                    <input type="file" name="images[]" id="upload-image" multiple mixlength="5">
-                    <input type="hidden" name="total-img-preview" id="total-img-preview" value={{ count($product->productImage) }}>
-                    <input type="hidden" name="image_id[]" value="imageid[]" id="get_image_id">
-
-                </label>
-
-            </div>
-            <div class="upload-img-preview"></div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="form-group">
-            <label for="">Product Quantity<span class="required-field">*</span></label>
-            <div class="form-field">
-                <input type="text" name="stocks_avaliable" class="form-control @error('stocks_avaliable') is-invalid @enderror" value="{{ old('stocks_avaliable', $product->stocks_avaliable) }}">
-                @error('stocks_avaliable')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="form-group">
-            <label for="">Product Price<span class="required-field">*</span></label>
-            <div class="form-field">
-                <input type="text" name="price" class="form-control @error('price') is-invalid @enderror" value="{{ old('price', $product->price) }}">
-                @error('price')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-            </div>
-        </div>
-    </div>
-    {{-- <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="length">Length:</label>
-                                        <div class="form-field">
-                                            <input type="number" class="form-control" id="length" name="length"
-                                                required value="{{ old('length', $product->parcelDetail->length) }}">
-    @error('length')
-    <span class="invalid-feedback" role="alert">
-        <strong>{{ $message }}</strong>
-    </span>
-    @enderror
-
-</div>
-</div>
-</div>
-<div class="col-md-3">
-    <div class="form-group">
-        <label for="width">Width:</label>
-        <div class="form-field">
-            <input type="number" class="form-control" id="width" name="width" required value="{{ old('width', $product->parcelDetail->width) }}">
-            @error('width')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-            @enderror
-
-        </div>
-    </div>
-</div>
-<div class="col-md-3">
-    <div class="form-group">
-        <label for="height">Height:</label>
-        <div class="form-field">
-            <input type="number" class="form-control" id="height" name="height" required value="{{ old('height', $product->parcelDetail->height) }}">
-            @error('height')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-            @enderror
-
-        </div>
-    </div>
-</div>
-<div class="col-md-3">
-    <div class="form-group">
-        <label for="weight">Weight:</label>
-        <div class="form-field">
-            <input type="number" class="form-control" id="weight" name="weight" required value="{{ old('weight', $product->parcelDetail->weight) }}">
-            @error('weight')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-            @enderror
-        </div>
-    </div>
-</div>
-<div class="col-md-6">
-    <div class="form-group">
-        <label for="distance_unit">Distance Unit:</label>
-        <div class="form-field">
-            <select id="distance_unit" class="form-control" name="distance_unit" required>
-                <option value="cm">cm</option>
-                <option value="m">m</option>
-                <option value="in">in</option>
-                <option value="ft">ft</option>
-            </select>
-
-        </div>
-    </div>
-</div>
-
-<div class="col-md-6">
-    <div class="form-group">
-        <label for="mass_unit">Mass Unit:</label>
-        <div class="form-field">
-            <select id="mass_unit" class="form-control" name="mass_unit" required>
-                <option value="lb">lb</option>
-                <option value="kg">kg</option>
-                <option value="oz">oz</option>
-                <option value="g">g</option>
-            </select>
-        </div>
-    </div>
-</div> --}}
-
-{{-- <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Shipping Price</label>
-                                        <div class="form-field">
-                                            <input type="text" name="shipping_price"
-                                                class="form-control @error('shipping_price') is-invalid @enderror"
-                                                value="{{ old('shipping_price', $product->shipping_price) }}">
-@error('shipping_price')
-<span class="invalid-feedback" role="alert">
-    <strong>{{ $message }}</strong>
-</span>
-@enderror
-</div>
-</div>
-</div> --}}
-<div class="custm-field-for-ymmm">
-    <div class="field-for-ymmm-box">
-        <div class="form-group">
-            <label for="">Year</label>
-            <div class="form-field">
-                {{-- <select class="form-control api_call" name="car_years"
-                                                                        id="car-years"></select> --}}
-                <select class="form-control" name="car_years" id="carYear">
-                    <option id="selectYearDefault">Select year</option>
-                    @foreach ($years as $year)
-                    <option value="{{ $year }}">{{ $year }}</option>
-                    @endforeach
-
-                </select>
-                <span class="form-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none">
-                        <path d="M13 1L7 7L1 1" stroke="#272643" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
-                </span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="">Brand</label>
-            <div class="form-field">
-                {{-- <select class="form-control api_call" name="car_model"
-                                                                        id="car-makes"></select> --}}
-                <select class="form-control" name="car_model" id="carModel">
-                    <option>please select year first</option>
-                </select>
-                <span class="form-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none">
-                        <path d="M13 1L7 7L1 1" stroke="#272643" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
-                </span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="">Model*</label>
-            <div class="form-field modelselect">
-                <div id="output"></div>
-                <select class="form-control car-model" id="carMake">
-                    <option>Select your make</option>
-                </select>
-                <span class="form-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none">
-                        <path d="M13 1L7 7L1 1" stroke="#272643" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
-                </span>
-            </div>
-        </div>
-    </div>
-    {{-- <i id="addValue" style="font-size: 20px; margin-top:50px;" class="fa-solid fa-circle-plus fa-fw"></i> --}}
-</div>
-</div>
-<input type="hidden" name="compatable_with" class="form-control" id="compatableProducts" placeholder="Product Name">
-<div id="test1234" class="ymmm-box-preview d-none">
-    {{-- <div class="ymmm-data-outer">
-                                <div class="ymmm-box-data">
-                                    <p>2023(Bentley)743</p>
+                            <div class="form-group">
+                                <label for="">Other specifications</label>
+                                <div class="form-field">
+                                    <textarea name="other_specification" class="form-control summernote @error('other_specification') is-invalid @enderror">{{ $product->other_specification ? $product->other_specification : '' }}</textarea>
+                                    @error('other_specification')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
-                                <span class="ymmm-cross">×</span>
-                            </div> --}}
-</div>
-{{-- <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="">Image</label>
-                                                <div class="form-field">
-                                                    <input type="file" name="image"
-                                                        class="form-control @error('image') is-invalid @enderror">
-                                                    @error('image')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-</span>
-@enderror
-</div>
-</div>
-</div> --}}
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="">Specifications and dimensions</label>
+                                <div class="form-field">
+                                    <textarea name="Specifications_and_dimensions" class="form-control @error('Specifications_and_dimensions') is-invalid @enderror" id="" cols="30" rows="2">{{ $product->Specifications_and_dimensions ? $product->Specifications_and_dimensions : '' }}</textarea>
+                                    @error('other_specification')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="">Shipping info</label>
+                                <div class="form-field">
+                                    <textarea name="Shipping_info" class="form-control @error('Shipping_info') is-invalid @enderror" id="" cols="30" rows="2">{{ $product->Shipping_info ? $product->Shipping_info : '' }}</textarea>
+                                    @error('Shipping_info')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="">field 3</label>
+                                <div class="form-field">
+                                    <textarea name="field_3" class="form-control @error('field_3') is-invalid @enderror" id="" cols="30" rows="2">{{ $product->field_3 ? $product->field_3 : '' }}</textarea>
+                                    @error('field_3')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div> --}}
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="">Add Product Images (Up to 5)</label>
+                                <!-- <label class="img-upload-box">
+                                        <p>Upload Images</p>
+                                        <input type="file" name="images[]" id="upload-image" multiple mixlength="5">
+                                        <input type="hidden" name="total-img-preview" id="total-img-preview"
+                                            value={{ count($product->productImage) }}>
+                                        <input type="hidden" name="image_id[]" value="imageid[]" id="get_image_id">
+                                    </label> -->
 
-<div class="row">
-    <div class="col-md-6">
-    </div>
-    <div class="col-md-6">
-        <div class="d-flex align-items-center gap-2 justify-content-end">
-            <a href="{{ route(auth()->user()->getRoleNames()->first() . '.products.index') }}" class="btn secondary-btn md-btn mr-1">Back</a>
-            <button class="btn primary-btn md-btn mr-1" id="submit" type="submit">Submit</button>
+                                <div class="pre-upload-img-preview">
+                                    @foreach ($product->productImage as $image)
+                                    <div class="upload-img-box">
+                                        <img src="{{ Storage::url($image->file_url) }}" class="uploadedimage" alt="img" img-id="{{ $image->id }}" height="100px" width="75px">
+                                        <div class="upload-img-cross">
+                                            <i class="fa-regular fa-circle-xmark remove_uploaded"></i>
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                    <label class="img-upload-box">
+                                        <div class="img-upload-box-inner">
+                                            <i class="fa-solid fa-plus"></i>
+                                            <p>Upload Images</p>
+                                        </div>
+                                        <input type="file" name="images[]" id="upload-image" multiple mixlength="5">
+                                        <input type="hidden" name="total-img-preview" id="total-img-preview" value={{ count($product->productImage) }}>
+                                        <input type="hidden" name="image_id[]" value="imageid[]" id="get_image_id">
+
+                                    </label>
+
+                                </div>
+                                <div class="upload-img-preview"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">Product Quantity<span class="required-field">*</span></label>
+                                <div class="form-field">
+                                    <input type="text" name="stocks_avaliable" class="form-control @error('stocks_avaliable') is-invalid @enderror" value="{{ old('stocks_avaliable', $product->stocks_avaliable) }}">
+                                    @error('stocks_avaliable')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">Product Price<span class="required-field">*</span></label>
+                                <div class="form-field">
+                                    <input type="text" name="price" class="form-control @error('price') is-invalid @enderror" value="{{ old('price', $product->price) }}">
+                                    @error('price')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                    {{-- <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="length">Length:</label>
+                                <div class="form-field">
+                                    <input type="number" class="form-control" id="length" name="length"
+                                        required value="{{ old('length', $product->parcelDetail->length) }}">
+                                    @error('length')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="width">Width:</label>
+                                <div class="form-field">
+                                    <input type="number" class="form-control" id="width" name="width" required value="{{ old('width', $product->parcelDetail->width) }}">
+                                    @error('width')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="height">Height:</label>
+                                <div class="form-field">
+                                    <input type="number" class="form-control" id="height" name="height" required value="{{ old('height', $product->parcelDetail->height) }}">
+                                    @error('height')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="weight">Weight:</label>
+                                <div class="form-field">
+                                    <input type="number" class="form-control" id="weight" name="weight" required value="{{ old('weight', $product->parcelDetail->weight) }}">
+                                    @error('weight')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="distance_unit">Distance Unit:</label>
+                                <div class="form-field">
+                                    <select id="distance_unit" class="form-control" name="distance_unit" required>
+                                        <option value="cm">cm</option>
+                                        <option value="m">m</option>
+                                        <option value="in">in</option>
+                                        <option value="ft">ft</option>
+                                    </select>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="mass_unit">Mass Unit:</label>
+                                <div class="form-field">
+                                    <select id="mass_unit" class="form-control" name="mass_unit" required>
+                                        <option value="lb">lb</option>
+                                        <option value="kg">kg</option>
+                                        <option value="oz">oz</option>
+                                        <option value="g">g</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div> --}}
+
+                    {{-- <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Shipping Price</label>
+                                    <div class="form-field">
+                                        <input type="text" name="shipping_price"
+                                            class="form-control @error('shipping_price') is-invalid @enderror"
+                                            value="{{ old('shipping_price', $product->shipping_price) }}">
+                                        @error('shipping_price')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div> --}}
+                            <div class="custm-field-for-ymmm">
+                                <div class="field-for-ymmm-box">
+                                    <div class="form-group">
+                                        <label for="">Year</label>
+                                        <div class="form-field">
+                                            {{-- <select class="form-control api_call" name="car_years"
+                                                    id="car-years">
+                                            </select> --}}
+                                            <select class="form-control" name="car_years" id="carYear">
+                                                <option id="selectYearDefault">Select year</option>
+                                                @foreach ($years as $year)
+                                                <option value="{{ $year }}">{{ $year }}</option>
+                                                @endforeach
+
+                                            </select>
+                                            <span class="form-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none">
+                                                    <path d="M13 1L7 7L1 1" stroke="#272643" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Brand</label>
+                                        <div class="form-field">
+                                            {{-- <select class="form-control api_call" name="car_model"
+                                                                                                    id="car-makes"></select> --}}
+                                            <select class="form-control" name="car_model" id="carModel">
+                                                <option>please select year first</option>
+                                            </select>
+                                            <span class="form-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none">
+                                                    <path d="M13 1L7 7L1 1" stroke="#272643" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Model*</label>
+                                        <div class="form-field modelselect">
+                                            <div id="output"></div>
+                                            <select class="form-control car-model" id="carMake">
+                                                <option>Select your make</option>
+                                            </select>
+                                            <span class="form-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none">
+                                                    <path d="M13 1L7 7L1 1" stroke="#272643" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- <i id="addValue" style="font-size: 20px; margin-top:50px;" class="fa-solid fa-circle-plus fa-fw"></i> --}}
+                            </div>
+                 </div>
+                <input type="hidden" name="compatable_with" class="form-control" id="compatableProducts" placeholder="Product Name">
+                <div id="test1234" class="ymmm-box-preview d-none">
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-center gap-2 justify-content-end">
+                            <a href="{{ route(auth()->check() ? (auth()->user()->getRoleNames()->first() . '.products.index'):'Dealer.products.index') }}" class="btn secondary-btn md-btn mr-1">Back</a>
+                            <button class="btn primary-btn md-btn mr-1" id="submit" type="submit">Update</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
 </div>
-</form>
 
-</div>
-
-{{-- ------------------ product-manager page --------------------------------}}
-
-
-
-{{-- ------------------ product-manager page --------------------------------}}
-
-</div>
-</div>
-{{-- </section> --}}
-{{-- </div> --}}
 @endsection
 
 @push('scripts')

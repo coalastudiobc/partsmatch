@@ -8,24 +8,40 @@
         <div class="serach-and-filter-box justify-content-end">
             <form action="">
                 <div class="pro-search-box">
-                    <input type="text" name="filter_by_name" class="form-control" placeholder="Search Product By Name">
+                    <input type="text" name="filter_by_name" class="form-control" value="{{ request('filter_by_name') }}" placeholder="Search Product">
                     <button type="submit" class="btn primary-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
             </form>
+            @if(request('filter_by_name'))
+            {{-- <form action="">
+                <div class="search-cross-btn">
+                    <input type="hidden" name="filter_by_name">
+                    <button type="submit" ><i class="fa-solid fa-xmark"></i></button>
+                </div>
+            </form> --}}
+            <form action="">
+                <div class="search-cross-btn">
+                    <a href="{{ route('admin.products.list') }}"><i class="fa-solid fa-xmark"></i></a>
+                </div>
+            </form>
+            @endif
         </div>
         <div class="product-detail-table product-list-table">
             <div class="table-responsive">
                 <table class="table">
                     <tr>
                         <th>
+                            <p>Part Number</p>
+                        </th>
+                        <th>
                             <p>Name</p>
                         </th>
                         <th>
                             <p>Stocks Avaliable</p>
                         </th>
-                        <th>
+                        {{-- <th>
                             <p>Price</p>
-                        </th>
+                        </th> --}}
                         {{-- <th>
                             <p>Shipping Price</p>
                         </th> --}}
@@ -39,14 +55,17 @@
                     @forelse ($products as $key => $product)
                         <tr>
                             <td>
-                                <p>{{ $product->name ? $product->name : 'N/A' }}</p>
+                                <p>{{ $product ? ($product->part_number ?? 'N/A') : 'N/A' }}</p>
                             </td>
                             <td>
-                                <p>{{ $product->stocks_avaliable ? $product->stocks_avaliable : 'N/A' }}</p>
+                                <p>{{ $product ? ($product->name ?? 'N/A') : 'N/A' }}</p>
                             </td>
                             <td>
-                                <p>{{ $product->price ? number_format($product->price,2,'.',',') : 'N/A' }}</p>
+                                <p>{{ $product ? ( $product->stocks_avaliable ?? '0') : 'N/A' }}</p>
                             </td>
+                            {{-- <td>
+                                <p>${{ $product->price ? number_format($product->price,2,'.',',') : 'N/A' }}</p>
+                            </td> --}}
                             {{-- <td>
                                 <p>{{ $product->shipping_price ? $product->shipping_price : 'N/A' }}</p>
                             </td> --}}
@@ -68,16 +87,16 @@
                     @empty
                         <tr>
                             <td class="no-record-found">
-                                <center>Did not found any product </center>
+                                <center>Did not found any parts </center>
                             </td>
                         </tr>
                     @endforelse
                 </table>
             </div>
         </div>
-        @isset($orders)  
+        @isset($products)  
         <div class="pagination-wrapper">
-            {!! $product->links('admin.pagination') !!}
+            {!! $products->links('admin.pagination') !!}
         </div>
         @endif
     </div>

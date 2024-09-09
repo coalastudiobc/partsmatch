@@ -16,7 +16,7 @@
                     </div>
                 @elseif($product->stocks_avaliable == 0)
                     <div class="left-badge">
-                        <p>Out of stock</p>
+                        <p>No more stock available</p>
                     </div>
                 @endif
             </div>
@@ -38,7 +38,7 @@
                 </button>
 
             @elseif($product->stocks_avaliable == 0)
-                <button  class="btn disabled-btn btn btn-secondary full-btn ">Out of stock</button>
+                <button  class="btn disabled-btn btn btn-secondary full-btn ">No more stock available</button>
 
             @else
                 <a href="{{ route('Dealer.cart.cart.index') }}" class="btn secondary-btn full-btn cart_add">Go to Cart</a>

@@ -63,6 +63,10 @@ class User extends Authenticatable
     {
         return $this->hasOne(PaymentDetail::class, 'user_id', 'id');
     }
+    public function postalCode()
+    {
+        return $this->belongsTo(PostalCode::class, 'zipcode', 'id');
+    }
     public function ComissionDetails()
     {
         return $this->hasOne(UserCommisionSetting::class, 'user_id', 'id');
@@ -80,7 +84,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(Subscription::class,  'user_id', 'id');
     }
-
+    
     public function cart()
     {
         return $this->hasMany(Cart::class, 'user_id');
@@ -103,6 +107,11 @@ class User extends Authenticatable
     public function scopeDealers($query)
     {
         return $query->role('dealer');
+    }
+    public function featuredProducts()
+    {
+        return $this->belongsToMany(Product::class, 'featured_products', 'user_id', 'product_id')
+                    ->withTimestamps();
     }
 
     public function scopeSearch($query)

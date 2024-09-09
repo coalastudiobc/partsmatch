@@ -11,25 +11,28 @@
     </div>
      <div class="product-detail-table product-list-table">
         <x-alert-component />
-        <div class="table-responsive">
-            <div class="test">
+        <div class="order-managment-table">
+            <div class="test table-responsive">
                 <table class="table">
                     <tr>
                         <th>
                             <p>Order ID</p>
                         </th>
-                        <th>
+                        {{-- <th>
                             <p>Total products</p>
+                        </th> --}}
+                        <th>
+                            <p>Shippment Amount</p>
                         </th>
                         <th>
-                            <p>Amount</p>
+                            <p>Order Amount</p>
                         </th>
 
                         <th>
-                            <p>Shippment price</p>
+                            <p>Total Amount</p>
                         </th>
                         <th>
-                            <p>Date</p>
+                            <p>Buy Date</p>
                         </th>
                         <th>
                             <p>Action</p>
@@ -41,17 +44,20 @@
                         <td>
                             <p>{{$fulfilledOrder? ( $fulfilledOrder->order_id ?? 'N/A') : 'N/A'}}</p>
                         </td>
-                        <td>
+                        {{-- <td>
                             <div class="pro-list-name" data-bs-toggle="modal" data-bs-target="#pickadress-modal">
                                 <h4>{{$fulfilledOrder ? (count($fulfilledOrder->orderDetails->orderItem) ?? 'N/A') : 'N/A' }}</h4>
                             </div>
-                        </td>
+                        </td> --}}
 
+                        <td>
+                            <p>${{$fulfilledOrder? ( $fulfilledOrder->orderDetails->shipment_price ?? 'N/A') : 'N/A' }}</p>
+                        </td>
                         <td>
                             <p>${{$fulfilledOrder? ( $fulfilledOrder->orderDetails->total_amount ?? 'N/A') : 'N/A'  }}</p>
                         </td>
                         <td>
-                            <p>${{$fulfilledOrder? ( $fulfilledOrder->orderDetails->shipment_price ?? 'N/A') : 'N/A' }}</p>
+                            <p>{{ $fulfilledOrder ? ($fulfilledOrder->orderDetails->total_amount && !is_null($fulfilledOrder->orderDetails->shipment_price) ? '$'.($fulfilledOrder->orderDetails->total_amount  + $fulfilledOrder->orderDetails->shipment_price) : 'N/A'):'N/A' }}</p>
                         </td>
                         <td>
                             <p>{{ $fulfilledOrder ? ($fulfilledOrder->orderDetails->created_at ? date('m/d/Y', strtotime($fulfilledOrder->orderDetails->created_at)) : 'N/A'):'N/A' }}</p>
@@ -67,8 +73,8 @@
                                             </div>
                                         </td> --}}
                         <td>
-                            <a class="btn primary-btn" href="{{route('Dealer.order.fullfilled.shippment.details',['order_id'=>$fulfilledOrder->orderDetails->id])}}">
-                            Track Details</a>
+                            <a class="btn primary-btn fullfilment-btn" href="{{route('Dealer.order.fullfilled.shippment.details',['order_id'=>$fulfilledOrder->orderDetails->id])}}">
+                            Track</a>
                         </td>
                     </tr>
                     @empty
@@ -81,6 +87,7 @@
                 </table>
             </div>
         </div>
+        {!! $fulfilledOrders->links('dealer.pagination') !!}
     </div>
     @isset($order)
     <div class="modal fade" id="pickadress-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

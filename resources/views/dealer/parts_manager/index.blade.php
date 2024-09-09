@@ -6,13 +6,13 @@
         <x-alert-component />
         <div class="bredcrum-plus-filter justify-content-end">
             <div class="serach-and-filter-box">
-                <form action="">
+                {{-- <form action="">
                     <div class="pro-search-box">
                         <input type="text" class="form-control" name="filter_by_name" placeholder="Search">
                         <button type="submit" class="btn primary-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
                         <!-- <a href="#" class="btn secondary-btn filter-open-btn">Filter</a> -->
                     </div>
-                </form>
+                </form> --}}
                 {{-- @can('role-view', $user) --}}
                 @if ($role == 'Advance')
                     <div class="serach-and-filter-box">
@@ -65,7 +65,7 @@
                             <p>{{ $user->productOfManager->count() ?? 'N/A' }}</p>     
                         </td>
                         <td>
-                            <span class="d-inline-block" data-bs-toggle="tooltip" data-bs-placement="left" title="Click to deactivate/active ">
+                            <span class="d-inline-block" data-bs-toggle="tooltip" data-bs-placement="left" title="Click to Active/Inactive the profile ">
                                 <div class="toggle-btn" >
                                     <input type="checkbox" id="switch{{ $key }}" class="custom-switch-input" @if ($user->status == 'ACTIVE') checked="checked" @endif
                                     onchange="toggleStatus(this, 'User', '{{ $user->id }}');"
@@ -76,8 +76,8 @@
                         
                         <td>
                             <div class="action-btns">
-                                <a href="{{ route('Dealer.partsmanager.edit', [$user->id]) }}"><i class="fa-solid fa-pen-to-square" style="color: #3EBE62;" title="edit"></i></a>
-                                <a class="delete" href="{{ route('Dealer.partsmanager.delete', ['user' => $user->id]) }}"><i class="fa-regular fa-trash-can " style="color: #E13F3F;" title="delete"></i></a>
+                                <a href="{{ route('Dealer.partsmanager.edit', [$user->id]) }}"><i class="fa-solid fa-pen-to-square" style="color: #3EBE62;" title="Click to modify details"></i></a>
+                                <a class="delete" href="{{ route('Dealer.partsmanager.delete', ['user' => $user->id]) }}"><i class="fa-regular fa-trash-can " style="color: #E13F3F;" title="Click to remove item"></i></a>
                             </div>
                         </td>
 
@@ -85,7 +85,7 @@
                     @empty
                     <div class="empty-data">
                         <img src="{{ asset('assets/images/no-product.svg') }}  " alt="" width="300">
-                        <p class="text-center mt-1">Did not found any Products</p>
+                        <p class="text-center mt-1">Did not found any parts</p>
                     </div>
                     @endforelse
                 </table>
@@ -191,8 +191,8 @@
 
                                                 <li><a class="dropdown-item custom_dropdown_commission" data-value="Basic" data-text="Basic" href="javascript:void(0)">Basic</a>
                                                 </li>
-                                                <li><a class="dropdown-item custom_dropdown_commission" data-value="Advanced" data-text="Advanced" href="javascript:void(0)">Advanced</a>
-                                                </li>
+                                                {{-- <li><a class="dropdown-item custom_dropdown_commission" data-value="Advanced" data-text="Advanced" href="javascript:void(0)">Advanced</a>
+                                                </li> --}}
 
                                             </ul>
                                         </div>

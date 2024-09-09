@@ -9,7 +9,7 @@
                         <x-alert-component />
                         <h2>Delivery Address</h2>
                         <div class="delivery-form">
-                            <form id="product-card-details" action="{{ route('Dealer.address.to') }}" method="post" enctype="multipart/form-data">
+                            <form id="product-card-details" action="{{ route(auth()->check() ? (auth()->user()->getRoleNames()->first().  '.address.to') : 'Dealer.address.to') }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6">
@@ -42,7 +42,7 @@
                                         <div class="form-group">
                                             <label for="">Address<span class="required-field">*</span></label>
                                             <div class="form-field">
-                                                <input type="text" class="form-control @error('street1') is-invalid @enderror" name="street1" value="{{ old('address1', $deliveryAddress->address1 ?? '')}}" placeholder="e.g: street no. & name">
+                                                <input type="text" class="form-control @error('street1') is-invalid @enderror" name="street1" value="{{ old('address1', $deliveryAddress->address1 ?? '')}}" placeholder="E.g: street & apt. Number & street name">
                                                 @error('street1')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -58,7 +58,7 @@
                                         <div class="form-group">
                                             <label for="">Address 2</label>
                                             <div class="form-field">
-                                                <input type="text" class="form-control @error('street2') is-invalid @enderror" name="street2" value="{{ $deliveryAddress->address2 ?? '' }}" placeholder="Description of above address">
+                                                <input type="text" class="form-control @error('street2') is-invalid @enderror" name="street2" value="{{ $deliveryAddress->address2 ?? '' }}" placeholder="E.g: suite number">
                                                 @error('street2')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -117,7 +117,7 @@
                                             <div class="add-type-main">
                                                 <label for="s-option">
                                                     <p>Home</p>
-                                                    <input type="radio" name="addressType" id="s-option" style="display: none" value="Home" {{ $deliveryAddress ? ($deliveryAddress->address_type == 'Home' ? 'checked' : '') : '' }}>
+                                                    <input type="radio" name="addressType" id="s-option" checked style="display: none" value="Home" {{ $deliveryAddress ? ($deliveryAddress->address_type == 'Home' ? 'checked' : 'checked') : '' }}>
                                                 </label>
                                                 <label for="v-option">
                                                     <p>Office</p>
@@ -451,9 +451,10 @@
         // Handle City Selection
         jQuery(document).on('click', '.city_dropdown_item', function() {
             var cityId = jQuery(this).attr('data-value');
+            var cityname = jQuery(this).attr('data-text');
             var selecttext = jQuery(this).attr('data-text');
             jQuery('#selectedCity').text(selecttext);
-            jQuery('input[name="city"]').val(cityId);
+            jQuery('input[name="city"]').val(cityname);
             jQuery('input[name="city"]').removeClass('is-invalid');
             jQuery('#city-error').text('');
         });

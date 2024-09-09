@@ -14,9 +14,9 @@
                 regex: emailRegex,
             },
             phone_number: {
-                digits: true,
-                minlength: 10,
-                maxlength: 10,
+                required: true,
+                phoneNumber:true,
+                phoneNumberFormat:true,
             },
             password: {
                 minlength: passwordMinLength,
@@ -27,8 +27,8 @@
                 equalTo: "#conPassword",
             },
             profile_pic: {
-                filesize: profilePicSize,
-                extension: profilePicMimes,
+                // filesize: profilePicSize,
+                imageExtension: true,
             },
         }
         const messages = {

@@ -78,19 +78,24 @@
                                                 <div class="dropdown">
                                                     <button class="btn btn-secondary dropdown-toggle" type="button"
                                                         data-bs-toggle="dropdown" aria-expanded="false">
-                                                        <img src="{{ Storage::url($authUser->profile_picture_url) }}"
+                                                        <img src="{{ $authUser->profile_picture_url ? Storage::url($authUser->profile_picture_url) : asset('assets/images/user.png') }}"
                                                             alt="">
                                                         {{ $authUser->name }}
                                                     </button>
                                                     <ul class="dropdown-menu dropdown-menu-end">
                                                         <li><a class="dropdown-item"
                                                                 href="{{ route('Dealer.profile') }}"><i
-                                                                    class="fa-solid fa-user"></i> Profile</a></li>
+                                                                    class="fa-solid fa-user"></i> Profile</a>
+                                                        </li>
                                                         <li><a class="dropdown-item"
+                                                            href="{{ route('Dealer.myorder.orderlist') }}"><i
+                                                            class="fa-solid fa-user"></i> My Orders</a>
+                                                        </li>
+                                                        {{-- <li><a class="dropdown-item"
                                                                 href="{{ route('Dealer.subscription.plan') }}"><i
                                                                     class="fa-solid fa-crown"></i> Subscription
                                                                 Plan</a>
-                                                        </li>
+                                                        </li> --}}
                                                         <li><a class="dropdown-item" href="{{ route('logout') }}">
                                                                 <i class="fa-solid fa-right-from-bracket"></i> Logout
                                                             </a>
@@ -107,7 +112,7 @@
                                 </ul>
                             @endauth
                         </div>
-
+                        
                     </div>
                 </nav>
             </div>
@@ -136,7 +141,7 @@
 
             </div>
 
-            <div id="fullPageLoader" class="page-loader d-none">
+            <div id="fullPageLoader" class="page-loader d-none ">
                 <div class="sk-circle">
                     <div class="sk-circle1 sk-child"></div>
                     <div class="sk-circle2 sk-child"></div>
@@ -185,15 +190,16 @@
     <script src="{{ asset('assets/js/common.js') }}?ver={{ now() }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
-jQuery(document).ready(function (e) {
-    jQuery('.sidebar-opener').on('click',function (event) {
-        jQuery('.dashboard-left-box').addClass('open');
-        jQuery('.cross-sidebar').removeClass('open');
-    })
-    jQuery('.cross-sidebar').on('click',function (event) {
-        jQuery('.dashboard-left-box').removeClass('open');
-    })
-})
+        jQuery(document).ready(function (e) {
+            jQuery('.sidebar-opener').on('click',function (event) {
+                jQuery('.dashboard-left-box').addClass('open');
+                jQuery('.cross-sidebar').removeClass('open');
+            })
+            jQuery('.cross-sidebar').on('click',function (event) {
+                jQuery('.dashboard-left-box').removeClass('open');
+            })
+     
+        })
 
 
 
@@ -236,6 +242,12 @@ jQuery(document).ready(function (e) {
                 // jQuery(this).addClass('active');
         //     })
         // })
+    //     window.onload = function() {
+    //     console.log('harvinder');
+    //     var loader = document.getElementById('fullPageLoader');
+    //     loader.classList.add('d-none'); // Hide loader
+    // };
+  
     </script>
     @stack('scripts')
 </body>

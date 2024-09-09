@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\CartProduct;
+use App\Models\FeaturedProduct;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -44,13 +45,24 @@ class HomeController extends Controller
         $category = Category::where('status', '1')->get();
         $collections = Category::with('products')->has('products')->where('parent_id', '!=', null)->where('status', '1')->inRandomOrder()->take(10)->get();
         $subcategories = Category::with('products')->has('products')->Where('parent_id', '!=', null)->where('status', '1')->inRandomOrder()->take(6)->get();
-        $brands = CarBrandMake::inRandomOrder()->get();
+
+        $brands = CarBrandMake::where('status','1')->inRandomOrder()->get();
         if (Auth::user()) {
             if (Auth::user()->hasRole("Administrator")) {
-                return redirect()->route('admin.category.index');
+                return redirect()->route('admin.dashboard');
             }
         }
-        return view('welcome', compact('category', 'subcategories', 'collections', "subcategory_id", "brands"));
+
+        // featured product
+        $alreadyFeaturedProductIds = FeaturedProduct::pluck('product_id')->toArray();
+        $products = Product::whereIn('id',$alreadyFeaturedProductIds)
+                            ->orderBy('created_at','desc')
+                            ->Paginate(__('pagination.pagination_nuber'));
+        // end 
+        $subcategorie = Category::with('products')->has('products')->Where('parent_id', '!=', null)->where('status', '1')->inRandomOrder()->take(6)->get();
+                    
+                              
+        return view('welcome', compact('category', 'subcategories', 'collections', "subcategory_id", "brands",'products','subcategorie'));
     }
 
     public function brands()
@@ -80,7 +92,6 @@ class HomeController extends Controller
     public function logout()
     {
         Auth::logout();
-
         return redirect('/');
     }
 
@@ -89,7 +100,7 @@ class HomeController extends Controller
         if (Auth::user()->hasRole("Administrator")) {
             return redirect()->route('admin.category.index');
         } else if (Auth::user()->hasRole("Dealer")) {
-            return redirect()->route('Dealer.products.index');
+            return redirect()->route('Dealer.dashboard');
         } else if (Auth::user()->hasRole("Manager")) {
             return redirect()->route('Manager.products.index');
         } else {
@@ -104,24 +115,35 @@ class HomeController extends Controller
         try {
             $class = "App\Models\\{$request->model}";
 
-            if (empty($class)) {
+            if (empty($class)) 
+            {
                 return response()->json(['status' => 'error', 'message' => ucwords($request->model) . ' not found'], 404);
             }
             $result = $class::where('id', $id)->firstOrFail();
             $status = ($result->status == 1) ? '0' : '1';
 
-            if ($result->update(['status' => $status])) {
-                if ($status == '1') {
-                    if ($class != "App\Models\Package") {
-                        return response()->json(['status' => 'success', 'message' => $request->model . " has been activated"], 200);
-                    } else {
+            if ($result->update(['status' => $status])) 
+            {
+                if ($status == '1') 
+                {
+                    if ($class == "App\Models\Package") {
                         return response()->json(['status' => 'success', 'message' => "Subscription plan" . " has been activated"], 200);
+                    } else if($class == "App\Models\CarBrandMake") {
+                        return response()->json(['status' => 'success', 'message' => "Brand" . " has been activated"], 200);
+                    } else 
+                    {
+                        return response()->json(['status' => 'success', 'message' => $request->model . " has been activated"], 200);
                     }
                 } else {
-                    if ($class != "App\Models\Package") {
-                        return response()->json(['status' => 'danger', 'message' => $request->model . " has been deactivated"], 200);
-                    } else {
+                    if ($class == "App\Models\Package") 
+                    {
                         return response()->json(['status' => 'danger', 'message' => "Subscription plan" . " has been deactivated"], 200);
+                    } else if($class == "App\Models\CarBrandMake")
+                    {
+                        return response()->json(['status' => 'danger', 'message' => "Brand" . " has been deactivated"], 200);
+                    } else
+                    {
+                        return response()->json(['status' => 'danger', 'message' => $request->model . " has been deactivated"], 200);
                     }
                 }
             } else {
@@ -133,24 +155,22 @@ class HomeController extends Controller
     }
     public function allProducts(Request $request)
     {
-        // if($request->method() == "POST")
-            // dd($request);
+        
         $brands = CarBrandMake::distinct('makes')->get();
-
         $sdk = \CarApiSdk\CarApi::build([
-            'token' => env('CAR_API_TOKEN'),
-            'secret' => env('CAR_API_SECRET'),
+            'token' => config('services.Car_api.CAR_API_TOKEN'),
+            'secret' => config('services.Car_api.CAR_API_SECRET'),
         ]);
         $filePath = storage_path('app/text.txt');
         $jwt = file_exists($filePath) ? file_get_contents($filePath) : null;
-
+        
         if (empty($jwt) || $sdk->loadJwt($jwt)->isJwtExpired()) {
             try {
                 $jwt = $sdk->authenticate();
                 file_put_contents($filePath, $jwt);
             } catch (Exception $e) {
                 Log::channel('daily')->error($e->getMessage());
-                return;
+                return redirect()->route('welcome')->with('error',$e->getMessage());
             }
         }
         $years = $sdk->years();
@@ -159,14 +179,23 @@ class HomeController extends Controller
             $request = $request->merge($request_test);
         }
         $models = AllModel::all();
-        $products = Product::with('productImage', 'featuredProduct', 'productCompatible')->where('status','1')->global()->category()->compatiblity($request)->price()->paginate(12)->appends($request->query());
+        $products = Product::with('productImage', 'featuredProduct', 'productCompatible')->where('status','1')->global($request)->category()->compatiblity($request)->price()->orderBy('id','desc')->paginate(12)->appends($request->query());
         $categories =  Category::with('children')->has('children')->orWhereNull('parent_id')->get();
+        
+        if($request->method() == "POST")
+        {
+           if($request->sortorder)
+           {
+               $products = Product::with('productImage', 'featuredProduct', 'productCompatible')->where('status','1')->category()->FilterCompatiblity($request)->price()->sort()->paginate(12)->appends($request->query());
+            
+           }
+        }
         return view('public_shop', compact("categories", "products", "brands", "years", "models"));
     }
 
     public function ProductDetail(Request $request ,  $product)
     {
-        $product = Product::withTrashed()->find($product);
+        $product = Product::with('productCompatible')->withTrashed()->find($product);
         $userdetails = User::where(function($query) use ($product){
                 $query->where('id',$product->user_id)
                 ->orWhere('id', '=', $product->dealer_id);

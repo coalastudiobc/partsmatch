@@ -152,10 +152,6 @@
                                                 <div class="form-field custm-error-field">
                                                     <select name="zipcode" id="zipcode" class="form-control @error('zipcode') is-invalid @enderror">
                                                     </select>
-                                                    {{-- <input type="number" name="zipcode" value="{{ old('zipcode') }}"
-                                                        class="form-control @error('zipcode') is-invalid @enderror"
-                                                        placeholder="Zip code"> --}}
-
                                                     @error('zipcode')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
@@ -174,17 +170,10 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="">Select industry*</label>
+                                                <label for="">Industry*</label>
                                                 <div class="form-field">
-                                                    {{-- <select name="industry_type" id="industury" class="form-control">
-                                                        <option value="volvo">Select industry</option>
-                                                        <option value="saab">Volvo</option>
-                                                        <option value="saab">Saab</option>
-                                                        <option value="opel">Opel</option>
-                                                        <option value="audi">Audi</option>
-                                                    </select> --}}
                                                     <input type="hidden" id="industry" name="industry_type"
                                                         class="custom_input @error('industry_type') is-invalid @enderror"
                                                         value="">
@@ -214,22 +203,29 @@
                                                             </div>
                                                             <ul class="dropdown-menu"
                                                                 aria-labelledby="dropdownMenuButton1">
-                                                                {{-- <li><a class="dropdown-item custom_dropdown_item"
-                                                                        data-value="" href="javascript:void(0)">Volvo</a>
-                                                                </li> --}}
                                                                 <li><a class="dropdown-item custom_dropdown_item"
-                                                                        data-value="Volvo"
-                                                                        href="javascript:void(0)">Volvo</a>
+                                                                        data-value="Franchise Dealership"
+                                                                        href="javascript:void(0)">Franchise Dealership</a>
                                                                 </li>
                                                                 <li><a class="dropdown-item custom_dropdown_item"
-                                                                        data-value="Saab" href="javascript:void(0)">Saab
-                                                                    </a></li>
+                                                                        data-value="Collision Center" href="javascript:void(0)">Collision Center
+                                                                    </a>
+                                                                </li>
                                                                 <li><a class="dropdown-item custom_dropdown_item"
-                                                                        data-value="Opel"
-                                                                        href="javascript:void(0)">Opel</a></li>
+                                                                        data-value="Body Shop"
+                                                                        href="javascript:void(0)">Body Shop
+                                                                    </a>
+                                                                    </li>
                                                                 <li><a class="dropdown-item custom_dropdown_item"
-                                                                        data-value="Audi"
-                                                                        href="javascript:void(0)">Audi</a></li>
+                                                                        data-value="Repair Shop"
+                                                                        href="javascript:void(0)">Repair Shop
+                                                                    </a>
+                                                                </li>
+                                                                <li><a class="dropdown-item custom_dropdown_item"
+                                                                        data-value="Surplus Buyer"
+                                                                        href="javascript:void(0)">Surplus Buyer
+                                                                    </a>
+                                                                </li>
                                                             </ul>
                                                         </div>
                                                     </div>

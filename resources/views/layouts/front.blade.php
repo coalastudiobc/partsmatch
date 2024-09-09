@@ -55,10 +55,13 @@
                         <div class="navbar-serch-box">
                             <ul>
                                 <li>
-                                    <form action="{{ route('search') }}" method="GET">
+                                    <form action="{{ route('search') }}" id="searchglobaly" method="GET">
                                         <div class="pro-search-box">
-                                            <input type="text" name="globalquery" class="form-control" value="{{request()->has('search_parameter') ? request()->search_parameter : ''}}"
-                                            placeholder="Search">
+                                            <input type="text" name="globalquery" id="globalquery" class="form-control" value="{{ request()->has('globalquery') ? request()->input('globalquery') : '' }}"
+                                            placeholder="Search Part #">
+                                            @if(request()->has('globalquery'))
+                                            <a href="{{route('products')}}" class="nav-serch-cross"><i class="fa-solid fa-xmark"></i></a>
+                                            @endif
                                             <button type="submit" class="btn primary-btn"><i
                                                 class="fa-solid fa-magnifying-glass"></i></button>
                                             </div>
@@ -73,17 +76,19 @@
                             <ul class="navbar-nav">
 
                                 @auth
-                                    <li class="nav-item">
-                                        <a class="nav-link dasboard-btn" style="color: #fff; padding: 3px 6px !important;" title="Dashboard" aria-current="page"
-                                            href="{{ route('redirect-to-dashboard') }}">
-                                            <span>
-                                                <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24" width="14" height="14">
-                                                    <path d="m9,9H2c-1.103,0-2-.897-2-2v-2C0,2.243,2.243,0,5,0h4c1.103,0,2,.897,2,2v5c0,1.103-.897,2-2,2Zm10,15h-4c-1.103,0-2-.897-2-2v-5c0-1.103.897-2,2-2h7c1.103,0,2,.897,2,2v2c0,2.757-2.243,5-5,5Zm3-11h-7c-1.103,0-2-.897-2-2V2c0-1.103.897-2,2-2h4c2.757,0,5,2.243,5,5v6c0,1.103-.897,2-2,2Zm-13,11h-4c-2.757,0-5-2.243-5-5v-6c0-1.103.897-2,2-2h7c1.103,0,2,.897,2,2v9c0,1.103-.897,2-2,2Z" fill="CurrentColor" />
-                                                </svg>
-                                            </span>
-                                            Dashboard
-                                        </a>
-                                    </li>
+                                    @if (!auth()->user()->hasRole('User'))
+                                        <li class="nav-item">
+                                            <a class="nav-link dasboard-btn" style="color: #fff; padding: 3px 6px !important;" title="Dashboard" aria-current="page"
+                                                href="{{ route('redirect-to-dashboard') }}">
+                                                <span>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24" width="14" height="14">
+                                                        <path d="m9,9H2c-1.103,0-2-.897-2-2v-2C0,2.243,2.243,0,5,0h4c1.103,0,2,.897,2,2v5c0,1.103-.897,2-2,2Zm10,15h-4c-1.103,0-2-.897-2-2v-5c0-1.103.897-2,2-2h7c1.103,0,2,.897,2,2v2c0,2.757-2.243,5-5,5Zm3-11h-7c-1.103,0-2-.897-2-2V2c0-1.103.897-2,2-2h4c2.757,0,5,2.243,5,5v6c0,1.103-.897,2-2,2Zm-13,11h-4c-2.757,0-5-2.243-5-5v-6c0-1.103.897-2,2-2h7c1.103,0,2,.897,2,2v9c0,1.103-.897,2-2,2Z" fill="CurrentColor" />
+                                                    </svg>
+                                                </span>
+                                                Dashboard
+                                            </a>
+                                        </li>
+                                    @endif
                                 @endauth
                                 {{-- <li class="nav-item">
                                     <a class="nav-link" aria-current="page"
@@ -123,7 +128,6 @@
                                 </ul>
                             @endguest
                             @auth
-
                                 <ul class="navbar-nav">
                                     <div class="cart-icon">
                                         @include('components.cart-icon')
@@ -135,7 +139,7 @@
                                                 <div class="dropdown">
                                                     <button class="btn btn-secondary dropdown-toggle" type="button"
                                                         data-bs-toggle="dropdown" aria-expanded="false">
-                                                        <img src="{{ Storage::url($authUser->profile_picture_url) }}"
+                                                        <img src="{{$authUser->profile_picture_url ? Storage::url($authUser->profile_picture_url) : asset('assets/images/user.png') }}"
                                                             alt="">
                                                         {{ $authUser->name }}
                                                     </button>
@@ -144,11 +148,17 @@
                                                                 href="{{ route('Dealer.profile') }}"><i
                                                                     class="fa-solid fa-user"></i> Profile</a>
                                                         </li>
+                                                        {{-- @if (auth()->user()->hasRole('User')) --}}
                                                         <li><a class="dropdown-item"
+                                                            href="{{ route('Dealer.myorder.orderlist') }}"><i
+                                                            class="fa-solid fa-user"></i> My Orders</a>
+                                                        </li>
+                                                        {{-- @endif --}}
+                                                        {{-- <li><a class="dropdown-item"
                                                                 href="{{ route('Dealer.subscription.plan') }}"><i
                                                                     class="fa-solid fa-crown"></i> Subscription
                                                                 Plan</a>
-                                                        </li>
+                                                        </li> --}}
                                                         {{-- <li><a class="dropdown-item" href="#">Another action</a></li> --}}
                                                         <li><a class="dropdown-item" href="{{ route('logout') }}">
                                                                 <i class="fa-solid fa-right-from-bracket"></i> Logout
@@ -230,6 +240,13 @@
                 }
             }, 100);
         });
+
+    //     document.addEventListener('DOMContentLoaded', function () {
+    //         document.getElementById('clear-search').addEventListener('click', function () {
+    //         document.getElementById('globalquery').value = ' ';
+    //         document.getElementById('searchglobaly').submit();
+    //     });
+    // });
     </script>
     @stack('scripts')
 </body>

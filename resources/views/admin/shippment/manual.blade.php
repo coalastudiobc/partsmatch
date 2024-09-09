@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'shipping')
+@section('title', 'Manual shipping')
 @section('heading', 'shipping')
 
 @section('content')
@@ -31,7 +31,7 @@
                                                     </h4>
                         
                                                     <div class="shipment-address-mail-phone">
-                                                        <a href="#">{{ $pickaddress->address_from ? ($pickaddress->address_from->email  ?? 'N/A'):'N/A'}}</a>
+                                                        <a href="#">{{ $pickaddress ? ($pickaddress->address_from->email  ?? 'N/A'):'N/A'}}</a>
                                                         <a href="#">{{ $pickaddress ? ($pickaddress->phone_number  ?? 'N/A'):'N/A'}}</a>
                                                     </div>
                                                 </div>

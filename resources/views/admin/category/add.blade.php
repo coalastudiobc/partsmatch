@@ -17,7 +17,7 @@
                                     <div class="dealer-profile-detail-form">
                                         <form id="category" enctype="multipart/form-data" method="post">
                                             @csrf
-                                            <div class="row">
+                                            <div class="row g-2">
                                                 <div class="col-md-6">
                                                     {{-- @dd($selective) --}}
                                                     @if ($selective == null || !$selective->isEmpty())
@@ -95,11 +95,11 @@
                                                                     <strong>{{ $message }}</strong>
                                                                 </span>
                                                             @enderror
-                                                            <div class="input-icon-custm tooltip-open">
+                                                            <div class="input-icon-custm tooltip-new">
                                                                 <span>
                                                                     <i class="fa-solid fa-question"></i>
                                                                 </span>
-                                                                <div class="tooltip">
+                                                                <div class="tooltip-text">
                                                                     <p>ghfvjvhm</p>
                                                                 </div>
                                                             </div>
@@ -113,11 +113,11 @@
                                                             <input type="text" name="icon"
                                                                 class="form-control @error('icon') is-invalid @enderror"
                                                                 value="{{ old('icon', $category->icon ?? $category->icon) }}">
-                                                            <div class="input-icon-custm tooltip-open">
+                                                            <div class="input-icon-custm tooltip-new">
                                                                 <span>
                                                                     <i class="fa-solid fa-question"></i>
                                                                 </span>
-                                                                <div class="tooltip">
+                                                                <div class="tooltip-text">
                                                                     <p>ghfvjvhm</p>
                                                                 </div>
                                                             </div>

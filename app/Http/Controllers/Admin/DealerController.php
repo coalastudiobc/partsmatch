@@ -21,7 +21,22 @@ class DealerController extends Controller
     }
     public function products(User $user)
     {
-        $products = Product::where('user_id', $user->id)->Search()->get();
+        // $products = Product::where('user_id', $user->id)->when(request('filter_by_name'), function ($query) {
+        //     $search = request('filter_by_name');
+        //     $query->where('name', 'like', "%{$search}%") 
+        //     ->Where('part_number', 'like', "%{$search}%");
+        // })->orderBy('created_at', 'DESC')->paginate(__('pagination.admin_paginaion_number'));
+        $products = Product::where('user_id', $user->id)
+            ->when(request('filter_by_name'), function ($query) {
+            $search = request('filter_by_name');
+            $query->where(function($query) use ($search) {
+                $query->where('name', 'like', "%{$search}%")
+                    ->orWhere('part_number', 'like', "%{$search}%");
+                });
+            })->orderBy('created_at', 'DESC');
+
+        $products = $products->paginate(__('pagination.admin_paginaion_number'));
+
         return view('admin.user.product_list', compact('products', 'user'));
     }
     public function toggleStatus(Request $request)

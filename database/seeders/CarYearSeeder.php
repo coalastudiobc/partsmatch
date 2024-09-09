@@ -24,8 +24,8 @@ class CarYearSeeder extends Seeder
     protected function initializeSdk()
     {
         $this->sdk = \CarApiSdk\CarApi::build([
-            'token' => env('CAR_API_TOKEN'),
-            'secret' => env('CAR_API_SECRET'),
+            'token' => config('services.Car_api.CAR_API_TOKEN'),
+            'secret' => config('services.Car_api.CAR_API_SECRET'),
         ]);
     }
 

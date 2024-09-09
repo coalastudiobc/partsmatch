@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\PaymentDetail;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use App\Models\PostalCode;
 use App\Notifications\UserRegistered;
 use Carbon\Carbon;
@@ -110,7 +111,7 @@ class RegisterController extends Controller
                 })
             ],
             'industry_type' => ['required', 'string'],
-            'image' => ['required', 'mimes:jpeg,jpg,png'],
+            // 'image' => ['required', 'mimes:jpeg,jpg,png'],
         ]);
     }
 
@@ -134,24 +135,28 @@ class RegisterController extends Controller
                 'zipcode' => $data['zipcode'],
                 'industry_type' => $data['industry_type'],
                 'email_verification_token' => str::random(50)
-
             ];
-            if ($data['image']) {
+            
+            if (isset($data['image'])) {
                 $image = store_image(request()->image, 'profile_pictures');
                 $user['profile_picture_url'] = $image['url'];
                 $user['profile_picture_file'] = $image['name'];
             }
 
             $userdetails = User::create($user);
-            $userdetails->assignRole('Dealer');
+            if($data['industry_type'] == 'Franchise Dealership')
+            {
+               $userdetails->assignRole('Dealer');
+            }else
+            {
+                $userdetails->assignRole('User');   
+            }
 
             return $userdetails;
         } catch (\Exception $e) {
-
             return redirect()->back()->with(['status' => 'success', 'message' => $e->getMessage()]);
         }
     }
-
 
     protected function registered(Request $request, $user)
     {

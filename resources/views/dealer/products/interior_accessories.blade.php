@@ -156,7 +156,7 @@
                                                             @if ($product->user_id !== auth()->user()->id)
                                                                 @if (in_array($product->id, authCartProducts()))
                                                                 <button class="btn secondary-btn add-cart-btn " id="added_btn">
-                                                                    <span>added</span>
+                                                                    <span>Added</span>
                                                                 </button>
                                                                 @elseif($product->stocks_avaliable > 0)
                                                                 <button product-id="{{ $product->id }}" class="btn secondary-btn add-cart-btn addtocart">
@@ -174,7 +174,7 @@
                                                                     </svg>
                                                                 </button>
                                                                 @else
-                                                                <p class="text-danger">Out of stocks</p>
+                                                                <p class="text-danger">No more stock available</p>
                                                                 @endif
                                                             @else
                                                             @endif

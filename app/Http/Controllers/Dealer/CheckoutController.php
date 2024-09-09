@@ -7,29 +7,26 @@ use App\Models\Cart;
 use App\Models\City;
 use App\Models\Order;
 use App\Models\State;
+use App\Models\Product;
 use App\Models\Country;
-use App\Models\OrderItem;
 use Stripe\PaymentIntent;
+use App\Models\OrderItem;
 use App\Models\CartProduct;
 use App\Traits\ShippoTrait;
 use App\Models\AdminSetting;
 use App\Models\BuyerAddress;
-
-
-use App\Http\Requests\ShippingAddressRequest;
-
 use Illuminate\Http\Request;
 use App\Models\UserAddresses;
-use Illuminate\Support\Collection;
 use App\Models\ShippingAddress;
 use App\Models\ShippingSetting;
 use App\Models\ShippmentCreation;
-use App\Models\ProductParcelDetail;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use App\Models\ProductParcelDetail;
 use App\Http\Controllers\Controller;
 use App\Models\ShippoPurchasedLabel;
 use App\Http\Requests\CheckoutRequest;
-use App\Models\Product;
+use App\Http\Requests\ShippingAddressRequest;
 use GuzzleHttp\Psr7\Request as GuzzleRequest;
 
 class CheckoutController extends Controller
@@ -115,6 +112,10 @@ class CheckoutController extends Controller
     public function orderProductView(Order $order)
     {
         $orderItem = OrderItem::where('order_id', $order->id)->get();
+        $role = auth()->user()->getRoleNames()->first();
+        // if($role == 'User'){
+            return view('dealer.myorder.view_public_product', compact('orderItem'));
+        // }
         return view('dealer.myorder.view_products', compact('orderItem'));
     }
 
@@ -282,14 +283,16 @@ class CheckoutController extends Controller
         $data = $user->shippingAddress;
         // $orders = Order::with('orderItem')->where('user_id', auth()->id())->orderByDesc('id')->paginate(10);
         $orders =  Order::with('orderItem')->where('user_id', auth()->id())->orderBy('id', 'DESC')->paginate(__('pagination.pagination_nuber'));
-
-        // dd($orders);
-        return view('dealer.myorder.order_list', compact('orders'));
+        $role = auth()->user()->getRoleNames()->first();
+        // if($role == 'User'){
+        //     return view('dealer.myorder.index', compact('orders'));
+        // }
+        return view('dealer.myorder.index', compact('orders'));
+        // return view('dealer.myorder.order_list', compact('orders'));
     }
-    public function to_address(ShippingAddressRequest $request)
-    {
+    public function to_address(Request $request)
+    {   
         try {
-
             $responseInArray = $this->address($request);
             // dd($responseInArray);
             if ($responseInArray->object_state !== 'VALID') {
@@ -323,12 +326,7 @@ class CheckoutController extends Controller
             //     $flag = 0;
             // }
 
-
-
-
             // 'shipping_address_table_id' => $for_address->id,
-
-
 
             $current_shipping_address = ShippingAddress::create($shippingAddress);
             session()->put('shipping_address_row_id', $current_shipping_address->id);
@@ -346,12 +344,11 @@ class CheckoutController extends Controller
             $stripeCustomer = auth()->user()->createOrGetStripeCustomer();
             $intent = auth()->user()->createSetupIntent();
 
-            // dd($allProductsOfCart);
             $grandTotal = $request->grandTotal;
             $selectedShipping = ShippingSetting::find($request->shipping_Method);
             return view('dealer.payment', compact('allProductsOfCart', 'grandTotal', 'selectedShipping', 'stripeCustomer', 'intent'));
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', $e->getMessage());
+            return redirect()->back()->with('error','Error in shipping address: '. $e->getMessage());
         }
     }
 

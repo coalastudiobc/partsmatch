@@ -82,6 +82,7 @@ Route::middleware(['auth', 'verified', 'admin'])->namespace('App\Http\Controller
     //payments payouts
     Route::name('payouts.')->group(function () {
         Route::get('payouts/view', [PayoutsController::class, 'index'])->name('view');
+        Route::get('payouts/payment/{fulfilledOrder}', [PayoutsController::class, 'payToDealer'])->name('getpayment');
     });
     
     //cms management
@@ -142,6 +143,9 @@ Route::middleware(['auth', 'verified', 'admin'])->namespace('App\Http\Controller
         Route::get('/add', 'BrandController@add')->name('add');
         Route::post('/store/{id?}', 'BrandController@store')->name('store');
         Route::get('/brands/edit/{id?}', 'BrandController@edit')->name('edit.make');
+
+        Route::get('/brands/status', [App\Http\Controllers\HomeController::class, 'togglestatus'])->name('listing.status');
+
     });
 
     Route::name('profile.')->group(function () {

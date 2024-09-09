@@ -86,7 +86,7 @@
                                                     <label>Order Commission<span class="required-field">*</span></label>
                                                     <div class="symbol"></div>
                                                     <input type="number" id="checkcommission" name="order_commission"
-                                                        class="form-control @error('order_commission') is-invalid @enderror two-decimals"
+                                                        class="form-control ps-5 @error('order_commission') is-invalid @enderror two-decimals"
                                                         value="{{ old('order_commission', get_admin_setting('order_commission')) }}">
 
                                                     @error('order_commission')
@@ -94,11 +94,11 @@
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
-                                                    <div class="input-icon-custm tooltip-open">
+                                                    <div class="input-icon-custm tooltip-new">
                                                         <span>
                                                             <i class="fa-solid fa-question"></i>
                                                         </span>
-                                                        <div class="tooltip">
+                                                        <div class="tooltip-text">
                                                             <p>ghfvjvhm</p>
                                                         </div>
                                                     </div>

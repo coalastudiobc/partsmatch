@@ -1,6 +1,6 @@
 @extends('layouts.front')
-@section('title', 'Account Settings')
-@section('heading', 'Account Settings')
+@section('title', 'Cms Management')
+@section('heading', 'Cms Management')
 
 @section('content')
     <section class="banner-content-sec">
