@@ -18,6 +18,10 @@
     .partsmanager-link-box h5 {
         max-width: 420px;
     }
+    .fittment-detail-list > div {
+        grid-template-columns: 1fr 1fr;
+        gap: 5px 0px;
+    }
 }
 
 @media screen and (max-width:1440px) {
@@ -36,6 +40,7 @@
     .partsmanager-link-box h5 {
         max-width: 300px;
     }
+    
 
 }
 
@@ -58,6 +63,10 @@
 }
 
 @media screen and (max-width:1199px) {
+    .fittment-detail-list > div {
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 5px 0px;
+    }
     .signup-img-txt img {
         display: none;
     }
@@ -451,6 +460,10 @@
 }
 
 @media screen and (max-width:767px) {
+    .fittment-detail-list > div {
+        grid-template-columns: 1fr 1fr;
+        gap: 5px 0px;
+    }
     h1 {
         font-size: 60px;
     }
@@ -1017,6 +1030,10 @@
 }
 
 @media screen and (max-width:575px) {
+    .fittment-detail-list > div {
+        grid-template-columns: 1fr;
+        gap: 5px 0px;
+    }
     .pro-search-box .primary-btn {
         right: 2px;
         top: 2px;
