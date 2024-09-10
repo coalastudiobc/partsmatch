@@ -52,7 +52,7 @@ class LoginController extends Controller
         if( is_null($user->email_verified_at) && is_null($user->working_for) )
         {
             Auth::logout();
-            return redirect()->back()->with(['status' => 'restricted', 'message' => 'Please check the mail box and verify the email first.']);
+            return redirect()->back()->with(['Error' => 'Please check the mail box and verify the email first to login.']);
             
         } else if($user->status == "INACTIVE")
         {
