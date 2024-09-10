@@ -47,8 +47,8 @@
 
     //name
     const packageRegex = {{ config('validation.package_regex') }};
-    const packageMinLength = parseInt(`${packageRegex}`.match(/(?<={)\d+/)[0]);
-    const packageMaxLength = parseInt(`${packageRegex}`.match(/\d+(?=})/)[0]);
+    const packageMinLength ={{ config('validation.package_minlength') }};
+    const packageMaxLength = {{ config('validation.package_maxlength') }};
 
     const accountMinLength = {{ config('validation.account_minlength') }};
     const accountMaxLength = {{ config('validation.account_maxlength') }};

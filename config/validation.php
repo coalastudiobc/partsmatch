@@ -61,8 +61,8 @@ return [
     'media_mimes' => 'jpeg,png,jpg,wmv,avi,mov,3gp,mp4',
 
     'package_regex' => '/^[^-\s][a-zA-Z\s]{10,100000}$/',
-    'package_minlength' => 10,
-    'package_maxlength' => 1000,
+    'package_minlength' => 8,
+    'package_maxlength' => 500,
     
     'part_number_regex' => '/^[a-zA-Z0-9_]+$/',
 

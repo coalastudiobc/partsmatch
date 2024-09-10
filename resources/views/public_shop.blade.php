@@ -246,16 +246,16 @@
                                                     <label for="radio1">By date: New - Old</label>
                                                 </div>
                                                 <div class="custm-check">
+                                                    <input type="radio" id="radio4" name="sortorder" value="old" {{ request('sortorder') === 'old' ? 'checked' : '' }}>
+                                                    <label for="radio4">By date: Old - New</label>
+                                                </div>
+                                                <div class="custm-check">
                                                     <input type="radio" id="radio2" name="sortorder" value="low" {{ request('sortorder') === 'low' ? 'checked' : '' }}>
                                                     <label for="radio2">By price: Low - High</label>
                                                 </div>
                                                 <div class="custm-check">
                                                     <input type="radio" id="radio3" name="sortorder" value="high" {{ request('sortorder') === 'high' ? 'checked' : '' }}>
                                                     <label for="radio3">By price: High - Low</label>
-                                                </div>
-                                                <div class="custm-check">
-                                                    <input type="radio" id="radio4" name="sortorder" value="old" {{ request('sortorder') === 'old' ? 'checked' : '' }}>
-                                                    <label for="radio4">By date: Old - New</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -430,6 +430,8 @@
 @section('modals')
 @include('modals.restrict_multiple')
 @endsection
+@include('layouts.include.footer')
+
 @push('scripts')
 
 <script>

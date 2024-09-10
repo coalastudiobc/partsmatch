@@ -428,6 +428,7 @@ return [
             'integer' => 'Please enter a valid integer value. Decimal numbers are not allowed'
         ],
         'description' => [
+            'required' => 'Please enter the package description',
             'min' => 'Description can be :min - :max characters',
             'max' => 'Description can be :min - :max characters',
         ],

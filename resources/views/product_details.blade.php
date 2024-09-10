@@ -387,6 +387,8 @@
 @section('modals')
 @include('modals.restrict_multiple')
 @endsection
+@include('layouts.include.footer')
+
 @push('scripts')
 <script>
     $('.slick-product').slick({

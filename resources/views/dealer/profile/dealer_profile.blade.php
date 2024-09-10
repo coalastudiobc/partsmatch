@@ -82,5 +82,6 @@
 @endsection
 @push('scripts')
 @include('modals.restrict_multiple')
+@include('layouts.include.footer')
     
 @endpush

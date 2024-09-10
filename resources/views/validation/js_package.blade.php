@@ -18,6 +18,7 @@
                 digits: true,
             },
             description: {
+                required:true,
                 minlength: packageMinLength,
                 maxlength: packageMaxLength,
             }
@@ -40,6 +41,7 @@
                 digits: `{{ __('customvalidation.package.product_count.integer') }}`,
             },
             description: {
+                required: `{{ __('customvalidation.package.description.required') }}`,
                 minlength: `{{ __('customvalidation.package.description.min', ['min' => '${packageMinLength}', 'max' => '${packageMaxLength}']) }}`,
                 maxlength: `{{ __('customvalidation.package.description.max', ['min' => '${packageMinLength}', 'max' => '${packageMaxLength}']) }}`,
             },

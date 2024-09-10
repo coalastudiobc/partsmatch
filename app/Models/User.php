@@ -124,6 +124,7 @@ class User extends Authenticatable
         $query->when(!empty($request->filter_by_name), function ($q) use ($request) {
             $q->Where('email', 'like', '%' . $request->filter_by_name . '%');
             $q->orWhere('name', 'like', '%' . $request->filter_by_name . '%');
+            $q->orWhere('address', 'like', '%' . $request->filter_by_name . '%');
         })->when(!empty($request->filter_by_name) && $request->filter_by_name == 'active', function ($q) use ($request) {
             $q->where('status', '1');
         })->when(!is_null($request->dates), function ($q) use ($request) {
