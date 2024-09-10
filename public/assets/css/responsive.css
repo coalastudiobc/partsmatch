@@ -1017,6 +1017,10 @@
 }
 
 @media screen and (max-width:575px) {
+    .pro-search-box .primary-btn {
+        right: 2px;
+        top: 2px;
+    }
     .slick-tab {
         flex-direction: column;
     }

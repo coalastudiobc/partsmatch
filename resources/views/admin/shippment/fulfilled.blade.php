@@ -16,7 +16,7 @@
                             <p>Cart Amount</p>
                         </th>
                         <th>
-                            <p>Shipment Charges</p>
+                            <p>Ship Charges</p>
                         </th>
                         <th>
                             <p>Buy Date</p>
@@ -28,9 +28,10 @@
                             <p>Delivery Date</p>
                         </th>
                         <th>
-                            <p>Action</p>
+                            <p>Status</p>
                         </th>
                     </tr>
+                    @isset($fulfilledOrders)
                     @forelse($fulfilledOrders as $fulfilledOrder)
                     <tr>
                         <td>
@@ -77,6 +78,7 @@
                         </td>
                     </tr>
                     @endforelse
+                    @endisset
                 </table>
             </div>
         </div>

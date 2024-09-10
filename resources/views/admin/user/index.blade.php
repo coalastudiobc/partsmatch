@@ -85,8 +85,8 @@
                             </td>
                             <td>
                                 <p><a href="{{ route('admin.dealers.show', [$user->id]) }}"
-                                        class="btn action-view-btn">View
-                                        details</a>
+                                        class="btn action-view-btn">
+                                        Details</a>
                                 </p>
                             </td>
                             {{-- <span class="custom-switch-indicator"></span> --}}

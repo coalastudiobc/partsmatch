@@ -7,8 +7,12 @@
     </div>
    <div class="product-deails-row">
     <div class="product-deails-main">
-        <p>{{ $product->part_number }} </p>
+        <p>{{ $product->part_number }}</p>
         <span class="public-product-name-span">{{$product->name}}</span>
+        <div class="quantity-box">
+            <h4>Avaliable Stock:</h4><p class="disabl">{{$product->stocks_avaliable}}</p>
+
+        </div>
     </div>
     <div style="min-height:10px; flex:1;"></div>
     
@@ -21,8 +25,7 @@
                 N/A
                 @endif
             </p>
-            <p class="disabl">{{$product->stocks_avaliable}}</p>
-
+            
                {{-- <p style="border: 2px solid red">
                 @if($product->stocks_avaliable > 0)
                     {{$product->stocks_avaliable}}

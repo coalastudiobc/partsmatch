@@ -35,6 +35,8 @@
                                                 <input type="file" disabled 
                                                     class="d-none disabled-inputs  @error('image') is-invalid @enderror"
                                                     name="image" id="file-upload">
+
+
                                                 @error('image')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -52,6 +54,9 @@
                                                 class="form-control disabled-inputs @error('name') is-invalid @enderror"
                                                 placeholder="Enter name" disabled
                                                 value="{{ old('name', $authUser->name) }}">
+                                                <span>
+
+                                                </span>
                                             @error('name')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -130,7 +135,7 @@
                                         </div>
                                         <div>
                                             <a href="{{ url()->current() }}"
-                                                class="cancelbtn btn primary-btn d-none editable">Cancel</a>
+                                                class="cancelbtn btn secondary-btn d-none editable">Cancel</a>
                                         </div>
                                     </div>
                                 </div>

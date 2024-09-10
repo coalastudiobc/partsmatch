@@ -19,7 +19,7 @@
                                                 action="{{ route('admin.brands.store', ['id' => json_encode($makes->id)]) }}"
                                                 enctype="multipart/form-data" method="post">
                                                 @csrf
-                                                <div class="row">
+                                                <div class="row g-3">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="range_to">Brand</label>

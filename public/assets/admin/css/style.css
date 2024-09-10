@@ -250,6 +250,21 @@ img {
 }
 
 
+:-webkit-scrollbar {
+    width: 4px;
+}
+
+:-webkit-scrollbar-thumb {
+    border-radius: 100px;
+    background: var(--primary-color);
+}
+
+:-webkit-scrollbar-track {
+    background: var(--secondary-color);
+    border-radius: 100px;
+}
+
+
 header {
     box-shadow: 0px 4px 30px 1px rgba(0, 0, 0, 0.09);
     background-color: #fff;
@@ -1243,7 +1258,7 @@ table tr th {
     padding: 8px 10px;
     background-color: var(--secondary-color);
     color: #fff;
-    min-width: 90px;
+    min-width: 65px;
 }
 
 .action-view-btn:hover {
@@ -1305,13 +1320,12 @@ span.doller-symbol-txt.symbol {
 
 /* ------------- tooltip ----------------- */
 
-
+/* 
 .tooltip-open {
     position: relative;
     transform: translateZ(0);
-    /* webkit flicker fix */
     -webkit-font-smoothing: antialiased;
-    /* webkit text rendering fix */
+
 }
 
 .tooltip {
@@ -1345,10 +1359,10 @@ span.doller-symbol-txt.symbol {
     box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
     margin-bottom: -10px;
 
-}
+} */
 
 /* This bridges the gap so you can mouse into the tooltip without it disappearing */
-.tooltip:before {
+/* .tooltip:before {
     bottom: -20px;
     content: " ";
     display: block;
@@ -1358,7 +1372,6 @@ span.doller-symbol-txt.symbol {
     width: 100%;
 }
 
-/* CSS Triangles - see Trevor's post */
 .tooltip:after {
     border-left: solid transparent 10px;
     border-right: solid transparent 10px;
@@ -1382,7 +1395,6 @@ span.doller-symbol-txt.symbol {
     transform: translateY(0px) translateX(-50%);
 }
 
-/* IE can just show/hide with no transition */
 .lte8 .wrapper .tooltip {
     display: none;
 }
@@ -1395,7 +1407,7 @@ span.doller-symbol-txt.symbol {
     font-size: 12px;
     color: var(--heading-color);
     white-space: nowrap;
-}
+} */
 
 
 /* ------------- tooltip ----------------- */
@@ -1673,9 +1685,8 @@ button.btn-close {
 .dealer-last-five-product .product-detail-table table tr td {
     background-color: #ffffff;
     height: unset;
-    padding: 6px 30px 6px 20px;
+    padding: 12px 10px 12px 10px;
 }
-
 .dealer-last-five-product .product-detail-table table tr td .primary-btn {
     padding: 7px 14px;
 }
@@ -1813,8 +1824,9 @@ button.btn-close {
     /* margin: 20px 0 0; */
     border-radius: 10px;
     padding: 10px 20px;
-    box-shadow: 1px 1px 10px 4px #ddd;
+    /* box-shadow: 1px 1px 10px 4px #ddd; */
     height: 100%;
+    border: 1px solid #ddd;
 }
 
 .shippment-rates-card>h3 {
@@ -2025,3 +2037,18 @@ button.btn-close {
     right: 50px;
 }
 
+.admin-sidebar-opener {
+    display: none;
+}
+
+
+
+span.admin-sidebar-cross-icon {
+    position: absolute;
+    top: 0;
+    right: 21px;
+    display: none;
+}
+.cms-list-table table tr th:last-child p{
+    float: right;
+}

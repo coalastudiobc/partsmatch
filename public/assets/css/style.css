@@ -256,6 +256,20 @@ img {
     border-radius: 100px;
 }
 
+:-webkit-scrollbar {
+    width: 4px;
+}
+
+:-webkit-scrollbar-thumb {
+    border-radius: 100px;
+    background: var(--primary-color);
+}
+
+:-webkit-scrollbar-track {
+    background: var(--secondary-color);
+    border-radius: 100px;
+}
+
 
 header {
     /* box-shadow: 0px 4px 30px 1px rgba(0, 0, 0, 0.09); */
@@ -1546,6 +1560,7 @@ button.btn-close {
     align-items: center;
     align-content: center;
     gap: 15px;
+    max-width: 600px;
 }
 
       /* Loader css Start */
@@ -3537,6 +3552,10 @@ a.nav-serch-cross {
     justify-content: center;
     align-items: center;
 }
+.categories-img-box svg{
+    width: 60px;
+    height: 60px;
+}
 
 
 
@@ -3819,6 +3838,27 @@ label.adress-info-inner::before {
 {
 cursor: pointer;
 }
+.quantity-box {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.quantity-box h4 {
+    font-size: 14px;
+    line-height: 18px;
+}
+
+.quantity-box > p {
+    font-size: 14px;
+}
+
+
+#bulk-upload .modal-dialog.modal-dialog-centered {
+    max-width: 700px;
+}
+
+
 
 
 

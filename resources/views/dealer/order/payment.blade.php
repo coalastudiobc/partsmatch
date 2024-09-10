@@ -63,7 +63,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="">Card Number</label>
-                                                <div class="form-field" id="cardNumberElement">
+                                                <div class="form-field"  id="cardNumberElement">
                                                     <input type="text" class="form-control" placeholder="Card-number">
                                                     <label for="card-number" class="stripe-error-messages"></label>
                                                 </div>

@@ -37,6 +37,7 @@
                             <p>Action</p>
                         </th>
                     </tr>
+                    @isset($fulfilledOrders)
                     @forelse($fulfilledOrders as $fulfilledOrder)
                     <tr>
                         <td>
@@ -75,25 +76,30 @@
                                     <p>Confirmed</p>
                                 </div>
                             @else
-                                <td>
                                     <a href="{{route('admin.payouts.getpayment',$fulfilledOrder)}}" class="btn primary-btn payout"  data-amount="{{calculatePayOuts($fulfilledOrder->order_for,$fulfilledOrder->shipment_price,$fulfilledOrder->total_amount)}}">Pay Out</a>
-                                </td>
                             @endif
                         </td>
                     </tr>
                     @empty
                     <tr>
                         <td class="no-record-found">
-                            <center>Did not found any order </center>
+                            <center>Did not found any payout </center>
                         </td>
                     </tr>
                     @endforelse
+        @endisset
+
                 </table>
             </div>
         </div>
+        @isset($fulfilledOrders)
         <div class="pagination-wrapper">
-            {!! $fulfilledOrders->links('admin.pagination') !!}
-        </div>
+        @if($fulfilledOrders)
+        {!! $fulfilledOrders ?? $fulfilledOrders->links('admin.pagination')  !!}
+        @endif
+        @endisset
+
+    </div>
     </div>
 @endsection
 @push('scripts')

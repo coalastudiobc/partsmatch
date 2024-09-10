@@ -1,4 +1,7 @@
     <div class="dashboard-left-box">
+    <span class="admin-sidebar-cross-icon">
+        <i class="fa-solid fa-xmark cross-sidebar"></i>
+    </span>
         {{-- <h2>Analytics</h2> --}}
         <div class="analyics-tabs">
             <ul>

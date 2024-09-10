@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'User')
+@section('title', 'Dealer Details')
 @section('heading', 'Dealer')
 
 @section('content')
@@ -17,7 +17,7 @@
                                                 <div class="file-upload-box">
                                                     <label for="file-upload">
                                                         <div class="profile-without-img">
-                                                            <img src="{{ !is_null($user->profile_picture_url) ? asset('storage/' . $user->profile_picture_url) : asset('admin/assets/img/users/user-1.png') }}"
+                                                            <img src="{{ !is_null($user->profile_picture_url) ? asset('storage/' . $user->profile_picture_url) : asset('assets/images/user.png') }}"
                                                                 alt="">
                                                             {{-- <div class="upload-icon"> --}}
                                                             {{-- <i class="fa-sharp fa-solid fa-pen"></i> --}}
@@ -34,7 +34,7 @@
 
 
                                 <div class="row g-4">
-                                    <div class="col-xl-4 col-lg-6 col-md-12">
+                                    <div class="col-xxl-4 col-xl-6 col-lg-6 col-md-12">
                                         <div class="dealer-pro-personal-info">
                                             <ul>
                                                 <li>
@@ -59,12 +59,12 @@
                                                 </li>
                                                 <li>
                                                     <h4>Zipcode</h4>
-                                                    <p>{{ optional($user->postalCode)->zipcode ?? 'N/A' }}</p>
+                                                    <p>{{ optional($user->postalCode)->code ?? 'N/A' }}</p>
                                                 </li>
                                             </ul>
                                         </div>
                                     </div>
-                                    <div class="col-xl-4 col-lg-6 col-md-12">
+                                    <div class="col-xxl-4 col-xl-6 col-lg-6 col-md-12">
                                         <div class="dealer-pro-commission-info">
                                             <ul>
                                                 <li>
@@ -123,8 +123,8 @@
                                                                     <label>Order Commission<span class="required-field">*</span></label>
                                                                     <div class="symbol">%</div>
                                                                     <input type="number" id="checkcommission" name="order_commission" class="form-control  two-decimals" value="{{old('order_commission', get_admin_setting('order_commission'))}}">
-                                                    <div class="input-icon-custm tooltip-open"><span><i class="fa-solid fa-question"></i></span>
-                                                                        <div class="tooltip">
+                                                    <div class="input-icon-custm tooltip-new"><span><i class="fa-solid fa-question"></i></span>
+                                                                        <div class="tooltip-text">
                                                                             <p>ghfvjvhm</p>
                                                                         </div>
                                                                     </div>
@@ -139,7 +139,7 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    <div class="col-xl-4 col-lg-12 col-md-12">
+                                    <div class="col-xxl-4 col-xl-12 col-lg-12 col-md-12">
                                         <div class="dealer-last-five-product">
                                             <h3>Recent Products</h3>
                                             <div class="product-detail-table">

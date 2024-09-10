@@ -482,6 +482,7 @@
     padding: 30px 36px;
     height: calc(100vh - 66px);
     overflow: auto;
+    overflow-x: hidden;
 }
 .dashboard-right-box h2 {
     font-size: 25px;
@@ -506,17 +507,25 @@
     height: 74px;
     white-space: nowrap;
 }
+.product-detail-table table tr td a{
+    white-space: nowrap;
+}
 
 .product-detail-table table tr td p {
     font-size: 16px;
     font-weight: 500;
     white-space: nowrap;
 }
+.product-detail-table table tr td p svg{
+    width: 30px;
+    height: 30px;
+}
 
 .product-detail-table table tr th {
     border-bottom: 0;
-    padding: 12px 22px 12px 22px;
+    /* padding: 12px 22px 12px 22px; */
     white-space: nowrap;
+    padding: 12px 10px 12px 10px !important;
 }
 
 .product-detail-table table tr th p {
@@ -541,7 +550,10 @@
     border-radius: 0px 10px 10px 0px;
     text-align: right;
 }
-
+.dealer-last-five-product .product-detail-table table tr td:last-child {
+    border-radius: 0px 10px 10px 0px;
+    text-align: left;
+}
 .product-detail-table table tr td .table-pro-quantity {
     width: 50px;
     height: 45px;
@@ -701,32 +713,29 @@ body:has(.page-content-wrapper) .custm-nav .container{
 
 
 
-.tooltip-new{
-    /* position: absolute; */
-    /* top: 50%; */
-    /* left: 50%; */
-    /* transform: translate(-50%, -50%); */
+/* .tooltip-new{
     font-size: clamp(1rem, 5vw, 2rem);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: bolder;
     color: rgb(247, 247, 247);
     background-color: #fff;
     margin: 0%;
-    /* padding: 10px; */
+
     border-radius: 5px;
     cursor: pointer;
 }
 .tooltip-new .tooltip-text {
     visibility: hidden;
     position: absolute;
-    width: clamp(100px, 100%, 250px);
+    width: clamp(200px, 100%, 250px);
     padding: 0px 4px 2px 4px;
     border-radius: 10px;
     text-align: center;
-    /* background-color: rgb(72, 72, 71); */
+
     z-index: 1;
     bottom: 169%;
     left: 50%;
+    background-color: #fff;
     transform: translate(-50%);
     color: #000;
     font-weight: 400;
@@ -748,6 +757,7 @@ body:has(.page-content-wrapper) .custm-nav .container{
     visibility: visible;
     opacity: 1;
 }
+    */
 .admin-header-right .navbar-nav .dropdown-menu {
     position: absolute;
 }

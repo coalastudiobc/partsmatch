@@ -33,13 +33,26 @@
 
 }
 @media screen and (max-width:1440px) {
- 
+    .dealer-pro-personal-info ul li {
+        display: grid;
+        align-items: center;
+        grid-template-columns: 1fr auto;
+    }
+    .dealer-pro-personal-info {
+        padding-right: 10px;
+    }
 }
 @media screen and (max-width:1199px) {
     
     
 }
 @media screen and (max-width:1024px) {
+    .admin-sidebar-cross-icon{
+        display: block !important;
+    }
+    .admin-sidebar-opener {
+        display: block !important;
+    }
     .page-content-sec .dashboard-left-box {
         position: fixed;
         left: 0;
@@ -74,12 +87,23 @@
     .dashboard-right-box {
         padding: 30px 20px;
     }
+    .shipment-data-name>h3 {
+        font-size: 14px;
+    }
+    .shipment-data-field>p {
+        font-size: 14px;
+    }
    
     
 }
 
 @media screen and (max-width:575px) {
-
+    .shipper-rates-list li a {
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 13px;
+    }
 }
 
 @media screen and (max-width:480px) {

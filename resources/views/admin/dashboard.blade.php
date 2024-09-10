@@ -25,7 +25,7 @@
                         <div class="db-analytics-card">
                             <div class="db-analytics-data">
                                 <h3>Order Amount + Shipping Charges</h3>
-                                <h5>{{isset($totalOrderPlacedAmount) ? '$' . number_format($totalOrderPlacedAmount, 2) : 'N/A' }}</h5>
+                                <h5>{{isset($totalOrderPlacedAmount) ? '$' . number_format($totalOrderPlacedAmount, 2) : 0 }}</h5>
                             </div>
                             <div class="db-analytics-img">
                                 <!-- <img src="{{ asset('assets/images/earning.png') }}" alt=""> -->
@@ -37,7 +37,7 @@
                         <div class="db-analytics-card">
                             <div class="db-analytics-data">
                                 <h3>Total Placed Orders</h3>
-                                <h5>{{$placedOrdersCount ?? 'N/A'}}</h5>
+                                <h5>{{$placedOrdersCount ?? 0}}</h5>
                             </div>
                             <div class="db-analytics-img">
                                 <!-- <img src="{{ asset('assets/images/timer.png') }}" alt=""> -->
