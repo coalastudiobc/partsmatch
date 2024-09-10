@@ -22,6 +22,27 @@ jQuery(document).ready(function () {
                 }
             });
     });
+    jQuery(".subscription-cancel").click(function (e) {
+        e.preventDefault();
+        jQuery('body').addClass('modal-open');
+        let url = jQuery(this).attr('href');
+        swal({
+            title: 'Are You Sure?',
+            text: 'You want to discontinue the recurring charges for this plan.',
+            icon: 'warning',
+            buttons: true,
+            dangerMode: true,
+            buttons: ["No", "Yes"],
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+            jQuery('#fullPageLoader').removeClass('d-none');
+                    window.location.replace(url)
+                } else {
+                    jQuery('body').removeClass('modal-open');
+                }
+            });
+    });
     // restore
     jQuery(".restore").click(function (e) {
         e.preventDefault();

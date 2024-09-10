@@ -33,13 +33,20 @@ class SubscriptionController extends Controller
             $plan = Package::find($plan_id);
             if (!$plan) 
             {
-                throw new \Exception('Selected plan did not found : ' .$e->getMessage());
+                throw new \Exception('Selected plan did not found');
             }
 
             $subscription = $this->getActiveSubscription(); // Check if the user has an active subscription
             if ($subscription) {
-                 // If the user already has a subscription, upgrade it
-                 $subscription->swap($plan->stripe_price);
+                
+                // If the user already has a subscription, upgrade it
+                $subscription->swap($plan->stripe_price);
+                if ($subscription && $subscription->canceled()) {
+                    // Set the end date to the current date or any other logic you need
+                    $subscription->update([
+                        'ends_at' => null,
+                    ]);
+                }
             } else {
                  // If the user doesn't have a subscription, create a new one
                  $subscription = auth()->user()->newSubscription($plan->stripe_id, $plan->stripe_price)->create($request->token);

@@ -166,7 +166,7 @@ class RegisterController extends Controller
             $user->notify(new VerificationEmail($user));
             $admin->notify(new UserRegistered($user));
 
-            return redirect()->route('login')->with('success', 'Registration successful. A confirmation email has been sent to ' . $user->email . '. Please verify to log in.');
+            return redirect()->route('login')->with('Success', 'Registration successful. A confirmation email has been sent to ' . $user->email . '. Please verify to log in.');
         } catch (Exception $ex) {
             return redirect()->route('login')->with('error', $ex->getMessage());
         }

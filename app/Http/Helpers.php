@@ -540,12 +540,15 @@ if (!function_exists('isPlanActive')) {
                 return false;
             }else{
                 if($planDetails->plan_id ==$plan->id){
+                
                     return true;
                 }
                 return false;
             }
             return false;
-            // return $planDetails;
+
+
+        
         } catch (\Exception $e) {
             // Log::error('Error in checkForBuyButton: ' . $e->getMessage());
             return false; 
@@ -566,7 +569,8 @@ if (!function_exists('isAlreadyCancelled')) {
                 
                 // if ($subscription->ends_at->isPast()) {
                 //     return true;
-                // }
+                // }    
+                // dd($subscription,auth()->user());
                 if ($subscription->ends_at) {
                     return true;
                 }

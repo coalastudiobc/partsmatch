@@ -44,11 +44,11 @@ Route::match(['get', 'post'], 'dealer/profile/{product}', [HomeController::class
 
 
 Auth::routes();
-Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers')->group(function () {
+Route::middleware(['auth', 'verified','user.status'])->namespace('App\Http\Controllers')->group(function () {
     Route::match(['GET', 'POST'],'/order/payment', [OrderPaymentController::class, 'index'])->name('order.payment');
 });
 
-Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers')->group(function () {
+Route::middleware(['auth', 'verified','user.status'])->namespace('App\Http\Controllers')->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/logout', [HomeController::class, 'logout'])->name('custom.logout');
     Route::match(['GET', 'POST'], '/change/password', [HomeController::class, 'changePassword'])->name('change.password');

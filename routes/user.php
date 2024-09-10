@@ -21,7 +21,7 @@ use App\Http\Controllers\Admin\CmsManagementController;
 */
 
 
-Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer')->name('User.')->group( function () 
+Route::middleware(['auth', 'verified','user.status'])->namespace('App\Http\Controllers\Dealer')->name('User.')->group( function () 
     {
 
         // product dealer profile

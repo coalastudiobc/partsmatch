@@ -15,7 +15,7 @@ use App\Http\Controllers\Dealer\PartsManagerController;
 use App\Http\Controllers\Dealer\SubscriptionController;
 use App\Http\Controllers\Dealer\AccountSettingController;
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth', 'verified','user.status'])->group(function () {
 
     Route::get('/products/status', [App\Http\Controllers\HomeController::class, 'togglestatus'])->name('Dealer.products.status');
 
@@ -27,7 +27,7 @@ Route::name('Dealer.products.')->group(function () {
     Route::get('/products/interior', [ProductController::class, 'show'])->name('interior');
     Route::get('/products/details/{product}', [ProductController::class, 'details'])->name('details');
 });
-Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer')->name('Dealer.')->group(function () {
+Route::middleware(['auth', 'verified','user.status'])->namespace('App\Http\Controllers\Dealer')->name('Dealer.')->group(function () {
     // Route::get('/download-csv', [ProductController::class, 'downloadCSV'])->name('download.sample');
     Route::get('/download-csv', [ProductController::class, 'downloadModifiedCSV'])->name('download.sample');
     Route::get('/dashboard', [DealerController::class, 'dashboard'])->name('dashboard');

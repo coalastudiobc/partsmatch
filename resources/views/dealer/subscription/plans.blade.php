@@ -24,28 +24,14 @@
                                     @endforeach
                             
                                 </ul>
-                                
-                                {{-- <ul class="card-list">
-                                    <li>
-                                        <p>Lorem ipsum dolor sit</p>
-                                    </li>
-                                    <li>
-                                        <p>Lorem ipsum dolor sit</p>
-                                    </li>
-                                    <li>
-                                        <p>Lorem ipsum dolor sit</p>
-                                    </li>
-                                    <li>
-                                        <p>Lorem ipsum dolor sit</p>
-                                    </li>
-                                </ul> --}}
                             </div>
                             <div>
                             @if(isPlanActive($plan))
                                 @if (isAlreadyCancelled($plan))
-                                    <p class="subscription-cancelled">Subscription has been cancelled.</p>
+                                    <p class="subscription-cancelled">The automatic renewals for your subscription have been stopped.</p> 
+                                </a>
                                 @else
-                                    <a href="{{ route('Dealer.subscription.plan.cancel') }}" disabled class="btn secondary-btn full-btn delete">Cancel</a>
+                                    <a href="{{ route('Dealer.subscription.plan.cancel') }}" disabled class="btn secondary-btn full-btn subscription-cancel">Cancel</a>
                                 @endif                
                             @else
                                 <a href="javascript:void(0)" class="btn secondary-btn full-btn parchase"

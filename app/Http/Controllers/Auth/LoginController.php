@@ -49,7 +49,7 @@ class LoginController extends Controller
     }
     protected function authenticated(Request $request, $user)
     {
-        if( is_null($user->email_verified_at))
+        if( is_null($user->email_verified_at) && is_null($user->working_for) )
         {
             Auth::logout();
             return redirect()->back()->with(['status' => 'restricted', 'message' => 'Please check the mail box and verify the email first.']);
@@ -57,7 +57,7 @@ class LoginController extends Controller
         } else if($user->status == "INACTIVE")
         {
             Auth::logout();
-            return redirect()->back()->with(['status' => 'restricted', 'message' => 'your account has been suspended by admin. Please contact to administrative.']);
+            return redirect()->back()->with([ 'Error' => 'your account has been suspended by admin. Please contact to administrative.']);
 
         }else {
             return redirect($this->redirectTo);

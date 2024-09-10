@@ -19,7 +19,7 @@ use App\Http\Controllers\Admin\CmsManagementController;
 |
 */
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth', 'verified','user.status'])->group(function () {
     // Route::get('/products/status', [App\Http\Controllers\HomeController::class, 'togglestatus'])->name('dealer.products.status');
     // cms page
     // Route::get('manager/view/{slug}', [CmsManagementController::class, 'cms'])->name('view');
@@ -30,7 +30,7 @@ Route::name('Manager.products.')->group(function () {
     Route::get('/products/interior', [ProductController::class, 'show'])->name('interior');
     Route::get('/products/details/{product}', [ProductController::class, 'details'])->name('details');
 });
-Route::middleware(['auth', 'verified'])->namespace('App\Http\Controllers\Dealer')->name('Manager.')->group( function () 
+Route::middleware(['auth', 'verified','user.status'])->namespace('App\Http\Controllers\Dealer')->name('Manager.')->group( function () 
     {
 
         Route::name('products.')->group(function () {
