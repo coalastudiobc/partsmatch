@@ -42,7 +42,6 @@ class LoginController extends Controller
 
     protected function credentials(Request $request)
     {
-        // dd(is_numeric($request->get('email')) , $this->username());
         if (is_numeric($request->get('email'))) {
             return ['phone_number' => $request->get('email'), 'password' => $request->get('password')];
         }
@@ -50,10 +49,17 @@ class LoginController extends Controller
     }
     protected function authenticated(Request $request, $user)
     {
-        if ($user->status == "INACTIVE") {
+        if( is_null($user->email_verified_at))
+        {
             Auth::logout();
-            return redirect()->back()->with(['status' => 'restricted', 'message' => 'your account has been suspended by admin']);
-        } else {
+            return redirect()->back()->with(['status' => 'restricted', 'message' => 'Please check the mail box and verify the email first.']);
+            
+        } else if($user->status == "INACTIVE")
+        {
+            Auth::logout();
+            return redirect()->back()->with(['status' => 'restricted', 'message' => 'your account has been suspended by admin. Please contact to administrative.']);
+
+        }else {
             return redirect($this->redirectTo);
         }
     }
