@@ -3857,7 +3857,11 @@ cursor: pointer;
 #bulk-upload .modal-dialog.modal-dialog-centered {
     max-width: 700px;
 }
-
+.pro-manage-table table tr th:last-child {
+    text-align: right;
+    padding-right: 16px !important;
+    width: unset;
+}
 
 
 
