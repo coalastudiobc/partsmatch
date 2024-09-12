@@ -15,12 +15,12 @@ use App\Http\Controllers\Dealer\PartsManagerController;
 use App\Http\Controllers\Dealer\SubscriptionController;
 use App\Http\Controllers\Dealer\AccountSettingController;
 
+// cms page
+Route::get('view/{slug}', [CmsManagementController::class, 'cms'])->name('view');
 Route::middleware(['auth', 'verified','user.status'])->group(function () {
 
     Route::get('/products/status', [App\Http\Controllers\HomeController::class, 'togglestatus'])->name('Dealer.products.status');
 
-    // cms page
-    Route::get('view/{slug}', [CmsManagementController::class, 'cms'])->name('view');
 });
 Route::name('Dealer.products.')->group(function () {
     Route::get('/products/interior/{subcategory}', [ProductController::class, 'interior'])->name('interior.page');

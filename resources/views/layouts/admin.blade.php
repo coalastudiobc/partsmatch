@@ -136,7 +136,7 @@
         <div class="footer-main">
             <div class="container">
                 <div class="footer-small">
-                    <p class="right-reserve">© {{ date('Y') }} partsmatch.com All Right Reserved</p>
+                    <p class="right-reserve">© {{ date('Y') }} partsmatch.ai All Right Reserved</p>
                 </div>
             </div>
         </div>
