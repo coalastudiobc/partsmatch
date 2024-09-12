@@ -48,6 +48,7 @@ class OrderController extends Controller
         
             $orders =  Order::forUser(auth()->id())
                 ->notFulfilled($fulfilledIds)
+                ->search()
                 ->orderBy('created_at', 'DESC')
                 ->paginate(__('pagination.pagination_nuber'));
         

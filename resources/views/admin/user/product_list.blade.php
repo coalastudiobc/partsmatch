@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'product')
+@section('title', 'Dealer Product')
 @section('heading', $user->name . '\'s Products')
 
 @section('content')

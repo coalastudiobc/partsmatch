@@ -3,17 +3,18 @@
 namespace App\Http\Controllers\Admin;
 
 use Exception;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\FulFilledOrder;
-use App\Models\UserAddresses;
-use App\Models\ShippmentAddressDetail;
-use App\Models\ShippingAddress;
 use App\Models\Order;
 use GuzzleHttp\Client;
 use Stripe\PaymentIntent;
-use App\Models\ShippoPurchasedLabel;
+use Illuminate\Http\Request;
+use App\Models\UserAddresses;
+use App\Models\FulFilledOrder;
+use App\Models\ShippingAddress;
 use Illuminate\Support\Facades\DB;
+use App\Models\ShippoPurchasedLabel;
+use App\Http\Controllers\Controller;
+use App\Models\ShippmentAddressDetail;
+use Illuminate\Support\Facades\Validator;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Request as GuzzleRequest;
 
@@ -103,8 +104,32 @@ class shippmentController extends Controller
     
     public function createShippmentManual(Request $request,$fulfilled_id)
     {
+        // $request->validate([
+        //    'shipment_title'=>'required',
+        //     'delivery_date' => 'required|date|after_or_equal:today',
+
+        // ], [
+        //    'shipment_title.required'=>'Please provide shippment title',
+        //     'delivery_date.required' => 'The delivery date is required.',
+        //     'delivery_date.date' => 'The delivery date must be a valid date.',
+        //     'delivery_date.after_or_equal' => 'The delivery date must be greater or equal to picking date or a future date.',
+        // ]);
+        $validator = Validator::make($request->all(), [
+            'shipment_title'=>'required',
+            'delivery_date' => 'required|date|after_or_equal:today',
+            
+        ], [
+            'shipment_title.required'=>'Please provide shippment title',
+            'delivery_date.required' => 'The delivery date is required.',
+            'delivery_date.date' => 'The delivery date must be a valid date.',
+            'delivery_date.after_or_equal' => 'The delivery date must be greater or equal to picking date or a future date.',
+        ]);
         try
         {
+            if ($validator->fails()) {
+                toastr()->error($validator->errors()->first());
+                return redirect()->back();
+            }
             $decrypt_order_id= jsdecode_userdata($fulfilled_id);
             ShippoPurchasedLabel::create(
                 [

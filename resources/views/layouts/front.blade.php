@@ -197,6 +197,22 @@
                 <div class="sk-circle12 sk-child"></div>
             </div>
         </div>
+        <div id="fullPageLoaderforonload" class="page-loader">
+            <div class="sk-circle">
+                <div class="sk-circle1 sk-child"></div>
+                <div class="sk-circle2 sk-child"></div>
+                <div class="sk-circle3 sk-child"></div>
+                <div class="sk-circle4 sk-child"></div>
+                <div class="sk-circle5 sk-child"></div>
+                <div class="sk-circle6 sk-child"></div>
+                <div class="sk-circle7 sk-child"></div>
+                <div class="sk-circle8 sk-child"></div>
+                <div class="sk-circle9 sk-child"></div>
+                <div class="sk-circle10 sk-child"></div>
+                <div class="sk-circle11 sk-child"></div>
+                <div class="sk-circle12 sk-child"></div>
+            </div>
+        </div>
         {{-- end loader --}}
         @yield('modals')
     </main>
@@ -210,6 +226,11 @@
     <script src="{{ asset('assets/js/common.js') }}?ver={{ now() }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
+         window.onload = function() {
+           
+            var loader = document.getElementById('fullPageLoaderforonload');
+            loader.classList.add('d-none'); // Hide loader
+            };
     function capitalizeFirst(string) {
         if (!string) return string; // handle empty or null strings
         return string.charAt(0).toUpperCase() + string.slice(1);
@@ -229,7 +250,7 @@
                 }
                 return cssLoaded;
             }
-
+           
             // Check CSS load status every 100 milliseconds
             var checkInterval = setInterval(function() {
                 if (checkCSSLoaded()) {

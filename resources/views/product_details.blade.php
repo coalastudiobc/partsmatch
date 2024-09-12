@@ -180,11 +180,11 @@
                                             <div class="accordion" id="accordionExample">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header">
-                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#additional-information" aria-expanded="false" aria-controls="collapseTwo">
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#additional-information" aria-expanded="false" aria-controls="collapseone">
                                                             Description
                                                         </button>
                                                     </h2>
-                                                    <div id="additional-information" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                                    <div id="additional-information" class="accordion-collapse collapse" aria-labelledby="headingone" data-bs-parent="#accordionExample">
                                                         <div class="accordion-body">
                                                             @if($product && $product->description)
                                                                 @foreach(explode(PHP_EOL, $product->description) as $value)
@@ -205,7 +205,7 @@
                                                             Fittment
                                                         </button>
                                                     </h2>
-                                                    <div id="additional-information1" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                                    <div id="additional-information1" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                                                         <div class="accordion-body">
                                                             <div class="fittment-details">
                                                                 <ul class="fittment-detail-list">
@@ -274,7 +274,7 @@
                                                             Additional Information
                                                         </button>
                                                     </h2>
-                                                    <div id="additional-information2" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                                    <div id="additional-information2" class="accordion-collapse collapse" aria-labelledby="headingthree" data-bs-parent="#accordionExample">
                                                         <div class="accordion-body">
                                                             <p>{{ $product->additional_details }} </p>
                                                             @if($product && $product->description)
@@ -310,7 +310,7 @@
     <div class="container">
         <div class="related-pro-wrapper">
             <div class="dealer-product-header">
-                <h3>Product</h3>
+                <h3>More Products</h3>
                 {{-- <a href="#" class="btn secondary-btn view-btn">
                     View all Products
                 </a> --}}

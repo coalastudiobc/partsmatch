@@ -9,11 +9,11 @@
                     <div class="table-responsive">
                         <table class="table my-order-table">
                             <tr>
-                                <th>OrderId</th>
-                                <th>Total product</th>
-                                <th>Total price</th>
+                                <th>Order ID</th>
+                                <th>Total Product</th>
+                                <th>Total Price</th>
                                 <th>Quantity</th>
-                                <th>Shippment price</th>
+                                <th>Shippment Price</th>
                                 <th>Date</th>
                                 <th>Action</th>
                             </tr>

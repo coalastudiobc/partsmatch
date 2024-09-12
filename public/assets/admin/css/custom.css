@@ -765,6 +765,10 @@ body:has(.page-content-wrapper) .custm-nav .container{
 
 
 
+.product-detail-table table tr th:last-child,.product-detail-table table tr td:last-child {
+    text-align: left !important;
+    padding-left: 20px !important;
+}
 
 
 

@@ -2049,6 +2049,13 @@ span.admin-sidebar-cross-icon {
     right: 21px;
     display: none;
 }
-.cms-list-table table tr th:last-child p{
+/* .cms-list-table table tr th:last-child p{
     float: right;
+} */
+
+.admin-feature-list table tr td a img {
+    border-radius: 12px;
 }
+
+
+

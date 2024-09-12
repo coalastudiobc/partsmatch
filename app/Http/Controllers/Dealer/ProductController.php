@@ -121,23 +121,125 @@ class ProductController extends Controller
     public function bulkUpload(Request $request)
     {
         try {
-            $request->validate([
-                'csv_file' => 'required|file|mimes:csv',
-            ]);
+            
+            // $path = $request->file('csv_file')->getRealPath();
+            // $data = array_map('str_getcsv', file($path));
+            // $header = array_shift($data);
+            //   // Define the expected columns
+            // $expectedColumns = ['name','category', 'part_number', 'description','additional_details','quantity','price','year(Make)Model'];
 
+            // $path = $request->file('csv_file')->getRealPath();
+            // $data = array_map('str_getcsv', file($path));
+            // $header = array_shift($data);
+
+            // if ($header !== $expectedColumns) {
+            //     return redirect()->back()->with('error', 'CSV header does not match the expected columns.');
+            // }
+            // $request->validate([
+            //     'csv_file' => 'required|file|mimes:csv',
+            // ]);
+            // $request->validate([
+            //     'csv_file' => 'required|file|mimes:csv,txt', // Ensure the file is a CSV
+            // ]);
+        
+            // $path = $request->file('csv_file')->getRealPath();
+            // $data = array_map('str_getcsv', file($path));
+            // $header = array_shift($data);
+        
+            // // Define the expected columns
+            // $expectedColumns = ['name', 'category', 'part_number', 'description', 'additional_details', 'quantity', 'price', 'year(Make)Model'];
+        
+            // if (count($header) !== count($expectedColumns)) {
+            //     return redirect()->back()->with('error', 'Not a CSV file Or compatible columns  as expected.');
+            // }
+        
+            // if ($header !== $expectedColumns) {
+            //     return redirect()->back()->with('error', 'CSV header does not match the expected columns.');
+            // }
+
+
+            // foreach ($data as $row) {
+            //     $row = array_combine($header, $row);
+            //     $subcategory = Category::with('parent')->has('parent')->where('name', $row['category'])->first();
+            //     if (!$subcategory) {
+            //         $subcategory = Category::where('name', 'others')->first();
+            //     }
+            //     $product = [
+            //         'name' => $row['name'],
+            //         'user_id' =>$this->getUserParent(),
+            //         'dealer_id' =>  auth()->user()->id,
+            //         'subcategory_id' => $subcategory->id,
+            //         'description' => $row['description'],
+            //         'part_number' => $row['part_number'],
+            //         'additional_details' => $row['additional_details'],
+            //         'stocks_avaliable' => intval(!empty($row['quantity']) && $row['quantity'] >= 0 ? $row['quantity'] : 0),
+            //         'price' => $row['price'],
+            //         'status' => '1',
+            //     ];
+            $request->validate([
+                'csv_file' => 'required|file|mimes:csv,txt', // Ensure the file is a CSV
+            ]);
+        
             $path = $request->file('csv_file')->getRealPath();
             $data = array_map('str_getcsv', file($path));
             $header = array_shift($data);
+        
+            // Define the expected columns
+            $expectedColumns = ['name', 'category', 'part_number', 'description', 'additional_details', 'quantity', 'price', 'year(Make)Model'];
+        
+            // Check if header matches expected columns
+            if ($header !== $expectedColumns) {
+                return redirect()->back()->with('Error', 'Not a CSV file or does not match the expected columns. Please download the sample one.');
+            }
+        
+            $errors = [];
+            $validRows = [];
+            $rowNumber = 2; // Starting row number (1-based index, header is row 1)
+        
             foreach ($data as $row) {
+                if (count($row) !== count($header)) {
+                    $errors[] = "Row $rowNumber has an incorrect number of columns.";
+                    $rowNumber++;
+                    continue;
+                }
+        
                 $row = array_combine($header, $row);
+        
+                // Validate each column value if necessary
+                // Example: Ensure 'quantity' is a non-negative integer
+                if (!is_numeric($row['quantity']) || $row['quantity'] < 0) {
+                    $errors[] = "Row $rowNumber has an invalid quantity value.";
+                }
+        
+                // Example: Ensure 'price' is a valid number
+                if (!is_numeric($row['price'])) {
+                    $errors[] = "Row $rowNumber has an invalid price value.";
+                }
+        
+                // Add the valid row to the array
+                if (empty($errors)) {
+                    $validRows[] = $row;
+                }
+        
+                $rowNumber++;
+            }
+        
+            // Check if there were any errors
+            if (!empty($errors)) {
+                return redirect()->back()->with('Error', implode(' ', $errors));
+            }
+        
+            // Save the valid rows
+            foreach ($validRows as $row) {
                 $subcategory = Category::with('parent')->has('parent')->where('name', $row['category'])->first();
                 if (!$subcategory) {
                     $subcategory = Category::where('name', 'others')->first();
                 }
+        
                 $product = [
                     'name' => $row['name'],
-                    'user_id' =>$this->getUserParent(),
-                    'dealer_id' =>  auth()->user()->id,
+                    'user_id' => $this->getUserParent(),
+                    'dealer_id' => auth()->user()->id,
                     'subcategory_id' => $subcategory->id,
                     'description' => $row['description'],
                     'part_number' => $row['part_number'],
@@ -146,6 +248,8 @@ class ProductController extends Controller
                     'price' => $row['price'],
                     'status' => '1',
                 ];
+        
+                // Save the product (assuming you have a Product model)
                 DB::beginTransaction();
                 $product = Product::create($product);
                 if ($row['year(Make)Model']) {
@@ -161,12 +265,15 @@ class ProductController extends Controller
                     }
                 }
                 DB::commit();
+            
             }
-            return redirect()->back()->with('message', 'Product added successfully');
+        
+            return redirect()->back()->with('message', 'CSV data imported successfully.');
         } catch (Exception $e) {
             DB::rollBack();
             return redirect()->back()->with('error', $e->getMessage());
         }
+        
     }
 
     /**
@@ -484,12 +591,17 @@ class ProductController extends Controller
             $featureLimit= $this->getFeatureLimit();
             // $products=FeaturedProduct::where('user_id',auth()->id())->orderBy('created_at','desc')->Paginate(__('pagination.pagination_nuber'));
             $alreadyFeaturedProductIds = FeaturedProduct::where('user_id',auth()->id())->pluck('product_id')->toArray();
-            $products=Product::where('user_id',auth()->id())
+            $products=Product::with('productImage')->where('user_id',auth()->id())
                                 ->whereIn('id',$alreadyFeaturedProductIds)
                                 ->Search($request)
                                 ->orderBy('created_at','desc')
                                 ->Paginate(__('pagination.pagination_nuber'));
-            return view('dealer.featuredProducts.index',compact('products','featureLimit','alreadyFeaturedProductIds'));
+
+            $hasActiveSubscription = DB::table('subscriptions')
+                                        ->where('user_id', auth()->id()) 
+                                        ->where('stripe_status', 'active') 
+                                        ->exists();
+            return view('dealer.featuredProducts.index',compact('products','featureLimit','alreadyFeaturedProductIds','hasActiveSubscription'));
         } catch (\Exception $e) {
          return redirect()->back()->with(['Error'=>$e->getMessage()]);
         }

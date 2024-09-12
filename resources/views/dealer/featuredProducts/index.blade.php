@@ -24,9 +24,15 @@
         </div>
         <div >
             {{-- data-bs-toggle="modal" data-bs-target="#exampleModal" --}}
+            @if($hasActiveSubscription)
             <a href="javascript:void(0)" class="btn primary-btn addproductbtn"  >
                 <img src="{{ asset('assets/images/add-round-icon.svg') }}" alt=""> Add
             </a>
+            @else
+            <a href="javascript:void(0)" class="btn primary-btn " data-bs-toggle="modal" data-bs-target="#exampleModal1" >
+                <img src="{{ asset('assets/images/add-round-icon.svg') }}" alt=""> Add
+            </a>
+            @endif
         </div>
     </div>
 
@@ -34,16 +40,16 @@
         <div class="table-responsive">
             <table class="table ">
                 <tr>
-                    <th>
+                    <th width="30%">
                         <p>Part Image</p>
                     </th>
-                    <th>
+                    <th width="30%">
                         <p>Part Number</p>
                     </th>
-                    <th>
+                    <th width="30%">
                         <p>Part name</p>
                     </th>
-                    <th class="featured-product-qua">
+                    <th class="featured-product-qua" width="10%">
                         <p>Quantity</p>
                     </th>
                     {{-- <th>
@@ -120,6 +126,28 @@
             
         </div>
     </div>
+
+    <div class="modal fade add-new-pro-modal" id="exampleModal1" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="product-detail-table product-list-table pro-manage-table">
+                        <div class="table-responsive">
+                            <div class="empty-data">
+                                <img src="{{ asset('assets/images/no-product.svg') }}" alt="" width="300">
+                                <p class="text-center mt-1">To add parts. Please  <a href="{{ route('Dealer.subscription.plan') }}"><u> subscibe </u></a> feature plans first.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+            
+        </div>
+    </div>
 @endsection
 @push('scripts')
     <script>
@@ -128,7 +156,6 @@
            jQuery('.addproductbtn').on('click',function (e) 
            {
                 var url = APP_URL + '/dealer/products/excludeFeatured';
-                console.log('helo',url);
                 let response = ajaxCall(url, 'get',null,false);
                 response.then(handleSuccess).catch(handleError)
                 function handleSuccess(response)

@@ -53,7 +53,7 @@
                                     <span class="custom-switch-indicator"></span>
                                 </label> --}}
 
-                                <div class="toggle-btn">
+                                <div class="toggle-btn" title="Click to active/Inactive status">
                                     <input type="checkbox" id="switch11{{ $key }}" class="custom-switch-input"
                                         @if ($package->status == '1') checked="checked" @endif
                                         onchange="toggleStatus(this, 'Package', '{{ $package->id }}');"

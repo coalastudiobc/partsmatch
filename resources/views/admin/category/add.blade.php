@@ -96,12 +96,10 @@
                                                                 </span>
                                                             @enderror
                                                             <div class="input-icon-custm tooltip-new">
-                                                                <span>
+                                                                <span data-toggle="tooltip" data-placement="left" title="Enter the name of category. if you want to make this category as parent, don't select any parent category">
                                                                     <i class="fa-solid fa-question"></i>
                                                                 </span>
-                                                                <div class="tooltip-text">
-                                                                    <p>ghfvjvhm</p>
-                                                                </div>
+                                                               
                                                             </div>
                                                         </div>
                                                     </div>
@@ -113,14 +111,14 @@
                                                             <input type="text" name="icon"
                                                                 class="form-control @error('icon') is-invalid @enderror"
                                                                 value="{{ old('icon', $category->icon ?? $category->icon) }}">
-                                                            <div class="input-icon-custm tooltip-new">
-                                                                <span>
-                                                                    <i class="fa-solid fa-question"></i>
-                                                                </span>
-                                                                <div class="tooltip-text">
-                                                                    <p>ghfvjvhm</p>
+                                                                <div class="input-icon-custm tooltip-new">
+                                                                    <span data-toggle="tooltip" data-placement="left" title="Enter a valid SVG icon html or code.">
+                                                                        <i class="fa-solid fa-question"></i>
+                                                                    </span>
+                                                                    <!-- <div class="tooltip-text">
+                                                                        <p>Name of package, describe the package and what it offers.</p>
+                                                                    </div> -->
                                                                 </div>
-                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>

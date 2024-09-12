@@ -7,7 +7,7 @@
             <x-alert-component />
             <div class="row g-4 ">
                 @forelse  ($plans as $plan)
-                    <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-6 col-12">
+                    <div class="col-xxl-4 col-xl-6 col-lg-6 col-md-6 col-12">
                         <div class="cards" id="card{{ $plan->id }}">
                             @if(isPlanActive($plan))
                             <div id="pointer">

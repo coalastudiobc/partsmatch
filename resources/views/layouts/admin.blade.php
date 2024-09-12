@@ -194,7 +194,10 @@
             jQuery('.admin-sidebar-cross-icon').on('click',function (e) {
                 jQuery('.dashboard-left-box').removeClass('open');
             })
-
+            $(function () {
+          
+          $('[data-toggle="tooltip"]').tooltip();
+      })
         });
     </script>
     @stack('scripts')

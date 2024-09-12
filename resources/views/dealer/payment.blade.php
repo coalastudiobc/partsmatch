@@ -1,4 +1,5 @@
 @extends('layouts.front')
+@section('title','Payment')
 @section('content')
 <section class="page-content-sec section-padding">
     <div class="container">
@@ -222,7 +223,9 @@
             }
         )
         if (error) {
-            cardBtn.disable = false
+        toastr.success(error.setup_intent.status );
+        var url = "{{ route('welcome') }}";
+        window.location.href = url;
         } else {
             cardButton.disabled = true;
             cardButton.innerHTML =

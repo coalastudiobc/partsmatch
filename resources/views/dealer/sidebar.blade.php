@@ -72,7 +72,7 @@
                     </div>
                 </div>
             </li>
-            @endif
+          
 
             <li class="analyics-tabs-list">
                 <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -114,6 +114,8 @@
                     </div>
                 </div>
             </li>
+            @endif
+
             {{-- <li class="analyics-tabs-list">
                             <div class="accordion accordion-flush" id="accordionFlushExample">
                                 <div class="accordion-item">

@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+@section('title', 'Payment Shipment')
 @section('content')
 <div class="dashboard-right-box">
     <div class="">

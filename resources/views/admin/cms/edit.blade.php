@@ -29,13 +29,13 @@
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
-                                                    <div class="input-icon-custm tooltip-new">
-                                                        <span>
+                                                    <div class="input-icon-custm">
+                                                        <span data-toggle="tooltip" data-placement="left" title="" data-bs-original-title="ghfvjvhm">
                                                             <i class="fa-solid fa-question"></i>
                                                         </span>
-                                                        <div class="tooltip-text">
-                                                            <p>ghfvjvhm</p>
-                                                        </div>
+                                                        {{-- <div class="tooltip-text">
+                                                            <p></p>
+                                                        </div> --}}
                                                     </div>
                                                 </div>
                                             </div>
@@ -52,13 +52,13 @@
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
-                                                    <div class="input-icon-custm tooltip-new">
-                                                        <span>
+                                                    <div class="input-icon-custm">
+                                                        <span data-toggle="tooltip" data-placement="left" title="" data-bs-original-title="ghfvjvhm">
                                                             <i class="fa-solid fa-question"></i>
                                                         </span>
-                                                        <div class="tooltip-text">
-                                                            <p>ghfvjvhm</p>
-                                                        </div>
+                                                        {{-- <div class="tooltip-text">
+                                                            <p></p>
+                                                        </div> --}}
                                                     </div>
                                                 </div>
                                             </div>
@@ -85,13 +85,13 @@
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
-                                                    <div class="input-icon-custm tooltip-new">
-                                                        <span>
+                                                    <div class="input-icon-custm">
+                                                        <span data-toggle="tooltip" data-placement="left" title="" data-bs-original-title="ghfvjvhm">
                                                             <i class="fa-solid fa-question"></i>
                                                         </span>
-                                                        <div class="tooltip-text">
+                                                        {{-- <div class="tooltip-text">
                                                             <p>ghfvjvhm</p>
-                                                        </div>
+                                                        </div> --}}
                                                     </div>
                                                 </div>
                                             </div>
@@ -167,13 +167,13 @@
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
-                                                    <div class="input-icon-custm tooltip-new">
-                                                        <span>
+                                                    <div class="input-icon-custm ">
+                                                        <span data-toggle="tooltip" data-placement="left" title="" data-bs-original-title="ghfvjvhm">
                                                             <i class="fa-solid fa-question"></i>
                                                         </span>
-                                                        <div class="tooltip-text">
+                                                        {{-- <div class="tooltip-text">
                                                             <p>ghfvjvhm</p>
-                                                        </div>
+                                                        </div> --}}
                                                     </div>
                                                 </div>
                                             </div>

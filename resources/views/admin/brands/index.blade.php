@@ -21,16 +21,16 @@
             <div class="table-responsive">
                 <table class="table">
                     <tr>
-                        <th>
+                        <th width="30%">
                             <p>Name</p>
                         </th>
-                        <th>
+                        <th width="30%">
                             <p>Image</p>
                         </th>
-                        <th>
+                        <th width="30%">
                             <p>Status</p>
                         </th>
-                        <th>
+                        <th width="10%">
                             <p>Action</p>
                         </th>
                     </tr>
@@ -56,7 +56,7 @@
                             <td>
                                 <a href="{{ route('admin.brands.edit.make', ['id' => json_encode($make->id)]) }}"
                                     class="btn primary-btn">
-                                    edit</a>
+                                    Edit</a>
                             </td>
                         </tr>
                     @empty

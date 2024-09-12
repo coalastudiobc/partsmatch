@@ -14,22 +14,22 @@
             <div class="table-responsive">
                 <table class="table">
                     <tr>
-                        <th>
+                        <th width="20%">
                             <p>Name</p>
                         </th>
-                        <th>
+                        <th width="20%">
                             <p>Title</p>
                         </th>
-                        <th>
+                        <th width="20%">
                             <p>Content</p>
                         </th>
-                        <th>
+                        <th width="15%">
                             <p>Image</p>
                         </th>
-                        <th>
+                        <th width="20%">
                             <p>Status</p>
                         </th>
-                        <th>
+                        <th width="5%">
                             <p>Action</p>
                         </th>
 
@@ -40,7 +40,7 @@
                                 <p>{{ $page->name ? $page->name : '' }}</p>
                             </td>
                             <td>
-                                <p>{{ $page->page_title ? Str::limit($page->page_title, 50, '....') : '' }}</p>
+                                <p>{{ $page->page_title ? Str::limit($page->page_title, 50, '....') : 'N/A' }}</p>
                             </td>
                             <td>
                                 <p>{{ $page->page_content ? Str::limit($page->page_content, 50, '....') : '' }}</p>

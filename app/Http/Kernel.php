@@ -67,6 +67,7 @@ class Kernel extends HttpKernel
         'admin' => \App\Http\Middleware\AllowedAdmin::class,
         'packagevalidity' => \App\Http\Middleware\PackageValidity::class,
         'user.status' => \App\Http\Middleware\UserStatusMiddleware::class,
+        'set.cache.history' => \App\Http\Middleware\SetCacheHistoryMiddleware::class,
 
     ];
 }

@@ -94,11 +94,11 @@
                                                 <label for="range_to">Delivery Date<span class="required-field">*</span></label>
                                                 <div class="form-field">
                                                     <input type="text" name="delivery_date" id="delivery_date"
-                                                        class="form-control @error('range_to') is-invalid @enderror sdfa"
-                                                        value="@isset($data){{ $data->range_to ?? '' }}@endisset"
+                                                        class="form-control @error('delivery_date') is-invalid @enderror sdfa"
+                                                        value="@isset($data){{ $data->delivery_date ?? '' }}@endisset"
                                                         placeholder="e.g:  08/10/2024"
                                                         title="Delivery date for deliver the part to buyer">
-                                                    @error('range_to')
+                                                    @error('delivery_date')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>

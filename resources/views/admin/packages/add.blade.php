@@ -340,10 +340,7 @@
                 jQuery(document).find('input[name="status"]').val(selectitem);
 
             });
-            $(function () {
-          
-                $('[data-toggle="tooltip"]').tooltip();
-            })
+
         });
 
 

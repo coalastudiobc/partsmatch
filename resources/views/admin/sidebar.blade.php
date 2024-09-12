@@ -246,7 +246,7 @@
                                         <li class="analyics-tabs-list @if (in_array(Route::current()->getName(), ['admin.shippment.fulfilled.listing']))  active @endif">
                                             <a href="{{ route('admin.shippment.fulfilled.listing') }}">
                                                 <div class="analyics-tabs-name">
-                                                    <h4>Fullfilled Shipment</h4>
+                                                    <h4>Fulfilled Shipment</h4>
                                                 </div>
                                             </a>
                                         </li>
@@ -709,7 +709,7 @@
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#flush-collapseOne5" aria-expanded="false"
                                     aria-controls="flush-collapseOne">
-                                    <a href="{{ route('admin.featured.product') }}" class="analyics-tabs-btns ">
+                                    <a href="{{ route('admin.featured.product') }}" class="analyics-tabs-btns  @if (Route::is('admin.featured.*')) active @endif ">
                                         <div class="analyics-tabs-name">
                                             <span>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17"

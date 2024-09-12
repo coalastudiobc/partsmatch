@@ -4,10 +4,17 @@
 @section('content')
 <div class="dashboard-right-box">
     <div class="serach-and-filter-box justify-content-end">
-        <div class="pro-search-box">
-            <input type="text" class="form-control" name="filter_by_name" placeholder="Search">
-            <a href="#" class="btn primary-btn"><i class="fa-solid fa-magnifying-glass"></i></a>
-        </div>
+            <form action="">
+                <div class="pro-search-box">
+                    <input type="text" name="filter_by_name" class="form-control"value="{{ request('filter_by_name') }}" placeholder="Search By Order Id Or Shipment Amount">
+                    <button type="submit" class="btn primary-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    @if(request('filter_by_name'))
+                    <div class="search-cross-btn">
+                        <a href="{{ route('Dealer.order.orderlist') }}"><i class="fa-solid fa-xmark"></i></a>
+                    </div>
+                @endif
+                </div>
+            </form>
         {{-- <div class="pro-filter">
                 <p>Filter:</p>
                 <a href="#" class="btn primary-btn outline-btn"><img
@@ -20,26 +27,26 @@
         <div class="test table-responsive">
             <table class="table">
                 <tr>
-                    <th>
+                    <th width="20%">
                         <p>Order ID</p>
                     </th>
                     {{-- <th>
                         <p>Total products</p>
                     </th> --}}
                     
-                    <th>
+                    <th width="30%">
                         <p>Shippment Amount</p>
                     </th>
                     {{-- <th>
                         <p>Order Amount</p>
                     </th> --}}
-                    <th>
+                    <th width="20%">
                         <p>Total Amount</p>
                     </th>
-                    <th>
+                    <th width="20%">
                         <p>Date</p>
                     </th>
-                    <th>
+                    <th width="10%">
                         <p>Action</p>
                     </th>
                 </tr>

@@ -1,8 +1,5 @@
 @extends('layouts.admin')
-
 @section('title', 'Featured Product')
-@section('heading', 'Featured product')
-
 @section('content')
 
     <div class="dashboard-right-box">
@@ -10,22 +7,28 @@
 
         {{-- <h2>CMS</h2> --}}
 
-        <div class="product-detail-table cms-list-table">
+        <div class="product-detail-table cms-list-table admin-feature-list">
             <div class="table-responsive">
                 <table class="table">
                     <tr>
-                        <th>
-                            <p>Name</p>
+                        <th width="20%">
+                            <p>Part Image</p>
                         </th>
-                        <th>
-                            <p>Product Name</p>
+                        <th width="20%">
+                            <p>Dealer Name</p>
                         </th>
-                        <th>
-                            <p>Image</p>
+                        <th width="30%">
+                            <p>Part Number</p>
                         </th>
-                        <th>
+                        <th width="20%">
+                            <p>Part Price</p>
+                        </th>
+                        <th width="10%">
+                            <p>Quantity</p>
+                        </th>
+                        {{-- <th>
                             <p>Featured Status</p>
-                        </th>
+                        </th> --}}
 
                         {{-- <th>
                             <p>Action</p>
@@ -35,22 +38,30 @@
                     @forelse($feature_products as $key => $feature_product)
                         <tr>
                             <td>
-                                <p>{{ $feature_product->product->user->name ? $feature_product->product->user->name : '' }}
+                                <img src="{{($feature_product->product && count($feature_product->product->productImage)) ? ( Storage::url(@$feature_product->product->productImage[0]->file_url ) ) : asset('assets/images/gear-logo.svg') }}"
+                                    alt="img" height="50px" width="50px">
+                        </td>
+
+                            <td>
+                                <p>{{ $feature_product->product->user ? ($feature_product->product->user->name ?? 'N/A'):'N/A'}}
                                 </p>
                             </td>
                             <td>
-                                <p>{{ $feature_product->product->name ? $feature_product->product->name : '' }}</p>
+                                <p>{{ $feature_product->product ? ($feature_product->product->part_number ?? 'N/A'):'N/A'  }}</p>
                             </td>
-
-                            <td><a href="{{ route('admin.dealers.product.edit', [$feature_product->product->id]) }}">
-                                    <img src="{{ Storage::url(@$feature_product->product->productImage[0]->file_url) }}"
-                                        alt="img" height="90px" width="90px">
-                                </a>
-                            </td>
-
                             <td>
+                                <p> {{ $feature_product->product 
+                                    ? number_format($feature_product->product->price, 2, '.', ',') 
+                                    : 'N/A' }}</p>
+                            </td>
+                            <td>
+                                <p>{{ $feature_product->product ? ($feature_product->product->stocks_avaliable ?? 0) :'N/A' }}</p>
+                            </td>
 
-                                <div class="toggle-btn">
+                          
+                            {{-- <td> --}}
+
+                                {{-- <div class="toggle-btn">
                                     <input type="checkbox" id="switch1{{ $key }}"
                                         data-id=" @if (isset($feature_product->id)) {{ $feature_product->id }} @else 0 @endif"
                                         product-id="{{ $feature_product->product->id }}"
@@ -60,9 +71,9 @@
                                         @if (isset($feature_product->product->user->subscription) &&
                                                 @$feature_product->product->user->subscription[0]->stripe_status != 'active') disabled @endif><label
                                         for="switch1{{ $key }}"></label>
-                                </div>
-
-                            </td>
+                                </div> --}}
+                               
+                            {{-- </td> --}}
 
                             {{-- <td>
                                 <div class="table-pro-quantity">

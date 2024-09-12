@@ -8,7 +8,7 @@
                 regex: nameRegex,
             },
             image: {
-                required: true,
+                // required: true,
                 filesize: profilePicSize,
                 extension: profilePicMimes,
             },

@@ -3819,8 +3819,8 @@ label.adress-info-inner::before {
 }
 
 
-.price-and-cart > p.text-danger{
-    font-size: 12px;
+.price-and-cart > p.text-danger {
+    font-size: 14px;
 }
 
 .price-and-cart p.disabl {
@@ -3857,13 +3857,17 @@ cursor: pointer;
 #bulk-upload .modal-dialog.modal-dialog-centered {
     max-width: 700px;
 }
-.pro-manage-table table tr th:last-child {
+/* .pro-manage-table table tr th:last-child {
     text-align: right;
     padding-right: 16px !important;
     width: unset;
+} */
+
+.product-view-img img {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
 }
-
-
 
 
 

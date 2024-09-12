@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'commision')
+@section('title', 'Global commision')
 @isset($user)
     @section('heading', "Set Commision for $username")
 @else
@@ -95,12 +95,12 @@
                                                         </span>
                                                     @enderror
                                                     <div class="input-icon-custm tooltip-new">
-                                                        <span>
+                                                        <span data-toggle="tooltip" data-placement="left" title="Commission for all Dealer. if there is no individually set.">
                                                             <i class="fa-solid fa-question"></i>
                                                         </span>
-                                                        <div class="tooltip-text">
-                                                            <p>ghfvjvhm</p>
-                                                        </div>
+                                                        <!-- <div class="tooltip-text">
+                                                            <p>Name of package, describe the package and what it offers.</p>
+                                                        </div> -->
                                                     </div>
                                                 </div>
                                             </div>

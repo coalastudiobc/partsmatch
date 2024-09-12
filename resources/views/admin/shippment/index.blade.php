@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+@section('title', 'Shippment Label')
 @section('content')
     <div class="dashboard-right-box">
         <x-alert-component />
@@ -6,25 +7,25 @@
             <div class="table-responsive">
                 <table class="table">
                     <tr>
-                        <th>
-                            <p>Order Id</p>
+                        <th width="10%">
+                            <p>Order ID</p>
                         </th>
-                        <th>
+                        <th width="10%">
                             <p>Products</p>
                         </th>
-                        <th>
+                        <th width="15%">
                             <p>Cart Amount</p>
                         </th>
-                        <th>
+                        <th width="20%">
                             <p>Shipment Amount</p>
                         </th>
-                        <th>
+                        <th width="20%">
                             <p>Buy Date</p>
                         </th>
-                        <th>
-                            <p>Fullfilled date</p>
+                        <th width="20%">
+                            <p>Fulfilled Date</p>
                         </th>
-                        <th>
+                        <th width="5%">
                             <p>Action</p>
                         </th>
                     </tr>

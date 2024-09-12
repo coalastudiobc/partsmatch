@@ -24,9 +24,20 @@ class ProfileRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255'],
-            'phone_number' => ['required'],
-            'image' => ['image', 'mimes:' . config('validation.php_profile_pic_mimes'), 'max:' . config('validation.php_profile_pic_size')],
-            'industry_type' => ['required'],
+            'phone_number' => [
+                'required',
+                function ($attribute, $value, $fail) {
+                    $digits = preg_replace('/\D/', '', $value);
+                    if (strlen($digits) < 10 || $digits[0] === '0') {
+                        return $fail('The ' . $attribute . ' must be a valid phone number and cannot start with zero.');
+                    }
+                    if (!preg_match('/^\(\d{3}\) \d{3}-\d{4}$/', $value)) {
+                        return $fail('The ' . $attribute . ' must be a valid phone number in the format (XXX) XXX-XXXX.');
+                    }
+                }
+            ],
+            'image' => ['sometimes', 'nullable','image', 'mimes:' . config('validation.php_profile_pic_mimes'), 'max:' . config('validation.php_profile_pic_size')],
+            'industry_type' => ['sometimes','nullable'],
             'address' => ['required'],
             'dealershipName' => ['required', 'string', 'regex:' . config('validation.name_regex'), 'max:255'],
         ];
@@ -34,6 +45,7 @@ class ProfileRequest extends FormRequest
 
     public function messages()
     {
+
         return [
             'name.required' => __('customvalidation.user.name.required'),
             'email.required' => __('customvalidation.user.email.required'),
@@ -47,7 +59,6 @@ class ProfileRequest extends FormRequest
             'dealershipName.string' => __('customvalidation.user.dealershipName.string'),
             'dealershipName.nameRegex' => __('customvalidation.user.dealershipName.regex'),
             'dealershipName.max' => __('customvalidation.user.dealershipName.max'),
-
         ];
     }
 }

@@ -1,4 +1,5 @@
 @extends('layouts.front')
+@section('title','Delivery address')
 @section('content')
 <section class="page-content-sec section-padding">
     <div class="container">

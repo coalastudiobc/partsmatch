@@ -186,12 +186,12 @@
                                                 </span>
                                             @enderror
                                             <div class="input-icon-custm tooltip-new">
-                                                <span>
+                                                <span data-toggle="tooltip" data-placement="left" title="" data-bs-original-title="Average shipping charge for every consignment.">
                                                     <i class="fa-solid fa-question"></i>
                                                 </span>
-                                                <div class="tooltip-text">
+                                                {{-- <div class="tooltip-text">
                                                     <p>Average shipping charge for every consignment.</p>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </div>
 

@@ -5,8 +5,8 @@
 <div class="dashboard-right-box">
      <div class="serach-and-filter-box justify-content-end">
         <div class="pro-search-box">
-            <input type="text" class="form-control" name="filter_by_name" placeholder="Search">
-            <a href="#" class="btn primary-btn"><i class="fa-solid fa-magnifying-glass"></i></a>
+            {{-- <input type="text" class="form-control" name="filter_by_name" placeholder="Search">
+            <a href="#" class="btn primary-btn"><i class="fa-solid fa-magnifying-glass"></i></a> --}}
         </div>
     </div>
      <div class="product-detail-table product-list-table">

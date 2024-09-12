@@ -8,13 +8,13 @@
                     <div class="table-responsive">
             <table class="table my-pro-view-table">
                 <tr>
-                    <th>product Image</th>
-                    <th>Part Number</th>
-                    <th>Name</th>
-                    <th>Price</th>
-                    <th>Brand</th>
-                    <th>Model</th>
-                    <th>Status</th>
+                    <th width="15%">Part Image</th>
+                    <th width="20%">Part Number</th>
+                    <th width="15%">Name</th>
+                    <th width="15%">Price</th>
+                    <th width="15%">Brand</th>
+                    <th width="10%">Model</th>
+                    <th width="10%">Status</th>
                 </tr>
                 @forelse ($orderItem as $key => $order)
                 <tr>

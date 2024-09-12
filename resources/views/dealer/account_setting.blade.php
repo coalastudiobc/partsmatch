@@ -71,7 +71,7 @@
                                         <div class="form-group">
                                             <label for="">Email*</label>
                                             <div class="form-field">
-                                                <input type="email" name="email" value="{{ old('email', $user->email ?? $user->email) }}" value="{{ old('email', $user->email ?? $user->email) }}" class="form-control @error('email') is-invalid @enderror disabled-inputs" disabled placeholder="Email">
+                                                <input type="email" name="email"   value="{{ old('email', $user->email ?? $user->email) }}" class="form-control @error('email') is-invalid @enderror "  placeholder="Email" disabled>
                                                 @error('email')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>

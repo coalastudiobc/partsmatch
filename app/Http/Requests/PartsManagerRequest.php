@@ -49,7 +49,7 @@ class PartsManagerRequest extends FormRequest
         if (!$parameter) {
             $rules['email'] = ['required', 'string', 'email', 'max:255', 'unique:users'];
             $rules['password'] =  ['required'];
-            $rules['image'] = ['required', 'image', 'mimes:' . config('validation.php_profile_pic_mimes'), 'max:' . config('validation.php_profile_pic_size')];
+            $rules['image'] = ['sometimes', 'nullable', 'image', 'mimes:' . config('validation.php_profile_pic_mimes'), 'max:' . config('validation.php_profile_pic_size')];
             $rules['confirm_password'] = ['required'];
         }
 

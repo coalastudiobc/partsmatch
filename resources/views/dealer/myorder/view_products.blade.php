@@ -9,7 +9,7 @@
         <div class="table-responsive">
             <table class="table">
                 <tr>
-                    <th>Product Image</th>
+                    <th>Part Image</th>
                     <th>Part Number</th>
                     <th>Name</th>
                     <th>Price</th>

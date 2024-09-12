@@ -37,9 +37,9 @@
                         <th>
                             <p>Industry</p>
                         </th>
-                        <th>
+                        {{-- <th>
                             <p>Address</p>
-                        </th>
+                        </th> --}}
                         <th>
                             <p>Product</p>
                         </th>
@@ -64,9 +64,9 @@
                             <td>
                                 <p>{{ $user->industry_type ? $user->industry_type : 'N/A' }}</p>
                             </td>
-                            <td>
+                            {{-- <td>
                                 <p>{{ $user->address ? $user->address : 'N/A' }}</p>
-                            </td>
+                            </td> --}}
                             <td>
                                 <a
                                     @if (isset($user->product)) href="{{ route('admin.dealers.product.list', [$user->id]) }}" @endif><u>

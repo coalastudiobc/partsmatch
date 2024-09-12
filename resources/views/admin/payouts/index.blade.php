@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+@section('title', 'Payouts Dealer')
 @section('content')
     <div class="dashboard-right-box">
         <x-alert-component />

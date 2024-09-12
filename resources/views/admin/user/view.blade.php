@@ -123,10 +123,13 @@
                                                                     <label>Order Commission<span class="required-field">*</span></label>
                                                                     <div class="symbol">%</div>
                                                                     <input type="number" id="checkcommission" name="order_commission" class="form-control  two-decimals" value="{{old('order_commission', get_admin_setting('order_commission'))}}">
-                                                    <div class="input-icon-custm tooltip-new"><span><i class="fa-solid fa-question"></i></span>
-                                                                        <div class="tooltip-text">
-                                                                            <p>ghfvjvhm</p>
-                                                                        </div>
+                                                                    <div class="input-icon-custm tooltip-new">
+                                                                        <span data-toggle="tooltip" data-placement="left" title="Set the individual commission for this dealer.">
+                                                                            <i class="fa-solid fa-question"></i>
+                                                                        </span>
+                                                                        <!-- <div class="tooltip-text">
+                                                                            <p>Name of package, describe the package and what it offers.</p>
+                                                                        </div> -->
                                                                     </div>
                                                                 </div>
                                                             </div>

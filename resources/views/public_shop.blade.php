@@ -1,4 +1,5 @@
 @extends('layouts.front')
+@section('title','Shop')
 @section('content')
 <section class="page-content-sec bg-white ">
     <div class="page-content-wrapper">

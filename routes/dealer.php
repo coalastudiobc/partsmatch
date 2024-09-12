@@ -116,7 +116,7 @@ Route::middleware(['auth', 'verified','user.status'])->namespace('App\Http\Contr
         Route::post('product/from/address', [ShippoController::class, 'from_address'])->name('from');
         Route::post('product/picking/address', [OrderController::class, 'picking_address'])->name('picking');
         Route::get('picking/address/delete/{address}', [OrderController::class, 'addressDelete'])->name('delete');
-        Route::match(['get', 'post'],'product/shipping/toaddress', [CheckoutController::class, 'to_address'])->name('to');
+        Route::match(['get', 'post'],'product/shipping/toaddress', [CheckoutController::class, 'to_address'])->name('to')->middleware('set.cache.history');
     });
 
     Route::name('stripe.onboarding.')->group(function () {
