@@ -72,9 +72,22 @@
                                                     <div class="d-flex gap-5 align-items-center">
                                                         <p class="commission-value">
                                                             @if (isset($user->ComissionDetails->commision_value))
-                                                                {{ $user->ComissionDetails->commision_value }}{{ $user->ComissionDetails->commision_type == 'Percentage' ? '%' : '$' }}
+                                                    
+                                                            @if ($user->ComissionDetails->commision_type == 'Percentage')
+                                                                {{ $user->ComissionDetails->commision_value ?? 'N/A' }}%
+                                                            @else
+                                                                ${{ $user->ComissionDetails->commision_value ?? 'N/A' }}
+                                                            @endif
+                                                       
+                                                        @endif
+                                                            @else
+                                                            @if ($globalCommissionType && $globalCommissionType->value == 'Percentage')
+                                                            {{ $globalCommission ? ($globalCommission->value ?? 'N/A') . '%' : 'N/A' }}
+                                                            @elseif ($globalCommissionType)
+                                                                {{ $globalCommission ? '$' . ($globalCommission->value ?? 'N/A') : 'N/A' }}
                                                             @else
                                                                 N/A
+                                                            @endif
                                                             @endif
                                                         </p>
                                                         <a class="" >

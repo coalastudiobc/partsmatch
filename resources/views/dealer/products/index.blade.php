@@ -496,8 +496,9 @@
                                         <label class="img-upload-box">
                                             <img src="images/upload-img.png" alt="">
                                             <p id="viewUploadedFileName">Upload CSV</p>
-                                            <input type="file" name=csv_file id="uploadCsvInput">
+                                            <input type="file" name=csv_file id="uploadCsvInput"  accept=".csv">
                                         </label>
+                                        <span class="redInvalid" id="errorMessageCsv"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -505,7 +506,7 @@
                                         class="btn secondary-btn full-btn">Get sample CSV</a>
                                 </div>
                                 <div class="col-md-6">
-                                    <button type="submit" class="btn secondary-btn full-btn">Submit</button>
+                                    <button type="submit" class="btn secondary-btn full-btn" id="submitCsv">Submit</button>
                                 </div>
                             </div>
                         </form>
@@ -823,4 +824,27 @@
 
         });
     </script>
+
+<script>
+    document.getElementById('uploadCsvInput').addEventListener('change', function(event) {
+        var fileInput = event.target;
+        var file = fileInput.files[0];
+        var errorMessage = document.getElementById('errorMessageCsv');
+        var submitButton = document.getElementById('submitCsv');
+        
+        if (file) {
+            // Check if the file type is CSV
+            if (file.type !== 'text/csv') {
+                errorMessage.textContent = 'Please select a CSV file.';
+                submitButton.disabled = true; // Disable submit button
+            } else {
+                errorMessage.textContent = ''; // Clear any previous error message
+                submitButton.disabled = false; // Enable submit button
+            }
+        } else {
+            errorMessage.textContent = ''; // Clear error message if no file selected
+            submitButton.disabled = false; // Enable submit button
+        }
+    });
+</script>
 @endpush

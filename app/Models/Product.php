@@ -129,29 +129,22 @@ class Product extends Model
             //     });
             // });
         
-            if ($request->has('globalquery')) {
-                $query->when($request->has('globalquery'), function ($q) use ($request) {
-                    $globalquery = $request->input('globalquery');
-                    
-                    
-                    $q->whereHas('productCompatible', function ($query) use ($globalquery) {
-                        $query->where(function ($query) use ($globalquery) {
-                            $query->whereIn('year', [$globalquery])
-                                  ->orWhereIn('make', [$globalquery])
-                                  ->orWhereIn('model', [$globalquery]);
-                        });
-                    });
-                })
-                ->with(['productCompatible' => function ($query) use ($request) {
+            if ($request->has('globalquery')){
+               return $query->orWhereHas('productCompatible', function ($query) use ($request) {
                     if ($request->has('globalquery')) {
-                        $globalquery = $request->input('globalquery');
-                        $query->where(function ($query) use ($globalquery) {
-                            $query->whereIn('year', [$globalquery])
-                                  ->orWhereIn('make', [$globalquery])
-                                  ->orWhereIn('model', [$globalquery]);
-                        });
+                        $query->whereIn('year', [$request->globalquery]);
+                        $query->orWhereIn('make', [$request->globalquery]);
+                        $query->orWhereIn('model', [$request->globalquery]);
                     }
-                }]);
+                    })  
+                    ->with(['productCompatible' => function ($query) use ($request) {
+                        if ($request->has('globalquery')) {
+                            $query->whereIn('year', [$request->globalquery]);
+                            $query->orWhereIn('make', [$request->globalquery]);
+                            $query->orWhereIn('model', [$request->globalquery]);
+                        }
+                
+                    }]);
             } else {
                 $query->whereHas('productCompatible', function ($query) use ($request) {
                     if ($request->has('year') && count($request->year)) {
@@ -178,50 +171,28 @@ class Product extends Model
             }
             
     }
-    // public function scopeFilterCompatiblity($query,$request = null)
-    // {
-    //     $request = $request ?? request();
-    //         $query->when(($request->has('year') && count($request->year)) , function ($q) use ($request) {
-    //             $q->whereHas('productCompatible', function ($query) use ($request) {
-    //                 $query->whereIn('year', $request->year);
-    //             });
-    //         })->when(($request->has('brand') && count($request->brand)) , function ($q) use ($request) {
-    //             $q->whereHas('productCompatible', function ($query) use ($request) {
-    //                 $query->whereIn('make', $request->brand);
-    //             });
-    //         })->when(($request->has('model') && count($request->model)) , function ($q) use ($request) {
-    //             $q->whereHas('productCompatible', function ($query) use ($request) {
-    //                 $query->whereIn('model', $request->model);
-    //             });
-    //         });
-    // }
+   
     public function scopeFilterCompatiblity($query, $request = null)
-{
-    $request = $request ?? request();
-    // Initialize a base query
-    $query->where(function ($q) use ($request) {
-        // Check if 'model' values are provided
-        if ($request->has('model') && count($request->model)) {
-            $q->whereHas('productCompatible', function ($query) use ($request) {
-                $query->whereIn('model', $request->model);
-            });
-        }
-
-        // Check if 'make' values are provided
-        if ($request->has('brand') && count($request->brand)) {
-            $q->orWhereHas('productCompatible', function ($query) use ($request) {
-                $query->whereIn('make', $request->brand);
-            });
-        }
-
-        // Check if 'year' values are provided (if needed)
-        if ($request->has('year') && count($request->year)) {
-            $q->orWhereHas('productCompatible', function ($query) use ($request) {
-                $query->whereIn('year', $request->year);
-            });
-        }
-    });
-}
+    {
+        $request = $request ?? request();
+        $query->where(function ($q) use ($request) {
+            if ($request->has('model') && count($request->model)) {
+                $q->whereHas('productCompatible', function ($query) use ($request) {
+                    $query->whereIn('model', $request->model);
+                });
+            }
+            if ($request->has('brand') && count($request->brand)) {
+                $q->orWhereHas('productCompatible', function ($query) use ($request) {
+                    $query->whereIn('make', $request->brand);
+                });
+            }
+            if ($request->has('year') && count($request->year)) {
+                $q->orWhereHas('productCompatible', function ($query) use ($request) {
+                    $query->whereIn('year', $request->year);
+                });
+            }
+        });
+    }
 
     
 
@@ -233,10 +204,7 @@ class Product extends Model
             $query->where(function ($query) use ($request) {
                 $query->where('name', 'like', '%' . $request->globalquery . '%')
                     ->orWhere('price', 'like', '%' .  $request->globalquery. '%')
-                    ->orWhere('year', 'like', '%' . $request->globalquery. '%')
-                    ->orWhere('brand', 'like', '%' .  $request->globalquery . '%')
-                    ->orWhere('part_number', 'like', '%' .  $request->globalquery. '%')
-                    ->orWhere('model', 'like', '%' .  $request->globalquery. '%');
+                    ->orWhere('part_number', 'like', '%' .  $request->globalquery. '%');
             });
         });
     }
@@ -267,5 +235,21 @@ class Product extends Model
             }});
     }
 
-
+    // public function scopeFilterCompatiblity($query,$request = null)
+        // {
+        //     $request = $request ?? request();
+        //         $query->when(($request->has('year') && count($request->year)) , function ($q) use ($request) {
+        //             $q->whereHas('productCompatible', function ($query) use ($request) {
+        //                 $query->whereIn('year', $request->year);
+        //             });
+        //         })->when(($request->has('brand') && count($request->brand)) , function ($q) use ($request) {
+        //             $q->whereHas('productCompatible', function ($query) use ($request) {
+        //                 $query->whereIn('make', $request->brand);
+        //             });
+        //         })->when(($request->has('model') && count($request->model)) , function ($q) use ($request) {
+        //             $q->whereHas('productCompatible', function ($query) use ($request) {
+        //                 $query->whereIn('model', $request->model);
+        //             });
+        //         });
+        // }
 }

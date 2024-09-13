@@ -10,23 +10,47 @@
                     <a href="{{route('products')}}">Clear All</a>
                 </div>
                 @if((request()->has('brand') && count(request()->brand)) || (request()->has('year') && count(request()->year)) || (request()->has('model') && count(request()->model)) || (request()->has('min_value') && (request()->has('max_value')) && ((request()->min_value != 0) || (request()->max_value != 10000)) ))
-                    <div class="interior-filter-box filter-preview">
+                  {{-- @php
+                     $brandsclone = request()->input('brand', []);
+                    $yearsclone = request()->input('year', []);
+                    $modelsclone = request()->input('model', []);
+
+                    if (
+                        (count($brandsclone) >= 1 && count($yearsclone) >= 1) || 
+                        (count($yearsclone) >= 1 && count($modelsclone) >= 1) || 
+                        (count($brandsclone) >= 1 && count($modelsclone) >= 1)
+                    ) {
+                        $isnotlast = false;
+                    } else {
+                        $isnotlast = true;
+                    }
+                  @endphp --}}
+                <div class="interior-filter-box filter-preview">
                         <div class="filter-selected-data">
                             @if(request()->has('brand') && count(request()->brand))
                                 @forelse(request()->brand as $brand)
                                         <div class="filter-selected-box">
                                             <a href="javascript:void(0)" data-action="brand" class="delete-filter" style="cursor:pointer;">✕</a>
                                             <p>{{$brand}}</p>
-                                        </div>
+                                        {{-- <div class="filter-selected-box">
+                                        @if($loop->last && count(request()->brand)==1 && $isnotlast)
+                                        <a href="{{route('products')}}" class="delete-filter" data-action="model"  style="cursor:pointer;">✕</a>
+                                        @else
+                                        <a href="javascript:void(0)" data-action="brand" class="delete-filter" style="cursor:pointer;">✕</a>
+                                        @endif
+                                        <p>{{$brand}}</p> --}}
+                                </div>
+
                                 @empty
                                 @endforelse
                             @endif
                             @if(request()->has('year') && count(request()->year))
                                 @forelse(request()->year as $year)
-                                        <div class="filter-selected-box">
-                                            <a href="javascript:void(0)" data-action="year" class="delete-filter" style="cursor:pointer;">✕</a>
-                                            <p>{{$year}}</p>
-                                        </div>
+                                <div class="filter-selected-box">
+                                    <a href="javascript:void(0)" data-action="year" class="delete-filter" style="cursor:pointer;">✕</a>
+                                    <p>{{$year}}</p>
+                                </div>
+                                
                                 @empty
                                 @endforelse
                             @endif
@@ -35,7 +59,16 @@
                                         <div class="filter-selected-box">
                                             <a href="javascript:void(0)" data-action="model" class="delete-filter" style="cursor:pointer;">✕</a>
                                             <p>{{$model}}</p>
-                                        </div>
+
+                                        {{-- <div class="filter-selected-box">
+
+                                        @if($loop->last && count(request()->model)==1 && $isnotlast)
+                                        <a href="{{route('products')}}" class="delete-filter" data-action="model"  style="cursor:pointer;">✕</a>
+                                        @else
+                                        <a href="javascript:void(0)" data-action="model" class="delete-filter" style="cursor:pointer;">✕</a>
+                                        @endif
+                                        <p>{{$model}}</p> --}}
+                                    </div>
                                 @empty
                                 @endforelse
                             @endif
@@ -99,6 +132,7 @@
                     <form id="filters" method="POST" action="">
                         @csrf
                         <input type="hidden" name="style" id="styleForSlider">
+                        <input type="hidden" name="page" id="postPageSelect" value="{{request()->has('page') ? request()->page : ''}}">
                         <div class="interior-filter-box">
 
                             <div class="accordion" id="accordionExample1">
@@ -419,7 +453,8 @@
                         </div>
                     </div>
                 </div>
-                {!! $products->links('dealer.pagination') !!}
+                {!! $products->links('shop_pagination') !!}
+
             </div>
         </div>
     </div>
@@ -510,16 +545,29 @@
 
         $('.delete-filter').on('click', function()
          {
-            
-            var action = $(this).attr('data-action');
-            if(action == "price"){
+             var action = $(this).attr('data-action');
+             if(action == "price"){
                 $('#selectedMinValue').val('0');
                 $('#selectedMaxValue').val('10000');
+                
             }else{
-            var filter = $(this).siblings('p').html();
-            filter = $("label:contains('"+filter+"')").attr('for')
-            $("#"+filter).prop('checked',false);
+                var filter = $(this).siblings('p').html();
+                filter = $("label:contains('"+filter+"')").attr('for')
+                $("#"+filter).prop('checked',false);
             }
+            // let url = new URL(window.location.href);
+            // let params = new URLSearchParams(url.search);
+            // params.set('brand', []);
+            // console.log(this,params);
+            $('#filters').submit();
+            jQuery('#fullPageLoader').removeClass('d-none');
+        });
+
+        $(document).on('click','.post-pagination', function(e)
+         {
+            e.preventDefault();
+            var page = $(this).attr('data-page');
+            $('#postPageSelect').val(page);
             $('#filters').submit();
             jQuery('#fullPageLoader').removeClass('d-none');
         });

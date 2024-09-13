@@ -3869,6 +3869,10 @@ cursor: pointer;
     border-radius: 10px;
 }
 
+.redInvalid {
+  color: red;
+}
+
 
 
 

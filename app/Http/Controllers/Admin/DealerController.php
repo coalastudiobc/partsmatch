@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminProductRequest;
+use App\Models\AdminSetting;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -67,7 +68,9 @@ class DealerController extends Controller
     {
         $paymentdetail = $user->paymentDetail;
         $products=Product::with('category')->where('user_id',$user->id)->where('user_id', $user->id)->latest('created_at')->limit(5)->get();
-        return view('admin.user.view', compact('user', 'paymentdetail','products'));
+        $globalCommission=AdminSetting::where('name','order_commission')->first();
+        $globalCommissionType=AdminSetting::where('name','order_commission_type')->first();
+        return view('admin.user.view', compact('user', 'paymentdetail','products','globalCommission','globalCommissionType'));
     }
 
     public function productedit(AdminProductRequest $request, Product $product)

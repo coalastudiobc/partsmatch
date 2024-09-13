@@ -179,16 +179,32 @@ class HomeController extends Controller
             $request = $request->merge($request_test);
         }
         $models = AllModel::all();
-        $products = Product::with('productImage', 'featuredProduct', 'productCompatible')->where('status','1')->global($request)->category()->compatiblity($request)->price()->orderBy('id','desc')->paginate(12)->appends($request->query());
-        $categories =  Category::with('children')->has('children')->orWhereNull('parent_id')->get();
-        
+        $products = Product::with('productImage', 'featuredProduct', 'productCompatible')
+                            ->where('status','1')
+                            ->Global($request)
+                            ->category($request)
+                            ->Compatiblity($request)
+                            ->price()
+                            ->orderBy('id','desc')
+                            ->paginate(12);
+
+        $categories =  Category::with('children')
+                                ->has('children')
+                                ->orWhereNull('parent_id')
+                                ->get();
+
         if($request->method() == "POST")
         {
            if($request->sortorder)
            {
-               $products = Product::with('productImage', 'featuredProduct', 'productCompatible')->where('status','1')->category()->FilterCompatiblity($request)->price()->sort()->paginate(12)->appends($request->query());
-            
-           }
+               $products = Product::with('productImage', 'featuredProduct', 'productCompatible')
+                                    ->where('status','1')
+                                    ->category()
+                                    ->FilterCompatiblity($request)
+                                    ->price()
+                                    ->sort()
+                                    ->paginate(12);
+            }
         }
         return view('public_shop', compact("categories", "products", "brands", "years", "models"));
     }
