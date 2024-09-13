@@ -79,7 +79,6 @@
                                                                 ${{ $user->ComissionDetails->commision_value ?? 'N/A' }}
                                                             @endif
                                                        
-                                                        @endif
                                                             @else
                                                             @if ($globalCommissionType && $globalCommissionType->value == 'Percentage')
                                                             {{ $globalCommission ? ($globalCommission->value ?? 'N/A') . '%' : 'N/A' }}
@@ -368,7 +367,7 @@ console.log(type);
                 required: true,
                 number: true, // Use `number` instead of `decimal` for numeric validation
                 min:1,
-                max:99
+                // max:99
             }
         },
         messages: {
@@ -380,7 +379,7 @@ console.log(type);
                 number: "Please enter a valid number.",
                 number: "Please enter a valid number.",
                 min:"The commission must be at least 1.",
-                max:"The commission must not exceed 99.",
+                // max:"The commission must not exceed 99.",
             }
         },
         errorPlacement: function (error, element) {
@@ -406,7 +405,6 @@ console.log(type);
     function handlecommissionManageSuccess(response) {
         console.log('handleShippingData', response);
         if(response.status){
-            console.log(response.type);
             if(response.type == '%'){
             jQuery('.commission-value').text(response.data + response.type);
             }else{
@@ -420,6 +418,9 @@ console.log(type);
 
     function handlecommissionManageError(error) {
         console.log('handleShippingError', error);
+        if(error.responseJSON){
+            toastr.error(error.responseJSON.message)
+        }
     }
 });
 

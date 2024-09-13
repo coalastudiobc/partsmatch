@@ -304,7 +304,7 @@
                         <div class="pickup-adress-box">
                             <form id="From_address" class="addForm" action="{{ route('Dealer.address.picking') }}" method="post" enctype="multipart/form-data">
                                 @csrf
-                                <h3 class="pick-address-head">Add pick up addressss</h3>
+                                <h3 class="pick-address-head">Add pick up address</h3>
                                 <div class="row">
                                     <h3>Personal info</h3>
                                     <div class="col-md-6">
